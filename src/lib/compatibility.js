@@ -1,5 +1,5 @@
 export function checkCompatibility(selectedParts, candidate) {
-  const { motherboard, case: selectedCase, cpu, ram } = selectedParts
+  const { motherboard, case: selectedCase, cpu, ram, cooler } = selectedParts
 
   if (candidate.category === 'cpu' && motherboard) {
     if (candidate.socket !== motherboard.socket)
@@ -22,12 +22,12 @@ export function checkCompatibility(selectedParts, candidate) {
   }
 
   if (candidate.category === 'case' && motherboard) {
-    if (!candidate.supportedFormFactors.includes(motherboard.formFactor))
+    if (Array.isArray(candidate.supportedFormFactors) && !candidate.supportedFormFactors.includes(motherboard.formFactor))
       return { compatible: false, reason: `Does not support ${motherboard.formFactor} form factor` }
   }
 
   if (candidate.category === 'motherboard' && selectedCase) {
-    if (!selectedCase.supportedFormFactors.includes(candidate.formFactor))
+    if (Array.isArray(selectedCase.supportedFormFactors) && !selectedCase.supportedFormFactors.includes(candidate.formFactor))
       return { compatible: false, reason: `Case does not support ${candidate.formFactor} form factor` }
   }
 
@@ -37,13 +37,23 @@ export function checkCompatibility(selectedParts, candidate) {
   }
 
   if (candidate.category === 'cooler' && motherboard) {
-    if (!candidate.sockets.includes(motherboard.socket))
+    if (Array.isArray(candidate.sockets) && !candidate.sockets.includes(motherboard.socket))
       return { compatible: false, reason: `Cooler does not support ${motherboard.socket} socket` }
   }
 
   if (candidate.category === 'cooler' && cpu) {
-    if (!candidate.sockets.includes(cpu.socket))
+    if (Array.isArray(candidate.sockets) && !candidate.sockets.includes(cpu.socket))
       return { compatible: false, reason: `Cooler does not support ${cpu.socket} socket` }
+  }
+
+  if (candidate.category === 'cpu' && cooler) {
+    if (Array.isArray(cooler.sockets) && !cooler.sockets.includes(candidate.socket))
+      return { compatible: false, reason: `Selected cooler does not support ${candidate.socket} socket` }
+  }
+
+  if (candidate.category === 'motherboard' && cooler) {
+    if (Array.isArray(cooler.sockets) && !cooler.sockets.includes(candidate.socket))
+      return { compatible: false, reason: `Selected cooler does not support ${candidate.socket} socket` }
   }
 
   return { compatible: true, reason: '' }

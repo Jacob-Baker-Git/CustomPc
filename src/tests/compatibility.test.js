@@ -59,6 +59,28 @@ describe('checkCompatibility', () => {
     expect(r.compatible).toBe(false)
     expect(r.reason).toMatch(/socket/i)
   })
+
+  it('CPU incompatible when selected cooler does not support its socket', () => {
+    const coolerAM5Only = { ...cooler, sockets: ['AM5'] }
+    const r = checkCompatibility({ cooler: coolerAM5Only }, cpuIntel)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/cooler.*socket/i)
+  })
+
+  it('CPU compatible when selected cooler supports its socket', () => {
+    const coolerAM5Only = { ...cooler, sockets: ['AM5'] }
+    expect(checkCompatibility({ cooler: coolerAM5Only }, cpuAM5).compatible).toBe(true)
+  })
+
+  it('motherboard incompatible when selected cooler does not support its socket', () => {
+    const coolerAM5Only = { ...cooler, sockets: ['AM5'] }
+    const r = checkCompatibility({ cooler: coolerAM5Only }, mbAM5)
+    expect(r.compatible).toBe(true) // mbAM5 is AM5, cooler supports AM5
+    const mbIntel = partsData.find(p => p.id === 'mb-asus-z790')
+    const r2 = checkCompatibility({ cooler: coolerAM5Only }, mbIntel)
+    expect(r2.compatible).toBe(false)
+    expect(r2.reason).toMatch(/cooler.*socket/i)
+  })
 })
 
 describe('getLockedReasons', () => {
