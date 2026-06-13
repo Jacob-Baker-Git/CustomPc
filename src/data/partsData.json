@@ -151,7 +151,7 @@
   },
   {
     "id": "case-cm-q300l", "category": "case", "name": "Cooler Master MasterBox Q300L",
-    "price": 59.99, "supportedFormFactors": ["mATX", "ITX"], "maxGpuLength": 360, "tdp": 0,
+    "price": 59.99, "supportedFormFactors": ["mATX", "ITX"], "maxGpuLength": 270, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mini Tower" }
   },
   {
