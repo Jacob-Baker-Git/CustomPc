@@ -12,8 +12,6 @@ export default function BuilderScreen() {
   const [activeCategory, setActiveCategory]   = useState(null)
   const [showCategoryPicker, setShowPicker]   = useState(true)
 
-  const hasAnyPart = Object.values(selectedParts).some(Boolean)
-
   function handleCategorySelect(category) {
     setActiveCategory(category)
     setShowPicker(false)
@@ -28,7 +26,7 @@ export default function BuilderScreen() {
     <div className="min-h-screen bg-gray-950">
       <TopBar />
       <div className="pt-16 h-screen">
-        {showCategoryPicker && !hasAnyPart ? (
+        {showCategoryPicker ? (
           <CategoryPicker selectedParts={selectedParts} onSelect={handleCategorySelect} />
         ) : (
           <div className="relative w-full h-full">
