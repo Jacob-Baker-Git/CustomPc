@@ -12,7 +12,7 @@ export default function BuildCanvas({ selectedParts }) {
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Environment preset="city" />
         {parts.map((part) => (
-          <PartModel key={part.id} part={part} />
+          <PartModel key={part.id} part={part} selectedParts={selectedParts} />
         ))}
         <OrbitControls enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
       </Canvas>
