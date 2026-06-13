@@ -1,5 +1,5 @@
 export default function DynamicBars({ value, max, label, unit }) {
-  const pct = Math.min((value / max) * 100, 100)
+  const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0
   const barColor =
     pct >= 100 ? 'bg-red-500' : pct >= 80 ? 'bg-amber-400' : 'bg-blue-500'
 

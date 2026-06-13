@@ -25,7 +25,7 @@ export default function BuilderScreen() {
   return (
     <div className="min-h-screen bg-gray-950">
       <TopBar />
-      <div className="pt-16 h-screen">
+      <div className="pt-16 h-[calc(100vh-4rem)]">
         {showCategoryPicker ? (
           <CategoryPicker selectedParts={selectedParts} onSelect={handleCategorySelect} />
         ) : (

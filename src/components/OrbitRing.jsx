@@ -1,11 +1,11 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useLayoutEffect, useState } from 'react'
 import { CATEGORIES } from './CategoryPicker'
 
 export default function OrbitRing({ selectedParts, onSelectCategory }) {
   const containerRef = useRef(null)
   const [size, setSize] = useState({ w: 800, h: 600 })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     function update() {
       if (containerRef.current)
         setSize({ w: containerRef.current.offsetWidth, h: containerRef.current.offsetHeight })
