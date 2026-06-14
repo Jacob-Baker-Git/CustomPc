@@ -1,25 +1,50 @@
 import useBuilderStore from '../../store/useBuilderStore'
 
+// Tower proportions: taller than wide (reads as a tower, not a cube).
+const W = 3.0   // width  (X)
+const H = 4.4   // height (Y)
+const D = 2.6   // depth  (Z)
+const T = 0.06  // panel thickness
+
+function Panel({ args, position, color, opacity = 1, glass = false }) {
+  return (
+    <mesh position={position}>
+      <boxGeometry args={args} />
+      <meshStandardMaterial
+        color={color}
+        transparent={opacity < 1}
+        opacity={opacity}
+        metalness={glass ? 0.1 : 0.6}
+        roughness={glass ? 0.08 : 0.55}
+        side={2}
+      />
+    </mesh>
+  )
+}
+
 export default function CaseModel() {
   const transparent = useBuilderStore((s) => s.caseTransparent)
 
+  // Open mode: panels removed — faint frame only, so parts are fully visible.
+  if (transparent) {
+    return (
+      <mesh>
+        <boxGeometry args={[W, H, D]} />
+        <meshBasicMaterial color="#3a567d" wireframe transparent opacity={0.5} />
+      </mesh>
+    )
+  }
+
+  // Solid mode: 5 opaque metal panels + 1 tinted tempered-glass front window.
   return (
     <group>
-      <mesh>
-        <boxGeometry args={[3.2, 3.0, 3.2]} />
-        <meshStandardMaterial
-          color={transparent ? '#88aadd' : '#2b2f36'}
-          transparent
-          opacity={transparent ? 0.12 : 0.95}
-          metalness={0.4}
-          roughness={transparent ? 0.1 : 0.5}
-          side={2}
-        />
-      </mesh>
-      <mesh>
-        <boxGeometry args={[3.2, 3.0, 3.2]} />
-        <meshBasicMaterial color="#5577aa" wireframe />
-      </mesh>
+      <Panel args={[W, T, D]} position={[0, -H / 2, 0]} color="#23272e" />  {/* bottom */}
+      <Panel args={[W, T, D]} position={[0,  H / 2, 0]} color="#23272e" />  {/* top */}
+      <Panel args={[T, H, D]} position={[ W / 2, 0, 0]} color="#2b2f36" />  {/* right side */}
+      <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#2b2f36" />  {/* left side */}
+      <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#1f2227" />  {/* rear / mobo tray */}
+      {/* tempered-glass front window — the build is visible through it */}
+      <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#7fa8d0" opacity={0.16} glass />
     </group>
   )
 }
