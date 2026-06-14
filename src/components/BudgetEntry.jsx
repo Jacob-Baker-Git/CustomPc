@@ -10,24 +10,27 @@ export default function BudgetEntry({ onSubmit }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center text-white">
-      <h1 className="text-4xl font-bold mb-2">Build Your PC</h1>
-      <p className="text-gray-400 mb-8 text-lg">What's your budget?</p>
-      <form onSubmit={handleSubmit} aria-label="form" className="flex flex-col items-center gap-4">
+    <div className="min-h-screen flex flex-col items-center justify-center text-white bg-gradient-to-br from-gray-950 via-gray-900 to-cyan-950/40">
+      <h1 className="text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+        Build Your PC
+      </h1>
+      <p className="text-gray-400 mb-10 text-lg">What's your budget?</p>
+      <form onSubmit={handleSubmit} aria-label="form" className="flex flex-col items-center gap-6">
         <div className="flex items-center gap-2 text-3xl">
-          <span className="text-gray-400">£</span>
+          <span className="text-cyan-300">£</span>
           <input
+            autoFocus
             type="number"
             min="1"
             placeholder="1000"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="bg-gray-800 text-white text-3xl w-48 px-4 py-2 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500 text-center"
+            className="bg-gray-900/70 backdrop-blur-md text-white text-3xl w-52 px-4 py-3 rounded-2xl border border-white/10 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_25px_rgba(34,211,238,0.35)] text-center transition-all"
           />
         </div>
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg text-lg transition-colors"
+          className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-[0_0_25px_rgba(34,211,238,0.45)] text-white font-semibold px-10 py-3 rounded-2xl text-lg transition-all"
         >
           Start Building
         </button>
