@@ -4,6 +4,8 @@ import CoolerModel from './CoolerModel'
 import RamModel from './RamModel'
 import GpuModel from './GpuModel'
 import StorageModel from './StorageModel'
+import PsuModel from './PsuModel'
+import CaseModel from './CaseModel'
 
 export const MODEL_REGISTRY = {
   motherboard: MotherboardModel,
@@ -12,4 +14,6 @@ export const MODEL_REGISTRY = {
   ram: RamModel,
   gpu: GpuModel,
   storage: StorageModel,
+  psu: PsuModel,
+  case: CaseModel,
 }
