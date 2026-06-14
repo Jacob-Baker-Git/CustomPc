@@ -2,15 +2,20 @@
 // The board lies flat: PCB in the XZ plane, components facing up (+Y).
 
 const MOUNTED = {
-  motherboard: { position: [0, 0, 0],        rotation: [0, 0, 0] },
-  cpu:         { position: [0, 0.09, -0.5],   rotation: [0, 0, 0] },
-  cooler:      { position: [0, 0.35, -0.5],   rotation: [0, 0, 0] },
-  ram:         { position: [0.75, 0.3, -0.4], rotation: [0, 0, 0] },
-  gpu:         { position: [0, 0.22, 0.55],   rotation: [0, 0, 0] },
-  storage:     { position: [-0.5, 0.06, 0.2], rotation: [0, 0, 0] },
-  psu:         { position: [0, -1.1, -0.6],   rotation: [0, 0, 0] },
-  case:        { position: [0, -0.3, 0],      rotation: [0, 0, 0] },
-  fans:        { position: [0, 0.7, 1.25],    rotation: [0, 0, 0] },
+  // Board anchored at origin, stood up vertical; components face the viewer (+Z).
+  motherboard: { position: [0, 0, 0],       rotation: [Math.PI / 2, 0, 0] },
+  // Mounted on the board face, just in front of it, sharing its vertical rotation.
+  cpu:         { position: [0, 0.4, 0.1],    rotation: [Math.PI / 2, 0, 0] },
+  cooler:      { position: [0, 0.4, 0.4],    rotation: [Math.PI / 2, 0, 0] },
+  ram:         { position: [0.7, 0.4, 0.1],  rotation: [0, Math.PI / 2, 0] },
+  storage:     { position: [-0.7, 0.0, 0.1], rotation: [Math.PI / 2, 0, 0] },
+  // Horizontal graphics card in the lower PCIe slot, extending toward the front.
+  gpu:         { position: [0, -0.35, 0.5],  rotation: [0, 0, 0] },
+  // Power supply in the bottom basement of the case.
+  psu:         { position: [0, -1.15, 0.0],  rotation: [0, 0, 0] },
+  case:        { position: [0, 0, 0],        rotation: [0, 0, 0] },
+  // Intake fans at the front of the case, facing the viewer.
+  fans:        { position: [0, 0, 1.35],     rotation: [0, 0, 0] },
 }
 
 // Standalone positions used until a motherboard exists to mount onto.

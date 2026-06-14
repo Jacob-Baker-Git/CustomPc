@@ -7,14 +7,19 @@ describe('assemblyLayout', () => {
     expect(assemblyLayout('motherboard', withMb).position).toEqual([0, 0, 0])
   })
 
-  it('mounts the cooler above the CPU when a motherboard is present', () => {
-    const cpuY = assemblyLayout('cpu', withMb).position[1]
-    const coolerY = assemblyLayout('cooler', withMb).position[1]
-    expect(coolerY).toBeGreaterThan(cpuY)
+  it('stands the motherboard vertical (non-zero rotation)', () => {
+    const r = assemblyLayout('motherboard', withMb).rotation
+    expect(r.some((v) => v !== 0)).toBe(true)
   })
 
-  it('mounts the GPU above the board so it is visible, not hidden under it', () => {
-    expect(assemblyLayout('gpu', withMb).position[1]).toBeGreaterThanOrEqual(0)
+  it('mounts the cooler in front of the CPU (sitting on it) when a motherboard is present', () => {
+    const cpuZ = assemblyLayout('cpu', withMb).position[2]
+    const coolerZ = assemblyLayout('cooler', withMb).position[2]
+    expect(coolerZ).toBeGreaterThan(cpuZ)
+  })
+
+  it('mounts the GPU in front of the board plane so it is visible', () => {
+    expect(assemblyLayout('gpu', withMb).position[2]).toBeGreaterThan(0)
   })
 
   it('gives case fans a mount position when a motherboard is present', () => {
