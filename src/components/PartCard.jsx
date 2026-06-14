@@ -3,14 +3,14 @@ export default function PartCard({ part, locked, lockReason, onSelect }) {
     <div
       title={locked ? lockReason : undefined}
       onClick={() => !locked && onSelect(part)}
-      className={`relative rounded-xl border p-4 flex flex-col gap-2 transition-all
+      className={`relative rounded-2xl border p-4 flex flex-col gap-2 transition-all
         ${locked
-          ? 'border-gray-700 bg-gray-800/40 opacity-40 cursor-not-allowed'
-          : 'border-gray-700 bg-gray-800 hover:border-blue-500 cursor-pointer'
+          ? 'border-white/5 bg-white/5 opacity-40 cursor-not-allowed'
+          : 'border-white/10 bg-white/5 hover:border-cyan-400/60 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] cursor-pointer'
         }`}
     >
       <div className="text-sm font-semibold text-white leading-tight">{part.name}</div>
-      <div className="text-blue-400 font-bold">£{part.price.toFixed(2)}</div>
+      <div className="font-bold text-cyan-300">£{part.price.toFixed(2)}</div>
       <div className="text-xs text-gray-400 space-y-0.5">
         {part.tdp > 0 && <div>{part.tdp}W TDP</div>}
         {part.socket && <div>Socket: {part.socket}</div>}

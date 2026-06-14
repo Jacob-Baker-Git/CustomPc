@@ -22,10 +22,10 @@ export default function PartSelector({ category, onSelect, onClose }) {
   )
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-6">
-      <div className="bg-gray-900 rounded-2xl w-full max-w-4xl max-h-[80vh] flex flex-col border border-gray-700">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800 gap-4">
-          <h2 className="text-white text-xl font-bold capitalize whitespace-nowrap">{category}</h2>
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+      <div className="bg-gray-900/80 backdrop-blur-xl rounded-3xl w-full max-w-4xl max-h-[80vh] flex flex-col border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.15)]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 gap-4">
+          <h2 className="text-xl font-bold capitalize whitespace-nowrap bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">{category}</h2>
           <div className="flex-1 max-w-sm">
             <SearchBar value={query} onChange={setQuery} placeholder={`Search ${category}...`} />
           </div>
