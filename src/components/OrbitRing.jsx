@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useState } from 'react'
-import { CATEGORIES } from './CategoryPicker'
+import { CATEGORIES } from '../lib/categories'
 import { RECOMMENDED_ORDER, nextRecommended } from '../lib/recommendedOrder'
 
 const ORDERED = RECOMMENDED_ORDER
