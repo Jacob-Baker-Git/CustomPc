@@ -6,6 +6,7 @@ import GpuModel from './GpuModel'
 import StorageModel from './StorageModel'
 import PsuModel from './PsuModel'
 import CaseModel from './CaseModel'
+import FansModel from './FansModel'
 
 export const MODEL_REGISTRY = {
   motherboard: MotherboardModel,
@@ -16,4 +17,5 @@ export const MODEL_REGISTRY = {
   storage: StorageModel,
   psu: PsuModel,
   case: CaseModel,
+  fans: FansModel,
 }
