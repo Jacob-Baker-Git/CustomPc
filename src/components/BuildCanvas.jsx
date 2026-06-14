@@ -8,7 +8,7 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [3.2, 1.6, 5.2], fov: 48 }}>
+      <Canvas camera={{ position: [2.6, 0.8, 7.0], fov: 46 }}>
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Environment preset="city" />
@@ -16,7 +16,7 @@ export default function BuildCanvas({ selectedParts }) {
           <PartModel key={part.id} part={part} selectedParts={selectedParts} />
         ))}
         <ScreenTracker selectedParts={selectedParts} />
-        <OrbitControls enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
+        <OrbitControls target={[0, -0.1, 0.4]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
       </Canvas>
     </div>
   )

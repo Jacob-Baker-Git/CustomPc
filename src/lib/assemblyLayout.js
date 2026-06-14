@@ -14,7 +14,9 @@ const MOUNTED = {
   gpu:         { position: [0, -0.55, 0.55],   rotation: [0, 0, 0] },
   // Power supply in the bottom basement of the case.
   psu:         { position: [0, -1.15, 0.0],  rotation: [0, 0, 0] },
-  case:        { position: [0, 0, 0],        rotation: [0, 0, 0] },
+  // Tower shell recentered so the rear wall hugs the board and the glass
+  // front clears the intake fans; build sits with even headroom.
+  case:        { position: [0, -0.1, 0.9],   rotation: [0, 0, 0] },
   // Intake fans at the front of the case, facing the viewer.
   fans:        { position: [0, 0, 1.35],     rotation: [0, 0, 0] },
 }
