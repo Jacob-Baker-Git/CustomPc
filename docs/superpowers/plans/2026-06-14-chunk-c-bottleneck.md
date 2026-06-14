@@ -114,19 +114,18 @@ export function computeBottleneck(cpu, gpu, resolution) {
   const cpuScore = cpu.perfScore ?? 0
   const gpuScore = gpu.perfScore ?? 0
 
-  // Weighted "demand pressure": the part that matters more at this resolution
-  // is penalised harder when it is the weaker of the two.
-  const cpuDemand = cpuScore * w.cpu
-  const gpuDemand = gpuScore * w.gpu
-  const maxDemand = Math.max(cpuDemand, gpuDemand)
-  const minDemand = Math.min(cpuDemand, gpuDemand)
-
-  const balancePct = maxDemand === 0
-    ? 100
-    : Math.round((minDemand / maxDemand) * 100)
+  // The weaker component is the limiter; the gap between the two sets the
+  // severity, amplified by how hard this resolution leans on the weaker part.
+  const weakerIsCpu = cpuScore < gpuScore
+  const weaker = Math.min(cpuScore, gpuScore)
+  const stronger = Math.max(cpuScore, gpuScore) || 1
+  const gap = 1 - weaker / stronger                  // 0 = identical
+  const stress = weakerIsCpu ? w.cpu : w.gpu          // 0.35..0.65
+  const severity = Math.min(1, gap * stress * 2)      // stress*2 in 0.7..1.3
+  const balancePct = Math.round((1 - severity) * 100)
 
   let limitedBy = 'none'
-  if (balancePct < 85) limitedBy = cpuScore < gpuScore ? 'cpu' : 'gpu'
+  if (balancePct < 85) limitedBy = weakerIsCpu ? 'cpu' : 'gpu'
 
   let verdict
   if (limitedBy === 'none') {
