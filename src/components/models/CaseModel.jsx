@@ -14,8 +14,8 @@ function Panel({ args, position, color, opacity = 1, glass = false }) {
         color={color}
         transparent={opacity < 1}
         opacity={opacity}
-        metalness={glass ? 0.1 : 0.6}
-        roughness={glass ? 0.08 : 0.55}
+        metalness={glass ? 0.0 : 0.6}
+        roughness={glass ? 0.25 : 0.55}
         side={2}
       />
     </mesh>
@@ -44,7 +44,7 @@ export default function CaseModel() {
       <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#2b2f36" />  {/* left side */}
       <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#1f2227" />  {/* rear / mobo tray */}
       {/* tempered-glass front window — the build is visible through it */}
-      <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#7fa8d0" opacity={0.16} glass />
+      <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#9fc6ee" opacity={0.1} glass />
     </group>
   )
 }

@@ -8,9 +8,12 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [2.6, 0.8, 7.0], fov: 46 }}>
-        <ambientLight intensity={0.6} />
+      <Canvas camera={{ position: [1.7, 0.6, 7.2], fov: 46 }}>
+        <ambientLight intensity={0.95} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
+        {/* Front key light (no distance falloff) so the build reads clearly
+            through the glass window in solid mode. */}
+        <directionalLight position={[2, 2, 8]} intensity={1.4} />
         <Environment preset="city" />
         {parts.map((part) => (
           <PartModel key={part.id} part={part} selectedParts={selectedParts} />
