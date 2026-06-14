@@ -1,16 +1,17 @@
 // All transforms are relative to the motherboard anchored at the origin.
-// The board lies flat: PCB in the XZ plane, components facing up (+Y).
+// The board stands VERTICAL (PCB in the XY plane), components facing the viewer (+Z).
 
 const MOUNTED = {
   // Board anchored at origin, stood up vertical; components face the viewer (+Z).
-  motherboard: { position: [0, 0, 0],       rotation: [Math.PI / 2, 0, 0] },
+  motherboard: { position: [0, 0, 0],         rotation: [Math.PI / 2, 0, 0] },
   // Mounted on the board face, just in front of it, sharing its vertical rotation.
-  cpu:         { position: [0, 0.4, 0.1],    rotation: [Math.PI / 2, 0, 0] },
-  cooler:      { position: [0, 0.4, 0.4],    rotation: [Math.PI / 2, 0, 0] },
-  ram:         { position: [0.7, 0.4, 0.1],  rotation: [0, Math.PI / 2, 0] },
-  storage:     { position: [-0.7, 0.0, 0.1], rotation: [Math.PI / 2, 0, 0] },
+  cpu:         { position: [0, 0.45, 0.12],    rotation: [Math.PI / 2, 0, 0] },
+  cooler:      { position: [0, 0.45, 0.38],    rotation: [Math.PI / 2, 0, 0] },
+  // Vertical RAM sticks standing side-by-side, to the right of the CPU.
+  ram:         { position: [0.75, 0.45, 0.12], rotation: [-Math.PI / 2, 0, 0] },
+  storage:     { position: [-0.8, 0.05, 0.12], rotation: [Math.PI / 2, 0, 0] },
   // Horizontal graphics card in the lower PCIe slot, extending toward the front.
-  gpu:         { position: [0, -0.35, 0.5],  rotation: [0, 0, 0] },
+  gpu:         { position: [0, -0.55, 0.55],   rotation: [0, 0, 0] },
   // Power supply in the bottom basement of the case.
   psu:         { position: [0, -1.15, 0.0],  rotation: [0, 0, 0] },
   case:        { position: [0, 0, 0],        rotation: [0, 0, 0] },
