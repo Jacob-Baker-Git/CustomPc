@@ -5,6 +5,7 @@ import OrbitRing from '../components/OrbitRing'
 import PartSelector from '../components/PartSelector'
 import CategoryPicker from '../components/CategoryPicker'
 import CaseToggle from '../components/CaseToggle'
+import BottleneckIndicator from '../components/BottleneckIndicator'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -33,6 +34,7 @@ export default function BuilderScreen() {
         ) : (
           <div className="relative w-full h-full">
             <BuildCanvas selectedParts={selectedParts} />
+            <BottleneckIndicator />
             <OrbitRing
               selectedParts={selectedParts}
               onSelectCategory={handleCategorySelect}
