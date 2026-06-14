@@ -81,6 +81,12 @@ describe('checkCompatibility', () => {
     expect(r2.compatible).toBe(false)
     expect(r2.reason).toMatch(/cooler.*socket/i)
   })
+
+  it('treats case fans as always compatible', () => {
+    const fan = { id: 'fan-x', category: 'fans', price: 20, tdp: 4 }
+    expect(checkCompatibility({ motherboard: mbAM5, cpu: cpuAM5 }, fan).compatible).toBe(true)
+    expect(checkCompatibility({}, fan).compatible).toBe(true)
+  })
 })
 
 describe('getLockedReasons', () => {
