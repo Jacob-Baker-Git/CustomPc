@@ -13,9 +13,10 @@ function specLine(p) {
 }
 
 export default function PeripheralsPanel() {
-  const selected      = useBuilderStore((s) => s.selectedPeripherals)
-  const addPeripheral = useBuilderStore((s) => s.addPeripheral)
-  const total         = useBuilderStore(selPeripheralsTotal)
+  const selected         = useBuilderStore((s) => s.selectedPeripherals)
+  const addPeripheral    = useBuilderStore((s) => s.addPeripheral)
+  const removePeripheral = useBuilderStore((s) => s.removePeripheral)
+  const total            = useBuilderStore(selPeripheralsTotal)
 
   const byCategory = useMemo(() => {
     const map = {}
@@ -39,13 +40,17 @@ export default function PeripheralsPanel() {
                 return (
                   <button
                     key={p.id}
-                    onClick={() => addPeripheral(cat, p)}
-                    className={`text-left rounded-2xl border p-4 transition-all
+                    onClick={() => (isSelected ? removePeripheral(cat) : addPeripheral(cat, p))}
+                    title={isSelected ? 'Click to deselect' : 'Click to select'}
+                    className={`relative text-left rounded-2xl border p-4 transition-all
                       ${isSelected
                         ? 'border-cyan-400/60 bg-cyan-500/10 shadow-[0_0_20px_rgba(34,211,238,0.25)]'
                         : 'border-white/10 bg-white/5 hover:border-cyan-400/40 hover:-translate-y-0.5'}`}
                   >
-                    <div className="text-sm font-semibold text-white leading-tight">{p.name}</div>
+                    {isSelected && (
+                      <span className="absolute top-2 right-2 text-cyan-300 text-xs">✓ selected</span>
+                    )}
+                    <div className="text-sm font-semibold text-white leading-tight pr-16">{p.name}</div>
                     <div className="font-bold text-cyan-300 mt-1">£{p.price.toFixed(2)}</div>
                     <div className="text-xs text-gray-400 mt-1">{specLine(p)}</div>
                   </button>

@@ -13,7 +13,7 @@ export default function PerformancePanel() {
   if (!cpu || !gpu) return null
 
   const fps   = estimateFps(cpu, gpu, resolution)
-  const value = buildValuePerPound(cpu, gpu, totalSpent)
+  const value = buildValuePerPound(cpu, gpu, totalSpent, resolution)
   const resLabel = RES_LABEL[resolution] ?? resolution
 
   return (
@@ -24,7 +24,7 @@ export default function PerformancePanel() {
         <span className="text-gray-400 text-xs mb-1">est. avg FPS @ {resLabel}</span>
       </div>
       <p className="mt-2 text-xs text-gray-400">
-        Value: <span className="text-cyan-300 font-semibold">{value.toFixed(1)}</span> FPS per £100
+        Value: <span className="text-cyan-300 font-semibold">{value.toFixed(1)}</span> FPS per £100 @ {resLabel}
       </p>
       <p className="mt-1 text-[10px] text-gray-600">Estimated from CPU + GPU performance — not a benchmark.</p>
     </div>

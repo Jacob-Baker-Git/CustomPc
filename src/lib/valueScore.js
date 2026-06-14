@@ -6,8 +6,9 @@ export function valuePerPound(part) {
   return part.perfScore / (part.price / 100)
 }
 
-// Build-level value: estimated 1440p FPS per £100 of total build cost.
-export function buildValuePerPound(cpu, gpu, totalPrice) {
+// Build-level value: estimated FPS at the given resolution per £100 of total
+// build cost. Defaults to 1440p when no resolution is supplied.
+export function buildValuePerPound(cpu, gpu, totalPrice, resolution = '1440p') {
   if (!cpu || !gpu || !totalPrice) return 0
-  return estimateFps(cpu, gpu, '1440p') / (totalPrice / 100)
+  return estimateFps(cpu, gpu, resolution) / (totalPrice / 100)
 }
