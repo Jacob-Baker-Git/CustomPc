@@ -1,5 +1,5 @@
 import useBuilderStore, {
-  selTotalSpent, selRemainingBudget, selTotalPower, selPsuWattage
+  selTotalSpent, selRemainingBudget, selTotalPower, selPsuWattage, selPeripheralsTotal
 } from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
 
@@ -8,7 +8,7 @@ const gpu = partsData.find(p => p.id === 'gpu-rtx-4060ti')
 const psu = partsData.find(p => p.id === 'psu-bequiet-750w')
 
 beforeEach(() => {
-  useBuilderStore.setState({ budget: 0, selectedParts: {} })
+  useBuilderStore.setState({ budget: 0, selectedParts: {}, selectedPeripherals: {} })
 })
 
 describe('useBuilderStore', () => {
@@ -53,5 +53,25 @@ describe('useBuilderStore', () => {
   it('selPsuWattage returns PSU wattage when selected', () => {
     useBuilderStore.getState().addPart('psu', psu)
     expect(selPsuWattage(useBuilderStore.getState())).toBe(750)
+  })
+
+  it('adds and removes a peripheral independently of selectedParts', () => {
+    const mon = { id: 'mon-x', category: 'monitor', name: 'Mon', price: 300 }
+    useBuilderStore.getState().addPeripheral('monitor', mon)
+    expect(useBuilderStore.getState().selectedPeripherals.monitor).toEqual(mon)
+    expect(useBuilderStore.getState().selectedParts.monitor).toBeUndefined()
+    useBuilderStore.getState().removePeripheral('monitor')
+    expect(useBuilderStore.getState().selectedPeripherals.monitor).toBeUndefined()
+  })
+
+  it('selPeripheralsTotal sums peripheral prices', () => {
+    useBuilderStore.getState().addPeripheral('monitor', { price: 300 })
+    useBuilderStore.getState().addPeripheral('mouse', { price: 60 })
+    expect(selPeripheralsTotal(useBuilderStore.getState())).toBeCloseTo(360)
+  })
+
+  it('peripherals do not affect selTotalSpent', () => {
+    useBuilderStore.getState().addPeripheral('monitor', { price: 300 })
+    expect(selTotalSpent(useBuilderStore.getState())).toBe(0)
   })
 })

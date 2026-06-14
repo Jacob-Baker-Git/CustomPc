@@ -24,6 +24,20 @@ const useBuilderStore = create((set) => ({
 
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
+
+  selectedPeripherals: {},
+
+  addPeripheral: (category, part) =>
+    set((state) => ({
+      selectedPeripherals: { ...state.selectedPeripherals, [category]: part },
+    })),
+
+  removePeripheral: (category) =>
+    set((state) => {
+      const next = { ...state.selectedPeripherals }
+      delete next[category]
+      return { selectedPeripherals: next }
+    }),
 }))
 
 export default useBuilderStore
@@ -37,3 +51,6 @@ export const selTotalPower = (s) =>
   Object.values(s.selectedParts).reduce((sum, p) => sum + (p?.tdp ?? 0), 0)
 
 export const selPsuWattage = (s) => s.selectedParts.psu?.wattage ?? 750
+
+export const selPeripheralsTotal = (s) =>
+  Object.values(s.selectedPeripherals).reduce((sum, p) => sum + (p?.price ?? 0), 0)
