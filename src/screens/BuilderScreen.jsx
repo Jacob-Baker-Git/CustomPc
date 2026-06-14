@@ -7,6 +7,7 @@ import CaseToggle from '../components/CaseToggle'
 import UpgradeSuggestion from '../components/UpgradeSuggestion'
 import BottleneckIndicator from '../components/BottleneckIndicator'
 import PerformancePanel from '../components/PerformancePanel'
+import PeripheralsPanel from '../components/PeripheralsPanel'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -14,6 +15,7 @@ export default function BuilderScreen() {
   const addPart       = useBuilderStore((s) => s.addPart)
   const removePart    = useBuilderStore((s) => s.removePart)
   const [activeCategory, setActiveCategory] = useState(null)
+  const [view, setView] = useState('build')
 
   function handlePartSelect(part) {
     addPart(part.category, part)
@@ -24,18 +26,36 @@ export default function BuilderScreen() {
     <div className="min-h-screen bg-gray-950">
       <TopBar />
       <div className="pt-16 h-[calc(100vh-4rem)]">
-        <div className="relative w-full h-full">
-          <BuildCanvas selectedParts={selectedParts} />
-          <BottleneckIndicator />
-          <PerformancePanel />
-          <OrbitRing
-            selectedParts={selectedParts}
-            onSelectCategory={setActiveCategory}
-            onDeselect={removePart}
-          />
-          <CaseToggle />
-          <UpgradeSuggestion />
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-full bg-gray-900/70 backdrop-blur-md border border-white/10 p-0.5">
+          {['build', 'peripherals'].map((v) => (
+            <button
+              key={v}
+              onClick={() => setView(v)}
+              className={`px-4 py-1 text-xs font-medium rounded-full capitalize transition-all
+                ${view === v
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_12px_rgba(34,211,238,0.4)]'
+                  : 'text-gray-300 hover:text-white'}`}
+            >
+              {v}
+            </button>
+          ))}
         </div>
+        {view === 'build' ? (
+          <div className="relative w-full h-full">
+            <BuildCanvas selectedParts={selectedParts} />
+            <BottleneckIndicator />
+            <PerformancePanel />
+            <OrbitRing
+              selectedParts={selectedParts}
+              onSelectCategory={setActiveCategory}
+              onDeselect={removePart}
+            />
+            <CaseToggle />
+            <UpgradeSuggestion />
+          </div>
+        ) : (
+          <PeripheralsPanel />
+        )}
       </div>
       {activeCategory && (
         <PartSelector
