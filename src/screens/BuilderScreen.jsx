@@ -4,6 +4,7 @@ import BuildCanvas from '../components/BuildCanvas'
 import OrbitRing from '../components/OrbitRing'
 import PartSelector from '../components/PartSelector'
 import CategoryPicker from '../components/CategoryPicker'
+import CaseToggle from '../components/CaseToggle'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -37,6 +38,7 @@ export default function BuilderScreen() {
               onSelectCategory={handleCategorySelect}
               onDeselect={removePart}
             />
+            <CaseToggle />
             <button
               onClick={() => setShowPicker(true)}
               className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-full border border-gray-600 transition-all"

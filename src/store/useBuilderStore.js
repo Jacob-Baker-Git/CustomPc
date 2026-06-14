@@ -17,6 +17,10 @@ const useBuilderStore = create((set) => ({
       delete next[category]
       return { selectedParts: next }
     }),
+
+  caseTransparent: true,
+  toggleCaseTransparency: () =>
+    set((state) => ({ caseTransparent: !state.caseTransparent })),
 }))
 
 export default useBuilderStore
