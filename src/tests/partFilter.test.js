@@ -13,13 +13,13 @@ describe('filterParts', () => {
     expect(ids).toContain('cpu-ryzen-7-7700x')
   })
 
-  it('default view hides parts over 70% of budget', () => {
-    const cheap = { id: 'x1', category: 'cpu', name: 'Cheap', price: 100, socket: 'AM5', tdp: 50 }
-    const dear  = { id: 'x2', category: 'cpu', name: 'Dear',  price: 800, socket: 'AM5', tdp: 50 }
+  it('default view hides parts over 60% of budget', () => {
+    const cheap = { id: 'x1', category: 'cpu', name: 'Cheap', price: 550, socket: 'AM5', tdp: 50 }
+    const dear  = { id: 'x2', category: 'cpu', name: 'Dear',  price: 650, socket: 'AM5', tdp: 50 }
     const res = filterParts([cheap, dear], { motherboard: mbAM5 }, 1000, '')
     const ids = res.map((r) => r.part.id)
-    expect(ids).toContain('x1')      // 100 <= 700
-    expect(ids).not.toContain('x2')  // 800 > 700
+    expect(ids).toContain('x1')      // 550 <= 600 (60% of 1000)
+    expect(ids).not.toContain('x2')  // 650 > 600
   })
 
   it('search reveals matching parts even if incompatible', () => {
