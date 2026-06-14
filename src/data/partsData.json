@@ -75,6 +75,36 @@
     "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B650E" }
   },
   {
+    "id": "mb-msi-x670e-carbon", "category": "motherboard", "name": "MSI MPG X670E Carbon WiFi",
+    "price": 389.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 14,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "X670E" }
+  },
+  {
+    "id": "mb-asrock-b650-pg", "category": "motherboard", "name": "ASRock B650 PG Lightning",
+    "price": 159.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 11,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B650" }
+  },
+  {
+    "id": "mb-gigabyte-x670-gaming", "category": "motherboard", "name": "Gigabyte X670 Gaming X AX",
+    "price": 249.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 13,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "X670" }
+  },
+  {
+    "id": "mb-asus-z790-maximus", "category": "motherboard", "name": "ASUS ROG Maximus Z790 Hero",
+    "price": 599.99, "socket": "LGA1700", "formFactor": "ATX", "ramType": "DDR5", "tdp": 16,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "Z790" }
+  },
+  {
+    "id": "mb-asrock-z790-pro", "category": "motherboard", "name": "ASRock Z790 Pro RS WiFi",
+    "price": 219.99, "socket": "LGA1700", "formFactor": "ATX", "ramType": "DDR5", "tdp": 13,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "Z790" }
+  },
+  {
+    "id": "mb-msi-b760m-mortar", "category": "motherboard", "name": "MSI MAG B760M Mortar WiFi DDR5",
+    "price": 169.99, "socket": "LGA1700", "formFactor": "mATX", "ramType": "DDR5", "tdp": 11,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B760" }
+  },
+  {
     "id": "cpu-ryzen-9-7950x", "category": "cpu", "name": "AMD Ryzen 9 7950X",
     "price": 549.99, "socket": "AM5", "tdp": 170, "perfScore": 98, "modelPath": "/models/cpu.glb",
     "specs": { "cores": 16, "boostClock": 5.7 }
@@ -150,6 +180,41 @@
     "specs": { "cores": 6, "boostClock": 4.4 }
   },
   {
+    "id": "cpu-ryzen-9-7900", "category": "cpu", "name": "AMD Ryzen 9 7900",
+    "price": 369.99, "socket": "AM5", "tdp": 65, "perfScore": 90, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 12, "boostClock": 5.4 }
+  },
+  {
+    "id": "cpu-ryzen-7-7700", "category": "cpu", "name": "AMD Ryzen 7 7700",
+    "price": 269.99, "socket": "AM5", "tdp": 65, "perfScore": 79, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 8, "boostClock": 5.3 }
+  },
+  {
+    "id": "cpu-ryzen-9-7950x3d", "category": "cpu", "name": "AMD Ryzen 9 7950X3D",
+    "price": 599.99, "socket": "AM5", "tdp": 120, "perfScore": 96, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 16, "boostClock": 5.7 }
+  },
+  {
+    "id": "cpu-ryzen-7-8700g", "category": "cpu", "name": "AMD Ryzen 7 8700G",
+    "price": 309.99, "socket": "AM5", "tdp": 65, "perfScore": 68, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 8, "boostClock": 5.1 }
+  },
+  {
+    "id": "cpu-i9-14900k", "category": "cpu", "name": "Intel Core i9-14900K",
+    "price": 549.99, "socket": "LGA1700", "tdp": 125, "perfScore": 100, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 24, "boostClock": 6.0 }
+  },
+  {
+    "id": "cpu-i7-14700k", "category": "cpu", "name": "Intel Core i7-14700K",
+    "price": 379.99, "socket": "LGA1700", "tdp": 125, "perfScore": 89, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 20, "boostClock": 5.6 }
+  },
+  {
+    "id": "cpu-i5-14600k", "category": "cpu", "name": "Intel Core i5-14600K",
+    "price": 269.99, "socket": "LGA1700", "tdp": 125, "perfScore": 80, "modelPath": "/models/cpu.glb",
+    "specs": { "cores": 14, "boostClock": 5.3 }
+  },
+  {
     "id": "gpu-rtx-4090", "category": "gpu", "name": "NVIDIA GeForce RTX 4090",
     "price": 1699.99, "tdp": 450, "length": 336, "perfScore": 100, "modelPath": "/models/gpu.glb",
     "specs": { "vram": 24, "memType": "GDDR6X" }
@@ -220,6 +285,36 @@
     "specs": { "vram": 6, "memType": "GDDR6" }
   },
   {
+    "id": "gpu-rtx-4070ti-super", "category": "gpu", "name": "NVIDIA GeForce RTX 4070 Ti Super",
+    "price": 849.99, "tdp": 285, "length": 304, "perfScore": 76, "modelPath": "/models/gpu.glb",
+    "specs": { "vram": 16, "memType": "GDDR6X" }
+  },
+  {
+    "id": "gpu-rtx-4070-super", "category": "gpu", "name": "NVIDIA GeForce RTX 4070 Super",
+    "price": 599.99, "tdp": 220, "length": 304, "perfScore": 68, "modelPath": "/models/gpu.glb",
+    "specs": { "vram": 12, "memType": "GDDR6X" }
+  },
+  {
+    "id": "gpu-rtx-4060ti-16gb", "category": "gpu", "name": "NVIDIA GeForce RTX 4060 Ti 16GB",
+    "price": 449.99, "tdp": 165, "length": 240, "perfScore": 52, "modelPath": "/models/gpu.glb",
+    "specs": { "vram": 16, "memType": "GDDR6" }
+  },
+  {
+    "id": "gpu-rx-7600xt", "category": "gpu", "name": "AMD Radeon RX 7600 XT",
+    "price": 319.99, "tdp": 190, "length": 267, "perfScore": 46, "modelPath": "/models/gpu.glb",
+    "specs": { "vram": 16, "memType": "GDDR6" }
+  },
+  {
+    "id": "gpu-rx-6750xt", "category": "gpu", "name": "AMD Radeon RX 6750 XT",
+    "price": 299.99, "tdp": 250, "length": 267, "perfScore": 48, "modelPath": "/models/gpu.glb",
+    "specs": { "vram": 12, "memType": "GDDR6" }
+  },
+  {
+    "id": "gpu-intel-arc-a770", "category": "gpu", "name": "Intel Arc A770 16GB",
+    "price": 279.99, "tdp": 225, "length": 280, "perfScore": 44, "modelPath": "/models/gpu.glb",
+    "specs": { "vram": 16, "memType": "GDDR6" }
+  },
+  {
     "id": "ram-corsair-ddr5-32", "category": "ram", "name": "Corsair Vengeance DDR5-5600 32GB",
     "price": 89.99, "ramType": "DDR5", "speed": 5600, "capacityGb": 32, "tdp": 5,
     "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
@@ -282,6 +377,41 @@
   {
     "id": "ram-gskill-ddr5-48", "category": "ram", "name": "G.Skill Trident Z5 DDR5-6400 48GB",
     "price": 179.99, "ramType": "DDR5", "speed": 6400, "capacityGb": 48, "tdp": 7,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-corsair-ddr5-32-6400", "category": "ram", "name": "Corsair Vengeance RGB DDR5-6400 32GB",
+    "price": 129.99, "ramType": "DDR5", "speed": 6400, "capacityGb": 32, "tdp": 6,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-gskill-ddr5-32-6000", "category": "ram", "name": "G.Skill Flare X5 DDR5-6000 32GB",
+    "price": 104.99, "ramType": "DDR5", "speed": 6000, "capacityGb": 32, "tdp": 6,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-kingston-ddr5-32", "category": "ram", "name": "Kingston Fury Beast DDR5-6000 32GB",
+    "price": 94.99, "ramType": "DDR5", "speed": 6000, "capacityGb": 32, "tdp": 6,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-corsair-ddr4-64", "category": "ram", "name": "Corsair Vengeance LPX DDR4-3200 64GB",
+    "price": 99.99, "ramType": "DDR4", "speed": 3200, "capacityGb": 64, "tdp": 5,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-crucial-ddr4-16", "category": "ram", "name": "Crucial Ballistix DDR4-3200 16GB",
+    "price": 37.99, "ramType": "DDR4", "speed": 3200, "capacityGb": 16, "tdp": 3,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-gskill-ddr4-32-3600", "category": "ram", "name": "G.Skill Trident Z RGB DDR4-3600 32GB",
+    "price": 74.99, "ramType": "DDR4", "speed": 3600, "capacityGb": 32, "tdp": 4,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-kingston-ddr4-16", "category": "ram", "name": "Kingston Fury Beast DDR4-3200 16GB",
+    "price": 32.99, "ramType": "DDR4", "speed": 3200, "capacityGb": 16, "tdp": 3,
     "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
   },
   {
@@ -355,6 +485,36 @@
     "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7450 }
   },
   {
+    "id": "storage-wd-sn770-1tb", "category": "storage", "name": "WD Black SN770 1TB NVMe",
+    "price": 69.99, "storageType": "NVMe SSD", "capacityGb": 1000, "tdp": 5,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 5150 }
+  },
+  {
+    "id": "storage-samsung-980-1tb", "category": "storage", "name": "Samsung 980 1TB NVMe",
+    "price": 64.99, "storageType": "NVMe SSD", "capacityGb": 1000, "tdp": 5,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 3500 }
+  },
+  {
+    "id": "storage-crucial-t500-2tb", "category": "storage", "name": "Crucial T500 2TB NVMe",
+    "price": 159.99, "storageType": "NVMe SSD", "capacityGb": 2000, "tdp": 7,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7400 }
+  },
+  {
+    "id": "storage-wd-sn850x-4tb", "category": "storage", "name": "WD Black SN850X 4TB NVMe",
+    "price": 299.99, "storageType": "NVMe SSD", "capacityGb": 4000, "tdp": 8,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7300 }
+  },
+  {
+    "id": "storage-samsung-870-2tb", "category": "storage", "name": "Samsung 870 EVO 2TB SATA SSD",
+    "price": 129.99, "storageType": "SATA SSD", "capacityGb": 2000, "tdp": 4,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 560 }
+  },
+  {
+    "id": "storage-seagate-8tb-hdd", "category": "storage", "name": "Seagate Barracuda 8TB HDD",
+    "price": 149.99, "storageType": "HDD", "capacityGb": 8000, "tdp": 8,
+    "modelPath": "/models/hdd.glb", "specs": { "readMbps": 210 }
+  },
+  {
     "id": "psu-corsair-rm1000x", "category": "psu", "name": "Corsair RM1000x 1000W",
     "price": 169.99, "wattage": 1000, "tdp": 0,
     "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
@@ -418,6 +578,41 @@
     "id": "psu-nzxt-c850", "category": "psu", "name": "NZXT C850 Gold 850W",
     "price": 129.99, "wattage": 850, "tdp": 0,
     "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-corsair-rm750e", "category": "psu", "name": "Corsair RM750e 750W",
+    "price": 99.99, "wattage": 750, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-seasonic-vertex-1000", "category": "psu", "name": "Seasonic Vertex GX-1000 1000W",
+    "price": 189.99, "wattage": 1000, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-bequiet-dark-power-850", "category": "psu", "name": "be quiet! Dark Power 13 850W",
+    "price": 199.99, "wattage": 850, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Titanium" }
+  },
+  {
+    "id": "psu-evga-supernova-1000", "category": "psu", "name": "EVGA SuperNOVA 1000 G7",
+    "price": 179.99, "wattage": 1000, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-msi-mpg-a850g", "category": "psu", "name": "MSI MPG A850G PCIE5",
+    "price": 139.99, "wattage": 850, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-cooler-master-mwe-650", "category": "psu", "name": "Cooler Master MWE Gold 650 V2",
+    "price": 74.99, "wattage": 650, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-corsair-sf1000", "category": "psu", "name": "Corsair SF1000 1000W SFX",
+    "price": 199.99, "wattage": 1000, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Platinum" }
   },
   {
     "id": "case-fractal-torrent", "category": "case", "name": "Fractal Design Torrent",
@@ -490,6 +685,36 @@
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
+    "id": "case-lian-li-o11-mini", "category": "case", "name": "Lian Li O11 Air Mini",
+    "price": 109.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 362, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-corsair-5000d", "category": "case", "name": "Corsair 5000D Airflow",
+    "price": 154.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 420, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-nzxt-h9-flow", "category": "case", "name": "NZXT H9 Flow",
+    "price": 159.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 435, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-fractal-pop-air", "category": "case", "name": "Fractal Design Pop Air",
+    "price": 79.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 405, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-cm-nr200-max", "category": "case", "name": "Cooler Master NR200P Max",
+    "price": 179.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 336, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mini ITX" }
+  },
+  {
+    "id": "case-phanteks-p400a", "category": "case", "name": "Phanteks Eclipse P400A",
+    "price": 89.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 420, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
     "id": "cooler-noctua-d15", "category": "cooler", "name": "Noctua NH-D15",
     "price": 89.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 5,
     "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 165 }
@@ -553,6 +778,41 @@
     "id": "cooler-bequiet-pure-rock-2", "category": "cooler", "name": "be quiet! Pure Rock 2",
     "price": 39.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 4,
     "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 155 }
+  },
+  {
+    "id": "cooler-thermalright-pa120-digital", "category": "cooler", "name": "Thermalright Peerless Assassin 120 Digital",
+    "price": 44.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 4,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 155 }
+  },
+  {
+    "id": "cooler-deepcool-ak400", "category": "cooler", "name": "DeepCool AK400",
+    "price": 34.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 4,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 155 }
+  },
+  {
+    "id": "cooler-noctua-d15-chromax", "category": "cooler", "name": "Noctua NH-D15 chromax.black",
+    "price": 109.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 5,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 165 }
+  },
+  {
+    "id": "cooler-arctic-lf3-240", "category": "cooler", "name": "Arctic Liquid Freezer III 240 AIO",
+    "price": 84.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 8,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "AIO", "radiator": "240mm" }
+  },
+  {
+    "id": "cooler-corsair-h150i", "category": "cooler", "name": "Corsair iCUE H150i Elite Capellix",
+    "price": 189.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 9,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "AIO", "radiator": "360mm" }
+  },
+  {
+    "id": "cooler-deepcool-ls520", "category": "cooler", "name": "DeepCool LS520 SE AIO",
+    "price": 89.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 8,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "AIO", "radiator": "240mm" }
+  },
+  {
+    "id": "cooler-noctua-u9s", "category": "cooler", "name": "Noctua NH-U9S",
+    "price": 54.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 4,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 125 }
   },
   {
     "id": "fans-arctic-p12-single", "category": "fans", "name": "Arctic P12 PWM 120mm",
@@ -628,5 +888,30 @@
     "id": "fans-thermaltake-toughfan-12", "category": "fans", "name": "Thermaltake ToughFan 12 (2-pack)",
     "price": 32.99, "tdp": 5, "modelPath": "/models/fans.glb",
     "specs": { "size": "120mm", "count": 2, "rgb": false }
+  },
+  {
+    "id": "fans-arctic-p14-3pack", "category": "fans", "name": "Arctic P14 PWM (3-pack)",
+    "price": 21.99, "tdp": 6, "modelPath": "/models/fans.glb",
+    "specs": { "size": "140mm", "count": 3, "rgb": false }
+  },
+  {
+    "id": "fans-noctua-nf-a12-chromax", "category": "fans", "name": "Noctua NF-A12x25 chromax.black",
+    "price": 32.99, "tdp": 3, "modelPath": "/models/fans.glb",
+    "specs": { "size": "120mm", "count": 1, "rgb": false }
+  },
+  {
+    "id": "fans-corsair-af120-3pack", "category": "fans", "name": "Corsair AF120 RGB Elite (3-pack)",
+    "price": 79.99, "tdp": 8, "modelPath": "/models/fans.glb",
+    "specs": { "size": "120mm", "count": 3, "rgb": true }
+  },
+  {
+    "id": "fans-lian-li-sl140-2pack", "category": "fans", "name": "Lian Li Uni Fan SL140 (2-pack)",
+    "price": 49.99, "tdp": 6, "modelPath": "/models/fans.glb",
+    "specs": { "size": "140mm", "count": 2, "rgb": true }
+  },
+  {
+    "id": "fans-arctic-p12-max-single", "category": "fans", "name": "Arctic P12 Max 120mm",
+    "price": 9.99, "tdp": 3, "modelPath": "/models/fans.glb",
+    "specs": { "size": "120mm", "count": 1, "rgb": false }
   }
 ]
