@@ -1,6 +1,7 @@
-import { useRef, useLayoutEffect, useState } from 'react'
+import { useRef, useLayoutEffect, useState, useEffect } from 'react'
 import { CATEGORIES } from '../lib/categories'
 import { RECOMMENDED_ORDER, nextRecommended } from '../lib/recommendedOrder'
+import { partScreenPositions } from '../lib/partScreenPositions'
 
 const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
@@ -9,6 +10,8 @@ const ORDERED = RECOMMENDED_ORDER
 export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect }) {
   const containerRef = useRef(null)
   const [size, setSize] = useState({ w: 800, h: 600 })
+  const lineRefs = useRef({})
+  const geomRef = useRef({ cx: 400, cy: 300 })
 
   useLayoutEffect(() => {
     function update() {
@@ -20,34 +23,56 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const next = nextRecommended(selectedParts)
   const cx = size.w / 2
   const cy = size.h / 2
   const radius = Math.min(size.w, size.h) * 0.40
+  geomRef.current = { cx, cy }
+
+  const next = nextRecommended(selectedParts)
+
+  const slots = ORDERED.map((cat, i) => {
+    const angle = (i / ORDERED.length) * 2 * Math.PI - Math.PI / 2
+    return { cat, x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle), order: i + 1 }
+  })
+
+  // Every frame, aim each filled slot's line endpoint at its part's live screen
+  // position; empty slots keep the endpoint at the center.
+  useEffect(() => {
+    let raf
+    function tick() {
+      const { cx, cy } = geomRef.current
+      for (const cat of ORDERED) {
+        const line = lineRefs.current[cat.id]
+        if (!line) continue
+        const tracked = selectedParts[cat.id] ? partScreenPositions.positions[cat.id] : null
+        line.setAttribute('x1', tracked ? tracked.x : cx)
+        line.setAttribute('y1', tracked ? tracked.y : cy)
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [selectedParts])
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
       <svg width={size.w} height={size.h} className="absolute inset-0">
-        {ORDERED.map((cat, i) => {
-          const angle = (i / ORDERED.length) * 2 * Math.PI - Math.PI / 2
-          const x = cx + radius * Math.cos(angle)
-          const y = cy + radius * Math.sin(angle)
+        {slots.map(({ cat, x, y }) => {
           const selected = Boolean(selectedParts[cat.id])
           return (
-            <line key={cat.id} x1={cx} y1={cy} x2={x} y2={y}
-              stroke={selected ? 'rgba(96,165,250,0.45)' : 'rgba(255,255,255,0.12)'}
-              strokeWidth={selected ? 1.5 : 1} />
+            <line
+              key={cat.id}
+              ref={(el) => { lineRefs.current[cat.id] = el }}
+              x1={cx} y1={cy} x2={x} y2={y}
+              stroke={selected ? 'rgba(96,165,250,0.55)' : 'rgba(255,255,255,0.12)'}
+              strokeWidth={selected ? 1.5 : 1}
+            />
           )
         })}
       </svg>
-      {ORDERED.map((cat, i) => {
-        const angle = (i / ORDERED.length) * 2 * Math.PI - Math.PI / 2
-        const x = cx + radius * Math.cos(angle)
-        const y = cy + radius * Math.sin(angle)
+      {slots.map(({ cat, x, y, order }) => {
         const part = selectedParts[cat.id]
         const isNext = cat.id === next
-        const order = i + 1
-
         return (
           <div
             key={cat.id}
