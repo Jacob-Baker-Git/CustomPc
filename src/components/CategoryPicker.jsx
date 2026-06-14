@@ -7,6 +7,7 @@ export const CATEGORIES = [
   { id: 'psu',         label: 'PSU',          icon: '⚡' },
   { id: 'case',        label: 'Case',         icon: '📦' },
   { id: 'cooler',      label: 'CPU Cooler',   icon: '❄️' },
+  { id: 'fans',        label: 'Case Fans',    icon: '🌀' },
 ]
 
 export default function CategoryPicker({ selectedParts, onSelect }) {

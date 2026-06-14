@@ -9,6 +9,7 @@ import useBuilderStore from '../store/useBuilderStore'
 export default function BuilderScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const addPart       = useBuilderStore((s) => s.addPart)
+  const removePart    = useBuilderStore((s) => s.removePart)
   const [activeCategory, setActiveCategory]   = useState(null)
   const [showCategoryPicker, setShowPicker]   = useState(true)
 
@@ -31,7 +32,11 @@ export default function BuilderScreen() {
         ) : (
           <div className="relative w-full h-full">
             <BuildCanvas selectedParts={selectedParts} />
-            <OrbitRing selectedParts={selectedParts} onSelectCategory={handleCategorySelect} />
+            <OrbitRing
+              selectedParts={selectedParts}
+              onSelectCategory={handleCategorySelect}
+              onDeselect={removePart}
+            />
             <button
               onClick={() => setShowPicker(true)}
               className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-full border border-gray-600 transition-all"
