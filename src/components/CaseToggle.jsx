@@ -10,7 +10,7 @@ export default function CaseToggle() {
   return (
     <button
       onClick={toggle}
-      className="absolute bottom-6 right-6 bg-gray-800/90 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-full border border-gray-600 transition-all flex items-center gap-2"
+      className="absolute bottom-6 right-6 bg-gray-900/70 backdrop-blur-md hover:border-cyan-400/60 text-white text-sm px-4 py-2 rounded-full border border-white/10 transition-all flex items-center gap-2"
     >
       <span>{transparent ? '👁️ See-through case' : '📦 Solid case'}</span>
     </button>
