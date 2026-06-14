@@ -1,3 +1,5 @@
+import { valuePerPound } from '../lib/valueScore'
+
 export default function PartCard({ part, locked, lockReason, onSelect }) {
   return (
     <div
@@ -18,6 +20,9 @@ export default function PartCard({ part, locked, lockReason, onSelect }) {
         {part.wattage && <div>{part.wattage}W</div>}
         {part.capacityGb && (
           <div>{part.capacityGb >= 1000 ? `${part.capacityGb / 1000}TB` : `${part.capacityGb}GB`}</div>
+        )}
+        {part.perfScore > 0 && (
+          <div className="text-cyan-300/80">{valuePerPound(part).toFixed(1)} perf/£100</div>
         )}
       </div>
       {locked && <div className="absolute top-2 right-2 text-red-400 text-xs">🔒</div>}
