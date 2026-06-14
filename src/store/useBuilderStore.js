@@ -21,6 +21,9 @@ const useBuilderStore = create((set) => ({
   caseTransparent: true,
   toggleCaseTransparency: () =>
     set((state) => ({ caseTransparent: !state.caseTransparent })),
+
+  resolution: '1440p',
+  setResolution: (resolution) => set({ resolution }),
 }))
 
 export default useBuilderStore
