@@ -23,7 +23,7 @@ export default function UpgradeSuggestion() {
         <span className="text-white text-sm font-semibold">Upgrade suggestion</span>
       </div>
       <p className="text-xs text-gray-300">
-        Swap your <span className="capitalize">{s.category}</span> →{' '}
+        Swap your <span className="uppercase">{s.category}</span> →{' '}
         <span className="text-cyan-300 font-semibold">{s.toPart.name}</span> for{' '}
         <span className="text-emerald-300 font-semibold">+{s.fpsGain} FPS</span> at {resLabel} ({cost}).
       </p>
