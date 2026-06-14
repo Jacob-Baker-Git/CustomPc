@@ -7,7 +7,7 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [3.5, 2.5, 4.5], fov: 50 }}>
+      <Canvas camera={{ position: [3.2, 1.6, 5.2], fov: 48 }}>
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Environment preset="city" />
