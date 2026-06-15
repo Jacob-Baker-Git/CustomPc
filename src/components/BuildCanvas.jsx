@@ -22,7 +22,7 @@ export default function BuildCanvas({ selectedParts }) {
         ))}
         <CableHarness selectedParts={selectedParts} />
         {selectedParts.case && selectedParts.motherboard && (
-          <FanSystem count={selectedParts.fans?.specs?.count ?? 0} />
+          <FanSystem filled={Boolean(selectedParts.fans)} />
         )}
         <ScreenTracker selectedParts={selectedParts} />
         <OrbitControls target={[0, -0.1, 0.05]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />

@@ -1,15 +1,20 @@
 export default function PsuModel() {
   return (
     <group>
-      {/* PSU box — fairly cubey */}
+      {/* PSU body — sits flat: wider than tall, like a real ATX unit */}
       <mesh>
-        <boxGeometry args={[0.8, 0.7, 0.7]} />
-        <meshStandardMaterial color="#1c1c1c" metalness={0.7} roughness={0.4} />
+        <boxGeometry args={[0.95, 0.48, 0.72]} />
+        <meshStandardMaterial color="#161618" metalness={0.7} roughness={0.4} />
       </mesh>
-      {/* fan grille on the side facing the window (+Z) */}
-      <mesh position={[0, 0, 0.36]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.26, 0.26, 0.02, 24]} />
-        <meshStandardMaterial color="#333333" metalness={0.5} roughness={0.6} />
+      {/* intake fan grille on top */}
+      <mesh position={[0, 0.245, 0]} rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[0.2, 0.2, 0.02, 24]} />
+        <meshStandardMaterial color="#2b2b30" metalness={0.5} roughness={0.6} />
+      </mesh>
+      {/* label patch on the window-facing side */}
+      <mesh position={[0, 0, 0.37]}>
+        <boxGeometry args={[0.5, 0.3, 0.01]} />
+        <meshStandardMaterial color="#3a3a40" metalness={0.3} roughness={0.7} />
       </mesh>
     </group>
   )

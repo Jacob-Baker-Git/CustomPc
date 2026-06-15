@@ -40,11 +40,11 @@ export default function CaseModel() {
   // Solid mode: 5 opaque metal panels + 1 tinted tempered-glass front window.
   return (
     <group>
-      <Panel args={[W, T, D]} position={[0, -H / 2, 0]} color="#d7dade" />  {/* bottom */}
-      <Panel args={[W, T, D]} position={[0,  H / 2, 0]} color="#d7dade" />  {/* top */}
-      <Panel args={[T, H, D]} position={[ W / 2, 0, 0]} color="#cdd0d6" />  {/* right side */}
-      <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#cdd0d6" />  {/* left side */}
-      <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#c4c7cd" />  {/* rear / mobo tray */}
+      <Panel args={[W, T, D]} position={[0, -H / 2, 0]} color="#15161a" />  {/* bottom */}
+      <Panel args={[W, T, D]} position={[0,  H / 2, 0]} color="#15161a" />  {/* top */}
+      <Panel args={[T, H, D]} position={[ W / 2, 0, 0]} color="#1b1c21" />  {/* right side */}
+      <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#1b1c21" />  {/* left side */}
+      <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#101116" />  {/* rear / mobo tray */}
       {/* tempered-glass front window — the build is visible through it */}
       <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#9fc6ee" opacity={0.1} glass />
     </group>
