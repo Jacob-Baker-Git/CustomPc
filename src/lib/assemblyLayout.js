@@ -10,15 +10,16 @@ const MOUNTED = {
   // Vertical RAM sticks standing side-by-side, to the right of the CPU.
   ram:         { position: [0.75, 0.45, 0.12], rotation: [-Math.PI / 2, 0, 0] },
   storage:     { position: [-0.8, 0.05, 0.12], rotation: [Math.PI / 2, 0, 0] },
-  // Horizontal graphics card in the lower PCIe slot, extending toward the front.
-  gpu:         { position: [0, -0.55, 0.55],   rotation: [0, 0, 0] },
-  // Power supply in the bottom basement of the case.
-  psu:         { position: [0, -1.15, 0.0],  rotation: [0, 0, 0] },
+  // Horizontal graphics card hanging from the PCIe slot, resting above the
+  // PSU shroud and extending toward the front glass.
+  gpu:         { position: [0, -0.85, 0.5],   rotation: [0, 0, 0] },
+  // Power supply hidden in the basement, beneath the shroud, toward the rear.
+  psu:         { position: [0, -1.9, -0.3],   rotation: [0, 0, 0] },
   // Tower shell recentered so the rear wall hugs the board and the glass
-  // front clears the intake fans; build sits with even headroom.
+  // front clears the build; sits with even headroom.
   case:        { position: [0, -0.1, 0.9],   rotation: [0, 0, 0] },
-  // Intake fans at the front of the case, facing the viewer.
-  fans:        { position: [0, 0, 1.35],     rotation: [0, 0, 0] },
+  // Top-mounted exhaust fans, lying flat (facing up) in a row.
+  fans:        { position: [0, 1.55, 0.15],   rotation: [-Math.PI / 2, 0, 0] },
 }
 
 // Standalone positions used until a motherboard exists to mount onto.

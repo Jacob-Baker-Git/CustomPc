@@ -22,16 +22,39 @@ function Panel({ args, position, color, opacity = 1, glass = false }) {
   )
 }
 
+// PSU shroud / basement cover at the bottom of the case — hides the PSU and
+// gives the GPU something to sit above, like a real modern build. Shown in both
+// modes since it's part of the chassis. Coords are local to the case group.
+function Shroud() {
+  return (
+    <group>
+      {/* top cover */}
+      <mesh position={[0, -1.2, 0]}>
+        <boxGeometry args={[W - 0.12, 0.08, D - 0.12]} />
+        <meshStandardMaterial color="#2b2f36" metalness={0.5} roughness={0.6} />
+      </mesh>
+      {/* front face */}
+      <mesh position={[0, -1.62, D / 2 - 0.12]}>
+        <boxGeometry args={[W - 0.12, 0.85, 0.06]} />
+        <meshStandardMaterial color="#33373f" metalness={0.5} roughness={0.6} />
+      </mesh>
+    </group>
+  )
+}
+
 export default function CaseModel() {
   const transparent = useBuilderStore((s) => s.caseTransparent)
 
   // Open mode: panels removed — faint frame only, so parts are fully visible.
   if (transparent) {
     return (
-      <mesh>
-        <boxGeometry args={[W, H, D]} />
-        <meshBasicMaterial color="#3a567d" wireframe transparent opacity={0.5} />
-      </mesh>
+      <group>
+        <mesh>
+          <boxGeometry args={[W, H, D]} />
+          <meshBasicMaterial color="#3a567d" wireframe transparent opacity={0.5} />
+        </mesh>
+        <Shroud />
+      </group>
     )
   }
 
@@ -45,6 +68,7 @@ export default function CaseModel() {
       <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#1f2227" />  {/* rear / mobo tray */}
       {/* tempered-glass front window — the build is visible through it */}
       <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#9fc6ee" opacity={0.1} glass />
+      <Shroud />
     </group>
   )
 }
