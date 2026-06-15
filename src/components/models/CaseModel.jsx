@@ -31,12 +31,12 @@ function Shroud() {
       {/* top cover */}
       <mesh position={[0, -1.2, 0]}>
         <boxGeometry args={[W - 0.12, 0.08, D - 0.12]} />
-        <meshStandardMaterial color="#2b2f36" metalness={0.5} roughness={0.6} />
+        <meshStandardMaterial color="#e4e6ea" metalness={0.3} roughness={0.55} />
       </mesh>
       {/* front face */}
       <mesh position={[0, -1.62, D / 2 - 0.12]}>
         <boxGeometry args={[W - 0.12, 0.85, 0.06]} />
-        <meshStandardMaterial color="#33373f" metalness={0.5} roughness={0.6} />
+        <meshStandardMaterial color="#dadce1" metalness={0.3} roughness={0.55} />
       </mesh>
     </group>
   )
@@ -61,11 +61,11 @@ export default function CaseModel() {
   // Solid mode: 5 opaque metal panels + 1 tinted tempered-glass front window.
   return (
     <group>
-      <Panel args={[W, T, D]} position={[0, -H / 2, 0]} color="#23272e" />  {/* bottom */}
-      <Panel args={[W, T, D]} position={[0,  H / 2, 0]} color="#23272e" />  {/* top */}
-      <Panel args={[T, H, D]} position={[ W / 2, 0, 0]} color="#2b2f36" />  {/* right side */}
-      <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#2b2f36" />  {/* left side */}
-      <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#1f2227" />  {/* rear / mobo tray */}
+      <Panel args={[W, T, D]} position={[0, -H / 2, 0]} color="#d7dade" />  {/* bottom */}
+      <Panel args={[W, T, D]} position={[0,  H / 2, 0]} color="#d7dade" />  {/* top */}
+      <Panel args={[T, H, D]} position={[ W / 2, 0, 0]} color="#cdd0d6" />  {/* right side */}
+      <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#cdd0d6" />  {/* left side */}
+      <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#c4c7cd" />  {/* rear / mobo tray */}
       {/* tempered-glass front window — the build is visible through it */}
       <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#9fc6ee" opacity={0.1} glass />
       <Shroud />

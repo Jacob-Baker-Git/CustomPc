@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment } from '@react-three/drei'
 import PartModel from './PartModel'
 import ScreenTracker from './ScreenTracker'
+import CableHarness from './models/CableHarness'
 
 export default function BuildCanvas({ selectedParts }) {
   const parts = Object.values(selectedParts).filter(Boolean)
@@ -18,6 +19,7 @@ export default function BuildCanvas({ selectedParts }) {
         {parts.map((part) => (
           <PartModel key={part.id} part={part} selectedParts={selectedParts} />
         ))}
+        <CableHarness selectedParts={selectedParts} />
         <ScreenTracker selectedParts={selectedParts} />
         <OrbitControls target={[0, -0.1, 0.4]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
       </Canvas>
