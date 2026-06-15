@@ -3,7 +3,8 @@ import useBuilderStore from '../../store/useBuilderStore'
 // Tower proportions: taller than wide (reads as a tower, not a cube). Depth is
 // kept shallow so the motherboard sits close to the glass, like a real case.
 const W = 3.0   // width  (X)
-const H = 4.4   // height (Y)
+const H = 3.7   // height (Y) — trimmed so the PSU sits on the floor and there's
+                // ~3 fan-thicknesses of clearance above the motherboard
 const D = 1.2   // depth  (Z)
 const T = 0.06  // panel thickness
 

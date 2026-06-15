@@ -3,13 +3,14 @@ import { OrbitControls, Environment } from '@react-three/drei'
 import PartModel from './PartModel'
 import ScreenTracker from './ScreenTracker'
 import CableHarness from './models/CableHarness'
+import FanSystem from './FanSystem'
 
 export default function BuildCanvas({ selectedParts }) {
   const parts = Object.values(selectedParts).filter(Boolean)
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [0.9, 0.5, 6.4], fov: 46 }}>
+      <Canvas camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}>
         <ambientLight intensity={0.95} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         {/* Front key light (no distance falloff) so the build reads clearly
@@ -20,8 +21,11 @@ export default function BuildCanvas({ selectedParts }) {
           <PartModel key={part.id} part={part} selectedParts={selectedParts} />
         ))}
         <CableHarness selectedParts={selectedParts} />
+        {selectedParts.case && selectedParts.motherboard && (
+          <FanSystem count={selectedParts.fans?.specs?.count ?? 0} />
+        )}
         <ScreenTracker selectedParts={selectedParts} />
-        <OrbitControls target={[0, -0.1, 0.2]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
+        <OrbitControls target={[0, -0.1, 0.05]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
       </Canvas>
     </div>
   )
