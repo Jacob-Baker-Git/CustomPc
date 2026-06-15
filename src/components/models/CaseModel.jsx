@@ -1,9 +1,10 @@
 import useBuilderStore from '../../store/useBuilderStore'
 
-// Tower proportions: taller than wide (reads as a tower, not a cube).
+// Tower proportions: taller than wide (reads as a tower, not a cube). Depth is
+// kept shallow so the motherboard sits close to the glass, like a real case.
 const W = 3.0   // width  (X)
 const H = 4.4   // height (Y)
-const D = 2.6   // depth  (Z)
+const D = 1.2   // depth  (Z)
 const T = 0.06  // panel thickness
 
 function Panel({ args, position, color, opacity = 1, glass = false }) {
@@ -22,39 +23,16 @@ function Panel({ args, position, color, opacity = 1, glass = false }) {
   )
 }
 
-// PSU shroud / basement cover at the bottom of the case — hides the PSU and
-// gives the GPU something to sit above, like a real modern build. Shown in both
-// modes since it's part of the chassis. Coords are local to the case group.
-function Shroud() {
-  return (
-    <group>
-      {/* top cover */}
-      <mesh position={[0, -1.2, 0]}>
-        <boxGeometry args={[W - 0.12, 0.08, D - 0.12]} />
-        <meshStandardMaterial color="#e4e6ea" metalness={0.3} roughness={0.55} />
-      </mesh>
-      {/* front face */}
-      <mesh position={[0, -1.62, D / 2 - 0.12]}>
-        <boxGeometry args={[W - 0.12, 0.85, 0.06]} />
-        <meshStandardMaterial color="#dadce1" metalness={0.3} roughness={0.55} />
-      </mesh>
-    </group>
-  )
-}
-
 export default function CaseModel() {
   const transparent = useBuilderStore((s) => s.caseTransparent)
 
   // Open mode: panels removed — faint frame only, so parts are fully visible.
   if (transparent) {
     return (
-      <group>
-        <mesh>
-          <boxGeometry args={[W, H, D]} />
-          <meshBasicMaterial color="#3a567d" wireframe transparent opacity={0.5} />
-        </mesh>
-        <Shroud />
-      </group>
+      <mesh>
+        <boxGeometry args={[W, H, D]} />
+        <meshBasicMaterial color="#3a567d" wireframe transparent opacity={0.5} />
+      </mesh>
     )
   }
 
@@ -68,7 +46,6 @@ export default function CaseModel() {
       <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#c4c7cd" />  {/* rear / mobo tray */}
       {/* tempered-glass front window — the build is visible through it */}
       <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#9fc6ee" opacity={0.1} glass />
-      <Shroud />
     </group>
   )
 }

@@ -9,7 +9,7 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [1.7, 0.6, 7.2], fov: 46 }}>
+      <Canvas camera={{ position: [0.9, 0.5, 6.4], fov: 46 }}>
         <ambientLight intensity={0.95} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         {/* Front key light (no distance falloff) so the build reads clearly
@@ -21,7 +21,7 @@ export default function BuildCanvas({ selectedParts }) {
         ))}
         <CableHarness selectedParts={selectedParts} />
         <ScreenTracker selectedParts={selectedParts} />
-        <OrbitControls target={[0, -0.1, 0.4]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
+        <OrbitControls target={[0, -0.1, 0.2]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
       </Canvas>
     </div>
   )

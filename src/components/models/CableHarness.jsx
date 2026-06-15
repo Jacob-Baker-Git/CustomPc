@@ -22,25 +22,25 @@ export default function CableHarness({ selectedParts = {} }) {
 
   return (
     <group>
-      {/* 24-pin ATX cable: shroud → up the right edge → into the board */}
+      {/* 24-pin ATX cable: bottom-left PSU → sweeping up to the board's right edge */}
       {selectedParts.psu && (
         <Cable
           points={[
-            [1.22, -1.15, 0.18],
-            [1.28, -0.55, 0.12],
-            [1.2, 0.15, 0.1],
-            [1.02, 0.35, 0.08],
+            [-0.6, -1.45, 0.18],
+            [0.2, -1.0, 0.14],
+            [1.0, -0.2, 0.1],
+            [1.0, 0.35, 0.06],
           ]}
         />
       )}
-      {/* PCIe power: shroud → up to the GPU */}
+      {/* PCIe power: bottom-left PSU → up to the GPU */}
       {selectedParts.psu && selectedParts.gpu && (
         <Cable
           radius={0.035}
           points={[
-            [0.25, -1.15, 0.38],
-            [0.18, -0.98, 0.46],
-            [0.05, -0.82, 0.5],
+            [-0.6, -1.45, 0.22],
+            [-0.35, -1.05, 0.28],
+            [-0.1, -0.9, 0.32],
           ]}
         />
       )}

@@ -4,6 +4,7 @@ import BuildCanvas from '../components/BuildCanvas'
 import OrbitRing from '../components/OrbitRing'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
+import InfoDisclaimer from '../components/InfoDisclaimer'
 import UpgradeSuggestion from '../components/UpgradeSuggestion'
 import BottleneckIndicator from '../components/BottleneckIndicator'
 import PerformancePanel from '../components/PerformancePanel'
@@ -51,6 +52,7 @@ export default function BuilderScreen() {
               onDeselect={removePart}
             />
             <CaseToggle />
+            <InfoDisclaimer />
             <UpgradeSuggestion />
           </div>
         ) : (
