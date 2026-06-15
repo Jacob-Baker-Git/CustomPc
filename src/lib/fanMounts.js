@@ -1,15 +1,22 @@
-// Fan mount points in the assembly's world frame (motherboard at the origin).
-// When a fan pack is selected every mount is filled; otherwise each shows an
-// empty square slot. Each fan/slot faces +Z and is re-oriented by `rotation`.
+// Fan mount points in the assembly's world frame (motherboard at the origin),
+// mounted flat on the case walls and centred on each panel with even spacing
+// (per the sketch: 1 left, 3 right, 3 top). When a fan pack is selected every
+// mount is filled, otherwise each shows an empty square slot. Each fan/slot
+// faces +Z by default and is re-oriented by `rotation`.
+const RIGHT_X = 1.43   // just inside the right wall
+const LEFT_X = -1.43   // just inside the left wall
+const TOP_Y = 1.6      // just under the top panel
+const DEPTH_Z = 0.35   // centred front-to-back
+
 export const FAN_MOUNTS = [
-  // Front intake — a column of three on the right, facing the window (visible).
-  { position: [1.2, 0.65, 0.45], rotation: [0, 0, 0] },
-  { position: [1.2, -0.05, 0.45], rotation: [0, 0, 0] },
-  { position: [1.2, -0.75, 0.45], rotation: [0, 0, 0] },
-  // Top exhaust — a row of three flush under the top panel, facing up.
-  { position: [-0.6, 1.6, 0.05], rotation: [-Math.PI / 2, 0, 0] },
-  { position: [0,    1.6, 0.05], rotation: [-Math.PI / 2, 0, 0] },
-  { position: [0.6,  1.6, 0.05], rotation: [-Math.PI / 2, 0, 0] },
-  // Rear exhaust — one on the left, facing the window.
-  { position: [-1.2, 0.65, 0.45], rotation: [0, 0, 0] },
+  // Right side wall — column of three, centred vertically, facing into the case.
+  { position: [RIGHT_X, 0.65, DEPTH_Z],  rotation: [0, -Math.PI / 2, 0] },
+  { position: [RIGHT_X, -0.1, DEPTH_Z],  rotation: [0, -Math.PI / 2, 0] },
+  { position: [RIGHT_X, -0.85, DEPTH_Z], rotation: [0, -Math.PI / 2, 0] },
+  // Top panel — row of three, centred across, facing up.
+  { position: [-0.9, TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
+  { position: [0,    TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
+  { position: [0.9,  TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
+  // Left side wall — one fan, centred, facing into the case.
+  { position: [LEFT_X, -0.1, DEPTH_Z], rotation: [0, Math.PI / 2, 0] },
 ]
