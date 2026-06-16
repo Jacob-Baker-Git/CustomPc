@@ -43,6 +43,10 @@ export default function BuilderScreen() {
         </div>
         {view === 'build' ? (
           <div className="relative w-full h-full">
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse 55% 55% at 50% 45%, rgba(45,120,160,0.18), rgba(2,6,23,0) 70%)' }}
+            />
             <BuildCanvas selectedParts={selectedParts} />
             <BottleneckIndicator />
             <PerformancePanel />
