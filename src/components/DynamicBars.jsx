@@ -1,13 +1,18 @@
 export default function DynamicBars({ value, max, label, unit }) {
-  const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0
+  const hasMax = typeof max === 'number' && max > 0
+  const pct = hasMax ? Math.min((value / max) * 100, 100) : 0
   const barColor =
     pct >= 100 ? 'bg-gradient-to-r from-red-500 to-rose-500'
     : pct >= 80 ? 'bg-gradient-to-r from-amber-400 to-orange-500'
     : 'bg-gradient-to-r from-cyan-400 to-blue-500'
 
-  const display = unit === '£'
-    ? `£${value.toFixed(0)} / £${max.toFixed(0)}`
-    : `${value}${unit} / ${max}${unit}`
+  // Until a capacity is known (e.g. no PSU selected yet) show only the live draw,
+  // not a misleading "0 / 750" against a default that isn't really there.
+  const display = !hasMax
+    ? `${value}${unit}`
+    : unit === '£'
+      ? `£${value.toFixed(0)} / £${max.toFixed(0)}`
+      : `${value}${unit} / ${max}${unit}`
 
   return (
     <div className="flex flex-col gap-1 min-w-[140px]">

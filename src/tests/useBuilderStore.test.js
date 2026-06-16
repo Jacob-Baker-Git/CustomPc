@@ -46,8 +46,8 @@ describe('useBuilderStore', () => {
     expect(selTotalPower(useBuilderStore.getState())).toBe(cpu.tdp + gpu.tdp)
   })
 
-  it('selPsuWattage defaults to 750 with no PSU', () => {
-    expect(selPsuWattage(useBuilderStore.getState())).toBe(750)
+  it('selPsuWattage is null with no PSU', () => {
+    expect(selPsuWattage(useBuilderStore.getState())).toBeNull()
   })
 
   it('selPsuWattage returns PSU wattage when selected', () => {

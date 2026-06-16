@@ -50,7 +50,7 @@ export const selRemainingBudget = (s) => s.budget - selTotalSpent(s)
 export const selTotalPower = (s) =>
   Object.values(s.selectedParts).reduce((sum, p) => sum + (p?.tdp ?? 0), 0)
 
-export const selPsuWattage = (s) => s.selectedParts.psu?.wattage ?? 750
+export const selPsuWattage = (s) => s.selectedParts.psu?.wattage ?? null
 
 export const selPeripheralsTotal = (s) =>
   Object.values(s.selectedPeripherals).reduce((sum, p) => sum + (p?.price ?? 0), 0)
