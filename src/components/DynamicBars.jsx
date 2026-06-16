@@ -13,11 +13,11 @@ export default function DynamicBars({ value, max, label, unit }) {
     <div className="flex flex-col gap-1 min-w-[140px]">
       <div className="flex justify-between text-xs text-gray-400">
         <span>{label}</span>
-        <span>{display}</span>
+        <span className="font-mono text-gray-300">{display}</span>
       </div>
-      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+      <div className="h-2 bg-white/10 rounded-sm overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${barColor} shadow-[0_0_10px_rgba(34,211,238,0.4)]`}
+          className={`h-full rounded-sm transition-all duration-500 ${barColor} shadow-[0_0_10px_rgba(34,211,238,0.4)]`}
           style={{ width: `${pct}%` }}
         />
       </div>
