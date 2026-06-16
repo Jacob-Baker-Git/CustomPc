@@ -13,12 +13,12 @@ export default function InfoDisclaimer() {
         onClick={() => setOpen((o) => !o)}
         title={TEXT}
         aria-label={TEXT}
-        className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-900/70 backdrop-blur-md border border-white/10 text-cyan-300 text-sm italic font-semibold hover:border-cyan-400/60 hover:shadow-[0_0_12px_rgba(34,211,238,0.4)] transition-all"
+        className="w-7 h-7 flex items-center justify-center rounded-full bg-slate-950/30 backdrop-blur-md border border-slate-800/60 text-cyan-300 text-sm italic font-semibold hover:border-cyan-400/60 hover:shadow-[0_0_12px_rgba(34,211,238,0.4)] transition-all"
       >
         i
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-xl p-3 text-xs text-gray-300 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+        <div className="absolute right-0 mt-2 w-64 bg-slate-950/60 backdrop-blur-md border border-slate-800/60 rounded-sm p-3 text-xs text-gray-300">
           {TEXT}
         </div>
       )}

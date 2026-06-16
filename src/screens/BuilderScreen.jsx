@@ -27,12 +27,12 @@ export default function BuilderScreen() {
     <div className="min-h-screen bg-gray-950">
       <TopBar />
       <div className="pt-16 h-[calc(100vh-4rem)]">
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-full bg-gray-900/70 backdrop-blur-md border border-white/10 p-0.5">
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
           {['build', 'peripherals'].map((v) => (
             <button
               key={v}
               onClick={() => setView(v)}
-              className={`px-4 py-1 text-xs font-medium rounded-full capitalize transition-all
+              className={`px-4 py-1 text-xs font-medium rounded-sm capitalize transition-all
                 ${view === v
                   ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_12px_rgba(34,211,238,0.4)]'
                   : 'text-gray-300 hover:text-white'}`}
