@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TopBar from '../components/TopBar'
 import BuildCanvas from '../components/BuildCanvas'
+import Backdrop from '../components/Backdrop'
 import OrbitRing from '../components/OrbitRing'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
@@ -24,7 +25,8 @@ export default function BuilderScreen() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="relative min-h-screen bg-[#05080f]">
+      <Backdrop />
       <TopBar />
       <div className="pt-16 h-[calc(100vh-4rem)]">
         <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
@@ -43,10 +45,6 @@ export default function BuilderScreen() {
         </div>
         {view === 'build' ? (
           <div className="relative w-full h-full">
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse 55% 55% at 50% 45%, rgba(45,120,160,0.18), rgba(2,6,23,0) 70%)' }}
-            />
             <BuildCanvas selectedParts={selectedParts} />
             <BottleneckIndicator />
             <PerformancePanel />
