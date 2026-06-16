@@ -10,6 +10,7 @@ import UpgradeSuggestion from '../components/UpgradeSuggestion'
 import BottleneckIndicator from '../components/BottleneckIndicator'
 import PerformancePanel from '../components/PerformancePanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
+import BuildSummary from '../components/BuildSummary'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -30,7 +31,7 @@ export default function BuilderScreen() {
       <TopBar />
       <div className="pt-16 h-[calc(100vh-4rem)]">
         <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
-          {['build', 'peripherals'].map((v) => (
+          {['build', 'peripherals', 'summary'].map((v) => (
             <button
               key={v}
               onClick={() => setView(v)}
@@ -57,8 +58,10 @@ export default function BuilderScreen() {
             <InfoDisclaimer />
             <UpgradeSuggestion />
           </div>
-        ) : (
+        ) : view === 'peripherals' ? (
           <PeripheralsPanel />
+        ) : (
+          <BuildSummary />
         )}
       </div>
       {activeCategory && (

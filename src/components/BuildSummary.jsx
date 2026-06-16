@@ -11,7 +11,7 @@ const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
 function Row({ label, name, price }) {
   return (
     <div className="flex items-center py-1.5 border-t border-slate-800/50">
-      <span className="font-mono text-[11px] uppercase text-slate-500 w-16 shrink-0">{label}</span>
+      <span className="font-mono text-[11px] uppercase text-slate-500 w-28 shrink-0 pr-2">{label}</span>
       <span className="flex-1 text-sm text-slate-100 truncate">{name}</span>
       <span className="font-mono text-sm text-slate-300 w-20 text-right">£{price.toFixed(2)}</span>
       <a
