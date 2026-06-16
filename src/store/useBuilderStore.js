@@ -1,44 +1,60 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-const useBuilderStore = create((set) => ({
-  budget: 0,
-  selectedParts: {},
+const useBuilderStore = create(
+  persist(
+    (set) => ({
+      budget: 0,
+      selectedParts: {},
 
-  setBudget: (amount) => set({ budget: amount }),
+      setBudget: (amount) => set({ budget: amount }),
 
-  addPart: (category, part) =>
-    set((state) => ({
-      selectedParts: { ...state.selectedParts, [category]: part },
-    })),
+      addPart: (category, part) =>
+        set((state) => ({
+          selectedParts: { ...state.selectedParts, [category]: part },
+        })),
 
-  removePart: (category) =>
-    set((state) => {
-      const next = { ...state.selectedParts }
-      delete next[category]
-      return { selectedParts: next }
+      removePart: (category) =>
+        set((state) => {
+          const next = { ...state.selectedParts }
+          delete next[category]
+          return { selectedParts: next }
+        }),
+
+      caseTransparent: true,
+      toggleCaseTransparency: () =>
+        set((state) => ({ caseTransparent: !state.caseTransparent })),
+
+      resolution: '1440p',
+      setResolution: (resolution) => set({ resolution }),
+
+      selectedPeripherals: {},
+
+      addPeripheral: (category, part) =>
+        set((state) => ({
+          selectedPeripherals: { ...state.selectedPeripherals, [category]: part },
+        })),
+
+      removePeripheral: (category) =>
+        set((state) => {
+          const next = { ...state.selectedPeripherals }
+          delete next[category]
+          return { selectedPeripherals: next }
+        }),
     }),
-
-  caseTransparent: true,
-  toggleCaseTransparency: () =>
-    set((state) => ({ caseTransparent: !state.caseTransparent })),
-
-  resolution: '1440p',
-  setResolution: (resolution) => set({ resolution }),
-
-  selectedPeripherals: {},
-
-  addPeripheral: (category, part) =>
-    set((state) => ({
-      selectedPeripherals: { ...state.selectedPeripherals, [category]: part },
-    })),
-
-  removePeripheral: (category) =>
-    set((state) => {
-      const next = { ...state.selectedPeripherals }
-      delete next[category]
-      return { selectedPeripherals: next }
-    }),
-}))
+    {
+      name: 'custompc-build-v1',
+      version: 1,
+      partialize: (state) => ({
+        budget: state.budget,
+        selectedParts: state.selectedParts,
+        selectedPeripherals: state.selectedPeripherals,
+        resolution: state.resolution,
+        caseTransparent: state.caseTransparent,
+      }),
+    }
+  )
+)
 
 export default useBuilderStore
 
