@@ -10,6 +10,7 @@ const ORDERED = RECOMMENDED_ORDER
 export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect }) {
   const containerRef = useRef(null)
   const [size, setSize] = useState({ w: 800, h: 600 })
+  const [hoveredCat, setHoveredCat] = useState(null)
   const lineRefs = useRef({})
   const geomRef = useRef({ cx: 400, cy: 300 })
 
@@ -57,44 +58,56 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
       <svg width={size.w} height={size.h} className="absolute inset-0">
-        {slots.map(({ cat, x, y }) => {
-          const selected = Boolean(selectedParts[cat.id])
-          return (
-            <line
-              key={cat.id}
-              ref={(el) => { lineRefs.current[cat.id] = el }}
-              x1={cx} y1={cy} x2={x} y2={y}
-              stroke={selected ? 'rgba(96,165,250,0.55)' : 'rgba(255,255,255,0.12)'}
-              strokeWidth={selected ? 1.5 : 1}
-            />
-          )
-        })}
+        {/* Faint orbital guide path the pills sit on */}
+        <circle
+          cx={cx} cy={cy} r={radius}
+          fill="none"
+          stroke="rgba(56,189,248,0.18)"
+          strokeWidth="1"
+          strokeDasharray="2 6"
+        />
+        {slots.map(({ cat, x, y }) => (
+          <line
+            key={cat.id}
+            data-cat={cat.id}
+            ref={(el) => { lineRefs.current[cat.id] = el }}
+            x1={cx} y1={cy} x2={x} y2={y}
+            stroke="rgba(56,189,248,0.6)"
+            strokeWidth="1"
+            className={`transition-opacity duration-300 ${hoveredCat === cat.id ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
       </svg>
       {slots.map(({ cat, x, y, order }) => {
         const part = selectedParts[cat.id]
         const isNext = cat.id === next
+        const far = y < cy - 1 // upper/back arc → slight depth dim
         return (
           <div
             key={cat.id}
+            data-pill={cat.id}
+            onMouseEnter={() => setHoveredCat(cat.id)}
+            onMouseLeave={() => setHoveredCat(null)}
             style={{ left: x, top: y, pointerEvents: 'auto' }}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
+            className={`absolute -translate-x-1/2 -translate-y-1/2 transition-opacity ${far ? 'opacity-70 hover:opacity-100' : ''}`}
           >
             {part ? (
-              <div className={`flex items-center gap-1 rounded-full border bg-gray-800/95 pl-2 pr-1 py-1 transition-all
-                ${isNext ? 'border-blue-400' : 'border-blue-500/60'}`}>
+              <div className={`flex items-center gap-1.5 rounded-sm border bg-slate-950/70 backdrop-blur-sm pl-1.5 pr-1 py-1 transition-all
+                ${isNext ? 'border-cyan-400' : 'border-slate-700/70'}`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${isNext ? 'bg-cyan-300' : 'bg-cyan-400/70'}`} />
                 <button
                   onClick={() => onSelectCategory(cat.id)}
-                  className="flex items-center gap-1 text-white text-xs font-medium whitespace-nowrap hover:text-blue-300"
+                  className="flex items-center gap-1.5 text-slate-100 text-xs whitespace-nowrap hover:text-cyan-300"
                   title={part.name}
                 >
                   <span>{cat.icon}</span>
                   <span className="max-w-[120px] truncate">{part.name}</span>
-                  <span className="text-blue-300">£{part.price.toFixed(0)}</span>
+                  <span className="font-mono text-cyan-300">£{part.price.toFixed(0)}</span>
                 </button>
                 <button
                   onClick={() => onDeselect(cat.id)}
                   aria-label={`Remove ${cat.label}`}
-                  className="ml-0.5 w-5 h-5 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-red-500/80 text-sm leading-none"
+                  className="ml-0.5 w-5 h-5 flex items-center justify-center rounded-sm text-slate-400 hover:text-white hover:bg-red-500/80 text-sm leading-none"
                 >
                   &times;
                 </button>
@@ -102,12 +115,12 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
             ) : (
               <button
                 onClick={() => onSelectCategory(cat.id)}
-                className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium whitespace-nowrap transition-all
+                className={`flex items-center gap-1.5 rounded-sm border px-2.5 py-1.5 text-xs whitespace-nowrap transition-all
                   ${isNext
-                    ? 'border-blue-400 bg-blue-500/20 text-blue-200 ring-2 ring-blue-400/60 animate-pulse'
-                    : 'border-gray-600 bg-gray-800 text-gray-200 hover:border-gray-400 hover:bg-gray-700'}`}
+                    ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200 ring-1 ring-cyan-400/50 animate-pulse'
+                    : 'border-slate-700/70 bg-slate-950/50 backdrop-blur-sm text-slate-300 hover:border-slate-500 hover:bg-slate-900/70'}`}
               >
-                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-gray-700 text-[10px] text-gray-300">{order}</span>
+                <span className="flex items-center justify-center w-4 h-4 rounded-sm bg-slate-800 text-[10px] font-mono text-slate-300">{order}</span>
                 <span>{cat.icon}</span>
                 <span>{cat.label}</span>
               </button>
