@@ -1,0 +1,14 @@
+[
+  { "id": "lol", "name": "League of Legends", "fpsFactor": 3.0 },
+  { "id": "valorant", "name": "Valorant", "fpsFactor": 2.8 },
+  { "id": "cs2", "name": "Counter-Strike 2", "fpsFactor": 2.6 },
+  { "id": "rocket-league", "name": "Rocket League", "fpsFactor": 2.5 },
+  { "id": "fortnite", "name": "Fortnite", "fpsFactor": 1.6 },
+  { "id": "apex", "name": "Apex Legends", "fpsFactor": 1.5 },
+  { "id": "warzone", "name": "Call of Duty: Warzone", "fpsFactor": 1.1 },
+  { "id": "elden-ring", "name": "Elden Ring", "fpsFactor": 0.9 },
+  { "id": "bg3", "name": "Baldur's Gate 3", "fpsFactor": 0.85 },
+  { "id": "starfield", "name": "Starfield", "fpsFactor": 0.65 },
+  { "id": "cyberpunk", "name": "Cyberpunk 2077", "fpsFactor": 0.5 },
+  { "id": "alan-wake-2", "name": "Alan Wake 2", "fpsFactor": 0.4 }
+]
