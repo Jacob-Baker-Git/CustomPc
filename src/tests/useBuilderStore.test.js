@@ -28,6 +28,13 @@ describe('useBuilderStore', () => {
     expect(useBuilderStore.getState().selectedParts.cpu).toBeUndefined()
   })
 
+  it('setBuild replaces all selected parts at once', () => {
+    useBuilderStore.getState().addPart('cpu', cpu)
+    useBuilderStore.getState().setBuild({ gpu })
+    expect(useBuilderStore.getState().selectedParts.cpu).toBeUndefined()
+    expect(useBuilderStore.getState().selectedParts.gpu).toEqual(gpu)
+  })
+
   it('selTotalSpent sums part prices', () => {
     useBuilderStore.getState().addPart('cpu', cpu)
     useBuilderStore.getState().addPart('gpu', gpu)

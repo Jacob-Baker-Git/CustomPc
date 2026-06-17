@@ -21,6 +21,8 @@ const useBuilderStore = create(
           return { selectedParts: next }
         }),
 
+      setBuild: (parts) => set({ selectedParts: parts }),
+
       caseTransparent: true,
       toggleCaseTransparency: () =>
         set((state) => ({ caseTransparent: !state.caseTransparent })),
