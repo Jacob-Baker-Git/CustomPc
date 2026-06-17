@@ -1,13 +1,25 @@
 import { useState } from 'react'
 import Backdrop from './Backdrop'
+import useBuilderStore from '../store/useBuilderStore'
+import { autoBuild } from '../lib/autoBuilder'
+import { PRESETS } from '../lib/presets'
+import partsData from '../data/partsData.json'
 
 export default function BudgetEntry({ onSubmit }) {
   const [value, setValue] = useState('1000')
+  const setResolution = useBuilderStore((s) => s.setResolution)
+  const setBuild = useBuilderStore((s) => s.setBuild)
 
   function handleSubmit(e) {
     e.preventDefault()
     const num = parseFloat(value)
     if (num > 0) onSubmit(num)
+  }
+
+  function applyPreset(p) {
+    setResolution(p.resolution)
+    setBuild(autoBuild({}, p.budget, partsData, p.resolution))
+    onSubmit(p.budget)
   }
 
   return (
@@ -38,6 +50,18 @@ export default function BudgetEntry({ onSubmit }) {
             Start Building
           </button>
         </form>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+          <span className="text-xs text-slate-500">or auto-build:</span>
+          {PRESETS.map((p) => (
+            <button
+              key={p.label}
+              onClick={() => applyPreset(p)}
+              className="text-xs font-mono px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-cyan-400 hover:text-cyan-300 transition-all"
+            >
+              {p.label} · £{p.budget}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
