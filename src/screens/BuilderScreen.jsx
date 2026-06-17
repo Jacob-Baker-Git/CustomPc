@@ -11,6 +11,7 @@ import BottleneckIndicator from '../components/BottleneckIndicator'
 import PerformancePanel from '../components/PerformancePanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
+import BuildWarnings from '../components/BuildWarnings'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -57,6 +58,7 @@ export default function BuilderScreen() {
             <CaseToggle />
             <InfoDisclaimer />
             <UpgradeSuggestion />
+            <BuildWarnings />
           </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
