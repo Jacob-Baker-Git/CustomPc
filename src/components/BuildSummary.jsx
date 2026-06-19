@@ -4,9 +4,11 @@ import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { buildShareUrl } from '../lib/shareLink'
 import { PANEL } from '../lib/uiTokens'
+import GamePerformanceList from './GamePerformanceList'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
+const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
 function Row({ label, name, price }) {
   return (
@@ -33,6 +35,7 @@ export default function BuildSummary() {
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
   const power = useBuilderStore(selTotalPower)
+  const resolution = useBuilderStore((s) => s.resolution)
   const [copied, setCopied] = useState(false)
 
   const buildRows = CATEGORIES.map((c) => ({ key: c.id, label: c.label, part: selectedParts[c.id] })).filter((r) => r.part)
@@ -91,6 +94,13 @@ export default function BuildSummary() {
                 <span>Draw <span className="font-mono text-amber-400">{power}W</span></span>
                 <span>Total <span className="font-mono text-slate-100">£{grandTotal.toFixed(2)}</span></span>
               </div>
+
+              {selectedParts.cpu && selectedParts.gpu && (
+                <div className="mt-5">
+                  <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-1">How it runs @ {RES_LABEL[resolution] ?? resolution}</div>
+                  <GamePerformanceList cpu={selectedParts.cpu} gpu={selectedParts.gpu} resolution={resolution} />
+                </div>
+              )}
             </>
           )}
 
