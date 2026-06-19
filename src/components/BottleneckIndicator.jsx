@@ -11,7 +11,7 @@ export default function BottleneckIndicator() {
   const result = computeBottleneck(cpu, gpu, resolution)
 
   return (
-    <div className={`absolute top-4 left-4 w-72 ${PANEL} p-4`}>
+    <div className={`${PANEL} p-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className="text-white text-sm font-semibold tracking-wide">Bottleneck</span>
         <ResolutionToggle />

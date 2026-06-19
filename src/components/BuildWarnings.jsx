@@ -8,7 +8,7 @@ export default function BuildWarnings() {
   if (warnings.length === 0) return null
 
   return (
-    <div className={`absolute top-80 left-4 w-72 ${PANEL} p-3`}>
+    <div className={`${PANEL} p-3`}>
       <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">Build checks</div>
       <ul className="space-y-1.5">
         {warnings.map((w, i) => (

@@ -14,6 +14,8 @@ import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
 import GamePanel from '../components/GamePanel'
+import CategoryList from '../components/CategoryList'
+import { useIsMobile } from '../hooks/useIsMobile'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -22,6 +24,7 @@ export default function BuilderScreen() {
   const removePart    = useBuilderStore((s) => s.removePart)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useState('build')
+  const isMobile = useIsMobile()
 
   function handlePartSelect(part) {
     addPart(part.category, part)
@@ -38,7 +41,7 @@ export default function BuilderScreen() {
             <button
               key={v}
               onClick={() => setView(v)}
-              className={`px-4 py-1 text-xs font-medium rounded-sm capitalize transition-all
+              className={`px-2.5 md:px-4 py-1 text-[11px] md:text-xs font-medium rounded-sm capitalize transition-all
                 ${view === v
                   ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_12px_rgba(34,211,238,0.4)]'
                   : 'text-gray-300 hover:text-white'}`}
@@ -48,23 +51,46 @@ export default function BuilderScreen() {
           ))}
         </div>
         {view === 'build' ? (
-          <div className="relative w-full h-full">
-            <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm animate-pulse">Assembling 3D…</div>}>
-              <BuildCanvas selectedParts={selectedParts} />
-            </Suspense>
-            <BottleneckIndicator />
-            <PerformancePanel />
-            <OrbitRing
-              selectedParts={selectedParts}
-              onSelectCategory={setActiveCategory}
-              onDeselect={removePart}
-            />
-            <CaseToggle />
-            <InfoDisclaimer />
-            <UpgradeSuggestion />
-            <BuildWarnings />
-            <AutoBuildButton />
-          </div>
+          isMobile ? (
+            <div className="flex flex-col h-full overflow-y-auto">
+              <div className="relative h-[45vh] shrink-0">
+                <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm animate-pulse">Assembling 3D…</div>}>
+                  <BuildCanvas selectedParts={selectedParts} />
+                </Suspense>
+                <div className="absolute bottom-3 right-3"><CaseToggle /></div>
+              </div>
+              <div className="p-4 space-y-3 pb-12">
+                <CategoryList
+                  selectedParts={selectedParts}
+                  onSelectCategory={setActiveCategory}
+                  onDeselect={removePart}
+                />
+                <BottleneckIndicator />
+                <PerformancePanel />
+                <BuildWarnings />
+                <UpgradeSuggestion />
+                <AutoBuildButton />
+              </div>
+            </div>
+          ) : (
+            <div className="relative w-full h-full">
+              <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm animate-pulse">Assembling 3D…</div>}>
+                <BuildCanvas selectedParts={selectedParts} />
+              </Suspense>
+              <div className="absolute top-4 left-4 w-72"><BottleneckIndicator /></div>
+              <div className="absolute top-44 left-4 w-72"><PerformancePanel /></div>
+              <OrbitRing
+                selectedParts={selectedParts}
+                onSelectCategory={setActiveCategory}
+                onDeselect={removePart}
+              />
+              <div className="absolute bottom-6 right-6"><CaseToggle /></div>
+              <InfoDisclaimer />
+              <div className="absolute bottom-6 left-6 w-80"><UpgradeSuggestion /></div>
+              <div className="absolute top-80 left-4 w-72"><BuildWarnings /></div>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"><AutoBuildButton /></div>
+            </div>
+          )
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
         ) : view === 'summary' ? (

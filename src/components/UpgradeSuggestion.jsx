@@ -18,7 +18,7 @@ export default function UpgradeSuggestion() {
   const cost = s.extraCost <= 0 ? 'no extra cost' : `+£${s.extraCost.toFixed(0)}`
 
   return (
-    <div className={`absolute bottom-6 left-6 w-80 ${PANEL} p-4`}>
+    <div className={`${PANEL} p-4`}>
       <div className="flex items-center gap-2 mb-1">
         <span>⚡</span>
         <span className="text-white text-sm font-semibold">Upgrade suggestion</span>

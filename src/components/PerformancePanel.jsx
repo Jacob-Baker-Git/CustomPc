@@ -18,7 +18,7 @@ export default function PerformancePanel() {
   const resLabel = RES_LABEL[resolution] ?? resolution
 
   return (
-    <div className={`absolute top-44 left-4 w-72 ${PANEL} p-4`}>
+    <div className={`${PANEL} p-4`}>
       <span className="text-white text-sm font-semibold tracking-wide">Performance</span>
       <div className="mt-2 flex items-end gap-2">
         <span className={`${TELEMETRY} text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent`}>{fps}</span>
