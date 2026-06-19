@@ -13,6 +13,7 @@ import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
+import GamePanel from '../components/GamePanel'
 import useBuilderStore from '../store/useBuilderStore'
 
 export default function BuilderScreen() {
@@ -33,7 +34,7 @@ export default function BuilderScreen() {
       <TopBar />
       <div className="pt-16 h-[calc(100vh-4rem)]">
         <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
-          {['build', 'peripherals', 'summary'].map((v) => (
+          {['build', 'peripherals', 'summary', 'games'].map((v) => (
             <button
               key={v}
               onClick={() => setView(v)}
@@ -64,8 +65,10 @@ export default function BuilderScreen() {
           </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
-        ) : (
+        ) : view === 'summary' ? (
           <BuildSummary />
+        ) : (
+          <GamePanel />
         )}
       </div>
       {activeCategory && (
