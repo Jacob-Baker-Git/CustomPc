@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import TopBar from '../components/TopBar'
-import BuildCanvas from '../components/BuildCanvas'
+const BuildCanvas = lazy(() => import('../components/BuildCanvas'))
 import Backdrop from '../components/Backdrop'
 import OrbitRing from '../components/OrbitRing'
 import PartSelector from '../components/PartSelector'
@@ -49,7 +49,9 @@ export default function BuilderScreen() {
         </div>
         {view === 'build' ? (
           <div className="relative w-full h-full">
-            <BuildCanvas selectedParts={selectedParts} />
+            <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm animate-pulse">Assembling 3D…</div>}>
+              <BuildCanvas selectedParts={selectedParts} />
+            </Suspense>
             <BottleneckIndicator />
             <PerformancePanel />
             <OrbitRing
