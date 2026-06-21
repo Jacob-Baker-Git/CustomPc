@@ -913,5 +913,25 @@
     "id": "fans-arctic-p12-max-single", "category": "fans", "name": "Arctic P12 Max 120mm",
     "price": 9.99, "tdp": 3, "modelPath": "/models/fans.glb",
     "specs": { "size": "120mm", "count": 1, "rgb": false }
+  },
+  {
+    "id": "paste-arctic-mx4", "category": "paste", "name": "Arctic MX-4 (4g)",
+    "brand": "Arctic", "price": 6.49, "tdp": 0
+  },
+  {
+    "id": "paste-noctua-nth1", "category": "paste", "name": "Noctua NT-H1 (3.5g)",
+    "brand": "Noctua", "price": 7.99, "tdp": 0
+  },
+  {
+    "id": "paste-tg-kryonaut", "category": "paste", "name": "Thermal Grizzly Kryonaut (1g)",
+    "brand": "Thermal Grizzly", "price": 9.99, "tdp": 0
+  },
+  {
+    "id": "paste-arctic-mx6", "category": "paste", "name": "Arctic MX-6 (4g)",
+    "brand": "Arctic", "price": 8.99, "tdp": 0
+  },
+  {
+    "id": "paste-cm-mastergel", "category": "paste", "name": "Cooler Master MasterGel Pro",
+    "brand": "Cooler Master", "price": 5.49, "tdp": 0
   }
 ]

@@ -8,4 +8,5 @@ export const CATEGORIES = [
   { id: 'case',        label: 'Case',         icon: '📦' },
   { id: 'cooler',      label: 'CPU Cooler',   icon: '❄️' },
   { id: 'fans',        label: 'Case Fans',    icon: '🌀' },
+  { id: 'paste',       label: 'Thermal Paste', icon: '🧴' },
 ]

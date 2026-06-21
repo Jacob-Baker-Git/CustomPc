@@ -6,7 +6,7 @@ import partsData from '../data/partsData.json'
 const cpu = partsData.find((p) => p.id === 'cpu-ryzen-7-7700x')
 
 describe('CategoryList', () => {
-  it('renders all nine categories', () => {
+  it('renders the category rows', () => {
     render(<CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} />)
     expect(screen.getByText('CPU')).toBeInTheDocument()
     expect(screen.getByText('GPU')).toBeInTheDocument()
