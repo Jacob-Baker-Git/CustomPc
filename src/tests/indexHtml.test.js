@@ -17,4 +17,9 @@ describe('index.html metadata', () => {
     expect(html).toContain('property="og:image"')
     expect(html).toContain('name="twitter:card"')
   })
+
+  it('paints a dark boot skeleton before JS loads', () => {
+    expect(html).toContain('#05080f')
+    expect(html).toMatch(/id="root">[\s\S]*class="boot"[\s\S]*<\/div>/)
+  })
 })
