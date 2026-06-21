@@ -3,6 +3,7 @@ import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selTotalPower } fr
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { buildShareUrl } from '../lib/shareLink'
+import { buildMarkdown } from '../lib/buildMarkdown'
 import { PANEL } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
 
@@ -32,6 +33,7 @@ export default function BuildSummary() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
   const budget = useBuilderStore((s) => s.budget)
+  const clearBuild = useBuilderStore((s) => s.clearBuild)
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
   const power = useBuilderStore(selTotalPower)
@@ -52,9 +54,13 @@ export default function BuildSummary() {
     } catch { /* clipboard unavailable */ }
   }
 
-  function copyPartsList() {
-    const lines = [...buildRows, ...periphRows].map((r) => `${r.label}: ${r.part.name} — £${r.part.price.toFixed(2)}`)
-    navigator.clipboard?.writeText(lines.join('\n')).catch(() => {})
+  function copyMarkdown() {
+    const rows = [...buildRows, ...periphRows].map((r) => ({ label: r.label, name: r.part.name, price: r.part.price }))
+    navigator.clipboard?.writeText(buildMarkdown(rows, grandTotal)).catch(() => {})
+  }
+
+  function handleClear() {
+    if (window.confirm('Clear the whole build? This removes all selected parts and peripherals.')) clearBuild()
   }
 
   return (
@@ -120,11 +126,18 @@ export default function BuildSummary() {
               Print
             </button>
             <button
-              onClick={copyPartsList}
+              onClick={copyMarkdown}
               disabled={isEmpty}
               className="text-xs px-3.5 py-2 rounded-sm border border-slate-700/70 text-slate-200 hover:border-slate-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
-              Copy parts list
+              Copy as Markdown
+            </button>
+            <button
+              onClick={handleClear}
+              disabled={isEmpty}
+              className="text-xs px-3.5 py-2 rounded-sm border border-red-700/60 text-red-300 hover:border-red-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            >
+              Clear build
             </button>
           </div>
         </div>

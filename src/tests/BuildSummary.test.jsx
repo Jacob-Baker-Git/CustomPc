@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import BuildSummary from '../components/BuildSummary'
 import useBuilderStore from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
@@ -26,5 +26,19 @@ describe('BuildSummary', () => {
     expect(buyLinks.length).toBe(2)
     expect(buyLinks[0].getAttribute('href')).toContain('amazon.co.uk')
     expect(buyLinks[0].getAttribute('href')).toContain(encodeURIComponent(cpu.name))
+  })
+
+  it('offers a Copy as Markdown action', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    expect(screen.getByRole('button', { name: /copy as markdown/i })).toBeInTheDocument()
+  })
+
+  it('Clear build empties the store after confirm', () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    fireEvent.click(screen.getByRole('button', { name: /clear build/i }))
+    expect(useBuilderStore.getState().selectedParts).toEqual({})
   })
 })
