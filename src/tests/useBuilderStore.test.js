@@ -28,6 +28,20 @@ describe('useBuilderStore', () => {
     expect(useBuilderStore.getState().selectedParts.cpu).toBeUndefined()
   })
 
+  it('does not persist to storage', () => {
+    expect(useBuilderStore.persist).toBeUndefined()
+  })
+
+  it('clearBuild empties parts and peripherals but keeps budget', () => {
+    useBuilderStore.getState().setBudget(1500)
+    useBuilderStore.getState().addPart('cpu', cpu)
+    useBuilderStore.getState().addPeripheral('monitor', { price: 300 })
+    useBuilderStore.getState().clearBuild()
+    expect(useBuilderStore.getState().selectedParts).toEqual({})
+    expect(useBuilderStore.getState().selectedPeripherals).toEqual({})
+    expect(useBuilderStore.getState().budget).toBe(1500)
+  })
+
   it('setBuild replaces all selected parts at once', () => {
     useBuilderStore.getState().addPart('cpu', cpu)
     useBuilderStore.getState().setBuild({ gpu })
