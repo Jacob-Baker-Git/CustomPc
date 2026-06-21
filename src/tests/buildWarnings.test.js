@@ -27,4 +27,15 @@ describe('getBuildWarnings', () => {
     const w = getBuildWarnings({ cpu, gpu, psu: bigPsu }) // 555W of 1000W
     expect(w.some((x) => x.level === 'critical')).toBe(false)
   })
+
+  it('warns on thin PSU headroom (under ~30% spare)', () => {
+    const w = getBuildWarnings({ cpu: { tdp: 100 }, gpu: { tdp: 300 }, psu: { wattage: 500 } })
+    expect(w.some((x) => x.level === 'warning' && /headroom/i.test(x.message))).toBe(true)
+    expect(w.some((x) => x.level === 'critical')).toBe(false)
+  })
+
+  it('gives no headroom warning when the PSU has ample spare', () => {
+    const w = getBuildWarnings({ cpu: { tdp: 100 }, gpu: { tdp: 300 }, psu: { wattage: 800 } })
+    expect(w.some((x) => /headroom/i.test(x.message))).toBe(false)
+  })
 })
