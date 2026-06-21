@@ -13,7 +13,7 @@ import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
-import GamePanel from '../components/GamePanel'
+import GamePerformancePanel from '../components/GamePerformancePanel'
 import CategoryList from '../components/CategoryList'
 import { useIsMobile } from '../hooks/useIsMobile'
 import useBuilderStore from '../store/useBuilderStore'
@@ -37,7 +37,7 @@ export default function BuilderScreen() {
       <TopBar />
       <div className="pt-16 h-[calc(100vh-4rem)]">
         <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
-          {['build', 'peripherals', 'summary', 'games'].map((v) => (
+          {['build', 'peripherals', 'summary'].map((v) => (
             <button
               key={v}
               onClick={() => setView(v)}
@@ -67,6 +67,7 @@ export default function BuilderScreen() {
                 />
                 <BottleneckIndicator />
                 <PerformancePanel />
+                <GamePerformancePanel />
                 <BuildWarnings />
                 <UpgradeSuggestion />
                 <AutoBuildButton />
@@ -79,6 +80,7 @@ export default function BuilderScreen() {
               </Suspense>
               <div className="absolute top-4 left-4 w-72"><BottleneckIndicator /></div>
               <div className="absolute top-44 left-4 w-72"><PerformancePanel /></div>
+              <div className="absolute top-4 right-4 w-72"><GamePerformancePanel /></div>
               <OrbitRing
                 selectedParts={selectedParts}
                 onSelectCategory={setActiveCategory}
@@ -93,10 +95,8 @@ export default function BuilderScreen() {
           )
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
-        ) : view === 'summary' ? (
-          <BuildSummary />
         ) : (
-          <GamePanel />
+          <BuildSummary />
         )}
       </div>
       {activeCategory && (
