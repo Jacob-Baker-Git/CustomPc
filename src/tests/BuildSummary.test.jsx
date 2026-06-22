@@ -24,7 +24,7 @@ describe('BuildSummary', () => {
     render(<BuildSummary />)
     expect(screen.getByText(cpu.name)).toBeInTheDocument()
     expect(screen.getByText(gpu.name)).toBeInTheDocument()
-    const buyLinks = screen.getAllByRole('link', { name: /buy/i })
+    const buyLinks = screen.getAllByRole('link', { name: /find best price/i })
     expect(buyLinks.length).toBe(2)
     expect(buyLinks[0].getAttribute('href')).toContain('amazon.co.uk')
     expect(buyLinks[0].getAttribute('href')).toContain(encodeURIComponent(cpu.name))

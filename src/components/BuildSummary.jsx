@@ -14,19 +14,19 @@ const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mo
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
-function Row({ label, name, price }) {
+function Row({ label, name, brand, price }) {
   return (
     <div className="flex items-center py-1.5 border-t border-slate-800/50">
       <span className="font-mono text-[11px] uppercase text-slate-500 w-28 shrink-0 pr-2">{label}</span>
       <span className="flex-1 text-sm text-slate-100 truncate">{name}</span>
       <span className="font-mono text-sm text-slate-300 w-20 text-right">£{price.toFixed(2)}</span>
       <a
-        href={searchUrl(name)}
+        href={searchUrl(name, brand)}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-16 text-right text-xs text-cyan-400 hover:text-cyan-300"
+        className="w-28 text-right text-xs text-cyan-400 hover:text-cyan-300 whitespace-nowrap"
       >
-        Buy ↗
+        Find Best Price ↗
       </a>
     </div>
   )
@@ -96,13 +96,13 @@ export default function BuildSummary() {
               {buildRows.length > 0 && (
                 <>
                   <div className="mt-4 mb-1 text-[11px] uppercase tracking-wider text-slate-500">Core build</div>
-                  {buildRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} price={r.part.price} />)}
+                  {buildRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} brand={r.part.brand} price={r.part.price} />)}
                 </>
               )}
               {periphRows.length > 0 && (
                 <>
                   <div className="mt-5 mb-1 text-[11px] uppercase tracking-wider text-slate-500">Peripherals</div>
-                  {periphRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} price={r.part.price} />)}
+                  {periphRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} brand={r.part.brand} price={r.part.price} />)}
                 </>
               )}
 

@@ -11,4 +11,9 @@ describe('retailerLinks', () => {
   it('does not append an affiliate tag when none is configured', () => {
     expect(searchUrl('Test Part')).not.toContain('&tag=')
   })
+
+  it('includes the brand in the query when provided', () => {
+    const url = searchUrl('RTX 4070', 'NVIDIA')
+    expect(url).toContain(encodeURIComponent('NVIDIA RTX 4070'))
+  })
 })
