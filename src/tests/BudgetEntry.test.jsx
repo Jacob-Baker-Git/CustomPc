@@ -4,7 +4,7 @@ import BudgetEntry from '../components/BudgetEntry'
 describe('BudgetEntry', () => {
   it('renders the budget heading', () => {
     render(<BudgetEntry onSubmit={() => {}} />)
-    expect(screen.getByText(/budget/i)).toBeInTheDocument()
+    expect(screen.getByText(/what's your budget/i)).toBeInTheDocument()
   })
 
   it('calls onSubmit with numeric value', () => {

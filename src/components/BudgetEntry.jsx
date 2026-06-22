@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import Backdrop from './Backdrop'
 import useBuilderStore from '../store/useBuilderStore'
-import { autoBuild } from '../lib/autoBuilder'
-import { PRESETS } from '../lib/presets'
+import { TIERS, partsForTier } from '../lib/tiers'
 import partsData from '../data/partsData.json'
 
 export default function BudgetEntry({ onSubmit }) {
@@ -16,10 +15,10 @@ export default function BudgetEntry({ onSubmit }) {
     if (num > 0) onSubmit(num)
   }
 
-  function applyPreset(p) {
-    setResolution(p.resolution)
-    setBuild(autoBuild({}, p.budget, partsData, p.resolution))
-    onSubmit(p.budget)
+  function applyTier(tier) {
+    setResolution(tier.resolution)
+    setBuild(partsForTier(tier, partsData))
+    onSubmit(tier.budget)
   }
 
   return (
@@ -51,14 +50,14 @@ export default function BudgetEntry({ onSubmit }) {
           </button>
         </form>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-          <span className="text-xs text-slate-500">or auto-build:</span>
-          {PRESETS.map((p) => (
+          <span className="text-xs text-slate-500">or quick-start:</span>
+          {TIERS.map((t) => (
             <button
-              key={p.label}
-              onClick={() => applyPreset(p)}
+              key={t.id}
+              onClick={() => applyTier(t)}
               className="text-xs font-mono px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-cyan-400 hover:text-cyan-300 transition-all"
             >
-              {p.label} · £{p.budget}
+              {t.label} · £{t.budget}
             </button>
           ))}
         </div>
