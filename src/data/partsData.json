@@ -616,102 +616,102 @@
   },
   {
     "id": "case-fractal-torrent", "category": "case", "name": "Fractal Design Torrent",
-    "price": 159.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 467, "tdp": 0,
+    "price": 159.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 467, "maxCoolerHeight": 188, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-nzxt-h510", "category": "case", "name": "NZXT H510",
-    "price": 79.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 381, "tdp": 0,
+    "price": 79.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 381, "maxCoolerHeight": 165, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-bequiet-pb500", "category": "case", "name": "be quiet! Pure Base 500",
-    "price": 89.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 369, "tdp": 0,
+    "price": 89.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 369, "maxCoolerHeight": 190, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-cm-q300l", "category": "case", "name": "Cooler Master MasterBox Q300L",
-    "price": 59.99, "supportedFormFactors": ["mATX", "ITX"], "maxGpuLength": 270, "tdp": 0,
+    "price": 59.99, "supportedFormFactors": ["mATX", "ITX"], "maxGpuLength": 270, "maxCoolerHeight": 159, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mini Tower" }
   },
   {
     "id": "case-fractal-north", "category": "case", "name": "Fractal Design North",
-    "price": 129.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 355, "tdp": 0,
+    "price": 129.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 355, "maxCoolerHeight": 170, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-lian-li-o11", "category": "case", "name": "Lian Li O11 Dynamic EVO",
-    "price": 149.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 426, "tdp": 0,
+    "price": 149.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 426, "maxCoolerHeight": 167, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-corsair-4000d", "category": "case", "name": "Corsair 4000D Airflow",
-    "price": 94.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 360, "tdp": 0,
+    "price": 94.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 360, "maxCoolerHeight": 170, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-nzxt-h7-flow", "category": "case", "name": "NZXT H7 Flow",
-    "price": 119.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "tdp": 0,
+    "price": 119.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "maxCoolerHeight": 185, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-fractal-meshify-2", "category": "case", "name": "Fractal Design Meshify 2",
-    "price": 139.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 461, "tdp": 0,
+    "price": 139.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 461, "maxCoolerHeight": 185, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Full Tower" }
   },
   {
     "id": "case-cm-nr200", "category": "case", "name": "Cooler Master NR200P",
-    "price": 99.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 330, "tdp": 0,
+    "price": 99.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 330, "maxCoolerHeight": 155, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mini ITX" }
   },
   {
     "id": "case-lian-li-a4-h2o", "category": "case", "name": "Lian Li A4-H2O",
-    "price": 119.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 322, "tdp": 0,
+    "price": 119.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 322, "maxCoolerHeight": 67, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mini ITX" }
   },
   {
     "id": "case-corsair-3000d", "category": "case", "name": "Corsair 3000D Airflow",
-    "price": 74.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 360, "tdp": 0,
+    "price": 74.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 360, "maxCoolerHeight": 170, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-phanteks-g360a", "category": "case", "name": "Phanteks Eclipse G360A",
-    "price": 84.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "tdp": 0,
+    "price": 84.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "maxCoolerHeight": 162, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-montech-air-903", "category": "case", "name": "Montech Air 903 Max",
-    "price": 64.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "tdp": 0,
+    "price": 64.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "maxCoolerHeight": 176, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-lian-li-o11-mini", "category": "case", "name": "Lian Li O11 Air Mini",
-    "price": 109.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 362, "tdp": 0,
+    "price": 109.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 362, "maxCoolerHeight": 170, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-corsair-5000d", "category": "case", "name": "Corsair 5000D Airflow",
-    "price": 154.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 420, "tdp": 0,
+    "price": 154.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 420, "maxCoolerHeight": 170, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-nzxt-h9-flow", "category": "case", "name": "NZXT H9 Flow",
-    "price": 159.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 435, "tdp": 0,
+    "price": 159.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 435, "maxCoolerHeight": 165, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-fractal-pop-air", "category": "case", "name": "Fractal Design Pop Air",
-    "price": 79.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 405, "tdp": 0,
+    "price": 79.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 405, "maxCoolerHeight": 170, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {
     "id": "case-cm-nr200-max", "category": "case", "name": "Cooler Master NR200P Max",
-    "price": 179.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 336, "tdp": 0,
+    "price": 179.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 336, "maxCoolerHeight": 155, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mini ITX" }
   },
   {
     "id": "case-phanteks-p400a", "category": "case", "name": "Phanteks Eclipse P400A",
-    "price": 89.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 420, "tdp": 0,
+    "price": 89.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 420, "maxCoolerHeight": 161, "tdp": 0,
     "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
   },
   {

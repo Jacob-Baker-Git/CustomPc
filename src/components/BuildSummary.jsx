@@ -8,6 +8,7 @@ import { encodeBuild } from '../lib/buildCodec'
 import useSavedStore from '../store/useSavedStore'
 import { PANEL } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
+import DimensionsChecklist from './DimensionsChecklist'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
@@ -118,6 +119,10 @@ export default function BuildSummary() {
                   <GamePerformanceList cpu={selectedParts.cpu} gpu={selectedParts.gpu} resolution={resolution} />
                 </div>
               )}
+              <div className="mt-5">
+                <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-1">Physical dimensions</div>
+                <DimensionsChecklist />
+              </div>
             </>
           )}
 
