@@ -1,10 +1,14 @@
 import useBuilderStore from '../store/useBuilderStore'
 import { encodeBuild, decodeBuild } from './buildCodec'
 
+export function shareUrlFromCode(code) {
+  return `${window.location.origin}${window.location.pathname}?build=${code}`
+}
+
 export function buildShareUrl() {
   const { budget, resolution, selectedParts, selectedPeripherals } = useBuilderStore.getState()
   const code = encodeBuild({ budget, resolution, parts: selectedParts, peripherals: selectedPeripherals })
-  return `${window.location.origin}${window.location.pathname}?build=${code}`
+  return shareUrlFromCode(code)
 }
 
 export function applyShareLinkFromUrl() {

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import useBuilderStore from '../store/useBuilderStore'
 import { encodeBuild } from '../lib/buildCodec'
-import { buildShareUrl, applyShareLinkFromUrl } from '../lib/shareLink'
+import { buildShareUrl, applyShareLinkFromUrl, shareUrlFromCode } from '../lib/shareLink'
 import partsData from '../data/partsData.json'
 
 const cpu = partsData.find((p) => p.id === 'cpu-ryzen-7-7700x')
@@ -34,5 +34,11 @@ describe('shareLink', () => {
 
   it('returns false when there is no build param', () => {
     expect(applyShareLinkFromUrl()).toBe(false)
+  })
+
+  it('shareUrlFromCode builds a ?build= url from a code', () => {
+    const url = shareUrlFromCode('ZZZ')
+    expect(url).toContain('?build=ZZZ')
+    expect(new URL(url).searchParams.get('build')).toBe('ZZZ')
   })
 })
