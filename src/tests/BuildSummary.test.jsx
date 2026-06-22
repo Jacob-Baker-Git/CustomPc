@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import BuildSummary from '../components/BuildSummary'
 import useBuilderStore from '../store/useBuilderStore'
+import useSavedStore from '../store/useSavedStore'
 import partsData from '../data/partsData.json'
 
 const cpu = partsData.find((p) => p.id === 'cpu-ryzen-7-7700x')
@@ -9,6 +10,7 @@ const gpu = partsData.find((p) => p.id === 'gpu-rtx-4060ti')
 
 beforeEach(() => {
   useBuilderStore.setState({ budget: 1000, selectedParts: {}, selectedPeripherals: {}, resolution: '1440p' })
+  useSavedStore.setState({ saved: [] })
 })
 
 describe('BuildSummary', () => {
@@ -40,5 +42,13 @@ describe('BuildSummary', () => {
     render(<BuildSummary />)
     fireEvent.click(screen.getByRole('button', { name: /clear build/i }))
     expect(useBuilderStore.getState().selectedParts).toEqual({})
+  })
+
+  it('Save PC stores a named build', () => {
+    vi.spyOn(window, 'prompt').mockReturnValue('Test Rig')
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    fireEvent.click(screen.getByRole('button', { name: /save pc/i }))
+    expect(useSavedStore.getState().saved.some((b) => b.name === 'Test Rig')).toBe(true)
   })
 })

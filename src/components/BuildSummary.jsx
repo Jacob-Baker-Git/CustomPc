@@ -4,6 +4,8 @@ import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { buildShareUrl } from '../lib/shareLink'
 import { buildMarkdown } from '../lib/buildMarkdown'
+import { encodeBuild } from '../lib/buildCodec'
+import useSavedStore from '../store/useSavedStore'
 import { PANEL } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
 
@@ -34,6 +36,7 @@ export default function BuildSummary() {
   const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
   const budget = useBuilderStore((s) => s.budget)
   const clearBuild = useBuilderStore((s) => s.clearBuild)
+  const saveBuild = useSavedStore((s) => s.saveBuild)
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
   const power = useBuilderStore(selTotalPower)
@@ -61,6 +64,14 @@ export default function BuildSummary() {
 
   function handleClear() {
     if (window.confirm('Clear the whole build? This removes all selected parts and peripherals.')) clearBuild()
+  }
+
+  function handleSave() {
+    const fallback = `Build · £${grandTotal.toFixed(0)}`
+    const name = window.prompt('Name this build', fallback)
+    if (name === null) return
+    const code = encodeBuild({ budget, resolution, parts: selectedParts, peripherals: selectedPeripherals })
+    saveBuild(name.trim() || fallback, code)
   }
 
   return (
@@ -111,6 +122,13 @@ export default function BuildSummary() {
           )}
 
           <div className="flex flex-wrap gap-2 mt-5">
+            <button
+              onClick={handleSave}
+              disabled={isEmpty}
+              className="text-xs px-3.5 py-2 rounded-sm border border-cyan-500/60 text-cyan-300 hover:border-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            >
+              Save PC
+            </button>
             <button
               onClick={copyShareLink}
               disabled={isEmpty}
