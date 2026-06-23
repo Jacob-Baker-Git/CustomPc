@@ -39,4 +39,23 @@ describe('filterParts', () => {
     const res = filterParts(cpus.filter((c) => c.socket === 'AM5'), { motherboard: mbAM5 }, 0, '')
     expect(res.length).toBeGreaterThan(0)
   })
+
+  it('brand filter narrows results to a single brand', () => {
+    const res = filterParts(cpus, {}, 0, '', 'AMD')
+    expect(res.length).toBeGreaterThan(0)
+    expect(res.every((r) => r.part.brand === 'AMD')).toBe(true)
+  })
+
+  it("brand 'all' or undefined returns the unfiltered set", () => {
+    const all = filterParts(cpus, {}, 0, '').map((r) => r.part.id)
+    const explicit = filterParts(cpus, {}, 0, '', 'all').map((r) => r.part.id)
+    expect(explicit).toEqual(all)
+  })
+
+  it('brand and search combine (both narrow)', () => {
+    const res = filterParts(cpus, {}, 0, 'core', 'Intel')
+    expect(res.length).toBeGreaterThan(0)
+    expect(res.every((r) => r.part.brand === 'Intel')).toBe(true)
+    expect(res.every((r) => /core/i.test(r.part.name))).toBe(true)
+  })
 })
