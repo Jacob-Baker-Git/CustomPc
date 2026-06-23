@@ -28,4 +28,11 @@ describe('sortParts', () => {
     sortParts(parts, 'price-desc')
     expect(parts).toEqual(copy)
   })
+  it('breaks brand ties by name (A-Z)', () => {
+    const items = [
+      { id: 'z', name: 'Zeta', brand: 'Acme', price: 1, tdp: 0 },
+      { id: 'a', name: 'Alpha', brand: 'Acme', price: 2, tdp: 0 },
+    ]
+    expect(sortParts(items, 'brand-asc').map((p) => p.id)).toEqual(['a', 'z'])
+  })
 })
