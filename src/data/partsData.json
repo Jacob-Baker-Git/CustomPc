@@ -1058,5 +1058,182 @@
     "id": "ram-kingston-fury-ddr5-6400-32", "category": "ram", "name": "Kingston Fury Renegade DDR5-6400 32GB", "brand": "Kingston",
     "price": 139.99, "ramType": "DDR5", "speed": 6400, "capacityGb": 32, "tdp": 6,
     "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "mb-asus-x870-tuf", "category": "motherboard", "name": "ASUS TUF Gaming X870-Plus WiFi", "brand": "ASUS",
+    "price": 309.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "X870" }
+  },
+  {
+    "id": "mb-gigabyte-x870e-elite", "category": "motherboard", "name": "Gigabyte X870E Aorus Elite WiFi7", "brand": "Gigabyte",
+    "price": 289.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "X870E" }
+  },
+  {
+    "id": "mb-msi-b850-tomahawk", "category": "motherboard", "name": "MSI MAG B850 Tomahawk Max WiFi", "brand": "MSI",
+    "price": 219.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B850" }
+  },
+  {
+    "id": "mb-asrock-b850m-pro", "category": "motherboard", "name": "ASRock B850M Pro RS WiFi", "brand": "ASRock",
+    "price": 144.99, "socket": "AM5", "formFactor": "mATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B850" }
+  },
+  {
+    "id": "mb-asrock-b860m-x", "category": "motherboard", "name": "ASRock B860M-X WiFi", "brand": "ASRock",
+    "price": 114.99, "socket": "LGA1851", "formFactor": "mATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B860" }
+  },
+  {
+    "id": "ram-corsair-ddr5-6000-32", "category": "ram", "name": "Corsair Vengeance DDR5-6000 32GB CL30", "brand": "Corsair",
+    "price": 94.99, "ramType": "DDR5", "speed": 6000, "capacityGb": 32, "tdp": 6,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-crucial-pro-ddr5-5600-32", "category": "ram", "name": "Crucial Pro DDR5-5600 32GB", "brand": "Crucial",
+    "price": 79.99, "ramType": "DDR5", "speed": 5600, "capacityGb": 32, "tdp": 5,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-teamgroup-tcreate-ddr5-6400-48", "category": "ram", "name": "TeamGroup T-Create Expert DDR5-6400 48GB", "brand": "TeamGroup",
+    "price": 149.99, "ramType": "DDR5", "speed": 6400, "capacityGb": 48, "tdp": 6,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-gskill-neo-ddr5-6000-64", "category": "ram", "name": "G.Skill Trident Z5 Neo DDR5-6000 64GB", "brand": "G.Skill",
+    "price": 214.99, "ramType": "DDR5", "speed": 6000, "capacityGb": 64, "tdp": 7,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "storage-crucial-p3plus-2tb", "category": "storage", "name": "Crucial P3 Plus 2TB NVMe", "brand": "Crucial",
+    "price": 104.99, "storageType": "NVMe SSD", "capacityGb": 2000, "tdp": 7,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 5000 }
+  },
+  {
+    "id": "storage-wd-sn770-2tb", "category": "storage", "name": "WD Black SN770 2TB NVMe", "brand": "WD",
+    "price": 119.99, "storageType": "NVMe SSD", "capacityGb": 2000, "tdp": 7,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 5150 }
+  },
+  {
+    "id": "storage-samsung-9100-2tb", "category": "storage", "name": "Samsung 9100 Pro 2TB PCIe 5.0 NVMe", "brand": "Samsung",
+    "price": 219.99, "storageType": "NVMe SSD", "capacityGb": 2000, "tdp": 9,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 14700 }
+  },
+  {
+    "id": "storage-kingston-kc3000-1tb", "category": "storage", "name": "Kingston KC3000 1TB NVMe", "brand": "Kingston",
+    "price": 79.99, "storageType": "NVMe SSD", "capacityGb": 1000, "tdp": 7,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7000 }
+  },
+  {
+    "id": "storage-wd-sn580-1tb", "category": "storage", "name": "WD Blue SN580 1TB NVMe", "brand": "WD",
+    "price": 59.99, "storageType": "NVMe SSD", "capacityGb": 1000, "tdp": 5,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 4150 }
+  },
+  {
+    "id": "storage-solidigm-p44-1tb", "category": "storage", "name": "Solidigm P44 Pro 1TB NVMe", "brand": "Solidigm",
+    "price": 84.99, "storageType": "NVMe SSD", "capacityGb": 1000, "tdp": 7,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7000 }
+  },
+  {
+    "id": "psu-corsair-rm750x-2024", "category": "psu", "name": "Corsair RM750x (2024) 750W", "brand": "Corsair",
+    "price": 119.99, "wattage": 750, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-bequiet-pp12m-750", "category": "psu", "name": "be quiet! Pure Power 12 M 750W", "brand": "be quiet!",
+    "price": 99.99, "wattage": 750, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-seasonic-gx850-atx3", "category": "psu", "name": "Seasonic Focus GX-850 ATX 3.0", "brand": "Seasonic",
+    "price": 139.99, "wattage": 850, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-thermaltake-gf3-750", "category": "psu", "name": "Thermaltake Toughpower GF3 750W", "brand": "Thermaltake",
+    "price": 109.99, "wattage": 750, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-nzxt-c1000-gold", "category": "psu", "name": "NZXT C1000 Gold 1000W", "brand": "NZXT",
+    "price": 149.99, "wattage": 1000, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-corsair-rm1200x-shift", "category": "psu", "name": "Corsair RM1200x SHIFT 1200W", "brand": "Corsair",
+    "price": 199.99, "wattage": 1200, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "case-lianli-lancool-216", "category": "case", "name": "Lian Li Lancool 216", "brand": "Lian Li",
+    "price": 94.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 392, "maxCoolerHeight": 180, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-lianli-lancool-207", "category": "case", "name": "Lian Li Lancool 207", "brand": "Lian Li",
+    "price": 79.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 372, "maxCoolerHeight": 165, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-fractal-terra", "category": "case", "name": "Fractal Design Terra", "brand": "Fractal Design",
+    "price": 169.99, "supportedFormFactors": ["ITX"], "maxGpuLength": 322, "maxCoolerHeight": 77, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mini ITX" }
+  },
+  {
+    "id": "case-nzxt-h5-flow-2024", "category": "case", "name": "NZXT H5 Flow (2024)", "brand": "NZXT",
+    "price": 94.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 365, "maxCoolerHeight": 165, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-montech-sky-two", "category": "case", "name": "Montech Sky Two", "brand": "Montech",
+    "price": 74.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 400, "maxCoolerHeight": 168, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "cooler-thermalright-phantom-120", "category": "cooler", "name": "Thermalright Phantom Spirit 120 SE", "brand": "Thermalright",
+    "price": 41.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1851", "LGA1200"], "tdp": 5,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 154 }
+  },
+  {
+    "id": "cooler-arctic-lf3-280", "category": "cooler", "name": "Arctic Liquid Freezer III 280 AIO", "brand": "Arctic",
+    "price": 104.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1851"], "tdp": 8,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "AIO", "radiator": "280mm" }
+  },
+  {
+    "id": "cooler-lianli-galahad2-360", "category": "cooler", "name": "Lian Li Galahad II Trinity 360 AIO", "brand": "Lian Li",
+    "price": 139.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1851"], "tdp": 10,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "AIO", "radiator": "360mm" }
+  },
+  {
+    "id": "cooler-idcooling-se214xt", "category": "cooler", "name": "ID-Cooling SE-214-XT", "brand": "ID-Cooling",
+    "price": 19.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1200"], "tdp": 4,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 150 }
+  },
+  {
+    "id": "cooler-noctua-d15-g2", "category": "cooler", "name": "Noctua NH-D15 G2", "brand": "Noctua",
+    "price": 139.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1851"], "tdp": 6,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 168 }
+  },
+  {
+    "id": "fans-noctua-a14x25-g2", "category": "fans", "name": "Noctua NF-A14x25 G2 140mm", "brand": "Noctua",
+    "price": 39.99, "tdp": 2,
+    "modelPath": "/models/fans.glb", "specs": { "size": "140mm", "count": 1, "rgb": false }
+  },
+  {
+    "id": "fans-arctic-p12-pro-4pack", "category": "fans", "name": "Arctic P12 Pro (4-pack)", "brand": "Arctic",
+    "price": 24.99, "tdp": 6,
+    "modelPath": "/models/fans.glb", "specs": { "size": "120mm", "count": 4, "rgb": false }
+  },
+  {
+    "id": "paste-noctua-nth2", "category": "paste", "name": "Noctua NT-H2 (3.5g)", "brand": "Noctua",
+    "price": 12.99, "tdp": 0
+  },
+  {
+    "id": "paste-tg-kryonaut-extreme", "category": "paste", "name": "Thermal Grizzly Kryonaut Extreme (2g)", "brand": "Thermal Grizzly",
+    "price": 14.99, "tdp": 0
+  },
+  {
+    "id": "paste-corsair-xtm70", "category": "paste", "name": "Corsair XTM70 (3g)", "brand": "Corsair",
+    "price": 9.99, "tdp": 0
   }
 ]
