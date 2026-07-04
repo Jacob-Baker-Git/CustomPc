@@ -12,13 +12,28 @@ describe('BudgetEntry wizard', () => {
     expect(screen.getByText(/what's your budget/i)).toBeInTheDocument()
   })
 
+  it('starts with an empty budget field and a placeholder, not a preset value', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    const input = screen.getByRole('spinbutton')
+    expect(input.value).toBe('')
+    expect(input.placeholder).toMatch(/budget/i)
+  })
+
+  it('shows the three wizard steps so the flow is clear up front', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    expect(screen.getByText(/^budget$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^resolution$/i)).toBeInTheDocument()
+    expect(screen.getByText(/fps target/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /next: resolution/i })).toBeInTheDocument()
+  })
+
   it('submitting a budget advances to the resolution step, not straight in', () => {
     const onSubmit = vi.fn()
     render(<BudgetEntry onSubmit={onSubmit} />)
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '1200' } })
     fireEvent.submit(screen.getByRole('form'))
     expect(onSubmit).not.toHaveBeenCalled()
-    expect(screen.getByText(/resolution/i)).toBeInTheDocument()
+    expect(screen.getByText(/what resolution/i)).toBeInTheDocument()
   })
 
   it('does not advance with a zero budget', () => {
@@ -27,7 +42,8 @@ describe('BudgetEntry wizard', () => {
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '0' } })
     fireEvent.submit(screen.getByRole('form'))
     expect(onSubmit).not.toHaveBeenCalled()
-    expect(screen.queryByText(/resolution/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/what resolution/i)).not.toBeInTheDocument()
+    expect(screen.getByRole('spinbutton')).toBeInTheDocument()
   })
 
   it('walks budget → resolution → FPS target and generates a build', () => {
@@ -35,7 +51,7 @@ describe('BudgetEntry wizard', () => {
     render(<BudgetEntry onSubmit={onSubmit} />)
 
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '1500' } })
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
 
     fireEvent.click(screen.getByRole('button', { name: /1440p/i }))
 
@@ -54,7 +70,7 @@ describe('BudgetEntry wizard', () => {
     render(<BudgetEntry onSubmit={onSubmit} />)
 
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '900' } })
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
     fireEvent.click(screen.getByRole('button', { name: /1080p/i }))
     fireEvent.click(screen.getByRole('button', { name: /start empty/i }))
 
@@ -67,7 +83,7 @@ describe('BudgetEntry wizard', () => {
     render(<BudgetEntry onSubmit={onSubmit} />)
 
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '800' } })
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
     fireEvent.click(screen.getByRole('button', { name: /4k/i }))
     fireEvent.click(screen.getByRole('button', { name: /^240/ }))
     fireEvent.change(screen.getByLabelText(/game/i), { target: { value: 'alan-wake-2' } })

@@ -12,13 +12,14 @@ const RES_OPTIONS = [
   { id: '4k',    label: '4K',    blurb: 'Maximum fidelity' },
 ]
 const TARGETS = [60, 120, 144, 240]
+const STEPS = ['Budget', 'Resolution', 'FPS target']
 
 export default function BudgetEntry({ onSubmit }) {
   const [step, setStep] = useState(1)
-  const [value, setValue] = useState('1000')
+  const [value, setValue] = useState('')
   const [resolution, setLocalResolution] = useState(null)
   const [fps, setFps] = useState(120)
-  const [gameId, setGameId] = useState(gamesData[0].id)
+  const [gameId, setGameId] = useState('fortnite')
   const [shortfall, setShortfall] = useState(null)
   const setResolution = useBuilderStore((s) => s.setResolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
@@ -60,7 +61,18 @@ export default function BudgetEntry({ onSubmit }) {
     <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#05080f]">
       <Backdrop />
       <div className="relative z-10 flex flex-col items-center px-4">
-        <h1 className="text-5xl font-bold mb-2 text-white">Build Your PC</h1>
+        <h1 className="text-5xl font-bold mb-3 text-white">Build Your PC</h1>
+        <ol className="flex items-center gap-2 mb-6 text-[11px] uppercase tracking-wider">
+          {STEPS.map((label, i) => (
+            <li key={label} className="flex items-center gap-2">
+              {i > 0 && <span className="text-slate-700">→</span>}
+              <span className={`flex items-center gap-1.5 ${step === i + 1 ? 'text-cyan-300' : 'text-slate-500'}`}>
+                <span className="font-mono">{i + 1}</span>
+                <span>{label}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
 
         {step === 1 && (
           <>
@@ -72,17 +84,17 @@ export default function BudgetEntry({ onSubmit }) {
                   autoFocus
                   type="number"
                   min="1"
-                  placeholder="e.g. 1500"
+                  placeholder="Enter budget"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="bg-slate-950/60 backdrop-blur-md text-white font-mono text-3xl w-52 px-4 py-3 rounded-sm border border-slate-700/70 focus:outline-none focus:border-cyan-400 text-center transition-colors"
+                  className="bg-slate-950/60 backdrop-blur-md text-white font-mono text-3xl w-72 px-4 py-3 rounded-sm border border-slate-700/70 focus:outline-none focus:border-cyan-400 text-center placeholder:text-2xl placeholder:text-slate-600 transition-colors"
                 />
               </div>
               <button
                 type="submit"
                 className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors"
               >
-                Continue
+                Next: resolution
               </button>
             </form>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
