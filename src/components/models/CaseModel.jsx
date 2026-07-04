@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import useBuilderStore from '../../store/useBuilderStore'
 
 // Tower proportions: taller than wide (reads as a tower, not a cube). Depth is
@@ -27,13 +28,14 @@ function Panel({ args, position, color, opacity = 1, glass = false }) {
 export default function CaseModel() {
   const transparent = useBuilderStore((s) => s.caseTransparent)
 
-  // Open mode: panels removed — faint frame only, so parts are fully visible.
+  // Open mode: panels removed — a clean edge frame only (no triangulated
+  // wireframe diagonals), so parts are fully visible.
   if (transparent) {
     return (
-      <mesh>
-        <boxGeometry args={[W, H, D]} />
-        <meshBasicMaterial color="#3a567d" wireframe transparent opacity={0.5} />
-      </mesh>
+      <lineSegments>
+        <edgesGeometry args={[new THREE.BoxGeometry(W, H, D)]} />
+        <lineBasicMaterial color="#4a6a94" transparent opacity={0.7} />
+      </lineSegments>
     )
   }
 
@@ -46,7 +48,7 @@ export default function CaseModel() {
       <Panel args={[T, H, D]} position={[-W / 2, 0, 0]} color="#1b1c21" />  {/* left side */}
       <Panel args={[W, H, T]} position={[0, 0, -D / 2]} color="#101116" />  {/* rear / mobo tray */}
       {/* tempered-glass front window — the build is visible through it */}
-      <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#9fc6ee" opacity={0.1} glass />
+      <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#87b3dd" opacity={0.16} glass />
     </group>
   )
 }

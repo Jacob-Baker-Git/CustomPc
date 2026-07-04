@@ -21,7 +21,7 @@ export default function PerformancePanel() {
     <div className={`${PANEL} p-4`}>
       <span className="text-white text-sm font-semibold tracking-wide">Performance</span>
       <div className="mt-2 flex items-end gap-2">
-        <span className={`${TELEMETRY} text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent`}>{fps}</span>
+        <span className={`${TELEMETRY} text-3xl font-bold text-cyan-300`}>{fps}</span>
         <span className="text-gray-400 text-xs mb-1">est. avg FPS @ {resLabel}</span>
       </div>
       <p className="mt-2 text-xs text-gray-400">

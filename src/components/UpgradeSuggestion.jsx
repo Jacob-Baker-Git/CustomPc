@@ -1,7 +1,8 @@
+import { Zap } from 'lucide-react'
 import useBuilderStore from '../store/useBuilderStore'
 import { suggestUpgrade } from '../lib/upgradeAdvisor'
 import partsData from '../data/partsData.json'
-import { PANEL, TELEMETRY } from '../lib/uiTokens'
+import { PANEL, TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
@@ -20,7 +21,7 @@ export default function UpgradeSuggestion() {
   return (
     <div className={`${PANEL} p-4`}>
       <div className="flex items-center gap-2 mb-1">
-        <span>⚡</span>
+        <Zap size={14} className="text-cyan-300" aria-hidden="true" />
         <span className="text-white text-sm font-semibold">Upgrade suggestion</span>
       </div>
       <p className="text-xs text-gray-300">
@@ -30,7 +31,7 @@ export default function UpgradeSuggestion() {
       </p>
       <button
         onClick={() => addPart(s.category, s.toPart)}
-        className="mt-3 w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium py-1.5 rounded-sm hover:shadow-[0_0_15px_rgba(34,211,238,0.5)] transition-all"
+        className={`mt-3 w-full ${BTN_PRIMARY} text-sm font-medium py-1.5 rounded-sm transition-colors`}
       >
         Apply upgrade
       </button>

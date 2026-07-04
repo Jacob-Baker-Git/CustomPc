@@ -1,5 +1,6 @@
 import { useRef, useLayoutEffect, useState, useEffect } from 'react'
 import { CATEGORIES } from '../lib/categories'
+import CategoryIcon from '../lib/categoryIcons'
 import { RECOMMENDED_ORDER, nextRecommended } from '../lib/recommendedOrder'
 import { partScreenPositions } from '../lib/partScreenPositions'
 import { orbitRadii } from '../lib/orbitGeometry'
@@ -104,7 +105,7 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
                   className="flex items-center gap-1.5 text-slate-100 text-xs whitespace-nowrap hover:text-cyan-300"
                   title={part.name}
                 >
-                  <span>{cat.icon}</span>
+                  <CategoryIcon id={cat.id} size={12} className="text-slate-400" />
                   <span className="max-w-[120px] truncate">{part.name}</span>
                   <span className="font-mono text-cyan-300">£{part.price.toFixed(0)}</span>
                 </button>
@@ -125,7 +126,7 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
                     : 'border-slate-700/70 bg-slate-950/50 backdrop-blur-sm text-slate-300 hover:border-slate-500 hover:bg-slate-900/70'}`}
               >
                 <span className="flex items-center justify-center w-4 h-4 rounded-sm bg-slate-800 text-[10px] font-mono text-slate-300">{order}</span>
-                <span>{cat.icon}</span>
+                <CategoryIcon id={cat.id} size={12} className="text-slate-400" />
                 <span>{cat.label}</span>
               </button>
             )}

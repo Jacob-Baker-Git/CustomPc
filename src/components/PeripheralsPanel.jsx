@@ -27,7 +27,7 @@ export default function PeripheralsPanel() {
   return (
     <div className="w-full h-full overflow-y-auto p-6">
       <div className="flex items-center justify-between mb-6 max-w-5xl mx-auto">
-        <h2 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">Peripherals</h2>
+        <h2 className="text-xl font-bold text-white">Peripherals</h2>
         <span className="text-sm text-gray-300">Subtotal: <span className="text-cyan-300 font-semibold">£{total.toFixed(2)}</span></span>
       </div>
       <div className="max-w-5xl mx-auto space-y-8">
@@ -42,9 +42,9 @@ export default function PeripheralsPanel() {
                     key={p.id}
                     onClick={() => (isSelected ? removePeripheral(cat) : addPeripheral(cat, p))}
                     title={isSelected ? 'Click to deselect' : 'Click to select'}
-                    className={`relative text-left rounded-2xl border p-4 transition-all
+                    className={`relative text-left rounded-sm border p-4 transition-all
                       ${isSelected
-                        ? 'border-cyan-400/60 bg-cyan-500/10 shadow-[0_0_20px_rgba(34,211,238,0.25)]'
+                        ? 'border-cyan-400/60 bg-cyan-500/10'
                         : 'border-white/10 bg-white/5 hover:border-cyan-400/40 hover:-translate-y-0.5'}`}
                   >
                     {isSelected && (

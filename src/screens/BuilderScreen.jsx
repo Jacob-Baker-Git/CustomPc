@@ -44,7 +44,7 @@ export default function BuilderScreen() {
               onClick={() => setView(v)}
               className={`px-2.5 md:px-4 py-1 text-[11px] md:text-xs font-medium rounded-sm capitalize transition-all
                 ${view === v
-                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_12px_rgba(34,211,238,0.4)]'
+                  ? 'bg-cyan-600 text-white'
                   : 'text-gray-300 hover:text-white'}`}
             >
               {v}

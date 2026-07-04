@@ -7,10 +7,10 @@ import { RgbBox } from './RgbParts'
 export default function MotherboardModel() {
   return (
     <group>
-      {/* PCB */}
+      {/* PCB — matte near-black like modern boards, not toy green */}
       <mesh>
         <boxGeometry args={[2.4, 0.06, 2.4]} />
-        <meshStandardMaterial color="#0f5132" metalness={0.3} roughness={0.7} />
+        <meshStandardMaterial color="#14161b" metalness={0.25} roughness={0.75} />
       </mesh>
 
       {/* CPU socket + IHS (upper-centre) */}

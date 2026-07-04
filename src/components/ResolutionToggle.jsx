@@ -18,7 +18,7 @@ export default function ResolutionToggle() {
           onClick={() => setResolution(opt.id)}
           className={`px-3 py-1 text-xs font-medium rounded-sm transition-all
             ${resolution === opt.id
-              ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_12px_rgba(34,211,238,0.4)]'
+              ? 'bg-cyan-600 text-white'
               : 'text-gray-300 hover:text-white'}`}
         >
           {opt.label}

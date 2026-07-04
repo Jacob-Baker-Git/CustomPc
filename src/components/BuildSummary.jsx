@@ -137,7 +137,7 @@ export default function BuildSummary() {
             <button
               onClick={copyShareLink}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-sm bg-gradient-to-r from-cyan-500 to-blue-600 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="text-xs px-3.5 py-2 rounded-sm bg-cyan-600 hover:bg-cyan-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               {copied ? 'Copied!' : 'Copy share link'}
             </button>

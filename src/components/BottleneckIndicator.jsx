@@ -22,10 +22,10 @@ export default function BottleneckIndicator() {
         <>
           <div className="h-2 bg-white/10 rounded-sm overflow-hidden mb-2">
             <div
-              className={`h-full rounded-sm transition-all duration-500 shadow-[0_0_10px_rgba(34,211,238,0.4)]
-                ${result.balancePct >= 85 ? 'bg-gradient-to-r from-emerald-400 to-green-500'
-                  : result.balancePct >= 70 ? 'bg-gradient-to-r from-amber-400 to-orange-500'
-                  : 'bg-gradient-to-r from-red-500 to-rose-500'}`}
+              className={`h-full rounded-sm transition-all duration-500
+                ${result.balancePct >= 85 ? 'bg-emerald-500'
+                  : result.balancePct >= 70 ? 'bg-amber-500'
+                  : 'bg-red-500'}`}
               style={{ width: `${result.balancePct}%` }}
             />
           </div>

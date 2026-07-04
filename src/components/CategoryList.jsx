@@ -1,4 +1,5 @@
 import { CATEGORIES } from '../lib/categories'
+import CategoryIcon from '../lib/categoryIcons'
 import { RECOMMENDED_ORDER, nextRecommended } from '../lib/recommendedOrder'
 
 const ORDERED = RECOMMENDED_ORDER
@@ -19,7 +20,7 @@ export default function CategoryList({ selectedParts, onSelectCategory, onDesele
             <div key={cat.id} className="flex items-center gap-2 rounded-sm border border-slate-700/70 bg-slate-950/50 px-3 py-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
               <button onClick={() => onSelectCategory(cat.id)} className="flex items-center gap-2 flex-1 min-w-0 text-left">
-                <span>{cat.icon}</span>
+                <CategoryIcon id={cat.id} className="text-slate-400" />
                 <span className="text-sm text-slate-100 truncate">{part.name}</span>
               </button>
               <span className="font-mono text-sm text-cyan-300 shrink-0">£{part.price.toFixed(0)}</span>
@@ -38,7 +39,7 @@ export default function CategoryList({ selectedParts, onSelectCategory, onDesele
                 : 'border-slate-800/60 bg-slate-950/40 text-slate-300'}`}
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-sm bg-slate-800 text-[10px] font-mono text-slate-300 shrink-0">{i + 1}</span>
-            <span>{cat.icon}</span>
+            <CategoryIcon id={cat.id} className="text-slate-400" />
             <span className="flex-1 text-left">{cat.label}</span>
             {isNext && <span className="text-[11px] text-cyan-300">pick one</span>}
           </button>

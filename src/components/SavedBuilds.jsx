@@ -39,7 +39,7 @@ export default function SavedBuilds({ onLoaded }) {
                     <div className="text-sm text-slate-100 truncate">{b.name}</div>
                     <div className="text-[11px] text-slate-500 font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
                   </div>
-                  <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-sm bg-gradient-to-r from-cyan-500 to-blue-600 text-white transition-all">Load</button>
+                  <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-sm bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">Load</button>
                   <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-slate-500 transition-all">Copy link</button>
                   <button onClick={() => removeSaved(b.id)} aria-label={`Delete ${b.name}`} className="w-7 h-7 flex items-center justify-center rounded-sm text-slate-400 hover:text-white hover:bg-red-500/80 text-sm">&times;</button>
                 </div>

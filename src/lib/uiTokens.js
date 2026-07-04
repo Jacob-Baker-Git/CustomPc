@@ -14,4 +14,6 @@ export const TELEMETRY = 'font-mono'
 
 // Restrained accent helpers.
 export const ACCENT_TEXT = 'text-cyan-300'
-export const ACCENT_GRAD = 'bg-gradient-to-r from-cyan-500 to-blue-600'
+
+// Flat primary action — one accent colour, no gradients or glows.
+export const BTN_PRIMARY = 'bg-cyan-600 hover:bg-cyan-500 text-white'
