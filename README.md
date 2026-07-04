@@ -1,16 +1,36 @@
-# React + Vite
+# Custom PC Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Plan a compatible custom gaming PC in 3D — live at [custompcbuilder.netlify.app](https://custompcbuilder.netlify.app/).
 
-Currently, two official plugins are available:
+Enter a budget (or pick a quick-start tier), then assemble a build part by part.
+The app checks compatibility as you go, estimates real-game FPS, flags
+bottlenecks, and renders the machine in an interactive 3D case.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **3D build view** — parts appear inside a stylised case as you pick them (react-three-fiber), with a see-through toggle
+- **Auto-build** — fills the remaining slots with the best-value compatible parts for your budget
+- **Compatibility guardrails** — socket, RAM type, PSU wattage, GPU length / cooler height vs. case dimensions
+- **Performance estimates** — bottleneck balance, est. average FPS at 1080p/1440p/4K, and per-game FPS for popular titles
+- **Budget tracking** — live spend/remaining, parts over budget are locked (swaps credit back the part you're replacing)
+- **Peripherals** — monitor, keyboard, mouse, headset alongside the core build
+- **Save & share** — named saved builds (localStorage), shareable `?build=` links, print/markdown export
+- **The in-progress build persists** across refreshes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+React 19 + Vite, Tailwind CSS, Zustand (state), three.js via @react-three/fiber + drei, Vitest + Testing Library.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Prices and performance scores are curated estimates in `src/data/partsData.json` — not live retailer data.
+
+## Development
+
+```bash
+npm install
+npm run dev        # dev server on :5173
+npm run test:run   # vitest suite
+npm run lint       # eslint
+npm run build      # production build
+```
+
+Deploys automatically to Netlify from `main`.
