@@ -2,7 +2,6 @@ import { checkCompatibility, getLockedReasons } from '../lib/compatibility'
 import partsData from '../data/partsData.json'
 
 const mbAM5   = partsData.find(p => p.id === 'mb-asus-x670e')
-const mbDDR4  = partsData.find(p => p.id === 'mb-gigabyte-b760m')
 const cpuAM5  = partsData.find(p => p.id === 'cpu-ryzen-7-7700x')
 const cpuIntel = partsData.find(p => p.id === 'cpu-i7-13700k')
 const ramDDR5 = partsData.find(p => p.id === 'ram-corsair-ddr5-32')
