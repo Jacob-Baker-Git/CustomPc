@@ -2,6 +2,7 @@ import { useRef, useLayoutEffect, useState, useEffect } from 'react'
 import { CATEGORIES } from '../lib/categories'
 import { RECOMMENDED_ORDER, nextRecommended } from '../lib/recommendedOrder'
 import { partScreenPositions } from '../lib/partScreenPositions'
+import { orbitRadii } from '../lib/orbitGeometry'
 
 const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
@@ -26,14 +27,17 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
 
   const cx = size.w / 2
   const cy = size.h / 2
-  const radius = Math.min(size.w, size.h) * 0.40
-  geomRef.current = { cx, cy }
+  const { rx, ry } = orbitRadii(size.w, size.h)
+
+  useEffect(() => {
+    geomRef.current = { cx, cy }
+  })
 
   const next = nextRecommended(selectedParts)
 
   const slots = ORDERED.map((cat, i) => {
     const angle = (i / ORDERED.length) * 2 * Math.PI - Math.PI / 2
-    return { cat, x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle), order: i + 1 }
+    return { cat, x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle), order: i + 1 }
   })
 
   // Every frame, aim each filled slot's line endpoint at its part's live screen
@@ -59,8 +63,8 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
       <svg width={size.w} height={size.h} className="absolute inset-0">
         {/* Faint orbital guide path the pills sit on */}
-        <circle
-          cx={cx} cy={cy} r={radius}
+        <ellipse
+          cx={cx} cy={cy} rx={rx} ry={ry}
           fill="none"
           stroke="rgba(56,189,248,0.18)"
           strokeWidth="1"

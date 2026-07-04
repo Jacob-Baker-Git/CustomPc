@@ -23,4 +23,10 @@ describe('useIsMobile', () => {
     const { result } = renderHook(() => useIsMobile())
     expect(result.current).toBe(false)
   })
+
+  it('uses the stacked layout below 1280px — the orbit + side panels need ~1300px', () => {
+    mockMatchMedia(true)
+    renderHook(() => useIsMobile())
+    expect(window.matchMedia).toHaveBeenCalledWith('(max-width: 1279px)')
+  })
 })

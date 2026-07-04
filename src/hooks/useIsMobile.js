@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 
-const QUERY = '(max-width: 767px)'
+// The desktop orbit layout (ring + three floating side panels) needs ~1300px
+// to avoid panels overlapping the ring; anything narrower gets the stacked layout.
+const QUERY = '(max-width: 1279px)'
+
+function subscribe(callback) {
+  const mq = window.matchMedia(QUERY)
+  mq.addEventListener('change', callback)
+  return () => mq.removeEventListener('change', callback)
+}
+
+function getSnapshot() {
+  return window.matchMedia(QUERY).matches
+}
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia(QUERY).matches
-  )
-
-  useEffect(() => {
-    const mq = window.matchMedia(QUERY)
-    const onChange = (e) => setIsMobile(e.matches)
-    mq.addEventListener('change', onChange)
-    setIsMobile(mq.matches)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
-
-  return isMobile
+  return useSyncExternalStore(subscribe, getSnapshot, () => false)
 }
