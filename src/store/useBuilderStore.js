@@ -23,7 +23,7 @@ const useBuilderStore = create(persist((set) => ({
 
   clearBuild: () => set({ selectedParts: {}, selectedPeripherals: {} }),
 
-  caseTransparent: true,
+  caseTransparent: false,
   toggleCaseTransparency: () =>
     set((state) => ({ caseTransparent: !state.caseTransparent })),
 

@@ -37,6 +37,10 @@ describe('useBuilderStore', () => {
     expect(saved.state.selectedParts.cpu.id).toBe('cpu-ryzen-7-7700x')
   })
 
+  it('starts with a solid case — see-through is opt-in', () => {
+    expect(useBuilderStore.getState().caseTransparent).toBe(false)
+  })
+
   it('persists resolution and peripherals but not transient UI state', () => {
     useBuilderStore.getState().setResolution('4k')
     useBuilderStore.getState().addPeripheral('monitor', { id: 'mon-x', price: 300 })

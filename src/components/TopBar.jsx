@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
 import useBuilderStore, {
   selTotalSpent, selTotalPower, selPsuWattage
 } from '../store/useBuilderStore'
@@ -28,7 +29,15 @@ export default function TopBar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/30 backdrop-blur-md border-b border-slate-800/60 px-3 md:px-6 py-2 md:py-3 flex flex-wrap md:flex-nowrap items-center gap-x-3 md:gap-8 gap-y-1">
-      <span className="font-bold text-lg tracking-tight bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">PC Builder</span>
+      <button
+        onClick={() => setBudget(0)}
+        aria-label="Back to budget screen"
+        title="Back to the budget & quick-start screen (your build is kept)"
+        className="w-7 h-7 flex items-center justify-center rounded-sm border border-slate-800/60 text-slate-400 hover:text-white hover:border-slate-600 transition-colors"
+      >
+        <ArrowLeft size={14} aria-hidden="true" />
+      </button>
+      <span className="font-bold text-lg tracking-tight text-white">PC <span className="text-cyan-400">Builder</span></span>
       <div className="flex items-center gap-2 text-sm text-gray-300">
         {editing ? (
           <span className="flex items-center gap-1">
@@ -41,7 +50,7 @@ export default function TopBar() {
               onChange={(e) => setDraft(e.target.value)}
               onBlur={commit}
               onKeyDown={(e) => { if (e.key === 'Enter') commit() }}
-              className="w-24 bg-slate-900/80 text-white font-mono px-2 py-0.5 rounded-sm border border-cyan-400 focus:outline-none focus:shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+              className="w-24 bg-slate-900/80 text-white font-mono px-2 py-0.5 rounded-sm border border-cyan-400 focus:outline-none"
             />
           </span>
         ) : (

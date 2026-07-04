@@ -25,7 +25,15 @@ export default function BuildCanvas({ selectedParts }) {
           <FanSystem filled={Boolean(selectedParts.fans)} />
         )}
         <ScreenTracker selectedParts={selectedParts} />
-        <OrbitControls target={[0, -0.1, 0.05]} enablePan={false} enableZoom dampingFactor={0.05} enableDamping />
+        <OrbitControls
+          target={[0, -0.1, 0.05]}
+          enablePan={false}
+          enableZoom
+          minDistance={3}
+          maxDistance={9}
+          dampingFactor={0.05}
+          enableDamping
+        />
       </Canvas>
     </div>
   )
