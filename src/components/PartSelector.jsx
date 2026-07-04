@@ -46,10 +46,10 @@ export default function PartSelector({ category, onSelect, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={`Select ${category}`}
-        className="bg-gray-900/80 backdrop-blur-xl rounded-3xl w-full max-w-4xl max-h-[80vh] flex flex-col border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.15)]"
+        className="bg-slate-950/80 backdrop-blur-xl rounded-sm w-full max-w-4xl max-h-[80vh] flex flex-col border border-slate-800/60 shadow-2xl"
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 gap-4">
-          <h2 className="text-xl font-bold capitalize whitespace-nowrap bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">{category}</h2>
+          <h2 className="text-xl font-bold capitalize whitespace-nowrap text-white">{category}</h2>
           <div className="flex-1 max-w-sm">
             <SearchBar value={query} onChange={setQuery} placeholder={`Search ${category}...`} />
           </div>
