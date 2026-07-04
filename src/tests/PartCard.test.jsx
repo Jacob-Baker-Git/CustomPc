@@ -15,4 +15,19 @@ describe('PartCard', () => {
     render(<PartCard part={cpu} locked={true} lockReason="Requires AM5 socket" onSelect={() => {}} />)
     expect(screen.getByText('🔒')).toBeInTheDocument()
   })
+
+  it('is a real button so keyboard users can reach it', () => {
+    render(<PartCard part={cpu} locked={false} lockReason="" onSelect={() => {}} />)
+    expect(screen.getByRole('button', { name: new RegExp(cpu.name) })).toBeInTheDocument()
+  })
+
+  it('shows the lock reason as visible text, not just a hover tooltip', () => {
+    render(<PartCard part={cpu} locked={true} lockReason="Requires AM5 socket" onSelect={() => {}} />)
+    expect(screen.getByText('Requires AM5 socket')).toBeInTheDocument()
+  })
+
+  it('marks the currently selected part', () => {
+    render(<PartCard part={cpu} locked={false} lockReason="" selected onSelect={() => {}} />)
+    expect(screen.getByText(/selected/i)).toBeInTheDocument()
+  })
 })
