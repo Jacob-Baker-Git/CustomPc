@@ -10,7 +10,14 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}>
+      <Canvas
+        camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}
+        onCreated={({ gl }) => {
+          // Without preventDefault the browser never fires webglcontextrestored,
+          // leaving a dead white canvas after a GPU reset/context loss.
+          gl.domElement.addEventListener('webglcontextlost', (e) => e.preventDefault())
+        }}
+      >
         <ambientLight intensity={0.95} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         {/* Front key light (no distance falloff) so the build reads clearly

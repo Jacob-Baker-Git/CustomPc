@@ -60,7 +60,9 @@ export default function BuilderScreen() {
                 </Suspense>
                 <div className="absolute bottom-3 right-3"><CaseToggle /></div>
               </div>
-              <div className="p-4 space-y-3 pb-12">
+              {/* relative z + own compositing layer: static content after a WebGL
+                  canvas can otherwise be composited underneath it. */}
+              <div className="relative z-10 transform-gpu p-4 space-y-3 pb-12">
                 <CategoryList
                   selectedParts={selectedParts}
                   onSelectCategory={setActiveCategory}
