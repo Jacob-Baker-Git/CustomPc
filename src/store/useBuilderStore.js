@@ -1,6 +1,7 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-const useBuilderStore = create((set) => ({
+const useBuilderStore = create(persist((set) => ({
   budget: 0,
   selectedParts: {},
 
@@ -42,6 +43,15 @@ const useBuilderStore = create((set) => ({
       delete next[category]
       return { selectedPeripherals: next }
     }),
+}), {
+  name: 'custompc-builder-v1',
+  version: 1,
+  partialize: (s) => ({
+    budget: s.budget,
+    selectedParts: s.selectedParts,
+    selectedPeripherals: s.selectedPeripherals,
+    resolution: s.resolution,
+  }),
 }))
 
 export default useBuilderStore

@@ -8,6 +8,7 @@ const gpu = partsData.find(p => p.id === 'gpu-rtx-4060ti')
 const psu = partsData.find(p => p.id === 'psu-bequiet-750w')
 
 beforeEach(() => {
+  localStorage.clear()
   useBuilderStore.setState({ budget: 0, selectedParts: {}, selectedPeripherals: {} })
 })
 
@@ -28,8 +29,21 @@ describe('useBuilderStore', () => {
     expect(useBuilderStore.getState().selectedParts.cpu).toBeUndefined()
   })
 
-  it('does not persist to storage', () => {
-    expect(useBuilderStore.persist).toBeUndefined()
+  it('persists budget and parts to localStorage so a refresh resumes the build', () => {
+    useBuilderStore.getState().setBudget(1200)
+    useBuilderStore.getState().addPart('cpu', cpu)
+    const saved = JSON.parse(localStorage.getItem('custompc-builder-v1'))
+    expect(saved.state.budget).toBe(1200)
+    expect(saved.state.selectedParts.cpu.id).toBe('cpu-ryzen-7-7700x')
+  })
+
+  it('persists resolution and peripherals but not transient UI state', () => {
+    useBuilderStore.getState().setResolution('4k')
+    useBuilderStore.getState().addPeripheral('monitor', { id: 'mon-x', price: 300 })
+    const saved = JSON.parse(localStorage.getItem('custompc-builder-v1'))
+    expect(saved.state.resolution).toBe('4k')
+    expect(saved.state.selectedPeripherals.monitor.id).toBe('mon-x')
+    expect(saved.state.caseTransparent).toBeUndefined()
   })
 
   it('clearBuild empties parts and peripherals but keeps budget', () => {
