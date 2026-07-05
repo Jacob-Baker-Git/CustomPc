@@ -3,7 +3,7 @@ import Backdrop from './Backdrop'
 import useBuilderStore from '../store/useBuilderStore'
 import { TIERS, partsForTier } from '../lib/tiers'
 import { targetBuild } from '../lib/targetBuilder'
-import partsData from '../data/partsData.json'
+import useCatalogStore from '../store/useCatalogStore'
 import gamesData from '../data/gamesData.json'
 
 const RES_OPTIONS = [
@@ -24,6 +24,7 @@ export default function BudgetEntry({ onSubmit }) {
   const setResolution = useBuilderStore((s) => s.setResolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
   const setLastGenerated = useBuilderStore((s) => s.setLastGenerated)
+  const partsData = useCatalogStore((s) => s.parts)
 
   const budgetNum = parseFloat(value)
 

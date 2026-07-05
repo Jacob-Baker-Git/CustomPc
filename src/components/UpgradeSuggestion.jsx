@@ -1,7 +1,7 @@
 import { Zap } from 'lucide-react'
 import useBuilderStore from '../store/useBuilderStore'
 import { suggestUpgrade } from '../lib/upgradeAdvisor'
-import partsData from '../data/partsData.json'
+import useCatalogStore from '../store/useCatalogStore'
 import { PANEL, TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
@@ -11,6 +11,7 @@ export default function UpgradeSuggestion() {
   const budget        = useBuilderStore((s) => s.budget)
   const resolution    = useBuilderStore((s) => s.resolution)
   const addPart       = useBuilderStore((s) => s.addPart)
+  const partsData     = useCatalogStore((s) => s.parts)
 
   const s = suggestUpgrade(selectedParts, budget, partsData, resolution)
   if (!s) return null

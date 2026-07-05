@@ -30,6 +30,26 @@ describe('BuildSummary', () => {
     expect(buyLinks[0].getAttribute('href')).toContain(encodeURIComponent(cpu.name))
   })
 
+  it('flags unpicked core categories as visibly missing', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    // 10 core categories, 2 picked → 8 flagged.
+    expect(screen.getAllByText(/not selected/i)).toHaveLength(8)
+    expect(screen.getByText(/8 parts missing/i)).toBeInTheDocument()
+    expect(screen.getByText('Thermal Paste')).toBeInTheDocument()
+  })
+
+  it('shows no missing banner once every core part is picked', () => {
+    const full = {}
+    for (const cat of ['motherboard', 'cpu', 'gpu', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans', 'paste']) {
+      full[cat] = { ...cpu, category: cat, name: `Part ${cat}` }
+    }
+    useBuilderStore.setState({ selectedParts: full })
+    render(<BuildSummary />)
+    expect(screen.queryByText(/not selected/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/missing/i)).not.toBeInTheDocument()
+  })
+
   it('offers a Copy as Markdown action', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)

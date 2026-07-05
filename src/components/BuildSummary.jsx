@@ -32,6 +32,19 @@ function Row({ label, name, brand, price }) {
   )
 }
 
+function MissingRow({ label }) {
+  return (
+    <div className="flex items-center py-1.5 border-t border-slate-800/50">
+      <span className="font-mono text-[11px] uppercase text-slate-500 w-28 shrink-0 pr-2">{label}</span>
+      <span className="flex-1 text-sm text-amber-300/90">
+        <span aria-hidden="true" className="mr-1.5">⚠</span>Not selected
+      </span>
+      <span className="font-mono text-sm text-slate-600 w-20 text-right">—</span>
+      <span className="w-28" />
+    </div>
+  )
+}
+
 export default function BuildSummary() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
@@ -45,6 +58,7 @@ export default function BuildSummary() {
   const [copied, setCopied] = useState(false)
 
   const buildRows = CATEGORIES.map((c) => ({ key: c.id, label: c.label, part: selectedParts[c.id] })).filter((r) => r.part)
+  const missingCount = CATEGORIES.length - buildRows.length
   const periphRows = PERIPHERAL_ORDER.map((id) => ({ key: id, label: PERIPHERAL_LABELS[id], part: selectedPeripherals[id] })).filter((r) => r.part)
   const isEmpty = buildRows.length === 0 && periphRows.length === 0
   const grandTotal = buildTotal + periphTotal
@@ -108,8 +122,18 @@ export default function BuildSummary() {
             <>
               {buildRows.length > 0 && (
                 <>
-                  <div className="mt-4 mb-1 text-[11px] uppercase tracking-wider text-slate-500">Core build</div>
-                  {buildRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} brand={r.part.brand} price={r.part.price} />)}
+                  <div className="mt-4 mb-1 flex items-baseline justify-between">
+                    <span className="text-[11px] uppercase tracking-wider text-slate-500">Core build</span>
+                    {missingCount > 0 && (
+                      <span className="text-[11px] text-amber-300/90">{missingCount} part{missingCount === 1 ? '' : 's'} missing</span>
+                    )}
+                  </div>
+                  {CATEGORIES.map((c) => {
+                    const part = selectedParts[c.id]
+                    return part
+                      ? <Row key={c.id} label={c.label} name={part.name} brand={part.brand} price={part.price} />
+                      : <MissingRow key={c.id} label={c.label} />
+                  })}
                 </>
               )}
               {periphRows.length > 0 && (

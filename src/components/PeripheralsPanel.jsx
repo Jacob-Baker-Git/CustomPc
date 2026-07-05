@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import useBuilderStore, { selPeripheralsTotal } from '../store/useBuilderStore'
-import peripheralsData from '../data/peripheralsData.json'
+import useCatalogStore from '../store/useCatalogStore'
+import SpecSheet from './SpecSheet'
 
 const CATEGORIES = ['monitor', 'keyboard', 'mouse', 'headset']
 
@@ -12,17 +13,55 @@ function specLine(p) {
   return ''
 }
 
+function PeripheralCard({ p, isSelected, onToggle }) {
+  const [showInfo, setShowInfo] = useState(false)
+
+  return (
+    <div
+      className={`relative rounded-sm border p-4 flex flex-col gap-2 transition-all
+        ${isSelected
+          ? 'border-cyan-400/60 bg-cyan-500/10'
+          : 'border-white/10 bg-white/5 hover:border-cyan-400/40 hover:-translate-y-0.5'}`}
+    >
+      {isSelected && (
+        <span className="absolute top-2 right-2 text-cyan-300 text-xs">✓ selected</span>
+      )}
+      <button
+        type="button"
+        onClick={onToggle}
+        title={isSelected ? 'Click to deselect' : 'Click to select'}
+        className="text-left flex flex-col cursor-pointer focus-visible:outline-cyan-400"
+      >
+        <div className="text-sm font-semibold text-white leading-tight pr-16">{p.name}</div>
+        <div className="font-bold text-cyan-300 mt-1">£{p.price.toFixed(2)}</div>
+        <div className="text-xs text-gray-400 mt-1">{specLine(p)}</div>
+      </button>
+      <button
+        type="button"
+        aria-label={`More info about ${p.name}`}
+        aria-expanded={showInfo}
+        onClick={() => setShowInfo((v) => !v)}
+        className="self-start text-[11px] text-slate-400 hover:text-cyan-300 border border-slate-700/70 hover:border-cyan-400/60 rounded-sm px-2 py-0.5 transition-colors"
+      >
+        {showInfo ? 'Hide info' : 'Info'}
+      </button>
+      {showInfo && <SpecSheet part={p} />}
+    </div>
+  )
+}
+
 export default function PeripheralsPanel() {
   const selected         = useBuilderStore((s) => s.selectedPeripherals)
   const addPeripheral    = useBuilderStore((s) => s.addPeripheral)
   const removePeripheral = useBuilderStore((s) => s.removePeripheral)
   const total            = useBuilderStore(selPeripheralsTotal)
+  const peripheralsData  = useCatalogStore((s) => s.peripherals)
 
   const byCategory = useMemo(() => {
     const map = {}
     for (const cat of CATEGORIES) map[cat] = peripheralsData.filter((p) => p.category === cat)
     return map
-  }, [])
+  }, [peripheralsData])
 
   return (
     <div className="w-full h-full overflow-y-auto p-6">
@@ -38,22 +77,12 @@ export default function PeripheralsPanel() {
               {byCategory[cat].map((p) => {
                 const isSelected = selected[cat]?.id === p.id
                 return (
-                  <button
+                  <PeripheralCard
                     key={p.id}
-                    onClick={() => (isSelected ? removePeripheral(cat) : addPeripheral(cat, p))}
-                    title={isSelected ? 'Click to deselect' : 'Click to select'}
-                    className={`relative text-left rounded-sm border p-4 transition-all
-                      ${isSelected
-                        ? 'border-cyan-400/60 bg-cyan-500/10'
-                        : 'border-white/10 bg-white/5 hover:border-cyan-400/40 hover:-translate-y-0.5'}`}
-                  >
-                    {isSelected && (
-                      <span className="absolute top-2 right-2 text-cyan-300 text-xs">✓ selected</span>
-                    )}
-                    <div className="text-sm font-semibold text-white leading-tight pr-16">{p.name}</div>
-                    <div className="font-bold text-cyan-300 mt-1">£{p.price.toFixed(2)}</div>
-                    <div className="text-xs text-gray-400 mt-1">{specLine(p)}</div>
-                  </button>
+                    p={p}
+                    isSelected={isSelected}
+                    onToggle={() => (isSelected ? removePeripheral(cat) : addPeripheral(cat, p))}
+                  />
                 )
               })}
             </div>

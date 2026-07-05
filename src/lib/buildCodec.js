@@ -1,8 +1,9 @@
-import partsData from '../data/partsData.json'
-import peripheralsData from '../data/peripheralsData.json'
+import useCatalogStore from '../store/useCatalogStore'
 
-const PART_BY_ID = new Map(partsData.map((p) => [p.id, p]))
-const PERIPHERAL_BY_ID = new Map(peripheralsData.map((p) => [p.id, p]))
+// Looked up at decode time (not module load) so saved builds resolve against
+// the live Supabase catalog once it replaces the bundled snapshot.
+const partById = (id) => useCatalogStore.getState().parts.find((p) => p.id === id)
+const peripheralById = (id) => useCatalogStore.getState().peripherals.find((p) => p.id === id)
 
 function toBase64Url(str) {
   return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
@@ -31,12 +32,12 @@ export function decodeBuild(code) {
 
   const parts = {}
   for (const [cat, id] of Object.entries(payload.p || {})) {
-    const part = PART_BY_ID.get(id)
+    const part = partById(id)
     if (part) parts[cat] = part
   }
   const peripherals = {}
   for (const [cat, id] of Object.entries(payload.x || {})) {
-    const part = PERIPHERAL_BY_ID.get(id)
+    const part = peripheralById(id)
     if (part) peripherals[cat] = part
   }
   return {

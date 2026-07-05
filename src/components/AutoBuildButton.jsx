@@ -2,13 +2,14 @@ import { Zap } from 'lucide-react'
 import useBuilderStore from '../store/useBuilderStore'
 import { autoBuild } from '../lib/autoBuilder'
 import { BTN_PRIMARY } from '../lib/uiTokens'
-import partsData from '../data/partsData.json'
+import useCatalogStore from '../store/useCatalogStore'
 
 export default function AutoBuildButton() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const budget = useBuilderStore((s) => s.budget)
   const resolution = useBuilderStore((s) => s.resolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
+  const partsData = useCatalogStore((s) => s.parts)
 
   return (
     <button

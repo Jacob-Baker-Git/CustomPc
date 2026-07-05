@@ -4,7 +4,7 @@ import { filterParts } from '../lib/partFilter'
 import { sortParts, SORT_OPTIONS } from '../lib/sortParts'
 import PartCard from './PartCard'
 import SearchBar from './SearchBar'
-import partsData from '../data/partsData.json'
+import useCatalogStore from '../store/useCatalogStore'
 
 export default function PartSelector({ category, onSelect, onClose }) {
   const selectedParts   = useBuilderStore((s) => s.selectedParts)
@@ -13,6 +13,7 @@ export default function PartSelector({ category, onSelect, onClose }) {
   const [query, setQuery] = useState('')
   const [sortKey, setSortKey] = useState('price-asc')
   const [showAll, setShowAll] = useState(false)
+  const partsData = useCatalogStore((s) => s.parts)
 
   const current = selectedParts[category]
 
@@ -24,7 +25,7 @@ export default function PartSelector({ category, onSelect, onClose }) {
 
   const parts = useMemo(
     () => partsData.filter((p) => p.category === category),
-    [category]
+    [partsData, category]
   )
 
   const sorted = useMemo(() => sortParts(parts, sortKey), [parts, sortKey])

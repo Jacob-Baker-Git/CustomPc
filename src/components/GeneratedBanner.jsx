@@ -2,7 +2,7 @@ import { X, Zap } from 'lucide-react'
 import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
 import { maxOutBudget } from '../lib/maxOutBudget'
 import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
-import partsData from '../data/partsData.json'
+import useCatalogStore from '../store/useCatalogStore'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
@@ -16,6 +16,7 @@ export default function GeneratedBanner() {
   const setBuild      = useBuilderStore((s) => s.setBuild)
   const clear         = useBuilderStore((s) => s.clearLastGenerated)
   const spent         = useBuilderStore(selTotalSpent)
+  const partsData     = useCatalogStore((s) => s.parts)
 
   if (!info) return null
 
