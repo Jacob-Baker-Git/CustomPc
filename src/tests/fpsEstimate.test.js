@@ -37,4 +37,24 @@ describe('estimateFps', () => {
     expect(estimateFps(strong, strong, '4K')).toBe(95)
     expect(estimateFps(strong, strong, 'banana')).toBe(150)
   })
+
+  it('interpolates custom resolutions by pixel count', () => {
+    // 3440x1440 ultrawide sits between QHD and 4K.
+    const uw = estimateFps(strong, strong, '3440x1440')
+    expect(uw).toBeLessThan(estimateFps(strong, strong, '1440p'))
+    expect(uw).toBeGreaterThan(estimateFps(strong, strong, '4k'))
+  })
+
+  it('treats an exact preset resolution written as WxH identically', () => {
+    expect(estimateFps(strong, strong, '2560x1440')).toBe(150)
+    expect(estimateFps(strong, strong, '3840x2160')).toBe(95)
+  })
+
+  it('extrapolates below 1080p to higher frame rates', () => {
+    expect(estimateFps(strong, strong, '1280x720')).toBeGreaterThan(200)
+  })
+
+  it('clamps absurdly high custom resolutions instead of going negative', () => {
+    expect(estimateFps(strong, strong, '7680x4320')).toBeGreaterThan(0)
+  })
 })

@@ -13,10 +13,26 @@ const RES_OPTIONS = [
 const TARGETS = [60, 120, 144, 240]
 const STEPS = ['Budget', 'Resolution', 'FPS target']
 
+// Hide the number-input spinner arrows (they crowd the tiny custom boxes).
+const NO_SPINNERS =
+  '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+
+// "3440x1440" (any case, optional spaces) → normalized "3440x1440"; null when
+// it isn't a sane landscape WxH resolution.
+function parseCustomRes(value) {
+  const m = /^(\d{3,4})\s*[x×]\s*(\d{3,4})$/.exec(String(value).trim().toLowerCase())
+  if (!m) return null
+  const w = Number(m[1])
+  const h = Number(m[2])
+  if (w < 640 || w > 7680 || h < 480 || h > 4320 || h > w) return null
+  return `${w}x${h}`
+}
+
 export default function BudgetEntry({ onSubmit }) {
   const [step, setStep] = useState(1)
   const [value, setValue] = useState('')
   const [resolution, setLocalResolution] = useState(null)
+  const [customRes, setCustomRes] = useState('')
   const [fps, setFps] = useState(120)
   const [customFps, setCustomFps] = useState('')
   const [gameId, setGameId] = useState('fortnite')
@@ -33,6 +49,10 @@ export default function BudgetEntry({ onSubmit }) {
   const customNum = parseInt(customFps, 10)
   const customValid = Number.isFinite(customNum) && customNum >= 30 && customNum <= 600
   const targetFps = customValid ? customNum : fps
+  // Same idea for resolution: a valid custom "WxH" overrides the preset cards.
+  const customResNorm = parseCustomRes(customRes)
+  const chosenRes = customResNorm ?? resolution
+  const chosenResLabel = RES_OPTIONS.find((r) => r.id === chosenRes)?.label ?? chosenRes
 
   function handleBudgetSubmit(e) {
     e.preventDefault()
@@ -46,7 +66,7 @@ export default function BudgetEntry({ onSubmit }) {
   }
 
   function enterBuilder(parts) {
-    setResolution(resolution)
+    setResolution(chosenRes)
     if (parts) setBuild(parts)
     onSubmit(budgetNum)
   }
@@ -55,13 +75,13 @@ export default function BudgetEntry({ onSubmit }) {
   // previous visit, which used to leak into "empty" sessions.
   function startEmpty() {
     clearBuild()
-    setResolution(resolution)
+    setResolution(chosenRes)
     onSubmit(budgetNum)
   }
 
   function generate() {
     const game = gamesData.find((g) => g.id === gameId)
-    const result = targetBuild(budgetNum, resolution, targetFps, game, partsData)
+    const result = targetBuild(budgetNum, chosenRes, targetFps, game, partsData)
     if (result.met) {
       setLastGenerated({ met: true, estFps: result.estFps, targetFps, gameName: game.name })
       enterBuilder(result.parts)
@@ -132,11 +152,11 @@ export default function BudgetEntry({ onSubmit }) {
             <p className="text-gray-400 mb-10 text-lg">What resolution will you play at?</p>
             <div className="flex flex-col sm:flex-row gap-3">
               {RES_OPTIONS.map((r) => {
-                const selected = resolution === r.id
+                const selected = resolution === r.id && !customResNorm
                 return (
                   <button
                     key={r.id}
-                    onClick={() => setLocalResolution(r.id)}
+                    onClick={() => { setLocalResolution(r.id); setCustomRes('') }}
                     aria-pressed={selected}
                     className={`w-44 px-4 py-5 rounded-sm border text-left transition-colors group
                       ${selected
@@ -148,10 +168,30 @@ export default function BudgetEntry({ onSubmit }) {
                   </button>
                 )
               })}
+              <div
+                className={`w-44 px-4 py-5 rounded-sm border text-left transition-colors
+                  ${customResNorm
+                    ? 'border-cyan-400 bg-cyan-500/15'
+                    : 'border-slate-700/70 focus-within:border-cyan-400/60'}`}
+              >
+                <input
+                  value={customRes}
+                  onChange={(e) => { setCustomRes(e.target.value); setShortfall(null) }}
+                  placeholder="3440x1440"
+                  aria-label="Custom resolution"
+                  inputMode="numeric"
+                  className={`w-full bg-transparent text-2xl font-bold font-mono focus:outline-none placeholder:text-slate-600
+                    ${customResNorm ? 'text-cyan-200' : 'text-white'}`}
+                />
+                <div className={`text-xs mt-1 ${customResNorm ? 'text-cyan-300/80' : 'text-slate-400'}`}>Custom — ultrawide etc.</div>
+              </div>
             </div>
+            {customRes !== '' && !customResNorm && (
+              <p className="mt-4 text-xs text-amber-300/90">Use width x height, e.g. 2560x1080 (landscape, up to 7680x4320).</p>
+            )}
             <button
               onClick={() => setStep(3)}
-              disabled={!resolution}
+              disabled={!chosenRes}
               className="mt-8 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Next: FPS target
@@ -193,7 +233,7 @@ export default function BudgetEntry({ onSubmit }) {
                   aria-label="Custom FPS target"
                   value={customFps}
                   onChange={(e) => { setCustomFps(e.target.value); setShortfall(null) }}
-                  className="w-20 bg-transparent focus:outline-none placeholder:text-slate-600 text-center"
+                  className={`w-20 bg-transparent focus:outline-none placeholder:text-slate-600 text-center ${NO_SPINNERS}`}
                 />
                 <span className={customValid ? 'text-cyan-200' : 'text-slate-500'}>fps</span>
               </label>
@@ -216,7 +256,7 @@ export default function BudgetEntry({ onSubmit }) {
             {shortfall && (
               <div className="mb-6 max-w-md text-center border border-amber-500/40 bg-amber-500/10 rounded-sm px-4 py-3">
                 <p className="text-sm text-amber-200">
-                  £{budgetNum.toFixed(0)} can't hit {targetFps} fps in {game.name} at {resolution === '4k' ? '4K' : resolution}.
+                  £{budgetNum.toFixed(0)} can't hit {targetFps} fps in {game.name} at {chosenResLabel}.
                   The closest build manages about <span className="font-mono font-semibold">{shortfall.estFps} fps</span>.
                 </p>
                 <button

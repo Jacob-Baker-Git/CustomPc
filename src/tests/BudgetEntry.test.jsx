@@ -137,6 +137,43 @@ describe('BudgetEntry wizard', () => {
     expect(useBuilderStore.getState().lastGenerated?.targetFps).toBe(360)
   })
 
+  it('accepts a custom resolution next to the presets (e.g. ultrawide)', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '2000' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+
+    fireEvent.change(screen.getByLabelText(/custom resolution/i), { target: { value: '3440x1440' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
+    fireEvent.click(screen.getByRole('button', { name: /start empty/i }))
+
+    expect(useBuilderStore.getState().resolution).toBe('3440x1440')
+  })
+
+  it('a valid custom resolution overrides a previously picked preset', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '2000' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+
+    fireEvent.click(screen.getByRole('button', { name: /1440p/i }))
+    fireEvent.change(screen.getByLabelText(/custom resolution/i), { target: { value: '2560 X 1080' } })
+    expect(screen.getByRole('button', { name: /1440p/i })).toHaveAttribute('aria-pressed', 'false')
+
+    // Picking a preset again clears the custom box.
+    fireEvent.click(screen.getByRole('button', { name: /4k/i }))
+    expect(screen.getByLabelText(/custom resolution/i).value).toBe('')
+    expect(screen.getByRole('button', { name: /4k/i })).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('rejects nonsense in the custom resolution box', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '2000' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+
+    fireEvent.change(screen.getByLabelText(/custom resolution/i), { target: { value: 'potato' } })
+    expect(screen.getByText(/width x height/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /next: fps target/i })).toBeDisabled()
+  })
+
   it('rejects an out-of-range custom FPS and falls back to the preset', () => {
     render(<BudgetEntry onSubmit={() => {}} />)
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '1500' } })

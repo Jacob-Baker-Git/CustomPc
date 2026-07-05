@@ -1,3 +1,5 @@
+import { resolutionMegapixels, lerpFactorByMp } from './fpsEstimate'
+
 // Resolution weights: how much the CPU vs GPU drives performance at each target.
 // Lower resolution leans on the CPU; higher leans on the GPU. A weakness in the
 // component the resolution stresses most (CPU at 1080p, GPU at 4K) bites harder.
@@ -6,13 +8,23 @@ const WEIGHTS = {
   '1440p': { cpu: 0.5, gpu: 0.5 },
   '4k':    { cpu: 0.35, gpu: 0.65 },
 }
+const CPU_WEIGHT = { '1080p': 0.6, '1440p': 0.5, '4k': 0.35 }
+
+// Custom "WxH" resolutions interpolate the CPU weight by pixel count.
+function weightsFor(resolution) {
+  if (WEIGHTS[resolution]) return WEIGHTS[resolution]
+  const mp = resolutionMegapixels(resolution)
+  if (mp == null) return WEIGHTS['1440p']
+  const cpu = lerpFactorByMp(CPU_WEIGHT, mp, 0.3, 0.65)
+  return { cpu, gpu: 1 - cpu }
+}
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
 export function computeBottleneck(cpu, gpu, resolution) {
   if (!cpu || !gpu) return null
 
-  const w = WEIGHTS[resolution] ?? WEIGHTS['1440p']
+  const w = weightsFor(resolution)
   const label = RES_LABEL[resolution] ?? resolution
 
   const cpuScore = cpu.perfScore ?? 0

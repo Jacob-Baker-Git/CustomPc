@@ -38,7 +38,9 @@ export default function TopBar() {
         <ArrowLeft size={14} aria-hidden="true" />
       </button>
       <span className="font-bold text-lg tracking-tight text-white">PC <span className="text-cyan-400">Builder</span></span>
-      <div className="flex items-center gap-2 text-sm text-gray-300">
+      {/* Compact on phones (values only, smaller text) so the header stays ONE
+          row — a wrapped two-row header covered the view tabs underneath. */}
+      <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-300">
         {editing ? (
           <span className="flex items-center gap-1">
             <span className="text-gray-400">£</span>
@@ -62,13 +64,13 @@ export default function TopBar() {
             £{budget.toFixed(0)}
           </button>
         )}
-        <span className="text-gray-500">budget</span>
-        <span className="text-gray-600 mx-1">|</span>
+        <span className="text-gray-500 hidden sm:inline">budget</span>
+        <span className="text-gray-600 mx-0.5 sm:mx-1">|</span>
         <span className={remaining < 0 ? 'text-red-400 font-mono font-semibold' : 'text-green-400 font-mono font-semibold'}>
           £{remaining.toFixed(0)}
         </span>
-        <span className="text-gray-500">remaining</span>
-        <span className="text-gray-600 mx-1">|</span>
+        <span className="text-gray-500 hidden sm:inline">remaining</span>
+        <span className="text-gray-600 mx-0.5 sm:mx-1">|</span>
         <span className="text-amber-400 font-mono font-semibold">{totalPower}W</span>
       </div>
       <div className="hidden md:flex gap-6 ml-auto">

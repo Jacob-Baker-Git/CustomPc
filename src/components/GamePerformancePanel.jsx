@@ -55,7 +55,8 @@ export default function GamePerformancePanel() {
               </span>
             ))}
           </div>
-          <div className="max-h-[55vh] overflow-y-auto">
+          {/* pr + thin scrollbar so the bar doesn't sit on top of the FPS numbers */}
+          <div className="max-h-[55vh] overflow-y-auto pr-2.5 [scrollbar-width:thin] [scrollbar-color:#334155_transparent]">
             <GamePerformanceList cpu={cpu} gpu={gpu} resolution={resolution} quality={quality} />
           </div>
           <p className="mt-2 text-[10px] text-gray-600">

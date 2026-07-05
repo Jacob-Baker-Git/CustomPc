@@ -35,10 +35,25 @@ describe('gameFps', () => {
     expect(low).toBeGreaterThan(medium)
   })
 
-  it('quality presets cannot push past the CPU frame ceiling', () => {
-    // CPU-bound game: the ceiling binds, so Low ≈ High.
-    const game = { fpsFactor: 3, cpuFactor: 0.5 }
-    expect(gameFps(cpu, gpu, '1080p', game, 'low')).toBe(gameFps(cpu, gpu, '1080p', game, 'high'))
+  it('every quality step improves FPS, even for CPU-bound games', () => {
+    const gpuBound = { fpsFactor: 1, cpuFactor: 5 }
+    const cpuBound = { fpsFactor: 3, cpuFactor: 0.5 }
+    for (const game of [gpuBound, cpuBound]) {
+      const high = gameFps(cpu, gpu, '1440p', game, 'high')
+      const medium = gameFps(cpu, gpu, '1440p', game, 'medium')
+      const low = gameFps(cpu, gpu, '1440p', game, 'low')
+      expect(medium).toBeGreaterThan(high)
+      expect(low).toBeGreaterThan(medium)
+    }
+  })
+
+  it('CPU-bound games gain far less from Low than GPU-bound ones', () => {
+    const gpuBound = { fpsFactor: 1, cpuFactor: 5 }
+    const cpuBound = { fpsFactor: 3, cpuFactor: 0.5 }
+    const gain = (game) =>
+      gameFps(cpu, gpu, '1080p', game, 'low') / gameFps(cpu, gpu, '1080p', game, 'high')
+    expect(gain(cpuBound)).toBeCloseTo(1.15, 1) // settings buy a little CPU headroom
+    expect(gain(gpuBound)).toBeCloseTo(1.45, 1) // and a lot of GPU headroom
   })
 
   it('a separate cpuFactor models CPU-bound games', () => {
