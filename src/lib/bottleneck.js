@@ -1,56 +1,41 @@
-import { resolutionMegapixels, lerpFactorByMp } from './fpsEstimate'
-
-// Resolution weights: how much the CPU vs GPU drives performance at each target.
-// Lower resolution leans on the CPU; higher leans on the GPU. A weakness in the
-// component the resolution stresses most (CPU at 1080p, GPU at 4K) bites harder.
-const WEIGHTS = {
-  '1080p': { cpu: 0.6, gpu: 0.4 },
-  '1440p': { cpu: 0.5, gpu: 0.5 },
-  '4k':    { cpu: 0.35, gpu: 0.65 },
-}
-const CPU_WEIGHT = { '1080p': 0.6, '1440p': 0.5, '4k': 0.35 }
-
-// Custom "WxH" resolutions interpolate the CPU weight by pixel count.
-function weightsFor(resolution) {
-  if (WEIGHTS[resolution]) return WEIGHTS[resolution]
-  const mp = resolutionMegapixels(resolution)
-  if (mp == null) return WEIGHTS['1440p']
-  const cpu = lerpFactorByMp(CPU_WEIGHT, mp, 0.3, 0.65)
-  return { cpu, gpu: 1 - cpu }
-}
+import { resFactors } from './fpsEstimate'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
+// Compares what each side actually delivers at this resolution on the FPS
+// model (comparable units), not raw perf scores. A mildly GPU-bound build is
+// the healthy normal state — only CPU limits and extreme CPU-overkill get
+// flagged. Custom "WxH" resolutions work via resFactors interpolation.
 export function computeBottleneck(cpu, gpu, resolution) {
   if (!cpu || !gpu) return null
 
-  const w = weightsFor(resolution)
   const label = RES_LABEL[resolution] ?? resolution
+  const f = resFactors(resolution)
+  const gpuFps = Math.round((gpu.perfScore ?? 0) * f.gpu)
+  const cpuFps = Math.round((cpu.perfScore ?? 0) * f.cpu)
 
-  const cpuScore = cpu.perfScore ?? 0
-  const gpuScore = gpu.perfScore ?? 0
+  const weakerIsCpu = cpuFps < gpuFps
+  const ratio = Math.min(gpuFps, cpuFps) / (Math.max(gpuFps, cpuFps) || 1)
 
-  // The weaker component is the limiter; the gap between the two sets the
-  // severity, amplified by how hard this resolution leans on the weaker part.
-  const weakerIsCpu = cpuScore < gpuScore
-  const weaker = Math.min(cpuScore, gpuScore)
-  const stronger = Math.max(cpuScore, gpuScore) || 1
-  const gap = 1 - weaker / stronger                  // 0 = identical
-  const stress = weakerIsCpu ? w.cpu : w.gpu          // 0.35..0.65
-  const severity = Math.min(1, gap * stress * 2)      // stress*2 in 0.7..1.3
-  const balancePct = Math.round((1 - severity) * 100)
+  // CPU-limited wastes GPU money — score it by the raw ratio. GPU-limited is
+  // expected (the GPU should be the limiter), so it scores on a gentler scale
+  // and only drops below "matched" when the CPU is heavily overspecced.
+  const balancePct = weakerIsCpu
+    ? Math.round(ratio * 100)
+    : Math.round(50 + ratio * 50)
 
   let limitedBy = 'none'
-  if (balancePct < 85) limitedBy = weakerIsCpu ? 'cpu' : 'gpu'
+  if (weakerIsCpu && balancePct < 85) limitedBy = 'cpu'
+  else if (!weakerIsCpu && balancePct < 75) limitedBy = 'gpu'
 
   let verdict
   if (limitedBy === 'none') {
     verdict = `Well matched for ${label}`
   } else if (limitedBy === 'cpu') {
-    verdict = `Your CPU can't keep up with this GPU at ${label} — the GPU is overkill`
+    verdict = `CPU bottleneck at ${label} — the GPU could render ~${gpuFps} fps but the CPU caps it near ~${cpuFps}`
   } else {
-    verdict = `Your GPU is holding the CPU back at ${label}`
+    verdict = `GPU-bound at ${label} — ~${gpuFps} fps with ~${cpuFps} of CPU headroom. Normal at higher resolutions; drop settings or resolution for more frames`
   }
 
-  return { balancePct, limitedBy, verdict }
+  return { balancePct, limitedBy, verdict, cpuFps, gpuFps }
 }

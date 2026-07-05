@@ -38,6 +38,7 @@ export default function BudgetEntry({ onSubmit }) {
   const [gameId, setGameId] = useState('fortnite')
   const [shortfall, setShortfall] = useState(null)
   const setResolution = useBuilderStore((s) => s.setResolution)
+  const setCustomResolution = useBuilderStore((s) => s.setCustomResolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
   const clearBuild = useBuilderStore((s) => s.clearBuild)
   const setLastGenerated = useBuilderStore((s) => s.setLastGenerated)
@@ -67,6 +68,7 @@ export default function BudgetEntry({ onSubmit }) {
 
   function enterBuilder(parts) {
     setResolution(chosenRes)
+    if (customResNorm) setCustomResolution(customResNorm)
     if (parts) setBuild(parts)
     onSubmit(budgetNum)
   }
@@ -76,6 +78,7 @@ export default function BudgetEntry({ onSubmit }) {
   function startEmpty() {
     clearBuild()
     setResolution(chosenRes)
+    if (customResNorm) setCustomResolution(customResNorm)
     onSubmit(budgetNum)
   }
 
@@ -83,7 +86,7 @@ export default function BudgetEntry({ onSubmit }) {
     const game = gamesData.find((g) => g.id === gameId)
     const result = targetBuild(budgetNum, chosenRes, targetFps, game, partsData)
     if (result.met) {
-      setLastGenerated({ met: true, estFps: result.estFps, targetFps, gameName: game.name })
+      setLastGenerated({ met: true, estFps: result.estFps, targetFps, gameName: game.name, quality: result.quality })
       enterBuilder(result.parts)
     } else {
       setShortfall(result)
@@ -256,12 +259,12 @@ export default function BudgetEntry({ onSubmit }) {
             {shortfall && (
               <div className="mb-6 max-w-md text-center border border-amber-500/40 bg-amber-500/10 rounded-sm px-4 py-3">
                 <p className="text-sm text-amber-200">
-                  £{budgetNum.toFixed(0)} can't hit {targetFps} fps in {game.name} at {chosenResLabel}.
-                  The closest build manages about <span className="font-mono font-semibold">{shortfall.estFps} fps</span>.
+                  £{budgetNum.toFixed(0)} can't hit {targetFps} fps in {game.name} at {chosenResLabel}, even
+                  on low settings. The closest build manages about <span className="font-mono font-semibold">{shortfall.estFps} fps</span>.
                 </p>
                 <button
                   onClick={() => {
-                    setLastGenerated({ met: false, estFps: shortfall.estFps, targetFps, gameName: game.name })
+                    setLastGenerated({ met: false, estFps: shortfall.estFps, targetFps, gameName: game.name, quality: shortfall.quality })
                     enterBuilder(shortfall.parts)
                   }}
                   className="mt-3 text-xs px-4 py-2 rounded-sm border border-amber-400/60 text-amber-200 hover:border-amber-300 transition-colors"

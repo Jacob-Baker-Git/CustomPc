@@ -9,7 +9,11 @@ const OPTIONS = [
 export default function ResolutionToggle() {
   const resolution    = useBuilderStore((s) => s.resolution)
   const setResolution = useBuilderStore((s) => s.setResolution)
-  const isCustom      = !OPTIONS.some((o) => o.id === resolution)
+  const customStored  = useBuilderStore((s) => s.customResolution)
+  // The remembered wizard resolution, or (fallback for old share links) the
+  // live resolution when it isn't a preset. Stays available as a fourth
+  // option even after clicking over to a preset.
+  const custom = customStored ?? (!OPTIONS.some((o) => o.id === resolution) ? resolution : null)
 
   return (
     <div className="inline-flex rounded-sm bg-slate-950/30 border border-slate-800/60 p-0.5">
@@ -25,11 +29,16 @@ export default function ResolutionToggle() {
           {opt.label}
         </button>
       ))}
-      {/* Custom resolution from the wizard — shown active until a preset is picked. */}
-      {isCustom && (
-        <span className="px-3 py-1 text-xs font-medium font-mono rounded-sm bg-cyan-600 text-white">
-          {resolution}
-        </span>
+      {custom && (
+        <button
+          onClick={() => setResolution(custom)}
+          className={`px-3 py-1 text-xs font-medium font-mono rounded-sm transition-all
+            ${resolution === custom
+              ? 'bg-cyan-600 text-white'
+              : 'text-gray-300 hover:text-white'}`}
+        >
+          {custom}
+        </button>
       )}
     </div>
   )

@@ -39,6 +39,11 @@ const useBuilderStore = create(persist((set) => ({
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
 
+  // Last custom "WxH" resolution the user entered in the wizard — kept so the
+  // resolution toggle can offer it as a fourth option alongside the presets.
+  customResolution: null,
+  setCustomResolution: (customResolution) => set({ customResolution }),
+
   selectedPeripherals: {},
 
   addPeripheral: (category, part) =>
@@ -60,6 +65,7 @@ const useBuilderStore = create(persist((set) => ({
     selectedParts: s.selectedParts,
     selectedPeripherals: s.selectedPeripherals,
     resolution: s.resolution,
+    customResolution: s.customResolution,
   }),
 }))
 

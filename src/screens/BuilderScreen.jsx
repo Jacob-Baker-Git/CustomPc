@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import TopBar from '../components/TopBar'
 const BuildCanvas = lazy(() => import('../components/BuildCanvas'))
 import Backdrop from '../components/Backdrop'
@@ -25,6 +25,13 @@ export default function BuilderScreen() {
   const removePart    = useBuilderStore((s) => s.removePart)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useHashView('build')
+  const scrollRef = useRef(null)
+
+  // Fresh views (and the first landing after the wizard) start at the top —
+  // the tabs live in the page flow now, so a stale scroll would hide them.
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 })
+  }, [view])
 
   function handlePartSelect(part) {
     addPart(part.category, part)
@@ -35,24 +42,28 @@ export default function BuilderScreen() {
     <div className="relative min-h-screen bg-[#05080f]">
       <Backdrop />
       <TopBar />
-      <div className="pt-16 h-[calc(100vh-4rem)]">
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
-          {['build', 'peripherals', 'summary', 'saved'].map((v) => (
-            <button
-              key={v}
-              onClick={() => setView(v)}
-              className={`px-2.5 md:px-4 py-1 text-[11px] md:text-xs font-medium rounded-sm capitalize transition-all
-                ${view === v
-                  ? 'bg-cyan-600 text-white'
-                  : 'text-gray-300 hover:text-white'}`}
-            >
-              {v}
-            </button>
-          ))}
+      {/* One scroll container for tabs + view content, so the tabs scroll away
+          with the page instead of floating over it. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-16">
+        <div className="flex justify-center pt-3 pb-2">
+          <div className="inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
+            {['build', 'peripherals', 'summary', 'saved'].map((v) => (
+              <button
+                key={v}
+                onClick={() => setView(v)}
+                className={`px-2.5 md:px-4 py-1 text-[11px] md:text-xs font-medium rounded-sm capitalize transition-all
+                  ${view === v
+                    ? 'bg-cyan-600 text-white'
+                    : 'text-gray-300 hover:text-white'}`}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
         </div>
         {view === 'build' ? (
-          <div className="flex flex-col h-full overflow-y-auto">
-            <div className="relative h-[45vh] md:h-[52vh] shrink-0">
+          <div>
+            <div className="relative h-[42vh] md:h-[48vh]">
               <CanvasErrorBoundary>
                 <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                   <BuildCanvas selectedParts={selectedParts} />

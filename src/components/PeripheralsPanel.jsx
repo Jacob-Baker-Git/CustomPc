@@ -64,7 +64,7 @@ export default function PeripheralsPanel() {
   }, [peripheralsData])
 
   return (
-    <div className="w-full h-full overflow-y-auto p-6">
+    <div className="w-full p-6 pb-12">
       <div className="flex items-center justify-between mb-6 max-w-5xl mx-auto">
         <h2 className="text-xl font-bold text-white">Peripherals</h2>
         <span className="text-sm text-gray-300">Subtotal: <span className="text-cyan-300 font-semibold">£{total.toFixed(2)}</span></span>

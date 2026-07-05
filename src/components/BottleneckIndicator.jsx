@@ -23,8 +23,8 @@ export default function BottleneckIndicator() {
           <div className="h-2 bg-white/10 rounded-sm overflow-hidden mb-2">
             <div
               className={`h-full rounded-sm transition-all duration-500
-                ${result.balancePct >= 85 ? 'bg-emerald-500'
-                  : result.balancePct >= 70 ? 'bg-amber-500'
+                ${result.limitedBy === 'none' ? 'bg-emerald-500'
+                  : result.limitedBy === 'gpu' ? 'bg-amber-500'
                   : 'bg-red-500'}`}
               style={{ width: `${result.balancePct}%` }}
             />

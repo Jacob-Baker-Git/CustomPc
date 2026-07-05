@@ -25,11 +25,28 @@ describe('targetBuild', () => {
   })
 
   it('reports an unreachable target and returns the closest build instead', () => {
-    const { parts, met, estFps } = targetBuild(800, '4k', 240, alanWake, partsData)
+    const { parts, met, estFps, quality } = targetBuild(800, '4k', 240, alanWake, partsData)
     expect(met).toBe(false)
     expect(estFps).toBeLessThan(240)
+    expect(quality).toBe('low') // closest-build estimate is best-case
     expect(parts.cpu).toBeDefined()
     expect(parts.gpu).toBeDefined()
+  })
+
+  it('meets targets at high settings when possible and says so', () => {
+    const { met, quality } = targetBuild(1500, '1440p', 120, fortnite, partsData)
+    expect(met).toBe(true)
+    expect(quality).toBe('high')
+  })
+
+  it('drops the quality preset to hit an aggressive esports target (360Hz)', () => {
+    // 360fps Fortnite at 1440p is out of reach at high settings on any
+    // hardware, but a big budget hits it on a lower preset — a £10k user
+    // must not be told it's impossible.
+    const { met, estFps, quality } = targetBuild(10000, '1440p', 360, fortnite, partsData)
+    expect(met).toBe(true)
+    expect(['medium', 'low']).toContain(quality)
+    expect(estFps).toBeGreaterThanOrEqual(360)
   })
 
   it('respects compatibility in the surrounding build', () => {

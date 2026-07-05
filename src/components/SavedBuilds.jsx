@@ -101,8 +101,8 @@ export default function SavedBuilds({ onLoaded }) {
   const pair = compareIds.map((id) => saved.find((b) => b.id === id)).filter(Boolean)
 
   return (
-    <div className="h-full overflow-y-auto">
-      <div className="max-w-2xl mx-auto px-4 pt-24 pb-12">
+    <div>
+      <div className="max-w-2xl mx-auto px-4 pt-2 pb-12">
         <div className={`${PANEL} p-5`}>
           <div className="flex items-baseline justify-between mb-3">
             <h2 className="text-lg text-white">Saved builds</h2>

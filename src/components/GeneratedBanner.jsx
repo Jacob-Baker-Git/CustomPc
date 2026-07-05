@@ -34,6 +34,7 @@ export default function GeneratedBanner() {
         {info.met
           ? <>This build hits <span className={`${TELEMETRY} text-cyan-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>
           : <>Closest to your {info.targetFps} fps target: <span className={`${TELEMETRY} text-amber-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>}
+        {info.quality && info.quality !== 'high' && <> on <span className="text-slate-100">{info.quality}</span> settings</>}
         {leftover > 0 && <> — <span className={`${TELEMETRY} text-emerald-300`}>£{leftover.toFixed(0)}</span> under budget</>}
       </p>
       {leftover > 20 && (

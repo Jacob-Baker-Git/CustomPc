@@ -48,4 +48,35 @@ describe('suggestUpgrade', () => {
   it('returns null when nothing is affordable', () => {
     expect(suggestUpgrade(build(), 610, catalog, '1440p')).toBeNull()
   })
+
+  it('skips marginal upgrades below the minimum meaningful gain', () => {
+    // +1 perfScore ≈ +1.5 fps at 1440p — not worth suggesting a swap for.
+    const tinyStep = [
+      ...catalog,
+      { id: 'gpu-barely', category: 'gpu', price: 420, perfScore: 61, length: 300 },
+    ]
+    const parts = { ...build(), cpu: { ...build().cpu, perfScore: 99 } }
+    const s = suggestUpgrade(parts, 850, tinyStep, '1440p') // only gpu-barely affordable
+    expect(s).toBeNull()
+  })
+
+  it('prefers a near-equal cheaper upgrade over a marginally better halo part', () => {
+    const priced = [
+      { id: 'gpu-value', category: 'gpu', price: 460, perfScore: 88, length: 300 },
+      { id: 'gpu-halo',  category: 'gpu', price: 900, perfScore: 90, length: 300 },
+    ]
+    // Strong CPU so the GPU side sets FPS: value gains 42 fps for £60,
+    // halo gains 45 fps for £500 — near-equal gain, wildly different value.
+    const parts = build({ cpu: { id: 'cpu-big', category: 'cpu', socket: 'AM5', price: 200, perfScore: 99 } })
+    const s = suggestUpgrade(parts, 5000, [...catalog, ...priced], '1440p')
+    expect(s.toPart.id).toBe('gpu-value')
+  })
+
+  it('treats a cheaper-and-faster swap as the best possible value', () => {
+    const bargain = { id: 'gpu-bargain', category: 'gpu', price: 350, perfScore: 87, length: 300 }
+    const parts = build({ cpu: { id: 'cpu-big', category: 'cpu', socket: 'AM5', price: 200, perfScore: 99 } })
+    const s = suggestUpgrade(parts, 5000, [...catalog, bargain], '1440p')
+    expect(s.toPart.id).toBe('gpu-bargain')
+    expect(s.extraCost).toBeLessThan(0)
+  })
 })
