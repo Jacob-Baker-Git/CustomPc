@@ -14,7 +14,7 @@ bottlenecks, and renders the machine in an interactive 3D case.
 - **Performance estimates** — bottleneck balance, est. average FPS at 1080p/1440p/4K, and per-game FPS for popular titles
 - **Budget tracking** — live spend/remaining, parts over budget are locked (swaps credit back the part you're replacing)
 - **Peripherals** — monitor, keyboard, mouse, headset alongside the core build
-- **Save & share** — named saved builds (localStorage), shareable `?build=` links, print/markdown export
+- **Save, share & compare** — named saved builds (localStorage), shareable `?build=` links, print/markdown export, side-by-side comparison of two saved builds
 - **The in-progress build persists** across refreshes
 
 ## Stack
@@ -29,8 +29,10 @@ Prices and performance scores are curated estimates in `src/data/partsData.json`
 npm install
 npm run dev        # dev server on :5173
 npm run test:run   # vitest suite
+npm run test:e2e   # Playwright end-to-end (needs npx playwright install chromium)
 npm run lint       # eslint
 npm run build      # production build
+npm run og:image   # regenerate the social preview card
 ```
 
 Deploys automatically to Netlify from `main`.
