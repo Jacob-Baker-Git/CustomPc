@@ -41,6 +41,16 @@ describe('useBuilderStore', () => {
     expect(useBuilderStore.getState().caseTransparent).toBe(false)
   })
 
+  it('tracks wizard generation info without persisting it', () => {
+    useBuilderStore.getState().setLastGenerated({ met: true, estFps: 150, targetFps: 120, gameName: 'Fortnite' })
+    expect(useBuilderStore.getState().lastGenerated.estFps).toBe(150)
+    useBuilderStore.getState().setBudget(1000) // trigger a persist write
+    const saved = JSON.parse(localStorage.getItem('custompc-builder-v1'))
+    expect(saved.state.lastGenerated).toBeUndefined()
+    useBuilderStore.getState().clearLastGenerated()
+    expect(useBuilderStore.getState().lastGenerated).toBeNull()
+  })
+
   it('persists resolution and peripherals but not transient UI state', () => {
     useBuilderStore.getState().setResolution('4k')
     useBuilderStore.getState().addPeripheral('monitor', { id: 'mon-x', price: 300 })

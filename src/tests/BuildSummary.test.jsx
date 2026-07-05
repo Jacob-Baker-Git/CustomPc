@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import BuildSummary from '../components/BuildSummary'
 import useBuilderStore from '../store/useBuilderStore'
 import useSavedStore from '../store/useSavedStore'
@@ -36,19 +36,20 @@ describe('BuildSummary', () => {
     expect(screen.getByRole('button', { name: /copy as markdown/i })).toBeInTheDocument()
   })
 
-  it('Clear build empties the store after confirm', () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(true)
+  it('Clear build empties the store after the dialog confirm', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)
     fireEvent.click(screen.getByRole('button', { name: /clear build/i }))
+    fireEvent.click(screen.getByRole('button', { name: /clear everything/i }))
     expect(useBuilderStore.getState().selectedParts).toEqual({})
   })
 
-  it('Save PC stores a named build', () => {
-    vi.spyOn(window, 'prompt').mockReturnValue('Test Rig')
+  it('Save PC stores a named build via the dialog', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)
     fireEvent.click(screen.getByRole('button', { name: /save pc/i }))
+    fireEvent.change(screen.getByLabelText(/build name/i), { target: { value: 'Test Rig' } })
+    fireEvent.click(screen.getByRole('button', { name: /^save$/i }))
     expect(useSavedStore.getState().saved.some((b) => b.name === 'Test Rig')).toBe(true)
   })
 })

@@ -1,5 +1,6 @@
 import { render, fireEvent } from '@testing-library/react'
 import OrbitRing from '../components/OrbitRing'
+import useBuilderStore from '../store/useBuilderStore'
 
 const parts = {
   gpu: { id: 'gpu-x', category: 'gpu', name: 'Test GPU', price: 500 },
@@ -27,5 +28,15 @@ describe('OrbitRing connector lines', () => {
     fireEvent.mouseEnter(container.querySelector('[data-pill="gpu"]'))
     expect(container.querySelector('line[data-cat="gpu"]').getAttribute('class')).toContain('opacity-100')
     expect(container.querySelector('line[data-cat="cpu"]').getAttribute('class')).toContain('opacity-0')
+  })
+
+  it('publishes the hovered category so the 3D part can highlight', () => {
+    const { container } = render(
+      <OrbitRing selectedParts={parts} onSelectCategory={noop} onDeselect={noop} />
+    )
+    fireEvent.mouseEnter(container.querySelector('[data-pill="gpu"]'))
+    expect(useBuilderStore.getState().hoveredCategory).toBe('gpu')
+    fireEvent.mouseLeave(container.querySelector('[data-pill="gpu"]'))
+    expect(useBuilderStore.getState().hoveredCategory).toBeNull()
   })
 })

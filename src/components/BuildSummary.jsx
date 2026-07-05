@@ -6,7 +6,7 @@ import { buildShareUrl } from '../lib/shareLink'
 import { buildMarkdown } from '../lib/buildMarkdown'
 import { encodeBuild } from '../lib/buildCodec'
 import useSavedStore from '../store/useSavedStore'
-import { PANEL } from '../lib/uiTokens'
+import { PANEL, PANEL_STRONG } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
 import DimensionsChecklist from './DimensionsChecklist'
 
@@ -63,16 +63,29 @@ export default function BuildSummary() {
     navigator.clipboard?.writeText(buildMarkdown(rows, grandTotal)).catch(() => {})
   }
 
-  function handleClear() {
-    if (window.confirm('Clear the whole build? This removes all selected parts and peripherals.')) clearBuild()
-  }
+  const [saveOpen, setSaveOpen] = useState(false)
+  const [clearOpen, setClearOpen] = useState(false)
+  const [nameDraft, setNameDraft] = useState('')
+  const fallbackName = `Build · £${grandTotal.toFixed(0)}`
 
   function handleSave() {
-    const fallback = `Build · £${grandTotal.toFixed(0)}`
-    const name = window.prompt('Name this build', fallback)
-    if (name === null) return
+    setNameDraft(fallbackName)
+    setSaveOpen(true)
+  }
+
+  function confirmSave() {
     const code = encodeBuild({ budget, resolution, parts: selectedParts, peripherals: selectedPeripherals })
-    saveBuild(name.trim() || fallback, code)
+    saveBuild(nameDraft.trim() || fallbackName, code)
+    setSaveOpen(false)
+  }
+
+  function handleClear() {
+    setClearOpen(true)
+  }
+
+  function confirmClear() {
+    clearBuild()
+    setClearOpen(false)
   }
 
   return (
@@ -126,6 +139,10 @@ export default function BuildSummary() {
             </>
           )}
 
+          <p className="mt-4 text-[10px] text-slate-600">
+            Prices are curated estimates (July 2026), not live retail data — use Find Best Price for current prices.
+          </p>
+
           <div className="flex flex-wrap gap-2 mt-5">
             <button
               onClick={handleSave}
@@ -165,6 +182,43 @@ export default function BuildSummary() {
           </div>
         </div>
       </div>
+
+      {saveOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+          <div role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
+            <h3 className="text-white text-sm font-semibold mb-3">Save this build</h3>
+            <label htmlFor="save-name" className="block text-xs text-slate-400 mb-1">Build name</label>
+            <input
+              id="save-name"
+              autoFocus
+              value={nameDraft}
+              onChange={(e) => setNameDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') confirmSave()
+                if (e.key === 'Escape') setSaveOpen(false)
+              }}
+              className="w-full bg-slate-900/80 text-white text-sm px-3 py-2 rounded-sm border border-slate-700/70 focus:outline-none focus:border-cyan-400"
+            />
+            <div className="flex justify-end gap-2 mt-4">
+              <button onClick={() => setSaveOpen(false)} className="text-xs px-3.5 py-2 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors">Cancel</button>
+              <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-sm bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">Save</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {clearOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+          <div role="dialog" aria-modal="true" aria-label="Clear build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
+            <h3 className="text-white text-sm font-semibold mb-2">Clear the whole build?</h3>
+            <p className="text-xs text-slate-400">This removes every selected part and peripheral. Saved builds are kept.</p>
+            <div className="flex justify-end gap-2 mt-4">
+              <button onClick={() => setClearOpen(false)} className="text-xs px-3.5 py-2 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors">Cancel</button>
+              <button onClick={confirmClear} className="text-xs px-3.5 py-2 rounded-sm border border-red-700/60 text-red-300 hover:border-red-500 transition-colors">Clear everything</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

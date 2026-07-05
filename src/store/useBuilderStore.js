@@ -27,6 +27,15 @@ const useBuilderStore = create(persist((set) => ({
   toggleCaseTransparency: () =>
     set((state) => ({ caseTransparent: !state.caseTransparent })),
 
+  // What the wizard just generated (for the one-off summary banner). Transient.
+  lastGenerated: null,
+  setLastGenerated: (info) => set({ lastGenerated: info }),
+  clearLastGenerated: () => set({ lastGenerated: null }),
+
+  // Category chip currently hovered — the matching 3D part highlights. Transient.
+  hoveredCategory: null,
+  setHoveredCategory: (category) => set({ hoveredCategory: category }),
+
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
 

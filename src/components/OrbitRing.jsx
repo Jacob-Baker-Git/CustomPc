@@ -4,6 +4,7 @@ import CategoryIcon from '../lib/categoryIcons'
 import { RECOMMENDED_ORDER, nextRecommended } from '../lib/recommendedOrder'
 import { partScreenPositions } from '../lib/partScreenPositions'
 import { orbitRadii } from '../lib/orbitGeometry'
+import useBuilderStore from '../store/useBuilderStore'
 
 const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
@@ -13,6 +14,7 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
   const containerRef = useRef(null)
   const [size, setSize] = useState({ w: 800, h: 600 })
   const [hoveredCat, setHoveredCat] = useState(null)
+  const setHoveredCategory = useBuilderStore((s) => s.setHoveredCategory)
   const lineRefs = useRef({})
   const geomRef = useRef({ cx: 400, cy: 300 })
 
@@ -91,8 +93,8 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
           <div
             key={cat.id}
             data-pill={cat.id}
-            onMouseEnter={() => setHoveredCat(cat.id)}
-            onMouseLeave={() => setHoveredCat(null)}
+            onMouseEnter={() => { setHoveredCat(cat.id); setHoveredCategory(cat.id) }}
+            onMouseLeave={() => { setHoveredCat(null); setHoveredCategory(null) }}
             style={{ left: x, top: y, pointerEvents: 'auto' }}
             className={`absolute -translate-x-1/2 -translate-y-1/2 transition-opacity ${far ? 'opacity-70 hover:opacity-100' : ''}`}
           >
@@ -122,7 +124,7 @@ export default function OrbitRing({ selectedParts, onSelectCategory, onDeselect 
                 onClick={() => onSelectCategory(cat.id)}
                 className={`flex items-center gap-1.5 rounded-sm border px-2.5 py-1.5 text-xs whitespace-nowrap transition-all
                   ${isNext
-                    ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200 ring-1 ring-cyan-400/50 animate-pulse'
+                    ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200 ring-1 ring-cyan-400/50 motion-safe:animate-pulse'
                     : 'border-slate-700/70 bg-slate-950/50 backdrop-blur-sm text-slate-300 hover:border-slate-500 hover:bg-slate-900/70'}`}
               >
                 <span className="flex items-center justify-center w-4 h-4 rounded-sm bg-slate-800 text-[10px] font-mono text-slate-300">{order}</span>

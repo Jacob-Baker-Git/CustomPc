@@ -23,6 +23,7 @@ export default function BudgetEntry({ onSubmit }) {
   const [shortfall, setShortfall] = useState(null)
   const setResolution = useBuilderStore((s) => s.setResolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
+  const setLastGenerated = useBuilderStore((s) => s.setLastGenerated)
 
   const budgetNum = parseFloat(value)
 
@@ -51,8 +52,12 @@ export default function BudgetEntry({ onSubmit }) {
   function generate() {
     const game = gamesData.find((g) => g.id === gameId)
     const result = targetBuild(budgetNum, resolution, fps, game, partsData)
-    if (result.met) enterBuilder(result.parts)
-    else setShortfall(result)
+    if (result.met) {
+      setLastGenerated({ met: true, estFps: result.estFps, targetFps: fps, gameName: game.name })
+      enterBuilder(result.parts)
+    } else {
+      setShortfall(result)
+    }
   }
 
   const game = gamesData.find((g) => g.id === gameId)
@@ -169,7 +174,10 @@ export default function BudgetEntry({ onSubmit }) {
                   The closest build manages about <span className="font-mono font-semibold">{shortfall.estFps} fps</span>.
                 </p>
                 <button
-                  onClick={() => enterBuilder(shortfall.parts)}
+                  onClick={() => {
+                    setLastGenerated({ met: false, estFps: shortfall.estFps, targetFps: fps, gameName: game.name })
+                    enterBuilder(shortfall.parts)
+                  }}
                   className="mt-3 text-xs px-4 py-2 rounded-sm border border-amber-400/60 text-amber-200 hover:border-amber-300 transition-colors"
                 >
                   Use closest build
