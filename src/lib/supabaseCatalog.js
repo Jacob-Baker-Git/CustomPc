@@ -22,9 +22,10 @@ async function fetchTable(table) {
 }
 
 export async function fetchCatalog() {
-  const [parts, peripherals] = await Promise.all([
+  const [parts, peripherals, games] = await Promise.all([
     fetchTable('parts'),
     fetchTable('peripherals'),
+    fetchTable('games'),
   ])
-  return { parts, peripherals }
+  return { parts, peripherals, games }
 }

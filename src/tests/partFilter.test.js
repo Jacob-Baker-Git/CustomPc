@@ -5,12 +5,14 @@ const cpus = partsData.filter((p) => p.category === 'cpu')
 const mbAM5 = partsData.find((p) => p.id === 'mb-asus-x670e')
 
 describe('filterParts', () => {
-  it('default view hides incompatible parts', () => {
-    // With an AM5 motherboard, Intel (LGA1700) CPUs are incompatible
+  it('default view keeps incompatible parts visible but marked locked', () => {
+    // With an AM5 motherboard, Intel (LGA1700) CPUs show as locked, not hidden.
     const res = filterParts(cpus, { motherboard: mbAM5 }, 5000, '')
-    const ids = res.map((r) => r.part.id)
-    expect(ids).not.toContain('cpu-i7-13700k')
-    expect(ids).toContain('cpu-ryzen-7-7700x')
+    const intel = res.find((r) => r.part.id === 'cpu-i7-13700k')
+    expect(intel).toBeDefined()
+    expect(intel.compatible).toBe(false)
+    expect(intel.reason).toMatch(/socket/i)
+    expect(res.find((r) => r.part.id === 'cpu-ryzen-7-7700x').compatible).toBe(true)
   })
 
   it('default view hides parts over 60% of budget', () => {

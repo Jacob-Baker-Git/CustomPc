@@ -2,8 +2,8 @@
 // flagships like the RTX 4090 / i9-14900K; current flagships exceed it). FPS is
 // GPU-bound at higher resolutions; a weak CPU sets a frame ceiling that bites
 // hardest at low resolution (mirrors the bottleneck model). An estimate, not a benchmark.
-const RES_GPU = { '1080p': 2.0, '1440p': 1.5, '4k': 0.95 } // fps per GPU perf point
-const RES_CPU = { '1080p': 2.4, '1440p': 2.2, '4k': 2.0 }  // CPU frame-ceiling factor
+export const RES_GPU = { '1080p': 2.0, '1440p': 1.5, '4k': 0.95 } // fps per GPU perf point
+export const RES_CPU = { '1080p': 2.4, '1440p': 2.2, '4k': 2.0 }  // CPU frame-ceiling factor
 
 export function estimateFps(cpu, gpu, resolution) {
   if (!cpu || !gpu) return 0

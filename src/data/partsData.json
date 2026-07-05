@@ -1235,5 +1235,99 @@
   {
     "id": "paste-corsair-xtm70", "category": "paste", "name": "Corsair XTM70 (3g)", "brand": "Corsair",
     "price": 9.99, "tdp": 0
+  },
+  {
+    "id": "cpu-ryzen-5-7500f", "category": "cpu", "name": "AMD Ryzen 5 7500F", "brand": "AMD",
+    "price": 139.99, "socket": "AM5", "tdp": 65, "perfScore": 63,
+    "modelPath": "/models/cpu.glb", "specs": { "cores": 6, "boostClock": 5 }
+  },
+  {
+    "id": "cpu-i5-14400f", "category": "cpu", "name": "Intel Core i5-14400F", "brand": "Intel",
+    "price": 189.99, "socket": "LGA1700", "tdp": 65, "perfScore": 66,
+    "modelPath": "/models/cpu.glb", "specs": { "cores": 10, "boostClock": 4.7 }
+  },
+  {
+    "id": "gpu-rtx-4080-super", "category": "gpu", "name": "NVIDIA GeForce RTX 4080 Super", "brand": "NVIDIA",
+    "price": 949.99, "tdp": 320, "length": 336, "perfScore": 87,
+    "modelPath": "/models/gpu.glb", "specs": { "vram": 16, "memType": "GDDR6X" }
+  },
+  {
+    "id": "gpu-rtx-3060-12gb", "category": "gpu", "name": "NVIDIA GeForce RTX 3060 12GB", "brand": "NVIDIA",
+    "price": 249.99, "tdp": 170, "length": 242, "perfScore": 34,
+    "modelPath": "/models/gpu.glb", "specs": { "vram": 12, "memType": "GDDR6" }
+  },
+  {
+    "id": "gpu-rx-6600", "category": "gpu", "name": "AMD Radeon RX 6600", "brand": "AMD",
+    "price": 189.99, "tdp": 132, "length": 190, "perfScore": 30,
+    "modelPath": "/models/gpu.glb", "specs": { "vram": 8, "memType": "GDDR6" }
+  },
+  {
+    "id": "mb-msi-b650-gaming-plus", "category": "motherboard", "name": "MSI B650 Gaming Plus WiFi", "brand": "MSI",
+    "price": 139.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 11,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B650" }
+  },
+  {
+    "id": "mb-gigabyte-b850-elite", "category": "motherboard", "name": "Gigabyte B850 Aorus Elite WiFi7", "brand": "Gigabyte",
+    "price": 189.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 13,
+    "modelPath": "/models/motherboard.glb", "specs": { "chipset": "B850" }
+  },
+  {
+    "id": "ram-gskill-ripjaws-s5-16", "category": "ram", "name": "G.Skill Ripjaws S5 DDR5-5600 16GB", "brand": "G.Skill",
+    "price": 49.99, "ramType": "DDR5", "speed": 5600, "capacityGb": 16, "tdp": 4,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "ram-corsair-ddr4-3600-32", "category": "ram", "name": "Corsair Vengeance LPX DDR4-3600 32GB", "brand": "Corsair",
+    "price": 64.99, "ramType": "DDR4", "speed": 3600, "capacityGb": 32, "tdp": 4,
+    "modelPath": "/models/ram.glb", "specs": { "sticks": 2 }
+  },
+  {
+    "id": "storage-samsung-990evo-plus-1tb", "category": "storage", "name": "Samsung 990 EVO Plus 1TB NVMe", "brand": "Samsung",
+    "price": 69.99, "storageType": "NVMe SSD", "capacityGb": 1000, "tdp": 5,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7250 }
+  },
+  {
+    "id": "storage-crucial-p310-2tb", "category": "storage", "name": "Crucial P310 2TB NVMe", "brand": "Crucial",
+    "price": 89.99, "storageType": "NVMe SSD", "capacityGb": 2000, "tdp": 6,
+    "modelPath": "/models/ssd.glb", "specs": { "readMbps": 7100 }
+  },
+  {
+    "id": "psu-corsair-rm650e", "category": "psu", "name": "Corsair RM650e 650W", "brand": "Corsair",
+    "price": 79.99, "wattage": 650, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Gold" }
+  },
+  {
+    "id": "psu-bequiet-sp12-1000", "category": "psu", "name": "be quiet! Straight Power 12 1000W", "brand": "be quiet!",
+    "price": 169.99, "wattage": 1000, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": { "rating": "80+ Platinum" }
+  },
+  {
+    "id": "case-nzxt-h6-flow", "category": "case", "name": "NZXT H6 Flow", "brand": "NZXT",
+    "price": 99.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 365, "maxCoolerHeight": 163, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "case-fractal-define-7", "category": "case", "name": "Fractal Design Define 7", "brand": "Fractal Design",
+    "price": 149.99, "supportedFormFactors": ["ATX", "mATX", "ITX"], "maxGpuLength": 467, "maxCoolerHeight": 185, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": { "type": "Mid Tower" }
+  },
+  {
+    "id": "cooler-arctic-freezer-36", "category": "cooler", "name": "Arctic Freezer 36", "brand": "Arctic",
+    "price": 24.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1851"], "tdp": 4,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "Air", "height": 159 }
+  },
+  {
+    "id": "cooler-corsair-nautilus-360", "category": "cooler", "name": "Corsair Nautilus 360 RS AIO", "brand": "Corsair",
+    "price": 109.99, "sockets": ["AM5", "AM4", "LGA1700", "LGA1851"], "tdp": 9,
+    "modelPath": "/models/cooler.glb", "specs": { "type": "AIO", "radiator": "360mm" }
+  },
+  {
+    "id": "fans-noctua-nf-p12-redux", "category": "fans", "name": "Noctua NF-P12 redux 120mm", "brand": "Noctua",
+    "price": 13.99, "tdp": 2,
+    "modelPath": "/models/fans.glb", "specs": { "size": "120mm", "count": 1, "rgb": false }
+  },
+  {
+    "id": "paste-tg-hydronaut", "category": "paste", "name": "Thermal Grizzly Hydronaut (3.9g)", "brand": "Thermal Grizzly",
+    "price": 8.49, "tdp": 0
   }
 ]

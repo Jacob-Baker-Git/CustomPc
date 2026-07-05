@@ -86,6 +86,74 @@ describe('checkCompatibility', () => {
     expect(checkCompatibility({ motherboard: mbAM5, cpu: cpuAM5 }, fan).compatible).toBe(true)
     expect(checkCompatibility({}, fan).compatible).toBe(true)
   })
+
+  it('case incompatible when the selected GPU does not fit it', () => {
+    const r = checkCompatibility({ gpu: gpuLong }, caseSmall)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/clearance/i)
+    expect(checkCompatibility({ gpu: gpuLong }, caseLarge).compatible).toBe(true)
+  })
+
+  it('air cooler incompatible when taller than the case limit', () => {
+    // Noctua NH-D15 is 165mm; the Lian Li A4-H2O tops out at 67mm.
+    const tinyCase = partsData.find((p) => p.id === 'case-lian-li-a4-h2o')
+    const r = checkCompatibility({ case: tinyCase }, cooler)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/mm/)
+  })
+
+  it('AIO coolers have no height limit', () => {
+    const tinyCase = partsData.find((p) => p.id === 'case-lian-li-a4-h2o')
+    const aio = partsData.find((p) => p.id === 'cooler-arctic-lf2-240')
+    expect(checkCompatibility({ case: tinyCase }, aio).compatible).toBe(true)
+  })
+
+  it('case incompatible when the selected air cooler is too tall for it', () => {
+    const tinyCase = partsData.find((p) => p.id === 'case-lian-li-a4-h2o')
+    const r = checkCompatibility({ cooler }, tinyCase)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/cooler/i)
+  })
+
+  it('DDR4 RAM incompatible with a DDR5-only CPU even before a board is picked', () => {
+    const r = checkCompatibility({ cpu: cpuAM5 }, ramDDR4)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/DDR5-only/i)
+    // Intel LGA1700 boards come in both flavours, so no lock without a board.
+    expect(checkCompatibility({ cpu: cpuIntel }, ramDDR4).compatible).toBe(true)
+  })
+
+  it('DDR5-only CPU incompatible with selected DDR4 RAM before a board is picked', () => {
+    const r = checkCompatibility({ ram: ramDDR4 }, cpuAM5)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/DDR4/i)
+    expect(checkCompatibility({ ram: ramDDR5 }, cpuAM5).compatible).toBe(true)
+  })
+
+  it('PSU incompatible when smaller than the current build draw', () => {
+    const psuSmall = partsData.find((p) => p.id === 'psu-thermaltake-smart-500')
+    const hungry = { cpu: { ...cpuAM5, tdp: 170 }, gpu: { ...gpuLong, tdp: 450 } }
+    const r = checkCompatibility(hungry, psuSmall)
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/draw/i)
+  })
+
+  it('part incompatible when it would push the draw past the selected PSU', () => {
+    const psuSmall = partsData.find((p) => p.id === 'psu-thermaltake-smart-500') // 500W
+    const build = { psu: psuSmall, cpu: { ...cpuAM5, tdp: 170 } }
+    const r = checkCompatibility(build, gpuLong) // 450W GPU → 620W total
+    expect(r.compatible).toBe(false)
+    expect(r.reason).toMatch(/PSU/i)
+  })
+
+  it('swapping a part credits its own draw before the PSU check', () => {
+    const psuSmall = partsData.find((p) => p.id === 'psu-thermaltake-smart-500') // 500W
+    const gpuMid = partsData.find((p) => p.id === 'gpu-rtx-4060') // 115W
+    const gpuNext = partsData.find((p) => p.id === 'gpu-rtx-4070') // 200W
+    const build = { psu: psuSmall, cpu: { ...cpuAM5, tdp: 105 }, gpu: gpuMid }
+    // 105 + 200 = 305W < 500W — fine once the old GPU's 115W is credited back.
+    expect(checkCompatibility(build, gpuNext).compatible).toBe(true)
+  })
 })
 
 describe('getLockedReasons', () => {

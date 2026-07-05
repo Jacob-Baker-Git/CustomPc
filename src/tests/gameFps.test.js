@@ -25,4 +25,35 @@ describe('gameFps', () => {
   it('exposes the standard FPS targets', () => {
     expect(FPS_TARGETS).toEqual([60, 120, 144])
   })
+
+  it('lower quality presets raise FPS, in order', () => {
+    const game = { fpsFactor: 1, cpuFactor: 5 } // GPU-bound so quality matters
+    const high = gameFps(cpu, gpu, '4k', game, 'high')
+    const medium = gameFps(cpu, gpu, '4k', game, 'medium')
+    const low = gameFps(cpu, gpu, '4k', game, 'low')
+    expect(medium).toBeGreaterThan(high)
+    expect(low).toBeGreaterThan(medium)
+  })
+
+  it('quality presets cannot push past the CPU frame ceiling', () => {
+    // CPU-bound game: the ceiling binds, so Low ≈ High.
+    const game = { fpsFactor: 3, cpuFactor: 0.5 }
+    expect(gameFps(cpu, gpu, '1080p', game, 'low')).toBe(gameFps(cpu, gpu, '1080p', game, 'high'))
+  })
+
+  it('a separate cpuFactor models CPU-bound games', () => {
+    // Same GPU scaling, weaker CPU ceiling → fewer FPS.
+    const balanced = gameFps(cpu, gpu, '1080p', { fpsFactor: 1.1, cpuFactor: 1.1 })
+    const cpuBound = gameFps(cpu, gpu, '1080p', { fpsFactor: 1.1, cpuFactor: 0.6 })
+    expect(cpuBound).toBeLessThan(balanced)
+  })
+
+  it('respects engine frame caps', () => {
+    expect(gameFps(cpu, gpu, '1080p', { fpsFactor: 3, cpuFactor: 3, fpsCap: 60 })).toBe(60)
+  })
+
+  it('exposes the quality levels for the UI', async () => {
+    const { QUALITY_LEVELS } = await import('../lib/gameFps')
+    expect(QUALITY_LEVELS).toEqual(['low', 'medium', 'high'])
+  })
 })

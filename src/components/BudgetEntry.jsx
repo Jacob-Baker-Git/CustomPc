@@ -4,7 +4,6 @@ import useBuilderStore from '../store/useBuilderStore'
 import { TIERS, partsForTier } from '../lib/tiers'
 import { targetBuild } from '../lib/targetBuilder'
 import useCatalogStore from '../store/useCatalogStore'
-import gamesData from '../data/gamesData.json'
 
 const RES_OPTIONS = [
   { id: '1080p', label: '1080p', blurb: 'Esports & high refresh' },
@@ -19,14 +18,21 @@ export default function BudgetEntry({ onSubmit }) {
   const [value, setValue] = useState('')
   const [resolution, setLocalResolution] = useState(null)
   const [fps, setFps] = useState(120)
+  const [customFps, setCustomFps] = useState('')
   const [gameId, setGameId] = useState('fortnite')
   const [shortfall, setShortfall] = useState(null)
   const setResolution = useBuilderStore((s) => s.setResolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
+  const clearBuild = useBuilderStore((s) => s.clearBuild)
   const setLastGenerated = useBuilderStore((s) => s.setLastGenerated)
   const partsData = useCatalogStore((s) => s.parts)
+  const gamesData = useCatalogStore((s) => s.games)
 
   const budgetNum = parseFloat(value)
+  // A filled-in custom box (e.g. 360 for a 360Hz monitor) beats the presets.
+  const customNum = parseInt(customFps, 10)
+  const customValid = Number.isFinite(customNum) && customNum >= 30 && customNum <= 600
+  const targetFps = customValid ? customNum : fps
 
   function handleBudgetSubmit(e) {
     e.preventDefault()
@@ -45,11 +51,19 @@ export default function BudgetEntry({ onSubmit }) {
     onSubmit(budgetNum)
   }
 
+  // Really start with nothing — also drops any build persisted from a
+  // previous visit, which used to leak into "empty" sessions.
+  function startEmpty() {
+    clearBuild()
+    setResolution(resolution)
+    onSubmit(budgetNum)
+  }
+
   function generate() {
     const game = gamesData.find((g) => g.id === gameId)
-    const result = targetBuild(budgetNum, resolution, fps, game, partsData)
+    const result = targetBuild(budgetNum, resolution, targetFps, game, partsData)
     if (result.met) {
-      setLastGenerated({ met: true, estFps: result.estFps, targetFps: fps, gameName: game.name })
+      setLastGenerated({ met: true, estFps: result.estFps, targetFps, gameName: game.name })
       enterBuilder(result.parts)
     } else {
       setShortfall(result)
@@ -151,20 +165,42 @@ export default function BudgetEntry({ onSubmit }) {
         {step === 3 && (
           <>
             <p className="text-gray-400 mb-8 text-lg">Pick an FPS target and the game that matters most.</p>
-            <div className="flex gap-2 mb-6">
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
               {TARGETS.map((t) => (
                 <button
                   key={t}
-                  onClick={() => { setFps(t); setShortfall(null) }}
+                  onClick={() => { setFps(t); setCustomFps(''); setShortfall(null) }}
+                  aria-pressed={!customValid && fps === t}
                   className={`px-5 py-2.5 rounded-sm border font-mono text-sm transition-colors
-                    ${fps === t
+                    ${!customValid && fps === t
                       ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200'
                       : 'border-slate-700/70 text-slate-300 hover:border-slate-500'}`}
                 >
                   {t} fps
                 </button>
               ))}
+              <label
+                className={`flex items-center gap-1.5 px-3 py-2.5 rounded-sm border font-mono text-sm transition-colors
+                  ${customValid
+                    ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700/70 text-slate-300 focus-within:border-slate-500'}`}
+              >
+                <input
+                  type="number"
+                  min="30"
+                  max="600"
+                  placeholder="custom"
+                  aria-label="Custom FPS target"
+                  value={customFps}
+                  onChange={(e) => { setCustomFps(e.target.value); setShortfall(null) }}
+                  className="w-20 bg-transparent focus:outline-none placeholder:text-slate-600 text-center"
+                />
+                <span className={customValid ? 'text-cyan-200' : 'text-slate-500'}>fps</span>
+              </label>
             </div>
+            {customFps !== '' && !customValid && (
+              <p className="mb-4 -mt-2 text-xs text-amber-300/90">Custom target must be between 30 and 600 fps.</p>
+            )}
             <div className="flex items-center gap-3 mb-8">
               <label htmlFor="wizard-game" className="text-sm text-slate-400">Game</label>
               <select
@@ -180,12 +216,12 @@ export default function BudgetEntry({ onSubmit }) {
             {shortfall && (
               <div className="mb-6 max-w-md text-center border border-amber-500/40 bg-amber-500/10 rounded-sm px-4 py-3">
                 <p className="text-sm text-amber-200">
-                  £{budgetNum.toFixed(0)} can't hit {fps} fps in {game.name} at {resolution === '4k' ? '4K' : resolution}.
+                  £{budgetNum.toFixed(0)} can't hit {targetFps} fps in {game.name} at {resolution === '4k' ? '4K' : resolution}.
                   The closest build manages about <span className="font-mono font-semibold">{shortfall.estFps} fps</span>.
                 </p>
                 <button
                   onClick={() => {
-                    setLastGenerated({ met: false, estFps: shortfall.estFps, targetFps: fps, gameName: game.name })
+                    setLastGenerated({ met: false, estFps: shortfall.estFps, targetFps, gameName: game.name })
                     enterBuilder(shortfall.parts)
                   }}
                   className="mt-3 text-xs px-4 py-2 rounded-sm border border-amber-400/60 text-amber-200 hover:border-amber-300 transition-colors"
@@ -203,7 +239,7 @@ export default function BudgetEntry({ onSubmit }) {
                 Generate build
               </button>
               <button
-                onClick={() => enterBuilder(null)}
+                onClick={startEmpty}
                 className="px-8 py-3 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors"
               >
                 Start empty instead

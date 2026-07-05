@@ -99,6 +99,57 @@ describe('BudgetEntry wizard', () => {
     expect(useBuilderStore.getState().selectedParts).toEqual({})
   })
 
+  it('Start empty wipes a build persisted from a previous visit', () => {
+    // Simulate localStorage restoring last session's build + peripherals.
+    useBuilderStore.setState({
+      selectedParts: { cpu: { id: 'cpu-old', category: 'cpu', name: 'Old CPU', price: 100, tdp: 65 } },
+      selectedPeripherals: { mouse: { id: 'mouse-old', category: 'mouse', name: 'Old Mouse', price: 20 } },
+    })
+    render(<BudgetEntry onSubmit={() => {}} />)
+
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '900' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+    fireEvent.click(screen.getByRole('button', { name: /1080p/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
+    fireEvent.click(screen.getByRole('button', { name: /start empty/i }))
+
+    expect(useBuilderStore.getState().selectedParts).toEqual({})
+    expect(useBuilderStore.getState().selectedPeripherals).toEqual({})
+  })
+
+  it('accepts a custom FPS target (e.g. a 360Hz monitor)', () => {
+    const onSubmit = vi.fn()
+    render(<BudgetEntry onSubmit={onSubmit} />)
+
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '3000' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+    fireEvent.click(screen.getByRole('button', { name: /1080p/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
+
+    fireEvent.change(screen.getByLabelText(/custom fps target/i), { target: { value: '360' } })
+    // Presets unhighlight once the custom box takes over.
+    expect(screen.getByRole('button', { name: /^120/ })).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.change(screen.getByLabelText(/game/i), { target: { value: 'valorant' } })
+    fireEvent.click(screen.getByRole('button', { name: /generate/i }))
+
+    expect(onSubmit).toHaveBeenCalledWith(3000)
+    expect(useBuilderStore.getState().lastGenerated?.targetFps).toBe(360)
+  })
+
+  it('rejects an out-of-range custom FPS and falls back to the preset', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '1500' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+    fireEvent.click(screen.getByRole('button', { name: /1440p/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
+
+    fireEvent.change(screen.getByLabelText(/custom fps target/i), { target: { value: '9999' } })
+    expect(screen.getByText(/between 30 and 600/i)).toBeInTheDocument()
+    // The 120 preset stays active for generation.
+    expect(screen.getByRole('button', { name: /^120/ })).toHaveAttribute('aria-pressed', 'true')
+  })
+
   it('warns when the target is unreachable and offers the closest build', () => {
     const onSubmit = vi.fn()
     render(<BudgetEntry onSubmit={onSubmit} />)

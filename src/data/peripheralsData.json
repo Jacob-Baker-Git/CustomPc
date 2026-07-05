@@ -25,5 +25,15 @@
   { "id": "hs-logi-g733", "category": "headset", "name": "Logitech G733 Lightspeed", "price": 129.99, "type": "Wireless" },
   { "id": "hs-razer-blackshark", "category": "headset", "name": "Razer BlackShark V2", "price": 99.99, "type": "Wired" },
   { "id": "hs-corsair-virtuoso", "category": "headset", "name": "Corsair Virtuoso RGB", "price": 179.99, "type": "Wireless" },
-  { "id": "hs-audeze-maxwell", "category": "headset", "name": "Audeze Maxwell", "price": 299.99, "type": "Wireless" }
+  { "id": "hs-audeze-maxwell", "category": "headset", "name": "Audeze Maxwell", "price": 299.99, "type": "Wireless" },
+
+  { "id": "mon-asus-pg259qn", "category": "monitor", "name": "ASUS ROG Swift PG259QN 24.5\" FHD 360Hz", "price": 399.99, "resolution": "1080p", "refresh": 360 },
+  { "id": "mon-zowie-xl2566k", "category": "monitor", "name": "BenQ Zowie XL2566K 24.5\" FHD 360Hz", "price": 479.99, "resolution": "1080p", "refresh": 360 },
+  { "id": "mon-asus-pg32ucdm", "category": "monitor", "name": "ASUS PG32UCDM 32\" 4K OLED 240Hz", "price": 1099.99, "resolution": "4k", "refresh": 240 },
+  { "id": "kb-wooting-60he", "category": "keyboard", "name": "Wooting 60HE", "price": 174.99, "switch": "Hall effect" },
+  { "id": "kb-logi-gpro-x-tkl", "category": "keyboard", "name": "Logitech G Pro X TKL", "price": 179.99, "switch": "Tactile" },
+  { "id": "mouse-razer-da-v3-pro", "category": "mouse", "name": "Razer DeathAdder V3 Pro", "price": 129.99, "dpi": 30000 },
+  { "id": "mouse-logi-g305", "category": "mouse", "name": "Logitech G305 Lightspeed", "price": 44.99, "dpi": 12000 },
+  { "id": "hs-hyperx-cloud3", "category": "headset", "name": "HyperX Cloud III", "price": 99.99, "type": "Wired" },
+  { "id": "hs-arctis-nova-pro", "category": "headset", "name": "SteelSeries Arctis Nova Pro Wireless", "price": 299.99, "type": "Wireless" }
 ]
