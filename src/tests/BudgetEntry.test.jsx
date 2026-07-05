@@ -46,6 +46,25 @@ describe('BudgetEntry wizard', () => {
     expect(screen.getByRole('spinbutton')).toBeInTheDocument()
   })
 
+  it('highlights the picked resolution and only advances on continue', () => {
+    render(<BudgetEntry onSubmit={() => {}} />)
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '1500' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+
+    // Continue is disabled until a resolution is chosen.
+    const cont = screen.getByRole('button', { name: /next: fps target/i })
+    expect(cont).toBeDisabled()
+
+    fireEvent.click(screen.getByRole('button', { name: /1440p/i }))
+    // Still on the resolution step — clicking a card selects, it doesn't advance.
+    expect(screen.getByText(/what resolution/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /1440p/i })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: /1080p/i })).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.click(cont)
+    expect(screen.getByText(/pick an fps target/i)).toBeInTheDocument()
+  })
+
   it('walks budget → resolution → FPS target and generates a build', () => {
     const onSubmit = vi.fn()
     render(<BudgetEntry onSubmit={onSubmit} />)
@@ -54,6 +73,7 @@ describe('BudgetEntry wizard', () => {
     fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
 
     fireEvent.click(screen.getByRole('button', { name: /1440p/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
 
     fireEvent.click(screen.getByRole('button', { name: /^120/ }))
     fireEvent.change(screen.getByLabelText(/game/i), { target: { value: 'fortnite' } })
@@ -72,6 +92,7 @@ describe('BudgetEntry wizard', () => {
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '900' } })
     fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
     fireEvent.click(screen.getByRole('button', { name: /1080p/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
     fireEvent.click(screen.getByRole('button', { name: /start empty/i }))
 
     expect(onSubmit).toHaveBeenCalledWith(900)
@@ -85,6 +106,7 @@ describe('BudgetEntry wizard', () => {
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '800' } })
     fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
     fireEvent.click(screen.getByRole('button', { name: /4k/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
     fireEvent.click(screen.getByRole('button', { name: /^240/ }))
     fireEvent.change(screen.getByLabelText(/game/i), { target: { value: 'alan-wake-2' } })
     fireEvent.click(screen.getByRole('button', { name: /generate/i }))

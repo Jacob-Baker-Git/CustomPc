@@ -32,11 +32,6 @@ export default function BudgetEntry({ onSubmit }) {
     if (budgetNum > 0) setStep(2)
   }
 
-  function chooseResolution(res) {
-    setLocalResolution(res)
-    setStep(3)
-  }
-
   function applyTier(tier) {
     setResolution(tier.resolution)
     setBuild(partsForTier(tier, partsData))
@@ -121,18 +116,32 @@ export default function BudgetEntry({ onSubmit }) {
           <>
             <p className="text-gray-400 mb-10 text-lg">What resolution will you play at?</p>
             <div className="flex flex-col sm:flex-row gap-3">
-              {RES_OPTIONS.map((r) => (
-                <button
-                  key={r.id}
-                  onClick={() => chooseResolution(r.id)}
-                  className="w-44 px-4 py-5 rounded-sm border border-slate-700/70 hover:border-cyan-400 text-left transition-colors group"
-                >
-                  <div className="text-2xl font-bold font-mono group-hover:text-cyan-300">{r.label}</div>
-                  <div className="text-xs text-slate-400 mt-1">{r.blurb}</div>
-                </button>
-              ))}
+              {RES_OPTIONS.map((r) => {
+                const selected = resolution === r.id
+                return (
+                  <button
+                    key={r.id}
+                    onClick={() => setLocalResolution(r.id)}
+                    aria-pressed={selected}
+                    className={`w-44 px-4 py-5 rounded-sm border text-left transition-colors group
+                      ${selected
+                        ? 'border-cyan-400 bg-cyan-500/15'
+                        : 'border-slate-700/70 hover:border-cyan-400'}`}
+                  >
+                    <div className={`text-2xl font-bold font-mono ${selected ? 'text-cyan-200' : 'group-hover:text-cyan-300'}`}>{r.label}</div>
+                    <div className={`text-xs mt-1 ${selected ? 'text-cyan-300/80' : 'text-slate-400'}`}>{r.blurb}</div>
+                  </button>
+                )
+              })}
             </div>
-            <button onClick={() => setStep(1)} className="mt-8 text-xs text-slate-500 hover:text-slate-300 transition-colors">
+            <button
+              onClick={() => setStep(3)}
+              disabled={!resolution}
+              className="mt-8 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Next: FPS target
+            </button>
+            <button onClick={() => setStep(1)} className="mt-6 text-xs text-slate-500 hover:text-slate-300 transition-colors">
               ← Back to budget
             </button>
           </>

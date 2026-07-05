@@ -30,11 +30,28 @@ describe('SavedBuilds', () => {
     expect(useBuilderStore.getState().selectedParts.cpu?.id).toBe('cpu-ryzen-7-7700x')
     expect(useBuilderStore.getState().budget).toBe(1200)
   })
-  it('deletes a save', () => {
+  it('asks for confirmation before deleting, then deletes on confirm', () => {
     useSavedStore.getState().saveBuild('Trash', 'ABC')
     render(<SavedBuilds />)
     fireEvent.click(screen.getByRole('button', { name: /delete trash/i }))
+
+    // Nothing is deleted yet — a confirmation dialog appears first.
+    expect(useSavedStore.getState().saved).toHaveLength(1)
+    const dialog = screen.getByRole('dialog', { name: /delete saved build/i })
+    expect(dialog).toHaveTextContent('Trash')
+
+    fireEvent.click(screen.getByRole('button', { name: /^delete$/i }))
     expect(useSavedStore.getState().saved).toHaveLength(0)
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('keeps the build when deletion is cancelled', () => {
+    useSavedStore.getState().saveBuild('Keeper', 'ABC')
+    render(<SavedBuilds />)
+    fireEvent.click(screen.getByRole('button', { name: /delete keeper/i }))
+    fireEvent.click(screen.getByRole('button', { name: /cancel/i }))
+    expect(useSavedStore.getState().saved).toHaveLength(1)
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
   it('compares two ticked builds side by side', () => {

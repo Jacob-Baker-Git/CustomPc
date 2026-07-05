@@ -2,13 +2,11 @@ import { useState, lazy, Suspense } from 'react'
 import TopBar from '../components/TopBar'
 const BuildCanvas = lazy(() => import('../components/BuildCanvas'))
 import Backdrop from '../components/Backdrop'
-import OrbitRing from '../components/OrbitRing'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
 import InfoDisclaimer from '../components/InfoDisclaimer'
 import UpgradeSuggestion from '../components/UpgradeSuggestion'
 import BottleneckIndicator from '../components/BottleneckIndicator'
-import PerformancePanel from '../components/PerformancePanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
@@ -18,7 +16,6 @@ import SavedBuilds from '../components/SavedBuilds'
 import CategoryList from '../components/CategoryList'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
-import { useIsMobile } from '../hooks/useIsMobile'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
 
@@ -28,7 +25,6 @@ export default function BuilderScreen() {
   const removePart    = useBuilderStore((s) => s.removePart)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useHashView('build')
-  const isMobile = useIsMobile()
 
   function handlePartSelect(part) {
     addPart(part.category, part)
@@ -55,56 +51,32 @@ export default function BuilderScreen() {
           ))}
         </div>
         {view === 'build' ? (
-          isMobile ? (
-            <div className="flex flex-col h-full overflow-y-auto">
-              <div className="relative h-[45vh] shrink-0">
-                <CanvasErrorBoundary>
-                  <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
-                    <BuildCanvas selectedParts={selectedParts} />
-                  </Suspense>
-                </CanvasErrorBoundary>
-                <div className="absolute bottom-3 right-3"><CaseToggle /></div>
-              </div>
-              {/* relative z + own compositing layer: static content after a WebGL
-                  canvas can otherwise be composited underneath it. */}
-              <div className="relative z-10 transform-gpu p-4 space-y-3 pb-12">
-                <GeneratedBanner />
-                <CategoryList
-                  selectedParts={selectedParts}
-                  onSelectCategory={setActiveCategory}
-                  onDeselect={removePart}
-                />
-                <BottleneckIndicator />
-                <PerformancePanel />
-                <GamePerformancePanel />
-                <BuildWarnings />
-                <UpgradeSuggestion />
-                <AutoBuildButton />
-              </div>
-            </div>
-          ) : (
-            <div className="relative w-full h-full">
-              <div className="absolute top-32 left-1/2 -translate-x-1/2 z-40 w-[min(92%,660px)]"><GeneratedBanner /></div>
+          <div className="flex flex-col h-full overflow-y-auto">
+            <div className="relative h-[45vh] md:h-[52vh] shrink-0">
               <CanvasErrorBoundary>
                 <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                   <BuildCanvas selectedParts={selectedParts} />
                 </Suspense>
               </CanvasErrorBoundary>
-              <div className="absolute top-4 left-4 w-72"><BottleneckIndicator /></div>
-              <div className="absolute top-44 left-4 w-72"><PerformancePanel /></div>
-              <div className="absolute top-4 right-4 w-72"><GamePerformancePanel /></div>
-              <OrbitRing
+              <InfoDisclaimer />
+              <div className="absolute bottom-3 right-3"><CaseToggle /></div>
+            </div>
+            {/* relative z + own compositing layer: static content after a WebGL
+                canvas can otherwise be composited underneath it. */}
+            <div className="relative z-10 transform-gpu w-full max-w-2xl mx-auto p-4 space-y-3 pb-12">
+              <GeneratedBanner />
+              <CategoryList
                 selectedParts={selectedParts}
                 onSelectCategory={setActiveCategory}
                 onDeselect={removePart}
               />
-              <div className="absolute bottom-6 right-6"><CaseToggle /></div>
-              <InfoDisclaimer />
-              <div className="absolute bottom-6 left-6 w-80"><UpgradeSuggestion /></div>
-              <div className="absolute top-80 left-4 w-72"><BuildWarnings /></div>
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"><AutoBuildButton /></div>
+              <BottleneckIndicator />
+              <GamePerformancePanel />
+              <BuildWarnings />
+              <UpgradeSuggestion />
+              <AutoBuildButton />
             </div>
-          )
+          </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
         ) : view === 'summary' ? (

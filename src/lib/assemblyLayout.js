@@ -17,7 +17,7 @@ const MOUNTED = {
   psu:         { position: [-0.75, -1.66, 0.35], rotation: [0, 0, 0] },
   // Shallow tower shell: rear wall hugs the board, glass sits close in front.
   case:        { position: [0, -0.1, 0.35],   rotation: [0, 0, 0] },
-  // Representative mount for the orbit tracking line (FanSystem draws the fans).
+  // Representative mount point (FanSystem draws the actual fans).
   fans:        { position: [0, 1.55, 0.05],   rotation: [0, 0, 0] },
 }
 

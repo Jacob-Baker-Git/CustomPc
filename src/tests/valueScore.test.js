@@ -1,4 +1,4 @@
-import { valuePerPound, buildValuePerPound } from '../lib/valueScore'
+import { valuePerPound } from '../lib/valueScore'
 
 describe('valuePerPound', () => {
   it('returns 0 for missing part, price, or perfScore', () => {
@@ -17,28 +17,5 @@ describe('valuePerPound', () => {
     const faster = valuePerPound({ perfScore: 90, price: 200 })
     expect(faster).toBeGreaterThan(cheap)
     expect(cheap).toBeGreaterThan(dearer)
-  })
-})
-
-describe('buildValuePerPound', () => {
-  const cpu = { perfScore: 100 }
-  const gpu = { perfScore: 100 }
-
-  it('returns 0 when a part or total is missing', () => {
-    expect(buildValuePerPound(null, gpu, 1000)).toBe(0)
-    expect(buildValuePerPound(cpu, gpu, 0)).toBe(0)
-  })
-
-  it('defaults to 1440p FPS per £100 of build cost', () => {
-    expect(buildValuePerPound(cpu, gpu, 1500)).toBeCloseTo(10)
-  })
-
-  it('uses the supplied resolution (value tracks the selected res)', () => {
-    // estimateFps(100,100,'1080p') === 200; 200 / (1500/100) = 13.33...
-    expect(buildValuePerPound(cpu, gpu, 1500, '1080p')).toBeCloseTo(200 / 15)
-    // estimateFps(100,100,'4k') === 95; 95 / 15
-    expect(buildValuePerPound(cpu, gpu, 1500, '4k')).toBeCloseTo(95 / 15)
-    expect(buildValuePerPound(cpu, gpu, 1500, '1080p'))
-      .toBeGreaterThan(buildValuePerPound(cpu, gpu, 1500, '4k'))
   })
 })

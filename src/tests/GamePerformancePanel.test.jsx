@@ -23,4 +23,20 @@ describe('GamePerformancePanel', () => {
     expect(screen.getByText(/how it runs @/i)).toBeInTheDocument()
     expect(screen.getByText('Counter-Strike 2')).toBeInTheDocument()
   })
+
+  it('says which CPU + GPU the numbers are based on', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<GamePerformancePanel />)
+    expect(screen.getByText(cpu.name)).toBeInTheDocument()
+    expect(screen.getByText(gpu.name)).toBeInTheDocument()
+  })
+
+  it('explains the traffic-light dots and that numbers are estimates', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<GamePerformancePanel />)
+    expect(screen.getByText(/60\+ smooth/i)).toBeInTheDocument()
+    expect(screen.getByText(/playable/i)).toBeInTheDocument()
+    expect(screen.getByText(/struggles/i)).toBeInTheDocument()
+    expect(screen.getByText(/not a benchmark/i)).toBeInTheDocument()
+  })
 })

@@ -5,7 +5,7 @@ import { decodeBuild } from '../lib/buildCodec'
 import { shareUrlFromCode } from '../lib/shareLink'
 import { estimateFps } from '../lib/fpsEstimate'
 import { CATEGORIES } from '../lib/categories'
-import { PANEL, TELEMETRY } from '../lib/uiTokens'
+import { PANEL, PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const totalOf = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.price ?? 0), 0)
@@ -68,6 +68,13 @@ export default function SavedBuilds({ onLoaded }) {
   const saved = useSavedStore((s) => s.saved)
   const removeSaved = useSavedStore((s) => s.removeSaved)
   const [compareIds, setCompareIds] = useState([])
+  const [pendingDelete, setPendingDelete] = useState(null)
+
+  function confirmDelete() {
+    removeSaved(pendingDelete.id)
+    setCompareIds((ids) => ids.filter((x) => x !== pendingDelete.id))
+    setPendingDelete(null)
+  }
 
   function toggleCompare(id) {
     setCompareIds((ids) =>
@@ -125,7 +132,7 @@ export default function SavedBuilds({ onLoaded }) {
                     </div>
                     <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-sm bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">Load</button>
                     <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-slate-500 transition-colors">Copy link</button>
-                    <button onClick={() => removeSaved(b.id)} aria-label={`Delete ${b.name}`} className="w-7 h-7 flex items-center justify-center rounded-sm text-slate-400 hover:text-white hover:bg-red-500/80 text-sm">&times;</button>
+                    <button onClick={() => setPendingDelete({ id: b.id, name: b.name })} aria-label={`Delete ${b.name}`} className="w-7 h-7 flex items-center justify-center rounded-sm text-slate-400 hover:text-white hover:bg-red-500/80 text-sm">&times;</button>
                   </div>
                 )
               })}
@@ -134,6 +141,19 @@ export default function SavedBuilds({ onLoaded }) {
           {pair.length === 2 && <CompareTable a={pair[0]} b={pair[1]} />}
         </div>
       </div>
+
+      {pendingDelete && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+          <div role="dialog" aria-modal="true" aria-label="Delete saved build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
+            <h3 className="text-white text-sm font-semibold mb-2">Delete "{pendingDelete.name}"?</h3>
+            <p className="text-xs text-slate-400">This permanently removes the saved build. It can't be undone.</p>
+            <div className="flex justify-end gap-2 mt-4">
+              <button onClick={() => setPendingDelete(null)} className="text-xs px-3.5 py-2 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors">Cancel</button>
+              <button onClick={confirmDelete} className="text-xs px-3.5 py-2 rounded-sm border border-red-700/60 text-red-300 hover:border-red-500 transition-colors">Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

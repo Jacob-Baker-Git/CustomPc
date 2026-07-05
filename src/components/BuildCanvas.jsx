@@ -1,7 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment } from '@react-three/drei'
 import PartModel from './PartModel'
-import ScreenTracker from './ScreenTracker'
 import CableHarness from './models/CableHarness'
 import FanSystem from './FanSystem'
 
@@ -27,7 +26,6 @@ export default function BuildCanvas({ selectedParts }) {
         {selectedParts.case && selectedParts.motherboard && (
           <FanSystem filled={Boolean(selectedParts.fans)} />
         )}
-        <ScreenTracker selectedParts={selectedParts} />
         <OrbitControls
           target={[0, -0.1, 0.05]}
           enablePan={false}

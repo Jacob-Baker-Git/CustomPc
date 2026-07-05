@@ -5,11 +5,12 @@ const TEXT =
   "This 3D view is a stylised approximation to help you picture the build — your actual PC won't look exactly like this."
 
 // An "ⓘ" badge that reveals a disclaimer on hover (title) or click (popover).
+// Positioned relative to the 3D canvas container it sits inside.
 export default function InfoDisclaimer() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="absolute top-20 right-6 z-40">
+    <div className="absolute top-3 right-3 z-40">
       <button
         onClick={() => setOpen((o) => !o)}
         title={TEXT}
