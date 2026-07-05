@@ -13,7 +13,7 @@ export default function RamModel() {
           {/* heatspreader */}
           <mesh position={[0, 0.1, 0]}>
             <boxGeometry args={[0.05, 0.35, 0.85]} />
-            <meshStandardMaterial color="#1a1a1f" metalness={0.6} roughness={0.4} />
+            <meshStandardMaterial color="#282b33" metalness={0.65} roughness={0.35} />
           </mesh>
           {/* cycling RGB diffuser along the top edge */}
           <RgbBox args={[0.05, 0.34, 0.04]} position={[0, 0.1, 0.44]} phase={0.4 + i * 0.25} />

@@ -10,7 +10,7 @@ export function Fan({ phase = 0 }) {
       {/* frame */}
       <mesh>
         <boxGeometry args={[0.6, 0.6, 0.12]} />
-        <meshStandardMaterial color="#17181c" metalness={0.4} roughness={0.6} />
+        <meshStandardMaterial color="#23252b" metalness={0.4} roughness={0.55} />
       </mesh>
       {/* cycling RGB ring */}
       <RgbRing radius={0.25} tube={0.028} phase={phase} position={[0, 0, 0.065]} />

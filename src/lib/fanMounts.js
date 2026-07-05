@@ -17,6 +17,7 @@ export const FAN_MOUNTS = [
   { position: [-0.9, TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
   { position: [0,    TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
   { position: [0.9,  TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
-  // Left side wall — one fan, centred, facing into the case.
-  { position: [LEFT_X, -0.1, DEPTH_Z], rotation: [0, Math.PI / 2, 0] },
+  // Left side wall — single exhaust fan mounted high (top-rear position,
+  // level with the CPU cooler) like a real rear exhaust.
+  { position: [LEFT_X, 0.95, DEPTH_Z], rotation: [0, Math.PI / 2, 0] },
 ]

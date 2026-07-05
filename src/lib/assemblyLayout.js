@@ -12,8 +12,9 @@ const MOUNTED = {
   storage:     { position: [-0.8, 0.05, 0.08], rotation: [Math.PI / 2, 0, 0] },
   // Horizontal graphics card hanging from the PCIe slot toward the glass.
   gpu:         { position: [0, -0.85, 0.28],   rotation: [0, 0, 0] },
-  // Power supply sitting flat on the case floor, bottom-left, nearest the window.
-  psu:         { position: [-0.75, -1.66, 0.15], rotation: [0, 0, 0] },
+  // Power supply sitting flat on the case floor, bottom-left, centred
+  // front-to-back in the shell (case spans z -0.25..0.95).
+  psu:         { position: [-0.75, -1.66, 0.35], rotation: [0, 0, 0] },
   // Shallow tower shell: rear wall hugs the board, glass sits close in front.
   case:        { position: [0, -0.1, 0.35],   rotation: [0, 0, 0] },
   // Representative mount for the orbit tracking line (FanSystem draws the fans).

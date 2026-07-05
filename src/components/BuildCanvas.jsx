@@ -10,20 +10,16 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas
-        camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}
-        onCreated={({ gl }) => {
-          // Without preventDefault the browser never fires webglcontextrestored,
-          // leaving a dead white canvas after a GPU reset/context loss.
-          gl.domElement.addEventListener('webglcontextlost', (e) => e.preventDefault())
-        }}
-      >
-        <ambientLight intensity={0.95} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+      <Canvas camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}>
+        <ambientLight intensity={1.15} />
+        <directionalLight position={[5, 5, 5]} intensity={1.1} />
         {/* Front key light (no distance falloff) so the build reads clearly
             through the glass window in solid mode. */}
-        <directionalLight position={[2, 2, 8]} intensity={1.4} />
-        <Environment preset="city" />
+        <directionalLight position={[2, 2, 8]} intensity={1.7} />
+        {/* Interior fill so parts inside the solid case don't read as black. */}
+        <pointLight position={[0, 0.4, 0.55]} intensity={5} distance={5} decay={1.6} />
+        {/* Bundled locally (public/hdri) so lighting doesn't depend on a CDN. */}
+        <Environment files="/hdri/city.hdr" />
         {parts.map((part) => (
           <PartModel key={part.id} part={part} selectedParts={selectedParts} />
         ))}
