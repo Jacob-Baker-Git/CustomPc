@@ -25,4 +25,19 @@ describe('CategoryList', () => {
     fireEvent.click(screen.getByText('GPU'))
     expect(onSelect).toHaveBeenCalledWith('gpu')
   })
+
+  it('renders a single-column list by default', () => {
+    const { container } = render(
+      <CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} />
+    )
+    expect(container.firstChild).toHaveClass('space-y-2')
+  })
+
+  it('renders a grid when columns=2 (desktop parts area)', () => {
+    const { container } = render(
+      <CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} columns={2} />
+    )
+    expect(container.firstChild).toHaveClass('grid')
+    expect(container.firstChild).toHaveClass('lg:grid-cols-2')
+  })
 })

@@ -6,11 +6,12 @@ const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
   .filter(Boolean)
 
-export default function CategoryList({ selectedParts, onSelectCategory, onDeselect }) {
+export default function CategoryList({ selectedParts, onSelectCategory, onDeselect, columns = 1 }) {
   const next = nextRecommended(selectedParts)
+  const wrap = columns === 2 ? 'grid grid-cols-1 lg:grid-cols-2 gap-2' : 'space-y-2'
 
   return (
-    <div className="space-y-2">
+    <div className={wrap}>
       {ORDERED.map((cat, i) => {
         const part = selectedParts[cat.id]
         const isNext = cat.id === next
