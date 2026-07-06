@@ -1,4 +1,5 @@
 import { checkCompatibility } from './compatibility'
+import { partQuality } from './partQuality'
 
 const BASE_WEIGHTS = {
   cpu: 0.18, gpu: 0.32, motherboard: 0.11, ram: 0.08, storage: 0.07,
@@ -40,23 +41,26 @@ function chooseBest(category, candidates, slice, remaining) {
   return [...pool].sort((a, b) => a.price - b.price)[0]
 }
 
-export function autoBuild(selectedParts, budget, partsData, resolution = '1440p') {
+export function autoBuild(selectedParts, budget, partsData, resolution = '1440p', options = {}) {
+  const weights = options.weights ?? weightsFor(resolution)
+  const upgradeOrder = options.upgradeOrder ?? ['gpu', 'cpu']
+  const maximise = options.maximise ?? false
+
   const result = { ...selectedParts }
   const userCats = new Set(Object.keys(selectedParts))
-  const weights = weightsFor(resolution)
   const spentExisting = Object.values(result).reduce((s, p) => s + (p?.price ?? 0), 0)
   const available = Math.max(0, budget - spentExisting)
   let remaining = available
 
   const emptyCats = FILL_ORDER.filter((c) => !result[c])
-  const weightSum = emptyCats.reduce((s, c) => s + weights[c], 0) || 1
+  const weightSum = emptyCats.reduce((s, c) => s + (weights[c] ?? 0), 0) || 1
   // Hold back the PSU's slice so the upgrade pass can't spend the power budget.
-  const psuReserve = result.psu ? 0 : (weights.psu / weightSum) * available
+  const psuReserve = result.psu ? 0 : ((weights.psu ?? 0) / weightSum) * available
 
   // Fill every empty category except PSU (sized last, after upgrades).
   for (const category of emptyCats) {
     if (category === 'psu') continue
-    const slice = (weights[category] / weightSum) * available
+    const slice = ((weights[category] ?? 0) / weightSum) * available
     let candidates = ofCategory(partsData, category).filter((p) => checkCompatibility(result, p).compatible)
     // compatibility.js only checks GPU-length when selecting a GPU, not a case —
     // so enforce it here when a GPU is already chosen.
@@ -70,19 +74,50 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     }
   }
 
-  // Spend leftover upgrading auto-picked perf drivers (never the user's own picks).
-  for (const category of ['gpu', 'cpu']) {
-    if (userCats.has(category)) continue
+  // Best higher-quality part in `category` we can still afford. `cheapest` picks
+  // the smallest affordable step up (used by the maximise loop); otherwise the
+  // best affordable jump (the original leftover behavior).
+  const affordableUpgrade = (category, cheapest) => {
     const current = result[category]
-    if (!current) continue
+    if (!current) return null
+    const curQ = partQuality(current)
     const without = { ...result, [category]: undefined }
-    const better = ofCategory(partsData, category)
+    const pool = ofCategory(partsData, category)
       .filter((p) => checkCompatibility(without, p).compatible)
-      .filter((p) => p.perfScore > current.perfScore && p.price - current.price <= remaining - psuReserve)
-      .sort((a, b) => (b.perfScore - a.perfScore) || (a.price - b.price))[0]
-    if (better) {
-      remaining -= better.price - current.price
-      result[category] = better
+      .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining - psuReserve)
+    if (pool.length === 0) return null
+    return cheapest
+      ? [...pool].sort((a, b) => (a.price - b.price) || (partQuality(b) - partQuality(a)))[0]
+      : [...pool].sort((a, b) => (partQuality(b) - partQuality(a)) || (a.price - b.price))[0]
+  }
+
+  if (maximise) {
+    // Step each priority category up one tier at a time until nothing more is
+    // affordable — spends as much of the budget as possible. Terminates because
+    // quality strictly increases each step over a finite catalog.
+    let guard = 0
+    let stepped = true
+    while (stepped && guard++ < 200) {
+      stepped = false
+      for (const category of upgradeOrder) {
+        if (userCats.has(category)) continue
+        const next = affordableUpgrade(category, true)
+        if (next) {
+          remaining -= next.price - result[category].price
+          result[category] = next
+          stepped = true
+        }
+      }
+    }
+  } else {
+    // Spend leftover upgrading auto-picked parts (never the user's own picks).
+    for (const category of upgradeOrder) {
+      if (userCats.has(category)) continue
+      const better = affordableUpgrade(category, false)
+      if (better) {
+        remaining -= better.price - result[category].price
+        result[category] = better
+      }
     }
   }
 
