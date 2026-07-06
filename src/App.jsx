@@ -1,15 +1,21 @@
 import { useEffect } from 'react'
 import BudgetEntry from './components/BudgetEntry'
 import BuilderScreen from './screens/BuilderScreen'
+import MainMenu from './components/MainMenu'
+import UpgradeWizard from './components/UpgradeWizard'
 import useBuilderStore from './store/useBuilderStore'
 import { loadCatalog } from './store/useCatalogStore'
 
 export default function App() {
   const budget    = useBuilderStore((s) => s.budget)
   const setBudget = useBuilderStore((s) => s.setBudget)
+  const flow      = useBuilderStore((s) => s.flow)
+  const setFlow   = useBuilderStore((s) => s.setFlow)
 
   useEffect(() => { loadCatalog() }, [])
 
-  if (!budget) return <BudgetEntry onSubmit={setBudget} />
-  return <BuilderScreen />
+  if (budget > 0) return <BuilderScreen />
+  if (flow === 'new')     return <BudgetEntry onSubmit={setBudget} onBack={() => setFlow('menu')} />
+  if (flow === 'upgrade') return <UpgradeWizard onBack={() => setFlow('menu')} />
+  return <MainMenu onNew={() => setFlow('new')} onUpgrade={() => setFlow('upgrade')} />
 }

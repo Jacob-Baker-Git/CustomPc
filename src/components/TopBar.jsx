@@ -8,6 +8,7 @@ import DynamicBars from './DynamicBars'
 export default function TopBar() {
   const budget     = useBuilderStore((s) => s.budget)
   const setBudget  = useBuilderStore((s) => s.setBudget)
+  const setFlow    = useBuilderStore((s) => s.setFlow)
   const totalSpent = useBuilderStore(selTotalSpent)
   const totalPower = useBuilderStore(selTotalPower)
   const psuwattage = useBuilderStore(selPsuWattage)
@@ -30,9 +31,9 @@ export default function TopBar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/30 backdrop-blur-md border-b border-slate-800/60 px-3 md:px-6 py-2 md:py-3 flex flex-wrap md:flex-nowrap items-center gap-x-3 md:gap-8 gap-y-1">
       <button
-        onClick={() => setBudget(0)}
-        aria-label="Back to budget screen"
-        title="Back to the budget & quick-start screen (your build is kept)"
+        onClick={() => { setBudget(0); setFlow('menu') }}
+        aria-label="Back to menu"
+        title="Back to the main menu (your build is kept)"
         className="w-7 h-7 flex items-center justify-center rounded-sm border border-slate-800/60 text-slate-400 hover:text-white hover:border-slate-600 transition-colors"
       >
         <ArrowLeft size={14} aria-hidden="true" />
