@@ -7,6 +7,11 @@ const useBuilderStore = create(persist((set) => ({
 
   setBudget: (amount) => set({ budget: amount }),
 
+  // Which pre-builder screen is showing. Transient — NOT in partialize, so a
+  // refresh with a persisted build still skips straight to the builder.
+  flow: 'menu',
+  setFlow: (flow) => set({ flow }),
+
   addPart: (category, part) =>
     set((state) => ({
       selectedParts: { ...state.selectedParts, [category]: part },
