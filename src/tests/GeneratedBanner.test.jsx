@@ -45,4 +45,15 @@ describe('GeneratedBanner', () => {
     fireEvent.click(screen.getByRole('button', { name: /dismiss/i }))
     expect(useBuilderStore.getState().lastGenerated).toBeNull()
   })
+
+  it('shows a generic line for an FPS-less upgrade (no "undefined fps")', () => {
+    useBuilderStore.setState({
+      lastGenerated: { upgrade: true },
+      budget: 1000, resolution: '1440p',
+      selectedParts: { cpu: { price: 300 }, gpu: { price: 400 } },
+    })
+    render(<GeneratedBanner />)
+    expect(screen.getByRole('status').textContent).not.toMatch(/undefined/)
+    expect(screen.getByText(/upgrade applied/i)).toBeInTheDocument()
+  })
 })
