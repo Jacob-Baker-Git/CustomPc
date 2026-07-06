@@ -6,6 +6,8 @@ import { test, expect } from '@playwright/test'
 test('wizard generates a build and the selected parts are visible', async ({ page }) => {
   await page.goto('/')
 
+  await page.getByRole('button', { name: /build a new pc/i }).click()
+
   await page.getByPlaceholder('Enter budget').fill('1600')
   await page.getByRole('button', { name: /next: resolution/i }).click()
   await page.getByRole('button', { name: /1440p/i }).click()
