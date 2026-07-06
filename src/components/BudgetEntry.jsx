@@ -4,6 +4,7 @@ import useBuilderStore from '../store/useBuilderStore'
 import { TIERS, partsForTier } from '../lib/tiers'
 import { targetBuild } from '../lib/targetBuilder'
 import useCatalogStore from '../store/useCatalogStore'
+import { enterBuildTab } from '../lib/enterBuildTab'
 
 const RES_OPTIONS = [
   { id: '1080p', label: '1080p', blurb: 'Esports & high refresh' },
@@ -61,12 +62,14 @@ export default function BudgetEntry({ onSubmit }) {
   }
 
   function applyTier(tier) {
+    enterBuildTab()
     setResolution(tier.resolution)
     setBuild(partsForTier(tier, partsData))
     onSubmit(tier.budget)
   }
 
   function enterBuilder(parts) {
+    enterBuildTab()
     setResolution(chosenRes)
     if (customResNorm) setCustomResolution(customResNorm)
     if (parts) setBuild(parts)
@@ -76,6 +79,7 @@ export default function BudgetEntry({ onSubmit }) {
   // Really start with nothing — also drops any build persisted from a
   // previous visit, which used to leak into "empty" sessions.
   function startEmpty() {
+    enterBuildTab()
     clearBuild()
     setResolution(chosenRes)
     if (customResNorm) setCustomResolution(customResNorm)

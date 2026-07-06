@@ -207,4 +207,15 @@ describe('BudgetEntry wizard', () => {
     expect(onSubmit).toHaveBeenCalledWith(800)
     expect(useBuilderStore.getState().selectedParts.gpu).toBeDefined()
   })
+
+  it('always lands on the Build tab even if the URL hash was left on summary', () => {
+    window.location.hash = 'summary'
+    render(<BudgetEntry onSubmit={() => {}} />)
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '900' } })
+    fireEvent.click(screen.getByRole('button', { name: /next: resolution/i }))
+    fireEvent.click(screen.getByRole('button', { name: /1080p/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: fps target/i }))
+    fireEvent.click(screen.getByRole('button', { name: /start empty/i }))
+    expect(window.location.hash).toBe('#build')
+  })
 })
