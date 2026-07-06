@@ -3,6 +3,7 @@ import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
 import { maxOutBudget } from '../lib/maxOutBudget'
 import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import useCatalogStore from '../store/useCatalogStore'
+import { USE_CASE_LABEL } from '../lib/buildProfiles'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
@@ -31,11 +32,13 @@ export default function GeneratedBanner() {
   return (
     <div role="status" className={`${PANEL_STRONG} flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5`}>
       <p className="text-xs text-slate-200">
-        {info.estFps != null && info.gameName
-          ? (info.met
-              ? <>This build hits <span className={`${TELEMETRY} text-cyan-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>
-              : <>Closest to your {info.targetFps} fps target: <span className={`${TELEMETRY} text-amber-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>)
-          : <>Upgrade applied</>}
+        {info.useCase
+          ? <>Your <span className="text-slate-100">{USE_CASE_LABEL[info.useCase] ?? info.useCase} build</span> uses <span className={`${TELEMETRY} text-cyan-300 font-semibold`}>£{spent.toFixed(0)}</span> of your £{budget.toFixed(0)} budget</>
+          : info.estFps != null && info.gameName
+            ? (info.met
+                ? <>This build hits <span className={`${TELEMETRY} text-cyan-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>
+                : <>Closest to your {info.targetFps} fps target: <span className={`${TELEMETRY} text-amber-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>)
+            : <>Upgrade applied</>}
         {info.quality && info.quality !== 'high' && <> on <span className="text-slate-100">{info.quality}</span> settings</>}
         {leftover > 0 && <> — <span className={`${TELEMETRY} text-emerald-300`}>£{leftover.toFixed(0)}</span> under budget</>}
       </p>

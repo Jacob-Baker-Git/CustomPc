@@ -56,4 +56,15 @@ describe('GeneratedBanner', () => {
     expect(screen.getByRole('status').textContent).not.toMatch(/undefined/)
     expect(screen.getByText(/upgrade applied/i)).toBeInTheDocument()
   })
+
+  it('summarises a use-case build without an FPS claim', () => {
+    useBuilderStore.setState({
+      lastGenerated: { useCase: 'programming', spend: 1450, budget: 1600 },
+      budget: 1600, resolution: '1440p',
+      selectedParts: { cpu: { price: 300 }, gpu: { price: 400 } },
+    })
+    render(<GeneratedBanner />)
+    expect(screen.getByText(/programming build/i)).toBeInTheDocument()
+    expect(screen.getByRole('status').textContent).not.toMatch(/fps/i)
+  })
 })
