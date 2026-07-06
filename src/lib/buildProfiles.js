@@ -5,12 +5,12 @@
 export const BUILD_PROFILES = {
   gaming: {
     weights: { cpu: 0.18, gpu: 0.32, motherboard: 0.11, ram: 0.08, storage: 0.07, psu: 0.07, case: 0.08, cooler: 0.06, fans: 0.03 },
-    upgradeOrder: ['gpu', 'cpu'],
+    upgradeOrder: ['gpu', 'cpu', 'storage', 'ram'],
     resolution: '1440p',
   },
   everyday: {
     weights: { cpu: 0.20, gpu: 0.14, motherboard: 0.11, ram: 0.10, storage: 0.14, psu: 0.08, case: 0.09, cooler: 0.08, fans: 0.06 },
-    upgradeOrder: ['storage', 'cpu'],
+    upgradeOrder: ['storage', 'ram', 'cpu'],
     resolution: '1080p',
   },
   programming: {
@@ -20,7 +20,7 @@ export const BUILD_PROFILES = {
   },
   workstation: {
     weights: { cpu: 0.26, gpu: 0.24, motherboard: 0.11, ram: 0.14, storage: 0.09, psu: 0.07, case: 0.05, cooler: 0.06, fans: 0.03 },
-    upgradeOrder: ['gpu', 'cpu', 'ram'],
+    upgradeOrder: ['gpu', 'cpu', 'ram', 'storage'],
     resolution: '4k',
   },
 }
