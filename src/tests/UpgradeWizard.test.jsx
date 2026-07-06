@@ -5,12 +5,15 @@ import useSavedStore from '../store/useSavedStore'
 import useCatalogStore from '../store/useCatalogStore'
 import { encodeBuild } from '../lib/buildCodec'
 
-// Deterministic, controlled catalog: CPU-limited current rig with one CPU
-// upgrade available in budget.
 const cpuLo = { id: 'cpu-lo', category: 'cpu', name: 'CPU Lo', price: 100, perfScore: 50,  tdp: 65,  socket: 'AM5' }
 const cpuHi = { id: 'cpu-hi', category: 'cpu', name: 'CPU Hi', price: 300, perfScore: 250, tdp: 105, socket: 'AM5' }
 const gpuLo = { id: 'gpu-lo', category: 'gpu', name: 'GPU Lo', price: 200, perfScore: 300, tdp: 200, length: 250 }
 const game  = { id: 'fortnite', name: 'Fortnite', fpsFactor: 1, cpuFactor: 1 }
+
+function loadSavedRig() {
+  fireEvent.click(screen.getByRole('button', { name: /select saved build/i }))
+  fireEvent.click(screen.getByRole('button', { name: /my rig/i }))
+}
 
 beforeEach(() => {
   window.location.hash = ''
@@ -20,36 +23,37 @@ beforeEach(() => {
   useSavedStore.setState({ saved: [{ id: 's1', name: 'My rig', savedAt: 1, code }] })
 })
 
-describe('UpgradeWizard flow', () => {
-  it('requires a CPU and GPU before continuing', () => {
+describe('UpgradeWizard fork', () => {
+  it('disables both path buttons until CPU and GPU are set', () => {
     render(<UpgradeWizard onBack={() => {}} />)
-    expect(screen.getByRole('button', { name: /next: goal/i })).toBeDisabled()
+    expect(screen.getByRole('button', { name: /select what i want to upgrade/i })).toBeDisabled()
+    expect(screen.getByRole('button', { name: /i'm unsure/i })).toBeDisabled()
   })
 
-  it('loads a saved build as the current PC and enables continue', () => {
-    render(<UpgradeWizard onBack={() => {}} />)
-    fireEvent.click(screen.getByRole('button', { name: /select saved build/i }))
-    fireEvent.click(screen.getByRole('button', { name: /my rig/i }))
-    expect(screen.getByRole('button', { name: /next: goal/i })).not.toBeDisabled()
-  })
-
-  it('applies an upgrade: swaps the part, sets budget = current + upgrade, opens Build tab', () => {
+  it('Path A: highlight CPU -> goal -> apply the CPU upgrade', () => {
     window.location.hash = 'summary'
     render(<UpgradeWizard onBack={() => {}} />)
-
-    fireEvent.click(screen.getByRole('button', { name: /select saved build/i }))
-    fireEvent.click(screen.getByRole('button', { name: /my rig/i }))
-    fireEvent.click(screen.getByRole('button', { name: /next: goal/i }))
+    loadSavedRig()
+    fireEvent.click(screen.getByRole('button', { name: /select what i want to upgrade/i }))
+    fireEvent.click(screen.getByRole('button', { name: /cpu lo/i }))
+    fireEvent.click(screen.getByRole('button', { name: /continue/i }))
     fireEvent.click(screen.getByRole('button', { name: /see upgrades/i }))
-
-    // Default upgrade budget (400) covers the +200 CPU swap.
     fireEvent.click(screen.getAllByRole('button', { name: /^apply$/i })[0])
 
     const s = useBuilderStore.getState()
     expect(s.selectedParts.cpu.id).toBe('cpu-hi')
-    expect(s.selectedParts.gpu.id).toBe('gpu-lo')
-    expect(s.budget).toBe(700) // (100 + 200 current) + 400 upgrade
-    expect(s.resolution).toBe('1440p')
+    expect(s.budget).toBe(700)
+    expect(window.location.hash).toBe('#build')
+  })
+
+  it('Path B: skips highlight, shows a diagnosis, Apply all swaps the CPU', () => {
+    render(<UpgradeWizard onBack={() => {}} />)
+    loadSavedRig()
+    fireEvent.click(screen.getByRole('button', { name: /i'm unsure/i }))
+    fireEvent.click(screen.getByRole('button', { name: /see upgrades/i }))
+    fireEvent.click(screen.getByRole('button', { name: /apply all recommended/i }))
+    const s = useBuilderStore.getState()
+    expect(s.selectedParts.cpu.id).toBe('cpu-hi')
     expect(window.location.hash).toBe('#build')
   })
 })
