@@ -2,6 +2,7 @@ import { render, screen, within, fireEvent } from '@testing-library/react'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import PartSelector from '../components/PartSelector'
 import useBuilderStore from '../store/useBuilderStore'
+import useCatalogStore from '../store/useCatalogStore'
 import partsData from '../data/partsData.json'
 
 const byName = (name) => partsData.find((p) => p.name === name)
@@ -73,5 +74,20 @@ describe('PartSelector modal behaviour', () => {
     expect(screen.queryByText('AMD Ryzen 9 9950X')).not.toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /pricier part/i }))
     expect(screen.getByText('AMD Ryzen 9 9950X')).toBeInTheDocument()
+  })
+
+  it('with ignoreBudget shows all parts and never locks for budget', () => {
+    useBuilderStore.setState({ budget: 1, selectedParts: {} }) // tiny budget would normally hide most parts
+    const onSelect = vi.fn()
+    const gpus = useCatalogStore.getState().parts.filter((p) => p.category === 'gpu')
+    const priciest = gpus.reduce((m, p) => (p.price > m.price ? p : m), gpus[0])
+
+    render(
+      <PartSelector category="gpu" contextParts={{}} ignoreBudget onSelect={onSelect} onClose={() => {}} />
+    )
+    const card = screen.getByText(priciest.name)
+    expect(card).toBeInTheDocument()
+    fireEvent.click(card)
+    expect(onSelect).toHaveBeenCalled()
   })
 })

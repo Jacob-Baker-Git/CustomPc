@@ -6,10 +6,12 @@ import PartCard from './PartCard'
 import SearchBar from './SearchBar'
 import useCatalogStore from '../store/useCatalogStore'
 
-export default function PartSelector({ category, onSelect, onClose }) {
-  const selectedParts   = useBuilderStore((s) => s.selectedParts)
-  const budget          = useBuilderStore((s) => s.budget)
+export default function PartSelector({ category, onSelect, onClose, contextParts, ignoreBudget = false }) {
+  const storeSelected   = useBuilderStore((s) => s.selectedParts)
+  const storeBudget     = useBuilderStore((s) => s.budget)
   const remainingBudget = useBuilderStore(selRemainingBudget)
+  const selectedParts   = contextParts ?? storeSelected
+  const budget          = ignoreBudget ? 0 : storeBudget
   const [query, setQuery] = useState('')
   const [sortKey, setSortKey] = useState('price-asc')
   const [showAll, setShowAll] = useState(false)
@@ -71,7 +73,7 @@ export default function PartSelector({ category, onSelect, onClose }) {
           {visible.map(({ part, compatible, reason }) => {
             // Swapping replaces the current part, so credit its price back.
             const swapBudget = remainingBudget + (current?.price ?? 0)
-            const overBudget = part.price > swapBudget
+            const overBudget = ignoreBudget ? false : part.price > swapBudget
             const locked     = !compatible || overBudget
             const lockReason = !compatible ? reason : 'Over remaining budget'
             return (
