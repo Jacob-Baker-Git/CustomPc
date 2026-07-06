@@ -62,30 +62,31 @@ export default function BuilderScreen() {
           </div>
         </div>
         {view === 'build' ? (
-          <div>
-            <div className="relative h-[42vh] md:h-[48vh]">
-              <CanvasErrorBoundary>
-                <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
-                  <BuildCanvas selectedParts={selectedParts} />
-                </Suspense>
-              </CanvasErrorBoundary>
-              <InfoDisclaimer />
-              <div className="absolute bottom-3 right-3"><CaseToggle /></div>
-            </div>
-            {/* relative z + own compositing layer: static content after a WebGL
-                canvas can otherwise be composited underneath it. */}
-            <div className="relative z-10 transform-gpu w-full max-w-2xl mx-auto p-4 space-y-3 pb-12">
-              <GeneratedBanner />
-              <CategoryList
-                selectedParts={selectedParts}
-                onSelectCategory={setActiveCategory}
-                onDeselect={removePart}
-              />
-              <BottleneckIndicator />
-              <GamePerformancePanel />
-              <BuildWarnings />
-              <UpgradeSuggestion />
-              <AutoBuildButton />
+          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl mx-auto p-4 pb-12">
+            <div className="build-grid">
+              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[60vh]">
+                <CanvasErrorBoundary>
+                  <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
+                    <BuildCanvas selectedParts={selectedParts} />
+                  </Suspense>
+                </CanvasErrorBoundary>
+                <InfoDisclaimer />
+                <div className="absolute bottom-3 right-3"><CaseToggle /></div>
+              </div>
+              <div className="area-banner"><GeneratedBanner /></div>
+              <div className="area-parts">
+                <CategoryList
+                  selectedParts={selectedParts}
+                  onSelectCategory={setActiveCategory}
+                  onDeselect={removePart}
+                  columns={2}
+                />
+              </div>
+              <div className="area-bottleneck"><BottleneckIndicator /></div>
+              <div className="area-perf"><GamePerformancePanel /></div>
+              <div className="area-warnings"><BuildWarnings /></div>
+              <div className="area-upgrade"><UpgradeSuggestion /></div>
+              <div className="area-autobuild"><AutoBuildButton /></div>
             </div>
           </div>
         ) : view === 'peripherals' ? (
