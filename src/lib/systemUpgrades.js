@@ -47,6 +47,34 @@ function supportingCandidates(currentParts, category, budget, catalog) {
     .slice(0, MAX_PER_CAT)
 }
 
+const drawOf = (parts) => Object.values(parts).reduce((s, p) => s + (p?.tdp ?? 0), 0)
+
+function deficienciesFor(currentParts, bottleneck) {
+  const out = []
+  const { ram, storage, psu } = currentParts
+
+  if (ram && (ram.capacityGb ?? 0) < 16) {
+    out.push({ category: 'ram', severity: 'high',
+      reason: `${ram.capacityGb}GB RAM holds modern games back — 16GB is the baseline.` })
+  }
+  if (storage) {
+    if (storage.storageType === 'HDD') {
+      out.push({ category: 'storage', severity: 'medium', reason: 'An SSD would cut load times dramatically.' })
+    } else if ((storage.capacityGb ?? 0) < 1000) {
+      out.push({ category: 'storage', severity: 'low', reason: 'Under 1TB fills up fast — consider more space.' })
+    }
+  }
+  const draw = drawOf(currentParts)
+  if (!psu || draw * 1.3 > (psu.wattage ?? 0)) {
+    out.push({ category: 'psu', severity: 'high',
+      reason: psu ? 'Your PSU leaves under ~30% headroom for this build.' : 'No power supply selected.' })
+  }
+  if (bottleneck && bottleneck.limitedBy === 'cpu') {
+    out.push({ category: 'cpu', severity: 'high', reason: bottleneck.verdict })
+  }
+  return out
+}
+
 // Whole-system upgrade analysis. CPU/GPU carry real FPS gains (via
 // upgradeCandidates); supporting parts carry an honest `reason` string.
 // `budget` is the extra spend allowed for a swap (not the whole build).
@@ -68,5 +96,5 @@ export function systemUpgrades(currentParts, goal, budget, catalog) {
     if (list.length) byCat[cat] = list
   }
 
-  return { bottleneck, byCat, deficiencies: [] }
+  return { bottleneck, byCat, deficiencies: deficienciesFor(currentParts, bottleneck) }
 }
