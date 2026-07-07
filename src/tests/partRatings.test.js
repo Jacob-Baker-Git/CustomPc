@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { partLevel, rateBuild } from '../lib/partRatings'
+import { partLevel, rateBuild, partUpgradeOptions } from '../lib/partRatings'
 
 const cpuLo = { id: 'cpu-lo', category: 'cpu', perfScore: 50 }
 const cpuMid = { id: 'cpu-mid', category: 'cpu', perfScore: 150 }
@@ -55,5 +55,26 @@ describe('rateBuild', () => {
   })
   it('returns overall 0 without a CPU or GPU', () => {
     expect(rateBuild({ cpu: cS }, 'gaming', ratingCatalog)).toEqual({ overall: 0, verdict: expect.any(String), parts: {} })
+  })
+})
+
+const game = { id: 'fortnite', name: 'Fortnite', fpsFactor: 1, cpuFactor: 1 }
+
+describe('partUpgradeOptions', () => {
+  it('offers cheaper-first, higher-scoring, compatible upgrades with newScore', () => {
+    const opts = partUpgradeOptions({ cpu: cW, gpu: gS }, 'gaming', 'cpu', ratingCatalog, { game })
+    expect(opts.length).toBeGreaterThan(0)
+    expect(opts[0].toPart.id).toBe('cm') // cheapest CPU stronger than cW
+    expect(opts[0].extraCost).toBe(120)
+    expect(opts[0].newScore).toBeGreaterThan(0)
+  })
+  it('adds an fps gain for gaming cpu/gpu, none for office', () => {
+    const g = partUpgradeOptions({ cpu: cW, gpu: gS }, 'gaming', 'cpu', ratingCatalog, { game })
+    expect(g[0].fpsGain).toBeGreaterThan(0)
+    const o = partUpgradeOptions({ cpu: cW, gpu: gS }, 'office', 'cpu', ratingCatalog, { game })
+    expect(o[0]?.fpsGain).toBeUndefined()
+  })
+  it('is empty when the part is already the best in its category', () => {
+    expect(partUpgradeOptions({ cpu: cS, gpu: gS }, 'gaming', 'cpu', ratingCatalog, { game })).toEqual([])
   })
 })

@@ -61,3 +61,31 @@ export function rateBuild(parts, useCase, catalog) {
   const overall = owsum > 0 ? Math.round(ossum / owsum) : 0
   return { overall, verdict: verdictFor(overall, label), parts: out }
 }
+
+// Better-in-category swaps that would raise this part's score. Cheapest first,
+// capped to `limit`. gaming/streaming cpu/gpu also carry an fps gain when a
+// representative `game` is supplied.
+export function partUpgradeOptions(parts, useCase, category, catalog, { game = null, limit = 5 } = {}) {
+  const current = parts[category]
+  if (!current) return []
+  const profile = BUILD_PROFILES[useCase] ?? BUILD_PROFILES.gaming
+  const curLevel = partLevel(current, catalog)
+  const curScore = rateBuild(parts, useCase, catalog).parts[category]?.score ?? 0
+  const showFps = Boolean(game) && FPS_USES.has(useCase) && (category === 'cpu' || category === 'gpu')
+  const baseFps = showFps ? gameFps(parts.cpu, parts.gpu, profile.resolution, game, 'high') : 0
+
+  const out = []
+  for (const cand of catalog) {
+    if (cand.category !== category) continue
+    if (partLevel(cand, catalog) <= curLevel) continue
+    if (cand.price <= current.price) continue
+    if (!checkCompatibility(parts, cand).compatible) continue
+    const next = { ...parts, [category]: cand }
+    const newScore = rateBuild(next, useCase, catalog).parts[category]?.score ?? 0
+    if (newScore <= curScore) continue
+    const opt = { toPart: cand, extraCost: cand.price - current.price, newScore }
+    if (showFps) opt.fpsGain = gameFps(next.cpu, next.gpu, profile.resolution, game, 'high') - baseFps
+    out.push(opt)
+  }
+  return out.sort((a, b) => a.extraCost - b.extraCost).slice(0, limit)
+}
