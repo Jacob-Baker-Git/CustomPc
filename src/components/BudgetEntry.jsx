@@ -76,8 +76,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
 
         {step === 1 && (
           <>
-            <p className="rise text-gray-400 mb-2 text-lg">What's your budget?</p>
-            <p className="rise rise-2 text-slate-500 text-xs mb-8 max-w-xs text-center">Prices are curated estimates (July 2026) — you can change any part after.</p>
+            <p className="rise text-gray-400 mb-10 text-lg">What's your budget?</p>
             <form onSubmit={handleBudgetSubmit} aria-label="form" className="rise rise-2 flex flex-col items-center gap-6">
               <div className="flex items-center gap-2 text-3xl">
                 <span className="text-cyan-300">£</span>
