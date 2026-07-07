@@ -1,13 +1,8 @@
-import { buildForUseCase } from './useCaseBuilder'
-
-// Quick-start templates: budget + intended use case. Parts are generated from
-// the current catalog so the build is always the best that money can buy.
+// Quick-start budget presets. Selecting one fills the budget and advances to
+// the use-case step — the actual parts depend on the use case the user then
+// picks, so £900 gaming ≠ £900 office.
 export const TIERS = [
-  { id: 'budget',     label: 'Budget',     budget: 900,  useCase: 'gaming' },
-  { id: 'mainstream', label: 'Mainstream', budget: 1700, useCase: 'gaming' },
-  { id: 'ultimate',   label: 'Ultimate',   budget: 3800, useCase: 'creation' },
+  { id: 'budget',     label: 'Entry',    budget: 900 },
+  { id: 'mainstream', label: 'Mid',      budget: 1700 },
+  { id: 'ultimate',   label: 'High-end', budget: 3800 },
 ]
-
-export function partsForTier(tier, parts) {
-  return buildForUseCase(tier.budget, tier.useCase, parts)
-}
