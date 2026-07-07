@@ -159,8 +159,8 @@ export default function UpgradeWizard({ onBack }) {
     <div className="relative min-h-screen flex flex-col items-center text-white bg-[#05080f] py-12">
       <Backdrop />
       <div className="relative z-10 w-full max-w-2xl px-4">
-        <h1 className="text-3xl font-bold mb-1 text-center">Upgrade your PC</h1>
-        <ol className="flex items-center justify-center gap-2 mb-8 text-[11px] uppercase tracking-wider">
+        <h1 className="rise text-3xl font-bold mb-1 text-center">Upgrade your PC</h1>
+        <ol className="rise flex items-center justify-center gap-2 mb-8 text-[11px] uppercase tracking-wider">
           {steps.map((label, i) => (
             <li key={label} className="flex items-center gap-2">
               {i > 0 && <span className="text-slate-700">→</span>}
@@ -170,7 +170,7 @@ export default function UpgradeWizard({ onBack }) {
         </ol>
 
         {screen === 'specs' && (
-          <div className={`${PANEL} p-5`}>
+          <div className={`${PANEL} p-5 rise`}>
             <div className="inline-flex rounded-sm border border-slate-800/60 p-0.5 mb-4">
               <button onClick={() => setTab('build')} className={`px-3 py-1 text-xs rounded-sm ${tab === 'build' ? 'bg-cyan-600 text-white' : 'text-gray-300'}`}>Build current PC</button>
               <button onClick={() => setTab('saved')} className={`px-3 py-1 text-xs rounded-sm ${tab === 'saved' ? 'bg-cyan-600 text-white' : 'text-gray-300'}`}>Select saved build</button>
@@ -213,8 +213,9 @@ export default function UpgradeWizard({ onBack }) {
         )}
 
         {screen === 'highlight' && (
-          <div className={`${PANEL} p-5`}>
-            <p className="text-sm text-slate-300 mb-4">Tap the parts you'd like to upgrade.</p>
+          <div className={`${PANEL} p-5 rise`}>
+            <p className="text-sm text-slate-300 mb-1">Tap the parts you'd like to upgrade.</p>
+            <p className="text-[11px] text-slate-500 mb-4">We'll only suggest swaps for the parts you pick here.</p>
             <div className="grid grid-cols-2 gap-2">
               {Object.keys(currentParts).map((cat) => {
                 const on = selectedCats.has(cat)
@@ -242,11 +243,12 @@ export default function UpgradeWizard({ onBack }) {
               </button>
               <button onClick={() => setScreen('specs')} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">← Current PC</button>
             </div>
+            {selectedCats.size === 0 && <p className="text-[11px] text-slate-500 mt-3">Select at least one part to continue.</p>}
           </div>
         )}
 
         {screen === 'goal' && (
-          <div className={`${PANEL} p-5`}>
+          <div className={`${PANEL} p-5 rise`}>
             <div className="flex items-center gap-3 mb-5">
               <label htmlFor="upgrade-game" className="text-sm text-slate-400">Game</label>
               <select id="upgrade-game" value={gameId} onChange={(e) => setGameId(e.target.value)} className="bg-slate-950/60 border border-slate-700/70 rounded-sm text-sm text-slate-100 px-3 py-2 focus:outline-none focus:border-cyan-400">
@@ -277,21 +279,36 @@ export default function UpgradeWizard({ onBack }) {
         )}
 
         {screen === 'results' && analysis && (
-          <div className={`${PANEL} p-5`}>
-            <div className="mb-4">
-              <div className="flex items-center justify-between text-sm mb-1">
-                <label htmlFor="upgrade-budget" className="text-slate-400">Upgrade budget</label>
-                <span className={`${TELEMETRY} text-cyan-300`}>£{upgradeBudget}</span>
+          <div className={`${PANEL} p-5 rise`}>
+            <h2 className="text-lg text-white mb-1">{path === 'select' ? 'Your upgrade options' : 'Diagnosis'}</h2>
+            <p className="text-xs text-slate-400 mb-4">
+              {path === 'select'
+                ? 'What each part you picked would gain at your goal — apply any one to open it in the builder.'
+                : "What's holding this build back at your goal, and the upgrades that fix it."}
+            </p>
+
+            <div className="rounded-sm border border-slate-800/60 p-3 mb-5 space-y-3">
+              <div>
+                <div className="flex items-center justify-between text-sm mb-1">
+                  <label htmlFor="upgrade-budget" className="text-slate-400">Extra to spend</label>
+                  <span className={`${TELEMETRY} text-cyan-300`}>£{upgradeBudget}</span>
+                </div>
+                <input id="upgrade-budget" type="range" min="0" max="2000" step="50" value={upgradeBudget} onChange={(e) => setUpgradeBudget(Number(e.target.value))} className="w-full accent-cyan-500" />
+                <p className="text-[11px] text-slate-500 mt-1">On top of your current parts — caps how pricey a swap can be.</p>
               </div>
-              <input id="upgrade-budget" type="range" min="0" max="2000" step="50" value={upgradeBudget} onChange={(e) => setUpgradeBudget(Number(e.target.value))} className="w-full accent-cyan-500" />
-            </div>
-            <div className="flex gap-2 mb-4">
-              {SORT_LABELS.map((s) => (
-                <button key={s.key} onClick={() => setSortKey(s.key)} aria-pressed={sortKey === s.key}
-                  className={`px-3 py-1.5 rounded-sm border text-xs transition-colors ${sortKey === s.key ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200' : 'border-slate-700/70 text-slate-300 hover:border-slate-500'}`}>
-                  {s.label}
-                </button>
-              ))}
+              {path === 'select' && (
+                <div className="flex items-center justify-between gap-3 border-t border-slate-800/60 pt-3">
+                  <label htmlFor="upgrade-sort" className="text-sm text-slate-400">Sort by</label>
+                  <select
+                    id="upgrade-sort"
+                    value={sortKey}
+                    onChange={(e) => setSortKey(e.target.value)}
+                    className="bg-slate-950/60 border border-slate-700/70 rounded-sm text-sm text-slate-100 px-3 py-1.5 focus:outline-none focus:border-cyan-400"
+                  >
+                    {SORT_LABELS.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
+                  </select>
+                </div>
+              )}
             </div>
 
             {path === 'select' ? (
