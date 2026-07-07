@@ -1,5 +1,6 @@
 import { Cpu, Wrench, ArrowRight } from 'lucide-react'
 import Backdrop from './Backdrop'
+import SiteFooter from './SiteFooter'
 
 export default function MainMenu({ onNew, onUpgrade }) {
   return (
@@ -33,6 +34,7 @@ export default function MainMenu({ onNew, onUpgrade }) {
             </div>
           </button>
         </div>
+        <div className="w-full max-w-2xl"><SiteFooter /></div>
       </div>
     </div>
   )
