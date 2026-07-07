@@ -74,9 +74,12 @@ export default function TopBar() {
         <span className="text-gray-600 mx-0.5 sm:mx-1">|</span>
         <span className="text-amber-400 font-mono font-semibold">{totalPower}W</span>
       </div>
-      <div className="hidden md:flex gap-6 ml-auto">
-        <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" />
-        <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" />
+      <div className="ml-auto flex items-center gap-3 md:gap-4">
+        <a href="#/feedback" className="text-xs text-slate-400 hover:text-cyan-300 transition-colors">Feedback</a>
+        <div className="hidden md:flex gap-6">
+          <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" />
+          <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" />
+        </div>
       </div>
     </header>
   )
