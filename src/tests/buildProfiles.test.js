@@ -27,3 +27,18 @@ describe('buildProfiles', () => {
     for (const u of USE_CASES) expect(USE_CASE_LABEL[u.id]).toBe(u.label)
   })
 })
+
+describe('build profiles needs', () => {
+  it('every profile has ramGb/storageGb/vram targets', () => {
+    for (const [id, p] of Object.entries(BUILD_PROFILES)) {
+      expect(p.needs, id).toBeTruthy()
+      expect(p.needs.ramGb, id).toBeGreaterThan(0)
+      expect(p.needs.storageGb, id).toBeGreaterThan(0)
+      expect(p.needs.vram, id).toBeGreaterThan(0)
+    }
+  })
+  it('creation wants more RAM and VRAM than office', () => {
+    expect(BUILD_PROFILES.creation.needs.ramGb).toBeGreaterThan(BUILD_PROFILES.office.needs.ramGb)
+    expect(BUILD_PROFILES.creation.needs.vram).toBeGreaterThan(BUILD_PROFILES.office.needs.vram)
+  })
+})
