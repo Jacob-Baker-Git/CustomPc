@@ -1,4 +1,4 @@
-import { useCaseBuild } from './useCaseBuilder'
+import { buildForUseCase } from './useCaseBuilder'
 
 // Quick-start templates: budget + intended use case. Parts are generated from
 // the current catalog so the build is always the best that money can buy.
@@ -9,5 +9,5 @@ export const TIERS = [
 ]
 
 export function partsForTier(tier, parts) {
-  return useCaseBuild(tier.budget, tier.useCase, parts)
+  return buildForUseCase(tier.budget, tier.useCase, parts)
 }
