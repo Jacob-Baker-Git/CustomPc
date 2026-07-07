@@ -1,103 +1,61 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Backdrop from './Backdrop'
 import useBuilderStore from '../store/useBuilderStore'
 import { TIERS, partsForTier } from '../lib/tiers'
-import { targetBuild } from '../lib/targetBuilder'
+import { BUILD_PROFILES, USE_CASES } from '../lib/buildProfiles'
+import { buildForUseCase } from '../lib/useCaseBuilder'
 import useCatalogStore from '../store/useCatalogStore'
 import { enterBuildTab } from '../lib/enterBuildTab'
 
-const RES_OPTIONS = [
-  { id: '1080p', label: '1080p', blurb: 'Esports & high refresh' },
-  { id: '1440p', label: '1440p', blurb: 'The sweet spot' },
-  { id: '4k',    label: '4K',    blurb: 'Maximum fidelity' },
-]
-const TARGETS = [60, 120, 144, 240]
-const STEPS = ['Budget', 'Resolution', 'FPS target']
+const STEPS = ['Budget', 'Use case']
+const totalOf = (parts) => Object.values(parts).reduce((s, p) => s + (p?.price ?? 0), 0)
 
-// Hide the number-input spinner arrows (they crowd the tiny custom boxes).
-const NO_SPINNERS =
-  '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-
-// "3440x1440" (any case, optional spaces) → normalized "3440x1440"; null when
-// it isn't a sane landscape WxH resolution.
-function parseCustomRes(value) {
-  const m = /^(\d{3,4})\s*[x×]\s*(\d{3,4})$/.exec(String(value).trim().toLowerCase())
-  if (!m) return null
-  const w = Number(m[1])
-  const h = Number(m[2])
-  if (w < 640 || w > 7680 || h < 480 || h > 4320 || h > w) return null
-  return `${w}x${h}`
-}
-
-export default function BudgetEntry({ onSubmit }) {
+export default function BudgetEntry({ onSubmit, onBack }) {
   const [step, setStep] = useState(1)
   const [value, setValue] = useState('')
-  const [resolution, setLocalResolution] = useState(null)
-  const [customRes, setCustomRes] = useState('')
-  const [fps, setFps] = useState(120)
-  const [customFps, setCustomFps] = useState('')
-  const [gameId, setGameId] = useState('fortnite')
-  const [shortfall, setShortfall] = useState(null)
+  const [useCase, setUseCase] = useState('gaming')
   const setResolution = useBuilderStore((s) => s.setResolution)
-  const setCustomResolution = useBuilderStore((s) => s.setCustomResolution)
   const setBuild = useBuilderStore((s) => s.setBuild)
   const clearBuild = useBuilderStore((s) => s.clearBuild)
   const setLastGenerated = useBuilderStore((s) => s.setLastGenerated)
   const partsData = useCatalogStore((s) => s.parts)
-  const gamesData = useCatalogStore((s) => s.games)
 
   const budgetNum = parseFloat(value)
-  // A filled-in custom box (e.g. 360 for a 360Hz monitor) beats the presets.
-  const customNum = parseInt(customFps, 10)
-  const customValid = Number.isFinite(customNum) && customNum >= 30 && customNum <= 600
-  const targetFps = customValid ? customNum : fps
-  // Same idea for resolution: a valid custom "WxH" overrides the preset cards.
-  const customResNorm = parseCustomRes(customRes)
-  const chosenRes = customResNorm ?? resolution
-  const chosenResLabel = RES_OPTIONS.find((r) => r.id === chosenRes)?.label ?? chosenRes
+  const tierBuilds = useMemo(
+    () => TIERS.map((t) => ({ tier: t, parts: partsForTier(t, partsData) })),
+    [partsData],
+  )
 
   function handleBudgetSubmit(e) {
     e.preventDefault()
     if (budgetNum > 0) setStep(2)
   }
 
-  function applyTier(tier) {
+  function applyTier(tier, parts) {
     enterBuildTab()
-    setResolution(tier.resolution)
-    setBuild(partsForTier(tier, partsData))
+    setResolution(BUILD_PROFILES[tier.useCase].resolution)
+    setBuild(parts)
     onSubmit(tier.budget)
   }
 
-  function enterBuilder(parts) {
+  function generate() {
+    const profile = BUILD_PROFILES[useCase]
+    const parts = buildForUseCase(budgetNum, useCase, partsData)
     enterBuildTab()
-    setResolution(chosenRes)
-    if (customResNorm) setCustomResolution(customResNorm)
-    if (parts) setBuild(parts)
+    setResolution(profile.resolution)
+    setBuild(parts)
+    setLastGenerated({ useCase, spend: totalOf(parts), budget: budgetNum })
     onSubmit(budgetNum)
   }
 
-  // Really start with nothing — also drops any build persisted from a
-  // previous visit, which used to leak into "empty" sessions.
+  // Really start with nothing — also drops any build persisted from a previous
+  // visit, which used to leak into "empty" sessions.
   function startEmpty() {
     enterBuildTab()
     clearBuild()
-    setResolution(chosenRes)
-    if (customResNorm) setCustomResolution(customResNorm)
+    setResolution(BUILD_PROFILES[useCase].resolution)
     onSubmit(budgetNum)
   }
-
-  function generate() {
-    const game = gamesData.find((g) => g.id === gameId)
-    const result = targetBuild(budgetNum, chosenRes, targetFps, game, partsData)
-    if (result.met) {
-      setLastGenerated({ met: true, estFps: result.estFps, targetFps, gameName: game.name, quality: result.quality })
-      enterBuilder(result.parts)
-    } else {
-      setShortfall(result)
-    }
-  }
-
-  const game = gamesData.find((g) => g.id === gameId)
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#05080f]">
@@ -132,169 +90,55 @@ export default function BudgetEntry({ onSubmit }) {
                   className="bg-slate-950/60 backdrop-blur-md text-white font-mono text-3xl w-72 px-4 py-3 rounded-sm border border-slate-700/70 focus:outline-none focus:border-cyan-400 text-center placeholder:text-2xl placeholder:text-slate-600 transition-colors"
                 />
               </div>
-              <button
-                type="submit"
-                className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors"
-              >
-                Next: resolution
+              <button type="submit" className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors">
+                Next: use case
               </button>
             </form>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
               <span className="text-xs text-slate-500">or quick-start:</span>
-              {TIERS.map((t) => (
+              {tierBuilds.map(({ tier, parts }) => (
                 <button
-                  key={t.id}
-                  onClick={() => applyTier(t)}
+                  key={tier.id}
+                  onClick={() => applyTier(tier, parts)}
                   className="text-xs font-mono px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-cyan-400 hover:text-cyan-300 transition-colors"
                 >
-                  {t.label} · £{t.budget}
+                  {tier.label} · £{tier.budget}
                 </button>
               ))}
             </div>
+            <button onClick={onBack} className="mt-8 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to menu</button>
           </>
         )}
 
         {step === 2 && (
           <>
-            <p className="text-gray-400 mb-10 text-lg">What resolution will you play at?</p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              {RES_OPTIONS.map((r) => {
-                const selected = resolution === r.id && !customResNorm
+            <p className="text-gray-400 mb-10 text-lg">What will you use this PC for?</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {USE_CASES.map((u) => {
+                const selected = useCase === u.id
                 return (
                   <button
-                    key={r.id}
-                    onClick={() => { setLocalResolution(r.id); setCustomRes('') }}
+                    key={u.id}
+                    onClick={() => setUseCase(u.id)}
                     aria-pressed={selected}
-                    className={`w-44 px-4 py-5 rounded-sm border text-left transition-colors group
-                      ${selected
-                        ? 'border-cyan-400 bg-cyan-500/15'
-                        : 'border-slate-700/70 hover:border-cyan-400'}`}
+                    className={`w-64 px-4 py-5 rounded-sm border text-left transition-colors group
+                      ${selected ? 'border-cyan-400 bg-cyan-500/15' : 'border-slate-700/70 hover:border-cyan-400'}`}
                   >
-                    <div className={`text-2xl font-bold font-mono ${selected ? 'text-cyan-200' : 'group-hover:text-cyan-300'}`}>{r.label}</div>
-                    <div className={`text-xs mt-1 ${selected ? 'text-cyan-300/80' : 'text-slate-400'}`}>{r.blurb}</div>
+                    <div className={`text-xl font-bold ${selected ? 'text-cyan-200' : 'group-hover:text-cyan-300'}`}>{u.label}</div>
+                    <div className={`text-xs mt-1 ${selected ? 'text-cyan-300/80' : 'text-slate-400'}`}>{u.blurb}</div>
                   </button>
                 )
               })}
-              <div
-                className={`w-44 px-4 py-5 rounded-sm border text-left transition-colors
-                  ${customResNorm
-                    ? 'border-cyan-400 bg-cyan-500/15'
-                    : 'border-slate-700/70 focus-within:border-cyan-400/60'}`}
-              >
-                <input
-                  value={customRes}
-                  onChange={(e) => { setCustomRes(e.target.value); setShortfall(null) }}
-                  placeholder="3440x1440"
-                  aria-label="Custom resolution"
-                  inputMode="numeric"
-                  className={`w-full bg-transparent text-2xl font-bold font-mono focus:outline-none placeholder:text-slate-600
-                    ${customResNorm ? 'text-cyan-200' : 'text-white'}`}
-                />
-                <div className={`text-xs mt-1 ${customResNorm ? 'text-cyan-300/80' : 'text-slate-400'}`}>Custom — ultrawide etc.</div>
-              </div>
             </div>
-            {customRes !== '' && !customResNorm && (
-              <p className="mt-4 text-xs text-amber-300/90">Use width x height, e.g. 2560x1080 (landscape, up to 7680x4320).</p>
-            )}
-            <button
-              onClick={() => setStep(3)}
-              disabled={!chosenRes}
-              className="mt-8 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              Next: FPS target
-            </button>
-            <button onClick={() => setStep(1)} className="mt-6 text-xs text-slate-500 hover:text-slate-300 transition-colors">
-              ← Back to budget
-            </button>
-          </>
-        )}
-
-        {step === 3 && (
-          <>
-            <p className="text-gray-400 mb-8 text-lg">Pick an FPS target and the game that matters most.</p>
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-              {TARGETS.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => { setFps(t); setCustomFps(''); setShortfall(null) }}
-                  aria-pressed={!customValid && fps === t}
-                  className={`px-5 py-2.5 rounded-sm border font-mono text-sm transition-colors
-                    ${!customValid && fps === t
-                      ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200'
-                      : 'border-slate-700/70 text-slate-300 hover:border-slate-500'}`}
-                >
-                  {t} fps
-                </button>
-              ))}
-              <label
-                className={`flex items-center gap-1.5 px-3 py-2.5 rounded-sm border font-mono text-sm transition-colors
-                  ${customValid
-                    ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200'
-                    : 'border-slate-700/70 text-slate-300 focus-within:border-slate-500'}`}
-              >
-                <input
-                  type="number"
-                  min="30"
-                  max="600"
-                  placeholder="custom"
-                  aria-label="Custom FPS target"
-                  value={customFps}
-                  onChange={(e) => { setCustomFps(e.target.value); setShortfall(null) }}
-                  className={`w-20 bg-transparent focus:outline-none placeholder:text-slate-600 text-center ${NO_SPINNERS}`}
-                />
-                <span className={customValid ? 'text-cyan-200' : 'text-slate-500'}>fps</span>
-              </label>
-            </div>
-            {customFps !== '' && !customValid && (
-              <p className="mb-4 -mt-2 text-xs text-amber-300/90">Custom target must be between 30 and 600 fps.</p>
-            )}
-            <div className="flex items-center gap-3 mb-8">
-              <label htmlFor="wizard-game" className="text-sm text-slate-400">Game</label>
-              <select
-                id="wizard-game"
-                value={gameId}
-                onChange={(e) => { setGameId(e.target.value); setShortfall(null) }}
-                className="bg-slate-950/60 border border-slate-700/70 rounded-sm text-sm text-slate-100 px-3 py-2 focus:outline-none focus:border-cyan-400"
-              >
-                {gamesData.map((g) => <option key={g.id} value={g.id}>{g.name}</option>)}
-              </select>
-            </div>
-
-            {shortfall && (
-              <div className="mb-6 max-w-md text-center border border-amber-500/40 bg-amber-500/10 rounded-sm px-4 py-3">
-                <p className="text-sm text-amber-200">
-                  £{budgetNum.toFixed(0)} can't hit {targetFps} fps in {game.name} at {chosenResLabel}, even
-                  on low settings. The closest build manages about <span className="font-mono font-semibold">{shortfall.estFps} fps</span>.
-                </p>
-                <button
-                  onClick={() => {
-                    setLastGenerated({ met: false, estFps: shortfall.estFps, targetFps, gameName: game.name, quality: shortfall.quality })
-                    enterBuilder(shortfall.parts)
-                  }}
-                  className="mt-3 text-xs px-4 py-2 rounded-sm border border-amber-400/60 text-amber-200 hover:border-amber-300 transition-colors"
-                >
-                  Use closest build
-                </button>
-              </div>
-            )}
-
-            <div className="flex gap-3">
-              <button
-                onClick={generate}
-                className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-8 py-3 rounded-sm transition-colors"
-              >
+            <div className="flex gap-3 mt-8">
+              <button onClick={generate} className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-8 py-3 rounded-sm transition-colors">
                 Generate build
               </button>
-              <button
-                onClick={startEmpty}
-                className="px-8 py-3 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors"
-              >
+              <button onClick={startEmpty} className="px-8 py-3 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors">
                 Start empty instead
               </button>
             </div>
-            <button onClick={() => { setShortfall(null); setStep(2) }} className="mt-8 text-xs text-slate-500 hover:text-slate-300 transition-colors">
-              ← Back to resolution
-            </button>
+            <button onClick={() => setStep(1)} className="mt-6 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to budget</button>
           </>
         )}
       </div>
