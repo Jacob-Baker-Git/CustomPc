@@ -17,10 +17,10 @@ describe('validateFeedback', () => {
 })
 
 describe('submitFeedback', () => {
-  beforeEach(() => { global.fetch = vi.fn().mockResolvedValue({ ok: true }) })
+  beforeEach(() => { globalThis.fetch = vi.fn().mockResolvedValue({ ok: true }) })
   it('POSTs a trimmed payload and resolves on success', async () => {
     await submitFeedback({ rating: 4, type: 'praise', message: '  nice  ', email: '' })
-    const [url, opts] = global.fetch.mock.calls[0]
+    const [url, opts] = globalThis.fetch.mock.calls[0]
     expect(url).toMatch(/\/rest\/v1\/feedback$/)
     expect(opts.method).toBe('POST')
     const body = JSON.parse(opts.body)
@@ -28,10 +28,10 @@ describe('submitFeedback', () => {
   })
   it('throws on an invalid entry without calling fetch', async () => {
     await expect(submitFeedback({ rating: 9, type: 'bug', message: 'x' })).rejects.toThrow()
-    expect(global.fetch).not.toHaveBeenCalled()
+    expect(globalThis.fetch).not.toHaveBeenCalled()
   })
   it('throws on a non-ok response', async () => {
-    global.fetch = vi.fn().mockResolvedValue({ ok: false, status: 500 })
+    globalThis.fetch = vi.fn().mockResolvedValue({ ok: false, status: 500 })
     await expect(submitFeedback({ rating: 4, type: 'bug', message: 'x' })).rejects.toThrow(/500/)
   })
 })
