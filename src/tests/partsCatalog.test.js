@@ -47,8 +47,8 @@ describe('parts catalog integrity', () => {
 
   it('offers a reasonably broad selection in every category', () => {
     const minimums = {
-      cpu: 33, gpu: 33, motherboard: 32, ram: 28, storage: 28,
-      psu: 28, case: 27, cooler: 27, fans: 23, paste: 9,
+      cpu: 39, gpu: 38, motherboard: 37, ram: 33, storage: 34,
+      psu: 33, case: 32, cooler: 32, fans: 28, paste: 11,
     }
     for (const [cat, min] of Object.entries(minimums)) {
       expect(byCat(cat).length, cat).toBeGreaterThanOrEqual(min)
