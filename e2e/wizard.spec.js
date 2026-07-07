@@ -9,13 +9,12 @@ test('wizard generates a build and the selected parts are visible', async ({ pag
   await page.getByRole('button', { name: /build a new pc/i }).click()
 
   await page.getByPlaceholder('Enter budget').fill('1600')
-  await page.getByRole('button', { name: /next: resolution/i }).click()
-  await page.getByRole('button', { name: /1440p/i }).click()
-  await page.getByRole('button', { name: /next: fps target/i }).click()
+  await page.getByRole('button', { name: /next: use case/i }).click()
+  await page.getByRole('button', { name: /gaming/i }).click()
   await page.getByRole('button', { name: /generate build/i }).click()
 
-  // The generated-build banner explains what happened.
-  await expect(page.getByText(/this build hits/i)).toBeVisible()
+  // The generated-build banner summarises the use-case build.
+  await expect(page.getByText(/gaming build/i)).toBeVisible()
 
   // Selected parts are visible on screen (part list rows).
   await expect(page.getByRole('button', { name: /remove cpu$/i })).toBeVisible()
