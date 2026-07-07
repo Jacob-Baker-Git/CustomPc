@@ -1,7 +1,7 @@
 import { partQuality } from './partQuality'
-import { computeBottleneck } from './bottleneck'
 import { checkCompatibility } from './compatibility'
 import { gameFps } from './gameFps'
+import { partSynergy } from './partSynergy'
 import { BUILD_PROFILES, USE_CASE_LABEL } from './buildProfiles'
 
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n))
@@ -43,17 +43,21 @@ export function rateBuild(parts, useCase, catalog) {
   for (const c of cats) { const wc = w[c] ?? 0; wsum += wc; lsum += wc * level[c] }
   const D = wsum > 0 ? lsum / wsum : 0
 
-  const bn = computeBottleneck(parts.cpu, parts.gpu, profile.resolution)
-
   const out = {}
   for (const c of cats) {
     const adequacy = clamp(Math.round(100 * level[c] / Math.max(expect[c] ?? 1, 1)), 0, 100)
+    const syn = partSynergy(parts, c, useCase)
     let balance
-    if (c === 'cpu') balance = bn && bn.limitedBy === 'cpu' ? bn.balancePct : 100
-    else if (c === 'gpu') balance = bn && bn.limitedBy === 'gpu' ? bn.balancePct : 100
-    else balance = clamp(Math.round(100 * level[c] / Math.max(D, 1)), 0, 100)
+    let synReason = null
+    if (syn) {
+      balance = syn.balance
+      synReason = syn.reason
+    } else {
+      balance = clamp(Math.round(100 * level[c] / Math.max(D, 1)), 0, 100)
+    }
     const score = Math.round(Math.min(adequacy, balance))
-    out[c] = { score, level: level[c], part: parts[c], isWeakLink: score < 70 }
+    const reason = balance < adequacy ? synReason : adequacy < 70 ? `Underpowered for ${label}` : null
+    out[c] = { score, level: level[c], part: parts[c], isWeakLink: score < 70, reason }
   }
 
   let owsum = 0, ossum = 0

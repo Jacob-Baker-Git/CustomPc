@@ -56,6 +56,19 @@ describe('rateBuild', () => {
   it('returns overall 0 without a CPU or GPU', () => {
     expect(rateBuild({ cpu: cS }, 'gaming', ratingCatalog)).toEqual({ overall: 0, verdict: expect.any(String), parts: {} })
   })
+  it('surfaces a synergy reason on a held-back part', () => {
+    const gVram = { id: 'gv', category: 'gpu', perfScore: 400, price: 900, tdp: 300, length: 300, specs: { vram: 8 } }
+    const cat = [cW, cM, cS, gW, gM, gVram, rS]
+    const r = rateBuild({ cpu: cS, gpu: gVram, ram: rS }, 'creation', cat)
+    expect(r.parts.gpu.reason).toMatch(/vram/i)
+    expect(r.parts.gpu.score).toBeLessThan(80)
+  })
+  it('softens a severe CPU bottleneck instead of zeroing balance', () => {
+    // cM has a non-zero level, so its score reflects the softened balance floor.
+    const r = rateBuild({ cpu: cM, gpu: gS }, 'gaming', ratingCatalog)
+    expect(r.parts.cpu.score).toBeGreaterThan(0)
+    expect(r.parts.cpu.score).toBeLessThan(r.parts.gpu.score)
+  })
 })
 
 const game = { id: 'fortnite', name: 'Fortnite', fpsFactor: 1, cpuFactor: 1 }
