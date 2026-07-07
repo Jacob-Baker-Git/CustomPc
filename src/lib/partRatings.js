@@ -24,9 +24,11 @@ function verdictFor(overall, label) {
   return `Struggles with ${label}`
 }
 
-// Score every present part /100 for the use case. cpu/gpu balance comes from the
-// FPS bottleneck; other parts are judged against the build's own tier. A part is
-// only as good as its worst of {adequacy vs the use-case expectation, balance}.
+// Score every present part /100 for the use case. `balance` (how well it pairs
+// with the rest of the build) comes from partSynergy for cpu/gpu/ram/storage/psu/
+// cooler; mobo/case/fans fall back to a vs-build-tier comparison. A part is only
+// as good as its worst of {adequacy vs the use-case expectation, balance}, and the
+// limiting factor is surfaced as `reason`.
 export function rateBuild(parts, useCase, catalog) {
   const profile = BUILD_PROFILES[useCase] ?? BUILD_PROFILES.gaming
   const label = USE_CASE_LABEL[useCase] ?? 'this use'
