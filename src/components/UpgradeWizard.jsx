@@ -177,14 +177,17 @@ export default function UpgradeWizard({ onBack }) {
             <div className="space-y-1.5">
               {rows.map(([cat, info]) => (
                 <div key={cat} className="border border-slate-800/60 rounded-sm">
-                  <button onClick={() => setOpenCat(openCat === cat ? null : cat)} className="w-full flex items-center gap-3 px-3 py-2 text-left">
-                    <span className="uppercase text-[10px] text-slate-500 w-16 shrink-0">{CAT_LABEL[cat] ?? cat}</span>
-                    <span className="text-sm text-slate-100 flex-1 min-w-0 truncate">{info.part.name}</span>
-                    <span className="w-20 h-1.5 rounded-full bg-slate-800 overflow-hidden shrink-0">
-                      <span className={`block h-full ${scoreBar(info.score)}`} style={{ width: `${info.score}%` }} />
-                    </span>
-                    <span className={`${TELEMETRY} text-sm font-semibold w-8 text-right shrink-0 ${scoreText(info.score)}`}>{info.score}</span>
-                    <ChevronDown size={14} className={`text-slate-500 transition-transform shrink-0 ${openCat === cat ? 'rotate-180' : ''}`} aria-hidden="true" />
+                  <button onClick={() => setOpenCat(openCat === cat ? null : cat)} className="w-full px-3 py-2 text-left">
+                    <div className="flex items-center gap-3">
+                      <span className="uppercase text-[10px] text-slate-500 w-16 shrink-0">{CAT_LABEL[cat] ?? cat}</span>
+                      <span className="text-sm text-slate-100 flex-1 min-w-0 truncate">{info.part.name}</span>
+                      <span className="w-20 h-1.5 rounded-full bg-slate-800 overflow-hidden shrink-0">
+                        <span className={`block h-full ${scoreBar(info.score)}`} style={{ width: `${info.score}%` }} />
+                      </span>
+                      <span className={`${TELEMETRY} text-sm font-semibold w-8 text-right shrink-0 ${scoreText(info.score)}`}>{info.score}</span>
+                      <ChevronDown size={14} className={`text-slate-500 transition-transform shrink-0 ${openCat === cat ? 'rotate-180' : ''}`} aria-hidden="true" />
+                    </div>
+                    {info.reason && <p className="text-[11px] text-amber-300/80 mt-1 pl-[4.75rem]">{info.reason}</p>}
                   </button>
 
                   {openCat === cat && (
