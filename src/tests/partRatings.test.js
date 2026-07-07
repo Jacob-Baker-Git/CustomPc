@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { partLevel } from '../lib/partRatings'
+import { partLevel, rateBuild } from '../lib/partRatings'
 
 const cpuLo = { id: 'cpu-lo', category: 'cpu', perfScore: 50 }
 const cpuMid = { id: 'cpu-mid', category: 'cpu', perfScore: 150 }
@@ -18,5 +18,42 @@ describe('partLevel', () => {
   })
   it('null part is 0', () => {
     expect(partLevel(null, catalog)).toBe(0)
+  })
+})
+
+// Three levels per category so partLevel gives 0 / ~50 / 100.
+const cW = { id: 'cw', category: 'cpu', perfScore: 60,  price: 100, tdp: 65,  socket: 'AM5' }
+const cM = { id: 'cm', category: 'cpu', perfScore: 160, price: 220, tdp: 88,  socket: 'AM5' }
+const cS = { id: 'cs', category: 'cpu', perfScore: 260, price: 340, tdp: 120, socket: 'AM5' }
+const gW = { id: 'gw', category: 'gpu', perfScore: 120, price: 200, tdp: 150, length: 260 }
+const gM = { id: 'gm', category: 'gpu', perfScore: 260, price: 420, tdp: 220, length: 280 }
+const gS = { id: 'gs', category: 'gpu', perfScore: 400, price: 800, tdp: 300, length: 300 }
+const rW = { id: 'rw', category: 'ram', capacityGb: 8,  price: 30,  ramType: 'DDR5', speed: 5200 }
+const rS = { id: 'rs', category: 'ram', capacityGb: 64, price: 200, ramType: 'DDR5', speed: 6000 }
+const ratingCatalog = [cW, cM, cS, gW, gM, gS, rW, rS]
+
+describe('rateBuild', () => {
+  it('scores a weak CPU behind a strong GPU below the GPU (gaming)', () => {
+    const r = rateBuild({ cpu: cW, gpu: gS }, 'gaming', ratingCatalog)
+    expect(r.parts.cpu.score).toBeLessThan(r.parts.gpu.score)
+    expect(r.parts.gpu.score).toBeGreaterThanOrEqual(80)
+  })
+  it('rates a mid build higher for office than for gaming', () => {
+    const build = { cpu: cM, gpu: gM, ram: rS }
+    expect(rateBuild(build, 'office', ratingCatalog).overall)
+      .toBeGreaterThan(rateBuild(build, 'gaming', ratingCatalog).overall)
+  })
+  it('flags low RAM as a weak link for content creation', () => {
+    const r = rateBuild({ cpu: cS, gpu: gS, ram: rW }, 'creation', ratingCatalog)
+    expect(r.parts.ram.isWeakLink).toBe(true)
+    expect(r.parts.ram.score).toBeLessThan(r.parts.gpu.score)
+  })
+  it('rates a strong balanced build highly', () => {
+    const r = rateBuild({ cpu: cS, gpu: gS, ram: rS }, 'gaming', ratingCatalog)
+    expect(r.overall).toBeGreaterThanOrEqual(70)
+    expect(r.verdict).toMatch(/gaming/i)
+  })
+  it('returns overall 0 without a CPU or GPU', () => {
+    expect(rateBuild({ cpu: cS }, 'gaming', ratingCatalog)).toEqual({ overall: 0, verdict: expect.any(String), parts: {} })
   })
 })
