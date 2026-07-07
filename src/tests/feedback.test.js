@@ -1,0 +1,37 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { validateFeedback, submitFeedback } from '../lib/feedback'
+
+describe('validateFeedback', () => {
+  it('accepts a complete valid entry', () => {
+    expect(validateFeedback({ rating: 5, type: 'idea', message: 'Great tool' }).ok).toBe(true)
+  })
+  it('rejects a bad rating, type, empty message, and malformed email', () => {
+    expect(validateFeedback({ rating: 0, type: 'idea', message: 'x' }).errors.rating).toBeTruthy()
+    expect(validateFeedback({ rating: 5, type: 'nope', message: 'x' }).errors.type).toBeTruthy()
+    expect(validateFeedback({ rating: 5, type: 'bug', message: '  ' }).errors.message).toBeTruthy()
+    expect(validateFeedback({ rating: 5, type: 'bug', message: 'hi', email: 'bad' }).errors.email).toBeTruthy()
+  })
+  it('allows an omitted email', () => {
+    expect(validateFeedback({ rating: 3, type: 'other', message: 'ok' }).ok).toBe(true)
+  })
+})
+
+describe('submitFeedback', () => {
+  beforeEach(() => { global.fetch = vi.fn().mockResolvedValue({ ok: true }) })
+  it('POSTs a trimmed payload and resolves on success', async () => {
+    await submitFeedback({ rating: 4, type: 'praise', message: '  nice  ', email: '' })
+    const [url, opts] = global.fetch.mock.calls[0]
+    expect(url).toMatch(/\/rest\/v1\/feedback$/)
+    expect(opts.method).toBe('POST')
+    const body = JSON.parse(opts.body)
+    expect(body).toEqual({ rating: 4, type: 'praise', message: 'nice', email: null })
+  })
+  it('throws on an invalid entry without calling fetch', async () => {
+    await expect(submitFeedback({ rating: 9, type: 'bug', message: 'x' })).rejects.toThrow()
+    expect(global.fetch).not.toHaveBeenCalled()
+  })
+  it('throws on a non-ok response', async () => {
+    global.fetch = vi.fn().mockResolvedValue({ ok: false, status: 500 })
+    await expect(submitFeedback({ rating: 4, type: 'bug', message: 'x' })).rejects.toThrow(/500/)
+  })
+})
