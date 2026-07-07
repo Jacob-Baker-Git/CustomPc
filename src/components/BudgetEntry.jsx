@@ -112,8 +112,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
 
         {step === 2 && (
           <>
-            <p className="rise text-gray-400 mb-2 text-lg">What will you use this PC for?</p>
-            <p className="rise rise-2 text-slate-500 text-xs mb-8 max-w-sm text-center">Each option tunes the build — GPU-heavy for gaming, more CPU &amp; RAM for creation and code. We spend as much of your budget as possible.</p>
+            <p className="rise text-gray-400 mb-10 text-lg">What will you use this PC for?</p>
             <div className="rise rise-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {USE_CASES.map((u) => {
                 const selected = useCase === u.id
