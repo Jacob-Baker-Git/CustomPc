@@ -78,11 +78,26 @@ describe('BudgetEntry wizard', () => {
     expect(window.location.hash).toBe('#build')
   })
 
-  it('a quick-start tier applies a generated build and its budget', () => {
+  it('a budget preset prefills the budget and jumps to the use-case step', () => {
+    render(<BudgetEntry onSubmit={() => {}} onBack={() => {}} />)
+    fireEvent.click(screen.getByRole('button', { name: /entry · £900/i }))
+    expect(screen.getByText(/what will you use/i)).toBeInTheDocument()
+  })
+
+  it('same budget, different use case yields different builds', () => {
     const onSubmit = vi.fn()
+    const { unmount } = render(<BudgetEntry onSubmit={onSubmit} onBack={() => {}} />)
+    fireEvent.click(screen.getByRole('button', { name: /entry · £900/i }))
+    fireEvent.click(screen.getByRole('button', { name: /gaming/i }))
+    fireEvent.click(screen.getByRole('button', { name: /generate build/i }))
+    const gamingGpu = useBuilderStore.getState().selectedParts.gpu?.id
+    unmount()
+    useBuilderStore.setState({ budget: 0, selectedParts: {}, resolution: '1440p' })
     render(<BudgetEntry onSubmit={onSubmit} onBack={() => {}} />)
-    fireEvent.click(screen.getByRole('button', { name: /budget · £900/i }))
-    expect(onSubmit).toHaveBeenCalledWith(900)
-    expect(useBuilderStore.getState().selectedParts.cpu).toBeDefined()
+    fireEvent.click(screen.getByRole('button', { name: /entry · £900/i }))
+    fireEvent.click(screen.getByRole('button', { name: /everyday & office/i }))
+    fireEvent.click(screen.getByRole('button', { name: /generate build/i }))
+    const officeGpu = useBuilderStore.getState().selectedParts.gpu?.id
+    expect(gamingGpu).not.toBe(officeGpu)
   })
 })

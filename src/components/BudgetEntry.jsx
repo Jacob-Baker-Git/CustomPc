@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import Backdrop from './Backdrop'
 import useBuilderStore from '../store/useBuilderStore'
-import { TIERS, partsForTier } from '../lib/tiers'
+import { TIERS } from '../lib/tiers'
 import { BUILD_PROFILES, USE_CASES } from '../lib/buildProfiles'
 import { buildForUseCase } from '../lib/useCaseBuilder'
 import useCatalogStore from '../store/useCatalogStore'
@@ -21,21 +21,10 @@ export default function BudgetEntry({ onSubmit, onBack }) {
   const partsData = useCatalogStore((s) => s.parts)
 
   const budgetNum = parseFloat(value)
-  const tierBuilds = useMemo(
-    () => TIERS.map((t) => ({ tier: t, parts: partsForTier(t, partsData) })),
-    [partsData],
-  )
 
   function handleBudgetSubmit(e) {
     e.preventDefault()
     if (budgetNum > 0) setStep(2)
-  }
-
-  function applyTier(tier, parts) {
-    enterBuildTab()
-    setResolution(BUILD_PROFILES[tier.useCase].resolution)
-    setBuild(parts)
-    onSubmit(tier.budget)
   }
 
   function generate() {
@@ -95,11 +84,11 @@ export default function BudgetEntry({ onSubmit, onBack }) {
               </button>
             </form>
             <div className="rise rise-3 mt-8 flex flex-wrap items-center justify-center gap-2">
-              <span className="text-xs text-slate-500">or a ready-made build:</span>
-              {tierBuilds.map(({ tier, parts }) => (
+              <span className="text-xs text-slate-500">or start from a preset:</span>
+              {TIERS.map((tier) => (
                 <button
                   key={tier.id}
-                  onClick={() => applyTier(tier, parts)}
+                  onClick={() => { setValue(String(tier.budget)); setStep(2) }}
                   className="text-xs font-mono px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   {tier.label} · £{tier.budget}
