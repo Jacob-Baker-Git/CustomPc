@@ -7,7 +7,7 @@ import { encodeBuild } from '../lib/buildCodec'
 
 const cpuLo = { id: 'cpu-lo', category: 'cpu', name: 'CPU Lo', price: 100, perfScore: 50,  tdp: 65,  socket: 'AM5' }
 const cpuHi = { id: 'cpu-hi', category: 'cpu', name: 'CPU Hi', price: 300, perfScore: 250, tdp: 105, socket: 'AM5' }
-const gpuLo = { id: 'gpu-lo', category: 'gpu', name: 'GPU Lo', price: 200, perfScore: 300, tdp: 200, length: 250 }
+const gpuHi = { id: 'gpu-hi', category: 'gpu', name: 'GPU Hi', price: 600, perfScore: 300, tdp: 250, length: 300 }
 const game  = { id: 'fortnite', name: 'Fortnite', fpsFactor: 1, cpuFactor: 1 }
 
 function loadSavedRig() {
@@ -17,43 +17,46 @@ function loadSavedRig() {
 
 beforeEach(() => {
   window.location.hash = ''
-  useCatalogStore.setState({ parts: [cpuLo, cpuHi, gpuLo], games: [game] })
+  useCatalogStore.setState({ parts: [cpuLo, cpuHi, gpuHi], games: [game] })
   useBuilderStore.setState({ budget: 0, flow: 'upgrade', selectedParts: {}, resolution: '1440p' })
-  const code = encodeBuild({ budget: 0, resolution: '1440p', parts: { cpu: cpuLo, gpu: gpuLo }, peripherals: {} })
+  const code = encodeBuild({ budget: 0, resolution: '1440p', parts: { cpu: cpuLo, gpu: gpuHi }, peripherals: {} })
   useSavedStore.setState({ saved: [{ id: 's1', name: 'My rig', savedAt: 1, code }] })
 })
 
-describe('UpgradeWizard fork', () => {
-  it('disables both path buttons until CPU and GPU are set', () => {
+describe('UpgradeWizard ratings flow', () => {
+  it('requires CPU and GPU before continuing to the use case', () => {
     render(<UpgradeWizard onBack={() => {}} />)
-    expect(screen.getByRole('button', { name: /select what i want to upgrade/i })).toBeDisabled()
-    expect(screen.getByRole('button', { name: /i'm unsure/i })).toBeDisabled()
+    expect(screen.getByRole('button', { name: /next: use case/i })).toBeDisabled()
   })
 
-  it('Path A: highlight CPU -> goal -> apply the CPU upgrade', () => {
+  it('highlights a saved build when selected', () => {
+    render(<UpgradeWizard onBack={() => {}} />)
+    fireEvent.click(screen.getByRole('button', { name: /select saved build/i }))
+    const card = screen.getByRole('button', { name: /my rig/i })
+    fireEvent.click(card)
+    expect(card).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: /next: use case/i })).not.toBeDisabled()
+  })
+
+  it('rates the build, upgrades a part, and opens it in the Build tab', () => {
     window.location.hash = 'summary'
     render(<UpgradeWizard onBack={() => {}} />)
     loadSavedRig()
-    fireEvent.click(screen.getByRole('button', { name: /select what i want to upgrade/i }))
+    fireEvent.click(screen.getByRole('button', { name: /next: use case/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^gaming/i }))
+    fireEvent.click(screen.getByRole('button', { name: /see ratings/i }))
+
+    // Dashboard shows the weak CPU row; open it and apply the upgrade.
     fireEvent.click(screen.getByRole('button', { name: /cpu lo/i }))
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }))
-    fireEvent.click(screen.getByRole('button', { name: /see upgrades/i }))
-    fireEvent.click(screen.getAllByRole('button', { name: /^apply$/i })[0])
+    fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
+
+    // Finalise into the builder.
+    fireEvent.click(screen.getByRole('button', { name: /open in build tab/i }))
 
     const s = useBuilderStore.getState()
     expect(s.selectedParts.cpu.id).toBe('cpu-hi')
-    expect(s.budget).toBe(700)
-    expect(window.location.hash).toBe('#build')
-  })
-
-  it('Path B: skips highlight, shows a diagnosis, Apply all swaps the CPU', () => {
-    render(<UpgradeWizard onBack={() => {}} />)
-    loadSavedRig()
-    fireEvent.click(screen.getByRole('button', { name: /i'm unsure/i }))
-    fireEvent.click(screen.getByRole('button', { name: /see upgrades/i }))
-    fireEvent.click(screen.getByRole('button', { name: /apply all recommended/i }))
-    const s = useBuilderStore.getState()
-    expect(s.selectedParts.cpu.id).toBe('cpu-hi')
+    expect(s.selectedParts.gpu.id).toBe('gpu-hi')
+    expect(s.budget).toBe(900) // 300 (cpu-hi) + 600 (gpu-hi)
     expect(window.location.hash).toBe('#build')
   })
 })
