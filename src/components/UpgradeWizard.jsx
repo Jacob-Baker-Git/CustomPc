@@ -187,7 +187,7 @@ export default function UpgradeWizard({ onBack }) {
                       <span className={`${TELEMETRY} text-sm font-semibold w-8 text-right shrink-0 ${scoreText(info.score)}`}>{info.score}</span>
                       <ChevronDown size={14} className={`text-slate-500 transition-transform shrink-0 ${openCat === cat ? 'rotate-180' : ''}`} aria-hidden="true" />
                     </div>
-                    {info.reason && <p className="text-[11px] text-amber-300/80 mt-1 pl-[4.75rem]">{info.reason}</p>}
+                    {info.reason && <span className="block text-[11px] text-amber-300/80 mt-1 pl-[4.75rem]">{info.reason}</span>}
                   </button>
 
                   {openCat === cat && (
