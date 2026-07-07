@@ -48,10 +48,10 @@ describe('BudgetEntry wizard', () => {
     expect(useBuilderStore.getState().selectedParts.gpu).toBeDefined()
   })
 
-  it('workstation use case defaults the stored resolution to 4k', () => {
+  it('content creation use case defaults the stored resolution to 4k', () => {
     render(<BudgetEntry onSubmit={() => {}} onBack={() => {}} />)
     enterBudget('3000')
-    fireEvent.click(screen.getByRole('button', { name: /workstation/i }))
+    fireEvent.click(screen.getByRole('button', { name: /content creation/i }))
     fireEvent.click(screen.getByRole('button', { name: /generate build/i }))
     expect(useBuilderStore.getState().resolution).toBe('4k')
   })

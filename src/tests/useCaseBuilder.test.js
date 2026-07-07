@@ -32,7 +32,7 @@ describe('buildForUseCase', () => {
 
   it('is deterministic', () => {
     const idMap = (b) => Object.fromEntries(Object.entries(b).map(([k, v]) => [k, v.id]))
-    expect(idMap(buildForUseCase(1500, 'everyday', partsData))).toEqual(idMap(buildForUseCase(1500, 'everyday', partsData)))
+    expect(idMap(buildForUseCase(1500, 'office', partsData))).toEqual(idMap(buildForUseCase(1500, 'office', partsData)))
   })
 
   it('falls back to the gaming profile for an unknown use case', () => {

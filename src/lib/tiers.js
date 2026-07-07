@@ -5,7 +5,7 @@ import { buildForUseCase } from './useCaseBuilder'
 export const TIERS = [
   { id: 'budget',     label: 'Budget',     budget: 900,  useCase: 'gaming' },
   { id: 'mainstream', label: 'Mainstream', budget: 1700, useCase: 'gaming' },
-  { id: 'ultimate',   label: 'Ultimate',   budget: 3800, useCase: 'workstation' },
+  { id: 'ultimate',   label: 'Ultimate',   budget: 3800, useCase: 'creation' },
 ]
 
 export function partsForTier(tier, parts) {
