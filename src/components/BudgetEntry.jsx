@@ -61,8 +61,8 @@ export default function BudgetEntry({ onSubmit, onBack }) {
     <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#05080f]">
       <Backdrop />
       <div className="relative z-10 flex flex-col items-center px-4">
-        <h1 className="text-5xl font-bold mb-3 text-white">Build Your PC</h1>
-        <ol className="flex items-center gap-2 mb-6 text-[11px] uppercase tracking-wider">
+        <h1 className="rise text-5xl font-bold mb-3 text-white">Build Your PC</h1>
+        <ol className="rise flex items-center gap-2 mb-6 text-[11px] uppercase tracking-wider">
           {STEPS.map((label, i) => (
             <li key={label} className="flex items-center gap-2">
               {i > 0 && <span className="text-slate-700">→</span>}
@@ -76,8 +76,9 @@ export default function BudgetEntry({ onSubmit, onBack }) {
 
         {step === 1 && (
           <>
-            <p className="text-gray-400 mb-10 text-lg">What's your budget?</p>
-            <form onSubmit={handleBudgetSubmit} aria-label="form" className="flex flex-col items-center gap-6">
+            <p className="rise text-gray-400 mb-2 text-lg">What's your budget?</p>
+            <p className="rise rise-2 text-slate-500 text-xs mb-8 max-w-xs text-center">Prices are curated estimates (July 2026) — you can change any part after.</p>
+            <form onSubmit={handleBudgetSubmit} aria-label="form" className="rise rise-2 flex flex-col items-center gap-6">
               <div className="flex items-center gap-2 text-3xl">
                 <span className="text-cyan-300">£</span>
                 <input
@@ -94,8 +95,8 @@ export default function BudgetEntry({ onSubmit, onBack }) {
                 Next: use case
               </button>
             </form>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-              <span className="text-xs text-slate-500">or quick-start:</span>
+            <div className="rise rise-3 mt-8 flex flex-wrap items-center justify-center gap-2">
+              <span className="text-xs text-slate-500">or a ready-made build:</span>
               {tierBuilds.map(({ tier, parts }) => (
                 <button
                   key={tier.id}
@@ -106,14 +107,15 @@ export default function BudgetEntry({ onSubmit, onBack }) {
                 </button>
               ))}
             </div>
-            <button onClick={onBack} className="mt-8 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to menu</button>
+            <button onClick={onBack} className="rise rise-4 mt-8 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to menu</button>
           </>
         )}
 
         {step === 2 && (
           <>
-            <p className="text-gray-400 mb-10 text-lg">What will you use this PC for?</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <p className="rise text-gray-400 mb-2 text-lg">What will you use this PC for?</p>
+            <p className="rise rise-2 text-slate-500 text-xs mb-8 max-w-sm text-center">Each option tunes the build — GPU-heavy for gaming, more CPU &amp; RAM for creation and code. We spend as much of your budget as possible.</p>
+            <div className="rise rise-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {USE_CASES.map((u) => {
                 const selected = useCase === u.id
                 return (
@@ -130,7 +132,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
                 )
               })}
             </div>
-            <div className="flex gap-3 mt-8">
+            <div className="rise rise-3 flex gap-3 mt-8">
               <button onClick={generate} className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-8 py-3 rounded-sm transition-colors">
                 Generate build
               </button>
@@ -138,7 +140,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
                 Start empty instead
               </button>
             </div>
-            <button onClick={() => setStep(1)} className="mt-6 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to budget</button>
+            <button onClick={() => setStep(1)} className="rise rise-4 mt-6 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to budget</button>
           </>
         )}
       </div>

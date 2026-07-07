@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Subtle entrance motion for the menu / wizard screens: a short fade + rise.
+   Staggered via .rise-2/3/4. Honors prefers-reduced-motion — content then
+   appears instantly with no transform. */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise   { opacity: 0; animation: riseIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.rise-2 { animation-delay: 70ms; }
+.rise-3 { animation-delay: 140ms; }
+.rise-4 { animation-delay: 210ms; }
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; opacity: 1; transform: none; }
+}
+
 /* Desktop-only Build-tab layout: 3D on the right, bottleneck + how-it-runs on
    the left, everything else full-width below. Below lg it is a plain flex
    column, so the child DOM order IS the (unchanged) mobile order. Every child
