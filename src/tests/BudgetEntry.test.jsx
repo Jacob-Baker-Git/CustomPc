@@ -4,7 +4,7 @@ import useBuilderStore from '../store/useBuilderStore'
 
 beforeEach(() => {
   window.location.hash = ''
-  useBuilderStore.setState({ budget: 0, selectedParts: {}, selectedPeripherals: {}, resolution: '1440p', lastGenerated: null })
+  useBuilderStore.setState({ budget: 0, selectedParts: {}, selectedPeripherals: {}, resolution: '1440p', lastGenerated: null, useCase: 'gaming' })
 })
 
 const enterBudget = (v) => {
@@ -99,5 +99,13 @@ describe('BudgetEntry wizard', () => {
     fireEvent.click(screen.getByRole('button', { name: /generate build/i }))
     const officeGpu = useBuilderStore.getState().selectedParts.gpu?.id
     expect(gamingGpu).not.toBe(officeGpu)
+  })
+
+  it('stores the picked use case for the build-page rating', () => {
+    render(<BudgetEntry onSubmit={() => {}} onBack={() => {}} />)
+    enterBudget('1500')
+    fireEvent.click(screen.getByRole('button', { name: /programming/i }))
+    fireEvent.click(screen.getByRole('button', { name: /generate build/i }))
+    expect(useBuilderStore.getState().useCase).toBe('programming')
   })
 })

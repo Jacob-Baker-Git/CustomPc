@@ -18,6 +18,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
   const setBuild = useBuilderStore((s) => s.setBuild)
   const clearBuild = useBuilderStore((s) => s.clearBuild)
   const setLastGenerated = useBuilderStore((s) => s.setLastGenerated)
+  const setStoreUseCase = useBuilderStore((s) => s.setUseCase)
   const partsData = useCatalogStore((s) => s.parts)
 
   const budgetNum = parseFloat(value)
@@ -33,6 +34,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
     enterBuildTab()
     setResolution(profile.resolution)
     setBuild(parts)
+    setStoreUseCase(useCase)
     setLastGenerated({ useCase, spend: totalOf(parts), budget: budgetNum })
     onSubmit(budgetNum)
   }
@@ -42,6 +44,7 @@ export default function BudgetEntry({ onSubmit, onBack }) {
   function startEmpty() {
     enterBuildTab()
     clearBuild()
+    setStoreUseCase(useCase)
     setResolution(BUILD_PROFILES[useCase].resolution)
     onSubmit(budgetNum)
   }
