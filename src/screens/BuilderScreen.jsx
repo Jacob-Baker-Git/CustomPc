@@ -6,12 +6,11 @@ import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
 import InfoDisclaimer from '../components/InfoDisclaimer'
 import UpgradeSuggestion from '../components/UpgradeSuggestion'
-import BottleneckIndicator from '../components/BottleneckIndicator'
+import BuildRatingPanel from '../components/BuildRatingPanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
-import GamePerformancePanel from '../components/GamePerformancePanel'
 import SavedBuilds from '../components/SavedBuilds'
 import CategoryList from '../components/CategoryList'
 import GeneratedBanner from '../components/GeneratedBanner'
@@ -62,7 +61,7 @@ export default function BuilderScreen() {
           </div>
         </div>
         {view === 'build' ? (
-          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl mx-auto p-4 pb-12">
+          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl 2xl:max-w-[88rem] mx-auto p-4 pb-12">
             <div className="build-grid">
               <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[60vh]">
                 <CanvasErrorBoundary>
@@ -82,8 +81,7 @@ export default function BuilderScreen() {
                   columns={2}
                 />
               </div>
-              <div className="area-bottleneck"><BottleneckIndicator /></div>
-              <div className="area-perf"><GamePerformancePanel /></div>
+              <div className="area-rating"><BuildRatingPanel /></div>
               <div className="area-warnings"><BuildWarnings /></div>
               <div className="area-upgrade"><UpgradeSuggestion /></div>
               <div className="area-autobuild"><AutoBuildButton /></div>
