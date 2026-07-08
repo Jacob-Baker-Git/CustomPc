@@ -20,6 +20,9 @@ test('wizard generates a build and the selected parts are visible', async ({ pag
   await expect(page.getByRole('button', { name: /remove cpu$/i })).toBeVisible()
   await expect(page.getByRole('button', { name: /remove gpu/i })).toBeVisible()
 
+  // The Build tab now rates the generated build inline.
+  await expect(page.getByText('/100')).toBeVisible()
+
   // Deep-linkable tabs: summary shows the same build.
   await page.getByRole('button', { name: /^summary$/i }).click()
   await expect(page).toHaveURL(/#summary/)
