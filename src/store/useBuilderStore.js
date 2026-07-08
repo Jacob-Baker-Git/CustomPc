@@ -44,6 +44,10 @@ const useBuilderStore = create(persist((set) => ({
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
 
+  // Use case the build is rated for — drives BuildRatingPanel and its dropdown.
+  useCase: 'gaming',
+  setUseCase: (useCase) => set({ useCase }),
+
   // Last custom "WxH" resolution the user entered in the wizard — kept so the
   // resolution toggle can offer it as a fourth option alongside the presets.
   customResolution: null,
@@ -71,6 +75,7 @@ const useBuilderStore = create(persist((set) => ({
     selectedPeripherals: s.selectedPeripherals,
     resolution: s.resolution,
     customResolution: s.customResolution,
+    useCase: s.useCase,
   }),
 }))
 
