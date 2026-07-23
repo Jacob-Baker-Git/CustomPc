@@ -13,6 +13,7 @@ beforeEach(() => {
   useBuilderStore.setState({
     budget: 1600,
     resolution: '1440p',
+    useCase: 'gaming',
     selectedParts: parts,
     selectedPeripherals: {},
     lastGenerated: { met: true, estFps, targetFps: 60, gameName: 'Fortnite' },
@@ -34,9 +35,12 @@ describe('GeneratedBanner', () => {
 
   it('spend-the-leftover upgrades the build and dismisses the banner', () => {
     render(<GeneratedBanner />)
-    const before = useBuilderStore.getState().selectedParts.gpu.perfScore
+    const total = (p) => Object.values(p).reduce((s, x) => s + (x?.price ?? 0), 0)
+    const before = total(useBuilderStore.getState().selectedParts)
     fireEvent.click(screen.getByRole('button', { name: /spend the leftover/i }))
-    expect(useBuilderStore.getState().selectedParts.gpu.perfScore).toBeGreaterThan(before)
+    const after = total(useBuilderStore.getState().selectedParts)
+    expect(after).toBeGreaterThan(before)
+    expect(after).toBeLessThanOrEqual(1600)
     expect(useBuilderStore.getState().lastGenerated).toBeNull()
   })
 

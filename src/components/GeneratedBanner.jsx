@@ -13,6 +13,7 @@ export default function GeneratedBanner() {
   const info          = useBuilderStore((s) => s.lastGenerated)
   const budget        = useBuilderStore((s) => s.budget)
   const resolution    = useBuilderStore((s) => s.resolution)
+  const useCase       = useBuilderStore((s) => s.useCase)
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const setBuild      = useBuilderStore((s) => s.setBuild)
   const clear         = useBuilderStore((s) => s.clearLastGenerated)
@@ -25,7 +26,7 @@ export default function GeneratedBanner() {
   const resLabel = RES_LABEL[resolution] ?? resolution
 
   function spendLeftover() {
-    setBuild(maxOutBudget(selectedParts, budget, partsData, resolution))
+    setBuild(maxOutBudget(selectedParts, budget, partsData, useCase))
     clear()
   }
 
