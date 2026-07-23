@@ -1,30 +1,27 @@
 import { useState } from 'react'
 import { Zap } from 'lucide-react'
-import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
-import { autoBuild } from '../lib/autoBuilder'
+import useBuilderStore from '../store/useBuilderStore'
+import { buildForUseCase } from '../lib/useCaseBuilder'
 import { BTN_PRIMARY, PANEL_STRONG } from '../lib/uiTokens'
 import useCatalogStore from '../store/useCatalogStore'
 
 export default function AutoBuildButton() {
-  const selectedParts = useBuilderStore((s) => s.selectedParts)
   const budget = useBuilderStore((s) => s.budget)
-  const resolution = useBuilderStore((s) => s.resolution)
+  const useCase = useBuilderStore((s) => s.useCase)
   const setBuild = useBuilderStore((s) => s.setBuild)
-  const spent = useBuilderStore(selTotalSpent)
   const partsData = useCatalogStore((s) => s.parts)
   const [notice, setNotice] = useState(null)
 
   function handleClick() {
-    const result = autoBuild(selectedParts, budget, partsData, resolution)
-    const changed = Object.keys(result).some((c) => result[c]?.id !== selectedParts[c]?.id)
-    if (!changed) {
-      // Silently doing nothing looks broken — say why instead.
-      const remaining = budget - spent
-      setNotice(
-        remaining <= 0
-          ? `Your build already uses the whole £${budget.toFixed(0)} budget, so there's nothing left for auto-build to spend. Raise the budget (click the £ figure in the header) or remove a part first.`
-          : `Auto-build couldn't find any compatible part to add or upgrade for the £${remaining.toFixed(0)} you have left. Raise the budget (click the £ figure in the header) or swap a pricey part for a cheaper one.`
-      )
+    // Regenerate the best varied build for the budget + selected use case. Starts
+    // from scratch (not the current parts) so each click can differ — "build me
+    // the best one / try again".
+    const result = buildForUseCase(budget, useCase, partsData, { rng: Math.random })
+    const spend = Object.values(result).reduce((s, p) => s + (p?.price ?? 0), 0)
+    if (spend > budget) {
+      // chooseBest's cheapest fallback overshoots when the budget can't complete a
+      // build — surface that instead of applying an over-budget rig.
+      setNotice(`£${budget.toFixed(0)} isn't enough to auto-build a complete PC yet. Raise the budget by clicking the £ figure in the header.`)
       return
     }
     setBuild(result)
@@ -42,7 +39,7 @@ export default function AutoBuildButton() {
       {notice && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
           <div role="dialog" aria-modal="true" aria-label="Auto-build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-white text-sm font-semibold mb-2">Nothing to auto-build</h3>
+            <h3 className="text-white text-sm font-semibold mb-2">Budget too low</h3>
             <p className="text-xs text-slate-400">{notice}</p>
             <div className="flex justify-end mt-4">
               <button
