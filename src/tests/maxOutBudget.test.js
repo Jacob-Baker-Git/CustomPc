@@ -1,27 +1,35 @@
+import { describe, it, expect } from 'vitest'
 import { maxOutBudget } from '../lib/maxOutBudget'
-import { targetBuild } from '../lib/targetBuilder'
-import { estimateFps } from '../lib/fpsEstimate'
+import { buildForUseCase } from '../lib/useCaseBuilder'
+import { checkCompatibility } from '../lib/compatibility'
 import partsData from '../data/partsData.json'
-import gamesData from '../data/gamesData.json'
 
-const fortnite = gamesData.find((g) => g.id === 'fortnite')
-const total = (parts) => Object.values(parts).reduce((s, p) => s + (p?.price ?? 0), 0)
+const CATS = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans']
+const total = (b) => CATS.reduce((s, c) => s + (b[c]?.price ?? 0), 0)
+const ids = (b) => Object.fromEntries(CATS.map((c) => [c, b[c]?.id]))
 
 describe('maxOutBudget', () => {
-  it('spends leftover budget on FPS upgrades without exceeding the budget', () => {
-    // A modest 60fps target leaves a big chunk of a £1600 budget unspent.
-    const { parts } = targetBuild(1600, '1440p', 60, fortnite, partsData)
-    const before = estimateFps(parts.cpu, parts.gpu, '1440p')
-
-    const upgraded = maxOutBudget(parts, 1600, partsData, '1440p')
-
-    expect(estimateFps(upgraded.cpu, upgraded.gpu, '1440p')).toBeGreaterThan(before)
-    expect(total(upgraded)).toBeLessThanOrEqual(1600)
+  it('spends the leftover across categories, staying compatible and within budget', () => {
+    const base = buildForUseCase(1200, 'gaming', partsData)
+    const upgraded = maxOutBudget(base, 2200, partsData, 'gaming')
+    expect(total(upgraded)).toBeGreaterThan(total(base))
+    expect(total(upgraded)).toBeLessThanOrEqual(2200)
+    for (const c of CATS) {
+      const others = { ...upgraded }; delete others[c]
+      expect(checkCompatibility(others, upgraded[c]).compatible).toBe(true)
+    }
+    const changed = CATS.filter((c) => upgraded[c]?.id !== base[c]?.id)
+    expect(changed.some((c) => c !== 'cpu' && c !== 'gpu')).toBe(true)
   })
 
-  it('returns the build unchanged when nothing affordable improves FPS', () => {
-    const { parts } = targetBuild(1600, '1440p', 60, fortnite, partsData)
-    const upgraded = maxOutBudget(parts, total(parts), partsData, '1440p')
-    expect(upgraded).toEqual(parts)
+  it('is use-case aware: programming never shrinks RAM when spending leftover', () => {
+    const base = buildForUseCase(1200, 'programming', partsData)
+    const up = maxOutBudget(base, 2600, partsData, 'programming')
+    expect(up.ram.capacityGb).toBeGreaterThanOrEqual(base.ram.capacityGb)
+  })
+
+  it('leaves the build unchanged when there is no budget to spend', () => {
+    const base = buildForUseCase(1500, 'gaming', partsData)
+    expect(ids(maxOutBudget(base, total(base), partsData, 'gaming'))).toEqual(ids(base))
   })
 })
