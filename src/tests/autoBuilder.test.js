@@ -2,9 +2,27 @@ import { describe, it, expect } from 'vitest'
 import { autoBuild } from '../lib/autoBuilder'
 import partsData from '../data/partsData.json'
 import { partQuality } from '../lib/partQuality'
+import { BUILD_PROFILES } from '../lib/buildProfiles'
+import { checkCompatibility } from '../lib/compatibility'
 
 const CATS = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans']
 const idMap = (b) => Object.fromEntries(Object.entries(b).map(([k, v]) => [k, v.id]))
+
+// Small seedable PRNG so variety is reproducible in tests.
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+const gamingOpts = (extra) => ({
+  weights: BUILD_PROFILES.gaming.weights,
+  upgradeOrder: BUILD_PROFILES.gaming.upgradeOrder,
+  maximise: true,
+  ...extra,
+})
 
 describe('autoBuild', () => {
   it('produces a complete, compatible build within budget', () => {
@@ -54,5 +72,38 @@ describe('autoBuild options', () => {
     const heavy = autoBuild({}, 2500, partsData, '1440p', { weights: ramWeights, upgradeOrder: ['ram', 'cpu'], maximise: true })
     const gaming = autoBuild({}, 2500, partsData, '1440p')
     expect(partQuality(heavy.ram)).toBeGreaterThanOrEqual(partQuality(gaming.ram))
+  })
+})
+
+describe('autoBuild variety + lockExisting', () => {
+  it('a seeded build is complete, compatible and within budget', () => {
+    const b = autoBuild({}, 1800, partsData, '1440p', gamingOpts({ rng: mulberry32(1) }))
+    for (const c of CATS) expect(b[c], `missing ${c}`).toBeTruthy()
+    expect(CATS.reduce((s, c) => s + b[c].price, 0)).toBeLessThanOrEqual(1800)
+    for (const c of CATS) {
+      const others = { ...b }; delete others[c]
+      expect(checkCompatibility(others, b[c]).compatible).toBe(true)
+    }
+  })
+
+  it('the same seed reproduces the same build', () => {
+    expect(idMap(autoBuild({}, 1800, partsData, '1440p', gamingOpts({ rng: mulberry32(7) }))))
+      .toEqual(idMap(autoBuild({}, 1800, partsData, '1440p', gamingOpts({ rng: mulberry32(7) }))))
+  })
+
+  it('different seeds can produce different builds', () => {
+    const variants = new Set([1, 2, 3, 4, 5].map((s) =>
+      JSON.stringify(idMap(autoBuild({}, 1800, partsData, '1440p', gamingOpts({ rng: mulberry32(s) }))))))
+    expect(variants.size).toBeGreaterThan(1)
+  })
+
+  it('lockExisting:false steps up a passed-in part; default keeps it', () => {
+    const cheapCpu = [...partsData.filter((p) => p.category === 'cpu')].sort((a, b) => a.price - b.price)[0]
+    const seed = { cpu: cheapCpu }
+    const opts = { weights: BUILD_PROFILES.gaming.weights, upgradeOrder: ['cpu'], maximise: true }
+    const locked = autoBuild(seed, 2500, partsData, '1440p', { ...opts, lockExisting: true })
+    const unlocked = autoBuild(seed, 2500, partsData, '1440p', { ...opts, lockExisting: false })
+    expect(locked.cpu.id).toBe(cheapCpu.id)
+    expect(partQuality(unlocked.cpu)).toBeGreaterThan(partQuality(cheapCpu))
   })
 })

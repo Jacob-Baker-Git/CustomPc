@@ -32,22 +32,32 @@ function choosePsu(candidates, draw, remaining) {
   )
 }
 
-function chooseBest(category, candidates, slice, remaining) {
+// Head of a best-first pool, or a random one of its top k when an rng is given —
+// keeps a varied build inside the best tier. Deterministic (head) without rng.
+function pick(sortedBestFirst, rng, k = 3) {
+  if (sortedBestFirst.length === 0) return null
+  if (!rng) return sortedBestFirst[0]
+  return sortedBestFirst[Math.floor(rng() * Math.min(k, sortedBestFirst.length))]
+}
+
+function chooseBest(category, candidates, slice, remaining, rng) {
   if (candidates.length === 0) return null
   let pool = candidates.filter((p) => p.price <= slice)
   if (pool.length === 0) pool = candidates.filter((p) => p.price <= remaining)
   if (pool.length === 0) return [...candidates].sort((a, b) => a.price - b.price)[0]
-  if (PERF.has(category)) return [...pool].sort((a, b) => (b.perfScore - a.perfScore) || (a.price - b.price))[0]
-  return [...pool].sort((a, b) => a.price - b.price)[0]
+  if (PERF.has(category)) return pick([...pool].sort((a, b) => (b.perfScore - a.perfScore) || (a.price - b.price)), rng)
+  return pick([...pool].sort((a, b) => a.price - b.price), rng)
 }
 
 export function autoBuild(selectedParts, budget, partsData, resolution = '1440p', options = {}) {
   const weights = options.weights ?? weightsFor(resolution)
   const upgradeOrder = options.upgradeOrder ?? ['gpu', 'cpu']
   const maximise = options.maximise ?? false
+  const rng = options.rng ?? null
+  const lockExisting = options.lockExisting ?? true
 
   const result = { ...selectedParts }
-  const userCats = new Set(Object.keys(selectedParts))
+  const userCats = lockExisting ? new Set(Object.keys(selectedParts)) : new Set()
   const spentExisting = Object.values(result).reduce((s, p) => s + (p?.price ?? 0), 0)
   const available = Math.max(0, budget - spentExisting)
   let remaining = available
@@ -67,10 +77,10 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     if (category === 'case' && result.gpu) {
       candidates = candidates.filter((p) => result.gpu.length <= p.maxGpuLength)
     }
-    const pick = chooseBest(category, candidates, slice, remaining - psuReserve)
-    if (pick) {
-      result[category] = pick
-      remaining -= pick.price
+    const chosen = chooseBest(category, candidates, slice, remaining - psuReserve, rng)
+    if (chosen) {
+      result[category] = chosen
+      remaining -= chosen.price
     }
   }
 
@@ -86,9 +96,10 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
       .filter((p) => checkCompatibility(without, p).compatible)
       .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining - psuReserve)
     if (pool.length === 0) return null
-    return cheapest
-      ? [...pool].sort((a, b) => (a.price - b.price) || (partQuality(b) - partQuality(a)))[0]
-      : [...pool].sort((a, b) => (partQuality(b) - partQuality(a)) || (a.price - b.price))[0]
+    const sorted = cheapest
+      ? [...pool].sort((a, b) => (a.price - b.price) || (partQuality(b) - partQuality(a)))
+      : [...pool].sort((a, b) => (partQuality(b) - partQuality(a)) || (a.price - b.price))
+    return pick(sorted, rng)
   }
 
   if (maximise) {
