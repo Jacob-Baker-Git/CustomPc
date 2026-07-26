@@ -18,14 +18,14 @@ export default function CategoryList({ selectedParts, onSelectCategory, onDesele
 
         if (part) {
           return (
-            <div key={cat.id} className="flex items-center gap-2 rounded-sm border border-slate-700/70 bg-slate-950/50 px-3 py-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+            <div key={cat.id} className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
               <button onClick={() => onSelectCategory(cat.id)} className="flex items-center gap-2 flex-1 min-w-0 text-left">
-                <CategoryIcon id={cat.id} className="text-slate-400" />
-                <span className="text-sm text-slate-100 truncate">{part.name}</span>
+                <CategoryIcon id={cat.id} className="text-muted" />
+                <span className="text-sm text-ink truncate">{part.name}</span>
               </button>
-              <span className="font-mono text-sm text-cyan-300 shrink-0">£{part.price.toFixed(0)}</span>
-              <button onClick={() => onDeselect(cat.id)} aria-label={`Remove ${cat.label}`} className="w-7 h-7 flex items-center justify-center rounded-sm text-slate-400 hover:text-white hover:bg-red-500/80 text-sm shrink-0">&times;</button>
+              <span className="font-mono tabular-nums text-sm text-accent shrink-0">£{part.price.toFixed(0)}</span>
+              <button onClick={() => onDeselect(cat.id)} aria-label={`Remove ${cat.label}`} className="w-7 h-7 flex items-center justify-center rounded-lg text-muted hover:text-ink hover:bg-bad text-sm shrink-0 transition-colors">&times;</button>
             </div>
           )
         }
@@ -34,15 +34,15 @@ export default function CategoryList({ selectedParts, onSelectCategory, onDesele
           <button
             key={cat.id}
             onClick={() => onSelectCategory(cat.id)}
-            className={`w-full flex items-center gap-2 rounded-sm border px-3 py-2 text-sm transition-all
+            className={`w-full flex items-center gap-2 rounded-lg border px-3 py-2.5 text-sm transition-colors
               ${isNext
-                ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200 ring-1 ring-cyan-400/40'
-                : 'border-slate-800/60 bg-slate-950/40 text-slate-300'}`}
+                ? 'border-accent bg-accent-soft text-accent'
+                : 'border-line bg-surface text-muted hover:border-line-strong hover:text-ink'}`}
           >
-            <span className="flex items-center justify-center w-5 h-5 rounded-sm bg-slate-800 text-[10px] font-mono text-slate-300 shrink-0">{i + 1}</span>
-            <CategoryIcon id={cat.id} className="text-slate-400" />
+            <span className="flex items-center justify-center w-5 h-5 rounded-md bg-surface-2 text-[10px] font-mono text-muted shrink-0">{i + 1}</span>
+            <CategoryIcon id={cat.id} className={isNext ? 'text-accent' : 'text-muted'} />
             <span className="flex-1 text-left">{cat.label}</span>
-            {isNext && <span className="text-[11px] text-cyan-300">pick one</span>}
+            {isNext && <span className="text-[11px] text-accent font-medium">pick one</span>}
           </button>
         )
       })}

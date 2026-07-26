@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   Workbench design system — neutral dark base + one warm accent.
+   The generic cyan-on-slate look is retired here. Every surface,
+   line and accent colour resolves from these vars (mapped to
+   semantic Tailwind classes in tailwind.config.js: bg-surface,
+   text-accent, border-line, text-muted, …).
+   ============================================================ */
+:root {
+  --ground: #0F1114;       /* app background — neutral near-black, no blue/warm cast */
+  --surface: #181A1F;      /* cards / panels */
+  --surface-2: #22252C;    /* insets, tracks, hover, secondary chips */
+  --line: #2A2E36;         /* hairline borders */
+  --line-strong: #363B45;  /* emphasised borders / dividers */
+  --ink: #EDEFF2;          /* primary text */
+  --muted: #99A0AB;        /* secondary text / labels */
+  --faint: #6B7280;        /* tertiary text / disabled */
+  --accent: #F26B3A;       /* warm signal accent — brand + primary action */
+  --accent-soft: rgba(242, 107, 58, 0.15); /* accent wash for active states */
+  --accent-ink: #1B1206;   /* text/icon on a solid accent fill */
+  --steel: #5E6672;        /* neutral secondary meter / muted bar */
+  --good: #3CCB82;         /* rating: strong */
+  --ok: #F2B84B;           /* rating: ok */
+  --bad: #F26A5A;          /* rating: weak */
+}
+
+html { background: var(--ground); }
+body {
+  font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
 /* Subtle entrance motion for the menu / wizard screens: a short fade + rise.
    Staggered via .rise-2/3/4. Honors prefers-reduced-motion — content then
    appears instantly with no transform. */

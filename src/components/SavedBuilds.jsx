@@ -27,22 +27,22 @@ function CompareTable({ a, b }) {
   ]
 
   return (
-    <div className="mt-5 pt-4 border-t border-slate-800/60">
-      <h3 className="text-sm text-white font-semibold mb-2">Comparison</h3>
+    <div className="mt-5 pt-4 border-t border-line">
+      <h3 className="text-sm text-ink font-semibold mb-2">Comparison</h3>
       <table className="w-full text-xs">
         <thead>
           <tr className="text-left">
-            <th className="py-1.5 pr-2 font-normal text-slate-500 w-24" />
-            <th className="py-1.5 pr-2 text-cyan-300">{a.name}</th>
-            <th className="py-1.5 text-cyan-300">{b.name}</th>
+            <th className="py-1.5 pr-2 font-normal text-muted w-24" />
+            <th className="py-1.5 pr-2 text-accent">{a.name}</th>
+            <th className="py-1.5 text-accent">{b.name}</th>
           </tr>
         </thead>
         <tbody>
           {summaryRows.map(([label, va, vb]) => (
-            <tr key={label} className="border-t border-slate-800/50">
-              <td className="py-1.5 pr-2 text-slate-500 uppercase text-[10px] font-mono">{label}</td>
-              <td className={`py-1.5 pr-2 ${TELEMETRY} text-slate-100`}>{va}</td>
-              <td className={`py-1.5 ${TELEMETRY} text-slate-100`}>{vb}</td>
+            <tr key={label} className="border-t border-line">
+              <td className="py-1.5 pr-2 text-muted uppercase text-[10px] font-mono">{label}</td>
+              <td className={`py-1.5 pr-2 ${TELEMETRY} text-ink`}>{va}</td>
+              <td className={`py-1.5 ${TELEMETRY} text-ink`}>{vb}</td>
             </tr>
           ))}
           {CATEGORIES.map((cat) => {
@@ -51,10 +51,10 @@ function CompareTable({ a, b }) {
             if (!pa && !pb) return null
             const differs = pa?.id !== pb?.id
             return (
-              <tr key={cat.id} className="border-t border-slate-800/50">
-                <td className="py-1.5 pr-2 text-slate-500 uppercase text-[10px] font-mono">{cat.label}</td>
-                <td className={`py-1.5 pr-2 ${differs ? 'text-slate-100' : 'text-slate-400'}`}>{pa?.name ?? '—'}</td>
-                <td className={`py-1.5 ${differs ? 'text-slate-100' : 'text-slate-400'}`}>{pb?.name ?? '—'}</td>
+              <tr key={cat.id} className="border-t border-line">
+                <td className="py-1.5 pr-2 text-muted uppercase text-[10px] font-mono">{cat.label}</td>
+                <td className={`py-1.5 pr-2 ${differs ? 'text-ink' : 'text-muted'}`}>{pa?.name ?? '—'}</td>
+                <td className={`py-1.5 ${differs ? 'text-ink' : 'text-muted'}`}>{pb?.name ?? '—'}</td>
               </tr>
             )
           })}
@@ -105,34 +105,34 @@ export default function SavedBuilds({ onLoaded }) {
       <div className="max-w-2xl mx-auto px-4 pt-2 pb-12">
         <div className={`${PANEL} p-5`}>
           <div className="flex items-baseline justify-between mb-3">
-            <h2 className="text-lg text-white">Saved builds</h2>
+            <h2 className="text-lg text-ink">Saved builds</h2>
             {saved.length > 1 && (
-              <span className="text-[11px] text-slate-500">tick two builds to compare</span>
+              <span className="text-[11px] text-muted">tick two builds to compare</span>
             )}
           </div>
           {saved.length === 0 ? (
-            <p className="text-sm text-slate-400 py-6 text-center">No saved builds yet — build something and hit "Save PC" in Summary.</p>
+            <p className="text-sm text-muted py-6 text-center">No saved builds yet — build something and hit "Save PC" in Summary.</p>
           ) : (
             <div className="space-y-1">
               {saved.map((b) => {
                 const ticked = compareIds.includes(b.id)
                 return (
-                  <div key={b.id} className="flex items-center gap-3 border-t border-slate-800/50 py-2">
+                  <div key={b.id} className="flex items-center gap-3 border-t border-line py-2">
                     <input
                       type="checkbox"
                       aria-label={`Compare ${b.name}`}
                       checked={ticked}
                       disabled={!ticked && compareIds.length >= 2}
                       onChange={() => toggleCompare(b.id)}
-                      className="accent-cyan-500 disabled:opacity-30"
+                      className="accent-accent disabled:opacity-30"
                     />
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm text-slate-100 truncate">{b.name}</div>
-                      <div className="text-[11px] text-slate-500 font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
+                      <div className="text-sm text-ink truncate">{b.name}</div>
+                      <div className="text-[11px] text-muted font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
                     </div>
-                    <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-sm bg-cyan-600 hover:bg-cyan-500 text-white transition-colors">Load</button>
-                    <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-slate-500 transition-colors">Copy link</button>
-                    <button onClick={() => setPendingDelete({ id: b.id, name: b.name })} aria-label={`Delete ${b.name}`} className="w-7 h-7 flex items-center justify-center rounded-sm text-slate-400 hover:text-white hover:bg-red-500/80 text-sm">&times;</button>
+                    <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-lg bg-accent hover:brightness-110 text-accent-ink transition-colors">Load</button>
+                    <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-lg border border-line text-ink hover:border-line-strong transition-colors">Copy link</button>
+                    <button onClick={() => setPendingDelete({ id: b.id, name: b.name })} aria-label={`Delete ${b.name}`} className="w-7 h-7 flex items-center justify-center rounded-lg text-muted hover:text-ink hover:bg-bad text-sm">&times;</button>
                   </div>
                 )
               })}
@@ -145,11 +145,11 @@ export default function SavedBuilds({ onLoaded }) {
       {pendingDelete && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
           <div role="dialog" aria-modal="true" aria-label="Delete saved build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-white text-sm font-semibold mb-2">Delete "{pendingDelete.name}"?</h3>
-            <p className="text-xs text-slate-400">This permanently removes the saved build. It can't be undone.</p>
+            <h3 className="text-ink text-sm font-semibold mb-2">Delete "{pendingDelete.name}"?</h3>
+            <p className="text-xs text-muted">This permanently removes the saved build. It can't be undone.</p>
             <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setPendingDelete(null)} className="text-xs px-3.5 py-2 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors">Cancel</button>
-              <button onClick={confirmDelete} className="text-xs px-3.5 py-2 rounded-sm border border-red-700/60 text-red-300 hover:border-red-500 transition-colors">Delete</button>
+              <button onClick={() => setPendingDelete(null)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
+              <button onClick={confirmDelete} className="text-xs px-3.5 py-2 rounded-lg border border-bad text-bad hover:brightness-110 transition-colors">Delete</button>
             </div>
           </div>
         </div>

@@ -4,32 +4,32 @@ import SiteFooter from './SiteFooter'
 
 export default function MainMenu({ onNew, onUpgrade }) {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#05080f]">
+    <div className="relative min-h-screen flex flex-col items-center justify-center text-ink bg-ground">
       <Backdrop />
       <div className="relative z-10 flex flex-col items-center px-4">
-        <h1 className="rise text-5xl font-bold mb-3 text-white">PC <span className="text-cyan-400">Builder</span></h1>
-        <p className="rise text-gray-400 mb-1 text-lg">What would you like to do?</p>
-        <p className="rise text-slate-500 text-xs mb-10">Free · no sign-up · everything runs in your browser</p>
+        <h1 className="rise font-display text-5xl font-extrabold mb-3 text-ink tracking-tight">PC <span className="text-accent">Builder</span></h1>
+        <p className="rise text-muted mb-1 text-lg">What would you like to do?</p>
+        <p className="rise text-faint text-xs mb-10">Free · no sign-up · everything runs in your browser</p>
         <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={onNew}
-            className="rise rise-2 w-64 px-6 py-8 rounded-sm border border-slate-700/70 hover:border-cyan-400 hover:bg-cyan-500/10 text-left transition-colors group"
+            className="rise rise-2 w-64 px-6 py-8 rounded-xl border border-line bg-surface hover:border-accent hover:bg-accent-soft text-left transition-colors group"
           >
-            <Cpu size={28} className="text-cyan-300 mb-3" aria-hidden="true" />
-            <div className="text-xl font-semibold group-hover:text-cyan-200">Build a new PC</div>
-            <div className="text-sm text-slate-400 mt-1">Set a budget and we'll pick the best parts for how you'll use it.</div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-medium text-cyan-300/80">
+            <Cpu size={28} className="text-accent mb-3" aria-hidden="true" />
+            <div className="text-xl font-semibold text-ink group-hover:text-accent">Build a new PC</div>
+            <div className="text-sm text-muted mt-1">Set a budget and we'll pick the best parts for how you'll use it.</div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-accent">
               Start <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </div>
           </button>
           <button
             onClick={onUpgrade}
-            className="rise rise-3 w-64 px-6 py-8 rounded-sm border border-slate-700/70 hover:border-cyan-400 hover:bg-cyan-500/10 text-left transition-colors group"
+            className="rise rise-3 w-64 px-6 py-8 rounded-xl border border-line bg-surface hover:border-accent hover:bg-accent-soft text-left transition-colors group"
           >
-            <Wrench size={28} className="text-cyan-300 mb-3" aria-hidden="true" />
-            <div className="text-xl font-semibold group-hover:text-cyan-200">Upgrade your PC</div>
-            <div className="text-sm text-slate-400 mt-1">Enter your current rig and goal — we'll find the upgrades that matter.</div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-medium text-cyan-300/80">
+            <Wrench size={28} className="text-accent mb-3" aria-hidden="true" />
+            <div className="text-xl font-semibold text-ink group-hover:text-accent">Upgrade your PC</div>
+            <div className="text-sm text-muted mt-1">Enter your current rig and goal — we'll find the upgrades that matter.</div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-accent">
               Choose <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </div>
           </button>

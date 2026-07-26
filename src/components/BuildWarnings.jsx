@@ -8,12 +8,12 @@ export default function BuildWarnings() {
   if (warnings.length === 0) return null
 
   return (
-    <div className={`${PANEL} p-3`}>
-      <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">Build checks</div>
+    <div className={`${PANEL} p-4`}>
+      <div className="text-[11px] uppercase tracking-wider text-muted mb-2">Build checks</div>
       <ul className="space-y-1.5">
         {warnings.map((w, i) => (
-          <li key={i} className="flex items-start gap-2 text-xs text-slate-300">
-            <span className={`mt-1 w-1.5 h-1.5 rounded-full shrink-0 ${w.level === 'critical' ? 'bg-red-500' : 'bg-amber-400'}`} />
+          <li key={i} className="flex items-start gap-2 text-xs text-muted">
+            <span className={`mt-1 w-1.5 h-1.5 rounded-full shrink-0 ${w.level === 'critical' ? 'bg-bad' : 'bg-ok'}`} />
             <span>{w.message}</span>
           </li>
         ))}

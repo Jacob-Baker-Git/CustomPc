@@ -9,8 +9,8 @@ const CAT_LABEL = {
   cpu: 'CPU', gpu: 'GPU', ram: 'RAM', storage: 'Storage', psu: 'PSU',
   cooler: 'Cooler', motherboard: 'Motherboard', case: 'Case', fans: 'Fans',
 }
-const scoreText = (s) => (s >= 80 ? 'text-emerald-300' : s >= 50 ? 'text-amber-300' : 'text-red-400')
-const scoreBar  = (s) => (s >= 80 ? 'bg-emerald-400' : s >= 50 ? 'bg-amber-400' : 'bg-red-500')
+const scoreText = (s) => (s >= 80 ? 'text-good' : s >= 50 ? 'text-ok' : 'text-bad')
+const scoreBar  = (s) => (s >= 80 ? 'bg-good' : s >= 50 ? 'bg-ok' : 'bg-bad')
 
 // The Build-tab rating: overall /100 for the chosen use case (header dropdown
 // changes it live), plus one row per part where a dropdown lists in-catalog
@@ -48,38 +48,38 @@ export default function BuildRatingPanel() {
   }
 
   return (
-    <div className={`${PANEL} p-4`}>
+    <div className={`${PANEL} p-5`}>
       <div className="flex items-center justify-between mb-3">
-        <span className="text-white text-sm font-semibold tracking-wide">Rating</span>
+        <span className="text-ink text-sm font-semibold">Your build rating</span>
         <select
           aria-label="Use case"
           value={useCase}
           onChange={(e) => setUseCase(e.target.value)}
-          className="bg-slate-950/60 border border-slate-700/70 rounded-sm text-xs text-slate-100 px-2 py-1 focus:outline-none focus:border-cyan-400"
+          className="bg-surface-2 border border-line rounded-lg text-xs text-ink px-2.5 py-1.5 focus:outline-none focus:border-accent"
         >
           {USE_CASES.map((u) => <option key={u.id} value={u.id}>{u.label}</option>)}
         </select>
       </div>
 
       {!hasCore ? (
-        <p className="text-gray-500 text-xs">Add a CPU and GPU to rate your build.</p>
+        <p className="text-muted text-xs">Add a CPU and GPU to rate your build.</p>
       ) : (
         <>
-          <div className="flex items-baseline gap-2 mb-3">
-            <span className={`${TELEMETRY} text-3xl font-bold ${scoreText(rating.overall)}`}>{rating.overall}</span>
-            <span className="text-xs text-slate-500">/100</span>
-            <span className="text-xs text-slate-300 ml-auto">{rating.verdict}</span>
+          <div className="flex items-baseline gap-2 mb-4">
+            <span className={`font-display text-4xl font-extrabold tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
+            <span className="text-xs text-faint">/100</span>
+            <span className={`text-xs font-semibold ml-auto ${scoreText(rating.overall)}`}>{rating.verdict}</span>
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             {rows.map(([cat, info]) => {
               const opts = optionsByCat[cat] ?? []
               return (
-                <div key={cat} className="flex flex-col gap-1 border border-slate-800/60 rounded-sm px-3 py-2">
+                <div key={cat} className="flex flex-col gap-1 border border-line rounded-lg px-3 py-2.5">
                   <div className="flex items-center gap-3">
-                    <span className="uppercase text-[10px] text-slate-500 w-14 shrink-0">{CAT_LABEL[cat] ?? cat}</span>
-                    <span className="text-sm text-slate-100 flex-1 min-w-0 truncate">{info.part.name}</span>
-                    <span className="w-14 h-1.5 rounded-full bg-slate-800 overflow-hidden shrink-0">
+                    <span className="uppercase text-[10px] tracking-wide text-muted w-14 shrink-0">{CAT_LABEL[cat] ?? cat}</span>
+                    <span className="text-sm text-ink flex-1 min-w-0 truncate">{info.part.name}</span>
+                    <span className="w-14 h-1.5 rounded-full bg-surface-2 overflow-hidden shrink-0">
                       <span className={`block h-full ${scoreBar(info.score)}`} style={{ width: `${info.score}%` }} />
                     </span>
                     <span className={`${TELEMETRY} text-sm font-semibold w-7 text-right shrink-0 ${scoreText(info.score)}`}>{info.score}</span>
@@ -88,7 +88,7 @@ export default function BuildRatingPanel() {
                       value=""
                       disabled={opts.length === 0}
                       onChange={(e) => chooseUpgrade(cat, e.target.value)}
-                      className="bg-slate-950/60 border border-slate-700/70 rounded-sm text-[11px] text-slate-200 px-1.5 py-1 max-w-[8.5rem] focus:outline-none focus:border-cyan-400 disabled:opacity-40"
+                      className="bg-surface-2 border border-line rounded-lg text-[11px] text-muted px-1.5 py-1 max-w-[8.5rem] focus:outline-none focus:border-accent disabled:opacity-40"
                     >
                       {opts.length === 0 ? (
                         <option value="">Best available</option>
@@ -104,7 +104,7 @@ export default function BuildRatingPanel() {
                       )}
                     </select>
                   </div>
-                  {info.reason && <span className="block text-[11px] text-amber-300/80 pl-[3.75rem]">{info.reason}</span>}
+                  {info.reason && <span className="block text-[11px] text-ok pl-[3.75rem]">{info.reason}</span>}
                 </div>
               )
             })}

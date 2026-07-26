@@ -32,21 +32,21 @@ export default function GeneratedBanner() {
 
   return (
     <div role="status" className={`${PANEL_STRONG} flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5`}>
-      <p className="text-xs text-slate-200">
+      <p className="text-xs text-muted">
         {info.useCase
-          ? <>Your <span className="text-slate-100">{USE_CASE_LABEL[info.useCase] ?? info.useCase} build</span> uses <span className={`${TELEMETRY} text-cyan-300 font-semibold`}>£{spent.toFixed(0)}</span> of your £{budget.toFixed(0)} budget</>
+          ? <>Your <span className="text-ink">{USE_CASE_LABEL[info.useCase] ?? info.useCase} build</span> uses <span className={`${TELEMETRY} text-accent font-semibold`}>£{spent.toFixed(0)}</span> of your £{budget.toFixed(0)} budget</>
           : info.estFps != null && info.gameName
             ? (info.met
-                ? <>This build hits <span className={`${TELEMETRY} text-cyan-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>
-                : <>Closest to your {info.targetFps} fps target: <span className={`${TELEMETRY} text-amber-300 font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>)
+                ? <>This build hits <span className={`${TELEMETRY} text-accent font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>
+                : <>Closest to your {info.targetFps} fps target: <span className={`${TELEMETRY} text-ok font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>)
             : <>Upgrade applied</>}
-        {info.quality && info.quality !== 'high' && <> on <span className="text-slate-100">{info.quality}</span> settings</>}
-        {leftover > 0 && <> — <span className={`${TELEMETRY} text-emerald-300`}>£{leftover.toFixed(0)}</span> under budget</>}
+        {info.quality && info.quality !== 'high' && <> on <span className="text-ink">{info.quality}</span> settings</>}
+        {leftover > 0 && <> — <span className={`${TELEMETRY} text-good`}>£{leftover.toFixed(0)}</span> under budget</>}
       </p>
       {leftover > 20 && (
         <button
           onClick={spendLeftover}
-          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-sm bg-cyan-600 hover:bg-cyan-500 text-white transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-accent hover:brightness-110 text-accent-ink font-semibold transition-colors"
         >
           <Zap size={12} aria-hidden="true" /> Spend the leftover
         </button>
@@ -54,7 +54,7 @@ export default function GeneratedBanner() {
       <button
         onClick={clear}
         aria-label="Dismiss"
-        className="ml-auto w-6 h-6 flex items-center justify-center rounded-sm text-slate-400 hover:text-white transition-colors"
+        className="ml-auto w-6 h-6 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors"
       >
         <X size={14} aria-hidden="true" />
       </button>

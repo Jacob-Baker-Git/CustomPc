@@ -13,24 +13,24 @@ export default function BottleneckIndicator() {
   return (
     <div className={`${PANEL} p-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className="text-white text-sm font-semibold tracking-wide">Bottleneck</span>
+        <span className="text-ink text-sm font-semibold tracking-wide">Bottleneck</span>
         <ResolutionToggle />
       </div>
       {!result ? (
-        <p className="text-gray-500 text-xs">Select a CPU and a GPU to see the balance.</p>
+        <p className="text-faint text-xs">Select a CPU and a GPU to see the balance.</p>
       ) : (
         <>
-          <div className="h-2 bg-white/10 rounded-sm overflow-hidden mb-2">
+          <div className="h-2 bg-surface-2 rounded-lg overflow-hidden mb-2">
             <div
-              className={`h-full rounded-sm transition-all duration-500
-                ${result.limitedBy === 'none' ? 'bg-emerald-500'
-                  : result.limitedBy === 'gpu' ? 'bg-amber-500'
-                  : 'bg-red-500'}`}
+              className={`h-full rounded-lg transition-all duration-500
+                ${result.limitedBy === 'none' ? 'bg-good'
+                  : result.limitedBy === 'gpu' ? 'bg-ok'
+                  : 'bg-bad'}`}
               style={{ width: `${result.balancePct}%` }}
             />
           </div>
-          <p className="text-xs text-gray-300">
-            <span className={`${TELEMETRY} font-semibold text-cyan-300`}>{result.balancePct}%</span>{' '}
+          <p className="text-xs text-muted">
+            <span className={`${TELEMETRY} font-semibold text-accent`}>{result.balancePct}%</span>{' '}
             balanced. {result.verdict}
           </p>
         </>

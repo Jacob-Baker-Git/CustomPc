@@ -50,15 +50,15 @@ export default function BudgetEntry({ onSubmit, onBack }) {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#05080f]">
+    <div className="relative min-h-screen flex flex-col items-center justify-center text-ink bg-ground">
       <Backdrop />
       <div className="relative z-10 flex flex-col items-center px-4">
-        <h1 className="rise text-5xl font-bold mb-3 text-white">Build Your PC</h1>
+        <h1 className="rise font-display text-5xl font-extrabold mb-3 text-ink tracking-tight">Build Your PC</h1>
         <ol className="rise flex items-center gap-2 mb-6 text-[11px] uppercase tracking-wider">
           {STEPS.map((label, i) => (
             <li key={label} className="flex items-center gap-2">
-              {i > 0 && <span className="text-slate-700">→</span>}
-              <span className={`flex items-center gap-1.5 ${step === i + 1 ? 'text-cyan-300' : 'text-slate-500'}`}>
+              {i > 0 && <span className="text-line-strong">→</span>}
+              <span className={`flex items-center gap-1.5 ${step === i + 1 ? 'text-accent' : 'text-faint'}`}>
                 <span className="font-mono">{i + 1}</span>
                 <span>{label}</span>
               </span>
@@ -68,10 +68,10 @@ export default function BudgetEntry({ onSubmit, onBack }) {
 
         {step === 1 && (
           <>
-            <p className="rise text-gray-400 mb-10 text-lg">What's your budget?</p>
+            <p className="rise text-muted mb-10 text-lg">What's your budget?</p>
             <form onSubmit={handleBudgetSubmit} aria-label="form" className="rise rise-2 flex flex-col items-center gap-6">
               <div className="flex items-center gap-2 text-3xl">
-                <span className="text-cyan-300">£</span>
+                <span className="text-accent">£</span>
                 <input
                   autoFocus
                   type="number"
@@ -79,32 +79,32 @@ export default function BudgetEntry({ onSubmit, onBack }) {
                   placeholder="Enter budget"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="bg-slate-950/60 backdrop-blur-md text-white font-mono text-3xl w-72 px-4 py-3 rounded-sm border border-slate-700/70 focus:outline-none focus:border-cyan-400 text-center placeholder:text-2xl placeholder:text-slate-600 transition-colors"
+                  className="bg-surface text-ink font-mono tabular-nums text-3xl w-72 px-4 py-3 rounded-xl border border-line focus:outline-none focus:border-accent text-center placeholder:text-2xl placeholder:text-faint transition-colors"
                 />
               </div>
-              <button type="submit" className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-10 py-3 rounded-sm text-lg transition-colors">
+              <button type="submit" className="bg-accent hover:brightness-110 text-accent-ink font-semibold px-10 py-3 rounded-lg text-lg transition-colors">
                 Next: use case
               </button>
             </form>
             <div className="rise rise-3 mt-8 flex flex-wrap items-center justify-center gap-2">
-              <span className="text-xs text-slate-500">or start from a preset:</span>
+              <span className="text-xs text-faint">or start from a preset:</span>
               {TIERS.map((tier) => (
                 <button
                   key={tier.id}
                   onClick={() => { setValue(String(tier.budget)); setStep(2) }}
-                  className="text-xs font-mono px-3 py-1.5 rounded-sm border border-slate-700/70 text-slate-200 hover:border-cyan-400 hover:text-cyan-300 transition-colors"
+                  className="text-xs font-mono px-3 py-1.5 rounded-lg border border-line bg-surface text-ink hover:border-accent hover:text-accent transition-colors"
                 >
                   {tier.label} · £{tier.budget}
                 </button>
               ))}
             </div>
-            <button onClick={onBack} className="rise rise-4 mt-8 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to menu</button>
+            <button onClick={onBack} className="rise rise-4 mt-8 text-xs text-faint hover:text-ink transition-colors">← Back to menu</button>
           </>
         )}
 
         {step === 2 && (
           <>
-            <p className="rise text-gray-400 mb-10 text-lg">What will you use this PC for?</p>
+            <p className="rise text-muted mb-10 text-lg">What will you use this PC for?</p>
             <div className="rise rise-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {USE_CASES.map((u) => {
                 const selected = useCase === u.id
@@ -113,24 +113,24 @@ export default function BudgetEntry({ onSubmit, onBack }) {
                     key={u.id}
                     onClick={() => setUseCase(u.id)}
                     aria-pressed={selected}
-                    className={`w-64 px-4 py-5 rounded-sm border text-left transition-colors group
-                      ${selected ? 'border-cyan-400 bg-cyan-500/15' : 'border-slate-700/70 hover:border-cyan-400'}`}
+                    className={`w-64 px-4 py-5 rounded-xl border text-left transition-colors group
+                      ${selected ? 'border-accent bg-accent-soft' : 'border-line bg-surface hover:border-accent'}`}
                   >
-                    <div className={`text-xl font-bold ${selected ? 'text-cyan-200' : 'group-hover:text-cyan-300'}`}>{u.label}</div>
-                    <div className={`text-xs mt-1 ${selected ? 'text-cyan-300/80' : 'text-slate-400'}`}>{u.blurb}</div>
+                    <div className={`text-xl font-bold ${selected ? 'text-accent' : 'text-ink group-hover:text-accent'}`}>{u.label}</div>
+                    <div className={`text-xs mt-1 ${selected ? 'text-accent' : 'text-muted'}`}>{u.blurb}</div>
                   </button>
                 )
               })}
             </div>
             <div className="rise rise-3 flex gap-3 mt-8">
-              <button onClick={generate} className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-8 py-3 rounded-sm transition-colors">
+              <button onClick={generate} className="bg-accent hover:brightness-110 text-accent-ink font-semibold px-8 py-3 rounded-lg transition-colors">
                 Generate build
               </button>
-              <button onClick={startEmpty} className="px-8 py-3 rounded-sm border border-slate-700/70 text-slate-300 hover:border-slate-500 transition-colors">
+              <button onClick={startEmpty} className="px-8 py-3 rounded-lg border border-line text-muted hover:border-line-strong hover:text-ink transition-colors">
                 Start empty instead
               </button>
             </div>
-            <button onClick={() => setStep(1)} className="rise rise-4 mt-6 text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to budget</button>
+            <button onClick={() => setStep(1)} className="rise rise-4 mt-6 text-xs text-faint hover:text-ink transition-colors">← Back to budget</button>
           </>
         )}
       </div>

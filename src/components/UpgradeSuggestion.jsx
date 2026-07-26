@@ -22,17 +22,17 @@ export default function UpgradeSuggestion() {
   return (
     <div className={`${PANEL} p-4`}>
       <div className="flex items-center gap-2 mb-1">
-        <Zap size={14} className="text-cyan-300" aria-hidden="true" />
-        <span className="text-white text-sm font-semibold">Upgrade suggestion</span>
+        <Zap size={14} className="text-accent" aria-hidden="true" />
+        <span className="text-ink text-sm font-semibold">Upgrade suggestion</span>
       </div>
-      <p className="text-xs text-gray-300">
+      <p className="text-xs text-muted">
         Swap your <span className="uppercase">{s.category}</span> →{' '}
-        <span className="text-cyan-300 font-semibold">{s.toPart.name}</span> for{' '}
-        <span className={`${TELEMETRY} text-emerald-300 font-semibold`}>+{s.fpsGain} FPS</span> at {resLabel} ({cost}).
+        <span className="text-accent font-semibold">{s.toPart.name}</span> for{' '}
+        <span className={`${TELEMETRY} text-good font-semibold`}>+{s.fpsGain} FPS</span> at {resLabel} ({cost}).
       </p>
       <button
         onClick={() => addPart(s.category, s.toPart)}
-        className={`mt-3 w-full ${BTN_PRIMARY} text-sm font-medium py-1.5 rounded-sm transition-colors`}
+        className={`mt-3 w-full ${BTN_PRIMARY} text-sm py-2 rounded-lg transition-colors`}
       >
         Apply upgrade
       </button>

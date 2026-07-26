@@ -23,7 +23,7 @@ export default function PartsBrowser() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-1">Parts browser</h1>
-      <p className="text-slate-400 text-sm mb-6">Explore every component in the catalog.</p>
+      <p className="text-muted text-sm mb-6">Explore every component in the catalog.</p>
 
       <div className="flex flex-wrap gap-2 mb-3">
         {CATEGORIES.map((c) => (
@@ -31,7 +31,7 @@ export default function PartsBrowser() {
             key={c}
             onClick={() => setCategory(c)}
             aria-pressed={category === c}
-            className={`px-3 py-1 rounded-sm border text-xs capitalize transition-colors ${category === c ? 'border-cyan-400 text-cyan-200 bg-cyan-500/15' : 'border-slate-700/70 text-slate-300 hover:border-cyan-400'}`}
+            className={`px-3 py-1 rounded-lg border text-xs capitalize transition-colors ${category === c ? 'border-accent text-accent bg-accent-soft' : 'border-line text-muted hover:border-accent'}`}
           >
             {c}
           </button>
@@ -44,29 +44,29 @@ export default function PartsBrowser() {
           placeholder="Search name or brand…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 min-w-48 bg-slate-950/60 border border-slate-700/70 rounded-sm px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"
+          className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-accent"
         />
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           aria-label="Sort by"
-          className="bg-slate-950/60 border border-slate-700/70 rounded-sm px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"
+          className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-accent"
         >
           {SORTS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
         </select>
       </div>
 
-      <p className="text-xs text-slate-500 mb-3">{results.length} parts</p>
+      <p className="text-xs text-muted mb-3">{results.length} parts</p>
       <ul className="space-y-2">
         {results.map((p) => (
-          <li key={p.id} className="flex items-center justify-between gap-3 border border-slate-800/70 rounded-sm px-3 py-2">
+          <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2">
             <div className="min-w-0">
-              <p className="text-sm text-white truncate">{p.name}</p>
-              <p className="text-xs text-slate-500 capitalize">{p.category} · {p.brand}{p.perfScore ? ` · perf ${p.perfScore}` : ''}</p>
+              <p className="text-sm text-ink truncate">{p.name}</p>
+              <p className="text-xs text-muted capitalize">{p.category} · {p.brand}{p.perfScore ? ` · perf ${p.perfScore}` : ''}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <span className="font-mono text-sm text-cyan-300">£{p.price.toFixed(2)}</span>
-              <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-cyan-300" aria-label={`Search ${p.name} on Amazon`}>
+              <span className="font-mono text-sm text-accent">£{p.price.toFixed(2)}</span>
+              <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="text-muted hover:text-accent" aria-label={`Search ${p.name} on Amazon`}>
                 <ExternalLink size={15} />
               </a>
             </div>

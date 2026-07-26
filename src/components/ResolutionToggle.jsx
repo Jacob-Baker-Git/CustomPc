@@ -16,15 +16,15 @@ export default function ResolutionToggle() {
   const custom = customStored ?? (!OPTIONS.some((o) => o.id === resolution) ? resolution : null)
 
   return (
-    <div className="inline-flex rounded-sm bg-slate-950/30 border border-slate-800/60 p-0.5">
+    <div className="inline-flex rounded-lg bg-surface border border-line p-0.5">
       {OPTIONS.map((opt) => (
         <button
           key={opt.id}
           onClick={() => setResolution(opt.id)}
-          className={`px-3 py-1 text-xs font-medium rounded-sm transition-all
+          className={`px-3 py-1 text-xs font-medium rounded-lg transition-all
             ${resolution === opt.id
-              ? 'bg-cyan-600 text-white'
-              : 'text-gray-300 hover:text-white'}`}
+              ? 'bg-accent text-ink'
+              : 'text-muted hover:text-ink'}`}
         >
           {opt.label}
         </button>
@@ -32,10 +32,10 @@ export default function ResolutionToggle() {
       {custom && (
         <button
           onClick={() => setResolution(custom)}
-          className={`px-3 py-1 text-xs font-medium font-mono rounded-sm transition-all
+          className={`px-3 py-1 text-xs font-medium font-mono rounded-lg transition-all
             ${resolution === custom
-              ? 'bg-cyan-600 text-white'
-              : 'text-gray-300 hover:text-white'}`}
+              ? 'bg-accent text-ink'
+              : 'text-muted hover:text-ink'}`}
         >
           {custom}
         </button>

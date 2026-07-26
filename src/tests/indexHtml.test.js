@@ -19,7 +19,7 @@ describe('index.html metadata', () => {
   })
 
   it('paints a dark boot skeleton before JS loads', () => {
-    expect(html).toContain('#05080f')
+    expect(html).toContain('#0F1114')
     expect(html).toMatch(/id="root">[\s\S]*class="boot"[\s\S]*<\/div>/)
   })
 })

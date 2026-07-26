@@ -38,22 +38,22 @@ export default function BuilderScreen() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#05080f]">
+    <div className="relative min-h-screen bg-ground">
       <Backdrop />
       <TopBar />
       {/* One scroll container for tabs + view content, so the tabs scroll away
           with the page instead of floating over it. */}
       <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-16">
         <div className="flex justify-center pt-3 pb-2">
-          <div className="inline-flex rounded-sm bg-slate-950/30 backdrop-blur-md border border-slate-800/60 p-0.5">
+          <div className="inline-flex rounded-lg bg-surface border border-line p-1 gap-0.5">
             {['build', 'peripherals', 'summary', 'saved'].map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
-                className={`px-2.5 md:px-4 py-1 text-[11px] md:text-xs font-medium rounded-sm capitalize transition-all
+                className={`px-3 md:px-4 py-1.5 text-[11px] md:text-xs font-semibold rounded-md capitalize transition-colors
                   ${view === v
-                    ? 'bg-cyan-600 text-white'
-                    : 'text-gray-300 hover:text-white'}`}
+                    ? 'bg-accent text-accent-ink'
+                    : 'text-muted hover:text-ink'}`}
               >
                 {v}
               </button>
@@ -65,7 +65,7 @@ export default function BuilderScreen() {
             <div className="build-grid">
               <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[60vh]">
                 <CanvasErrorBoundary>
-                  <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
+                  <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                     <BuildCanvas selectedParts={selectedParts} />
                   </Suspense>
                 </CanvasErrorBoundary>

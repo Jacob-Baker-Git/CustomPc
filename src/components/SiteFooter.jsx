@@ -8,10 +8,10 @@ const LINKS = [
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-slate-800/60 py-6 text-center text-xs text-slate-500">
+    <footer className="mt-16 border-t border-line py-6 text-center text-xs text-faint">
       <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         {LINKS.map((l) => (
-          <a key={l.href} href={l.href} className="hover:text-cyan-300 transition-colors">{l.label}</a>
+          <a key={l.href} href={l.href} className="hover:text-accent transition-colors">{l.label}</a>
         ))}
       </nav>
       <p className="mt-4">Prices are curated estimates (July 2026). Free · no sign-up.</p>

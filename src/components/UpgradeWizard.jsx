@@ -48,17 +48,17 @@ export default function UpgradeWizard({ onBack }) {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center text-white bg-[#05080f] py-12">
+    <div className="relative min-h-screen flex flex-col items-center text-ink bg-ground py-12">
       <Backdrop />
       <div className="relative z-10 w-full max-w-2xl px-4">
-        <h1 className="rise text-3xl font-bold mb-1 text-center">Upgrade your PC</h1>
+        <h1 className="rise font-display text-3xl font-extrabold mb-1 text-center">Upgrade your PC</h1>
         <ol className="rise flex items-center justify-center gap-2 mb-8 text-[11px] uppercase tracking-wider">
           {['Current PC', 'Use case'].map((label, i) => {
             const active = (screen === 'specs' && i === 0) || (screen === 'usecase' && i === 1)
             return (
               <li key={label} className="flex items-center gap-2">
-                {i > 0 && <span className="text-slate-700">→</span>}
-                <span className={active ? 'text-cyan-300' : 'text-slate-500'}>{i + 1} {label}</span>
+                {i > 0 && <span className="text-line-strong">→</span>}
+                <span className={active ? 'text-accent' : 'text-faint'}>{i + 1} {label}</span>
               </li>
             )
           })}
@@ -66,18 +66,18 @@ export default function UpgradeWizard({ onBack }) {
 
         {screen === 'specs' && (
           <div className={`${PANEL} p-5 rise`}>
-            <div className="inline-flex rounded-sm border border-slate-800/60 p-0.5 mb-4">
-              <button onClick={() => setTab('build')} className={`px-3 py-1 text-xs rounded-sm ${tab === 'build' ? 'bg-cyan-600 text-white' : 'text-gray-300'}`}>Build current PC</button>
-              <button onClick={() => setTab('saved')} className={`px-3 py-1 text-xs rounded-sm ${tab === 'saved' ? 'bg-cyan-600 text-white' : 'text-gray-300'}`}>Select saved build</button>
+            <div className="inline-flex rounded-lg border border-line p-1 gap-0.5 mb-4">
+              <button onClick={() => setTab('build')} className={`px-3 py-1.5 text-xs font-semibold rounded-md ${tab === 'build' ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'}`}>Build current PC</button>
+              <button onClick={() => setTab('saved')} className={`px-3 py-1.5 text-xs font-semibold rounded-md ${tab === 'saved' ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'}`}>Select saved build</button>
             </div>
 
             {tab === 'build' ? (
               <CategoryList selectedParts={currentParts} onSelectCategory={setPickerCategory} onDeselect={deselect} />
             ) : saved.length === 0 ? (
-              <p className="text-sm text-slate-400 py-6 text-center">No saved builds yet. Build one first, or use the "Build current PC" tab.</p>
+              <p className="text-sm text-muted py-6 text-center">No saved builds yet. Build one first, or use the "Build current PC" tab.</p>
             ) : (
               <div className="space-y-2">
-                <p className="text-[11px] text-slate-500">Pick one of your saved builds to rate and upgrade.</p>
+                <p className="text-[11px] text-faint">Pick one of your saved builds to rate and upgrade.</p>
                 {saved.map((b) => {
                   const on = savedSelectedId === b.id
                   const d = decodeBuild(b.code)
@@ -87,37 +87,37 @@ export default function UpgradeWizard({ onBack }) {
                       key={b.id}
                       onClick={() => loadSaved(b)}
                       aria-pressed={on}
-                      className={`w-full text-left border rounded-sm px-3 py-2.5 transition-colors
-                        ${on ? 'border-cyan-400 bg-cyan-500/15' : 'border-slate-700/70 hover:border-slate-500'}`}
+                      className={`w-full text-left border rounded-lg px-3 py-2.5 transition-colors
+                        ${on ? 'border-accent bg-accent-soft' : 'border-line bg-surface hover:border-line-strong'}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-100">{b.name}</span>
-                        <span className={`${TELEMETRY} text-xs ${on ? 'text-cyan-300' : 'text-slate-400'}`}>£{total.toFixed(0)}</span>
+                        <span className="text-sm text-ink">{b.name}</span>
+                        <span className={`${TELEMETRY} text-xs ${on ? 'text-accent' : 'text-muted'}`}>£{total.toFixed(0)}</span>
                       </div>
-                      <div className="text-[11px] text-slate-500 font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
+                      <div className="text-[11px] text-faint font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
                     </button>
                   )
                 })}
               </div>
             )}
 
-            <p className="text-[11px] text-slate-500 mt-4">CPU and GPU are required — they drive the rating.</p>
+            <p className="text-[11px] text-faint mt-4">CPU and GPU are required — they drive the rating.</p>
             <div className="flex items-center gap-3 mt-4">
               <button
                 onClick={() => setScreen('usecase')}
                 disabled={!hasCore}
-                className={`${BTN_PRIMARY} px-6 py-2 rounded-sm text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed transition-colors`}
+                className={`${BTN_PRIMARY} px-6 py-2 rounded-lg text-sm disabled:opacity-40 disabled:cursor-not-allowed transition-colors`}
               >
                 Next: use case →
               </button>
-              <button onClick={onBack} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">← Back to menu</button>
+              <button onClick={onBack} className="text-xs text-faint hover:text-ink transition-colors">← Back to menu</button>
             </div>
           </div>
         )}
 
         {screen === 'usecase' && (
           <div className={`${PANEL} p-5 rise`}>
-            <p className="text-sm text-slate-300 mb-4">What do you use this PC for? We'll rate it for that.</p>
+            <p className="text-sm text-muted mb-4">What do you use this PC for? We'll rate it for that.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {USE_CASES.map((u) => {
                 const on = useCase === u.id
@@ -126,18 +126,18 @@ export default function UpgradeWizard({ onBack }) {
                     key={u.id}
                     onClick={() => setUseCase(u.id)}
                     aria-pressed={on}
-                    className={`px-4 py-3 rounded-sm border text-left transition-colors
-                      ${on ? 'border-cyan-400 bg-cyan-500/15' : 'border-slate-700/70 hover:border-cyan-400'}`}
+                    className={`px-4 py-3 rounded-xl border text-left transition-colors
+                      ${on ? 'border-accent bg-accent-soft' : 'border-line bg-surface hover:border-accent'}`}
                   >
-                    <div className={`text-sm font-semibold ${on ? 'text-cyan-200' : 'text-slate-100'}`}>{u.label}</div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">{u.blurb}</div>
+                    <div className={`text-sm font-semibold ${on ? 'text-accent' : 'text-ink'}`}>{u.label}</div>
+                    <div className="text-[11px] text-muted mt-0.5">{u.blurb}</div>
                   </button>
                 )
               })}
             </div>
             <div className="flex items-center gap-3 mt-5">
-              <button onClick={openInBuild} className={`${BTN_PRIMARY} px-6 py-2 rounded-sm text-sm font-medium transition-colors`}>Open in Build →</button>
-              <button onClick={() => setScreen('specs')} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">← Current PC</button>
+              <button onClick={openInBuild} className={`${BTN_PRIMARY} px-6 py-2 rounded-lg text-sm transition-colors`}>Open in Build →</button>
+              <button onClick={() => setScreen('specs')} className="text-xs text-faint hover:text-ink transition-colors">← Current PC</button>
             </div>
           </div>
         )}

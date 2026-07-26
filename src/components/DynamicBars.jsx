@@ -2,9 +2,9 @@ export default function DynamicBars({ value, max, label, unit }) {
   const hasMax = typeof max === 'number' && max > 0
   const pct = hasMax ? Math.min((value / max) * 100, 100) : 0
   const barColor =
-    pct >= 100 ? 'bg-red-500'
-    : pct >= 80 ? 'bg-amber-500'
-    : 'bg-cyan-500'
+    pct >= 100 ? 'bg-bad'
+    : pct >= 80 ? 'bg-ok'
+    : 'bg-accent'
 
   // Until a capacity is known (e.g. no PSU selected yet) show only the live draw,
   // not a misleading "0 / 750" against a default that isn't really there.
@@ -16,13 +16,13 @@ export default function DynamicBars({ value, max, label, unit }) {
 
   return (
     <div className="flex flex-col gap-1 min-w-[140px]">
-      <div className="flex justify-between text-xs text-gray-400">
+      <div className="flex justify-between text-xs text-muted">
         <span>{label}</span>
-        <span className="font-mono text-gray-300">{display}</span>
+        <span className="font-mono tabular-nums text-ink">{display}</span>
       </div>
-      <div className="h-2 bg-white/10 rounded-sm overflow-hidden">
+      <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
         <div
-          className={`h-full rounded-sm transition-all duration-500 ${barColor}`}
+          className={`h-full rounded-full transition-all duration-500 ${barColor}`}
           style={{ width: `${pct}%` }}
         />
       </div>

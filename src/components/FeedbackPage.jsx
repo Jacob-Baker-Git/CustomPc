@@ -37,7 +37,7 @@ export default function FeedbackPage() {
     return (
       <div className="text-center py-16">
         <h1 className="text-3xl font-bold mb-3">Thank you! 🙌</h1>
-        <p className="text-slate-400">Your feedback helps make the builder better.</p>
+        <p className="text-muted">Your feedback helps make the builder better.</p>
       </div>
     )
   }
@@ -46,11 +46,11 @@ export default function FeedbackPage() {
     <form onSubmit={onSubmit} className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold mb-1">Feedback</h1>
-        <p className="text-slate-400 text-sm">Tell us what works, what doesn't, or what you'd like next.</p>
+        <p className="text-muted text-sm">Tell us what works, what doesn't, or what you'd like next.</p>
       </div>
 
       <div>
-        <span className="block text-sm text-slate-300 mb-2">Your rating</span>
+        <span className="block text-sm text-muted mb-2">Your rating</span>
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map((n) => (
             <button
@@ -60,15 +60,15 @@ export default function FeedbackPage() {
               onClick={() => setRating(n)}
               className="p-1"
             >
-              <Star size={26} className={n <= rating ? 'fill-cyan-400 text-cyan-400' : 'text-slate-600'} />
+              <Star size={26} className={n <= rating ? 'fill-accent text-accent' : 'text-faint'} />
             </button>
           ))}
         </div>
-        {errors.rating && <p className="text-xs text-red-400 mt-1">{errors.rating}</p>}
+        {errors.rating && <p className="text-xs text-bad mt-1">{errors.rating}</p>}
       </div>
 
       <div>
-        <span className="block text-sm text-slate-300 mb-2">Category</span>
+        <span className="block text-sm text-muted mb-2">Category</span>
         <div className="flex flex-wrap gap-2">
           {TYPES.map((t) => (
             <button
@@ -76,7 +76,7 @@ export default function FeedbackPage() {
               type="button"
               aria-pressed={type === t.id}
               onClick={() => setType(t.id)}
-              className={`px-3 py-1.5 rounded-sm border text-sm transition-colors ${type === t.id ? 'border-cyan-400 text-cyan-200 bg-cyan-500/15' : 'border-slate-700/70 text-slate-300 hover:border-cyan-400'}`}
+              className={`px-3 py-1.5 rounded-lg border text-sm transition-colors ${type === t.id ? 'border-accent text-accent bg-accent-soft' : 'border-line text-muted hover:border-accent'}`}
             >
               {t.label}
             </button>
@@ -85,31 +85,31 @@ export default function FeedbackPage() {
       </div>
 
       <div>
-        <label htmlFor="fb-msg" className="block text-sm text-slate-300 mb-2">Message</label>
+        <label htmlFor="fb-msg" className="block text-sm text-muted mb-2">Message</label>
         <textarea
           id="fb-msg"
           value={message}
           maxLength={2000}
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
-          className="w-full bg-slate-950/60 border border-slate-700/70 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-cyan-400"
+          className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
         />
         <div className="flex justify-between text-xs mt-1">
-          <span className="text-red-400">{errors.message}</span>
-          <span className="text-slate-500">{message.length}/2000</span>
+          <span className="text-bad">{errors.message}</span>
+          <span className="text-muted">{message.length}/2000</span>
         </div>
       </div>
 
       <div>
-        <label htmlFor="fb-email" className="block text-sm text-slate-300 mb-2">Email <span className="text-slate-500">(optional, if you want a reply)</span></label>
+        <label htmlFor="fb-email" className="block text-sm text-muted mb-2">Email <span className="text-muted">(optional, if you want a reply)</span></label>
         <input
           id="fb-email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-slate-950/60 border border-slate-700/70 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-cyan-400"
+          className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
         />
-        {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
+        {errors.email && <p className="text-xs text-bad mt-1">{errors.email}</p>}
       </div>
 
       {/* Honeypot: hidden from humans, tempting to bots. */}
@@ -123,12 +123,12 @@ export default function FeedbackPage() {
         aria-hidden="true"
       />
 
-      {status === 'error' && <p className="text-sm text-red-400">Something went wrong sending that. Please try again.</p>}
+      {status === 'error' && <p className="text-sm text-bad">Something went wrong sending that. Please try again.</p>}
 
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="bg-cyan-600 hover:bg-cyan-500 disabled:opacity-60 text-white font-semibold px-8 py-3 rounded-sm transition-colors"
+        className="bg-accent hover:brightness-110 disabled:opacity-60 text-ink font-semibold px-8 py-3 rounded-lg transition-colors"
       >
         {status === 'sending' ? 'Sending…' : 'Send feedback'}
       </button>

@@ -149,12 +149,12 @@ export function specRows(part) {
 export default function SpecSheet({ part }) {
   const note = insight(part)
   return (
-    <div className="border-t border-white/10 pt-2 mt-1">
-      {note && <p className="text-[11px] leading-relaxed text-slate-300 mb-2">{note}</p>}
+    <div className="border-t border-line pt-2 mt-1">
+      {note && <p className="text-[11px] leading-relaxed text-muted mb-2">{note}</p>}
       {part.category === 'gpu' && part.perfScore > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-2">
           {gpuResChips(part).map(({ res, fps }) => (
-            <span key={res} className="text-[10px] font-mono px-1.5 py-0.5 rounded-sm border border-slate-700/70 text-slate-300">
+            <span key={res} className="text-[10px] font-mono px-1.5 py-0.5 rounded-md border border-line text-muted">
               ~{fps} fps @ {res.split(' ')[0]}
             </span>
           ))}
@@ -163,8 +163,8 @@ export default function SpecSheet({ part }) {
       <dl className="text-[11px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
         {specRows(part).map(([label, value]) => (
           <div key={label} className="contents">
-            <dt className="text-slate-500">{label}</dt>
-            <dd className="text-slate-200 text-right font-mono">{value}</dd>
+            <dt className="text-muted">{label}</dt>
+            <dd className="text-ink text-right font-mono tabular-nums">{value}</dd>
           </div>
         ))}
       </dl>
