@@ -32,7 +32,6 @@ export const GLTF_MODELS = Object.fromEntries(
       targetSize: Math.max(...spec.raw) * modelScale(cat),
       rotation: spec.rotation,
       position: [0, 0, 0],
-      ...(spec.anchorNode ? { anchorNode: spec.anchorNode } : {}),
       ...(cat === 'ram' ? { instances: ramOffsets() } : {}),
     }]
   })

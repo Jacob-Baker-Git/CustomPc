@@ -71,10 +71,16 @@ function mountDepth(category) {
   return rotateExtents(spec.anchorSize, spec.rotation)[2] * modelScale(category)
 }
 
+// The PSU is the one part with no board connector, so it cannot come from
+// MOUNTS. It sits in the basement instead, and these are its only placement
+// figures: how far back along the case it sits, and the gap it keeps from the
+// basement floor and rear tray.
+const PSU_BAY = { offsetMm: -30, clearanceMm: 8 }
+
 // Centre of a part in world units, derived from its mount point. Mounted parts
-// sit against the board's +Z face and extend outward by half their own depth;
-// anchored parts are shifted so their connector, not their centre, lands on the
-// mount point.
+// sit against the board's +Z face and extend outward by half their mounting
+// depth; anchored parts are shifted so their connector, not their centre, lands
+// on the mount point.
 export function partCentre(category) {
   if (category === 'motherboard') return [0, 0, 0]
 
@@ -84,7 +90,11 @@ export function partCentre(category) {
     const floorY = board.min[1] - mm(CASE.basementMm)
     const rearZ = board.min[2] - mm(BOARD.standoffMm)
     // Stands on the basement floor, pushed back against the rear tray.
-    return [mm(-30), floorY + height / 2 + mm(8), rearZ + depth / 2 + mm(8)]
+    return [
+      mm(PSU_BAY.offsetMm),
+      floorY + height / 2 + mm(PSU_BAY.clearanceMm),
+      rearZ + depth / 2 + mm(PSU_BAY.clearanceMm),
+    ]
   }
 
   const mount = MOUNTS[category]

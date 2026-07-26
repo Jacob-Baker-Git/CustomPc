@@ -27,9 +27,11 @@ export const PART_SPECS = {
     raw: [1.486, 1.935, 2.936],
     lengthMm: 271,
     rotation: [0, Math.PI / 2, 0],
-    anchorNode: 'CPU',
+    // Measured from the mesh's pump-block node: offset from the assembly's bbox
+    // centre to the block's centre, and the block's own bbox. Together these let
+    // the geometry mount the AIO by its block while the radiator hangs where the
+    // mesh puts it. The renderer stays unaware of them by design — see GltfPart.
     anchorOffset: [0.517, -0.589, -0.529],
-    // Pump block's own bbox, so the block (not the whole assembly) sits flush on the board.
     anchorSize: [0.45, 0.76, 0.76],
   },
 

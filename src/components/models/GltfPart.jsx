@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 // units). This lets us drop in models of unknown native scale/pivot and have
 // them land at a predictable size in the assembly. Fine positioning and
 // orientation are supplied by the caller (refined against the render).
-export default function GltfPart({ url, targetSize = 2, rotation = [0, 0, 0], position = [0, 0, 0], anchorNode }) {
+export default function GltfPart({ url, targetSize = 2, rotation = [0, 0, 0], position = [0, 0, 0] }) {
   const { scene } = useGLTF(url)
 
   const { object, scale } = useMemo(() => {
@@ -18,17 +18,19 @@ export default function GltfPart({ url, targetSize = 2, rotation = [0, 0, 0], po
     box.getSize(size)
     const maxDim = Math.max(size.x, size.y, size.z) || 1
 
-    // Align on the named connector when given (the AIO's pump block, say) so the
-    // part meets its mount at the right point. Falls back to the bounding-box
-    // centre, which is right for parts whose body IS the mounting surface.
-    const anchor = anchorNode ? obj.getObjectByName(anchorNode) : null
+    // Always centre on the bounding box. Connector alignment — mounting the AIO
+    // by its pump block rather than its middle — is handled analytically in
+    // assemblyGeometry via each spec's anchorOffset/anchorSize, NOT here.
+    // Deliberate: the geometry module is the oracle for part placement because
+    // the rendered canvas cannot be inspected on some machines, and it can only
+    // predict placement if it never depends on inspecting a loaded mesh.
+    // Re-centring on a named node here would double-apply that offset.
     const centre = new THREE.Vector3()
-    if (anchor) new THREE.Box3().setFromObject(anchor).getCenter(centre)
-    else box.getCenter(centre)
+    box.getCenter(centre)
 
     obj.position.sub(centre)
     return { object: obj, scale: targetSize / maxDim }
-  }, [scene, targetSize, anchorNode])
+  }, [scene, targetSize])
 
   return (
     <group position={position} rotation={rotation}>

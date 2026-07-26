@@ -1,7 +1,6 @@
-import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE, modelScale } from '../lib/assemblyGeometry'
-import { mm, FAN_MM } from '../lib/pcScale'
-import { MOUNTS } from '../lib/mountPoints'
-import { PART_SPECS } from '../lib/partSpecs'
+import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE } from '../lib/assemblyGeometry'
+import { mm, WU_PER_MM, FAN_MM } from '../lib/pcScale'
+import { MOUNTS, BOARD } from '../lib/mountPoints'
 
 const near = (v, expectedMm) => expect(v).toBeCloseTo(mm(expectedMm), 2)
 
@@ -86,12 +85,33 @@ describe('partCentre', () => {
     expect(partCentre('gpu')[1]).toBeLessThan(partCentre('cooler')[1])
   })
 
-  it('sits the cooler pump block flush on the board face', () => {
-    const { anchorOffset, anchorSize, rotation } = PART_SPECS.cooler
-    const scale = modelScale('cooler')
-    const blockZ = partCentre('cooler')[2] + rotateVector(anchorOffset, rotation)[2] * scale
-    const blockDepth = rotateExtents(anchorSize, rotation)[2] * scale
-    expect(blockZ - blockDepth / 2).toBeCloseTo(boardFaceZ(), 6)
+  // Pinned to independently computed millimetres rather than re-deriving from
+  // the same anchorOffset that partCentre consumes. A test that recomputes the
+  // formula it is checking passes for any offset, including a wrong one — so it
+  // would not notice the anchor placement silently breaking.
+  //
+  // These come from the measured mesh: the pump block sits 54 mm below the
+  // assembly's bbox centre, so mounting the block on a socket at (-20, 75) puts
+  // the bbox centre up at (28.8, 129.4), with the block's front face flush on
+  // the board at 24.5 mm.
+  it('places the cooler so its pump block meets the socket', () => {
+    const centreMm = partCentre('cooler').map((v) => +(v / WU_PER_MM).toFixed(1))
+    expect(centreMm).toEqual([28.8, 129.4, 93.0])
+  })
+})
+
+describe('board mesh versus the mount frame', () => {
+  // BOARD.widthMm (244) is the ATX reference frame the mount points are measured
+  // in. The GLB is squarer than a real ATX board — about 302 mm front-to-back —
+  // so the two legitimately differ; the mesh is a generic stand-in, not a
+  // dimensionally exact ATX board. What must hold is that the rendered board is
+  // never NARROWER than the frame, or a mount point would hang off its edge.
+  it('renders a board at least as wide as the mount frame assumes', () => {
+    expect(partSize('motherboard')[0]).toBeGreaterThanOrEqual(mm(BOARD.widthMm))
+  })
+
+  it('renders a board as tall as the ATX long edge', () => {
+    expect(partSize('motherboard')[1]).toBeCloseTo(mm(BOARD.heightMm), 6)
   })
 })
 
