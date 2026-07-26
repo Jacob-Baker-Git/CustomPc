@@ -29,6 +29,8 @@ export const PART_SPECS = {
     rotation: [0, Math.PI / 2, 0],
     anchorNode: 'CPU',
     anchorOffset: [0.517, -0.589, -0.529],
+    // Pump block's own bbox, so the block (not the whole assembly) sits flush on the board.
+    anchorSize: [0.45, 0.76, 0.76],
   },
 
   // A DIMM stands edge-on in its slot: its 133 mm length is mesh Z and must run

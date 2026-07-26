@@ -1,6 +1,7 @@
-import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ } from '../lib/assemblyGeometry'
+import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE, modelScale } from '../lib/assemblyGeometry'
 import { mm } from '../lib/pcScale'
 import { MOUNTS } from '../lib/mountPoints'
+import { PART_SPECS } from '../lib/partSpecs'
 
 const near = (v, expectedMm) => expect(v).toBeCloseTo(mm(expectedMm), 2)
 
@@ -84,11 +85,47 @@ describe('partCentre', () => {
   it('sits the GPU below the cooler', () => {
     expect(partCentre('gpu')[1]).toBeLessThan(partCentre('cooler')[1])
   })
+
+  it('sits the cooler pump block flush on the board face', () => {
+    const { anchorOffset, anchorSize, rotation } = PART_SPECS.cooler
+    const scale = modelScale('cooler')
+    const blockZ = partCentre('cooler')[2] + rotateVector(anchorOffset, rotation)[2] * scale
+    const blockDepth = rotateExtents(anchorSize, rotation)[2] * scale
+    expect(blockZ - blockDepth / 2).toBeCloseTo(boardFaceZ(), 6)
+  })
 })
 
 describe('partBox', () => {
   it('returns a box consistent with the part size', () => {
     const box = partBox('gpu')
     expect(box.max[0] - box.min[0]).toBeCloseTo(partSize('gpu')[0], 6)
+  })
+})
+
+describe('caseInterior', () => {
+  it('is a real tower, deep enough for a board plus cooler clearance', () => {
+    expect(CASE.depthMm).toBe(450)
+    expect(CASE.widthMm).toBe(210)
+    expect(CASE.heightMm).toBeGreaterThanOrEqual(450)
+  })
+
+  it('contains every part', () => {
+    const inner = caseInterior()
+    for (const cat of ['motherboard', 'gpu', 'ram', 'storage', 'psu', 'cooler']) {
+      const box = partBox(cat)
+      for (let i = 0; i < 3; i++) {
+        expect(box.min[i], `${cat} axis ${i} min`).toBeGreaterThanOrEqual(inner.min[i] - 1e-6)
+        expect(box.max[i], `${cat} axis ${i} max`).toBeLessThanOrEqual(inner.max[i] + 1e-6)
+      }
+    }
+  })
+
+  it('sits the PSU in the basement, entirely below the board', () => {
+    expect(partBox('psu').max[1]).toBeLessThanOrEqual(partBox('motherboard').min[1] + 1e-6)
+  })
+
+  it('gives the basement room for the PSU', () => {
+    const [, psuHeight] = partSize('psu')
+    expect(mm(CASE.basementMm)).toBeGreaterThan(psuHeight)
   })
 })

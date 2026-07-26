@@ -1,6 +1,6 @@
 import { mm } from './pcScale'
 import { PART_SPECS } from './partSpecs'
-import { MOUNTS } from './mountPoints'
+import { MOUNTS, BOARD } from './mountPoints'
 
 const HALF_PI = Math.PI / 2
 const isQuarterTurn = (a) => Math.abs(Math.abs(a) - HALF_PI) < 1e-6
@@ -60,6 +60,17 @@ function anchorOffsetWorld(category) {
   return rotateVector(spec.anchorOffset, spec.rotation).map((v) => v * scale)
 }
 
+// Depth of the part's mounting face along world Z. For an anchored part that is
+// the connector's own depth — an AIO touches the board only at its pump block,
+// so placing its whole bounding box against the face would shove the radiator
+// through the side panel.
+function mountDepth(category) {
+  const spec = PART_SPECS[category]
+  const [, , depth] = partSize(category)
+  if (!spec?.anchorSize) return depth
+  return rotateExtents(spec.anchorSize, spec.rotation)[2] * modelScale(category)
+}
+
 // Centre of a part in world units, derived from its mount point. Mounted parts
 // sit against the board's +Z face and extend outward by half their own depth;
 // anchored parts are shifted so their connector, not their centre, lands on the
@@ -67,15 +78,23 @@ function anchorOffsetWorld(category) {
 export function partCentre(category) {
   if (category === 'motherboard') return [0, 0, 0]
 
+  if (category === 'psu') {
+    const board = partBox('motherboard')
+    const [, height, depth] = partSize('psu')
+    const floorY = board.min[1] - mm(CASE.basementMm)
+    const rearZ = board.min[2] - mm(BOARD.standoffMm)
+    // Stands on the basement floor, pushed back against the rear tray.
+    return [mm(-30), floorY + height / 2 + mm(8), rearZ + depth / 2 + mm(8)]
+  }
+
   const mount = MOUNTS[category]
   if (!mount) return [0, 0, 0]
 
-  const [, , depth] = partSize(category)
   const offset = anchorOffsetWorld(category)
   return [
     mm(mount.xMm) - offset[0],
     mm(mount.yMm) - offset[1],
-    boardFaceZ() + depth / 2 - offset[2],
+    boardFaceZ() + mountDepth(category) / 2 - offset[2],
   ]
 }
 
@@ -85,5 +104,26 @@ export function partBox(category) {
   return {
     min: centre.map((c, i) => c - size[i] / 2),
     max: centre.map((c, i) => c + size[i] / 2),
+  }
+}
+
+// Tower interior. Height carries a PSU basement below the board and a
+// top-mounted radiator above it, so it runs taller than the board alone needs.
+export const CASE = {
+  heightMm: 500,
+  depthMm: 450,    // front-to-back, world X
+  widthMm: 210,    // side-to-side, world Z
+  basementMm: 110, // PSU compartment below the board
+}
+
+// Interior bounds in world units, anchored off the board: the rear tray sits one
+// standoff behind the board, and the basement hangs below the board's lower edge.
+export function caseInterior() {
+  const board = partBox('motherboard')
+  const rearZ = board.min[2] - mm(BOARD.standoffMm)
+  const floorY = board.min[1] - mm(CASE.basementMm)
+  return {
+    min: [-mm(CASE.depthMm) / 2, floorY, rearZ],
+    max: [mm(CASE.depthMm) / 2, floorY + mm(CASE.heightMm), rearZ + mm(CASE.widthMm)],
   }
 }

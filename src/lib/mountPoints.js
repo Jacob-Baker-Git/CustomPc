@@ -20,7 +20,7 @@ export const MOUNTS = {
   // DIMM slots run vertically, ahead of the socket, sticks spaced along X.
   ram: { xMm: 70, yMm: 40, pitchMm: 10 },
   // Primary PCIe x16, below the socket. The card extends toward the case front.
-  gpu: { xMm: -95, yMm: -55 },
+  gpu: { xMm: -70, yMm: -55 },
   // M.2 slot between the socket and the PCIe slot.
   storage: { xMm: -10, yMm: -20 },
 }
