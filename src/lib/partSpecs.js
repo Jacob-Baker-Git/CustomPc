@@ -1,0 +1,45 @@
+// Physical spec per part category.
+//
+// `raw`        — the GLB's own bounding box (x,y,z), measured from its accessors.
+// `lengthMm`   — the real-world size of ONE axis. Since a mesh's aspect ratio is
+//                fixed, one true dimension sizes the whole model.
+// `fitAxis`    — which WORLD axis (0=X, 1=Y, 2=Z) lengthMm refers to, after
+//                rotation. Omitted means "the longest axis".
+// `rotation`   — model-local rotation bringing the mesh into scene convention
+//                (+X case front, +Y up, +Z toward the glass). Right angles only.
+// `anchorNode` — optional sub-node to align on instead of the bbox centre.
+// `anchorOffset` — vector from the mesh bbox centre to that node's centre, in
+//                raw model units. Kept here so the pure geometry can predict
+//                where an anchored part lands without loading the mesh.
+export const PART_SPECS = {
+  // The board's long (305 mm) edge is mesh Z and must stand vertical, so mesh Z
+  // maps to world Y.
+  motherboard: { raw: [30.56, 4.96, 30.85], lengthMm: 305, rotation: [Math.PI / 2, 0, 0] },
+
+  // Card lies horizontal: the mesh's long axis (30.187) becomes world X.
+  gpu: { raw: [4.381, 30.187, 12.819], lengthMm: 285, rotation: [0, 0, Math.PI / 2] },
+
+  // 240 AIO assembly. Mesh +Y is up (the pump block sits below the radiator) and
+  // the radiator's long axis is mesh Z, which must run front-to-back (world X).
+  // Anchoring on the pump block puts the radiator at the case top by itself —
+  // the mesh locks them 131 mm apart, matching a real socket-to-radiator gap.
+  cooler: {
+    raw: [1.486, 1.935, 2.936],
+    lengthMm: 271,
+    rotation: [0, Math.PI / 2, 0],
+    anchorNode: 'CPU',
+    anchorOffset: [0.517, -0.589, -0.529],
+  },
+
+  // A DIMM stands edge-on in its slot: its 133 mm length is mesh Z and must run
+  // vertical (world Y), leaving the 7 mm thickness across the board.
+  ram: { raw: [0.033, 0.226, 0.608], lengthMm: 133, rotation: [Math.PI / 2, 0, 0] },
+
+  // Flat M.2 stick lying on the board face: 80 mm along world X, 22 mm up, and
+  // near-zero thickness toward the glass.
+  storage: { raw: [4.332, 0.009, 1.201], lengthMm: 80, rotation: [Math.PI / 2, 0, 0] },
+
+  // The PSU mesh is near-cubic, so sizing it by its longest axis would make it
+  // far too tall for a basement. Pin its HEIGHT to a real 86 mm ATX unit instead.
+  psu: { raw: [20.446, 21.937, 22.73], lengthMm: 86, fitAxis: 1, rotation: [0, 0, 0] },
+}
