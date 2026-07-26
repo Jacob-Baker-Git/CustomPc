@@ -15,13 +15,17 @@ export default function InfoDisclaimer() {
         onClick={() => setOpen((o) => !o)}
         title={TEXT}
         aria-label={TEXT}
-        className="w-7 h-7 flex items-center justify-center rounded-full bg-slate-950/30 backdrop-blur-md border border-slate-800/60 text-cyan-300 hover:border-cyan-400/60 transition-colors"
+        className="w-7 h-7 flex items-center justify-center rounded-full bg-surface border border-line text-accent hover:border-accent transition-colors"
       >
         <Info size={14} aria-hidden="true" />
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-slate-950/60 backdrop-blur-md border border-slate-800/60 rounded-sm p-3 text-xs text-gray-300">
+        <div className="absolute right-0 mt-2 w-64 bg-surface border border-line rounded-lg p-3 text-xs text-muted">
           {TEXT}
+          <p className="mt-2">
+            {/* CC BY 4.0 attribution for the part models lives on the Help page. */}
+            <a href="#/help" className="text-accent hover:underline">3D model credits</a>
+          </p>
         </div>
       )}
     </div>

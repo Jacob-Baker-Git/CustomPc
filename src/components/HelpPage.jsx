@@ -7,22 +7,56 @@ const FAQS = [
   { q: 'Do I need an account?', a: 'No. It\'s free with no sign-up — your builds are saved in your browser only.' },
 ]
 
+// CC BY 4.0 requires visible attribution: title, author, source, licence. The
+// 3D view uses these models generically (a GPU model stands in for any GPU).
+const MODEL_CREDITS = [
+  { part: 'Graphics card', title: 'GeForce RTX 3080', author: '_surovic_' },
+  { part: 'Motherboard', title: 'Asus Strix B550-F', author: 'MUSHROOM_BUILDS' },
+  { part: 'CPU cooler', title: 'Liquid CPU Cooling', author: 'Denzerru' },
+  { part: 'Power supply', title: 'PSU', author: 'Groovex' },
+  { part: 'Storage', title: 'Samsung 990 Pro M.2', author: 'lime.ball.animations' },
+  { part: 'Memory', title: 'Corsair Vengeance RGB Pro', author: 'Nouraiz' },
+]
+
 export default function HelpPage() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-1">Help &amp; FAQ</h1>
-      <p className="text-slate-400 text-sm mb-6">How the builder and upgrade tools work.</p>
+      <p className="text-muted text-sm mb-6">How the builder and upgrade tools work.</p>
       <div className="space-y-3">
         {FAQS.map((f) => (
-          <details key={f.q} className="group border border-slate-800/70 rounded-sm px-4 py-3">
-            <summary className="cursor-pointer text-white font-medium list-none flex justify-between items-center">
+          <details key={f.q} className="group border border-line rounded-lg px-4 py-3">
+            <summary className="cursor-pointer text-ink font-medium list-none flex justify-between items-center">
               {f.q}
-              <span className="text-slate-500 group-open:rotate-180 transition-transform">⌄</span>
+              <span className="text-muted group-open:rotate-180 transition-transform">⌄</span>
             </summary>
-            <p className="text-sm text-slate-400 mt-2 leading-relaxed">{f.a}</p>
+            <p className="text-sm text-muted mt-2 leading-relaxed">{f.a}</p>
           </details>
         ))}
       </div>
+
+      <section id="model-credits" className="mt-10 border-t border-line pt-6">
+        <h2 className="text-lg font-semibold mb-1">3D model credits</h2>
+        <p className="text-sm text-muted mb-3">
+          The parts in the 3D view use these models from Sketchfab, licensed under{' '}
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            CC BY 4.0
+          </a>
+          . The case and fans are our own.
+        </p>
+        <ul className="space-y-1 text-sm text-muted">
+          {MODEL_CREDITS.map((c) => (
+            <li key={c.part}>
+              <span className="text-ink">{c.part}:</span> &ldquo;{c.title}&rdquo; by {c.author}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }
