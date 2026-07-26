@@ -2,7 +2,9 @@ import * as THREE from 'three'
 import { useMemo } from 'react'
 
 // A single braided cable drawn as a smooth tube through the given world points.
-function Cable({ points, radius = 0.04, color = '#e9e9ed' }) {
+// Dark sleeved black — matte, like real sleeved PSU cables (the old off-white
+// read as loose noodles).
+function Cable({ points, radius = 0.028, color = '#141519' }) {
   const geometry = useMemo(() => {
     const curve = new THREE.CatmullRomCurve3(points.map((p) => new THREE.Vector3(...p)))
     return new THREE.TubeGeometry(curve, 40, radius, 8, false)
@@ -36,7 +38,7 @@ export default function CableHarness({ selectedParts = {} }) {
       {/* PCIe power: bottom-left PSU → up to the GPU */}
       {selectedParts.psu && selectedParts.gpu && (
         <Cable
-          radius={0.035}
+          radius={0.024}
           points={[
             [-0.6, -1.45, 0.22],
             [-0.35, -1.05, 0.28],

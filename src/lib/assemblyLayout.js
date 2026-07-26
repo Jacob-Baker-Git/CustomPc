@@ -9,7 +9,10 @@ const MOUNTED = {
   cooler:      { position: [0, 0.45, 0.2],     rotation: [Math.PI / 2, 0, 0] },
   // Vertical RAM sticks standing side-by-side, to the right of the CPU.
   ram:         { position: [0.75, 0.45, 0.08], rotation: [-Math.PI / 2, 0, 0] },
-  storage:     { position: [-0.8, 0.05, 0.08], rotation: [Math.PI / 2, 0, 0] },
+  // Flat M.2 stick lying on the board face. The board model is 0.4 deep and
+  // centred on the origin, so it fills z -0.2..0.2 — anything at z 0.08 sits
+  // buried inside it. Park the stick just clear of the board's front face.
+  storage:     { position: [-0.8, 0.05, 0.23], rotation: [Math.PI / 2, 0, 0] },
   // Horizontal graphics card hanging from the PCIe slot toward the glass.
   gpu:         { position: [0, -0.85, 0.28],   rotation: [0, 0, 0] },
   // Power supply sitting flat on the case floor, bottom-left, centred

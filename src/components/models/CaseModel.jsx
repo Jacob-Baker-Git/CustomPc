@@ -17,8 +17,9 @@ function Panel({ args, position, color, opacity = 1, glass = false }) {
         color={color}
         transparent={opacity < 1}
         opacity={opacity}
-        metalness={glass ? 0.0 : 0.6}
-        roughness={glass ? 0.25 : 0.55}
+        metalness={glass ? 0.0 : 0.75}
+        roughness={glass ? 0.12 : 0.42}
+        envMapIntensity={glass ? 1.4 : 1.1}
         side={2}
       />
     </mesh>
@@ -34,7 +35,7 @@ export default function CaseModel() {
     return (
       <lineSegments>
         <edgesGeometry args={[new THREE.BoxGeometry(W, H, D)]} />
-        <lineBasicMaterial color="#4a6a94" transparent opacity={0.7} />
+        <lineBasicMaterial color="#7c8798" transparent opacity={0.65} />
       </lineSegments>
     )
   }

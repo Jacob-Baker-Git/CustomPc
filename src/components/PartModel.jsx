@@ -1,4 +1,8 @@
+import { Suspense } from 'react'
 import { MODEL_REGISTRY } from './models/partModelRegistry'
+import { GLTF_MODELS } from '../lib/gltfModels'
+import GltfPart from './models/GltfPart'
+import ModelErrorBoundary from './models/ModelErrorBoundary'
 import { assemblyLayout } from '../lib/assemblyLayout'
 import useBuilderStore from '../store/useBuilderStore'
 
@@ -22,21 +26,38 @@ export default function PartModel({ part, selectedParts }) {
 
   const ModelComponent = MODEL_REGISTRY[part.category]
   const { position, rotation } = assemblyLayout(part.category, selectedParts)
+  const gltf = GLTF_MODELS[part.category]
+
+  // The procedural (primitive) model — also the fallback when a GLTF is missing
+  // or fails to load.
+  const primitive = ModelComponent ? (
+    <ModelComponent part={part} />
+  ) : (
+    <mesh>
+      <boxGeometry args={[0.5, 0.5, 0.5]} />
+      <meshStandardMaterial color="#555" metalness={0.7} roughness={0.3} />
+    </mesh>
+  )
 
   return (
     <group position={position} rotation={rotation}>
-      {ModelComponent ? (
-        <ModelComponent part={part} />
+      {gltf ? (
+        <ModelErrorBoundary fallback={primitive}>
+          <Suspense fallback={primitive}>
+            {gltf.instances
+              ? gltf.instances.map((offset, i) => (
+                  <GltfPart key={i} {...gltf} position={offset} />
+                ))
+              : <GltfPart {...gltf} />}
+          </Suspense>
+        </ModelErrorBoundary>
       ) : (
-        <mesh>
-          <boxGeometry args={[0.5, 0.5, 0.5]} />
-          <meshStandardMaterial color="#555" metalness={0.7} roughness={0.3} />
-        </mesh>
+        primitive
       )}
       {hovered && (
         <mesh>
           <boxGeometry args={HIGHLIGHT_SIZE[part.category] ?? [1, 1, 1]} />
-          <meshBasicMaterial color="#22d3ee" transparent opacity={0.18} depthWrite={false} />
+          <meshBasicMaterial color="#F26B3A" transparent opacity={0.2} depthWrite={false} />
         </mesh>
       )}
     </group>

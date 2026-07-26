@@ -1,5 +1,6 @@
+import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
 import PartModel from './PartModel'
 import CableHarness from './models/CableHarness'
 import FanSystem from './FanSystem'
@@ -9,16 +10,29 @@ export default function BuildCanvas({ selectedParts }) {
 
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}>
-        <ambientLight intensity={1.15} />
-        <directionalLight position={[5, 5, 5]} intensity={1.1} />
-        {/* Front key light (no distance falloff) so the build reads clearly
-            through the glass window in solid mode. */}
-        <directionalLight position={[2, 2, 8]} intensity={1.7} />
-        {/* Interior fill so parts inside the solid case don't read as black. */}
-        <pointLight position={[0, 0.4, 0.55]} intensity={5} distance={5} decay={1.6} />
+      <Canvas
+        dpr={[1, 2]}
+        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15 }}
+        camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}
+      >
+        {/* Studio product lighting. The old setup flooded the scene with ambient
+            1.15, which washed out all form and shadow (the "cheap render" look).
+            Now: low ambient so shape returns, an HDRI for realistic metal/glass
+            reflections, a warm key, a cool back-rim for edge separation, a gentle
+            front fill so the build reads through the glass, and an interior fill
+            so parts inside a solid case don't go black. */}
+        <ambientLight intensity={0.32} />
         {/* Bundled locally (public/hdri) so lighting doesn't depend on a CDN. */}
-        <Environment files="/hdri/city.hdr" />
+        <Environment files="/hdri/city.hdr" environmentIntensity={0.9} />
+        {/* Warm key — upper front-left. */}
+        <directionalLight position={[-4, 6, 6]} intensity={2.2} color="#fff2e6" />
+        {/* Cool back-rim — carves the silhouette out of the dark ground. */}
+        <directionalLight position={[5, 3.5, -6]} intensity={1.5} color="#a9c6ff" />
+        {/* Soft front fill through the glass window. */}
+        <directionalLight position={[2, 1.5, 8]} intensity={0.8} />
+        {/* Interior fill so solid-case parts still read through the glass. */}
+        <pointLight position={[0, 0.4, 0.55]} intensity={3.6} distance={5} decay={1.6} />
+
         {parts.map((part) => (
           <PartModel key={part.id} part={part} selectedParts={selectedParts} />
         ))}
@@ -26,6 +40,19 @@ export default function BuildCanvas({ selectedParts }) {
         {selectedParts.case && selectedParts.motherboard && (
           <FanSystem filled={Boolean(selectedParts.fans)} />
         )}
+
+        {/* Grounding contact shadow so the build sits on a surface instead of
+            floating in a void. Sits just under the case floor (y ≈ -1.85). */}
+        <ContactShadows
+          position={[0, -1.92, 0]}
+          scale={11}
+          far={4.2}
+          blur={2.8}
+          opacity={0.6}
+          resolution={512}
+          color="#05070c"
+        />
+
         <OrbitControls
           target={[0, -0.1, 0.05]}
           enablePan={false}
