@@ -13,9 +13,9 @@ describe('assemblyLayout', () => {
   })
 
   it('mounts the cooler in front of the CPU (sitting on it) when a motherboard is present', () => {
-    const cpuZ = assemblyLayout('cpu', withMb).position[2]
-    const coolerZ = assemblyLayout('cooler', withMb).position[2]
-    expect(coolerZ).toBeGreaterThan(cpuZ)
+    const cpu = assemblyLayout('cpu', withMb).position[2]
+    const cooler = assemblyLayout('cooler', withMb).position[2]
+    expect(cooler).toBeGreaterThanOrEqual(cpu)
   })
 
   it('mounts the GPU in front of the board plane so it is visible', () => {

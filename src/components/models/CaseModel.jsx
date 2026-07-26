@@ -1,13 +1,15 @@
 import * as THREE from 'three'
 import useBuilderStore from '../../store/useBuilderStore'
+import { caseInterior, CASE } from '../../lib/assemblyGeometry'
+import { mm } from '../../lib/pcScale'
 
-// Tower proportions: taller than wide (reads as a tower, not a cube). Depth is
-// kept shallow so the motherboard sits close to the glass, like a real case.
-const W = 3.0   // width  (X)
-const H = 3.7   // height (Y) — trimmed so the PSU sits on the floor and there's
-                // ~3 fan-thicknesses of clearance above the motherboard
-const D = 1.2   // depth  (Z)
-const T = 0.06  // panel thickness
+// Shell dimensions come from the same interior geometry the parts are placed
+// in, so the case always contains what it's supposed to contain.
+const inner = caseInterior()
+const W = inner.max[0] - inner.min[0]  // front-to-back
+const H = inner.max[1] - inner.min[1]  // height
+const D = inner.max[2] - inner.min[2]  // side-to-side
+const T = mm(7)                        // panel thickness
 
 function Panel({ args, position, color, opacity = 1, glass = false }) {
   return (
@@ -68,6 +70,9 @@ export default function CaseModel() {
       {Array.from({ length: 3 }).map((_, i) => (
         <Panel key={`l${i}`} args={[T, 0.05, 0.78]} position={[-W / 2 - 0.012, 0.8 + i * 0.25, 0]} color="#22242a" />
       ))}
+
+      {/* PSU basement shroud — the deck the board sits above */}
+      <Panel args={[W, T, D]} position={[0, -H / 2 + mm(CASE.basementMm), 0]} color="#1a1c21" />
 
       {/* tempered-glass front window — the build is visible through it */}
       <Panel args={[W, H, T]} position={[0, 0, D / 2]} color="#87b3dd" opacity={0.16} glass />
