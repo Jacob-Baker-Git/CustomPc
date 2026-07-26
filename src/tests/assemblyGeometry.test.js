@@ -1,5 +1,5 @@
 import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE, modelScale } from '../lib/assemblyGeometry'
-import { mm } from '../lib/pcScale'
+import { mm, FAN_MM } from '../lib/pcScale'
 import { MOUNTS } from '../lib/mountPoints'
 import { PART_SPECS } from '../lib/partSpecs'
 
@@ -127,5 +127,12 @@ describe('caseInterior', () => {
   it('gives the basement room for the PSU', () => {
     const [, psuHeight] = partSize('psu')
     expect(mm(CASE.basementMm)).toBeGreaterThan(psuHeight)
+  })
+})
+
+describe('case fans', () => {
+  it('uses a real 120mm fan', () => {
+    expect(FAN_MM).toBe(120)
+    expect(mm(FAN_MM)).toBeCloseTo(0.98, 2)
   })
 })

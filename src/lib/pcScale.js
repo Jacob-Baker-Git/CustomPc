@@ -7,3 +7,6 @@
 export const WU_PER_MM = 1 / 122
 
 export const mm = (v) => v * WU_PER_MM
+
+// Standard case fan, used for both the fan models and the vent grilles they sit behind.
+export const FAN_MM = 120
