@@ -1,23 +1,34 @@
-// Fan mount points in the assembly's world frame (motherboard at the origin),
-// mounted flat on the case walls and centred on each panel with even spacing
-// (per the sketch: 1 left, 3 right, 3 top). When a fan pack is selected every
-// mount is filled, otherwise each shows an empty square slot. Each fan/slot
-// faces +Z by default and is re-oriented by `rotation`.
-const RIGHT_X = 1.43   // just inside the right wall
-const LEFT_X = -1.43   // just inside the left wall
-const TOP_Y = 1.6      // just under the top panel
-const DEPTH_Z = 0.35   // centred front-to-back
+// Fan mount points in the assembly's world frame (motherboard at the origin).
+// Derived from the case interior so they stay correct if the case changes, and
+// spaced exactly one fan apart so adjacent frames touch without intersecting.
+// Each fan/slot faces +Z by default and is re-oriented by `rotation`.
+import { caseInterior } from './assemblyGeometry'
+import { mm, FAN_MM } from './pcScale'
+
+const inner = caseInterior()
+
+const FAN = mm(FAN_MM)        // full width of a 120 mm fan
+const HALF = FAN / 2
+const THICK_HALF = mm(12.5)   // half a fan's ~25 mm frame depth
+
+// Each panel, one half-thickness inside the wall it mounts to.
+const FRONT_X = inner.max[0] - THICK_HALF
+const REAR_X = inner.min[0] + THICK_HALF
+const TOP_Y = inner.max[1] - THICK_HALF
+const MID_Z = (inner.min[2] + inner.max[2]) / 2
+
+// Highest a wall fan can sit without pushing into the top row.
+const COLUMN_TOP = TOP_Y - THICK_HALF - HALF
 
 export const FAN_MOUNTS = [
-  // Right side wall — column of three, centred vertically, facing into the case.
-  { position: [RIGHT_X, 0.65, DEPTH_Z],  rotation: [0, -Math.PI / 2, 0] },
-  { position: [RIGHT_X, -0.1, DEPTH_Z],  rotation: [0, -Math.PI / 2, 0] },
-  { position: [RIGHT_X, -0.85, DEPTH_Z], rotation: [0, -Math.PI / 2, 0] },
-  // Top panel — row of three, centred across, facing up.
-  { position: [-0.9, TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
-  { position: [0,    TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
-  { position: [0.9,  TOP_Y, DEPTH_Z], rotation: [-Math.PI / 2, 0, 0] },
-  // Left side wall — single exhaust fan mounted high (top-rear position,
-  // level with the CPU cooler) like a real rear exhaust.
-  { position: [LEFT_X, 0.95, DEPTH_Z], rotation: [0, Math.PI / 2, 0] },
+  // Front panel — intake column of three, stacked downward from the top row.
+  { position: [FRONT_X, COLUMN_TOP, MID_Z], rotation: [0, -Math.PI / 2, 0] },
+  { position: [FRONT_X, COLUMN_TOP - FAN, MID_Z], rotation: [0, -Math.PI / 2, 0] },
+  { position: [FRONT_X, COLUMN_TOP - 2 * FAN, MID_Z], rotation: [0, -Math.PI / 2, 0] },
+  // Top panel — row of three, centred front-to-back, facing up.
+  { position: [-FAN, TOP_Y, MID_Z], rotation: [-Math.PI / 2, 0, 0] },
+  { position: [0, TOP_Y, MID_Z], rotation: [-Math.PI / 2, 0, 0] },
+  { position: [FAN, TOP_Y, MID_Z], rotation: [-Math.PI / 2, 0, 0] },
+  // Rear panel — single exhaust mounted high, like a real rear exhaust.
+  { position: [REAR_X, COLUMN_TOP, MID_Z], rotation: [0, Math.PI / 2, 0] },
 ]
