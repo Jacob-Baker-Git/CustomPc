@@ -1,5 +1,6 @@
 import { mm } from './pcScale'
 import { PART_SPECS } from './partSpecs'
+import { MOUNTS } from './mountPoints'
 
 const HALF_PI = Math.PI / 2
 const isQuarterTurn = (a) => Math.abs(Math.abs(a) - HALF_PI) < 1e-6
@@ -43,4 +44,46 @@ export function partSize(category) {
   if (!spec) return [0, 0, 0]
   const scale = modelScale(category)
   return rotateExtents(spec.raw, spec.rotation).map((v) => v * scale)
+}
+
+// The board's front face — where mounted components begin.
+export function boardFaceZ() {
+  return partSize('motherboard')[2] / 2
+}
+
+// Offset from a part's bbox centre to its anchor node, in world units and world
+// axes. Zero for parts that mount by their body rather than a named connector.
+function anchorOffsetWorld(category) {
+  const spec = PART_SPECS[category]
+  if (!spec?.anchorOffset) return [0, 0, 0]
+  const scale = modelScale(category)
+  return rotateVector(spec.anchorOffset, spec.rotation).map((v) => v * scale)
+}
+
+// Centre of a part in world units, derived from its mount point. Mounted parts
+// sit against the board's +Z face and extend outward by half their own depth;
+// anchored parts are shifted so their connector, not their centre, lands on the
+// mount point.
+export function partCentre(category) {
+  if (category === 'motherboard') return [0, 0, 0]
+
+  const mount = MOUNTS[category]
+  if (!mount) return [0, 0, 0]
+
+  const [, , depth] = partSize(category)
+  const offset = anchorOffsetWorld(category)
+  return [
+    mm(mount.xMm) - offset[0],
+    mm(mount.yMm) - offset[1],
+    boardFaceZ() + depth / 2 - offset[2],
+  ]
+}
+
+export function partBox(category) {
+  const size = partSize(category)
+  const centre = partCentre(category)
+  return {
+    min: centre.map((c, i) => c - size[i] / 2),
+    max: centre.map((c, i) => c + size[i] / 2),
+  }
 }

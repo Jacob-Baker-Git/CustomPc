@@ -1,5 +1,6 @@
-import { partSize, rotateExtents, rotateVector } from '../lib/assemblyGeometry'
+import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ } from '../lib/assemblyGeometry'
 import { mm } from '../lib/pcScale'
+import { MOUNTS } from '../lib/mountPoints'
 
 const near = (v, expectedMm) => expect(v).toBeCloseTo(mm(expectedMm), 2)
 
@@ -60,5 +61,34 @@ describe('partSize', () => {
 
   it('returns a zero-size box for an unknown category', () => {
     expect(partSize('banana')).toEqual([0, 0, 0])
+  })
+})
+
+describe('partCentre', () => {
+  it('centres the motherboard on the origin', () => {
+    expect(partCentre('motherboard')).toEqual([0, 0, 0])
+  })
+
+  it('mounts RAM, GPU and M.2 in front of the board face, never inside it', () => {
+    for (const cat of ['ram', 'gpu', 'storage']) {
+      expect(partBox(cat).min[2], cat).toBeGreaterThanOrEqual(boardFaceZ() - 1e-6)
+    }
+  })
+
+  it('lands the cooler pump block on the socket, not the mesh centre', () => {
+    // The radiator hangs well above the socket, so the bbox centre must sit
+    // higher than the mount point it is anchored by.
+    expect(partCentre('cooler')[1]).toBeGreaterThan(mm(MOUNTS.cooler.yMm))
+  })
+
+  it('sits the GPU below the cooler', () => {
+    expect(partCentre('gpu')[1]).toBeLessThan(partCentre('cooler')[1])
+  })
+})
+
+describe('partBox', () => {
+  it('returns a box consistent with the part size', () => {
+    const box = partBox('gpu')
+    expect(box.max[0] - box.min[0]).toBeCloseTo(partSize('gpu')[0], 6)
   })
 })
