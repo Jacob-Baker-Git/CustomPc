@@ -33,6 +33,9 @@ export const PART_SPECS = {
     raw: [1.486, 1.935, 2.936],
     lengthMm: 271,
     rotation: [0, Math.PI / 2, 0],
+    // The pump block clamps onto the CPU's heat spreader, so the assembly starts
+    // where the CPU ends rather than at the board face like everything else.
+    mountsOn: 'cpu',
     // Measured from the mesh's pump-block node: offset from the assembly's bbox
     // centre to the block's centre, and the block's own bbox. Together these let
     // the geometry mount the AIO by its block while the radiator hangs where the

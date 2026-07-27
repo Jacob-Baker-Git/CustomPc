@@ -7,7 +7,7 @@ import { mm } from '../lib/pcScale'
 // encloses a large volume it does not physically occupy, and the RAM legitimately
 // sits inside that empty space. An AABB test would report a collision that isn't
 // real. It gets its own targeted assertion below instead.
-const PARTS = ['motherboard', 'gpu', 'ram', 'storage', 'psu']
+const PARTS = ['motherboard', 'cpu', 'gpu', 'ram', 'storage', 'psu']
 
 // Pairs allowed to touch, because one physically mounts onto the other.
 const MOUNTED_PAIRS = new Set(['gpu|motherboard'])
@@ -58,5 +58,21 @@ describe('assembly has no floating or intersecting parts', () => {
     const cooler = partBox('cooler')
     const radiatorThickness = mm(25)
     expect(cooler.max[1] - radiatorThickness).toBeGreaterThan(board.max[1])
+  })
+
+  // A cooler clamps onto the CPU's heat spreader, so it starts where the CPU
+  // ends. Starting it at the board face like every other mounted part put the
+  // entire 40x40 CPU *inside* the pump block — the part was rendering perfectly
+  // and was simply swallowed whole.
+  it('seats the cooler on top of the CPU rather than through it', () => {
+    const cpu = partBox('cpu')
+    const cooler = partBox('cooler')
+    const intrusion = cpu.max[2] - cooler.min[2]
+    // Same caveat as the AABB exclusion above: the cooler's bounding box reaches
+    // slightly behind the pump block's actual mounting face (tubes, radiator
+    // shell), so demanding an exact zero measures mesh slop, not placement. What
+    // matters is that the CPU is no longer *inside* the cooler — this intrusion
+    // was the CPU's entire thickness before it stacked on the CPU.
+    expect(intrusion).toBeLessThan(partSize('cpu')[2] * 0.05)
   })
 })

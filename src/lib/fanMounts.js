@@ -20,15 +20,15 @@ const MID_Z = (inner.min[2] + inner.max[2]) / 2
 // Highest a wall fan can sit without pushing into the top row.
 const COLUMN_TOP = TOP_Y - THICK_HALF - HALF
 
+// Every fan hangs on a vertical end wall — front intake, rear exhaust — which is
+// how air actually moves through a tower. Nothing mounts on the top panel: the
+// AIO radiator occupies that span, so a top row put two sets of fan geometry in
+// the same place.
 export const FAN_MOUNTS = [
   // Front panel — intake column of three, stacked downward from the top row.
   { position: [FRONT_X, COLUMN_TOP, MID_Z], rotation: [0, -Math.PI / 2, 0] },
   { position: [FRONT_X, COLUMN_TOP - FAN, MID_Z], rotation: [0, -Math.PI / 2, 0] },
   { position: [FRONT_X, COLUMN_TOP - 2 * FAN, MID_Z], rotation: [0, -Math.PI / 2, 0] },
-  // Top panel — row of three, centred front-to-back, facing up.
-  { position: [-FAN, TOP_Y, MID_Z], rotation: [-Math.PI / 2, 0, 0] },
-  { position: [0, TOP_Y, MID_Z], rotation: [-Math.PI / 2, 0, 0] },
-  { position: [FAN, TOP_Y, MID_Z], rotation: [-Math.PI / 2, 0, 0] },
   // Rear panel — single exhaust mounted high, like a real rear exhaust.
   { position: [REAR_X, COLUMN_TOP, MID_Z], rotation: [0, Math.PI / 2, 0] },
 ]

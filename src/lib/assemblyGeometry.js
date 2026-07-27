@@ -71,6 +71,16 @@ function mountDepth(category) {
   return rotateExtents(spec.anchorSize, spec.rotation)[2] * modelScale(category)
 }
 
+// The surface a part mounts against, along world Z. Normally that is the board's
+// front face, but a part can declare it stacks on another (`mountsOn`) — a cooler
+// clamps onto the CPU's heat spreader, not onto the PCB. Without this every part
+// started at the board face, so the pump block and the CPU both began at the same
+// Z and the pump simply swallowed the whole CPU.
+function mountBaseZ(category) {
+  const on = PART_SPECS[category]?.mountsOn
+  return on ? partBox(on).max[2] : boardFaceZ()
+}
+
 // The PSU is the one part with no board connector, so it cannot come from
 // MOUNTS. It sits in the basement instead, and these are its only placement
 // figures: how far back along the case it sits, and the gap it keeps from the
@@ -104,7 +114,7 @@ export function partCentre(category) {
   return [
     mm(mount.xMm) - offset[0],
     mm(mount.yMm) - offset[1],
-    boardFaceZ() + mountDepth(category) / 2 - offset[2],
+    mountBaseZ(category) + mountDepth(category) / 2 - offset[2],
   ]
 }
 

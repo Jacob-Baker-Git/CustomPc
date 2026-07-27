@@ -21,6 +21,24 @@ const boxOf = (mount) => {
 }
 
 describe('fanMounts', () => {
+  // Air is pulled in the front and pushed out the back. Nothing mounts on the
+  // top panel: that is where the AIO radiator lives, so a top row put two sets
+  // of fan geometry in the same space.
+  it('mounts every fan on a vertical end wall, never the top panel', () => {
+    FAN_MOUNTS.forEach((mount, n) => {
+      expect(mount.rotation[0], `fan ${n} should not face up or down`).toBe(0)
+      expect(Math.abs(mount.rotation[1]), `fan ${n} should face along X`).toBeCloseTo(Math.PI / 2)
+    })
+  })
+
+  it('is a three-fan front intake and a single rear exhaust', () => {
+    const front = FAN_MOUNTS.filter((m) => m.position[0] > 0)
+    const rear = FAN_MOUNTS.filter((m) => m.position[0] < 0)
+    expect(front).toHaveLength(3)
+    expect(rear).toHaveLength(1)
+    expect(FAN_MOUNTS).toHaveLength(4)
+  })
+
   it('keeps every fan inside the case', () => {
     const inner = caseInterior()
     FAN_MOUNTS.forEach((mount, n) => {
