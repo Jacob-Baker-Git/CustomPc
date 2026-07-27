@@ -16,6 +16,12 @@ export const PART_SPECS = {
   // maps to world Y.
   motherboard: { raw: [30.56, 4.96, 30.85], lengthMm: 305, rotation: [Math.PI / 2, 0, 0] },
 
+  // The bare package lies flat in its mesh (thin axis is mesh Y, same as the
+  // board), so it takes the board's quarter turn to sit against the vertical
+  // tray. ~40 mm square, matching a modern desktop socket. Mostly hidden under
+  // the cooler's pump block — it is modelled for the moments it isn't.
+  cpu: { raw: [3.162, 0.231, 3.162], lengthMm: 40, rotation: [Math.PI / 2, 0, 0] },
+
   // Card lies horizontal: the mesh's long axis (30.187) becomes world X.
   gpu: { raw: [4.381, 30.187, 12.819], lengthMm: 285, rotation: [0, 0, Math.PI / 2] },
 

@@ -1,16 +1,34 @@
-import { RgbRing } from './RgbParts'
+import { Suspense } from 'react'
+import GltfPart from './GltfPart'
+import ModelErrorBoundary from './ModelErrorBoundary'
 import { mm, FAN_MM } from '../../lib/pcScale'
 
-// A single fan unit (dark frame + cycling RGB ring + hub + blades) and an empty
-// fan slot (a bare square mount frame). Both face +Z so a mount's rotation can
-// aim them at the right wall.
+// A single case fan and an empty fan slot. Both face +Z so a mount's rotation
+// can aim them at the right wall (see fanMounts.js).
 
-// Both the fan and the empty slot are authored 0.6 units across. Scale them to a
-// real 120 mm fan so they match the rest of the scene, which is now built to a
-// single physical scale. Authoring proportions stay untouched.
+// The real fan mesh is square across X/Y with the 120 mm frame as its largest
+// dimension, so handing GltfPart the world size of that axis scales the whole
+// model correctly — no measured constant to drift. Verified by modelBounds.test.js.
+const FAN_URL = '/models/fan.glb'
+
+// Deliberately unlit: the model is a plain black fan and stays that way. The
+// glowing RGB ring that used to sit here read as a neon torus next to the real
+// GPU and cooler meshes, which is the opposite of what the 3D view is for.
+export function Fan() {
+  return (
+    <ModelErrorBoundary fallback={<ProceduralFan />}>
+      <Suspense fallback={<ProceduralFan />}>
+        <GltfPart url={FAN_URL} targetSize={mm(FAN_MM)} />
+      </Suspense>
+    </ModelErrorBoundary>
+  )
+}
+
+// Fallback for a missing/broken fan model. Authored 0.6 units across and scaled
+// to a real 120 mm like everything else in the scene.
 const FAN_SCALE = mm(FAN_MM) / 0.6
 
-export function Fan({ phase = 0 }) {
+function ProceduralFan() {
   return (
     <group scale={FAN_SCALE}>
       {/* frame */}
@@ -18,8 +36,6 @@ export function Fan({ phase = 0 }) {
         <boxGeometry args={[0.6, 0.6, 0.12]} />
         <meshStandardMaterial color="#23252b" metalness={0.4} roughness={0.55} />
       </mesh>
-      {/* cycling RGB ring */}
-      <RgbRing radius={0.25} tube={0.028} phase={phase} position={[0, 0, 0.065]} />
       {/* hub */}
       <mesh position={[0, 0, 0.07]} rotation={[Math.PI / 2, 0, 0]}>
         <cylinderGeometry args={[0.1, 0.1, 0.06, 20]} />

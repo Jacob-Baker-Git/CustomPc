@@ -9,6 +9,7 @@ import { MOUNTS } from './mountPoints'
 // falls back to the primitive — so adding an entry is always safe.
 const FILES = {
   motherboard: 'motherboard.glb',
+  cpu: 'cpu.glb',
   gpu: 'gpu.glb',
   cooler: 'cooler.glb',
   ram: 'ram.glb',
