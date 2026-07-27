@@ -30,7 +30,13 @@ export const GLTF_MODELS = Object.fromEntries(
       // GltfPart scales by the mesh's largest raw dimension, so hand it the
       // world size of that same axis.
       targetSize: Math.max(...spec.raw) * modelScale(cat),
-      rotation: spec.rotation,
+      // Deliberately NO rotation here. PartModel's placement group already
+      // applies spec.rotation (via assemblyLayout), and it has to — the
+      // procedural fallback models and the hover highlight live in that same
+      // group and are authored in mesh convention. Passing it here too rotated
+      // every GLB twice: the board's PI/2 became PI, laying it flat, while
+      // assemblyGeometry kept rotating once and "proving" a scene that never
+      // rendered. Covered by assemblyRenderRotation.test.js.
       position: [0, 0, 0],
       ...(cat === 'ram' ? { instances: ramOffsets() } : {}),
     }]

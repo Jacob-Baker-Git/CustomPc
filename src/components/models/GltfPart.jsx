@@ -5,9 +5,13 @@ import { useGLTF } from '@react-three/drei'
 // Loads a GLTF/GLB part and normalises it: the model is re-centred on the origin
 // and uniformly scaled so its largest dimension equals `targetSize` (world
 // units). This lets us drop in models of unknown native scale/pivot and have
-// them land at a predictable size in the assembly. Fine positioning and
-// orientation are supplied by the caller (refined against the render).
-export default function GltfPart({ url, targetSize = 2, rotation = [0, 0, 0], position = [0, 0, 0] }) {
+// them land at a predictable size in the assembly.
+//
+// Takes NO rotation on purpose. Orientation is owned entirely by PartModel's
+// placement group, which wraps this and must rotate the procedural fallback and
+// hover highlight too. Accepting a rotation here once meant every GLB got its
+// spec rotation applied twice — see gltfModels.js and assemblyRenderRotation.test.js.
+export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0] }) {
   const { scene } = useGLTF(url)
 
   const { object, scale } = useMemo(() => {
@@ -33,7 +37,7 @@ export default function GltfPart({ url, targetSize = 2, rotation = [0, 0, 0], po
   }, [scene, targetSize])
 
   return (
-    <group position={position} rotation={rotation}>
+    <group position={position}>
       <group scale={scale}>
         <primitive object={object} />
       </group>
