@@ -1,8 +1,22 @@
 # Netlify security headers, applied to every route.
+#
+# Two directives here are load-bearing for the 3D view, and neither is
+# exercised by `npm run dev` (the dev server sends no CSP at all):
+#   - connect-src blob:      GLTFLoader unpacks each model's embedded textures
+#                            into blob: URLs and reads them back with
+#                            ImageBitmapLoader, i.e. fetch() — which connect-src
+#                            governs, not img-src. Blocking it rejects the whole
+#                            model, not just the texture, so every textured part
+#                            silently degrades to a grey box.
+#   - script-src 'wasm-unsafe-eval'
+#                            motherboard.glb requires EXT_meshopt_compression,
+#                            whose decoder compiles WebAssembly. This token
+#                            permits WASM only — it does NOT allow JS eval().
+# Covered by src/tests/cspHeaders.test.js.
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://igeggndtnmdpauxovnwv.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' blob: https://igeggndtnmdpauxovnwv.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
