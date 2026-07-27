@@ -46,9 +46,18 @@ export function partSize(category) {
   return rotateExtents(spec.raw, spec.rotation).map((v) => v * scale)
 }
 
-// The board's front face — where mounted components begin.
+// The PCB's component-side face — the plane parts actually plug into, and where
+// everything mounted on the board begins.
+//
+// Deliberately NOT half the board's bounding box. That box is 49 mm deep because
+// the mesh includes the VRM heatsinks and the I/O shroud, which stand 41.6 mm
+// proud of the PCB; using it mounted every part on top of the shroud, floating
+// clear of the board with nothing touching it. `surfaceOffset` carries the real
+// plane, measured from the mesh (see partSpecs.js).
 export function boardFaceZ() {
-  return partSize('motherboard')[2] / 2
+  const spec = PART_SPECS.motherboard
+  if (!spec?.surfaceOffset) return partSize('motherboard')[2] / 2
+  return rotateVector(spec.surfaceOffset, spec.rotation)[2] * modelScale('motherboard')
 }
 
 // Offset from a part's bbox centre to its anchor node, in world units and world

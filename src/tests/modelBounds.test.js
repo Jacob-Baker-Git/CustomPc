@@ -12,7 +12,10 @@ import { FAN_MM } from '../lib/pcScale'
 // `normalized` accessors are divided back down first.
 const DIV = { 5120: 127, 5121: 255, 5122: 32767, 5123: 65535 }
 
-function meshBounds(publicPath) {
+// `materialName` narrows the result to the sub-mesh drawn with that material,
+// letting a test ask where a specific feature sits inside a model rather than
+// just how big the whole thing is.
+function meshBounds(publicPath, materialName = null) {
   const file = resolve(process.cwd(), 'public', publicPath.replace(/^\//, ''))
   const buf = readFileSync(file)
   const json = JSON.parse(buf.slice(20, 20 + buf.readUInt32LE(12)).toString('utf8'))
@@ -32,6 +35,7 @@ function meshBounds(publicPath) {
     const world = new Matrix4().multiplyMatrices(parent, local(n))
     if (n.mesh !== undefined) {
       for (const p of json.meshes[n.mesh].primitives || []) {
+        if (materialName && json.materials?.[p.material]?.name !== materialName) continue
         const a = json.accessors[p.attributes?.POSITION]
         if (!a?.min) continue
         const d = a.normalized ? DIV[a.componentType] || 1 : 1
@@ -52,8 +56,12 @@ function meshBounds(publicPath) {
     walk(r, new Matrix4())
   }
 
+  return box
+}
+
+const meshSize = (publicPath, materialName = null) => {
   const s = new Vector3()
-  box.getSize(s)
+  meshBounds(publicPath, materialName).getSize(s)
   return [s.x, s.y, s.z]
 }
 
@@ -64,7 +72,7 @@ function meshBounds(publicPath) {
 describe('PART_SPECS.raw matches the shipped meshes', () => {
   for (const [category, model] of Object.entries(GLTF_MODELS)) {
     it(`${category} matches ${model.url}`, () => {
-      const actual = meshBounds(model.url)
+      const actual = meshSize(model.url)
       PART_SPECS[category].raw.forEach((expected, i) => {
         // raw is recorded to 3dp, so allow the rounding as an absolute floor —
         // a relative bound alone is impossibly tight on near-zero axes like the
@@ -76,12 +84,39 @@ describe('PART_SPECS.raw matches the shipped meshes', () => {
   }
 })
 
+// Where the PCB actually is inside the motherboard mesh decides where EVERY
+// board-mounted part sits. The board's bounding box is 49 mm deep because it
+// includes the VRM heatsinks and the I/O shroud, so treating its front face as
+// the mounting surface floated every part 41.6 mm clear of the board.
+describe('motherboard PCB plane', () => {
+  const spec = PART_SPECS.motherboard
+
+  it('surfaceOffset still points at the mesh PCB component face', () => {
+    const whole = meshBounds('/models/motherboard.glb')
+    const pcb = meshBounds('/models/motherboard.glb', 'Board')
+    const centre = new Vector3()
+    whole.getCenter(centre)
+
+    // Mesh Y is the board's thin axis; the PCB's +Y face is the component side.
+    expect(spec.surfaceOffset[1]).toBeCloseTo(pcb.max.y - centre.y, 2)
+  })
+
+  it('puts the PCB face well behind the bounding box front', () => {
+    const whole = meshBounds('/models/motherboard.glb')
+    const size = new Vector3()
+    whole.getSize(size)
+    // Guards the actual defect: if these ever coincide the mounting surface has
+    // silently reverted to the shroud.
+    expect(spec.surfaceOffset[1]).toBeLessThan(size.y / 2 - 1)
+  })
+})
+
 // The case fans are not PART_SPECS parts — they are instanced straight onto
 // FAN_MOUNTS, which documents that every fan "faces +Z by default and is
 // re-oriented by `rotation`". A replacement model that isn't square-on-XY and
 // thin-in-Z would land edge-on in all seven mounts.
 describe('case fan mesh', () => {
-  const bounds = () => meshBounds('/models/fan.glb')
+  const bounds = () => meshSize("/models/fan.glb")
 
   it('is square across X and Y', () => {
     const [x, y] = bounds()

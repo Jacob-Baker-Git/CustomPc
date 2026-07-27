@@ -1,4 +1,4 @@
-import { partBox, partSize } from '../lib/assemblyGeometry'
+import { partBox, partSize, boardFaceZ } from '../lib/assemblyGeometry'
 import { MOUNTS } from '../lib/mountPoints'
 import { mm } from '../lib/pcScale'
 
@@ -9,10 +9,16 @@ import { mm } from '../lib/pcScale'
 // real. It gets its own targeted assertion below instead.
 const PARTS = ['motherboard', 'cpu', 'gpu', 'ram', 'storage', 'psu']
 
-// Pairs allowed to touch, because one physically mounts onto the other.
-const MOUNTED_PAIRS = new Set(['gpu|motherboard'])
+// Parts that plug into the board. The board's bounding box is ~42 mm deeper
+// than its PCB because the mesh carries VRM heatsinks and a tall I/O shroud, so
+// anything correctly seated on the PCB surface is *inside* that box. Overlap
+// between the board and the things mounted on it is therefore expected — the
+// real guard is that mounted parts don't collide with each other, and that
+// parts which do NOT mount on the board (the PSU) stay clear of it.
+const BOARD_MOUNTED = new Set(['cpu', 'gpu', 'ram', 'storage'])
 
-const key = (a, b) => [a, b].sort().join('|')
+const isBoardMount = (a, b) =>
+  (a === 'motherboard' && BOARD_MOUNTED.has(b)) || (b === 'motherboard' && BOARD_MOUNTED.has(a))
 
 // Smallest per-axis overlap. Positive on all three axes means the boxes really
 // do intersect; zero or negative means they are clear of each other.
@@ -39,9 +45,18 @@ describe('assembly has no floating or intersecting parts', () => {
   it('never lets two unrelated parts occupy the same space', () => {
     for (let i = 0; i < PARTS.length; i++) {
       for (let j = i + 1; j < PARTS.length; j++) {
-        if (MOUNTED_PAIRS.has(key(PARTS[i], PARTS[j]))) continue
+        if (isBoardMount(PARTS[i], PARTS[j])) continue
         expect(overlap(PARTS[i], PARTS[j]), `${PARTS[i]} vs ${PARTS[j]}`).toBeLessThanOrEqual(TOUCH_EPSILON)
       }
+    }
+  })
+
+  // The defect a user actually saw: "nothing's touching the motherboard".
+  // boardFaceZ() returned half the board's bounding box — the top of the I/O
+  // shroud — so every part sat 41.6 mm off the PCB, connected to nothing.
+  it('seats every board-mounted part flush on the PCB surface', () => {
+    for (const category of BOARD_MOUNTED) {
+      expect(partBox(category).min[2], `${category} back face`).toBeCloseTo(boardFaceZ(), 9)
     }
   })
 

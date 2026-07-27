@@ -94,13 +94,13 @@ describe('partCentre', () => {
   // assembly's bbox centre, so mounting the block on a socket at (-20, 75) puts
   // the bbox centre up at (28.8, 129.4).
   //
-  // Z is 95.9 rather than 93.0 because the block clamps onto the CPU's heat
-  // spreader, not onto the PCB: it starts at the CPU's outer face, which is the
-  // board face plus the CPU's own 2.9 mm. Seating it on the board instead left
-  // the entire CPU inside the pump block.
+  // Z is built up from the PCB surface rather than the board's bounding box:
+  // boardFaceZ() is -17.1 mm (the PCB's component face, 41.6 mm behind the top
+  // of the I/O shroud), plus the CPU's own 2.9 mm because the pump block clamps
+  // onto the heat spreader, plus the block's half depth and anchor offset.
   it('places the cooler so its pump block meets the socket, on top of the CPU', () => {
     const centreMm = partCentre('cooler').map((v) => +(v / WU_PER_MM).toFixed(1))
-    expect(centreMm).toEqual([28.8, 129.4, 95.9])
+    expect(centreMm).toEqual([28.8, 129.4, 54.3])
   })
 })
 

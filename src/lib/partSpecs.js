@@ -14,7 +14,20 @@
 export const PART_SPECS = {
   // The board's long (305 mm) edge is mesh Z and must stand vertical, so mesh Z
   // maps to world Y.
-  motherboard: { raw: [30.56, 4.96, 30.85], lengthMm: 305, rotation: [Math.PI / 2, 0, 0] },
+  //
+  // `surfaceOffset` is the vector from the mesh's bbox centre to the PCB's
+  // component-side face, in raw model units — the plane things actually plug
+  // into. It is NOT half the bounding box: this mesh is 49 mm deep because it
+  // includes the VRM heatsinks and the tall ROG I/O shroud, whose top sits
+  // 41.6 mm proud of the PCB. Mounting parts on the bbox front face left every
+  // one of them floating that far clear of the board. Measured from the mesh's
+  // `Board` material and checked by modelBounds.test.js.
+  motherboard: {
+    raw: [30.56, 4.96, 30.85],
+    lengthMm: 305,
+    rotation: [Math.PI / 2, 0, 0],
+    surfaceOffset: [0, -1.7305, 0],
+  },
 
   // The bare package lies flat in its mesh (thin axis is mesh Y, same as the
   // board), so it takes the board's quarter turn to sit against the vertical
