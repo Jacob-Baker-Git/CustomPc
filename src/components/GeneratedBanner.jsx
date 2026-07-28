@@ -5,14 +5,11 @@ import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import useCatalogStore from '../store/useCatalogStore'
 import { USE_CASE_LABEL } from '../lib/buildProfiles'
 
-const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
-
-// One-off summary shown after the wizard generates a build: what it achieves
-// and, when money is left on the table, a one-click way to spend it on FPS.
+// One-off summary shown after setup generates a build: what it cost, and when
+// money is left on the table, a one-click way to spend it.
 export default function GeneratedBanner() {
   const info          = useBuilderStore((s) => s.lastGenerated)
   const budget        = useBuilderStore((s) => s.budget)
-  const resolution    = useBuilderStore((s) => s.resolution)
   const useCase       = useBuilderStore((s) => s.useCase)
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const setBuild      = useBuilderStore((s) => s.setBuild)
@@ -23,7 +20,6 @@ export default function GeneratedBanner() {
   if (!info) return null
 
   const leftover = budget - spent
-  const resLabel = RES_LABEL[resolution] ?? resolution
 
   function spendLeftover() {
     setBuild(maxOutBudget(selectedParts, budget, partsData, useCase))
@@ -35,12 +31,7 @@ export default function GeneratedBanner() {
       <p className="text-xs text-muted">
         {info.useCase
           ? <>Your <span className="text-ink">{USE_CASE_LABEL[info.useCase] ?? info.useCase} build</span> uses <span className={`${TELEMETRY} text-accent font-semibold`}>£{spent.toFixed(0)}</span> of your £{budget.toFixed(0)} budget</>
-          : info.estFps != null && info.gameName
-            ? (info.met
-                ? <>This build hits <span className={`${TELEMETRY} text-accent font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>
-                : <>Closest to your {info.targetFps} fps target: <span className={`${TELEMETRY} text-ok font-semibold`}>~{info.estFps} fps</span> in {info.gameName} at {resLabel}</>)
-            : <>Upgrade applied</>}
-        {info.quality && info.quality !== 'high' && <> on <span className="text-ink">{info.quality}</span> settings</>}
+          : <>Upgrade applied</>}
         {leftover > 0 && <> — <span className={`${TELEMETRY} text-good`}>£{leftover.toFixed(0)}</span> under budget</>}
       </p>
       {leftover > 20 && (

@@ -13,8 +13,5 @@ export const PANEL_STRONG = 'bg-surface-2 border border-line-strong rounded-xl'
 // Monospace telemetry — apply to live-updating numbers only (labels stay sans).
 export const TELEMETRY = 'font-mono tabular-nums'
 
-// Restrained accent helpers.
-export const ACCENT_TEXT = 'text-accent'
-
 // Flat primary action — one warm accent, dark ink on top, no gradients or glows.
 export const BTN_PRIMARY = 'bg-accent hover:brightness-110 text-accent-ink font-semibold'

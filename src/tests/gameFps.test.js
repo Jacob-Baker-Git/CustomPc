@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { gameFps, FPS_TARGETS } from '../lib/gameFps'
+import { gameFps } from '../lib/gameFps'
 import { estimateFps } from '../lib/fpsEstimate'
 import partsData from '../data/partsData.json'
 
@@ -20,10 +20,6 @@ describe('gameFps', () => {
   it('gives a higher-fpsFactor game more FPS than a lower one', () => {
     expect(gameFps(cpu, gpu, '1440p', { fpsFactor: 2.6 }))
       .toBeGreaterThan(gameFps(cpu, gpu, '1440p', { fpsFactor: 0.5 }))
-  })
-
-  it('exposes the standard FPS targets', () => {
-    expect(FPS_TARGETS).toEqual([60, 120, 144])
   })
 
   it('lower quality presets raise FPS, in order', () => {

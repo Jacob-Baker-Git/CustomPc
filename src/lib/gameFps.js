@@ -1,7 +1,5 @@
 import { resFactors } from './fpsEstimate'
 
-export const FPS_TARGETS = [60, 120, 144]
-
 // Graphics presets lean on the GPU side: dropping settings mostly relieves the
 // graphics card. The CPU also gains a little (draw distance, shadows and crowd
 // settings cost CPU too), so every game improves at lower presets — CPU-bound

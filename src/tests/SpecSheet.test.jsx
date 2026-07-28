@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import SpecSheet, { insight } from '../components/SpecSheet'
+import SpecSheet from '../components/SpecSheet'
+import { insight } from '../lib/specSheetContent'
 import partsData from '../data/partsData.json'
 import peripheralsData from '../data/peripheralsData.json'
 

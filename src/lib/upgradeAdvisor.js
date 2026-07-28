@@ -1,7 +1,5 @@
 import { estimateFps } from './fpsEstimate'
 import { checkCompatibility } from './compatibility'
-import { gameFps } from './gameFps'
-import { computeBottleneck } from './bottleneck'
 
 // Only CPU/GPU swaps move the FPS needle, so those are the upgrade candidates.
 const UPGRADEABLE = ['gpu', 'cpu']
@@ -59,65 +57,4 @@ export function suggestUpgrade(selectedParts, budget, catalog, resolution = '144
       if (va !== vb) return va === Infinity ? -1 : vb === Infinity ? 1 : vb - va
       return b.fpsGain - a.fpsGain || a.extraCost - b.extraCost
     })[0]
-}
-
-// Ranked, filterable upgrade candidates for the Upgrade-your-PC flow. Only
-// CPU/GPU swaps move the FPS needle (same rule as suggestUpgrade). `budget` is
-// the extra spend allowed for the swap (not the whole build).
-export function upgradeCandidates(currentParts, { game, resolution, targetFps, budget }, catalog) {
-  const cpu = currentParts.cpu
-  const gpu = currentParts.gpu
-  if (!cpu || !gpu || !game) return []
-
-  const baseFps = gameFps(cpu, gpu, resolution, game, 'high')
-  const before = computeBottleneck(cpu, gpu, resolution)
-
-  const out = []
-  for (const category of UPGRADEABLE) {
-    const current = currentParts[category]
-    if (!current) continue
-
-    for (const cand of catalog) {
-      if (cand.category !== category) continue
-      if ((cand.perfScore ?? 0) <= (current.perfScore ?? 0)) continue
-
-      const extraCost = cand.price - current.price
-      if (extraCost > budget) continue
-
-      const { compatible } = checkCompatibility(currentParts, cand)
-      if (!compatible) continue
-
-      const next = { ...currentParts, [category]: cand }
-      const resultFps = gameFps(next.cpu, next.gpu, resolution, game, 'high')
-      const fpsGain = resultFps - baseFps
-      if (fpsGain < MIN_GAIN) continue
-
-      const after = computeBottleneck(next.cpu, next.gpu, resolution)
-      out.push({
-        category,
-        fromPart: current,
-        toPart: cand,
-        fpsGain,
-        extraCost,
-        resultFps,
-        pricePerFps: extraCost <= 0 ? 0 : extraCost / fpsGain,
-        meetsGoal: resultFps >= targetFps,
-        fixesBottleneck: Boolean(
-          before && after && before.limitedBy !== 'none' && after.balancePct > before.balancePct
-        ),
-      })
-    }
-  }
-  return out
-}
-
-const CANDIDATE_SORTS = {
-  value: (a, b) => a.pricePerFps - b.pricePerFps,
-  gain:  (a, b) => b.fpsGain - a.fpsGain,
-  cost:  (a, b) => a.extraCost - b.extraCost,
-}
-
-export function sortCandidates(list, key = 'value') {
-  const cmp = CANDIDATE_SORTS[key] ?? CANDIDATE_SORTS.value
-  return [...list].sort(cmp)
 }

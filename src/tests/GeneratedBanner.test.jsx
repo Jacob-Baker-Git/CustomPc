@@ -1,22 +1,21 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import GeneratedBanner from '../components/GeneratedBanner'
 import useBuilderStore from '../store/useBuilderStore'
-import { targetBuild } from '../lib/targetBuilder'
+import { autoBuild } from '../lib/autoBuilder'
 import partsData from '../data/partsData.json'
-import gamesData from '../data/gamesData.json'
-
-const fortnite = gamesData.find((g) => g.id === 'fortnite')
 
 beforeEach(() => {
   localStorage.clear()
-  const { parts, estFps } = targetBuild(1600, '1440p', 60, fortnite, partsData)
+  // A non-maximised build deliberately leaves money on the table, which is what
+  // the "spend the leftover" path needs to act on.
+  const parts = autoBuild({}, 1600, partsData, '1440p')
   useBuilderStore.setState({
     budget: 1600,
     resolution: '1440p',
     useCase: 'gaming',
     selectedParts: parts,
     selectedPeripherals: {},
-    lastGenerated: { met: true, estFps, targetFps: 60, gameName: 'Fortnite' },
+    lastGenerated: { useCase: 'gaming', spend: 0, budget: 1600 },
   })
 })
 
@@ -27,9 +26,9 @@ describe('GeneratedBanner', () => {
     expect(container).toBeEmptyDOMElement()
   })
 
-  it('summarises what the generated build achieves', () => {
+  it('summarises what the generated build cost', () => {
     render(<GeneratedBanner />)
-    expect(screen.getByText(/fortnite/i)).toBeInTheDocument()
+    expect(screen.getByText(/gaming build/i)).toBeInTheDocument()
     expect(screen.getByText(/under budget/i)).toBeInTheDocument()
   })
 
