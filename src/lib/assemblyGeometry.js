@@ -46,6 +46,17 @@ export function partSize(category) {
   return rotateExtents(spec.raw, spec.rotation).map((v) => v * scale)
 }
 
+// Size in the MODEL's own axes — i.e. before the placement group applies
+// spec.rotation. Anything rendered as a CHILD of that group needs these, not
+// partSize(), or it comes out rotated twice. Returns null for categories with
+// no measured model (the case is procedural).
+export function partLocalSize(category) {
+  const spec = PART_SPECS[category]
+  if (!spec) return null
+  const scale = modelScale(category)
+  return spec.raw.map((v) => v * scale)
+}
+
 // The PCB's component-side face — the plane parts actually plug into, and where
 // everything mounted on the board begins.
 //

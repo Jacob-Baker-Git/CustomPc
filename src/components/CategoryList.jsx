@@ -6,9 +6,23 @@ const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
   .filter(Boolean)
 
-export default function CategoryList({ selectedParts, onSelectCategory, onDeselect, columns = 1 }) {
+// `onHoverCategory` is optional: the builder passes it so hovering a row
+// highlights the matching part in the 3D view. Setup renders this list too,
+// where there is no 3D, so it simply omits the prop.
+export default function CategoryList({ selectedParts, onSelectCategory, onDeselect, onHoverCategory, columns = 1 }) {
   const next = nextRecommended(selectedParts)
   const wrap = columns === 2 ? 'grid grid-cols-1 lg:grid-cols-2 gap-2' : 'space-y-2'
+
+  // Focus handlers as well as pointer ones, so the highlight works for anyone
+  // tabbing through the list rather than using a mouse.
+  const hoverProps = onHoverCategory
+    ? (id) => ({
+        onMouseEnter: () => onHoverCategory(id),
+        onMouseLeave: () => onHoverCategory(null),
+        onFocus: () => onHoverCategory(id),
+        onBlur: () => onHoverCategory(null),
+      })
+    : () => ({})
 
   return (
     <div className={wrap}>
@@ -18,7 +32,7 @@ export default function CategoryList({ selectedParts, onSelectCategory, onDesele
 
         if (part) {
           return (
-            <div key={cat.id} className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5">
+            <div key={cat.id} {...hoverProps(cat.id)} className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5">
               <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
               <button onClick={() => onSelectCategory(cat.id)} className="flex items-center gap-2 flex-1 min-w-0 text-left">
                 <CategoryIcon id={cat.id} className="text-muted" />
@@ -34,6 +48,7 @@ export default function CategoryList({ selectedParts, onSelectCategory, onDesele
           <button
             key={cat.id}
             onClick={() => onSelectCategory(cat.id)}
+            {...hoverProps(cat.id)}
             className={`w-full flex items-center gap-2 rounded-lg border px-3 py-2.5 text-sm transition-colors
               ${isNext
                 ? 'border-accent bg-accent-soft text-accent'

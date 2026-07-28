@@ -22,6 +22,7 @@ export default function BuilderScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const addPart       = useBuilderStore((s) => s.addPart)
   const removePart    = useBuilderStore((s) => s.removePart)
+  const setHovered    = useBuilderStore((s) => s.setHoveredCategory)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useHashView('build')
   const scrollRef = useRef(null)
@@ -60,6 +61,7 @@ export default function BuilderScreen() {
                   selectedParts={selectedParts}
                   onSelectCategory={setActiveCategory}
                   onDeselect={removePart}
+                  onHoverCategory={setHovered}
                   columns={2}
                 />
               </div>

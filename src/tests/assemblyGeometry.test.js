@@ -1,6 +1,7 @@
-import { partSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE } from '../lib/assemblyGeometry'
+import { partSize, partLocalSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE } from '../lib/assemblyGeometry'
 import { mm, WU_PER_MM, FAN_MM } from '../lib/pcScale'
 import { MOUNTS, BOARD } from '../lib/mountPoints'
+import { PART_SPECS } from '../lib/partSpecs'
 
 const near = (v, expectedMm) => expect(v).toBeCloseTo(mm(expectedMm), 2)
 
@@ -25,6 +26,30 @@ describe('rotateVector', () => {
   it('flips a vector under a half turn, where extents would not change', () => {
     const [, y] = rotateVector([0, 1, 0], [Math.PI, 0, 0])
     expect(+y.toFixed(6)).toBe(-1)
+  })
+})
+
+// The hover highlight is a CHILD of the placement group, so it is authored in
+// the model's own axes while partSize() is world-space. Rotating one must give
+// the other — the previous highlight constants were world-ish and came out
+// rotated twice, drawing the GPU's shell as a tall slab beside the card.
+describe('partLocalSize', () => {
+  it('rotates into partSize for every measured part', () => {
+    for (const category of Object.keys(PART_SPECS)) {
+      const rotated = rotateExtents(partLocalSize(category), PART_SPECS[category].rotation)
+      rotated.forEach((v, i) => expect(v).toBeCloseTo(partSize(category)[i], 9))
+    }
+  })
+
+  it('differs from partSize wherever the model is rotated a quarter turn', () => {
+    // If these ever matched, the two conventions would have collapsed and the
+    // double-rotation bug could return unnoticed.
+    expect(partLocalSize('gpu')).not.toEqual(partSize('gpu'))
+  })
+
+  it('is null for categories with no measured model, so no box is drawn', () => {
+    expect(partLocalSize('case')).toBeNull()
+    expect(partLocalSize('paste')).toBeNull()
   })
 })
 

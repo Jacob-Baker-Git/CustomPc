@@ -4,19 +4,12 @@ import { GLTF_MODELS } from '../lib/gltfModels'
 import GltfPart from './models/GltfPart'
 import ModelErrorBoundary from './models/ModelErrorBoundary'
 import { assemblyLayout } from '../lib/assemblyLayout'
+import { partLocalSize } from '../lib/assemblyGeometry'
 import useBuilderStore from '../store/useBuilderStore'
 
-// Approximate model-local bounds for the hover highlight shell per category.
-const HIGHLIGHT_SIZE = {
-  motherboard: [2.6, 0.5, 2.6],
-  cpu:         [0.8, 0.25, 0.8],
-  cooler:      [1.0, 0.6, 1.0],
-  ram:         [0.35, 0.7, 1.05],
-  gpu:         [2.15, 0.5, 1.05],
-  storage:     [0.95, 0.3, 1.05],
-  psu:         [1.15, 0.7, 0.9],
-  case:        [3.15, 3.85, 1.35],
-}
+// A little larger than the part, so the shell reads as a glow around it rather
+// than z-fighting with the surface.
+const HIGHLIGHT_INFLATE = 1.08
 
 export default function PartModel({ part, selectedParts }) {
   const hovered = useBuilderStore((s) => s.hoveredCategory) === part.category
@@ -27,6 +20,11 @@ export default function PartModel({ part, selectedParts }) {
   const ModelComponent = MODEL_REGISTRY[part.category]
   const { position, rotation } = assemblyLayout(part.category, selectedParts)
   const gltf = GLTF_MODELS[part.category]
+
+  // Derived from the same measured model dimensions that place the part, so it
+  // can't drift out of step with the assembly the way hand-tuned constants did.
+  const localSize = partLocalSize(part.category)
+  const highlightSize = localSize && localSize.map((v) => v * HIGHLIGHT_INFLATE)
 
   // The procedural (primitive) model — also the fallback when a GLTF is missing
   // or fails to load.
@@ -54,9 +52,9 @@ export default function PartModel({ part, selectedParts }) {
       ) : (
         primitive
       )}
-      {hovered && (
+      {hovered && highlightSize && (
         <mesh>
-          <boxGeometry args={HIGHLIGHT_SIZE[part.category] ?? [1, 1, 1]} />
+          <boxGeometry args={highlightSize} />
           <meshBasicMaterial color="#F26B3A" transparent opacity={0.2} depthWrite={false} />
         </mesh>
       )}

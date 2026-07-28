@@ -40,4 +40,46 @@ describe('CategoryList', () => {
     expect(container.firstChild).toHaveClass('grid')
     expect(container.firstChild).toHaveClass('lg:grid-cols-2')
   })
+
+  // The 3D hover highlight reads hoveredCategory but nothing was setting it,
+  // so the feature was silently dead. These hold the wiring in place.
+  describe('hover reporting for the 3D highlight', () => {
+    it('reports the category under the pointer, and null on leave', () => {
+      const onHoverCategory = vi.fn()
+      render(
+        <CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} onHoverCategory={onHoverCategory} />
+      )
+      const gpuRow = screen.getByText('GPU').closest('button')
+      fireEvent.mouseEnter(gpuRow)
+      expect(onHoverCategory).toHaveBeenCalledWith('gpu')
+      fireEvent.mouseLeave(gpuRow)
+      expect(onHoverCategory).toHaveBeenLastCalledWith(null)
+    })
+
+    it('reports rows that already hold a part', () => {
+      const onHoverCategory = vi.fn()
+      render(
+        <CategoryList selectedParts={{ cpu }} onSelectCategory={() => {}} onDeselect={() => {}} onHoverCategory={onHoverCategory} />
+      )
+      fireEvent.mouseEnter(screen.getByText(cpu.name).closest('div'))
+      expect(onHoverCategory).toHaveBeenCalledWith('cpu')
+    })
+
+    it('also reports on keyboard focus, not just the pointer', () => {
+      const onHoverCategory = vi.fn()
+      render(
+        <CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} onHoverCategory={onHoverCategory} />
+      )
+      const gpuRow = screen.getByText('GPU').closest('button')
+      fireEvent.focus(gpuRow)
+      expect(onHoverCategory).toHaveBeenCalledWith('gpu')
+      fireEvent.blur(gpuRow)
+      expect(onHoverCategory).toHaveBeenLastCalledWith(null)
+    })
+
+    it('is inert when no handler is supplied (the setup flow has no 3D)', () => {
+      render(<CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} />)
+      expect(() => fireEvent.mouseEnter(screen.getByText('GPU').closest('button'))).not.toThrow()
+    })
+  })
 })
