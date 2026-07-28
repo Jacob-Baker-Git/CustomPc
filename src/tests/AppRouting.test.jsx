@@ -13,29 +13,49 @@ vi.mock('../store/useCatalogStore', async () => {
 beforeEach(() => {
   window.location.hash = ''
   useBuilderStore.setState({
-    budget: 0, flow: 'menu', selectedParts: {}, selectedPeripherals: {}, resolution: '1440p',
+    budget: 0, flow: 'hub', selectedParts: {}, selectedPeripherals: {}, resolution: '1440p',
   })
 })
 
 describe('App routing', () => {
-  it('shows the main menu when there is no build in progress', () => {
+  it('shows the hub by default', () => {
     render(<App />)
-    expect(screen.getByRole('button', { name: /build a new pc/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /upgrade your pc/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /saved builds/i })).toBeInTheDocument()
   })
-  it('routes to the new-build wizard', () => {
+
+  it('routes to setup', () => {
     render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: /build a new pc/i }))
-    expect(screen.getByText(/what's your budget/i)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /start a build/i }))
+    expect(screen.getByText(/where are you starting from/i)).toBeInTheDocument()
   })
-  it('routes to the upgrade wizard', () => {
+
+  it('routes to saved builds', () => {
     render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: /upgrade your pc/i }))
-    expect(screen.getByRole('heading', { name: /upgrade your pc/i })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /saved builds/i }))
+    expect(screen.getByRole('heading', { name: /saved builds/i })).toBeInTheDocument()
   })
-  it('shows the builder once a budget is set', () => {
-    useBuilderStore.setState({ budget: 1500 })
+
+  // Routing is driven by `flow` alone now. It used to be `budget > 0`, which
+  // meant a returning visitor with a persisted budget could never reach the hub.
+  it('shows the builder when flow says so, whatever the budget', () => {
+    useBuilderStore.setState({ flow: 'builder', budget: 0 })
     render(<App />)
-    expect(screen.getByRole('button', { name: /^peripherals$/i })).toBeInTheDocument()
+    // Two sets of tabs render: the header row and the mobile bottom bar. Only
+    // one is visible at a time, but jsdom applies no CSS so both are present.
+    expect(screen.getAllByRole('button', { name: /^peripherals$/i })).toHaveLength(2)
+  })
+
+  it('stays on the hub when a budget is set but flow is hub', () => {
+    useBuilderStore.setState({ flow: 'hub', budget: 1500 })
+    render(<App />)
+    expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
+  })
+
+  it('offers to carry on when a build is already in progress', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } }, budget: 900 })
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /carry on building/i }))
+    expect(useBuilderStore.getState().flow).toBe('builder')
   })
 })

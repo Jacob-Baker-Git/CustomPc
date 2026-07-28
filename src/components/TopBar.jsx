@@ -4,8 +4,9 @@ import useBuilderStore, {
   selTotalSpent, selTotalPower, selPsuWattage
 } from '../store/useBuilderStore'
 import DynamicBars from './DynamicBars'
+import ViewTabs from './ViewTabs'
 
-export default function TopBar() {
+export default function TopBar({ view, onViewChange }) {
   const budget     = useBuilderStore((s) => s.budget)
   const setBudget  = useBuilderStore((s) => s.setBudget)
   const setFlow    = useBuilderStore((s) => s.setFlow)
@@ -31,14 +32,16 @@ export default function TopBar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-line px-3 md:px-6 py-2 md:py-3 flex flex-wrap md:flex-nowrap items-center gap-x-3 md:gap-8 gap-y-1">
       <button
-        onClick={() => { setBudget(0); setFlow('menu') }}
+        onClick={() => setFlow('hub')}
         aria-label="Back to menu"
-        title="Back to the main menu (your build is kept)"
+        title="Back to the main menu"
         className="w-8 h-8 flex items-center justify-center rounded-lg border border-line text-muted hover:text-ink hover:border-line-strong transition-colors"
       >
         <ArrowLeft size={14} aria-hidden="true" />
       </button>
-      <span className="font-display font-extrabold text-lg tracking-tight text-ink">PC <span className="text-accent">Builder</span></span>
+      {/* Below 360px the wordmark is what pushes this header onto a second row,
+          so it goes; every real phone width keeps it. */}
+      <span className="hidden min-[360px]:inline font-display font-extrabold text-lg tracking-tight text-ink">PC <span className="text-accent">Builder</span></span>
       {/* Compact on phones (values only, smaller text) so the header stays ONE
           row — a wrapped two-row header covered the view tabs underneath. */}
       <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted">
@@ -74,9 +77,14 @@ export default function TopBar() {
         <span className="text-line-strong mx-0.5 sm:mx-1">|</span>
         <span className="text-ok font-mono tabular-nums font-semibold">{totalPower}W</span>
       </div>
+      {/* Tabs live in the header on desktop; on phones they are the bottom bar
+          rendered by BuilderScreen, so this row stays one row at 375px. */}
       <div className="ml-auto flex items-center gap-3 md:gap-4">
+        <ViewTabs view={view} onChange={onViewChange} />
         <a href="#/feedback" className="text-xs text-muted hover:text-accent transition-colors">Feedback</a>
-        <div className="hidden md:flex gap-6">
+        {/* xl, not lg: at 1024 the tabs have just moved in and the bars no
+            longer fit beside them without wrapping the header. */}
+        <div className="hidden xl:flex gap-6">
           <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" />
           <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" />
         </div>

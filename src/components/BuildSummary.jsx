@@ -50,6 +50,7 @@ export default function BuildSummary() {
   const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
   const budget = useBuilderStore((s) => s.budget)
   const clearBuild = useBuilderStore((s) => s.clearBuild)
+  const setFlow = useBuilderStore((s) => s.setFlow)
   const saveBuild = useSavedStore((s) => s.saveBuild)
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
@@ -204,6 +205,15 @@ export default function BuildSummary() {
               Clear build
             </button>
           </div>
+
+          {/* Saved builds moved to the hub — this is the way back to them from
+              the place where saving actually happens. */}
+          <button
+            onClick={() => setFlow('saved')}
+            className="mt-4 text-xs text-muted hover:text-accent transition-colors"
+          >
+            View your saved builds →
+          </button>
         </div>
       </div>
 

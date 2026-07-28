@@ -1,19 +1,55 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import MainMenu from '../components/MainMenu'
+import useBuilderStore from '../store/useBuilderStore'
+
+const noop = () => {}
+
+beforeEach(() => {
+  useBuilderStore.setState({ budget: 0, selectedParts: {}, selectedPeripherals: {} })
+})
 
 describe('MainMenu', () => {
-  it('shows both entry options', () => {
-    render(<MainMenu onNew={() => {}} onUpgrade={() => {}} />)
-    expect(screen.getByRole('button', { name: /build a new pc/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /upgrade your pc/i })).toBeInTheDocument()
+  it('offers starting a build and the saved-builds library', () => {
+    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /saved builds/i })).toBeInTheDocument()
   })
+
+  it('surfaces the content pages that used to be footer-only', () => {
+    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    for (const href of ['#/parts', '#/glossary', '#/help', '#/feedback']) {
+      expect(document.querySelector(`a[href="${href}"]`)).toBeTruthy()
+    }
+  })
+
+  it('hides the resume card when there is no build yet', () => {
+    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    expect(screen.queryByRole('button', { name: /carry on building/i })).toBeNull()
+  })
+
+  it('shows the resume card with the build so far once parts are chosen', () => {
+    useBuilderStore.setState({
+      budget: 1500,
+      selectedParts: { cpu: { id: 'c', price: 200 }, gpu: { id: 'g', price: 400 } },
+    })
+    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    const resume = screen.getByRole('button', { name: /carry on building/i })
+    expect(resume).toHaveTextContent('2 parts chosen')
+    expect(resume).toHaveTextContent('£600')
+    expect(resume).toHaveTextContent('£1500')
+  })
+
   it('calls the right handler for each option', () => {
-    const onNew = vi.fn()
-    const onUpgrade = vi.fn()
-    render(<MainMenu onNew={onNew} onUpgrade={onUpgrade} />)
-    fireEvent.click(screen.getByRole('button', { name: /build a new pc/i }))
-    fireEvent.click(screen.getByRole('button', { name: /upgrade your pc/i }))
-    expect(onNew).toHaveBeenCalledTimes(1)
-    expect(onUpgrade).toHaveBeenCalledTimes(1)
+    const onStart = vi.fn()
+    const onResume = vi.fn()
+    const onSaved = vi.fn()
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
+    render(<MainMenu onStart={onStart} onResume={onResume} onSaved={onSaved} />)
+    fireEvent.click(screen.getByRole('button', { name: /carry on building/i }))
+    fireEvent.click(screen.getByRole('button', { name: /start a different build/i }))
+    fireEvent.click(screen.getByRole('button', { name: /saved builds/i }))
+    expect(onResume).toHaveBeenCalledTimes(1)
+    expect(onStart).toHaveBeenCalledTimes(1)
+    expect(onSaved).toHaveBeenCalledTimes(1)
   })
 })

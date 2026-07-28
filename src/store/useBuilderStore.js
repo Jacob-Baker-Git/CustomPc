@@ -7,9 +7,11 @@ const useBuilderStore = create(persist((set) => ({
 
   setBudget: (amount) => set({ budget: amount }),
 
-  // Which pre-builder screen is showing. Transient — NOT in partialize, so a
-  // refresh with a persisted build still skips straight to the builder.
-  flow: 'menu',
+  // Which screen the app is on: 'hub' | 'setup' | 'saved' | 'builder'.
+  // Persisted, so a refresh returns you where you were. This used to be
+  // derived from `budget > 0`, which meant leaving the builder had to zero
+  // the budget and a returning visitor could never reach the hub at all.
+  flow: 'hub',
   setFlow: (flow) => set({ flow }),
 
   addPart: (category, part) =>
@@ -68,7 +70,14 @@ const useBuilderStore = create(persist((set) => ({
     }),
 }), {
   name: 'custompc-builder-v1',
-  version: 1,
+  version: 2,
+  // v1 had no persisted `flow` and inferred "in the builder" from a non-zero
+  // budget. Preserve that inference once, so anyone mid-build reopens in the
+  // builder rather than being dropped back on the hub.
+  migrate: (persisted, version) => {
+    if (version >= 2 || !persisted) return persisted
+    return { ...persisted, flow: (persisted.budget ?? 0) > 0 ? 'builder' : 'hub' }
+  },
   partialize: (s) => ({
     budget: s.budget,
     selectedParts: s.selectedParts,
@@ -76,6 +85,7 @@ const useBuilderStore = create(persist((set) => ({
     resolution: s.resolution,
     customResolution: s.customResolution,
     useCase: s.useCase,
+    flow: s.flow,
   }),
 }))
 

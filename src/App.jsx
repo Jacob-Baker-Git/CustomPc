@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import BudgetEntry from './components/BudgetEntry'
+import SetupFlow from './components/SetupFlow'
 import BuilderScreen from './screens/BuilderScreen'
 import MainMenu from './components/MainMenu'
-import UpgradeWizard from './components/UpgradeWizard'
+import SavedBuilds from './components/SavedBuilds'
 import SiteChrome from './components/SiteChrome'
 import HelpPage from './components/HelpPage'
 import PartsBrowser from './components/PartsBrowser'
@@ -11,14 +11,13 @@ import FeedbackPage from './components/FeedbackPage'
 import useBuilderStore from './store/useBuilderStore'
 import { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
+import { enterBuildTab } from './lib/enterBuildTab'
 
 const PAGES = { help: HelpPage, parts: PartsBrowser, glossary: GlossaryPage, feedback: FeedbackPage }
 
 export default function App() {
-  const budget    = useBuilderStore((s) => s.budget)
-  const setBudget = useBuilderStore((s) => s.setBudget)
-  const flow      = useBuilderStore((s) => s.flow)
-  const setFlow   = useBuilderStore((s) => s.setFlow)
+  const flow    = useBuilderStore((s) => s.flow)
+  const setFlow = useBuilderStore((s) => s.setFlow)
   const { page, navigate } = usePageRoute()
 
   useEffect(() => { loadCatalog() }, [])
@@ -27,8 +26,21 @@ export default function App() {
     const Page = PAGES[page]
     return <SiteChrome onBack={() => navigate(null)}><Page /></SiteChrome>
   }
-  if (budget > 0) return <BuilderScreen />
-  if (flow === 'new')     return <BudgetEntry onSubmit={setBudget} onBack={() => setFlow('menu')} />
-  if (flow === 'upgrade') return <UpgradeWizard onBack={() => setFlow('menu')} />
-  return <MainMenu onNew={() => setFlow('new')} onUpgrade={() => setFlow('upgrade')} />
+
+  if (flow === 'builder') return <BuilderScreen />
+  if (flow === 'setup')   return <SetupFlow onBack={() => setFlow('hub')} />
+  if (flow === 'saved') {
+    return (
+      <SiteChrome onBack={() => setFlow('hub')}>
+        <SavedBuilds onLoaded={() => { enterBuildTab(); setFlow('builder') }} />
+      </SiteChrome>
+    )
+  }
+  return (
+    <MainMenu
+      onStart={() => setFlow('setup')}
+      onResume={() => { enterBuildTab(); setFlow('builder') }}
+      onSaved={() => setFlow('saved')}
+    />
+  )
 }

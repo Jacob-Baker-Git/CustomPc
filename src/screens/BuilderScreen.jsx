@@ -11,10 +11,10 @@ import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
-import SavedBuilds from '../components/SavedBuilds'
 import CategoryList from '../components/CategoryList'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
+import ViewTabs from '../components/ViewTabs'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
 
@@ -26,8 +26,7 @@ export default function BuilderScreen() {
   const [view, setView] = useHashView('build')
   const scrollRef = useRef(null)
 
-  // Fresh views (and the first landing after the wizard) start at the top —
-  // the tabs live in the page flow now, so a stale scroll would hide them.
+  // Fresh views (and the first landing after setup) start at the top.
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 })
   }, [view])
@@ -40,28 +39,11 @@ export default function BuilderScreen() {
   return (
     <div className="relative min-h-screen bg-ground">
       <Backdrop />
-      <TopBar />
-      {/* One scroll container for tabs + view content, so the tabs scroll away
-          with the page instead of floating over it. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-16">
-        <div className="flex justify-center pt-3 pb-2">
-          <div className="inline-flex rounded-lg bg-surface border border-line p-1 gap-0.5">
-            {['build', 'peripherals', 'summary', 'saved'].map((v) => (
-              <button
-                key={v}
-                onClick={() => setView(v)}
-                className={`px-3 md:px-4 py-1.5 text-[11px] md:text-xs font-semibold rounded-md capitalize transition-colors
-                  ${view === v
-                    ? 'bg-accent text-accent-ink'
-                    : 'text-muted hover:text-ink'}`}
-              >
-                {v}
-              </button>
-            ))}
-          </div>
-        </div>
+      <TopBar view={view} onViewChange={setView} />
+      {/* pb-16 clears the fixed bottom tab bar wherever it is showing. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-16 pb-16 lg:pb-0">
         {view === 'build' ? (
-          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl 2xl:max-w-[88rem] mx-auto p-4 pb-12">
+          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl 2xl:max-w-[88rem] mx-auto p-4 pt-3 pb-12">
             <div className="build-grid">
               <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[60vh]">
                 <CanvasErrorBoundary>
@@ -89,12 +71,11 @@ export default function BuilderScreen() {
           </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
-        ) : view === 'summary' ? (
-          <BuildSummary />
         ) : (
-          <SavedBuilds onLoaded={() => setView('build')} />
+          <BuildSummary />
         )}
       </div>
+      <ViewTabs view={view} onChange={setView} variant="bar" />
       {activeCategory && (
         <PartSelector
           category={activeCategory}
