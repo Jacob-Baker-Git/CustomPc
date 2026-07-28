@@ -102,10 +102,11 @@ function mountBaseZ(category) {
 }
 
 // The PSU is the one part with no board connector, so it cannot come from
-// MOUNTS. It sits in the basement instead, and these are its only placement
-// figures: how far back along the case it sits, and the gap it keeps from the
-// basement floor and rear tray.
-const PSU_BAY = { offsetMm: -30, clearanceMm: 8 }
+// MOUNTS. It sits in the basement instead, pushed back against the case's rear
+// wall so its IEC socket reaches the outside — a PSU floating mid-basement has
+// nowhere for the mains cable to go. `clearanceMm` is the gap it keeps from the
+// basement floor, the rear wall and the motherboard tray.
+const PSU_BAY = { clearanceMm: 8 }
 
 // Centre of a part in world units, derived from its mount point. Mounted parts
 // sit against the board's +Z face and extend outward by half their mounting
@@ -116,12 +117,14 @@ export function partCentre(category) {
 
   if (category === 'psu') {
     const board = partBox('motherboard')
-    const [, height, depth] = partSize('psu')
+    const [width, height, depth] = partSize('psu')
     const floorY = board.min[1] - mm(CASE.basementMm)
     const rearZ = board.min[2] - mm(BOARD.standoffMm)
-    // Stands on the basement floor, pushed back against the rear tray.
+    const rearX = -mm(CASE.depthMm) / 2
+    // Stands on the basement floor, against the rear wall (so the socket is
+    // reachable) and against the motherboard tray.
     return [
-      mm(PSU_BAY.offsetMm),
+      rearX + width / 2 + mm(PSU_BAY.clearanceMm),
       floorY + height / 2 + mm(PSU_BAY.clearanceMm),
       rearZ + depth / 2 + mm(PSU_BAY.clearanceMm),
     ]
@@ -149,8 +152,15 @@ export function partBox(category) {
 
 // Tower interior. Height carries a PSU basement below the board and a
 // top-mounted radiator above it, so it runs taller than the board alone needs.
+//
+// 482 rather than a round 500 so the AIO's radiator meets the roof. The mesh
+// locks the pump and radiator a fixed distance apart and we mount by the pump
+// (a block clamps to the CPU, not to the case), so the radiator's height is
+// decided by the socket — the roof has to come to it. A real build takes up the
+// slack in the tubes, which a rigid mesh cannot. assemblyGeometry.test.js pins
+// the resulting clearance so a new cooler mesh reopening the gap fails loudly.
 export const CASE = {
-  heightMm: 500,
+  heightMm: 482,
   depthMm: 450,    // front-to-back, world X
   widthMm: 210,    // side-to-side, world Z
   basementMm: 110, // PSU compartment below the board

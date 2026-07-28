@@ -177,6 +177,36 @@ describe('caseInterior', () => {
     const [, psuHeight] = partSize('psu')
     expect(mm(CASE.basementMm)).toBeGreaterThan(psuHeight)
   })
+
+  // Case height, the PSU's seat and its rotation were all changed at once
+  // without a single test failing, because "everything is inside the box" is
+  // the only thing that was pinned. These pin the intent instead.
+
+  it('brings the roof down to meet the AIO radiator', () => {
+    // The mesh locks pump-to-radiator, and we mount by the pump, so the roof
+    // has to come to the radiator rather than the other way round. Touching,
+    // but never intersecting.
+    const gap = caseInterior().max[1] - partBox('cooler').max[1]
+    expect(gap).toBeGreaterThanOrEqual(0)
+    expect(gap).toBeLessThanOrEqual(mm(2))
+  })
+
+  it('stands the PSU on the basement floor, against the rear wall', () => {
+    const inner = caseInterior()
+    const psu = partBox('psu')
+    expect(psu.min[0] - inner.min[0]).toBeCloseTo(mm(8), 6)
+    expect(psu.min[1] - inner.min[1]).toBeCloseTo(mm(8), 6)
+  })
+
+  it('aims the PSU socket at the back of the case', () => {
+    // The mesh's I/O face is -Z (see partSpecs). After the spec rotation it has
+    // to point at world -X, the case rear, or the mains cable has nowhere to go.
+    // Rounded, and -0 folded to 0, so signed-zero noise from the rotation
+    // doesn't fail a direction that is otherwise exactly right.
+    const facing = rotateVector([0, 0, -1], PART_SPECS.psu.rotation)
+      .map((v) => (Math.abs(v) < 1e-9 ? 0 : +v.toFixed(6)))
+    expect(facing).toEqual([-1, 0, 0])
+  })
 })
 
 describe('case fans', () => {
