@@ -7,13 +7,43 @@ import { BUILD_PROFILES, USE_CASE_LABEL } from './buildProfiles'
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n))
 const FPS_USES = new Set(['gaming', 'streaming'])
 
+// Per-category quality range, memoised per catalog. partLevel is called once
+// per candidate AND once per category inside rateBuild for every candidate, so
+// rescanning all ~317 parts each time dominated the rating panel's render cost.
+// Keyed on the catalog array itself: the store swaps in a new array when the
+// live catalog loads, which invalidates the entry for free.
+const rangeCache = new WeakMap()
+
+function categoryRange(catalog, category) {
+  let byCategory = rangeCache.get(catalog)
+  if (!byCategory) {
+    byCategory = new Map()
+    rangeCache.set(catalog, byCategory)
+  }
+  let range = byCategory.get(category)
+  if (range === undefined) {
+    let min = Infinity
+    let max = -Infinity
+    let count = 0
+    for (const p of catalog) {
+      if (p.category !== category) continue
+      const q = partQuality(p)
+      if (q < min) min = q
+      if (q > max) max = q
+      count++
+    }
+    range = count === 0 ? null : { min, max }
+    byCategory.set(category, range)
+  }
+  return range
+}
+
 // Percentile of a part's quality within its category across the catalog (0-100).
 export function partLevel(part, catalog) {
   if (!part) return 0
-  const qs = catalog.filter((p) => p.category === part.category).map(partQuality)
-  if (qs.length === 0) return 0
-  const min = Math.min(...qs)
-  const max = Math.max(...qs)
+  const range = categoryRange(catalog, part.category)
+  if (!range) return 0
+  const { min, max } = range
   return max > min ? Math.round(100 * (partQuality(part) - min) / (max - min)) : 100
 }
 

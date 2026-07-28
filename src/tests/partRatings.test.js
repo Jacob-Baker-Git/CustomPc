@@ -19,6 +19,30 @@ describe('partLevel', () => {
   it('null part is 0', () => {
     expect(partLevel(null, catalog)).toBe(0)
   })
+
+  // The per-category range is memoised per catalog array. These pin the two
+  // ways that could go wrong: a stale answer for a part not seen before, and a
+  // stale range after the catalog itself changes (the live Supabase swap).
+  it('agrees with a from-scratch scan for every part in a real catalog', async () => {
+    const { default: realCatalog } = await import('../data/partsData.json')
+    const { partQuality } = await import('../lib/partQuality')
+    for (const part of realCatalog) {
+      const qs = realCatalog.filter((p) => p.category === part.category).map(partQuality)
+      const min = Math.min(...qs)
+      const max = Math.max(...qs)
+      const expected = max > min ? Math.round(100 * (partQuality(part) - min) / (max - min)) : 100
+      expect(partLevel(part, realCatalog)).toBe(expected)
+    }
+  })
+
+  it('recomputes when given a different catalog', () => {
+    expect(partLevel(cpuMid, catalog)).toBe(50)
+    // cpuMid is now the strongest CPU on offer, so it must read 100.
+    const narrowed = [cpuLo, cpuMid, gpu]
+    expect(partLevel(cpuMid, narrowed)).toBe(100)
+    // ...and the original catalog must be unaffected.
+    expect(partLevel(cpuMid, catalog)).toBe(50)
+  })
 })
 
 // Three levels per category so partLevel gives 0 / ~50 / 100.
