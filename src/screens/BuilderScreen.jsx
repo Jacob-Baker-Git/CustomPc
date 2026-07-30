@@ -11,7 +11,7 @@ import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
-import CategoryList from '../components/CategoryList'
+import SelectedPartsPanel from '../components/SelectedPartsPanel'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
 import ViewTabs from '../components/ViewTabs'
@@ -58,11 +58,10 @@ export default function BuilderScreen() {
               </div>
               <div className="area-banner"><GeneratedBanner /></div>
               <div className="area-parts">
-                <CategoryList
+                <SelectedPartsPanel
                   selectedParts={selectedParts}
                   onSelectCategory={setActiveCategory}
                   onDeselect={removePart}
-                  columns={2}
                 />
               </div>
               <div className="area-usecase"><UseCaseChips /></div>
