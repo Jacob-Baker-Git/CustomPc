@@ -30,7 +30,7 @@ export default function TopBar({ view, onViewChange }) {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-line px-3 md:px-6 py-2 md:py-3 flex flex-wrap md:flex-nowrap items-center gap-x-3 md:gap-8 gap-y-1">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-line px-3 md:px-6 py-2 md:py-3 flex flex-wrap md:flex-nowrap items-center gap-x-3 md:gap-6 gap-y-1">
       <button
         onClick={() => setFlow('hub')}
         aria-label="Back to menu"
@@ -78,14 +78,22 @@ export default function TopBar({ view, onViewChange }) {
         <span className="text-line-strong mx-0.5 sm:mx-1 hidden xl:inline">|</span>
         <span className="hidden xl:inline text-ok font-mono tabular-nums font-semibold">{totalPower}W</span>
       </div>
-      {/* Tabs live in the header on desktop; on phones they are the bottom bar
-          rendered by BuilderScreen, so this row stays one row at 375px. */}
-      <div className="ml-auto flex items-center gap-3 md:gap-4">
+      {/* Three zones: the budget readout above ends the left one. `flex-1` on
+          the flanks centres the tabs — but only at xl, where both flanks carry
+          weight. Between lg and xl the meters are hidden, so the tabs sit right
+          of true centre. That is expected; do NOT absolutely position them to
+          "fix" it, because they would then overlap the flanks and wrap the
+          header, which has to stay one row at every width.
+          Tabs live in the header on desktop; on phones they are the bottom bar
+          rendered by BuilderScreen. */}
+      <div className="flex-1 flex justify-end lg:justify-center">
         <ViewTabs view={view} onChange={onViewChange} />
+      </div>
+      <div className="flex items-center gap-3 md:gap-4 lg:flex-1 lg:justify-end">
         <a href="#/feedback" className="text-xs text-muted hover:text-accent transition-colors">Feedback</a>
-        {/* xl, not lg: at 1024 the tabs have just moved in and the bars no
+        {/* xl, not lg: at 1024 the tabs have just moved in and the meters no
             longer fit beside them without wrapping the header. */}
-        <div className="hidden xl:flex gap-6">
+        <div className="hidden xl:flex gap-3">
           <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" />
           <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" />
         </div>
