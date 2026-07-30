@@ -22,14 +22,17 @@ export default function DynamicBars({ value, max, label, unit, compact = false }
       className={
         compact
           ? 'flex flex-col gap-0.5 flex-1 min-w-0'
-          : 'flex flex-col gap-1 rounded-lg border border-line bg-surface-2 px-2.5 py-1.5 min-w-[136px]'
+          // Deliberately tight: measured, the chip drives the header's height at
+          // xl+, and a roomier one pushed it 63px -> 81px. Padding, gap and bar
+          // height here are the difference between a chip and a taller header.
+          : 'flex flex-col gap-0.5 rounded-lg border border-line bg-surface-2 px-2.5 py-1 min-w-[136px]'
       }
     >
-      <div className={`flex items-baseline justify-between gap-2 ${compact ? 'text-[10px] text-muted' : 'text-[10px]'}`}>
+      <div className={`flex items-baseline justify-between gap-2 ${compact ? 'text-[10px] text-muted' : 'text-[10px] leading-none'}`}>
         <span className={compact ? '' : 'uppercase tracking-wide text-faint'}>{label}</span>
         <span className={`font-mono tabular-nums truncate ${compact ? 'text-ink' : 'text-[11px] text-ink'}`}>{display}</span>
       </div>
-      <div className={`rounded-full overflow-hidden ${compact ? 'h-1.5 bg-surface-2' : 'h-1.5 bg-ground'}`}>
+      <div className={`rounded-full overflow-hidden ${compact ? 'h-1.5 bg-surface-2' : 'h-1 bg-ground'}`}>
         <div
           className={`h-full rounded-full transition-all duration-500 ${barColor}`}
           style={{ width: `${pct}%` }}

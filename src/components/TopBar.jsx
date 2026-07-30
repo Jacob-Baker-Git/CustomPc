@@ -41,7 +41,10 @@ export default function TopBar({ view, onViewChange }) {
       </button>
       {/* Below 360px the wordmark is what pushes this header onto a second row,
           so it goes; every real phone width keeps it. */}
-      <span className="hidden min-[360px]:inline font-display font-extrabold text-lg tracking-tight text-ink">PC <span className="text-accent">Builder</span></span>
+      {/* nowrap is load-bearing: once the three zones took their flex-1 share,
+          the left group got tight enough that "PC Builder" broke onto two lines
+          and took the whole header from 63px to 81px with it. Measured. */}
+      <span className="hidden min-[360px]:inline whitespace-nowrap font-display font-extrabold text-lg tracking-tight text-ink">PC <span className="text-accent">Builder</span></span>
       {/* Below `xl` this shrinks to just the editable budget: the remaining and
           power figures move into the meter row underneath, where they get a bar
           to be read against. */}
