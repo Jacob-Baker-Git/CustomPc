@@ -40,13 +40,11 @@ const useBuilderStore = create(persist((set) => ({
   clearLastGenerated: () => set({ lastGenerated: null }),
 
   // Category chip currently hovered — the matching 3D part highlights. Transient.
-  hoveredCategory: null,
-  setHoveredCategory: (category) => set({ hoveredCategory: category }),
 
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
 
-  // Use case the build is rated for — drives BuildRatingPanel and its dropdown.
+  // Use case the build is rated for — drives BuildRatingPanel and its chips.
   useCase: 'gaming',
   setUseCase: (useCase) => set({ useCase }),
 

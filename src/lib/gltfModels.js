@@ -1,5 +1,5 @@
 import { PART_SPECS } from './partSpecs'
-import { modelScale } from './assemblyGeometry'
+import { modelScale, partLocalSize } from './assemblyGeometry'
 import { mm } from './pcScale'
 import { MOUNTS } from './mountPoints'
 
@@ -29,8 +29,9 @@ export const GLTF_MODELS = Object.fromEntries(
     return [cat, {
       url: `/models/${file}`,
       // GltfPart scales by the mesh's largest raw dimension, so hand it the
-      // world size of that same axis.
-      targetSize: Math.max(...spec.raw) * modelScale(cat),
+      // world size of that same axis. A spec with `sizeMm` is stretched per axis
+      // instead, so it hands over all three model-local dimensions.
+      targetSize: spec.sizeMm ? partLocalSize(cat) : Math.max(...spec.raw) * modelScale(cat),
       // Deliberately NO rotation here. PartModel's placement group already
       // applies spec.rotation (via assemblyLayout), and it has to — the
       // procedural fallback models and the hover highlight live in that same

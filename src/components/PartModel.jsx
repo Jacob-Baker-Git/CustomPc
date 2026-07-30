@@ -4,27 +4,19 @@ import { GLTF_MODELS } from '../lib/gltfModels'
 import GltfPart from './models/GltfPart'
 import ModelErrorBoundary from './models/ModelErrorBoundary'
 import { assemblyLayout } from '../lib/assemblyLayout'
-import { partLocalSize } from '../lib/assemblyGeometry'
-import useBuilderStore from '../store/useBuilderStore'
 
-// A little larger than the part, so the shell reads as a glow around it rather
-// than z-fighting with the surface.
-const HIGHLIGHT_INFLATE = 1.08
-
+// Hovering a part in the list used to draw a translucent orange box around it in
+// the scene. It was removed on request: an inflated AABB around a non-boxy part
+// reads as a smear over the model rather than a highlight of it. The store's
+// `hoveredCategory` and CategoryList's hover handlers went with it — they had no
+// other reader, and a write-only store field is how the last dead branch hid.
 export default function PartModel({ part, selectedParts }) {
-  const hovered = useBuilderStore((s) => s.hoveredCategory) === part.category
-
   // Fans are rendered by FanSystem (mounts + empty slots), not per-part here.
   if (part.category === 'fans' || part.category === 'paste') return null
 
   const ModelComponent = MODEL_REGISTRY[part.category]
   const { position, rotation } = assemblyLayout(part.category, selectedParts)
   const gltf = GLTF_MODELS[part.category]
-
-  // Derived from the same measured model dimensions that place the part, so it
-  // can't drift out of step with the assembly the way hand-tuned constants did.
-  const localSize = partLocalSize(part.category)
-  const highlightSize = localSize && localSize.map((v) => v * HIGHLIGHT_INFLATE)
 
   // The procedural (primitive) model — also the fallback when a GLTF is missing
   // or fails to load.
@@ -51,12 +43,6 @@ export default function PartModel({ part, selectedParts }) {
         </ModelErrorBoundary>
       ) : (
         primitive
-      )}
-      {hovered && highlightSize && (
-        <mesh>
-          <boxGeometry args={highlightSize} />
-          <meshBasicMaterial color="#F26B3A" transparent opacity={0.2} depthWrite={false} />
-        </mesh>
       )}
     </group>
   )

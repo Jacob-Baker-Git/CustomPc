@@ -3,9 +3,14 @@ import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 
 // Loads a GLTF/GLB part and normalises it: the model is re-centred on the origin
-// and uniformly scaled so its largest dimension equals `targetSize` (world
-// units). This lets us drop in models of unknown native scale/pivot and have
-// them land at a predictable size in the assembly.
+// and scaled so it lands at a predictable size in the assembly, whatever its
+// native scale and pivot.
+//
+// `targetSize` is a number for a uniform fit (largest dimension → that size), or
+// an [x, y, z] triple in the model's own axes for a per-axis fit. The triple is
+// for meshes whose proportions are not the real component's — the PSU mesh is
+// near-cubic where a real ATX unit is 150x86x160, so no uniform scale can be
+// right on more than one axis. assemblyGeometry decides which; see PART_SPECS.
 //
 // Takes NO rotation on purpose. Orientation is owned entirely by PartModel's
 // placement group, which wraps this and must rotate the procedural fallback and
@@ -20,7 +25,10 @@ export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0] }) 
     const box = new THREE.Box3().setFromObject(obj)
     const size = new THREE.Vector3()
     box.getSize(size)
-    const maxDim = Math.max(size.x, size.y, size.z) || 1
+    const nz = (v) => (v > 1e-9 ? v : 1)
+    const fit = Array.isArray(targetSize)
+      ? [targetSize[0] / nz(size.x), targetSize[1] / nz(size.y), targetSize[2] / nz(size.z)]
+      : targetSize / (Math.max(size.x, size.y, size.z) || 1)
 
     // Always centre on the bounding box. Connector alignment — mounting the AIO
     // by its pump block rather than its middle — is handled analytically in
@@ -33,7 +41,7 @@ export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0] }) 
     box.getCenter(centre)
 
     obj.position.sub(centre)
-    return { object: obj, scale: targetSize / maxDim }
+    return { object: obj, scale: fit }
   }, [scene, targetSize])
 
   return (

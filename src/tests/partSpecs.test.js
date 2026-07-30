@@ -6,8 +6,21 @@ describe('partSpecs', () => {
     expect(PART_SPECS.gpu.lengthMm).toBe(285)         // RTX 3080 FE
     expect(PART_SPECS.cooler.lengthMm).toBe(271)      // measured 240 AIO
     expect(PART_SPECS.ram.lengthMm).toBe(133)         // DDR4 DIMM
-    expect(PART_SPECS.psu.lengthMm).toBe(86)          // ATX PSU height
     expect(PART_SPECS.storage.lengthMm).toBe(80)      // M.2 2280
+    // The PSU is the one part sized on all three axes: its mesh is near-cubic
+    // and a real ATX unit is nothing like it, so a uniform fit is wrong however
+    // it is anchored.
+    expect(PART_SPECS.psu.sizeMm).toEqual([160, 86, 150])
+  })
+
+  it('gives every part exactly one sizing rule', () => {
+    for (const [cat, spec] of Object.entries(PART_SPECS)) {
+      const uniform = spec.lengthMm !== undefined
+      expect(uniform !== (spec.sizeMm !== undefined), `${cat} needs lengthMm or sizeMm, not both`).toBe(true)
+      if (spec.sizeMm) expect(spec.sizeMm, cat).toHaveLength(3)
+      // fitAxis only means anything for a uniform fit.
+      if (spec.sizeMm) expect(spec.fitAxis, cat).toBeUndefined()
+    }
   })
 
   it('records the raw GLB bounding box for every part', () => {

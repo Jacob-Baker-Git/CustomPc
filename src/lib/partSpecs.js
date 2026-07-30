@@ -65,13 +65,18 @@ export const PART_SPECS = {
   // near-zero thickness toward the glass.
   storage: { raw: [4.332, 0.009, 1.201], lengthMm: 80, rotation: [Math.PI / 2, 0, 0] },
 
-  // The PSU mesh is near-cubic, so sizing it by its longest axis would make it
-  // far too tall for a basement. Pin its HEIGHT to a real 86 mm ATX unit instead.
+  // The PSU mesh is near-cubic (20.4 x 21.9 x 22.7) but a real ATX unit is not:
+  // 150 wide x 86 tall x ~160 deep. Any UNIFORM fit therefore has to be wrong on
+  // two axes — pinning the height to 86 mm, as this did, rendered an 89x86x80 mm
+  // block that sat in one corner of a 450x110x210 basement looking like a spare
+  // part rather than the thing everything plugs into. `sizeMm` names all three
+  // world dimensions instead, so the mesh is stretched to the volume a real
+  // supply fills: [front-to-back, up, side-to-side].
   //
   // The quarter turn puts the IEC socket where it belongs. In the mesh the I/O
   // face (nodes `iio`/`iio.001` plus the rating text) is at -Z and the honeycomb
   // exhaust (`berlubang`) at +Z; unrotated that aimed the socket at the side
   // panel and the vent at the glass. Turning +90 degrees about Y maps mesh -Z to
   // world -X, so the plug faces the back of the case where the cable exits.
-  psu: { raw: [20.446, 21.937, 22.73], lengthMm: 86, fitAxis: 1, rotation: [0, Math.PI / 2, 0] },
+  psu: { raw: [20.446, 21.937, 22.73], sizeMm: [160, 86, 150], rotation: [0, Math.PI / 2, 0] },
 }

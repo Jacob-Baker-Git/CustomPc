@@ -3,7 +3,7 @@ import { Euler, Quaternion, Vector3, Matrix4, Box3 } from 'three'
 import { GLTF_MODELS } from '../lib/gltfModels'
 import { assemblyLayout } from '../lib/assemblyLayout'
 import { PART_SPECS } from '../lib/partSpecs'
-import { partSize, modelScale } from '../lib/assemblyGeometry'
+import { partSize, partLocalSize } from '../lib/assemblyGeometry'
 
 const withMb = { motherboard: { id: 'mb-x' } }
 const quat = (r) => new Quaternion().setFromEuler(new Euler(r[0], r[1], r[2]))
@@ -51,8 +51,9 @@ describe('rendered part orientation matches assemblyGeometry', () => {
     it(`renders ${cat} at the size assemblyGeometry predicts`, () => {
       const outer = quat(assemblyLayout(cat, withMb).rotation)
       const inner = quat(GLTF_MODELS[cat].rotation ?? [0, 0, 0])
-      const rendered = rotatedExtent(PART_SPECS[cat].raw, outer.clone().multiply(inner))
-        .map((v) => v * modelScale(cat))
+      // partLocalSize already carries the per-axis scale, so this covers the
+      // stretched PSU as well as every uniformly-fitted part.
+      const rendered = rotatedExtent(partLocalSize(cat), outer.clone().multiply(inner))
       partSize(cat).forEach((expected, i) => {
         expect(rendered[i]).toBeCloseTo(expected, 6)
       })

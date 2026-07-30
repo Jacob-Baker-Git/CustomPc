@@ -29,7 +29,19 @@ export function rotateVector([x, y, z], [rx, ry, rz]) {
   return v
 }
 
+// Undo rotateExtents. Each quarter turn permutes two of the three dimensions,
+// and a swap is its own inverse — so replaying the swaps in the opposite order
+// inverts the whole composition, for any combination of right angles.
+export function unrotateExtents([x, y, z], [rx, ry, rz]) {
+  let out = [x, y, z]
+  if (isQuarterTurn(rz)) out = [out[1], out[0], out[2]]
+  if (isQuarterTurn(ry)) out = [out[2], out[1], out[0]]
+  if (isQuarterTurn(rx)) out = [out[0], out[2], out[1]]
+  return out
+}
+
 // Uniform scale taking raw model units to world units for a category.
+// Meaningless for a spec sized by `sizeMm` — use modelScaleAxes for those.
 export function modelScale(category) {
   const spec = PART_SPECS[category]
   if (!spec) return 0
@@ -38,12 +50,30 @@ export function modelScale(category) {
   return mm(spec.lengthMm) / basis
 }
 
+// Per-axis scale from raw model units to world units, in the MODEL's own axes.
+//
+// Uniform for every part whose mesh has the real thing's proportions. `sizeMm`
+// is the escape hatch for one that does not: it names all three world-space
+// dimensions and is un-rotated back into model axes here, so a stylised mesh can
+// still occupy the volume the real component does. Authored in world axes on
+// purpose — a case is reasoned about as depth/height/width, and this file has a
+// long history of bugs from mixing the two conventions.
+export function modelScaleAxes(category) {
+  const spec = PART_SPECS[category]
+  if (!spec) return [0, 0, 0]
+  if (!spec.sizeMm) {
+    const s = modelScale(category)
+    return [s, s, s]
+  }
+  const local = unrotateExtents(spec.sizeMm.map(mm), spec.rotation)
+  return local.map((v, i) => v / spec.raw[i])
+}
+
 // World-space size of a part, in world units, after its model rotation.
 export function partSize(category) {
   const spec = PART_SPECS[category]
   if (!spec) return [0, 0, 0]
-  const scale = modelScale(category)
-  return rotateExtents(spec.raw, spec.rotation).map((v) => v * scale)
+  return rotateExtents(partLocalSize(category), spec.rotation)
 }
 
 // Size in the MODEL's own axes — i.e. before the placement group applies
@@ -53,8 +83,8 @@ export function partSize(category) {
 export function partLocalSize(category) {
   const spec = PART_SPECS[category]
   if (!spec) return null
-  const scale = modelScale(category)
-  return spec.raw.map((v) => v * scale)
+  const axes = modelScaleAxes(category)
+  return spec.raw.map((v, i) => v * axes[i])
 }
 
 // The PCB's component-side face — the plane parts actually plug into, and where
@@ -76,8 +106,11 @@ export function boardFaceZ() {
 function anchorOffsetWorld(category) {
   const spec = PART_SPECS[category]
   if (!spec?.anchorOffset) return [0, 0, 0]
-  const scale = modelScale(category)
-  return rotateVector(spec.anchorOffset, spec.rotation).map((v) => v * scale)
+  const axes = modelScaleAxes(category)
+  // Scale in model axes first, then rotate — the scale is per-model-axis, so
+  // applying it after the rotation would stretch the wrong component.
+  const scaled = spec.anchorOffset.map((v, i) => v * axes[i])
+  return rotateVector(scaled, spec.rotation)
 }
 
 // Depth of the part's mounting face along world Z. For an anchored part that is
@@ -88,7 +121,8 @@ function mountDepth(category) {
   const spec = PART_SPECS[category]
   const [, , depth] = partSize(category)
   if (!spec?.anchorSize) return depth
-  return rotateExtents(spec.anchorSize, spec.rotation)[2] * modelScale(category)
+  const axes = modelScaleAxes(category)
+  return rotateExtents(spec.anchorSize.map((v, i) => v * axes[i]), spec.rotation)[2]
 }
 
 // The surface a part mounts against, along world Z. Normally that is the board's

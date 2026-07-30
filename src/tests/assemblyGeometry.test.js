@@ -1,4 +1,4 @@
-import { partSize, partLocalSize, rotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE } from '../lib/assemblyGeometry'
+import { partSize, partLocalSize, rotateExtents, unrotateExtents, rotateVector, partCentre, partBox, boardFaceZ, caseInterior, CASE } from '../lib/assemblyGeometry'
 import { mm, WU_PER_MM, FAN_MM } from '../lib/pcScale'
 import { MOUNTS, BOARD } from '../lib/mountPoints'
 import { PART_SPECS } from '../lib/partSpecs'
@@ -53,9 +53,46 @@ describe('partLocalSize', () => {
   })
 })
 
+// unrotateExtents is what lets a spec name its size in world axes; if it were
+// not a true inverse the PSU would be stretched along the wrong axes, which is
+// exactly the class of convention bug this file keeps producing.
+describe('unrotateExtents', () => {
+  it('inverts rotateExtents for every rotation in use', () => {
+    const dims = [3, 5, 7]
+    for (const [cat, spec] of Object.entries(PART_SPECS)) {
+      expect(unrotateExtents(rotateExtents(dims, spec.rotation), spec.rotation), cat).toEqual(dims)
+    }
+  })
+
+  it('inverts a compound rotation, where a naive re-apply would not', () => {
+    const r = [Math.PI / 2, Math.PI / 2, 0]
+    const dims = [3, 5, 7]
+    expect(unrotateExtents(rotateExtents(dims, r), r)).toEqual(dims)
+    // The 3-cycle is the case that catches a "just call rotateExtents again" fix.
+    expect(rotateExtents(rotateExtents(dims, r), r)).not.toEqual(dims)
+  })
+})
+
 describe('partSize', () => {
   it('sizes the motherboard as a 305mm ATX board standing vertical', () => {
     near(partSize('motherboard')[1], 305)
+  })
+
+  it('gives the PSU a real ATX unit\'s three dimensions, not a cube', () => {
+    const [depth, height, width] = partSize('psu')
+    near(depth, 160)
+    near(height, 86)
+    near(width, 150)
+  })
+
+  it('stands the PSU on the basement floor against the rear wall', () => {
+    const psu = partBox('psu')
+    const interior = caseInterior()
+    // Clearances stay small on the three faces it is pushed against, and it now
+    // fills most of the basement instead of sitting in a corner of it.
+    expect(psu.min[0] - interior.min[0]).toBeLessThan(mm(12))
+    expect(psu.min[1] - interior.min[1]).toBeLessThan(mm(12))
+    expect(psu.max[2] - psu.min[2]).toBeGreaterThan(mm(140))
   })
 
   it('lays the GPU horizontal, 285mm front-to-back', () => {
