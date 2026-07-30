@@ -102,8 +102,14 @@ export default function PeripheralsPanel() {
         <div className="space-y-8">
           {CATEGORIES.map(({ id, label, icon: Icon, blurb }) => {
             const { all, bands } = byCategory[id] ?? { all: [], bands: [] }
-            const activeBandId = bandByCategory[id] ?? 'all'
-            const activeBand = bands.find((b) => b.id === activeBandId) ?? bands[0]
+            // Resolve the band FIRST, then take the id back off it. Band ids are
+            // derived from the catalogue's own prices, so when the live Supabase
+            // catalogue swaps in and shifts a boundary, a stored id can stop
+            // existing. Keying the chips off the stored id directly left the
+            // radiogroup with nothing checked while the list had silently reset
+            // to All — an invalid ARIA state and an unexplained UI change.
+            const activeBand = bands.find((b) => b.id === bandByCategory[id]) ?? bands[0]
+            const activeBandId = activeBand?.id ?? 'all'
             const shown = activeBand ? all.filter((p) => inBand(p.price, activeBand)) : all
             const picked = selected[id]
             return (
