@@ -5,10 +5,10 @@ import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
 // key: no store, no catalogue, no icons. A crash caused by one of those must
 // not also break the page that reports it.
 export default class ErrorBoundary extends Component {
-  state = { error: null, showDetail: false, confirmingReset: false }
+  state = { hasError: false, error: null, showDetail: false, confirmingReset: false }
 
   static getDerivedStateFromError(error) {
-    return { error }
+    return { hasError: true, error }
   }
 
   reload = () => { window.location.reload() }
@@ -24,19 +24,19 @@ export default class ErrorBoundary extends Component {
     } catch {
       // Unparseable state is exactly what Reset is for; fall through and reload.
     }
-    this.setState({ error: null })
+    this.setState({ hasError: false, error: null })
     window.location.reload()
   }
 
   reset = () => {
     try { localStorage.removeItem(BUILDER_STORAGE_KEY) } catch { /* nothing else to try */ }
-    this.setState({ error: null, confirmingReset: false })
+    this.setState({ hasError: false, error: null, confirmingReset: false })
     window.location.reload()
   }
 
   render() {
-    const { error, showDetail, confirmingReset } = this.state
-    if (!error) return this.props.children
+    const { hasError, error, showDetail, confirmingReset } = this.state
+    if (!hasError) return this.props.children
 
     return (
       <div className="min-h-screen bg-ground text-ink flex items-center justify-center p-6">

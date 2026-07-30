@@ -7,6 +7,14 @@ function Boom() {
   throw new Error('kaboom in a component')
 }
 
+function BoomNull() {
+  throw null
+}
+
+function BoomString() {
+  throw 'plain string boom'
+}
+
 // React logs caught errors to console.error; silence it so the run stays readable.
 let spy
 beforeEach(() => { spy = vi.spyOn(console, 'error').mockImplementation(() => {}) })
@@ -62,5 +70,37 @@ describe('ErrorBoundary', () => {
     render(<ErrorBoundary><Boom /></ErrorBoundary>)
     fireEvent.click(screen.getByRole('button', { name: /technical detail/i }))
     expect(screen.getByText(/kaboom in a component/)).toBeInTheDocument()
+  })
+
+  it('shows the crash page even when the thrown value is falsy', () => {
+    render(<ErrorBoundary><BoomNull /></ErrorBoundary>)
+    expect(screen.getByRole('heading', { name: /something went wrong/i })).toBeInTheDocument()
+  })
+
+  it('malformed persisted JSON does not take the fallback down', () => {
+    localStorage.setItem(BUILDER_STORAGE_KEY, 'not json at all')
+    render(<ErrorBoundary><Boom /></ErrorBoundary>)
+
+    expect(() => {
+      fireEvent.click(screen.getByRole('button', { name: /back to the menu/i }))
+    }).not.toThrow()
+    expect(screen.getByRole('heading', { name: /something went wrong/i })).toBeInTheDocument()
+  })
+
+  it('cancel hides the confirmation without touching localStorage', () => {
+    localStorage.setItem(BUILDER_STORAGE_KEY, '{"state":{"budget":1500},"version":2}')
+    render(<ErrorBoundary><Boom /></ErrorBoundary>)
+
+    fireEvent.click(screen.getByRole('button', { name: /reset the app/i }))
+    fireEvent.click(screen.getByRole('button', { name: /cancel/i }))
+
+    expect(localStorage.getItem(BUILDER_STORAGE_KEY)).not.toBeNull()
+    expect(screen.queryByRole('button', { name: /yes, erase my build/i })).not.toBeInTheDocument()
+  })
+
+  it('renders technical detail for an error with no .message', () => {
+    render(<ErrorBoundary><BoomString /></ErrorBoundary>)
+    fireEvent.click(screen.getByRole('button', { name: /technical detail/i }))
+    expect(screen.getByText(/plain string boom/)).toBeInTheDocument()
   })
 })
