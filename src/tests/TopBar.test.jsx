@@ -39,4 +39,17 @@ describe('TopBar view tabs', () => {
     render(<TopBar view="build" onViewChange={() => {}} />)
     expect(screen.queryByRole('button', { name: /^saved$/i })).toBeNull()
   })
+
+  it('renders the desktop tabs as one segmented group', () => {
+    const { container } = render(<TopBar view="build" onViewChange={() => {}} />)
+    const group = container.querySelector('.lg\\:inline-flex')
+    expect(group).toHaveClass('bg-ground')
+  })
+
+  // Icons must not leak into the accessible name, or every name-based query
+  // in this file and in the E2E spec breaks.
+  it('keeps the accessible name to the label alone', () => {
+    render(<TopBar view="build" onViewChange={() => {}} />)
+    expect(screen.getByRole('button', { name: /^build$/i })).toBeInTheDocument()
+  })
 })

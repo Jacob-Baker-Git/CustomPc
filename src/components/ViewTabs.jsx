@@ -37,19 +37,27 @@ export default function ViewTabs({ view, onChange, variant = 'inline' }) {
     )
   }
 
+  // An inset well (bg-ground is darker than the header's bg-surface) reads as a
+  // control rather than a floating box, and equal-width segments stop the group
+  // from jittering as the active label changes.
   return (
-    <div className="hidden lg:inline-flex rounded-lg bg-surface-2 border border-line p-1 gap-0.5">
-      {VIEWS.map((v) => (
-        <button
-          key={v}
-          onClick={() => onChange(v)}
-          aria-current={view === v ? 'page' : undefined}
-          className={`px-3 xl:px-4 py-1.5 text-xs font-semibold rounded-md capitalize transition-colors
-            ${view === v ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'}`}
-        >
-          {v}
-        </button>
-      ))}
+    <div className="hidden lg:inline-flex rounded-xl bg-ground border border-line p-1 gap-1">
+      {VIEWS.map((v) => {
+        const Icon = ICONS[v]
+        const on = view === v
+        return (
+          <button
+            key={v}
+            onClick={() => onChange(v)}
+            aria-current={on ? 'page' : undefined}
+            className={`flex items-center justify-center gap-1.5 min-w-[104px] xl:min-w-[118px] px-3 py-1.5 text-xs font-semibold rounded-lg capitalize transition-colors
+              ${on ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink hover:bg-surface-2'}`}
+          >
+            <Icon size={14} aria-hidden="true" />
+            {v}
+          </button>
+        )
+      })}
     </div>
   )
 }
