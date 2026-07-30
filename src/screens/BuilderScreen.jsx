@@ -45,9 +45,9 @@ export default function BuilderScreen() {
           is taller from `md` up because the header's own padding grows there. */}
       <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 xl:pt-16 pb-16 lg:pb-0">
         {view === 'build' ? (
-          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl 2xl:max-w-[88rem] mx-auto p-4 pt-3 pb-12">
+          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-[1800px] mx-auto px-4 lg:px-6 pt-3 pb-12">
             <div className="build-grid">
-              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[60vh]">
+              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[65vh]">
                 <CanvasErrorBoundary>
                   <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                     <BuildCanvas selectedParts={selectedParts} />
@@ -55,6 +55,12 @@ export default function BuilderScreen() {
                 </CanvasErrorBoundary>
                 <InfoDisclaimer />
                 <div className="absolute bottom-3 right-3"><CaseToggle /></div>
+              </div>
+              {/* One grid child, two stacked panels. Splitting these back into
+                  separate grid rows reintroduces the zoom gap — see index.css. */}
+              <div className="area-left flex flex-col gap-3">
+                <UseCaseChips />
+                <BuildRatingPanel />
               </div>
               <div className="area-banner"><GeneratedBanner /></div>
               <div className="area-parts">
@@ -64,8 +70,6 @@ export default function BuilderScreen() {
                   onDeselect={removePart}
                 />
               </div>
-              <div className="area-usecase"><UseCaseChips /></div>
-              <div className="area-rating"><BuildRatingPanel /></div>
               <div className="area-warnings"><BuildWarnings /></div>
               <div className="area-autobuild"><AutoBuildButton /></div>
             </div>

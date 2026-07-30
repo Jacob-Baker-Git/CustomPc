@@ -75,10 +75,18 @@ body {
 @media (min-width: 1024px) {
   .build-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    /* The 3D preview earns the larger share: it is the thing people came for,
+       and the left column is text that reads fine narrow. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    /* One left-hand area, not two rows.
+       .area-viz used to span "usecase" and "rating", and Grid splits a spanning
+       item's excess height EQUALLY across the rows it spans — so half of the
+       viz's min-height landed as dead space above the rating panel, growing
+       without limit as you zoomed out (47px at 1900px tall, 213px at 2400px).
+       With one row there is no excess to distribute. Do not split this back
+       apart. */
     grid-template-areas:
-      "usecase   viz"
-      "rating    viz"
+      "left      viz"
       "banner    banner"
       "parts     parts"
       "warnings  warnings"
@@ -87,8 +95,7 @@ body {
     gap: 1rem;
   }
   .build-grid > .area-viz       { grid-area: viz; }
-  .build-grid > .area-usecase   { grid-area: usecase; }
-  .build-grid > .area-rating    { grid-area: rating; }
+  .build-grid > .area-left      { grid-area: left; }
   .build-grid > .area-banner    { grid-area: banner; }
   .build-grid > .area-parts     { grid-area: parts; }
   .build-grid > .area-warnings  { grid-area: warnings; }
