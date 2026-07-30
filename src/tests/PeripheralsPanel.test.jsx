@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, within } from '@testing-library/react'
 import { describe, it, expect, beforeEach } from 'vitest'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import useBuilderStore from '../store/useBuilderStore'
@@ -42,9 +42,9 @@ describe('PeripheralsPanel', () => {
     expect(useBuilderStore.getState().selectedPeripherals.monitor).toBeUndefined()
   })
 
-  // The catalogue now runs from a £10 mouse to a £1000 monitor, so the flat grid
-  // it used to be needed a way in.
-  describe('price band filter', () => {
+  // Bands are per category and stated in money: one global Value/Mid/High-end
+  // chip meant ~£30 for a mouse and ~£300 for a monitor simultaneously.
+  describe('price filters', () => {
     const cheapest = (cat) =>
       peripheralsData.filter((p) => p.category === cat).sort((a, b) => a.price - b.price)[0]
     const dearest = (cat) =>
@@ -56,20 +56,38 @@ describe('PeripheralsPanel', () => {
       expect(screen.getByText(dearest('monitor').name)).toBeInTheDocument()
     })
 
-    it('Value keeps the cheapest and drops the dearest', () => {
+    it('gives each category its own filter group', () => {
       render(<PeripheralsPanel />)
-      fireEvent.click(screen.getByRole('radio', { name: 'Value' }))
+      for (const cat of ['Monitor', 'Keyboard', 'Mouse', 'Headset']) {
+        expect(screen.getByRole('radiogroup', { name: new RegExp(`${cat} price`, 'i') })).toBeInTheDocument()
+      }
+    })
+
+    it('labels every chip in money, never as an abstract tier', () => {
+      render(<PeripheralsPanel />)
+      const group = screen.getByRole('radiogroup', { name: /mouse price/i })
+      for (const chip of within(group).getAllByRole('radio')) {
+        expect(chip.textContent).not.toMatch(/value|mid|high-end/i)
+      }
+    })
+
+    it('the cheapest band keeps the cheapest option and drops the dearest', () => {
+      render(<PeripheralsPanel />)
+      const group = screen.getByRole('radiogroup', { name: /monitor price/i })
+      fireEvent.click(within(group).getAllByRole('radio')[1]) // first band after All
+
       expect(screen.getByText(cheapest('monitor').name)).toBeInTheDocument()
       expect(screen.queryByText(dearest('monitor').name)).toBeNull()
     })
 
-    it('High-end is the mirror of that, across every category', () => {
+    // The old filter was global, which is most of why it made no sense.
+    it('filtering one category leaves the others alone', () => {
       render(<PeripheralsPanel />)
-      fireEvent.click(screen.getByRole('radio', { name: 'High-end' }))
-      for (const cat of ['monitor', 'keyboard', 'mouse', 'headset']) {
-        expect(screen.getByText(dearest(cat).name), cat).toBeInTheDocument()
-        expect(screen.queryByText(cheapest(cat).name), cat).toBeNull()
-      }
+      const group = screen.getByRole('radiogroup', { name: /monitor price/i })
+      fireEvent.click(within(group).getAllByRole('radio')[1])
+
+      expect(screen.getByText(dearest('mouse').name)).toBeInTheDocument()
+      expect(screen.getByText(dearest('keyboard').name)).toBeInTheDocument()
     })
   })
 

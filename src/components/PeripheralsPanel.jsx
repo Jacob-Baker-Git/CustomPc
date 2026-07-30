@@ -4,6 +4,7 @@ import useBuilderStore, { selPeripheralsTotal } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import SpecSheet from './SpecSheet'
 import { PANEL, TELEMETRY } from '../lib/uiTokens'
+import { priceBands, inBand } from '../lib/priceBands'
 
 const CATEGORIES = [
   { id: 'monitor',  label: 'Monitor',  icon: Monitor,    blurb: 'The one part you actually look at' },
@@ -11,21 +12,6 @@ const CATEGORIES = [
   { id: 'mouse',    label: 'Mouse',    icon: Mouse,      blurb: 'Shape matters more than DPI' },
   { id: 'headset',  label: 'Headset',  icon: Headphones, blurb: 'Wired sounds better per pound' },
 ]
-
-// Bands are read off the catalogue itself rather than hardcoded, so adding a
-// cheaper or dearer item re-sorts the tiers instead of stranding it.
-const BANDS = [
-  { id: 'all',   label: 'All' },
-  { id: 'value', label: 'Value' },
-  { id: 'mid',   label: 'Mid' },
-  { id: 'high',  label: 'High-end' },
-]
-
-function bandOf(price, thirds) {
-  if (price <= thirds[0]) return 'value'
-  if (price <= thirds[1]) return 'mid'
-  return 'high'
-}
 
 function specLine(p) {
   if (p.category === 'monitor') return `${p.resolution} · ${p.refresh}Hz`
@@ -78,18 +64,13 @@ export default function PeripheralsPanel() {
   const removePeripheral = useBuilderStore((s) => s.removePeripheral)
   const total            = useBuilderStore(selPeripheralsTotal)
   const peripheralsData  = useCatalogStore((s) => s.peripherals)
-  const [band, setBand]  = useState('all')
+  const [bandByCategory, setBandByCategory] = useState({})
 
   const byCategory = useMemo(() => {
     const map = {}
     for (const { id } of CATEGORIES) {
       const all = peripheralsData.filter((p) => p.category === id).sort((a, b) => a.price - b.price)
-      const prices = all.map((p) => p.price)
-      const thirds = [
-        prices[Math.floor(prices.length / 3)] ?? Infinity,
-        prices[Math.floor((2 * prices.length) / 3)] ?? Infinity,
-      ]
-      map[id] = { all, thirds }
+      map[id] = { all, bands: priceBands(all.map((p) => p.price)) }
     }
     return map
   }, [peripheralsData])
@@ -118,32 +99,12 @@ export default function PeripheralsPanel() {
           </div>
         </div>
 
-        {/* One filter for the whole page. The catalogue now runs from a £10 mouse
-            to a £1000 monitor, which is unreadable as a single flat grid. */}
-        <div role="radiogroup" aria-label="Price band" className="flex flex-wrap gap-1.5 mb-6">
-          {BANDS.map((b) => {
-            const on = b.id === band
-            return (
-              <button
-                key={b.id}
-                role="radio"
-                aria-checked={on}
-                onClick={() => setBand(b.id)}
-                className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors active:scale-95
-                  ${on
-                    ? 'chip-pick border-accent bg-accent text-accent-ink'
-                    : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
-              >
-                {b.label}
-              </button>
-            )
-          })}
-        </div>
-
         <div className="space-y-8">
           {CATEGORIES.map(({ id, label, icon: Icon, blurb }) => {
-            const { all, thirds } = byCategory[id] ?? { all: [], thirds: [Infinity, Infinity] }
-            const shown = band === 'all' ? all : all.filter((p) => bandOf(p.price, thirds) === band)
+            const { all, bands } = byCategory[id] ?? { all: [], bands: [] }
+            const activeBandId = bandByCategory[id] ?? 'all'
+            const activeBand = bands.find((b) => b.id === activeBandId) ?? bands[0]
+            const shown = activeBand ? all.filter((p) => inBand(p.price, activeBand)) : all
             const picked = selected[id]
             return (
               <section key={id}>
@@ -157,6 +118,28 @@ export default function PeripheralsPanel() {
                       : `${shown.length} option${shown.length === 1 ? '' : 's'}`}
                   </span>
                 </div>
+                {bands.length > 1 && (
+                  <div role="radiogroup" aria-label={`${label} price`} className="flex flex-wrap gap-1.5 mb-3">
+                    {bands.map((b) => {
+                      const on = b.id === activeBandId
+                      const count = all.filter((p) => inBand(p.price, b)).length
+                      return (
+                        <button
+                          key={b.id}
+                          role="radio"
+                          aria-checked={on}
+                          onClick={() => setBandByCategory((prev) => ({ ...prev, [id]: b.id }))}
+                          className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition-colors active:scale-95
+                            ${on
+                              ? 'chip-pick border-accent bg-accent text-accent-ink'
+                              : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
+                        >
+                          {b.label} <span className={on ? 'opacity-70' : 'text-faint'}>{count}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
                 {shown.length === 0 ? (
                   <p className="text-xs text-faint">Nothing in this price band.</p>
                 ) : (
