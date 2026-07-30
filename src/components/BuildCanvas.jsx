@@ -13,7 +13,11 @@ export default function BuildCanvas({ selectedParts }) {
       <Canvas
         dpr={[1, 2]}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15 }}
-        camera={{ position: [1.7, 1.05, 5.6], fov: 46 }}
+        // Distance from the orbit target is ~7.2 world units. At fov 46 the
+        // visible frame height is 0.849·d, so the 482mm case (3.95 wu at
+        // 1 wu = 122 mm) fills ~65% of the frame — it used to be ~78%, which
+        // read as starting too zoomed in.
+        camera={{ position: [2.05, 1.3, 6.8], fov: 46 }}
       >
         {/* Studio product lighting. The old setup flooded the scene with ambient
             1.15, which washed out all form and shadow (the "cheap render" look).
@@ -53,12 +57,15 @@ export default function BuildCanvas({ selectedParts }) {
           color="#05070c"
         />
 
+        {/* 2.2–16 rather than 3–9: close enough to inspect one part, far enough
+            to see the whole build in its room. WU_PER_MM was originally chosen
+            so the old clamps still worked — widening them is deliberate. */}
         <OrbitControls
           target={[0, -0.1, 0.05]}
           enablePan={false}
           enableZoom
-          minDistance={3}
-          maxDistance={9}
+          minDistance={2.2}
+          maxDistance={16}
           dampingFactor={0.05}
           enableDamping
         />
