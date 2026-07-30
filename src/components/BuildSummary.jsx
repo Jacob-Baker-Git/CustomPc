@@ -1,18 +1,23 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selTotalPower } from '../store/useBuilderStore'
+import useCatalogStore from '../store/useCatalogStore'
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { buildShareUrl } from '../lib/shareLink'
 import { buildMarkdown } from '../lib/buildMarkdown'
 import { encodeBuild } from '../lib/buildCodec'
+import { rateBuild } from '../lib/partRatings'
+import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
 import useSavedStore from '../store/useSavedStore'
-import { PANEL, PANEL_STRONG } from '../lib/uiTokens'
+import { PANEL, PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
 import DimensionsChecklist from './DimensionsChecklist'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
+const CAT_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
+const scoreText = (s) => (s >= 80 ? 'text-good' : s >= 50 ? 'text-ok' : 'text-bad')
 
 function Row({ label, name, brand, price }) {
   return (
@@ -56,7 +61,23 @@ export default function BuildSummary() {
   const periphTotal = useBuilderStore(selPeripheralsTotal)
   const power = useBuilderStore(selTotalPower)
   const resolution = useBuilderStore((s) => s.resolution)
+  const useCase = useBuilderStore((s) => s.useCase)
+  const partsData = useCatalogStore((s) => s.parts)
   const [copied, setCopied] = useState(false)
+  const [showFps, setShowFps] = useState(false)
+
+  // The same rating the Build tab shows. This tab used to open with a 22-row
+  // frame-rate table, which answered a question only gamers had asked and
+  // disagreed with the score everywhere else on the site.
+  const rating = useMemo(
+    () => rateBuild(selectedParts, useCase, partsData),
+    [selectedParts, useCase, partsData],
+  )
+  const weakest = useMemo(
+    () => Object.entries(rating.parts).sort((a, b) => a[1].score - b[1].score).filter(([, i]) => i.isWeakLink).slice(0, 3),
+    [rating],
+  )
+  const framePaced = Boolean(BUILD_PROFILES[useCase]?.cpuGpuPaced)
 
   const buildRows = CATEGORIES.map((c) => ({ key: c.id, label: c.label, part: selectedParts[c.id] })).filter((r) => r.part)
   const missingCount = CATEGORIES.length - buildRows.length
@@ -121,6 +142,30 @@ export default function BuildSummary() {
             <p className="text-sm text-muted py-6 text-center">No parts selected yet — head to the Build tab.</p>
           ) : (
             <>
+              {rating.overall > 0 && (
+                <div className="mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3">
+                  <div className="flex items-baseline gap-2">
+                    <span className={`font-display text-3xl font-extrabold tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
+                    <span className="text-xs text-faint">/100</span>
+                    <span className="text-[11px] text-muted ml-1">CustomPC score</span>
+                    <span className={`text-xs font-semibold ml-auto ${scoreText(rating.overall)}`}>{rating.verdict}</span>
+                  </div>
+                  <p className="text-[11px] text-faint mt-1.5">
+                    Rated for <span className="text-muted">{USE_CASE_LABEL[useCase] ?? useCase}</span>. Change that on the Build tab.
+                  </p>
+                  {weakest.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mt-2.5">
+                      {weakest.map(([cat, info]) => (
+                        <span key={cat} className="text-[10px] px-1.5 py-0.5 rounded-md border border-line text-muted">
+                          {CAT_LABEL[cat] ?? cat} <span className={`${TELEMETRY} ${scoreText(info.score)}`}>{info.score}</span>
+                        </span>
+                      ))}
+                      <span className="text-[10px] text-faint self-center">weakest links</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {buildRows.length > 0 && (
                 <>
                   <div className="mt-4 mb-1 flex items-baseline justify-between">
@@ -151,10 +196,21 @@ export default function BuildSummary() {
                 <span>Total <span className="font-mono text-ink">£{grandTotal.toFixed(2)}</span></span>
               </div>
 
-              {selectedParts.cpu && selectedParts.gpu && (
+              {/* Frame rates are now a detail behind a toggle, and only for the
+                  use cases where they mean anything — not the headline table
+                  this tab opened with regardless of what the PC was for. */}
+              {framePaced && selectedParts.cpu && selectedParts.gpu && (
                 <div className="mt-5">
-                  <div className="text-[11px] uppercase tracking-wider text-muted mb-1">How it runs @ {RES_LABEL[resolution] ?? resolution}</div>
-                  <GamePerformanceList cpu={selectedParts.cpu} gpu={selectedParts.gpu} resolution={resolution} />
+                  <button
+                    onClick={() => setShowFps((v) => !v)}
+                    aria-expanded={showFps}
+                    className="text-[11px] uppercase tracking-wider text-muted hover:text-accent transition-colors"
+                  >
+                    Frame rates @ {RES_LABEL[resolution] ?? resolution} {showFps ? '−' : '+'}
+                  </button>
+                  {showFps && (
+                    <GamePerformanceList cpu={selectedParts.cpu} gpu={selectedParts.gpu} resolution={resolution} limit={8} />
+                  )}
                 </div>
               )}
               <div className="mt-5">

@@ -5,12 +5,13 @@ function dotColor(fps) {
   return fps >= 60 ? 'bg-good' : fps >= 30 ? 'bg-ok' : 'bg-bad'
 }
 
-export default function GamePerformanceList({ cpu, gpu, resolution, quality = 'high' }) {
+export default function GamePerformanceList({ cpu, gpu, resolution, quality = 'high', limit = Infinity }) {
   const games = useCatalogStore((s) => s.games)
   if (!cpu || !gpu) return null
   const rows = games
     .map((game) => ({ game, fps: gameFps(cpu, gpu, resolution, game, quality) }))
     .sort((a, b) => b.fps - a.fps)
+    .slice(0, limit)
 
   return (
     <div>

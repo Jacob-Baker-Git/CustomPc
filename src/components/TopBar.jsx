@@ -42,8 +42,9 @@ export default function TopBar({ view, onViewChange }) {
       {/* Below 360px the wordmark is what pushes this header onto a second row,
           so it goes; every real phone width keeps it. */}
       <span className="hidden min-[360px]:inline font-display font-extrabold text-lg tracking-tight text-ink">PC <span className="text-accent">Builder</span></span>
-      {/* Compact on phones (values only, smaller text) so the header stays ONE
-          row — a wrapped two-row header covered the view tabs underneath. */}
+      {/* Below `xl` this shrinks to just the editable budget: the remaining and
+          power figures move into the meter row underneath, where they get a bar
+          to be read against. */}
       <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted">
         {editing ? (
           <span className="flex items-center gap-1">
@@ -68,14 +69,14 @@ export default function TopBar({ view, onViewChange }) {
             £{budget.toFixed(0)}
           </button>
         )}
-        <span className="text-faint hidden sm:inline">budget</span>
-        <span className="text-line-strong mx-0.5 sm:mx-1">|</span>
-        <span className={remaining < 0 ? 'text-bad font-mono tabular-nums font-semibold' : 'text-good font-mono tabular-nums font-semibold'}>
+        <span className="text-faint hidden xl:inline">budget</span>
+        <span className="text-line-strong mx-0.5 sm:mx-1 hidden xl:inline">|</span>
+        <span className={`hidden xl:inline font-mono tabular-nums font-semibold ${remaining < 0 ? 'text-bad' : 'text-good'}`}>
           £{remaining.toFixed(0)}
         </span>
-        <span className="text-faint hidden sm:inline">remaining</span>
-        <span className="text-line-strong mx-0.5 sm:mx-1">|</span>
-        <span className="text-ok font-mono tabular-nums font-semibold">{totalPower}W</span>
+        <span className="text-faint hidden xl:inline">remaining</span>
+        <span className="text-line-strong mx-0.5 sm:mx-1 hidden xl:inline">|</span>
+        <span className="hidden xl:inline text-ok font-mono tabular-nums font-semibold">{totalPower}W</span>
       </div>
       {/* Tabs live in the header on desktop; on phones they are the bottom bar
           rendered by BuilderScreen, so this row stays one row at 375px. */}
@@ -88,6 +89,14 @@ export default function TopBar({ view, onViewChange }) {
           <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" />
           <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" />
         </div>
+      </div>
+      {/* Every width below `xl` gets the same two meters on their own row — the
+          exact complement of the full-size pair above, so the readout never just
+          vanishes as the window narrows. Wrapping is safe: this row is the only
+          thing that wraps, and the content below is padded to clear it. */}
+      <div className="w-full flex items-center gap-4 xl:hidden">
+        <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" compact />
+        <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" compact />
       </div>
     </header>
   )

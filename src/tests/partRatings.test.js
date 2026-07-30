@@ -8,10 +8,16 @@ const gpu = { id: 'g', category: 'gpu', perfScore: 300 }
 const catalog = [cpuLo, cpuMid, cpuHi, gpu]
 
 describe('partLevel', () => {
-  it('scales the weakest to 0 and strongest to 100 within a category', () => {
-    expect(partLevel(cpuLo, catalog)).toBe(0)
+  // The floor is the point: the cheapest CPU you can still buy is not a zero,
+  // and scoring it as one was what dragged honest budget builds into the 20s.
+  it('scales the weakest to the floor and strongest to 100 within a category', () => {
+    expect(partLevel(cpuLo, catalog)).toBe(25)
     expect(partLevel(cpuHi, catalog)).toBe(100)
-    expect(partLevel(cpuMid, catalog)).toBe(50)
+    expect(partLevel(cpuMid, catalog)).toBe(63)
+  })
+  it('keeps the ordering of the raw percentile', () => {
+    expect(partLevel(cpuLo, catalog)).toBeLessThan(partLevel(cpuMid, catalog))
+    expect(partLevel(cpuMid, catalog)).toBeLessThan(partLevel(cpuHi, catalog))
   })
   it('a lone part in its category is 100', () => {
     expect(partLevel(gpu, catalog)).toBe(100)
@@ -30,18 +36,18 @@ describe('partLevel', () => {
       const qs = realCatalog.filter((p) => p.category === part.category).map(partQuality)
       const min = Math.min(...qs)
       const max = Math.max(...qs)
-      const expected = max > min ? Math.round(100 * (partQuality(part) - min) / (max - min)) : 100
+      const expected = max > min ? Math.round(25 + 75 * (partQuality(part) - min) / (max - min)) : 100
       expect(partLevel(part, realCatalog)).toBe(expected)
     }
   })
 
   it('recomputes when given a different catalog', () => {
-    expect(partLevel(cpuMid, catalog)).toBe(50)
+    expect(partLevel(cpuMid, catalog)).toBe(63)
     // cpuMid is now the strongest CPU on offer, so it must read 100.
     const narrowed = [cpuLo, cpuMid, gpu]
     expect(partLevel(cpuMid, narrowed)).toBe(100)
     // ...and the original catalog must be unaffected.
-    expect(partLevel(cpuMid, catalog)).toBe(50)
+    expect(partLevel(cpuMid, catalog)).toBe(63)
   })
 })
 
@@ -86,6 +92,40 @@ describe('rateBuild', () => {
     const r = rateBuild({ cpu: cS, gpu: gVram, ram: rS }, 'creation', cat)
     expect(r.parts.gpu.reason).toMatch(/vram/i)
     expect(r.parts.gpu.score).toBeLessThan(80)
+  })
+  it('never scores a part in the catalogue at zero, even the weakest for the job', () => {
+    const r = rateBuild({ cpu: cW, gpu: gW, ram: rW }, 'creation', ratingCatalog)
+    for (const [cat, info] of Object.entries(r.parts)) {
+      expect(info.score, `${cat} scored ${info.score}`).toBeGreaterThan(20)
+    }
+    expect(r.overall).toBeGreaterThan(20)
+  })
+  it('rates the cheapest possible gaming build as workable rather than broken', () => {
+    const r = rateBuild({ cpu: cW, gpu: gW, ram: rW }, 'gaming', ratingCatalog)
+    expect(r.overall).toBeGreaterThanOrEqual(40)
+    expect(r.verdict).not.toMatch(/struggles/i)
+  })
+  it('explains a weak link with a headline and a detail, never "underpowered"', () => {
+    const r = rateBuild({ cpu: cS, gpu: gS, ram: rW }, 'creation', ratingCatalog)
+    expect(r.parts.ram.reason).toBeTruthy()
+    expect(r.parts.ram.detail).toBeTruthy()
+    expect(r.parts.ram.detail.length).toBeGreaterThan(r.parts.ram.reason.length)
+    for (const info of Object.values(r.parts)) {
+      expect(info.reason ?? '').not.toMatch(/underpowered/i)
+    }
+  })
+  it('never attaches a caution to a part that scored well', () => {
+    for (const uc of ['gaming', 'office', 'creation', 'programming', 'streaming']) {
+      const r = rateBuild({ cpu: cM, gpu: gM, ram: rS }, uc, ratingCatalog)
+      for (const [cat, info] of Object.entries(r.parts)) {
+        if (info.score >= 72) expect(info.reason, `${uc}/${cat} @ ${info.score}`).toBeNull()
+      }
+    }
+  })
+  it('leaves a part that is fine for the job without a note', () => {
+    const r = rateBuild({ cpu: cS, gpu: gS, ram: rS }, 'office', ratingCatalog)
+    expect(r.parts.cpu.reason).toBeNull()
+    expect(r.parts.cpu.detail).toBeNull()
   })
   it('softens a severe CPU bottleneck instead of zeroing balance', () => {
     // cM has a non-zero level, so its score reflects the softened balance floor.

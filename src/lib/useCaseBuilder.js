@@ -10,6 +10,9 @@ export function buildForUseCase(budget, useCase, partsData, { rng } = {}) {
     weights: profile.weights,
     upgradeOrder: profile.upgradeOrder,
     maximise: true,
+    // Spend against the score the user is actually shown for this use case,
+    // rather than against raw part quality.
+    rateFor: useCase,
     rng,
   })
 }

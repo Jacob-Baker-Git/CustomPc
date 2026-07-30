@@ -5,7 +5,7 @@ import Backdrop from '../components/Backdrop'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
 import InfoDisclaimer from '../components/InfoDisclaimer'
-import UpgradeSuggestion from '../components/UpgradeSuggestion'
+import UseCaseChips from '../components/UseCaseChips'
 import BuildRatingPanel from '../components/BuildRatingPanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
@@ -22,7 +22,6 @@ export default function BuilderScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const addPart       = useBuilderStore((s) => s.addPart)
   const removePart    = useBuilderStore((s) => s.removePart)
-  const setHovered    = useBuilderStore((s) => s.setHoveredCategory)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useHashView('build')
   const scrollRef = useRef(null)
@@ -41,8 +40,10 @@ export default function BuilderScreen() {
     <div className="relative min-h-screen bg-ground">
       <Backdrop />
       <TopBar view={view} onViewChange={setView} />
-      {/* pb-16 clears the fixed bottom tab bar wherever it is showing. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-16 pb-16 lg:pb-0">
+      {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
+          top padding below `xl` clears the header's second row of meters, which
+          is taller from `md` up because the header's own padding grows there. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 xl:pt-16 pb-16 lg:pb-0">
         {view === 'build' ? (
           <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-6xl 2xl:max-w-[88rem] mx-auto p-4 pt-3 pb-12">
             <div className="build-grid">
@@ -61,13 +62,12 @@ export default function BuilderScreen() {
                   selectedParts={selectedParts}
                   onSelectCategory={setActiveCategory}
                   onDeselect={removePart}
-                  onHoverCategory={setHovered}
                   columns={2}
                 />
               </div>
+              <div className="area-usecase"><UseCaseChips /></div>
               <div className="area-rating"><BuildRatingPanel /></div>
               <div className="area-warnings"><BuildWarnings /></div>
-              <div className="area-upgrade"><UpgradeSuggestion /></div>
               <div className="area-autobuild"><AutoBuildButton /></div>
             </div>
           </div>

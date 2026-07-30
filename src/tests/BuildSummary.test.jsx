@@ -30,6 +30,39 @@ describe('BuildSummary', () => {
     expect(buyLinks[0].getAttribute('href')).toContain(encodeURIComponent(cpu.name))
   })
 
+  // This tab used to open with a 22-row frame-rate table whatever the PC was
+  // for, which disagreed with the score shown everywhere else.
+  describe('CustomPC score block', () => {
+    it('leads with the score and the use case it was rated for', () => {
+      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'programming' })
+      render(<BuildSummary />)
+      expect(screen.getByText(/custompc score/i)).toBeInTheDocument()
+      expect(screen.getByText(/rated for/i)).toHaveTextContent('Programming')
+      expect(screen.getByText(/for programming$/i)).toBeInTheDocument()
+    })
+
+    it('names the weakest links', () => {
+      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'gaming' })
+      render(<BuildSummary />)
+      expect(screen.getByText(/weakest links/i)).toBeInTheDocument()
+    })
+
+    it('keeps frame rates behind a toggle instead of dumping the table', () => {
+      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'gaming' })
+      render(<BuildSummary />)
+      const toggle = screen.getByRole('button', { name: /frame rates/i })
+      expect(toggle).toHaveAttribute('aria-expanded', 'false')
+      fireEvent.click(toggle)
+      expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    it('offers no frame rates at all for a use case nobody measures in fps', () => {
+      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'office' })
+      render(<BuildSummary />)
+      expect(screen.queryByRole('button', { name: /frame rates/i })).toBeNull()
+    })
+  })
+
   it('flags unpicked core categories as visibly missing', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)

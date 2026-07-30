@@ -49,6 +49,20 @@ body {
   .rise { animation: none; opacity: 1; transform: none; }
 }
 
+/* A chip dips inward as it becomes the selected one — a physical "pressed in"
+   beat that confirms the pick without moving anything around it. Applied only
+   to the chip that just turned on, so it fires on change rather than on every
+   render of the group. */
+@keyframes chipPick {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.chip-pick { animation: chipPick 220ms cubic-bezier(0.22, 1, 0.36, 1); }
+@media (prefers-reduced-motion: reduce) {
+  .chip-pick { animation: none; }
+}
+
 /* Desktop-only Build-tab layout: 3D on the right, the rating panel on the left,
    everything else full-width below. Below lg it is a plain flex column, so the
    child DOM order IS the (unchanged) mobile order. Every child sits above the
@@ -63,20 +77,20 @@ body {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
     grid-template-areas:
+      "usecase   viz"
       "rating    viz"
       "banner    banner"
       "parts     parts"
       "warnings  warnings"
-      "upgrade   upgrade"
       "autobuild autobuild";
     align-items: start;
     gap: 1rem;
   }
   .build-grid > .area-viz       { grid-area: viz; }
+  .build-grid > .area-usecase   { grid-area: usecase; }
   .build-grid > .area-rating    { grid-area: rating; }
   .build-grid > .area-banner    { grid-area: banner; }
   .build-grid > .area-parts     { grid-area: parts; }
   .build-grid > .area-warnings  { grid-area: warnings; }
-  .build-grid > .area-upgrade   { grid-area: upgrade; }
   .build-grid > .area-autobuild { grid-area: autobuild; }
 }

@@ -15,10 +15,11 @@ describe('MainMenu', () => {
     expect(screen.getByRole('button', { name: /saved builds/i })).toBeInTheDocument()
   })
 
-  it('surfaces the content pages that used to be footer-only', () => {
+  it('reaches the content pages through the footer, and only through it', () => {
     render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
     for (const href of ['#/parts', '#/glossary', '#/help', '#/feedback']) {
-      expect(document.querySelector(`a[href="${href}"]`)).toBeTruthy()
+      // Exactly one route to each: the tile row that duplicated the footer is gone.
+      expect(document.querySelectorAll(`a[href="${href}"]`)).toHaveLength(1)
     }
   })
 

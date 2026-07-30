@@ -1,4 +1,4 @@
-export default function DynamicBars({ value, max, label, unit }) {
+export default function DynamicBars({ value, max, label, unit, compact = false }) {
   const hasMax = typeof max === 'number' && max > 0
   const pct = hasMax ? Math.min((value / max) * 100, 100) : 0
   const barColor =
@@ -14,13 +14,15 @@ export default function DynamicBars({ value, max, label, unit }) {
       ? `£${value.toFixed(0)} / £${max.toFixed(0)}`
       : `${value}${unit} / ${max}${unit}`
 
+  // `compact` is the phone shape: same meter, no minimum width and smaller type,
+  // so two of them fit a 375px row instead of being hidden entirely.
   return (
-    <div className="flex flex-col gap-1 min-w-[140px]">
-      <div className="flex justify-between text-xs text-muted">
+    <div className={`flex flex-col ${compact ? 'gap-0.5 flex-1 min-w-0' : 'gap-1 min-w-[140px]'}`}>
+      <div className={`flex justify-between gap-2 text-muted ${compact ? 'text-[10px]' : 'text-xs'}`}>
         <span>{label}</span>
-        <span className="font-mono tabular-nums text-ink">{display}</span>
+        <span className="font-mono tabular-nums text-ink truncate">{display}</span>
       </div>
-      <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
+      <div className={`bg-surface-2 rounded-full overflow-hidden ${compact ? 'h-1.5' : 'h-2'}`}>
         <div
           className={`h-full rounded-full transition-all duration-500 ${barColor}`}
           style={{ width: `${pct}%` }}

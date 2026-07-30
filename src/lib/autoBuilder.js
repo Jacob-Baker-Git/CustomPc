@@ -1,5 +1,6 @@
 import { checkCompatibility } from './compatibility'
 import { partQuality } from './partQuality'
+import { rateBuild } from './partRatings'
 
 const BASE_WEIGHTS = {
   cpu: 0.18, gpu: 0.32, motherboard: 0.11, ram: 0.08, storage: 0.07,
@@ -55,6 +56,9 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
   const maximise = options.maximise ?? false
   const rng = options.rng ?? null
   const lockExisting = options.lockExisting ?? true
+  // Use case to score against. Absent, the maximise pass keeps its original
+  // quality-stepping behaviour — so every existing caller is untouched.
+  const rateFor = options.rateFor ?? null
 
   const result = { ...selectedParts }
   const userCats = lockExisting ? new Set(Object.keys(selectedParts)) : new Set()
@@ -84,17 +88,28 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     }
   }
 
+  // Affordable, compatible, strictly-better swaps for a category, cheapest first.
+  const upgradePool = (category) => {
+    const current = result[category]
+    if (!current) return []
+    const curQ = partQuality(current)
+    const without = { ...result, [category]: undefined }
+    let pool = ofCategory(partsData, category)
+      .filter((p) => checkCompatibility(without, p).compatible)
+      .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining - psuReserve)
+    // Same gap as the fill pass: compatibility.js checks GPU length when picking
+    // a GPU, never when picking the case it has to fit inside.
+    if (category === 'case' && result.gpu) {
+      pool = pool.filter((p) => result.gpu.length <= p.maxGpuLength)
+    }
+    return pool.sort((a, b) => a.price - b.price)
+  }
+
   // Best higher-quality part in `category` we can still afford. `cheapest` picks
   // the smallest affordable step up (used by the maximise loop); otherwise the
   // best affordable jump (the original leftover behavior).
   const affordableUpgrade = (category, cheapest) => {
-    const current = result[category]
-    if (!current) return null
-    const curQ = partQuality(current)
-    const without = { ...result, [category]: undefined }
-    const pool = ofCategory(partsData, category)
-      .filter((p) => checkCompatibility(without, p).compatible)
-      .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining - psuReserve)
+    const pool = upgradePool(category)
     if (pool.length === 0) return null
     const sorted = cheapest
       ? [...pool].sort((a, b) => (a.price - b.price) || (partQuality(b) - partQuality(a)))
@@ -102,10 +117,22 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     return pick(sorted, rng)
   }
 
-  if (maximise) {
-    // Step each priority category up one tier at a time until nothing more is
-    // affordable — spends as much of the budget as possible. Terminates because
-    // quality strictly increases each step over a finite catalog.
+  // A handful of candidates spread across the affordable price range. Rating
+  // every one of ~35 parts in every category on every round is what this cap
+  // avoids; the loop iterates, so a step skipped now is still reachable next
+  // round once something cheaper has been bought.
+  const upgradeCandidates = (category, cap = 6) => {
+    const pool = upgradePool(category)
+    if (pool.length <= cap) return pool
+    const out = new Set()
+    for (let i = 0; i < cap; i++) out.add(pool[Math.round((i * (pool.length - 1)) / (cap - 1))])
+    return [...out]
+  }
+
+  // The original maximise pass: walk the priority list taking the cheapest step
+  // up in each until nothing more is affordable. Terminates because quality
+  // strictly increases each step over a finite catalog.
+  const stepUpQuality = () => {
     let guard = 0
     let stepped = true
     while (stepped && guard++ < 200) {
@@ -120,6 +147,44 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
         }
       }
     }
+  }
+
+  if (maximise && rateFor) {
+    // Score-greedy maximise. Every affordable single-part swap is priced against
+    // the CustomPC score it would actually buy, and the best score-per-pound one
+    // wins each round.
+    //
+    // The old pass walked a fixed priority list taking the cheapest step up in
+    // each, over and over. That has no notion of diminishing returns, so a £1700
+    // gaming build marched the CPU to an i9-14900KS — £650 that bought nothing a
+    // gamer would feel — while the GPU, which the profile weights nearly twice as
+    // heavily, sat at 76. Rating each candidate is what makes "best within the
+    // budget" mean the thing the user is shown.
+    let guard = 0
+    while (guard++ < 60) {
+      const base = rateBuild(result, rateFor, partsData).overall
+      const steps = []
+      for (const category of FILL_ORDER) {
+        if (category === 'psu' || userCats.has(category) || !result[category]) continue
+        for (const cand of upgradeCandidates(category)) {
+          const cost = cand.price - result[category].price
+          const gain = rateBuild({ ...result, [category]: cand }, rateFor, partsData).overall - base
+          if (gain <= 0) continue
+          steps.push({ category, cand, cost, value: cost > 0 ? gain / cost : Infinity })
+        }
+      }
+      if (steps.length === 0) break
+      steps.sort((a, b) => b.value - a.value || a.cost - b.cost)
+      const step = pick(steps, rng, 2)
+      remaining -= step.cost
+      result[step.category] = step.cand
+    }
+    // Nothing left that raises the score, so put any remainder into raw quality
+    // the way the old pass did — a better case or cooler still beats change in
+    // the user's pocket.
+    stepUpQuality()
+  } else if (maximise) {
+    stepUpQuality()
   } else {
     // Spend leftover upgrading auto-picked parts (never the user's own picks).
     for (const category of upgradeOrder) {

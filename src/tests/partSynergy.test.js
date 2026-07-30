@@ -21,7 +21,15 @@ describe('partSynergy', () => {
     const s = partSynergy({ cpu: cpuTiny, gpu: gpuBig }, 'cpu', 'gaming')
     expect(s.balance).toBeGreaterThanOrEqual(25)
     expect(s.balance).toBeLessThan(60)
-    expect(s.reason).toMatch(/bottleneck/i)
+    // Names the GPU it is holding back, and explains why behind the disclosure.
+    expect(s.reason).toMatch(/GPU/)
+    expect(s.detail).toMatch(/frames/i)
+  })
+  it('ignores the CPU/GPU pairing for use cases that are not frame-paced', () => {
+    // Nobody notices a "bottleneck" while writing email — docking office and
+    // programming builds for one only made honest builds look broken.
+    expect(partSynergy({ cpu: cpuTiny, gpu: gpuBig }, 'cpu', 'office').balance).toBe(100)
+    expect(partSynergy({ cpu: cpuTiny, gpu: gpuBig }, 'cpu', 'programming').balance).toBe(100)
   })
   it('flags low VRAM on the GPU for creation', () => {
     const s = partSynergy({ cpu: cpuBig, gpu: gpuBig }, 'gpu', 'creation')
@@ -41,7 +49,8 @@ describe('partSynergy', () => {
   it('flags an undersized cooler for the CPU', () => {
     const s = partSynergy({ cpu: cpuBig, gpu: gpuBig, cooler: { category: 'cooler', specs: { type: 'Air', height: 100 } } }, 'cooler', 'gaming')
     expect(s.balance).toBeLessThan(100) // 80W cap vs 170W CPU
-    expect(s.reason).toMatch(/undersized/i)
+    expect(s.reason).toMatch(/170W/)
+    expect(s.detail).toMatch(/throttl|clock/i)
   })
   it('never penalises missing metadata (GPU with no vram field)', () => {
     const s = partSynergy({ cpu: cpuBig, gpu: { category: 'gpu', perfScore: 100, tdp: 300 } }, 'gpu', 'creation')

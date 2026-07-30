@@ -1,20 +1,16 @@
-import { Cpu, ArrowRight, Bookmark, Layers, BookOpen, HelpCircle, MessageSquare } from 'lucide-react'
+import { Cpu, ArrowRight, Bookmark } from 'lucide-react'
 import Backdrop from './Backdrop'
 import SiteFooter from './SiteFooter'
 import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
 import useSavedStore from '../store/useSavedStore'
 import { TELEMETRY } from '../lib/uiTokens'
 
-const LINKS = [
-  { href: '#/parts',    icon: Layers,        label: 'Browse parts',  blurb: 'Every part in the catalogue' },
-  { href: '#/glossary', icon: BookOpen,      label: 'Glossary',      blurb: 'Jargon, in plain English' },
-  { href: '#/help',     icon: HelpCircle,    label: 'Help',          blurb: 'How this works' },
-  { href: '#/feedback', icon: MessageSquare, label: 'Feedback',      blurb: 'Tell us what to fix' },
-]
-
 // The app's home. Previously this forked into "new PC" vs "upgrade", which led
 // to the same builder either way — so it now leads with continuing or starting
-// a build and surfaces the content pages that were buried in the footer.
+// a build. Parts/glossary/help/feedback are deliberately footer-only: they were
+// briefly promoted to a row of tiles, which said the same four things twice on
+// one screen and gave secondary pages the same visual weight as the one action
+// this page exists for.
 export default function MainMenu({ onStart, onResume, onSaved }) {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const budget        = useBuilderStore((s) => s.budget)
@@ -91,21 +87,7 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           </button>
         </div>
 
-        <div className="rise rise-3 mt-8 w-full grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {LINKS.map(({ href, icon: Icon, label, blurb }) => (
-            <a
-              key={href}
-              href={href}
-              className="px-3 py-3 rounded-lg border border-line bg-surface hover:border-accent hover:text-accent text-muted transition-colors"
-            >
-              <Icon size={16} className="mb-1.5" aria-hidden="true" />
-              <div className="text-xs font-semibold text-ink">{label}</div>
-              <div className="text-[11px] text-faint leading-snug mt-0.5">{blurb}</div>
-            </a>
-          ))}
-        </div>
-
-        <div className="w-full"><SiteFooter /></div>
+        <div className="rise rise-3 w-full"><SiteFooter /></div>
       </div>
     </div>
   )

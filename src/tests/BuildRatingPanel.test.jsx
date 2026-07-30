@@ -27,12 +27,44 @@ describe('BuildRatingPanel', () => {
     expect(screen.getByText('GPU Hi')).toBeInTheDocument()
   })
 
-  it('changing the use case re-rates live', () => {
+  it('rates against the use case the chips set, which live outside this panel', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: cpuLo, gpu: gpuHi }, useCase: 'office' })
+    render(<BuildRatingPanel />)
+    expect(screen.getByText(/(entry-level|gets by|solid|great|excellent) for everyday & office/i)).toBeInTheDocument()
+    expect(screen.queryByRole('radio')).toBeNull()
+  })
+
+  it('recommends the worst part, not the flashiest, and applies it', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: cpuLo, gpu: gpuHi }, useCase: 'gaming', budget: 2000 })
+    render(<BuildRatingPanel />)
+    const tip = screen.getByText(/your weakest part is the/i)
+    expect(tip).toHaveTextContent(/CPU/)
+    expect(tip).toHaveTextContent('CPU Hi')
+    fireEvent.click(screen.getByRole('button', { name: /apply this upgrade/i }))
+    expect(useBuilderStore.getState().selectedParts.cpu.id).toBe('cpu-hi')
+  })
+
+  it('recommends nothing it cannot afford', () => {
+    // CPU Hi is a £200 step up; £50 of headroom must not conjure it.
+    useBuilderStore.setState({ selectedParts: { cpu: cpuLo, gpu: gpuHi }, useCase: 'gaming', budget: 750 })
+    render(<BuildRatingPanel />)
+    expect(screen.queryByText(/your weakest part is the/i)).toBeNull()
+  })
+
+  it('calls it the CustomPC score', () => {
+    render(<BuildRatingPanel />)
+    expect(screen.getByText(/your custompc score/i)).toBeInTheDocument()
+  })
+
+  it('expands a held-back part to explain why', () => {
     useBuilderStore.setState({ selectedParts: { cpu: cpuLo, gpu: gpuHi }, useCase: 'gaming' })
     render(<BuildRatingPanel />)
-    fireEvent.change(screen.getByLabelText('Use case'), { target: { value: 'office' } })
-    expect(useBuilderStore.getState().useCase).toBe('office')
-    expect(screen.getByText(/(struggles with|okay for|strong for|excellent for) everyday & office/i)).toBeInTheDocument()
+    const why = screen.getByRole('button', { name: /why is the cpu rated/i })
+    expect(why).toHaveAttribute('aria-expanded', 'false')
+    fireEvent.click(why)
+    expect(why).toHaveAttribute('aria-expanded', 'true')
+    // The detail is a real explanation, not a restatement of the headline.
+    expect(screen.getByText(/frames|tier|works/i)).toBeInTheDocument()
   })
 
   it('picking an improvement swaps the live part', () => {

@@ -4,6 +4,7 @@ import partsData from '../data/partsData.json'
 import { partQuality } from '../lib/partQuality'
 import { BUILD_PROFILES } from '../lib/buildProfiles'
 import { checkCompatibility } from '../lib/compatibility'
+import { rateBuild } from '../lib/partRatings'
 
 const CATS = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans']
 const idMap = (b) => Object.fromEntries(Object.entries(b).map(([k, v]) => [k, v.id]))
@@ -72,6 +73,50 @@ describe('autoBuild options', () => {
     const heavy = autoBuild({}, 2500, partsData, '1440p', { weights: ramWeights, upgradeOrder: ['ram', 'cpu'], maximise: true })
     const gaming = autoBuild({}, 2500, partsData, '1440p')
     expect(partQuality(heavy.ram)).toBeGreaterThanOrEqual(partQuality(gaming.ram))
+  })
+})
+
+describe('autoBuild rateFor (score-greedy maximise)', () => {
+  const spend = (b) => Object.values(b).reduce((s, p) => s + (p?.price ?? 0), 0)
+
+  it('beats the quality-stepping pass on the score it is spending against', () => {
+    for (const useCase of ['gaming', 'creation', 'programming', 'streaming']) {
+      const p = BUILD_PROFILES[useCase]
+      const opts = { weights: p.weights, upgradeOrder: p.upgradeOrder, maximise: true }
+      const plain = autoBuild({}, 1700, partsData, p.resolution, opts)
+      const scored = autoBuild({}, 1700, partsData, p.resolution, { ...opts, rateFor: useCase })
+      expect(
+        rateBuild(scored, useCase, partsData).overall,
+        `${useCase} got no better`,
+      ).toBeGreaterThan(rateBuild(plain, useCase, partsData).overall)
+    }
+  })
+
+  it('stops pouring a gaming budget into the CPU', () => {
+    // The old pass walked ['gpu','cpu',...] taking the cheapest step in each,
+    // and landed a £650 i9 in a £1700 gaming build while the GPU stayed mid.
+    const p = BUILD_PROFILES.gaming
+    const build = autoBuild({}, 1700, partsData, p.resolution, {
+      weights: p.weights, upgradeOrder: p.upgradeOrder, maximise: true, rateFor: 'gaming',
+    })
+    expect(build.gpu.price).toBeGreaterThan(build.cpu.price)
+  })
+
+  it('still respects the budget and the parts the user chose', () => {
+    const p = BUILD_PROFILES.gaming
+    const mine = { gpu: partsData.find((x) => x.category === 'gpu' && x.price < 300) }
+    const build = autoBuild(mine, 1700, partsData, p.resolution, {
+      weights: p.weights, upgradeOrder: p.upgradeOrder, maximise: true, rateFor: 'gaming',
+    })
+    expect(build.gpu.id).toBe(mine.gpu.id)
+    expect(spend(build)).toBeLessThanOrEqual(1700)
+  })
+
+  it('is deterministic without an rng', () => {
+    const p = BUILD_PROFILES.gaming
+    const opts = { weights: p.weights, upgradeOrder: p.upgradeOrder, maximise: true, rateFor: 'gaming' }
+    expect(idMap(autoBuild({}, 1500, partsData, p.resolution, opts)))
+      .toEqual(idMap(autoBuild({}, 1500, partsData, p.resolution, opts)))
   })
 })
 
