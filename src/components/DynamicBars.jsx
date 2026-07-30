@@ -14,15 +14,22 @@ export default function DynamicBars({ value, max, label, unit, compact = false }
       ? `£${value.toFixed(0)} / £${max.toFixed(0)}`
       : `${value}${unit} / ${max}${unit}`
 
-  // `compact` is the phone shape: same meter, no minimum width and smaller type,
-  // so two of them fit a 375px row instead of being hidden entirely.
+  // Full size is a bordered chip so the meter groups with the tab control beside
+  // it instead of trailing off as a stray hairline. `compact` is the phone
+  // shape: no chrome, no minimum width, smaller type, so two fit a 375px row.
   return (
-    <div className={`flex flex-col ${compact ? 'gap-0.5 flex-1 min-w-0' : 'gap-1 min-w-[140px]'}`}>
-      <div className={`flex justify-between gap-2 text-muted ${compact ? 'text-[10px]' : 'text-xs'}`}>
-        <span>{label}</span>
-        <span className="font-mono tabular-nums text-ink truncate">{display}</span>
+    <div
+      className={
+        compact
+          ? 'flex flex-col gap-0.5 flex-1 min-w-0'
+          : 'flex flex-col gap-1 rounded-lg border border-line bg-surface-2 px-2.5 py-1.5 min-w-[136px]'
+      }
+    >
+      <div className={`flex items-baseline justify-between gap-2 ${compact ? 'text-[10px] text-muted' : 'text-[10px]'}`}>
+        <span className={compact ? '' : 'uppercase tracking-wide text-faint'}>{label}</span>
+        <span className={`font-mono tabular-nums truncate ${compact ? 'text-ink' : 'text-[11px] text-ink'}`}>{display}</span>
       </div>
-      <div className={`bg-surface-2 rounded-full overflow-hidden ${compact ? 'h-1.5' : 'h-2'}`}>
+      <div className={`rounded-full overflow-hidden ${compact ? 'h-1.5 bg-surface-2' : 'h-1.5 bg-ground'}`}>
         <div
           className={`h-full rounded-full transition-all duration-500 ${barColor}`}
           style={{ width: `${pct}%` }}
