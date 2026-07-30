@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
 
 const useBuilderStore = create(persist((set) => ({
   budget: 0,
@@ -62,7 +63,7 @@ const useBuilderStore = create(persist((set) => ({
       return { selectedPeripherals: next }
     }),
 }), {
-  name: 'custompc-builder-v1',
+  name: BUILDER_STORAGE_KEY,
   version: 2,
   // v1 had no persisted `flow` and inferred "in the builder" from a non-zero
   // budget. Preserve that inference once, so anyone mid-build reopens in the
