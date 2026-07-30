@@ -53,4 +53,52 @@ describe('CategoryList', () => {
     fireEvent.mouseEnter(screen.getByText(cpu.name).closest('div'))
     expect(onHoverCategory).not.toHaveBeenCalled()
   })
+
+  it('names the category on a filled row, not just the product', () => {
+    render(<CategoryList selectedParts={{ cpu }} onSelectCategory={() => {}} onDeselect={() => {}} />)
+    const row = screen.getByText(cpu.name).closest('div')
+    expect(row).toHaveTextContent(/cpu/i)
+  })
+
+  describe('emphasiseMissing (Build tab only)', () => {
+    it('tags every unfilled essential as missing', () => {
+      render(
+        <CategoryList selectedParts={{ cpu }} onSelectCategory={() => {}} onDeselect={() => {}} emphasiseMissing />
+      )
+      // 9 essentials, CPU filled → 8 still missing.
+      expect(screen.getAllByText('Missing')).toHaveLength(8)
+    })
+
+    // Paste is deliberately empty, so it must not read as a hole.
+    it('explains thermal paste instead of flagging it', () => {
+      render(<CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} emphasiseMissing />)
+      const paste = screen.getByText('Thermal Paste').closest('button')
+      expect(paste).toHaveTextContent(/optional/i)
+      expect(paste).toHaveTextContent(/coolers ship with paste/i)
+      expect(paste).not.toHaveTextContent('Missing')
+    })
+
+    it('still marks the next recommended pick', () => {
+      render(<CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} emphasiseMissing />)
+      const board = screen.getByText('Motherboard').closest('button')
+      expect(board).toHaveTextContent(/pick one/i)
+      expect(board).toHaveTextContent('Missing')
+    })
+
+    // Colour alone must never carry the meaning.
+    it('every state carries a text tag, not just a colour', () => {
+      render(
+        <CategoryList selectedParts={{ cpu }} onSelectCategory={() => {}} onDeselect={() => {}} emphasiseMissing />
+      )
+      expect(screen.getAllByText('Missing').length).toBeGreaterThan(0)
+      expect(screen.getByText(/optional/i)).toBeInTheDocument()
+    })
+  })
+
+  // SetupFlow renders this same list for "the PC I already own", where an empty
+  // slot means "I don't have one" — flagging those red would be a lie.
+  it('stays quiet about missing parts by default', () => {
+    render(<CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} />)
+    expect(screen.queryByText('Missing')).toBeNull()
+  })
 })
