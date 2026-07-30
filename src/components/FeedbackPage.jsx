@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Star } from 'lucide-react'
 import { validateFeedback, submitFeedback } from '../lib/feedback'
+import { makeChallenge, checkAnswer, submittedTooFast } from '../lib/humanCheck'
 
 const TYPES = [
   { id: 'idea', label: 'Idea' },
@@ -17,12 +18,33 @@ export default function FeedbackPage() {
   const [company, setCompany] = useState('') // honeypot
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | done | error
+  const [challenge, setChallenge] = useState(() => makeChallenge())
+  const [challengeInput, setChallengeInput] = useState('')
+  const mountedAt = useRef(0)
+  useEffect(() => { mountedAt.current = Date.now() }, [])
 
   async function onSubmit(e) {
     e.preventDefault()
+
+    // Field problems first: telling someone to "take another moment" when their
+    // real problem is an empty message helps nobody.
     const v = validateFeedback({ rating, type, message, email })
-    setErrors(v.errors)
-    if (!v.ok) return
+    if (!v.ok) { setErrors(v.errors); return }
+
+    // Then the cheap bot signals. The honeypot below stays silent on purpose —
+    // telling a bot it was caught just teaches it which field to leave alone.
+    if (submittedTooFast(mountedAt.current)) {
+      setErrors({ challenge: 'Take another moment to look that over, then send.' })
+      return
+    }
+    if (!checkAnswer(challenge, challengeInput)) {
+      setErrors({ challenge: 'That answer is not right — try the new sum.' })
+      setChallenge(makeChallenge())
+      setChallengeInput('')
+      return
+    }
+
+    setErrors({})
     if (company) { setStatus('done'); return } // bot filled the honeypot — silently succeed
     setStatus('sending')
     try {
@@ -110,6 +132,22 @@ export default function FeedbackPage() {
           className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
         />
         {errors.email && <p className="text-xs text-bad mt-1">{errors.email}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="fb-human" className="block text-sm text-muted mb-2">
+          Quick check — {challenge.question}
+        </label>
+        <input
+          id="fb-human"
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          value={challengeInput}
+          onChange={(e) => setChallengeInput(e.target.value)}
+          className="w-24 bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink font-mono tabular-nums focus:outline-none focus:border-accent"
+        />
+        {errors.challenge && <p className="text-xs text-bad mt-1">{errors.challenge}</p>}
       </div>
 
       {/* Honeypot: hidden from humans, tempting to bots. */}
