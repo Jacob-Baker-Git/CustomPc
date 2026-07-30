@@ -1378,5 +1378,221 @@
   {"id":"fans-corsair-rx120-3pack","category":"fans","name":"Corsair iCUE Link RX120 RGB (3-pack)","brand":"Corsair","price":119.99,"tdp":6,"modelPath":"/models/fans.glb","specs":{"size":"120mm","count":3,"rgb":true}},
   {"id":"fans-arctic-p14-max","category":"fans","name":"Arctic P14 Max 140mm","brand":"Arctic","price":10.99,"tdp":2,"modelPath":"/models/fans.glb","specs":{"size":"140mm","count":1,"rgb":false}},
   {"id":"paste-thermalright-tf7","category":"paste","name":"Thermalright TF7 (2g)","brand":"Thermalright","price":6.49,"tdp":0},
-  {"id":"paste-gelid-gc-extreme","category":"paste","name":"Gelid GC-Extreme (3.5g)","brand":"Gelid","price":11.99,"tdp":0}
+  {"id":"paste-gelid-gc-extreme","category":"paste","name":"Gelid GC-Extreme (3.5g)","brand":"Gelid","price":11.99,"tdp":0},
+
+  {
+    "id": "cpu-i3-12100f", "category": "cpu", "name": "Intel Core i3-12100F", "brand": "Intel",
+    "price": 84.99, "socket": "LGA1700", "tdp": 58, "perfScore": 40,
+    "modelPath": "/models/cpu.glb", "specs": {"cores":4,"boostClock":4.3}
+  },
+  {
+    "id": "cpu-ryzen-5-8400f", "category": "cpu", "name": "AMD Ryzen 5 8400F", "brand": "AMD",
+    "price": 109.99, "socket": "AM5", "tdp": 65, "perfScore": 50,
+    "modelPath": "/models/cpu.glb", "specs": {"cores":6,"boostClock":4.7}
+  },
+  {
+    "id": "cpu-i5-14600kf", "category": "cpu", "name": "Intel Core i5-14600KF", "brand": "Intel",
+    "price": 229.99, "socket": "LGA1700", "tdp": 125, "perfScore": 74,
+    "modelPath": "/models/cpu.glb", "specs": {"cores":14,"boostClock":5.3}
+  },
+  {
+    "id": "gpu-arc-a380", "category": "gpu", "name": "Intel Arc A380", "brand": "Intel",
+    "price": 109.99, "tdp": 75, "length": 200, "perfScore": 14,
+    "modelPath": "/models/gpu.glb", "specs": {"vram":6,"memType":"GDDR6"}
+  },
+  {
+    "id": "gpu-rx-6500xt", "category": "gpu", "name": "AMD Radeon RX 6500 XT", "brand": "AMD",
+    "price": 119.99, "tdp": 107, "length": 200, "perfScore": 16,
+    "modelPath": "/models/gpu.glb", "specs": {"vram":4,"memType":"GDDR6"}
+  },
+  {
+    "id": "gpu-gtx-1650", "category": "gpu", "name": "NVIDIA GeForce GTX 1650", "brand": "NVIDIA",
+    "price": 129.99, "tdp": 75, "length": 229, "perfScore": 15,
+    "modelPath": "/models/gpu.glb", "specs": {"vram":4,"memType":"GDDR6"}
+  },
+  {
+    "id": "gpu-rtx-3050-6gb", "category": "gpu", "name": "NVIDIA GeForce RTX 3050 6GB", "brand": "NVIDIA",
+    "price": 149.99, "tdp": 70, "length": 200, "perfScore": 20,
+    "modelPath": "/models/gpu.glb", "specs": {"vram":6,"memType":"GDDR6"}
+  },
+  {
+    "id": "mb-asrock-h610m-hvs", "category": "motherboard", "name": "ASRock H610M-HVS/M.2 DDR4", "brand": "ASRock",
+    "price": 64.99, "socket": "LGA1700", "formFactor": "mATX", "ramType": "DDR4", "tdp": 10,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"H610"}
+  },
+  {
+    "id": "mb-gigabyte-a620m-s2h", "category": "motherboard", "name": "Gigabyte A620M S2H", "brand": "Gigabyte",
+    "price": 69.99, "socket": "AM5", "formFactor": "mATX", "ramType": "DDR5", "tdp": 10,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"A620"}
+  },
+  {
+    "id": "mb-msi-b760m-e", "category": "motherboard", "name": "MSI PRO B760M-E DDR4", "brand": "MSI",
+    "price": 94.99, "socket": "LGA1700", "formFactor": "mATX", "ramType": "DDR4", "tdp": 12,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"B760"}
+  },
+  {
+    "id": "mb-asus-tuf-b760plus", "category": "motherboard", "name": "ASUS TUF Gaming B760-PLUS WiFi", "brand": "ASUS",
+    "price": 169.99, "socket": "LGA1700", "formFactor": "ATX", "ramType": "DDR5", "tdp": 12,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"B760"}
+  },
+  {
+    "id": "mb-gigabyte-b850-eagle", "category": "motherboard", "name": "Gigabyte B850 Eagle WiFi6E", "brand": "Gigabyte",
+    "price": 179.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 12,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"B850"}
+  },
+  {
+    "id": "mb-msi-x870e-carbon", "category": "motherboard", "name": "MSI MPG X870E Carbon WiFi", "brand": "MSI",
+    "price": 449.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"X870E"}
+  },
+  {
+    "id": "mb-asus-proart-x870e", "category": "motherboard", "name": "ASUS ProArt X870E-Creator WiFi", "brand": "ASUS",
+    "price": 479.99, "socket": "AM5", "formFactor": "ATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"X870E"}
+  },
+  {
+    "id": "mb-asrock-z890-taichi", "category": "motherboard", "name": "ASRock Z890 Taichi", "brand": "ASRock",
+    "price": 529.99, "socket": "LGA1851", "formFactor": "ATX", "ramType": "DDR5", "tdp": 15,
+    "modelPath": "/models/motherboard.glb", "specs": {"chipset":"Z890"}
+  },
+  {
+    "id": "ram-patriot-ddr4-16", "category": "ram", "name": "Patriot Viper Steel DDR4-3200 16GB", "brand": "Patriot",
+    "price": 29.99, "ramType": "DDR4", "speed": 3200, "capacityGb": 16, "tdp": 5,
+    "modelPath": "/models/ram.glb", "specs": {"sticks":2}
+  },
+  {
+    "id": "ram-teamgroup-ddr5-16", "category": "ram", "name": "TeamGroup Elite DDR5-5600 16GB", "brand": "TeamGroup",
+    "price": 44.99, "ramType": "DDR5", "speed": 5600, "capacityGb": 16, "tdp": 5,
+    "modelPath": "/models/ram.glb", "specs": {"sticks":2}
+  },
+  {
+    "id": "ram-gskill-z5-7200-32", "category": "ram", "name": "G.Skill Trident Z5 RGB DDR5-7200 32GB", "brand": "G.Skill",
+    "price": 159.99, "ramType": "DDR5", "speed": 7200, "capacityGb": 32, "tdp": 5,
+    "modelPath": "/models/ram.glb", "specs": {"sticks":2}
+  },
+  {
+    "id": "ram-kingston-renegade-64", "category": "ram", "name": "Kingston Fury Renegade DDR5-6400 64GB", "brand": "Kingston",
+    "price": 209.99, "ramType": "DDR5", "speed": 6400, "capacityGb": 64, "tdp": 5,
+    "modelPath": "/models/ram.glb", "specs": {"sticks":2}
+  },
+  {
+    "id": "storage-kingston-nv3-500", "category": "storage", "name": "Kingston NV3 500GB NVMe", "brand": "Kingston",
+    "price": 29.99, "storageType": "NVMe SSD", "capacityGb": 500, "tdp": 7,
+    "modelPath": "/models/ssd.glb", "specs": {"readMbps":6000}
+  },
+  {
+    "id": "storage-toshiba-p300-2tb", "category": "storage", "name": "Toshiba P300 2TB HDD", "brand": "Toshiba",
+    "price": 49.99, "storageType": "HDD", "capacityGb": 2000, "tdp": 6,
+    "modelPath": "/models/ssd.glb", "specs": {"readMbps":190}
+  },
+  {
+    "id": "storage-firecuda-530r-4tb", "category": "storage", "name": "Seagate FireCuda 530R 4TB NVMe", "brand": "Seagate",
+    "price": 319.99, "storageType": "NVMe SSD", "capacityGb": 4000, "tdp": 9,
+    "modelPath": "/models/ssd.glb", "specs": {"readMbps":7300}
+  },
+  {
+    "id": "psu-evga-500w1", "category": "psu", "name": "EVGA 500 W1 500W", "brand": "EVGA",
+    "price": 39.99, "wattage": 500, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": {"rating":"80+ White"}
+  },
+  {
+    "id": "psu-corsair-cx650", "category": "psu", "name": "Corsair CX650 650W", "brand": "Corsair",
+    "price": 69.99, "wattage": 650, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": {"rating":"80+ Bronze"}
+  },
+  {
+    "id": "psu-bequiet-sp10-750", "category": "psu", "name": "be quiet! System Power 10 750W", "brand": "be quiet!",
+    "price": 89.99, "wattage": 750, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": {"rating":"80+ Gold"}
+  },
+  {
+    "id": "psu-msi-a850gl", "category": "psu", "name": "MSI MAG A850GL PCIE5 850W", "brand": "MSI",
+    "price": 109.99, "wattage": 850, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": {"rating":"80+ Gold"}
+  },
+  {
+    "id": "psu-asus-thor-1200", "category": "psu", "name": "ASUS ROG Thor 1200P2 1200W", "brand": "ASUS",
+    "price": 329.99, "wattage": 1200, "tdp": 0,
+    "modelPath": "/models/psu.glb", "specs": {"rating":"80+ Platinum"}
+  },
+  {
+    "id": "case-kolink-observatory-lite", "category": "case", "name": "Kolink Observatory Lite", "brand": "Kolink",
+    "price": 44.99, "supportedFormFactors": ["ATX","mATX","ITX"], "maxGpuLength": 330, "maxCoolerHeight": 160, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Mid Tower"}
+  },
+  {
+    "id": "case-thermaltake-versa-h18", "category": "case", "name": "Thermaltake Versa H18", "brand": "Thermaltake",
+    "price": 49.99, "supportedFormFactors": ["mATX","ITX"], "maxGpuLength": 350, "maxCoolerHeight": 155, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Mini Tower"}
+  },
+  {
+    "id": "case-aerocool-cylon", "category": "case", "name": "Aerocool Cylon RGB", "brand": "Aerocool",
+    "price": 54.99, "supportedFormFactors": ["ATX","mATX","ITX"], "maxGpuLength": 371, "maxCoolerHeight": 155, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Mid Tower"}
+  },
+  {
+    "id": "case-phanteks-xt-pro-ultra", "category": "case", "name": "Phanteks XT Pro Ultra", "brand": "Phanteks",
+    "price": 89.99, "supportedFormFactors": ["ATX","mATX","ITX"], "maxGpuLength": 400, "maxCoolerHeight": 185, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Mid Tower"}
+  },
+  {
+    "id": "case-bequiet-pure-base-501", "category": "case", "name": "be quiet! Pure Base 501", "brand": "be quiet!",
+    "price": 99.99, "supportedFormFactors": ["ATX","mATX","ITX"], "maxGpuLength": 430, "maxCoolerHeight": 190, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Mid Tower"}
+  },
+  {
+    "id": "case-lianli-o11-evo-xl", "category": "case", "name": "Lian Li O11 Dynamic Evo XL", "brand": "Lian Li",
+    "price": 199.99, "supportedFormFactors": ["ATX","mATX","ITX"], "maxGpuLength": 460, "maxCoolerHeight": 167, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Full Tower"}
+  },
+  {
+    "id": "case-corsair-6500x", "category": "case", "name": "Corsair 6500X", "brand": "Corsair",
+    "price": 219.99, "supportedFormFactors": ["ATX","mATX","ITX"], "maxGpuLength": 400, "maxCoolerHeight": 170, "tdp": 0,
+    "modelPath": "/models/case.glb", "specs": {"type":"Mid Tower"}
+  },
+  {
+    "id": "cooler-thermalright-ax120r", "category": "cooler", "name": "Thermalright Assassin X 120 R SE", "brand": "Thermalright",
+    "price": 17.99, "sockets": ["AM5","AM4","LGA1700","LGA1851","LGA1200"], "tdp": 5,
+    "modelPath": "/models/cooler.glb", "specs": {"type":"Air","height":155}
+  },
+  {
+    "id": "cooler-deepcool-ag400", "category": "cooler", "name": "DeepCool AG400", "brand": "DeepCool",
+    "price": 24.99, "sockets": ["AM5","AM4","LGA1700","LGA1851","LGA1200"], "tdp": 5,
+    "modelPath": "/models/cooler.glb", "specs": {"type":"Air","height":150}
+  },
+  {
+    "id": "cooler-bequiet-dark-rock-5", "category": "cooler", "name": "be quiet! Dark Rock Pro 5", "brand": "be quiet!",
+    "price": 99.99, "sockets": ["AM5","AM4","LGA1700","LGA1851","LGA1200"], "tdp": 5,
+    "modelPath": "/models/cooler.glb", "specs": {"type":"Air","height":168}
+  },
+  {
+    "id": "fans-thermalright-tlc12-3", "category": "fans", "name": "Thermalright TL-C12C X3 (3-pack)", "brand": "Thermalright",
+    "price": 13.99, "tdp": 6,
+    "modelPath": "/models/fans.glb", "specs": {"size":"120mm","count":3,"rgb":false}
+  },
+  {
+    "id": "fans-arctic-p12-5pack", "category": "fans", "name": "Arctic P12 PWM PST (5-pack)", "brand": "Arctic",
+    "price": 24.99, "tdp": 10,
+    "modelPath": "/models/fans.glb", "specs": {"size":"120mm","count":5,"rgb":false}
+  },
+  {
+    "id": "fans-bequiet-pw3-140-2", "category": "fans", "name": "be quiet! Pure Wings 3 140mm (2-pack)", "brand": "be quiet!",
+    "price": 24.99, "tdp": 4,
+    "modelPath": "/models/fans.glb", "specs": {"size":"140mm","count":2,"rgb":false}
+  },
+  {
+    "id": "fans-noctua-p12-redux-3", "category": "fans", "name": "Noctua NF-P12 redux (3-pack)", "brand": "Noctua",
+    "price": 39.99, "tdp": 6,
+    "modelPath": "/models/fans.glb", "specs": {"size":"120mm","count":3,"rgb":false}
+  },
+  {
+    "id": "fans-noctua-a14-3pack", "category": "fans", "name": "Noctua NF-A14 PWM (3-pack)", "brand": "Noctua",
+    "price": 69.99, "tdp": 6,
+    "modelPath": "/models/fans.glb", "specs": {"size":"140mm","count":3,"rgb":false}
+  },
+  {
+    "id": "fans-lianli-tl-lcd-3", "category": "fans", "name": "Lian Li Uni Fan TL LCD 120 (3-pack)", "brand": "Lian Li",
+    "price": 129.99, "tdp": 9,
+    "modelPath": "/models/fans.glb", "specs": {"size":"120mm","count":3,"rgb":true}
+  }
 ]
