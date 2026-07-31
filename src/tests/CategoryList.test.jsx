@@ -91,7 +91,9 @@ describe('CategoryList', () => {
         <CategoryList selectedParts={{ cpu }} onSelectCategory={() => {}} onDeselect={() => {}} emphasiseMissing />
       )
       expect(screen.getAllByText('Missing').length).toBeGreaterThan(0)
-      expect(screen.getByText(/optional/i)).toBeInTheDocument()
+      // The optional slot carries BOTH the explanation and an "Add" affordance,
+      // so this matches more than once by design.
+      expect(screen.getAllByText(/optional/i).length).toBeGreaterThan(0)
     })
   })
 

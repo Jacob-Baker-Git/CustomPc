@@ -54,10 +54,14 @@ export default function CategoryList({
         const flagged = emphasiseMissing && !optional
         const explained = emphasiseMissing && optional
 
+        // An optional slot is NOT disabled — it is a part you may add. Styling it
+        // grey-on-grey made it read as unavailable, so it gets the same solid
+        // surface and ink as any live row plus an explicit "Add" affordance; only
+        // its border stays quiet, because it is not a hole in the build.
         const tone = flagged
           ? 'border-bad/60 bg-bad/[0.07] text-ink hover:border-bad'
           : explained
-            ? 'border-line-strong text-muted hover:text-ink'
+            ? 'border-line-strong bg-surface text-ink hover:border-accent hover:text-accent'
             : isNext
               ? 'border-accent bg-accent-soft text-accent'
               : 'border-line bg-surface text-muted hover:border-line-strong hover:text-ink'
@@ -70,9 +74,16 @@ export default function CategoryList({
               ${emphasiseMissing ? 'border-dashed' : ''} ${tone}`}
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-md bg-surface-2 text-[10px] font-mono text-muted shrink-0">{i + 1}</span>
-            <CategoryIcon id={cat.id} className={flagged ? 'text-bad' : isNext ? 'text-accent' : 'text-muted'} />
+            <CategoryIcon id={cat.id} className={flagged ? 'text-bad' : explained ? 'text-muted' : isNext ? 'text-accent' : 'text-muted'} />
             <span className="flex-1 text-left truncate">{cat.label}</span>
-            {explained && <span className="text-[10px] text-faint truncate">{OPTIONAL_NOTE}</span>}
+            {explained && (
+              <>
+                <span className="hidden sm:inline text-[10px] text-faint truncate">{OPTIONAL_NOTE}</span>
+                <span className="text-[10px] font-semibold border border-line-strong rounded-full px-2 py-0.5 shrink-0">
+                  Optional · Add
+                </span>
+              </>
+            )}
             {flagged && <span className="text-[11px] font-semibold text-bad shrink-0">Missing</span>}
             {isNext && (
               <span className="text-[10px] font-semibold bg-accent text-accent-ink rounded-full px-2 py-0.5 shrink-0">

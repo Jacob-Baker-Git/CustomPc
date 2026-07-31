@@ -3,6 +3,7 @@ import { ChevronDown, Zap } from 'lucide-react'
 import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRatings'
+import ScoreInfo from './ScoreInfo'
 import { PANEL, TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
 
 const CAT_LABEL = {
@@ -64,7 +65,10 @@ export default function BuildRatingPanel() {
 
   return (
     <div className={`${PANEL} p-5`}>
-      <span className="block text-ink text-sm font-semibold mb-3">Your CustomPC score</span>
+      <span className="flex items-center gap-2 text-ink text-sm font-semibold mb-3">
+        Your CustomPC score
+        <ScoreInfo />
+      </span>
 
       {!hasCore ? (
         <p className="text-muted text-xs">Add a CPU and GPU to rate your build.</p>

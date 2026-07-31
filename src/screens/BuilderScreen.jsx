@@ -45,7 +45,10 @@ export default function BuilderScreen() {
           is taller from `md` up because the header's own padding grows there. */}
       <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 xl:pt-16 pb-16 lg:pb-0">
         {view === 'build' ? (
-          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-[1800px] mx-auto px-4 lg:px-6 pt-3 pb-12">
+          // Gutters grow with the window so the panels never sit flush against
+          // the screen edge, but stay far smaller than the old max-w-6xl, which
+          // wasted most of a wide display.
+          <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12">
             <div className="build-grid">
               {/* The desktop floor is in PIXELS, deliberately. It used to be
                   65vh, and a vh floor on a row whose other cell is sized by text
