@@ -47,7 +47,13 @@ export default function BuilderScreen() {
         {view === 'build' ? (
           <div className="relative z-10 transform-gpu w-full max-w-2xl lg:max-w-[1800px] mx-auto px-4 lg:px-6 pt-3 pb-12">
             <div className="build-grid">
-              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[65vh]">
+              {/* The desktop floor is in PIXELS, deliberately. It used to be
+                  65vh, and a vh floor on a row whose other cell is sized by text
+                  means zooming out grows the row while the text column stays put
+                  — 512px of dead space below the score at a 2400px-tall viewport.
+                  A px floor only bites when the left column is genuinely short
+                  (an empty build), which is the only case it was ever for. */}
+              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[520px]">
                 <CanvasErrorBoundary>
                   <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                     <BuildCanvas selectedParts={selectedParts} />
