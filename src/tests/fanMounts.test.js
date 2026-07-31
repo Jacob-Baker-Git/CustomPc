@@ -1,6 +1,8 @@
-import { FAN_MOUNTS } from '../lib/fanMounts'
-import { caseInterior } from '../lib/assemblyGeometry'
+import { FAN_MOUNTS, FAN_INSET } from '../lib/fanMounts'
+import { caseInterior, CASE } from '../lib/assemblyGeometry'
 import { mm, FAN_MM } from '../lib/pcScale'
+
+const PANEL = mm(CASE.panelMm)
 
 // A fan is a flat square: full width on two axes, thin on the axis it faces.
 // The rotation tells us which axis is the thin one.
@@ -39,11 +41,31 @@ describe('fanMounts', () => {
     expect(FAN_MOUNTS).toHaveLength(4)
   })
 
-  it('keeps every fan inside the case', () => {
+  // A fan now reaches INTO its panel's cut-out rather than stopping at the
+  // interior boundary, so the shell — interior plus one panel thickness — is
+  // what has to contain it. Sitting entirely inside the interior is what read
+  // as the fans being stuck onto solid walls.
+  it('keeps every fan within the case shell, never poking out of a wall', () => {
     const inner = caseInterior()
+    const shell = {
+      min: inner.min.map((v) => v - PANEL),
+      max: inner.max.map((v) => v + PANEL),
+    }
     FAN_MOUNTS.forEach((mount, n) => {
       const box = boxOf(mount)
       for (let i = 0; i < 3; i++) {
+        expect(box.min[i], `fan ${n} axis ${i} min`).toBeGreaterThanOrEqual(shell.min[i] - 1e-6)
+        expect(box.max[i], `fan ${n} axis ${i} max`).toBeLessThanOrEqual(shell.max[i] + 1e-6)
+      }
+    })
+  })
+
+  // The two axes it is NOT recessed on must still be fully inside.
+  it('keeps every fan within the interior on the axes it is not recessed on', () => {
+    const inner = caseInterior()
+    FAN_MOUNTS.forEach((mount, n) => {
+      const box = boxOf(mount)
+      for (const i of [1, 2]) {
         expect(box.min[i], `fan ${n} axis ${i} min`).toBeGreaterThanOrEqual(inner.min[i] - 1e-6)
         expect(box.max[i], `fan ${n} axis ${i} max`).toBeLessThanOrEqual(inner.max[i] + 1e-6)
       }
@@ -64,3 +86,28 @@ describe('fanMounts', () => {
     }
   })
 })
+
+describe('fans are recessed into their panel, not parked against it', () => {
+  // The complaint was that the fans sat ON the interior walls. They did: the
+  // mount was one half-thickness inside the interior, so the frame finished
+  // exactly on the panel's inner face — and CaseModel cut no aperture, so each
+  // fan was stuck to blank metal.
+  it('finishes each fan flush with the outside of its wall', () => {
+    const inner = caseInterior()
+    const thickHalf = mm(12.5)
+    for (const mount of FAN_MOUNTS) {
+      const x = mount.position[0]
+      const outer = x > 0 ? x + thickHalf : x - thickHalf
+      const wallOuter = x > 0 ? inner.max[0] + PANEL : inner.min[0] - PANEL
+      expect(outer).toBeCloseTo(wallOuter, 9)
+    }
+  })
+
+  it('buries only the panel thickness, leaving most of the frame inside', () => {
+    const thickHalf = mm(12.5)
+    expect(FAN_INSET).toBeCloseTo(PANEL - thickHalf, 9)
+    expect(2 * thickHalf - PANEL).toBeGreaterThan(thickHalf)
+  })
+})
+
+// Panel cut-outs moved to caseApertures.js — see caseApertures.test.js.

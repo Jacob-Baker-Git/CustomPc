@@ -44,6 +44,15 @@ export const PART_SPECS = {
     // From the PCB's centre to its component face — half the (thick) PCB.
     surfaceOffset: [0, 0.373, 0],
     hideNodes: ['Object_197'],
+    // The rear I/O stack — the port cluster that pokes through the case's back
+    // panel. Offset from the PCB centre and size, both in raw model units, as
+    // the union of the mesh's `IO_Metal.001` and `IO_Heatsink_botton` nodes.
+    //
+    // Recorded because the rear exhaust fan has to CLEAR it: the I/O runs 163 mm
+    // up the board's rear edge and stands 48 mm proud, so a 120 mm fan mounted
+    // level with the board's top edge and centred on the case's width sat
+    // straight through the USB ports. Nothing had ever compared the two.
+    ioBlock: { offset: [-9.159, 2.394, -7.318], size: [4.99, 4.23, 14.39] },
   },
 
   // The bare package lies flat in its mesh (thin axis is mesh Y, same as the
@@ -53,7 +62,25 @@ export const PART_SPECS = {
   cpu: { raw: [3.162, 0.231, 3.162], lengthMm: 40, rotation: [Math.PI / 2, 0, 0] },
 
   // Card lies horizontal: the mesh's long axis (30.187) becomes world X.
-  gpu: { raw: [4.381, 30.187, 12.819], lengthMm: 285, rotation: [0, 0, Math.PI / 2] },
+  //
+  // `powerInlet` is the mesh's own `12_pin` node, offset from the card's bbox
+  // centre in raw model units — the actual socket the PCIe lead plugs into. It
+  // sits on the card's OUTER edge (facing the side window), not on the upper
+  // face where the harness used to aim; the old guess missed it by 34 mm.
+  // `pcbOffset` is the `motherboard` node — the card's PCB, whose plane is the
+  // one that has to line up with the board's PCIe slot.
+  gpu: {
+    raw: [4.381, 30.187, 12.819],
+    // 320 rather than the 3080 FE's real 285: at 285 the card's edge connector
+    // fell ~10 mm short of the slot's far end. Because the card is anchored on
+    // its PCB's leading edge (MOUNTS.gpu.pcbRearMm) the extra length all goes
+    // FORWARD, so the notch stays put and the connector fills the slot.
+    lengthMm: 320,
+    rotation: [0, 0, Math.PI / 2],
+    powerInlet: [0.11, -2.74, 5.43],
+    pcbOffset: [1.37, 3.77, 0.27],
+    pcbSize: [0.10, 19.03, 11.18],
+  },
 
   // 240 AIO assembly. Mesh +Y is up (the pump block sits below the radiator) and
   // the radiator's long axis is mesh Z, which must run front-to-back (world X).
@@ -72,11 +99,22 @@ export const PART_SPECS = {
     // mesh puts it. The renderer stays unaware of them by design — see GltfPart.
     anchorOffset: [0.517, -0.589, -0.529],
     anchorSize: [0.45, 0.76, 0.76],
+    // The two 120 mm fans on the radiator (`Object_11` and `Object_20`), as
+    // offsets from the assembly's bbox centre in raw model units. The roof vent
+    // is cut over THESE rather than over the whole assembly's bounding box: the
+    // box is 13 mm forward of the blades, which showed as the vent sitting too
+    // far along the roof from the fans it is meant to be venting.
+    radiatorFans: { offsets: [[-0.04, 0.83, 0.50], [-0.04, 0.83, -0.79]], size: [1.30, 0.27, 1.30] },
   },
 
-  // A DIMM stands edge-on in its slot: its 133 mm length is mesh Z and must run
+  // A DIMM stands edge-on in its slot: its length is mesh Z and must run
   // vertical (world Y), leaving the 7 mm thickness across the board.
-  ram: { raw: [0.033, 0.226, 0.608], lengthMm: 133, rotation: [Math.PI / 2, 0, 0] },
+  //
+  // 142 rather than a real DIMM's 133: this board mesh draws its slots a little
+  // longer than spec, and a stick sized to the real part sat visibly short of
+  // the slot's lower end. Matching the drawn slot beats matching the datasheet
+  // when the board is the thing you can see it against.
+  ram: { raw: [0.033, 0.226, 0.608], lengthMm: 142, rotation: [Math.PI / 2, 0, 0] },
 
   // Flat M.2 stick lying on the board face: 80 mm along world X, 22 mm up, and
   // near-zero thickness toward the glass.
@@ -91,9 +129,36 @@ export const PART_SPECS = {
   // supply fills: [front-to-back, up, side-to-side].
   //
   // The quarter turn puts the IEC socket where it belongs. In the mesh the I/O
-  // face (nodes `iio`/`iio.001` plus the rating text) is at -Z and the honeycomb
-  // exhaust (`berlubang`) at +Z; unrotated that aimed the socket at the side
-  // panel and the vent at the glass. Turning +90 degrees about Y maps mesh -Z to
-  // world -X, so the plug faces the back of the case where the cable exits.
-  psu: { raw: [20.446, 21.937, 22.73], sizeMm: [160, 86, 150], rotation: [0, Math.PI / 2, 0] },
+  // face is at -Z and the honeycomb exhaust at +Z; unrotated that aimed the
+  // socket at the side panel and the vent at the glass. Turning +90 degrees
+  // about Y maps mesh -Z to world -X, so the plug faces the back of the case
+  // where the cable exits.
+  //
+  // `ioSocket` is the mains inlet and rocker switch on that face — the union of
+  // the mesh's `Object_12`/`Object_14`/`Object_16`, offset from the mesh centre
+  // and sized in raw model units. Recorded because the case's rear panel has to
+  // be cut for it: the cut-out was previously centred on the PSU's face, which
+  // put it on the wrong side of the unit entirely. The socket sits low and
+  // toward the window, not in the middle.
+  //
+  // (An older comment here named nodes `iio`/`iio.001`/`berlubang`. No such
+  // names exist in the shipped mesh — every node is `Object_N`. Do not trust it.)
+  // `body`/`bodyOffset`/`hideNodes` for the same reason the motherboard has them:
+  // the mesh carries `Object_78`, a lone 0.6-unit cube floating well above the
+  // unit, and it MORE THAN DOUBLES the bounding box's height — 10.499 units of
+  // actual supply inside a 21.937-unit box. Since `sizeMm` scales the whole box,
+  // an 86 mm PSU rendered about 41 mm tall inside an 86 mm hitbox, which is why
+  // its loom and its socket kept looking detached from it: they were anchored to
+  // the box, and the box was twice the visible unit.
+  psu: {
+    raw: [20.446, 21.937, 22.73],
+    body: [20.446, 10.499, 22.73],
+    bodyOffset: [0, -5.7185, 0],
+    hideNodes: ['Object_78'],
+    sizeMm: [160, 86, 150],
+    rotation: [0, Math.PI / 2, 0],
+    // Offset from the BODY's centre (everything here is), which is why this is
+    // not the raw -6.857 the node dump reports against the whole mesh.
+    ioSocket: { offset: [-5.299, -1.1385, -8.937], size: [6.474, 5.347, 4.85] },
+  },
 }

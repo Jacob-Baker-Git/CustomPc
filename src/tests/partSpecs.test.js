@@ -1,11 +1,15 @@
 import { PART_SPECS } from '../lib/partSpecs'
 
 describe('partSpecs', () => {
+  // Two of these are deliberately NOT the datasheet figure. Where the mesh has
+  // to meet the board mesh — a card in its slot, a DIMM in its slot — the drawn
+  // slot wins over the spec sheet, because the board is the thing you see it
+  // against. Both are within a real part's range anyway.
   it('sizes every part against a real-world reference', () => {
     expect(PART_SPECS.motherboard.lengthMm).toBe(305) // ATX long edge
-    expect(PART_SPECS.gpu.lengthMm).toBe(285)         // RTX 3080 FE
+    expect(PART_SPECS.gpu.lengthMm).toBe(320)         // 3080 FE is 285; sized to fill the slot
     expect(PART_SPECS.cooler.lengthMm).toBe(271)      // measured 240 AIO
-    expect(PART_SPECS.ram.lengthMm).toBe(133)         // DDR4 DIMM
+    expect(PART_SPECS.ram.lengthMm).toBe(142)         // DIMM is 133; sized to fill the slot
     expect(PART_SPECS.storage.lengthMm).toBe(80)      // M.2 2280
     // The PSU is the one part sized on all three axes: its mesh is near-cubic
     // and a real ATX unit is nothing like it, so a uniform fit is wrong however

@@ -4,6 +4,14 @@ import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
 import PartModel from './PartModel'
 import CableHarness from './models/CableHarness'
 import FanSystem from './FanSystem'
+import { caseInterior } from '../lib/assemblyGeometry'
+
+// The case is anchored to the board's REAR edge, not centred on the origin, so
+// the build's mass sits forward of it. Framing off the interior keeps the tower
+// centred instead of drifting to one side of the frame — and keeps doing so if
+// the case's depth changes again.
+const interior = caseInterior()
+const CENTRE_X = (interior.min[0] + interior.max[0]) / 2
 
 export default function BuildCanvas({ selectedParts }) {
   const parts = Object.values(selectedParts).filter(Boolean)
@@ -17,7 +25,7 @@ export default function BuildCanvas({ selectedParts }) {
         // visible frame height is 0.849·d, so the 482mm case (3.95 wu at
         // 1 wu = 122 mm) fills ~65% of the frame — it used to be ~78%, which
         // read as starting too zoomed in.
-        camera={{ position: [2.05, 1.3, 6.8], fov: 46 }}
+        camera={{ position: [CENTRE_X + 2.05, 1.3, 6.8], fov: 46 }}
       >
         {/* Studio product lighting. The old setup flooded the scene with ambient
             1.15, which washed out all form and shadow (the "cheap render" look).
@@ -48,7 +56,7 @@ export default function BuildCanvas({ selectedParts }) {
         {/* Grounding contact shadow so the build sits on a surface instead of
             floating in a void. Sits just under the case floor (y ≈ -1.85). */}
         <ContactShadows
-          position={[0, -1.92, 0]}
+          position={[CENTRE_X, -1.92, 0]}
           scale={11}
           far={4.2}
           blur={2.8}
@@ -61,7 +69,7 @@ export default function BuildCanvas({ selectedParts }) {
             to see the whole build in its room. WU_PER_MM was originally chosen
             so the old clamps still worked — widening them is deliberate. */}
         <OrbitControls
-          target={[0, -0.1, 0.05]}
+          target={[CENTRE_X, -0.1, 0.05]}
           enablePan={false}
           enableZoom
           minDistance={2.2}

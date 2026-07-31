@@ -160,17 +160,40 @@ describe('motherboard renders a real ATX board', () => {
     expect(spec.bodyOffset[2]).toBeCloseTo(pcb.z - whole.z, 1)
   })
 
-  // Every node named in config must resolve, or the config silently does nothing
-  // — the anchorNode:'CPU' typo that matched no node is the cautionary tale.
-  it('every hidden node name actually exists in the mesh', () => {
-    const file = resolve(process.cwd(), 'public', 'models/motherboard.glb')
-    const buf = readFileSync(file)
+})
+
+// Every node named in config must resolve, or the config silently does nothing
+// — the anchorNode:'CPU' typo that matched no node is the cautionary tale, and
+// partSpecs.psu carried a comment naming three nodes that never existed.
+describe('hidden node names resolve', () => {
+  const nodeNames = (url) => {
+    const buf = readFileSync(resolve(process.cwd(), 'public', url.replace(/^\//, '')))
     const json = JSON.parse(buf.slice(20, 20 + buf.readUInt32LE(12)).toString('utf8'))
-    const names = new Set(json.nodes.map((n) => n.name).filter(Boolean))
-    for (const name of spec.hideNodes ?? []) {
-      expect(names.has(name), `${name} should exist in motherboard.glb`).toBe(true)
-    }
-  })
+    return new Set(json.nodes.map((n) => n.name).filter(Boolean))
+  }
+
+  for (const [category, model] of Object.entries(GLTF_MODELS)) {
+    const hidden = PART_SPECS[category].hideNodes ?? []
+    if (!hidden.length) continue
+    it(`${category} hides only nodes that exist in ${model.url}`, () => {
+      const names = nodeNames(model.url)
+      for (const name of hidden) {
+        expect(names.has(name), `${name} should exist in ${model.url}`).toBe(true)
+      }
+    })
+  }
+})
+
+// A body that is not smaller than the raw box means the `body` mechanism is
+// doing nothing — either the spec is wrong or the mesh was re-exported clean.
+describe('declared bodies are actually smaller than their meshes', () => {
+  for (const [category, s] of Object.entries(PART_SPECS)) {
+    if (!s.body) continue
+    it(`${category}'s body sits inside its raw bounding box`, () => {
+      s.body.forEach((v, i) => expect(v, `axis ${i}`).toBeLessThanOrEqual(s.raw[i] + 1e-9))
+      expect(s.body.some((v, i) => v < s.raw[i] - 0.5), 'body should differ from raw').toBe(true)
+    })
+  }
 })
 
 // The case fans are not PART_SPECS parts — they are instanced straight onto

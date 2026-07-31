@@ -54,8 +54,12 @@ describe('assembly has no floating or intersecting parts', () => {
   // The defect a user actually saw: "nothing's touching the motherboard".
   // boardFaceZ() returned half the board's bounding box — the top of the I/O
   // shroud — so every part sat 41.6 mm off the PCB, connected to nothing.
+  // The GPU is excluded: it is seated by its own PCB going into the slot, so
+  // its bracket legitimately reaches back past the board plane. Covered by
+  // assemblyGeometry.test.js's 'seats the GPU's PCB in the slot'.
   it('seats every board-mounted part flush on the PCB surface', () => {
     for (const category of BOARD_MOUNTED) {
+      if (category === 'gpu') continue
       expect(partBox(category).min[2], `${category} back face`).toBeCloseTo(boardFaceZ(), 9)
     }
   })

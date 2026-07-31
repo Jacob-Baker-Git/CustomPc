@@ -73,8 +73,14 @@ export function modelScaleAxes(category) {
     const s = modelScale(category)
     return [s, s, s]
   }
+  // Against the BODY, not the raw box — same reason modelScale() fits the body.
+  // Dividing by `raw` sized the whole mesh to sizeMm, so any stray geometry
+  // inflating the bounding box shrank the actual component by the same factor.
+  // The PSU mesh carries a lone cube floating well above the unit that more than
+  // doubles its height, so an 86 mm supply rendered about 41 mm tall inside an
+  // 86 mm hitbox — parts anchored to that box then looked detached from it.
   const local = unrotateExtents(spec.sizeMm.map(mm), spec.rotation)
-  return local.map((v, i) => v / spec.raw[i])
+  return local.map((v, i) => v / fitExtents(spec)[i])
 }
 
 // World-space size of a part, in world units, after its model rotation.
@@ -132,6 +138,33 @@ export function boardFaceZ() {
   return rotateVector(spec.surfaceOffset, spec.rotation)[2] * modelScale('motherboard')
 }
 
+// A named sub-feature of a part, in world units. Both features recorded so far
+// — the board's rear I/O stack and the PSU's mains inlet — are things the case's
+// back panel has to be cut for, and both are stored as an offset from the part's
+// own centre plus a size, in raw model units.
+function featureBox(category, feature) {
+  const spec = PART_SPECS[category]
+  const f = spec?.[feature]
+  if (!f) return null
+  const axes = modelScaleAxes(category)
+  const offset = rotateVector(f.offset.map((v, i) => v * axes[i]), spec.rotation)
+  const size = rotateExtents(f.size.map((v, i) => v * axes[i]), spec.rotation)
+  const centre = partCentre(category).map((c, i) => c + offset[i])
+  return {
+    min: centre.map((c, i) => c - size[i] / 2),
+    max: centre.map((c, i) => c + size[i] / 2),
+  }
+}
+
+// The port cluster that reaches through the case's back panel. Also what the
+// rear exhaust fan has to be placed clear of (see fanMounts).
+export const ioBlockBox = () => featureBox('motherboard', 'ioBlock')
+
+// The PSU's mains inlet and switch. It sits low on the unit and toward the
+// window — NOT in the middle of its face, which is where the rear panel's
+// cut-out used to be, putting the hole on the wrong side of the PSU entirely.
+export const psuSocketBox = () => featureBox('psu', 'ioSocket')
+
 // Offset from a part's bbox centre to its anchor node, in world units and world
 // axes. Zero for parts that mount by their body rather than a named connector.
 function anchorOffsetWorld(category) {
@@ -142,6 +175,82 @@ function anchorOffsetWorld(category) {
   // applying it after the rotation would stretch the wrong component.
   const scaled = spec.anchorOffset.map((v, i) => v * axes[i])
   return rotateVector(scaled, spec.rotation)
+}
+
+// Offset from a part's bbox centre to its own PCB plane, in world units. Zero
+// for a part with no separately measured board.
+//
+// An expansion card is held by its PCB, but a triple-slot cooler's bounding box
+// is dominated by the heatsink hanging off it — so the PCB sits ~13 mm off the
+// box centre and seating the box on the slot leaves the card hovering above it.
+function pcbPlaneOffset(category) {
+  const spec = PART_SPECS[category]
+  if (!spec?.pcbOffset) return [0, 0, 0]
+  const axes = modelScaleAxes(category)
+  return rotateVector(spec.pcbOffset.map((v, i) => v * axes[i]), spec.rotation)
+}
+
+// How far the PCB's edge sinks into its slot. A couple of millimetres so the
+// card visibly engages rather than resting on the board's surface.
+const SLOT_SEAT_MM = 2
+
+// A card's own PCB size in world axes.
+function pcbWorldSize(category) {
+  const spec = PART_SPECS[category]
+  if (!spec?.pcbSize) return [0, 0, 0]
+  const axes = modelScaleAxes(category)
+  return rotateExtents(spec.pcbSize.map((v, i) => v * axes[i]), spec.rotation)
+}
+
+// Where the PCB's leading edge sits relative to the card's bbox centre — the end
+// that goes into the slot.
+const pcbLeadX = (category) => pcbPlaneOffset(category)[0] - pcbWorldSize(category)[0] / 2
+
+// Where a card's centre must sit for its PCB's lower edge to meet the slot.
+//
+// Seating a card by its BOUNDING BOX seats the wrong thing: on a triple-slot
+// cooler the box's lower face is the bracket, which reaches ~10 mm below the
+// PCB to bolt to the case. So the box met the board while the PCB — the part
+// that actually goes in the slot — hovered 10 mm above it with nothing bridging
+// the gap. The bracket now reaches back past the board plane instead, which is
+// what it does in a real machine.
+function pcbSeatZ(category) {
+  const half = pcbWorldSize(category)[2] / 2
+  return boardFaceZ() + mm(SLOT_SEAT_MM) + half - pcbPlaneOffset(category)[2]
+}
+
+// A card's own PCB in world space — the sheet that goes in the slot, as opposed
+// to the bounding box, which on a triple-slot cooler is mostly heatsink and
+// bracket. This is what "seated" has to be judged against.
+export function pcbBox(category) {
+  if (!PART_SPECS[category]?.pcbSize) return null
+  const size = pcbWorldSize(category)
+  const offset = pcbPlaneOffset(category)
+  const centre = partCentre(category).map((c, i) => c + offset[i])
+  return {
+    min: centre.map((c, i) => c - size[i] / 2),
+    max: centre.map((c, i) => c + size[i] / 2),
+  }
+}
+
+// The world box covering the radiator's own fans — what the roof vent is cut
+// over. Null for a cooler with no measured fans.
+export function radiatorFanBox() {
+  const spec = PART_SPECS.cooler
+  if (!spec?.radiatorFans) return null
+  const axes = modelScaleAxes('cooler')
+  const size = rotateExtents(spec.radiatorFans.size.map((v, i) => v * axes[i]), spec.rotation)
+  const centre = partCentre('cooler')
+  const min = [Infinity, Infinity, Infinity]
+  const max = [-Infinity, -Infinity, -Infinity]
+  for (const raw of spec.radiatorFans.offsets) {
+    const off = rotateVector(raw.map((v, i) => v * axes[i]), spec.rotation)
+    for (let i = 0; i < 3; i++) {
+      min[i] = Math.min(min[i], centre[i] + off[i] - size[i] / 2)
+      max[i] = Math.max(max[i], centre[i] + off[i] + size[i] / 2)
+    }
+  }
+  return { min, max }
 }
 
 // Depth of the part's mounting face along world Z. For an anchored part that is
@@ -171,7 +280,22 @@ function mountBaseZ(category) {
 // wall so its IEC socket reaches the outside — a PSU floating mid-basement has
 // nowhere for the mains cable to go. `clearanceMm` is the gap it keeps from the
 // basement floor, the rear wall and the motherboard tray.
-const PSU_BAY = { clearanceMm: 8 }
+//
+// All three come from caseInterior() rather than being rebuilt here. This used
+// to recompute the floor and tray planes itself and derive the rear wall from
+// `-CASE.depthMm/2` — a duplicate of a constant caseInterior() no longer uses,
+// which is how the PSU ended up correctly against the rear panel while the
+// board floated 102.7 mm inside it.
+// Three separate gaps, because they answer to different things.
+//
+// `rearGapMm` pushes it up against the wall its mains socket comes through,
+// `trayGapMm` against the motherboard tray, and `floorGapMm` is the only space
+// under it — trimmed with
+// CASE.basementMm so the case's floor rises with the unit. The basement went
+// 110 → 95 → 90 that way. **The PSU is now at its ceiling**: its top sits 2 mm
+// below the board's lower edge, so it cannot rise further without eating the
+// board, and any more height has to come out of the floor.
+const PSU_BAY = { rearGapMm: 2, trayGapMm: 2, floorGapMm: 2 }
 
 // Centre of a part in world units, derived from its mount point. Mounted parts
 // sit against the board's +Z face and extend outward by half their mounting
@@ -181,17 +305,14 @@ export function partCentre(category) {
   if (category === 'motherboard') return [0, 0, 0]
 
   if (category === 'psu') {
-    const board = partBox('motherboard')
-    const [width, height, depth] = partSize('psu')
-    const floorY = board.min[1] - mm(CASE.basementMm)
-    const rearZ = board.min[2] - mm(BOARD.standoffMm)
-    const rearX = -mm(CASE.depthMm) / 2
-    // Stands on the basement floor, against the rear wall (so the socket is
-    // reachable) and against the motherboard tray.
+    const inner = caseInterior()
+    const size = partSize('psu')
+    // Sits in the basement, against the rear wall (so the socket is reachable),
+    // up against the motherboard tray, on a small gap off the floor.
     return [
-      rearX + width / 2 + mm(PSU_BAY.clearanceMm),
-      floorY + height / 2 + mm(PSU_BAY.clearanceMm),
-      rearZ + depth / 2 + mm(PSU_BAY.clearanceMm),
+      inner.min[0] + size[0] / 2 + mm(PSU_BAY.rearGapMm),
+      inner.min[1] + size[1] / 2 + mm(PSU_BAY.floorGapMm),
+      inner.min[2] + size[2] / 2 + mm(PSU_BAY.trayGapMm),
     ]
   }
 
@@ -201,15 +322,29 @@ export function partCentre(category) {
   const offset = anchorOffsetWorld(category)
   // A card declaring `rearInsetMm` is placed by its rear (bracket) edge against
   // the board's, rather than by its centre — see MOUNTS.gpu.
-  const x = mount.rearInsetMm === undefined
-    ? mm(mount.xMm)
-    : partBox('motherboard').min[0] + partSize(category)[0] / 2 + mm(mount.rearInsetMm)
+  // `pcbRearMm` places a card by the LEADING EDGE OF ITS PCB — the end that
+  // goes into the slot — so making the card longer stretches it forward and the
+  // connector stays exactly where it is. Anchoring on the bracket (rearInsetMm)
+  // could not do that: this mesh starts its PCB 17 mm in from the bracket, and
+  // that gap scales with the card, so every length change dragged the connector
+  // out of the slot.
+  const x = mount.pcbRearMm !== undefined
+    ? mm(mount.pcbRearMm) - pcbLeadX(category)
+    : mount.rearInsetMm === undefined
+      ? mm(mount.xMm)
+      : caseInterior().min[0] + partSize(category)[0] / 2 + mm(mount.rearInsetMm)
 
-  return [
-    x - offset[0],
-    mm(mount.yMm) - offset[1],
-    mountBaseZ(category) + mountDepth(category) / 2 - offset[2],
-  ]
+  // A card declaring `slotYMm` is seated by its PCB on the slot's centreline;
+  // everything else is placed by its own centre.
+  const y = mount.slotYMm === undefined
+    ? mm(mount.yMm)
+    : mm(mount.slotYMm) - pcbPlaneOffset(category)[1]
+
+  const z = PART_SPECS[category]?.pcbSize
+    ? pcbSeatZ(category)
+    : mountBaseZ(category) + mountDepth(category) / 2 - offset[2]
+
+  return [x - offset[0], y - offset[1], z]
 }
 
 export function partBox(category) {
@@ -231,20 +366,45 @@ export function partBox(category) {
 // slack in the tubes, which a rigid mesh cannot. assemblyGeometry.test.js pins
 // the resulting clearance so a new cooler mesh reopening the gap fails loudly.
 export const CASE = {
-  heightMm: 482,
-  depthMm: 450,    // front-to-back, world X
+  // Follows the radiator: the mesh locks pump-to-radiator and we mount by the
+  // pump, so the roof has to come to wherever the socket puts it. 482 against
+  // the old guessed socket, then 467 → 452 → 447 as the basement was trimmed —
+  // the floor rose each time, so the roof came with it to hold the same
+  // roofline over the radiator.
+  heightMm: 447,
+  depthMm: 380,    // front-to-back, world X
   widthMm: 210,    // side-to-side, world Z
-  basementMm: 110, // PSU compartment below the board
+  basementMm: 90,  // PSU compartment below the board: 2 + 86 + 2 of clearance
+  panelMm: 7,      // wall thickness, shared with CaseModel and fanMounts
+  // Board's rear edge to the rear panel's inner face — the depth of the I/O
+  // shield frame, which is what fills it in a real tower.
+  //
+  // 15 rather than the 6 it started at, because the card is anchored by its
+  // PCB's leading edge and this GPU mesh sits its bracket ~19 mm behind that
+  // edge (further than a real card). Aligning the connector with the slot
+  // therefore puts the bracket ~144 mm back, and the panel has to be there to
+  // meet it — otherwise the bracket hangs outside the case. Widening this is
+  // the honest fix; the alternative is a mis-seated connector.
+  rearGapMm: 15,
 }
 
-// Interior bounds in world units, anchored off the board: the rear tray sits one
-// standoff behind the board, and the basement hangs below the board's lower edge.
+// Interior bounds in world units, anchored off the board on ALL THREE axes: the
+// rear tray sits one standoff behind the board, the basement hangs below the
+// board's lower edge, and the rear panel comes up to the board's rear edge.
+//
+// That last one was missing. X was hard-centred on the origin (`±depthMm/2`),
+// which is a statement about the *board's* position, not the case's — so the
+// board sat 102.7 mm forward of a rear panel the PSU was already against, and
+// the GPU's bracket bolted to thin air. Depth went 450 → 380 at the same time:
+// with the void behind the board closed, 450 just moved that void in front of
+// the card. See assemblyGeometry.test.js.
 export function caseInterior() {
   const board = partBox('motherboard')
+  const rearX = board.min[0] - mm(CASE.rearGapMm)
   const rearZ = board.min[2] - mm(BOARD.standoffMm)
   const floorY = board.min[1] - mm(CASE.basementMm)
   return {
-    min: [-mm(CASE.depthMm) / 2, floorY, rearZ],
-    max: [mm(CASE.depthMm) / 2, floorY + mm(CASE.heightMm), rearZ + mm(CASE.widthMm)],
+    min: [rearX, floorY, rearZ],
+    max: [rearX + mm(CASE.depthMm), floorY + mm(CASE.heightMm), rearZ + mm(CASE.widthMm)],
   }
 }

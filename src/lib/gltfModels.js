@@ -1,5 +1,5 @@
 import { PART_SPECS } from './partSpecs'
-import { modelScale, partLocalSize, bodyShiftLocal } from './assemblyGeometry'
+import { modelScale, meshLocalSize, bodyShiftLocal } from './assemblyGeometry'
 import { mm } from './pcScale'
 import { MOUNTS } from './mountPoints'
 
@@ -28,10 +28,11 @@ export const GLTF_MODELS = Object.fromEntries(
     const spec = PART_SPECS[cat]
     return [cat, {
       url: `/models/${file}`,
-      // GltfPart scales by the mesh's largest raw dimension, so hand it the
-      // world size of that same axis. A spec with `sizeMm` is stretched per axis
-      // instead, so it hands over all three model-local dimensions.
-      targetSize: spec.sizeMm ? partLocalSize(cat) : Math.max(...spec.raw) * modelScale(cat),
+      // GltfPart fits the WHOLE mesh's bounding box, so both branches hand over
+      // whole-mesh sizes — `meshLocalSize`, not `partLocalSize`. Handing it the
+      // body's size instead would shrink the mesh until the *body* was smaller
+      // than intended by however much stray geometry the box carries.
+      targetSize: spec.sizeMm ? meshLocalSize(cat) : Math.max(...spec.raw) * modelScale(cat),
       // Nodes that draw geometry belonging to no real component. Hidden after the
       // fit is measured, so the scale still derives from `raw` exactly.
       ...(spec.hideNodes ? { hideNodes: spec.hideNodes } : {}),
