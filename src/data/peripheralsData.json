@@ -1,66 +1,957 @@
 [
-  { "id": "mon-dell-s2721dgf", "category": "monitor", "name": "Dell S2721DGF 27\" QHD 165Hz", "price": 329.99, "resolution": "1440p", "refresh": 165 },
-  { "id": "mon-lg-27gp850", "category": "monitor", "name": "LG 27GP850 27\" QHD 180Hz", "price": 379.99, "resolution": "1440p", "refresh": 180 },
-  { "id": "mon-gigabyte-m32u", "category": "monitor", "name": "Gigabyte M32U 32\" 4K 144Hz", "price": 599.99, "resolution": "4k", "refresh": 144 },
-  { "id": "mon-aoc-24g2", "category": "monitor", "name": "AOC 24G2 24\" FHD 144Hz", "price": 149.99, "resolution": "1080p", "refresh": 144 },
-  { "id": "mon-asus-pg27aqdm", "category": "monitor", "name": "ASUS PG27AQDM 27\" QHD OLED 240Hz", "price": 899.99, "resolution": "1440p", "refresh": 240 },
-  { "id": "mon-samsung-g7", "category": "monitor", "name": "Samsung Odyssey G7 32\" QHD 240Hz", "price": 549.99, "resolution": "1440p", "refresh": 240 },
-
-  { "id": "kb-keychron-k8", "category": "keyboard", "name": "Keychron K8 Mechanical", "price": 89.99, "switch": "Brown" },
-  { "id": "kb-logi-g915", "category": "keyboard", "name": "Logitech G915 TKL Wireless", "price": 209.99, "switch": "Tactile" },
-  { "id": "kb-corsair-k70", "category": "keyboard", "name": "Corsair K70 RGB", "price": 159.99, "switch": "Red" },
-  { "id": "kb-ducky-one3", "category": "keyboard", "name": "Ducky One 3", "price": 119.99, "switch": "Blue" },
-  { "id": "kb-razer-huntsman", "category": "keyboard", "name": "Razer Huntsman V2", "price": 149.99, "switch": "Optical" },
-  { "id": "kb-steelseries-apex", "category": "keyboard", "name": "SteelSeries Apex Pro", "price": 199.99, "switch": "Adjustable" },
-
-  { "id": "mouse-logi-gpro", "category": "mouse", "name": "Logitech G Pro X Superlight", "price": 129.99, "dpi": 25600 },
-  { "id": "mouse-razer-viper", "category": "mouse", "name": "Razer Viper V2 Pro", "price": 139.99, "dpi": 30000 },
-  { "id": "mouse-glorious-o", "category": "mouse", "name": "Glorious Model O", "price": 49.99, "dpi": 12000 },
-  { "id": "mouse-ss-aerox3", "category": "mouse", "name": "SteelSeries Aerox 3", "price": 69.99, "dpi": 18000 },
-  { "id": "mouse-corsair-m65", "category": "mouse", "name": "Corsair M65 RGB Elite", "price": 59.99, "dpi": 18000 },
-  { "id": "mouse-logi-g502", "category": "mouse", "name": "Logitech G502 X", "price": 79.99, "dpi": 25600 },
-
-  { "id": "hs-hyperx-cloud2", "category": "headset", "name": "HyperX Cloud II", "price": 79.99, "type": "Wired" },
-  { "id": "hs-steelseries-arctis", "category": "headset", "name": "SteelSeries Arctis Nova 7", "price": 149.99, "type": "Wireless" },
-  { "id": "hs-logi-g733", "category": "headset", "name": "Logitech G733 Lightspeed", "price": 129.99, "type": "Wireless" },
-  { "id": "hs-razer-blackshark", "category": "headset", "name": "Razer BlackShark V2", "price": 99.99, "type": "Wired" },
-  { "id": "hs-corsair-virtuoso", "category": "headset", "name": "Corsair Virtuoso RGB", "price": 179.99, "type": "Wireless" },
-  { "id": "hs-audeze-maxwell", "category": "headset", "name": "Audeze Maxwell", "price": 299.99, "type": "Wireless" },
-
-  { "id": "mon-asus-pg259qn", "category": "monitor", "name": "ASUS ROG Swift PG259QN 24.5\" FHD 360Hz", "price": 399.99, "resolution": "1080p", "refresh": 360 },
-  { "id": "mon-zowie-xl2566k", "category": "monitor", "name": "BenQ Zowie XL2566K 24.5\" FHD 360Hz", "price": 479.99, "resolution": "1080p", "refresh": 360 },
-  { "id": "mon-asus-pg32ucdm", "category": "monitor", "name": "ASUS PG32UCDM 32\" 4K OLED 240Hz", "price": 1099.99, "resolution": "4k", "refresh": 240 },
-  { "id": "kb-wooting-60he", "category": "keyboard", "name": "Wooting 60HE", "price": 174.99, "switch": "Hall effect" },
-  { "id": "kb-logi-gpro-x-tkl", "category": "keyboard", "name": "Logitech G Pro X TKL", "price": 179.99, "switch": "Tactile" },
-  { "id": "mouse-razer-da-v3-pro", "category": "mouse", "name": "Razer DeathAdder V3 Pro", "price": 129.99, "dpi": 30000 },
-  { "id": "mouse-logi-g305", "category": "mouse", "name": "Logitech G305 Lightspeed", "price": 44.99, "dpi": 12000 },
-  { "id": "hs-hyperx-cloud3", "category": "headset", "name": "HyperX Cloud III", "price": 99.99, "type": "Wired" },
-  { "id": "hs-arctis-nova-pro", "category": "headset", "name": "SteelSeries Arctis Nova Pro Wireless", "price": 299.99, "type": "Wireless" },
-
-  {"id":"mon-aoc-22b2h","category":"monitor","name":"AOC 22B2H 22\" FHD 75Hz","brand":"AOC","price":79.99,"resolution":"1080p","refresh":75},
-  {"id":"mon-acer-ka242y","category":"monitor","name":"Acer KA242Y 24\" FHD 100Hz","brand":"Acer","price":89.99,"resolution":"1080p","refresh":100},
-  {"id":"mon-msi-g244f","category":"monitor","name":"MSI G244F 24\" FHD 170Hz","brand":"MSI","price":119.99,"resolution":"1080p","refresh":170},
-  {"id":"mon-gigabyte-gs27q","category":"monitor","name":"Gigabyte GS27Q 27\" QHD 165Hz","brand":"Gigabyte","price":199.99,"resolution":"1440p","refresh":165},
-  {"id":"mon-lg-27gs60qc","category":"monitor","name":"LG 27GS60QC 27\" QHD 180Hz Curved","brand":"LG","price":229.99,"resolution":"1440p","refresh":180},
-  {"id":"mon-aoc-q27g3xmn","category":"monitor","name":"AOC Q27G3XMN 27\" QHD 180Hz Mini-LED","brand":"AOC","price":279.99,"resolution":"1440p","refresh":180},
-  {"id":"mon-lg-27gr95qe","category":"monitor","name":"LG 27GR95QE 27\" QHD OLED 240Hz","brand":"LG","price":749.99,"resolution":"1440p","refresh":240},
-  {"id":"mon-alienware-aw3423dwf","category":"monitor","name":"Alienware AW3423DWF 34\" QD-OLED 165Hz","brand":"Alienware","price":799.99,"resolution":"1440p","refresh":165},
-  {"id":"mon-samsung-g80sd","category":"monitor","name":"Samsung Odyssey G8 32\" 4K OLED 240Hz","brand":"Samsung","price":999.99,"resolution":"4k","refresh":240},
-  {"id":"kb-logi-k120","category":"keyboard","name":"Logitech K120 Wired","brand":"Logitech","price":14.99,"switch":"Membrane"},
-  {"id":"kb-redragon-k552","category":"keyboard","name":"Redragon K552 Kumara","brand":"Redragon","price":34.99,"switch":"Blue"},
-  {"id":"kb-corsair-k55-pro","category":"keyboard","name":"Corsair K55 RGB PRO","brand":"Corsair","price":39.99,"switch":"Membrane"},
-  {"id":"kb-keychron-c3-pro","category":"keyboard","name":"Keychron C3 Pro","brand":"Keychron","price":39.99,"switch":"Red"},
-  {"id":"kb-logi-g413se","category":"keyboard","name":"Logitech G413 SE","brand":"Logitech","price":59.99,"switch":"Tactile"},
-  {"id":"kb-razer-huntsman-mini","category":"keyboard","name":"Razer Huntsman Mini","brand":"Razer","price":99.99,"switch":"Optical Linear"},
-  {"id":"mouse-logi-b100","category":"mouse","name":"Logitech B100","brand":"Logitech","price":9.99,"dpi":800},
-  {"id":"mouse-razer-da-essential","category":"mouse","name":"Razer DeathAdder Essential","brand":"Razer","price":24.99,"dpi":6400},
-  {"id":"mouse-logi-g203","category":"mouse","name":"Logitech G203 Lightsync","brand":"Logitech","price":29.99,"dpi":8000},
-  {"id":"mouse-cm-mm712","category":"mouse","name":"Cooler Master MM712","brand":"Cooler Master","price":44.99,"dpi":19000},
-  {"id":"mouse-razer-viper-v3-hs","category":"mouse","name":"Razer Viper V3 HyperSpeed","brand":"Razer","price":69.99,"dpi":30000},
-  {"id":"mouse-razer-viper-v3-pro","category":"mouse","name":"Razer Viper V3 Pro","brand":"Razer","price":149.99,"dpi":35000},
-  {"id":"hs-trust-gxt415","category":"headset","name":"Trust GXT 415 Zirox","brand":"Trust","price":19.99,"type":"Wired"},
-  {"id":"hs-corsair-hs35v2","category":"headset","name":"Corsair HS35 v2","brand":"Corsair","price":39.99,"type":"Wired"},
-  {"id":"hs-logi-g335","category":"headset","name":"Logitech G335","brand":"Logitech","price":54.99,"type":"Wired"},
-  {"id":"hs-steelseries-nova5","category":"headset","name":"SteelSeries Arctis Nova 5","brand":"SteelSeries","price":99.99,"type":"Wireless"},
-  {"id":"hs-hyperx-cloud3-wl","category":"headset","name":"HyperX Cloud III Wireless","brand":"HyperX","price":129.99,"type":"Wireless"}
+  {
+    "id": "mon-dell-s2721dgf",
+    "category": "monitor",
+    "name": "Dell S2721DGF 27\" QHD 165Hz",
+    "price": 329.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-lg-27gp850",
+    "category": "monitor",
+    "name": "LG 27GP850 27\" QHD 180Hz",
+    "price": 379.99,
+    "resolution": "1440p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-gigabyte-m32u",
+    "category": "monitor",
+    "name": "Gigabyte M32U 32\" 4K 144Hz",
+    "price": 599.99,
+    "resolution": "4k",
+    "refresh": 144
+  },
+  {
+    "id": "mon-aoc-24g2",
+    "category": "monitor",
+    "name": "AOC 24G2 24\" FHD 144Hz",
+    "price": 149.99,
+    "resolution": "1080p",
+    "refresh": 144
+  },
+  {
+    "id": "mon-asus-pg27aqdm",
+    "category": "monitor",
+    "name": "ASUS PG27AQDM 27\" QHD OLED 240Hz",
+    "price": 899.99,
+    "resolution": "1440p",
+    "refresh": 240
+  },
+  {
+    "id": "mon-samsung-g7",
+    "category": "monitor",
+    "name": "Samsung Odyssey G7 32\" QHD 240Hz",
+    "price": 549.99,
+    "resolution": "1440p",
+    "refresh": 240
+  },
+  {
+    "id": "kb-keychron-k8",
+    "category": "keyboard",
+    "name": "Keychron K8 Mechanical",
+    "price": 89.99,
+    "switch": "Brown"
+  },
+  {
+    "id": "kb-logi-g915",
+    "category": "keyboard",
+    "name": "Logitech G915 TKL Wireless",
+    "price": 209.99,
+    "switch": "Tactile"
+  },
+  {
+    "id": "kb-corsair-k70",
+    "category": "keyboard",
+    "name": "Corsair K70 RGB",
+    "price": 159.99,
+    "switch": "Red"
+  },
+  {
+    "id": "kb-ducky-one3",
+    "category": "keyboard",
+    "name": "Ducky One 3",
+    "price": 119.99,
+    "switch": "Blue"
+  },
+  {
+    "id": "kb-razer-huntsman",
+    "category": "keyboard",
+    "name": "Razer Huntsman V2",
+    "price": 149.99,
+    "switch": "Optical"
+  },
+  {
+    "id": "kb-steelseries-apex",
+    "category": "keyboard",
+    "name": "SteelSeries Apex Pro",
+    "price": 199.99,
+    "switch": "Adjustable"
+  },
+  {
+    "id": "mouse-logi-gpro",
+    "category": "mouse",
+    "name": "Logitech G Pro X Superlight",
+    "price": 129.99,
+    "dpi": 25600
+  },
+  {
+    "id": "mouse-razer-viper",
+    "category": "mouse",
+    "name": "Razer Viper V2 Pro",
+    "price": 139.99,
+    "dpi": 30000
+  },
+  {
+    "id": "mouse-glorious-o",
+    "category": "mouse",
+    "name": "Glorious Model O",
+    "price": 49.99,
+    "dpi": 12000
+  },
+  {
+    "id": "mouse-ss-aerox3",
+    "category": "mouse",
+    "name": "SteelSeries Aerox 3",
+    "price": 69.99,
+    "dpi": 18000
+  },
+  {
+    "id": "mouse-corsair-m65",
+    "category": "mouse",
+    "name": "Corsair M65 RGB Elite",
+    "price": 59.99,
+    "dpi": 18000
+  },
+  {
+    "id": "mouse-logi-g502",
+    "category": "mouse",
+    "name": "Logitech G502 X",
+    "price": 79.99,
+    "dpi": 25600
+  },
+  {
+    "id": "hs-hyperx-cloud2",
+    "category": "headset",
+    "name": "HyperX Cloud II",
+    "price": 79.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-steelseries-arctis",
+    "category": "headset",
+    "name": "SteelSeries Arctis Nova 7",
+    "price": 149.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-logi-g733",
+    "category": "headset",
+    "name": "Logitech G733 Lightspeed",
+    "price": 129.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-razer-blackshark",
+    "category": "headset",
+    "name": "Razer BlackShark V2",
+    "price": 99.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-corsair-virtuoso",
+    "category": "headset",
+    "name": "Corsair Virtuoso RGB",
+    "price": 179.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-audeze-maxwell",
+    "category": "headset",
+    "name": "Audeze Maxwell",
+    "price": 299.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "mon-asus-pg259qn",
+    "category": "monitor",
+    "name": "ASUS ROG Swift PG259QN 24.5\" FHD 360Hz",
+    "price": 399.99,
+    "resolution": "1080p",
+    "refresh": 360
+  },
+  {
+    "id": "mon-zowie-xl2566k",
+    "category": "monitor",
+    "name": "BenQ Zowie XL2566K 24.5\" FHD 360Hz",
+    "price": 479.99,
+    "resolution": "1080p",
+    "refresh": 360
+  },
+  {
+    "id": "mon-asus-pg32ucdm",
+    "category": "monitor",
+    "name": "ASUS PG32UCDM 32\" 4K OLED 240Hz",
+    "price": 1099.99,
+    "resolution": "4k",
+    "refresh": 240
+  },
+  {
+    "id": "kb-wooting-60he",
+    "category": "keyboard",
+    "name": "Wooting 60HE",
+    "price": 174.99,
+    "switch": "Hall effect"
+  },
+  {
+    "id": "kb-logi-gpro-x-tkl",
+    "category": "keyboard",
+    "name": "Logitech G Pro X TKL",
+    "price": 179.99,
+    "switch": "Tactile"
+  },
+  {
+    "id": "mouse-razer-da-v3-pro",
+    "category": "mouse",
+    "name": "Razer DeathAdder V3 Pro",
+    "price": 129.99,
+    "dpi": 30000
+  },
+  {
+    "id": "mouse-logi-g305",
+    "category": "mouse",
+    "name": "Logitech G305 Lightspeed",
+    "price": 44.99,
+    "dpi": 12000
+  },
+  {
+    "id": "hs-hyperx-cloud3",
+    "category": "headset",
+    "name": "HyperX Cloud III",
+    "price": 99.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-arctis-nova-pro",
+    "category": "headset",
+    "name": "SteelSeries Arctis Nova Pro Wireless",
+    "price": 299.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "mon-aoc-22b2h",
+    "category": "monitor",
+    "name": "AOC 22B2H 22\" FHD 75Hz",
+    "brand": "AOC",
+    "price": 79.99,
+    "resolution": "1080p",
+    "refresh": 75
+  },
+  {
+    "id": "mon-acer-ka242y",
+    "category": "monitor",
+    "name": "Acer KA242Y 24\" FHD 100Hz",
+    "brand": "Acer",
+    "price": 89.99,
+    "resolution": "1080p",
+    "refresh": 100
+  },
+  {
+    "id": "mon-msi-g244f",
+    "category": "monitor",
+    "name": "MSI G244F 24\" FHD 170Hz",
+    "brand": "MSI",
+    "price": 119.99,
+    "resolution": "1080p",
+    "refresh": 170
+  },
+  {
+    "id": "mon-gigabyte-gs27q",
+    "category": "monitor",
+    "name": "Gigabyte GS27Q 27\" QHD 165Hz",
+    "brand": "Gigabyte",
+    "price": 199.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-lg-27gs60qc",
+    "category": "monitor",
+    "name": "LG 27GS60QC 27\" QHD 180Hz Curved",
+    "brand": "LG",
+    "price": 229.99,
+    "resolution": "1440p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-aoc-q27g3xmn",
+    "category": "monitor",
+    "name": "AOC Q27G3XMN 27\" QHD 180Hz Mini-LED",
+    "brand": "AOC",
+    "price": 279.99,
+    "resolution": "1440p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-lg-27gr95qe",
+    "category": "monitor",
+    "name": "LG 27GR95QE 27\" QHD OLED 240Hz",
+    "brand": "LG",
+    "price": 749.99,
+    "resolution": "1440p",
+    "refresh": 240
+  },
+  {
+    "id": "mon-alienware-aw3423dwf",
+    "category": "monitor",
+    "name": "Alienware AW3423DWF 34\" QD-OLED 165Hz",
+    "brand": "Alienware",
+    "price": 799.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-samsung-g80sd",
+    "category": "monitor",
+    "name": "Samsung Odyssey G8 32\" 4K OLED 240Hz",
+    "brand": "Samsung",
+    "price": 999.99,
+    "resolution": "4k",
+    "refresh": 240
+  },
+  {
+    "id": "kb-logi-k120",
+    "category": "keyboard",
+    "name": "Logitech K120 Wired",
+    "brand": "Logitech",
+    "price": 14.99,
+    "switch": "Membrane"
+  },
+  {
+    "id": "kb-redragon-k552",
+    "category": "keyboard",
+    "name": "Redragon K552 Kumara",
+    "brand": "Redragon",
+    "price": 34.99,
+    "switch": "Blue"
+  },
+  {
+    "id": "kb-corsair-k55-pro",
+    "category": "keyboard",
+    "name": "Corsair K55 RGB PRO",
+    "brand": "Corsair",
+    "price": 39.99,
+    "switch": "Membrane"
+  },
+  {
+    "id": "kb-keychron-c3-pro",
+    "category": "keyboard",
+    "name": "Keychron C3 Pro",
+    "brand": "Keychron",
+    "price": 39.99,
+    "switch": "Red"
+  },
+  {
+    "id": "kb-logi-g413se",
+    "category": "keyboard",
+    "name": "Logitech G413 SE",
+    "brand": "Logitech",
+    "price": 59.99,
+    "switch": "Tactile"
+  },
+  {
+    "id": "kb-razer-huntsman-mini",
+    "category": "keyboard",
+    "name": "Razer Huntsman Mini",
+    "brand": "Razer",
+    "price": 99.99,
+    "switch": "Optical Linear"
+  },
+  {
+    "id": "mouse-logi-b100",
+    "category": "mouse",
+    "name": "Logitech B100",
+    "brand": "Logitech",
+    "price": 9.99,
+    "dpi": 800
+  },
+  {
+    "id": "mouse-razer-da-essential",
+    "category": "mouse",
+    "name": "Razer DeathAdder Essential",
+    "brand": "Razer",
+    "price": 24.99,
+    "dpi": 6400
+  },
+  {
+    "id": "mouse-logi-g203",
+    "category": "mouse",
+    "name": "Logitech G203 Lightsync",
+    "brand": "Logitech",
+    "price": 29.99,
+    "dpi": 8000
+  },
+  {
+    "id": "mouse-cm-mm712",
+    "category": "mouse",
+    "name": "Cooler Master MM712",
+    "brand": "Cooler Master",
+    "price": 44.99,
+    "dpi": 19000
+  },
+  {
+    "id": "mouse-razer-viper-v3-hs",
+    "category": "mouse",
+    "name": "Razer Viper V3 HyperSpeed",
+    "brand": "Razer",
+    "price": 69.99,
+    "dpi": 30000
+  },
+  {
+    "id": "mouse-razer-viper-v3-pro",
+    "category": "mouse",
+    "name": "Razer Viper V3 Pro",
+    "brand": "Razer",
+    "price": 149.99,
+    "dpi": 35000
+  },
+  {
+    "id": "hs-trust-gxt415",
+    "category": "headset",
+    "name": "Trust GXT 415 Zirox",
+    "brand": "Trust",
+    "price": 19.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-corsair-hs35v2",
+    "category": "headset",
+    "name": "Corsair HS35 v2",
+    "brand": "Corsair",
+    "price": 39.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-logi-g335",
+    "category": "headset",
+    "name": "Logitech G335",
+    "brand": "Logitech",
+    "price": 54.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-steelseries-nova5",
+    "category": "headset",
+    "name": "SteelSeries Arctis Nova 5",
+    "brand": "SteelSeries",
+    "price": 99.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-hyperx-cloud3-wl",
+    "category": "headset",
+    "name": "HyperX Cloud III Wireless",
+    "brand": "HyperX",
+    "price": 129.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "mon-aoc-27g4x",
+    "category": "monitor",
+    "name": "AOC 27G4X 27\" FHD 180Hz",
+    "brand": "AOC",
+    "price": 199.99,
+    "resolution": "1080p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-aoc-cu34g2x",
+    "category": "monitor",
+    "name": "AOC CU34G2X 34\" UWQHD 144Hz",
+    "brand": "AOC",
+    "price": 329.99,
+    "resolution": "1440p",
+    "refresh": 144
+  },
+  {
+    "id": "mon-acer-xv272u",
+    "category": "monitor",
+    "name": "Acer Nitro XV272U 27\" QHD 170Hz",
+    "brand": "Acer",
+    "price": 249.99,
+    "resolution": "1440p",
+    "refresh": 170
+  },
+  {
+    "id": "mon-acer-xb273u",
+    "category": "monitor",
+    "name": "Acer Predator XB273U 27\" QHD 270Hz",
+    "brand": "Acer",
+    "price": 449.99,
+    "resolution": "1440p",
+    "refresh": 270
+  },
+  {
+    "id": "mon-asus-vg27aq",
+    "category": "monitor",
+    "name": "ASUS TUF VG27AQ 27\" QHD 165Hz",
+    "brand": "ASUS",
+    "price": 269.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-asus-xg27acs",
+    "category": "monitor",
+    "name": "ASUS ROG Strix XG27ACS 27\" QHD 180Hz",
+    "brand": "ASUS",
+    "price": 299.99,
+    "resolution": "1440p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-benq-ex2710q",
+    "category": "monitor",
+    "name": "BenQ MOBIUZ EX2710Q 27\" QHD 165Hz",
+    "brand": "BenQ",
+    "price": 319.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-dell-g2724d",
+    "category": "monitor",
+    "name": "Dell G2724D 27\" QHD 165Hz",
+    "brand": "Dell",
+    "price": 239.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-dell-u2723qe",
+    "category": "monitor",
+    "name": "Dell UltraSharp U2723QE 27\" 4K 60Hz",
+    "brand": "Dell",
+    "price": 429.99,
+    "resolution": "4k",
+    "refresh": 60
+  },
+  {
+    "id": "mon-gigabyte-m27q-x",
+    "category": "monitor",
+    "name": "Gigabyte M27Q X 27\" QHD 240Hz",
+    "brand": "Gigabyte",
+    "price": 399.99,
+    "resolution": "1440p",
+    "refresh": 240
+  },
+  {
+    "id": "mon-gigabyte-fo32u2",
+    "category": "monitor",
+    "name": "Gigabyte Aorus FO32U2 32\" 4K OLED 240Hz",
+    "brand": "Gigabyte",
+    "price": 1049.99,
+    "resolution": "4k",
+    "refresh": 240
+  },
+  {
+    "id": "mon-hp-x24i",
+    "category": "monitor",
+    "name": "HP X24i 24\" FHD 144Hz",
+    "brand": "HP",
+    "price": 129.99,
+    "resolution": "1080p",
+    "refresh": 144
+  },
+  {
+    "id": "mon-iiyama-gb2470hsu",
+    "category": "monitor",
+    "name": "Iiyama G-Master GB2470HSU 24\" FHD 165Hz",
+    "brand": "Iiyama",
+    "price": 139.99,
+    "resolution": "1080p",
+    "refresh": 165
+  },
+  {
+    "id": "mon-lg-24gs60f",
+    "category": "monitor",
+    "name": "LG 24GS60F 24\" FHD 180Hz",
+    "brand": "LG",
+    "price": 129.99,
+    "resolution": "1080p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-lg-32gs95ue",
+    "category": "monitor",
+    "name": "LG 32GS95UE 32\" 4K OLED 240Hz",
+    "brand": "LG",
+    "price": 999.99,
+    "resolution": "4k",
+    "refresh": 240
+  },
+  {
+    "id": "mon-msi-274qrf",
+    "category": "monitor",
+    "name": "MSI MAG 274QRF QD E2 27\" QHD 180Hz",
+    "brand": "MSI",
+    "price": 279.99,
+    "resolution": "1440p",
+    "refresh": 180
+  },
+  {
+    "id": "mon-msi-321urx",
+    "category": "monitor",
+    "name": "MSI MPG 321URX 32\" 4K QD-OLED 240Hz",
+    "brand": "MSI",
+    "price": 949.99,
+    "resolution": "4k",
+    "refresh": 240
+  },
+  {
+    "id": "mon-samsung-g5-27",
+    "category": "monitor",
+    "name": "Samsung Odyssey G5 27\" QHD 165Hz",
+    "brand": "Samsung",
+    "price": 199.99,
+    "resolution": "1440p",
+    "refresh": 165
+  },
+  {
+    "id": "kb-logi-g213",
+    "category": "keyboard",
+    "name": "Logitech G213 Prodigy",
+    "brand": "Logitech",
+    "price": 44.99,
+    "switch": "Membrane"
+  },
+  {
+    "id": "kb-logi-mx-keys-s",
+    "category": "keyboard",
+    "name": "Logitech MX Keys S",
+    "brand": "Logitech",
+    "price": 109.99,
+    "switch": "Membrane"
+  },
+  {
+    "id": "kb-corsair-k65-plus",
+    "category": "keyboard",
+    "name": "Corsair K65 Plus Wireless",
+    "brand": "Corsair",
+    "price": 139.99,
+    "switch": "Tactile"
+  },
+  {
+    "id": "kb-corsair-k100",
+    "category": "keyboard",
+    "name": "Corsair K100 RGB",
+    "brand": "Corsair",
+    "price": 229.99,
+    "switch": "Optical"
+  },
+  {
+    "id": "kb-razer-bw-v4-x",
+    "category": "keyboard",
+    "name": "Razer BlackWidow V4 X",
+    "brand": "Razer",
+    "price": 119.99,
+    "switch": "Tactile"
+  },
+  {
+    "id": "kb-razer-huntsman-v3-tkl",
+    "category": "keyboard",
+    "name": "Razer Huntsman V3 Pro TKL",
+    "brand": "Razer",
+    "price": 199.99,
+    "switch": "Adjustable"
+  },
+  {
+    "id": "kb-ss-apex-3-tkl",
+    "category": "keyboard",
+    "name": "SteelSeries Apex 3 TKL",
+    "brand": "SteelSeries",
+    "price": 49.99,
+    "switch": "Membrane"
+  },
+  {
+    "id": "kb-ss-apex-pro-tkl-g3",
+    "category": "keyboard",
+    "name": "SteelSeries Apex Pro TKL Gen 3",
+    "brand": "SteelSeries",
+    "price": 229.99,
+    "switch": "Adjustable"
+  },
+  {
+    "id": "kb-keychron-k2-he",
+    "category": "keyboard",
+    "name": "Keychron K2 HE",
+    "brand": "Keychron",
+    "price": 169.99,
+    "switch": "Hall effect"
+  },
+  {
+    "id": "kb-keychron-q1-pro",
+    "category": "keyboard",
+    "name": "Keychron Q1 Pro",
+    "brand": "Keychron",
+    "price": 189.99,
+    "switch": "Tactile"
+  },
+  {
+    "id": "kb-ducky-one-3-sf",
+    "category": "keyboard",
+    "name": "Ducky One 3 SF",
+    "brand": "Ducky",
+    "price": 129.99,
+    "switch": "Red"
+  },
+  {
+    "id": "kb-nuphy-air75-v2",
+    "category": "keyboard",
+    "name": "NuPhy Air75 V2",
+    "brand": "NuPhy",
+    "price": 129.99,
+    "switch": "Brown"
+  },
+  {
+    "id": "kb-hyperx-alloy-rise-75",
+    "category": "keyboard",
+    "name": "HyperX Alloy Rise 75",
+    "brand": "HyperX",
+    "price": 159.99,
+    "switch": "Red"
+  },
+  {
+    "id": "kb-redragon-k617",
+    "category": "keyboard",
+    "name": "Redragon K617 Fizz",
+    "brand": "Redragon",
+    "price": 29.99,
+    "switch": "Red"
+  },
+  {
+    "id": "mouse-logi-g502-hero",
+    "category": "mouse",
+    "name": "Logitech G502 Hero",
+    "brand": "Logitech",
+    "price": 44.99,
+    "dpi": 25600
+  },
+  {
+    "id": "mouse-logi-g309",
+    "category": "mouse",
+    "name": "Logitech G309 Lightspeed",
+    "brand": "Logitech",
+    "price": 64.99,
+    "dpi": 25600
+  },
+  {
+    "id": "mouse-logi-mx-master-3s",
+    "category": "mouse",
+    "name": "Logitech MX Master 3S",
+    "brand": "Logitech",
+    "price": 89.99,
+    "dpi": 8000
+  },
+  {
+    "id": "mouse-razer-basilisk-v3",
+    "category": "mouse",
+    "name": "Razer Basilisk V3",
+    "brand": "Razer",
+    "price": 59.99,
+    "dpi": 26000
+  },
+  {
+    "id": "mouse-razer-cobra",
+    "category": "mouse",
+    "name": "Razer Cobra",
+    "brand": "Razer",
+    "price": 39.99,
+    "dpi": 8500
+  },
+  {
+    "id": "mouse-razer-naga-v2-pro",
+    "category": "mouse",
+    "name": "Razer Naga V2 Pro",
+    "brand": "Razer",
+    "price": 169.99,
+    "dpi": 30000
+  },
+  {
+    "id": "mouse-corsair-katar-elite",
+    "category": "mouse",
+    "name": "Corsair Katar Elite Wireless",
+    "brand": "Corsair",
+    "price": 54.99,
+    "dpi": 26000
+  },
+  {
+    "id": "mouse-corsair-m75-air",
+    "category": "mouse",
+    "name": "Corsair M75 Air Wireless",
+    "brand": "Corsair",
+    "price": 129.99,
+    "dpi": 26000
+  },
+  {
+    "id": "mouse-ss-rival-3",
+    "category": "mouse",
+    "name": "SteelSeries Rival 3",
+    "brand": "SteelSeries",
+    "price": 29.99,
+    "dpi": 8500
+  },
+  {
+    "id": "mouse-ss-aerox-5",
+    "category": "mouse",
+    "name": "SteelSeries Aerox 5 Wireless",
+    "brand": "SteelSeries",
+    "price": 109.99,
+    "dpi": 18000
+  },
+  {
+    "id": "mouse-glorious-model-o-2",
+    "category": "mouse",
+    "name": "Glorious Model O 2 Wireless",
+    "brand": "Glorious",
+    "price": 79.99,
+    "dpi": 26000
+  },
+  {
+    "id": "mouse-pulsar-x2h-mini",
+    "category": "mouse",
+    "name": "Pulsar X2H Mini",
+    "brand": "Pulsar",
+    "price": 89.99,
+    "dpi": 26000
+  },
+  {
+    "id": "mouse-endgame-op1-8k",
+    "category": "mouse",
+    "name": "Endgame Gear OP1 8k",
+    "brand": "Endgame Gear",
+    "price": 79.99,
+    "dpi": 26000
+  },
+  {
+    "id": "mouse-cm-mm311",
+    "category": "mouse",
+    "name": "Cooler Master MM311",
+    "brand": "Cooler Master",
+    "price": 29.99,
+    "dpi": 10000
+  },
+  {
+    "id": "hs-logi-g435",
+    "category": "headset",
+    "name": "Logitech G435",
+    "brand": "Logitech",
+    "price": 49.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-logi-gpro-x2",
+    "category": "headset",
+    "name": "Logitech G Pro X 2 Lightspeed",
+    "brand": "Logitech",
+    "price": 199.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-razer-bs-v2-x",
+    "category": "headset",
+    "name": "Razer BlackShark V2 X",
+    "brand": "Razer",
+    "price": 49.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-razer-kraken-v4",
+    "category": "headset",
+    "name": "Razer Kraken V4",
+    "brand": "Razer",
+    "price": 129.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-razer-barracuda-x",
+    "category": "headset",
+    "name": "Razer Barracuda X",
+    "brand": "Razer",
+    "price": 99.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-hyperx-cloud-alpha",
+    "category": "headset",
+    "name": "HyperX Cloud Alpha",
+    "brand": "HyperX",
+    "price": 69.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-hyperx-cloud-alpha-wl",
+    "category": "headset",
+    "name": "HyperX Cloud Alpha Wireless",
+    "brand": "HyperX",
+    "price": 159.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-ss-nova-1",
+    "category": "headset",
+    "name": "SteelSeries Arctis Nova 1",
+    "brand": "SteelSeries",
+    "price": 49.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-ss-nova-3",
+    "category": "headset",
+    "name": "SteelSeries Arctis Nova 3",
+    "brand": "SteelSeries",
+    "price": 79.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-corsair-hs55",
+    "category": "headset",
+    "name": "Corsair HS55 Stereo",
+    "brand": "Corsair",
+    "price": 49.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-corsair-hs80-max",
+    "category": "headset",
+    "name": "Corsair HS80 Max Wireless",
+    "brand": "Corsair",
+    "price": 169.99,
+    "type": "Wireless"
+  },
+  {
+    "id": "hs-epos-h3",
+    "category": "headset",
+    "name": "EPOS H3",
+    "brand": "EPOS",
+    "price": 89.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-beyer-mmx-100",
+    "category": "headset",
+    "name": "Beyerdynamic MMX 100",
+    "brand": "Beyerdynamic",
+    "price": 119.99,
+    "type": "Wired"
+  },
+  {
+    "id": "hs-turtle-stealth-600-g3",
+    "category": "headset",
+    "name": "Turtle Beach Stealth 600 Gen 3",
+    "brand": "Turtle Beach",
+    "price": 89.99,
+    "type": "Wireless"
+  }
 ]
