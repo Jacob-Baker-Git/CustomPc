@@ -4,7 +4,8 @@ import { describe, it, expect } from 'vitest'
 import { Matrix4, Vector3, Box3, Quaternion } from 'three'
 import { PART_SPECS } from '../lib/partSpecs'
 import { GLTF_MODELS } from '../lib/gltfModels'
-import { FAN_MM } from '../lib/pcScale'
+import { modelScale } from '../lib/assemblyGeometry'
+import { FAN_MM, WU_PER_MM } from '../lib/pcScale'
 
 // Union bbox of a .glb, matching Box3.setFromObject(scene) — accessor min/max
 // pushed through each node's world matrix. Quantised meshes (KHR_mesh_quantization
@@ -91,11 +92,13 @@ describe('PART_SPECS.raw matches the shipped meshes', () => {
 describe('motherboard PCB plane', () => {
   const spec = PART_SPECS.motherboard
 
-  it('surfaceOffset still points at the mesh PCB component face', () => {
-    const whole = meshBounds('/models/motherboard.glb')
+  // Measured from the PCB's own centre, because that is what the board is now
+  // centred on. It used to be measured from the whole mesh's centre, back when
+  // the mesh bounding box was the thing being positioned.
+  it('surfaceOffset points at the PCB component face, from the PCB centre', () => {
     const pcb = meshBounds('/models/motherboard.glb', 'Board')
     const centre = new Vector3()
-    whole.getCenter(centre)
+    pcb.getCenter(centre)
 
     // Mesh Y is the board's thin axis; the PCB's +Y face is the component side.
     expect(spec.surfaceOffset[1]).toBeCloseTo(pcb.max.y - centre.y, 2)
@@ -105,9 +108,68 @@ describe('motherboard PCB plane', () => {
     const whole = meshBounds('/models/motherboard.glb')
     const size = new Vector3()
     whole.getSize(size)
-    // Guards the actual defect: if these ever coincide the mounting surface has
-    // silently reverted to the shroud.
+    // Guards the actual defect: mounting on the bbox front face put every part
+    // on top of the I/O shroud, floating 41.6 mm clear of the board.
     expect(spec.surfaceOffset[1]).toBeLessThan(size.y / 2 - 1)
+  })
+})
+
+// The bug this file existed to prevent and still missed: `raw` matched the mesh
+// perfectly, and every derived number was self-consistent — but the mesh is far
+// bigger than the BOARD it draws (an I/O shroud, VRM heatsinks, and a stray
+// 74 mm sheet, node Object_197, that belongs to no real motherboard). Sizing on
+// the bounding box therefore rendered the PCB at 213 x 266 mm instead of ATX's
+// 244 x 305, and put its centre ~30 mm from the origin that MOUNTS measures
+// from. Both errors displaced every board-mounted part.
+//
+// These tests tie the SHIPPED MESH to the real-world dimensions the geometry
+// claims, which is the tie that was missing.
+describe('motherboard renders a real ATX board', () => {
+  const spec = PART_SPECS.motherboard
+  const pcbBox = () => meshBounds('/models/motherboard.glb', 'Board')
+
+  const pcbSize = () => {
+    const s = new Vector3()
+    pcbBox().getSize(s)
+    return s
+  }
+
+  it('scales the PCB itself to ATX, not the mesh bounding box', () => {
+    const size = pcbSize()
+    // modelScale is world units per raw unit; divide back out to millimetres.
+    const toMm = (v) => (v * modelScale('motherboard')) / WU_PER_MM
+    expect(toMm(size.z), 'long edge').toBeCloseTo(305, 0)
+    expect(toMm(size.x), 'short edge').toBeGreaterThan(235)
+    expect(toMm(size.x), 'short edge').toBeLessThan(253)
+  })
+
+  it('records the PCB extents as the board body', () => {
+    const size = pcbSize()
+    expect(spec.body[0]).toBeCloseTo(size.x, 1)
+    expect(spec.body[1]).toBeCloseTo(size.y, 1)
+    expect(spec.body[2]).toBeCloseTo(size.z, 1)
+  })
+
+  it('records where the PCB sits inside the mesh, so mounts land on the board', () => {
+    const whole = new Vector3()
+    meshBounds('/models/motherboard.glb').getCenter(whole)
+    const pcb = new Vector3()
+    pcbBox().getCenter(pcb)
+    expect(spec.bodyOffset[0]).toBeCloseTo(pcb.x - whole.x, 1)
+    expect(spec.bodyOffset[1]).toBeCloseTo(pcb.y - whole.y, 1)
+    expect(spec.bodyOffset[2]).toBeCloseTo(pcb.z - whole.z, 1)
+  })
+
+  // Every node named in config must resolve, or the config silently does nothing
+  // — the anchorNode:'CPU' typo that matched no node is the cautionary tale.
+  it('every hidden node name actually exists in the mesh', () => {
+    const file = resolve(process.cwd(), 'public', 'models/motherboard.glb')
+    const buf = readFileSync(file)
+    const json = JSON.parse(buf.slice(20, 20 + buf.readUInt32LE(12)).toString('utf8'))
+    const names = new Set(json.nodes.map((n) => n.name).filter(Boolean))
+    for (const name of spec.hideNodes ?? []) {
+      expect(names.has(name), `${name} should exist in motherboard.glb`).toBe(true)
+    }
   })
 })
 

@@ -40,12 +40,20 @@ export function unrotateExtents([x, y, z], [rx, ry, rz]) {
   return out
 }
 
+// The extents `lengthMm` actually refers to. Normally the whole mesh, but a part
+// may declare a `body` — the functional component inside a mesh that also draws
+// decoration around it. The motherboard's mesh is 14% larger than its PCB, so
+// fitting 305 mm to the mesh rendered a 266 mm board. See PART_SPECS.
+function fitExtents(spec) {
+  return spec.body ?? spec.raw
+}
+
 // Uniform scale taking raw model units to world units for a category.
 // Meaningless for a spec sized by `sizeMm` — use modelScaleAxes for those.
 export function modelScale(category) {
   const spec = PART_SPECS[category]
   if (!spec) return 0
-  const rotated = rotateExtents(spec.raw, spec.rotation)
+  const rotated = rotateExtents(fitExtents(spec), spec.rotation)
   const basis = spec.fitAxis === undefined ? Math.max(...rotated) : rotated[spec.fitAxis]
   return mm(spec.lengthMm) / basis
 }
@@ -80,11 +88,34 @@ export function partSize(category) {
 // spec.rotation. Anything rendered as a CHILD of that group needs these, not
 // partSize(), or it comes out rotated twice. Returns null for categories with
 // no measured model (the case is procedural).
+//
+// Reports the BODY where one is declared: layout and collision care about the
+// board, not about the shroud and stray geometry drawn around it. The renderer
+// needs the whole mesh instead — that is meshLocalSize.
 export function partLocalSize(category) {
   const spec = PART_SPECS[category]
   if (!spec) return null
   const axes = modelScaleAxes(category)
+  return fitExtents(spec).map((v, i) => v * axes[i])
+}
+
+// The whole mesh's size in model axes, decoration included. Only the renderer
+// wants this — it has to fit the actual GLB, not the functional body inside it.
+export function meshLocalSize(category) {
+  const spec = PART_SPECS[category]
+  if (!spec) return null
+  const axes = modelScaleAxes(category)
   return spec.raw.map((v, i) => v * axes[i])
+}
+
+// How far the mesh must shift so its BODY lands on the group origin, in model
+// axes. Without it the board's PCB sits ~30 mm from the origin that MOUNTS
+// measures from, and every mounted part inherits the error.
+export function bodyShiftLocal(category) {
+  const spec = PART_SPECS[category]
+  if (!spec?.bodyOffset) return [0, 0, 0]
+  const axes = modelScaleAxes(category)
+  return spec.bodyOffset.map((v, i) => -v * axes[i])
 }
 
 // The PCB's component-side face — the plane parts actually plug into, and where
@@ -168,8 +199,14 @@ export function partCentre(category) {
   if (!mount) return [0, 0, 0]
 
   const offset = anchorOffsetWorld(category)
+  // A card declaring `rearInsetMm` is placed by its rear (bracket) edge against
+  // the board's, rather than by its centre — see MOUNTS.gpu.
+  const x = mount.rearInsetMm === undefined
+    ? mm(mount.xMm)
+    : partBox('motherboard').min[0] + partSize(category)[0] / 2 + mm(mount.rearInsetMm)
+
   return [
-    mm(mount.xMm) - offset[0],
+    x - offset[0],
     mm(mount.yMm) - offset[1],
     mountBaseZ(category) + mountDepth(category) / 2 - offset[2],
   ]

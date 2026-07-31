@@ -1,5 +1,5 @@
 import { PART_SPECS } from './partSpecs'
-import { modelScale, partLocalSize } from './assemblyGeometry'
+import { modelScale, partLocalSize, bodyShiftLocal } from './assemblyGeometry'
 import { mm } from './pcScale'
 import { MOUNTS } from './mountPoints'
 
@@ -32,6 +32,9 @@ export const GLTF_MODELS = Object.fromEntries(
       // world size of that same axis. A spec with `sizeMm` is stretched per axis
       // instead, so it hands over all three model-local dimensions.
       targetSize: spec.sizeMm ? partLocalSize(cat) : Math.max(...spec.raw) * modelScale(cat),
+      // Nodes that draw geometry belonging to no real component. Hidden after the
+      // fit is measured, so the scale still derives from `raw` exactly.
+      ...(spec.hideNodes ? { hideNodes: spec.hideNodes } : {}),
       // Deliberately NO rotation here. PartModel's placement group already
       // applies spec.rotation (via assemblyLayout), and it has to — the
       // procedural fallback models and the hover highlight live in that same
@@ -39,7 +42,10 @@ export const GLTF_MODELS = Object.fromEntries(
       // every GLB twice: the board's PI/2 became PI, laying it flat, while
       // assemblyGeometry kept rotating once and "proving" a scene that never
       // rendered. Covered by assemblyRenderRotation.test.js.
-      position: [0, 0, 0],
+      // Shifts the mesh so its functional body — not its bounding box — sits on
+      // the group origin, which is the point MOUNTS measures from. Zero for every
+      // part whose mesh is the component.
+      position: bodyShiftLocal(cat),
       ...(cat === 'ram' ? { instances: ramOffsets() } : {}),
     }]
   })

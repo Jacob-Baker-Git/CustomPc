@@ -22,11 +22,28 @@ export const PART_SPECS = {
   // 41.6 mm proud of the PCB. Mounting parts on the bbox front face left every
   // one of them floating that far clear of the board. Measured from the mesh's
   // `Board` material and checked by modelBounds.test.js.
+  // `body`/`bodyOffset` exist because this mesh is much larger than the board it
+  // draws. Besides the shroud and heatsinks it carries `Object_197`, a 0.65-thick
+  // sheet running ~74 mm past the PCB's edge that belongs to no real motherboard
+  // — the "random wires" hanging off the bottom-front corner.
+  //
+  // Sizing on the bounding box therefore rendered the PCB at 213 x 266 mm instead
+  // of ATX's 244 x 305, and left its centre ~30 mm from the origin that MOUNTS
+  // measures from. Both errors displaced every board-mounted part, which is why
+  // the RAM and the GPU never looked seated.
+  //
+  // So the board is sized and centred on its PCB (the `Board` material) and the
+  // decoration just comes along for the ride. The PCB's own aspect gives 244.5 mm
+  // across when its long edge is 305, so a uniform scale is still right.
   motherboard: {
     raw: [30.56, 4.96, 30.85],
+    body: [21.599, 0.747, 26.943],
+    bodyOffset: [-2.996, -2.104, -0.915],
     lengthMm: 305,
     rotation: [Math.PI / 2, 0, 0],
-    surfaceOffset: [0, -1.7305, 0],
+    // From the PCB's centre to its component face — half the (thick) PCB.
+    surfaceOffset: [0, 0.373, 0],
+    hideNodes: ['Object_197'],
   },
 
   // The bare package lies flat in its mesh (thin axis is mesh Y, same as the

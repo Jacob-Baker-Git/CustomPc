@@ -16,7 +16,7 @@ import { useGLTF } from '@react-three/drei'
 // placement group, which wraps this and must rotate the procedural fallback and
 // hover highlight too. Accepting a rotation here once meant every GLB got its
 // spec rotation applied twice — see gltfModels.js and assemblyRenderRotation.test.js.
-export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0] }) {
+export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0], hideNodes }) {
   const { scene } = useGLTF(url)
 
   const { object, scale } = useMemo(() => {
@@ -41,8 +41,22 @@ export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0] }) 
     box.getCenter(centre)
 
     obj.position.sub(centre)
+
+    // Strictly AFTER the box above: `raw` in PART_SPECS is the whole mesh's
+    // bounding box, so the fit has to be measured on the whole mesh or the scale
+    // silently stops matching the geometry. Hiding here only removes geometry
+    // that draws no real component — the board's stray Object_197 sheet. A test
+    // pins that every name listed still resolves, because a name that matches
+    // nothing would fail silently.
+    if (hideNodes?.length) {
+      const wanted = new Set(hideNodes)
+      obj.traverse((child) => {
+        if (wanted.has(child.name)) child.visible = false
+      })
+    }
+
     return { object: obj, scale: fit }
-  }, [scene, targetSize])
+  }, [scene, targetSize, hideNodes])
 
   return (
     <group position={position}>

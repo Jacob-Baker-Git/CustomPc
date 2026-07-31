@@ -156,22 +156,59 @@ describe('partCentre', () => {
   // assembly's bbox centre, so mounting the block on a socket at (-20, 75) puts
   // the bbox centre up at (28.8, 129.4).
   //
-  // Z is built up from the PCB surface rather than the board's bounding box:
-  // boardFaceZ() is -17.1 mm (the PCB's component face, 41.6 mm behind the top
-  // of the I/O shroud), plus the CPU's own 2.9 mm because the pump block clamps
-  // onto the heat spreader, plus the block's half depth and anchor offset.
+  // Z is built up from the PCB surface: boardFaceZ() is +4.2 mm, half the
+  // rendered PCB's thickness out from its centre, plus the CPU's own 2.9 mm
+  // because the pump block clamps onto the heat spreader, plus the block's half
+  // depth and anchor offset.
+  //
+  // This was 54.3 mm while the board was centred on its MESH bounding box, which
+  // put the PCB's face 17.1 mm BEHIND the origin. Centring on the PCB moved the
+  // face to +4.2 mm, so everything mounted on the board moved out by 21.3 mm.
   it('places the cooler so its pump block meets the socket, on top of the CPU', () => {
     const centreMm = partCentre('cooler').map((v) => +(v / WU_PER_MM).toFixed(1))
-    expect(centreMm).toEqual([28.8, 129.4, 54.3])
+    expect(centreMm).toEqual([28.8, 129.4, 75.6])
+  })
+})
+
+// The assertion that was missing while BOTH of this scene's seating bugs were
+// live: the board rendered 13% undersized because it was scaled by its mesh
+// bounding box rather than its PCB, and the GPU straddled its mount point so
+// 90 mm of card hung off the back of the board. Every number involved was
+// self-consistent; nothing compared a part's position to the board it sits on.
+describe('board-mounted parts actually sit on the board', () => {
+  const board = () => partBox('motherboard')
+  const EPS = 1e-9
+
+  for (const category of ['cpu', 'ram', 'gpu', 'storage']) {
+    it(`${category} starts on the board rather than behind its rear edge`, () => {
+      expect(partBox(category).min[0]).toBeGreaterThanOrEqual(board().min[0] - EPS)
+    })
+
+    it(`${category} stays within the board's height`, () => {
+      expect(partBox(category).min[1]).toBeGreaterThanOrEqual(board().min[1] - EPS)
+      expect(partBox(category).max[1]).toBeLessThanOrEqual(board().max[1] + EPS)
+    })
+
+    it(`${category} sits on the PCB face, not inside the board`, () => {
+      expect(partBox(category).min[2]).toBeGreaterThanOrEqual(boardFaceZ() - EPS)
+    })
+  }
+
+  // A long card legitimately runs past the board's FRONT edge into the case —
+  // that is what makes the rear edge the one that has to be pinned.
+  it('lets a long GPU overhang the front edge, which is real', () => {
+    expect(partBox('gpu').max[0]).toBeGreaterThan(board().max[0])
   })
 })
 
 describe('board mesh versus the mount frame', () => {
   // BOARD.widthMm (244) is the ATX reference frame the mount points are measured
-  // in. The GLB is squarer than a real ATX board — about 302 mm front-to-back —
-  // so the two legitimately differ; the mesh is a generic stand-in, not a
-  // dimensionally exact ATX board. What must hold is that the rendered board is
-  // never NARROWER than the frame, or a mount point would hang off its edge.
+  // in. Now that the board is sized on its PCB rather than the mesh bounding box,
+  // the rendered board is 244.5 x 305 mm — the PCB's own aspect happens to be
+  // ATX's to within half a millimetre. It used to render 302 mm front-to-back,
+  // which is why this only ever asserted "not narrower than the frame".
+  // What must hold is that the board is never NARROWER than the frame, or a
+  // mount point would hang off its edge.
   it('renders a board at least as wide as the mount frame assumes', () => {
     expect(partSize('motherboard')[0]).toBeGreaterThanOrEqual(mm(BOARD.widthMm))
   })

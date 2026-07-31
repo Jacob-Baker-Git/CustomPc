@@ -8,7 +8,12 @@ describe('mountPoints', () => {
 
   it('keeps every mount point on the board', () => {
     for (const [name, m] of Object.entries(MOUNTS)) {
-      expect(Math.abs(m.xMm), name).toBeLessThanOrEqual(BOARD.widthMm / 2)
+      // A card placed by its rear edge has no xMm — it derives its X from the
+      // board's own rear edge, so it cannot fall off it by construction. The
+      // seating is asserted against the rendered geometry in assemblyGeometry.
+      if (m.xMm !== undefined) {
+        expect(Math.abs(m.xMm), name).toBeLessThanOrEqual(BOARD.widthMm / 2)
+      }
       expect(Math.abs(m.yMm), name).toBeLessThanOrEqual(BOARD.heightMm / 2)
     }
   })

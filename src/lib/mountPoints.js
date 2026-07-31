@@ -19,8 +19,15 @@ export const MOUNTS = {
   cooler: SOCKET,
   // DIMM slots run vertically, ahead of the socket, sticks spaced along X.
   ram: { xMm: 70, yMm: 40, pitchMm: 10 },
-  // Primary PCIe x16, below the socket. The card extends toward the case front.
-  gpu: { xMm: -70, yMm: -55 },
+  // Primary PCIe x16, below the socket.
+  //
+  // A long expansion card is placed by its BRACKET, not its centre: the bracket
+  // bolts to the case's rear panel and the card extends FORWARD from there.
+  // `xMm` treated -70 as the card's centre, so a 285 mm card straddled it and
+  // hung 90 mm off the back of the board — the reason the GPU never looked
+  // plugged in. `rearInsetMm` places its rear edge relative to the board's, so
+  // the position stays right for a card of any length.
+  gpu: { rearInsetMm: 0, yMm: -55 },
   // M.2 slot between the socket and the PCIe slot.
   storage: { xMm: -10, yMm: -20 },
 }
