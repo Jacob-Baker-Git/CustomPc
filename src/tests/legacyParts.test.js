@@ -8,9 +8,9 @@ const legacyIds = new Set(legacy.map((p) => p.id))
 
 // Discontinued parts exist so someone can say "this is what I already own" in
 // the upgrade flow, and so the browser is a useful reference. They must never be
-// RECOMMENDED: every part we suggest carries an affiliate link, and pointing
-// someone at a card that has not been made for six years is exactly the
-// misleading-price problem the terms page disclaims.
+// RECOMMENDED: a card that has not been made for six years cannot be bought at
+// anything like our recorded price, so suggesting one is advice nobody can act
+// on — the misleading-price problem the terms page disclaims.
 describe('legacy parts', () => {
   it('has legacy parts to test with', () => {
     expect(legacy.length).toBeGreaterThan(0)

@@ -11,7 +11,6 @@ import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
 import useSavedStore from '../store/useSavedStore'
 import { PANEL, PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
-import { AFFILIATE_DISCLOSURE } from '../lib/legalContent'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
 
@@ -222,12 +221,8 @@ export default function BuildSummary() {
             </>
           )}
 
-          {/* Sits with the "Find Best Price" links, not in a policy page: the
-              CMA and ASA both require the commission disclosure to be visible
-              before the click, and a footer link doesn't satisfy that. */}
           <p className="mt-4 text-[11px] text-muted leading-relaxed">
             Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data — use Find Best Price for current prices.
-            {' '}{AFFILIATE_DISCLOSURE}
           </p>
 
           <div className="flex flex-wrap gap-2 mt-5">

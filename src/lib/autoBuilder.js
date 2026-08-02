@@ -19,11 +19,10 @@ function weightsFor(resolution) {
 }
 
 // `legacy` parts are discontinued. They exist so the upgrade flow can say "this
-// is what I already own", not so we can recommend them — every recommendation
-// carries an affiliate link, and pointing someone at a card that has not been
-// made for years is the misleading-price problem the terms page disclaims. A
-// part already in the selection is still honoured; this only governs what we
-// reach for ourselves.
+// is what I already own", not so we can recommend them: you cannot go and buy a
+// six-year-old card at anything like our recorded price, so a build containing
+// one is advice that cannot be acted on. A part already in the selection is
+// still honoured; this only governs what we reach for ourselves.
 const ofCategory = (parts, c) => parts.filter((p) => p.category === c && !p.legacy)
 const drawOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.tdp ?? 0), 0)
 

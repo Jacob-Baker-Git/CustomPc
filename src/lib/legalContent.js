@@ -25,10 +25,13 @@ export const OPERATOR = {
 
 export const LAST_UPDATED = '1 August 2026'
 
-// Shown next to the outbound retailer links, not buried on a policy page: the
-// CMA and ASA both require the disclosure to be visible before the click.
-export const AFFILIATE_DISCLOSURE =
-  'Some links to retailers may earn us a commission if you buy something. It never changes the price you pay, and it never affects which parts we recommend.'
+// There is deliberately no AFFILIATE_DISCLOSURE here. The site has no affiliate
+// relationship with anyone and earns nothing from the outbound links, so there
+// is nothing to disclose — and saying otherwise would itself be inaccurate.
+//
+// If that ever changes, the disclosure has to come back in three places at once
+// (the parts listings, the summary price note and the footer), because the CMA
+// and ASA require it visible before the click rather than on a policy page.
 
 export const PRIVACY = {
   intro:
@@ -45,7 +48,8 @@ export const PRIVACY = {
     {
       heading: 'The feedback form is the only thing that reaches us',
       body: [
-        'If you submit feedback we store what you typed: a rating, a category, your message, and your email address if you chose to give one. The email field is optional and only used to reply to you.',
+        'If you submit feedback we store what you typed: a rating, a category and your message. There is no email field and we do not ask who you are, so feedback reaches us anonymously and we have no way to reply to it.',
+        'If you put your own contact details inside the message we will have them, because we store the message as written. Please do not, unless you mean to.',
         'We also store a one-way hash of your IP address. It exists solely to stop one person flooding the form, and it cannot be reversed back into your IP address.',
       ],
     },
@@ -53,16 +57,15 @@ export const PRIVACY = {
       heading: 'How long we keep it',
       body: [
         'The IP hash is erased automatically 30 days after submission.',
-        'Your email address is erased automatically 90 days after submission.',
-        'The message itself may be kept longer to inform how the site is improved, but once the above have been erased it is no longer linked to you.',
-        'These deletions run on a scheduled job — they are not something we have to remember to do.',
+        'The message itself may be kept longer to inform how the site is improved, but once the IP hash has gone there is nothing left linking it to you.',
+        'That deletion runs on a scheduled job — it is not something we have to remember to do.',
       ],
     },
     {
       heading: 'Where it is stored',
       body: [
         'Feedback is stored in a Supabase (PostgreSQL) database hosted in the European Union (Ireland).',
-        'It is not sold, shared, or used for marketing. We will never send you a newsletter — the only reason we would email you is to reply to feedback you sent us.',
+        'It is not sold, shared, or used for marketing. We could not send you a newsletter if we wanted to — we do not have your address.',
       ],
     },
     {
@@ -75,13 +78,13 @@ export const PRIVACY = {
     {
       heading: 'Lawful basis',
       body: [
-        'Where UK GDPR applies, we rely on legitimate interests: running the site, replying to people who contact us, and preventing abuse of the feedback form. Giving your email address is entirely your choice.',
+        'Where UK GDPR applies, we rely on legitimate interests: running the site and preventing abuse of the feedback form. That is the only purpose the IP hash serves, and it is the only personal data we hold.',
       ],
     },
     {
       heading: 'Your rights',
       body: [
-        'You can ask us for a copy of what we hold about you, ask us to correct it, or ask us to erase it. Because there are no accounts, please tell us the approximate date and content of your feedback so we can find it.',
+        'You can ask us for a copy of what we hold about you, ask us to correct it, or ask us to erase it. Because there are no accounts and feedback is anonymous, please tell us the approximate date and content of your message so we can find it.',
         'If you think we have handled your data badly you can complain to the Information Commissioner’s Office (ico.org.uk).',
       ],
     },
@@ -115,10 +118,10 @@ export const TERMS = {
       ],
     },
     {
-      heading: 'Affiliate links',
+      heading: 'Links to retailers',
       body: [
-        AFFILIATE_DISCLOSURE,
-        'We are not a retailer. You cannot buy anything here, we hold no stock, and we are not party to any purchase you make elsewhere. Your contract, your consumer rights, your warranty and your returns are all with whoever you buy from.',
+        'The links to retailers are ordinary links. We are not an affiliate of any shop, we earn no commission, and nothing we recommend is influenced by what anyone pays us — because nobody does.',
+        'We are not a retailer either. You cannot buy anything here, we hold no stock, and we are not party to any purchase you make elsewhere. Your contract, your consumer rights, your warranty and your returns are all with whoever you buy from.',
       ],
     },
     {

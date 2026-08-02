@@ -1,17 +1,28 @@
 import { describe, it, expect } from 'vitest'
-import { PRIVACY, TERMS, OPERATOR, AFFILIATE_DISCLOSURE, LAST_UPDATED } from '../lib/legalContent'
+import * as legal from '../lib/legalContent'
+import { PRIVACY, TERMS, OPERATOR, LAST_UPDATED } from '../lib/legalContent'
 
 const allText = (doc) => [doc.intro, ...doc.sections.flatMap((s) => [s.heading, ...s.body])].join(' ')
 
 describe('legal content', () => {
-  it('states the retention periods the database actually enforces', () => {
-    // These numbers are the ones in the `purge_feedback_personal_data` pg_cron
-    // job (ip_hash at 30 days, email at 90). If someone changes the job without
-    // changing the page, the privacy notice becomes a false statement — which is
-    // a worse position than having no notice at all.
+  it('states the retention period the database actually enforces', () => {
+    // This number is the one in the `purge_feedback_personal_data` pg_cron job
+    // (ip_hash at 30 days). If someone changes the job without changing the
+    // page, the privacy notice becomes a false statement — which is a worse
+    // position than having no notice at all.
     const text = allText(PRIVACY)
     expect(text).toMatch(/IP hash is erased automatically 30 days/)
-    expect(text).toMatch(/email address is erased automatically 90 days/)
+  })
+
+  // The form collects no email address. These assertions are the whole reason
+  // the ICO fee question is answerable, so they guard the claim from both
+  // directions: the page must say we do not ask, and must not carry the old
+  // "erased after 90 days" promise that implied we do.
+  it('does not claim to collect or retain an email address', () => {
+    const text = allText(PRIVACY)
+    expect(text).toMatch(/no email field/i)
+    expect(text).not.toMatch(/email address is erased/i)
+    expect(text).not.toMatch(/if you chose to give one/i)
   })
 
   it('tells people their builds are local and a share link is public', () => {
@@ -34,14 +45,17 @@ describe('legal content', () => {
     expect(text).toMatch(/Compatibility/i)
   })
 
-  it('says commission never changes the price or the recommendations', () => {
-    expect(AFFILIATE_DISCLOSURE).toMatch(/commission/i)
-    expect(AFFILIATE_DISCLOSURE).toMatch(/never changes the price/i)
-    expect(AFFILIATE_DISCLOSURE).toMatch(/never affects which parts/i)
+  // There is no affiliate relationship, so there is no disclosure to render.
+  // If a tag is ever reintroduced this has to be reversed deliberately rather
+  // than by someone quietly re-exporting the constant.
+  it('exports no affiliate disclosure, because there is no affiliation', () => {
+    expect(legal.AFFILIATE_DISCLOSURE).toBeUndefined()
   })
 
-  it('carries the affiliate disclosure into the terms page too', () => {
-    expect(allText(TERMS)).toContain(AFFILIATE_DISCLOSURE)
+  it('states plainly on the terms page that we earn no commission', () => {
+    const text = allText(TERMS)
+    expect(text).toMatch(/not an affiliate/i)
+    expect(text).toMatch(/earn no commission/i)
   })
 
   it('has a last-updated date', () => {
