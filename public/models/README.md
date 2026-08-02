@@ -30,10 +30,15 @@ model without crediting it fails the suite rather than quietly infringing.
 | `ram.glb` | Corsairn VENGEANCE RGB PRO | Nouraiz | https://sketchfab.com/3d-models/corsairn-vengeance-rgb-pro-9b163c4d5ad34edca58488500b5f4daf |
 
 The bottom six URLs were recovered on 2026-08-01 by searching Sketchfab for the
-recorded author + title, matching on both. Licence confirmed **CC Attribution**
-for `gpu.glb`, `storage.glb` and `ram.glb`; `motherboard.glb`, `cooler.glb` and
-`psu.glb` are listed as free downloads but their licence text renders
-client-side and could not be read automatically — worth eyeballing once.
+recorded author + title, matching on both.
+
+**Licence verified `CC Attribution` for all eight models.** `gpu.glb`,
+`storage.glb` and `ram.glb` were confirmed on 2026-08-01 from the retrieved
+listing; `motherboard.glb`, `cooler.glb` and `psu.glb` on 2026-08-02 by opening
+their pages in a real browser. Sketchfab renders its licence text client-side,
+so `fetch`/curl returns an empty page — those three were unverified for that
+reason alone, not because anything looked doubtful. If a model is ever swapped,
+verify the replacement the same way: load the page, don't fetch it.
 
 Staged in `/models-staging/`, not yet in use:
 

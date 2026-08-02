@@ -23,10 +23,12 @@ export const FPS_CAVEAT =
 // been written down. Each URL was matched on BOTH author and title, and the
 // titles below are now the exact Sketchfab titles rather than paraphrases.
 //
-// Licence spot-checks: gpu, storage and ram were confirmed "CC Attribution" from
-// the retrieved page/listing. motherboard, cooler and psu are all listed as
-// "Download Free 3D model" but their licence text could not be read
-// programmatically (Sketchfab renders it client-side) — worth eyeballing once.
+// Licence: ALL EIGHT verified "CC Attribution" on their Sketchfab pages.
+// gpu, storage and ram were confirmed 2026-08-01 from the retrieved listing;
+// motherboard, cooler and psu on 2026-08-02 by loading the pages in a real
+// browser. Sketchfab renders licence text client-side, so a plain fetch returns
+// an empty page — that is why the last three sat unverified, not because there
+// was any doubt. Re-check the same way if a model is ever swapped.
 export const MODEL_CREDITS = [
   { file: 'cpu.glb', part: 'CPU', title: 'PC CPU processor', author: 'apleesee', source: 'https://sketchfab.com/3d-models/pc-cpu-processor-efb6b95b255c4a37a9661df178ea3bb3' },
   { file: 'fan.glb', part: 'Case fans', title: '120mm Computer Fans', author: 'kusuma844', source: 'https://sketchfab.com/3d-models/120mm-computer-fans-6c17bfc4a2a5438eb9996fb3c73e1a91' },
