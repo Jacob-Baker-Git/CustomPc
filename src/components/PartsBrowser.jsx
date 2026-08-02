@@ -65,7 +65,17 @@ export default function PartsBrowser() {
         {results.map((p) => (
           <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2">
             <div className="min-w-0">
-              <p className="text-sm text-ink truncate">{p.name}</p>
+              <p className="text-sm text-ink truncate">
+                {p.name}
+                {/* Say so plainly. These are listed so you can tell us what you
+                    already own; the retailer link will mostly find used or
+                    third-party stock at whatever price it likes. */}
+                {p.legacy && (
+                  <span className="ml-2 align-middle text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
+                    Discontinued
+                  </span>
+                )}
+              </p>
               <p className="text-xs text-muted capitalize">{p.category} · {p.brand}{p.perfScore ? ` · perf ${p.perfScore}` : ''}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">

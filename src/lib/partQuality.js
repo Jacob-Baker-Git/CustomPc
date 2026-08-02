@@ -11,10 +11,15 @@ function radiatorMm(radiator) {
 // decides lane count, VRM class, memory support and how far the board can be
 // pushed. Without this every board scored identically, which quietly made a
 // ninth of the build unratable.
+// Previous-generation chipsets sit below their current-generation equivalents:
+// fewer lanes, older PCIe, and in the LGA1200 B-series a locked memory
+// multiplier. Without these entries every AM4/LGA1200 board fell through to the
+// default 50 — which made a B450 rank above a B650 and put a ninth of any
+// legacy-platform build on a made-up number.
 const CHIPSET_TIER = {
   X870E: 100, X670E: 96, Z890: 95, X870: 88, X670: 85, Z790: 84,
-  B850: 72, B860: 70, B650E: 68, B760: 56, B650: 52,
-  A620: 30, H610: 28,
+  B850: 72, B860: 70, B650E: 68, X570: 60, B760: 56, Z590: 56, B650: 52,
+  Z490: 50, B550: 48, B560: 40, B450: 32, A620: 30, B460: 30, H610: 28,
 }
 
 const FAN_SIZE_MM = (size) => (/(\d{2,3})/.exec(String(size ?? '')) ? Number(/(\d{2,3})/.exec(String(size))[1]) : 0)

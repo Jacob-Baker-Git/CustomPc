@@ -248,6 +248,8 @@ export function partUpgradeOptions(parts, useCase, category, catalog, { game = n
   const out = []
   for (const cand of catalog) {
     if (cand.category !== category) continue
+    // Never suggest upgrading TO something discontinued — see autoBuilder.
+    if (cand.legacy) continue
     if (partLevel(cand, catalog) <= curLevel) continue
     if (cand.price <= current.price) continue
     if (!checkCompatibility(parts, cand).compatible) continue

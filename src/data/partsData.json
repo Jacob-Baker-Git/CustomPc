@@ -9,7 +9,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X670E"
     }
@@ -24,7 +23,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X670E"
     }
@@ -39,7 +37,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z790"
     }
@@ -54,7 +51,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 10,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -69,7 +65,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -84,7 +79,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -99,7 +93,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -114,7 +107,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 9,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "A620"
     }
@@ -129,7 +121,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z790"
     }
@@ -144,7 +135,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 16,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z790"
     }
@@ -159,7 +149,6 @@
     "formFactor": "ATX",
     "ramType": "DDR4",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -174,7 +163,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -189,7 +177,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 9,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "H610"
     }
@@ -204,7 +191,6 @@
     "formFactor": "ITX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -219,7 +205,6 @@
     "formFactor": "ITX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650E"
     }
@@ -234,7 +219,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 14,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X670E"
     }
@@ -249,7 +233,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -264,7 +247,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 13,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X670"
     }
@@ -279,7 +261,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 16,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z790"
     }
@@ -294,7 +275,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 13,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z790"
     }
@@ -309,7 +289,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -323,7 +302,6 @@
     "socket": "AM5",
     "tdp": 170,
     "perfScore": 98,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.7
@@ -338,7 +316,6 @@
     "socket": "AM5",
     "tdp": 105,
     "perfScore": 80,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5.4
@@ -353,7 +330,6 @@
     "socket": "AM5",
     "tdp": 105,
     "perfScore": 70,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5.3
@@ -368,7 +344,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 100,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 5.8
@@ -383,7 +358,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 86,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.4
@@ -398,7 +372,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 78,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 14,
       "boostClock": 5.1
@@ -413,7 +386,6 @@
     "socket": "AM5",
     "tdp": 170,
     "perfScore": 92,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 12,
       "boostClock": 5.6
@@ -428,7 +400,6 @@
     "socket": "AM5",
     "tdp": 120,
     "perfScore": 88,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5
@@ -443,7 +414,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 67,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5.1
@@ -458,7 +428,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 52,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5
@@ -473,7 +442,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 99,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 5.8
@@ -488,7 +456,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 83,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.2
@@ -503,7 +470,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 64,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 10,
       "boostClock": 4.6
@@ -518,7 +484,6 @@
     "socket": "LGA1700",
     "tdp": 58,
     "perfScore": 45,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 4,
       "boostClock": 4.5
@@ -533,7 +498,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 58,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 4.4
@@ -548,7 +512,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 90,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 12,
       "boostClock": 5.4
@@ -563,7 +526,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 79,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5.3
@@ -578,7 +540,6 @@
     "socket": "AM5",
     "tdp": 120,
     "perfScore": 96,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.7
@@ -593,7 +554,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 68,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5.1
@@ -608,7 +568,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 100,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 6
@@ -623,7 +582,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 89,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 20,
       "boostClock": 5.6
@@ -638,7 +596,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 80,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 14,
       "boostClock": 5.3
@@ -653,7 +610,6 @@
     "tdp": 450,
     "length": 336,
     "perfScore": 100,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 24,
       "memType": "GDDR6X"
@@ -668,7 +624,6 @@
     "tdp": 285,
     "length": 336,
     "perfScore": 72,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6X"
@@ -683,7 +638,6 @@
     "tdp": 165,
     "length": 240,
     "perfScore": 50,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -698,7 +652,6 @@
     "tdp": 355,
     "length": 287,
     "perfScore": 88,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 24,
       "memType": "GDDR6"
@@ -713,7 +666,6 @@
     "tdp": 165,
     "length": 210,
     "perfScore": 42,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -728,7 +680,6 @@
     "tdp": 320,
     "length": 336,
     "perfScore": 85,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6X"
@@ -743,7 +694,6 @@
     "tdp": 200,
     "length": 285,
     "perfScore": 62,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6X"
@@ -758,7 +708,6 @@
     "tdp": 115,
     "length": 200,
     "perfScore": 40,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -773,7 +722,6 @@
     "tdp": 315,
     "length": 276,
     "perfScore": 78,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 20,
       "memType": "GDDR6"
@@ -788,7 +736,6 @@
     "tdp": 263,
     "length": 267,
     "perfScore": 64,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -803,7 +750,6 @@
     "tdp": 245,
     "length": 267,
     "perfScore": 56,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6"
@@ -818,7 +764,6 @@
     "tdp": 180,
     "length": 245,
     "perfScore": 38,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -833,7 +778,6 @@
     "tdp": 130,
     "length": 200,
     "perfScore": 28,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -848,7 +792,6 @@
     "tdp": 125,
     "length": 229,
     "perfScore": 22,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 6,
       "memType": "GDDR6"
@@ -863,7 +806,6 @@
     "tdp": 285,
     "length": 304,
     "perfScore": 76,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6X"
@@ -878,7 +820,6 @@
     "tdp": 220,
     "length": 304,
     "perfScore": 68,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6X"
@@ -893,7 +834,6 @@
     "tdp": 165,
     "length": 240,
     "perfScore": 52,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -908,7 +848,6 @@
     "tdp": 190,
     "length": 267,
     "perfScore": 46,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -923,7 +862,6 @@
     "tdp": 250,
     "length": 267,
     "perfScore": 48,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6"
@@ -938,7 +876,6 @@
     "tdp": 225,
     "length": 280,
     "perfScore": 44,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -954,7 +891,6 @@
     "speed": 5600,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -969,7 +905,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -984,7 +919,6 @@
     "speed": 3200,
     "capacityGb": 32,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -999,7 +933,6 @@
     "speed": 5200,
     "capacityGb": 16,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1014,7 +947,6 @@
     "speed": 6400,
     "capacityGb": 64,
     "tdp": 8,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1029,7 +961,6 @@
     "speed": 6000,
     "capacityGb": 64,
     "tdp": 8,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1044,7 +975,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1059,7 +989,6 @@
     "speed": 4800,
     "capacityGb": 16,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1074,7 +1003,6 @@
     "speed": 3600,
     "capacityGb": 16,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1089,7 +1017,6 @@
     "speed": 3200,
     "capacityGb": 16,
     "tdp": 3,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1104,7 +1031,6 @@
     "speed": 3200,
     "capacityGb": 32,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1119,7 +1045,6 @@
     "speed": 3600,
     "capacityGb": 32,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1134,7 +1059,6 @@
     "speed": 6400,
     "capacityGb": 48,
     "tdp": 7,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1149,7 +1073,6 @@
     "speed": 6400,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1164,7 +1087,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1179,7 +1101,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1194,7 +1115,6 @@
     "speed": 3200,
     "capacityGb": 64,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1209,7 +1129,6 @@
     "speed": 3200,
     "capacityGb": 16,
     "tdp": 3,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1224,7 +1143,6 @@
     "speed": 3600,
     "capacityGb": 32,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1239,7 +1157,6 @@
     "speed": 3200,
     "capacityGb": 16,
     "tdp": 3,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -1253,7 +1170,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7450
     }
@@ -1267,7 +1183,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7300
     }
@@ -1281,7 +1196,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 3500
     }
@@ -1295,7 +1209,6 @@
     "storageType": "HDD",
     "capacityGb": 2000,
     "tdp": 6,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 190
     }
@@ -1309,7 +1222,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 4000,
     "tdp": 8,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7450
     }
@@ -1323,7 +1235,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7300
     }
@@ -1337,7 +1248,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 10,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 12400
     }
@@ -1351,7 +1261,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 500,
     "tdp": 4,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 3500
     }
@@ -1365,7 +1274,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 3500
     }
@@ -1379,7 +1287,6 @@
     "storageType": "SATA SSD",
     "capacityGb": 1000,
     "tdp": 4,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 560
     }
@@ -1393,7 +1300,6 @@
     "storageType": "SATA SSD",
     "capacityGb": 500,
     "tdp": 3,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 560
     }
@@ -1407,7 +1313,6 @@
     "storageType": "HDD",
     "capacityGb": 4000,
     "tdp": 7,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 190
     }
@@ -1421,7 +1326,6 @@
     "storageType": "HDD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 150
     }
@@ -1435,7 +1339,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7450
     }
@@ -1449,7 +1352,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 5150
     }
@@ -1463,7 +1365,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 3500
     }
@@ -1477,7 +1378,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7400
     }
@@ -1491,7 +1391,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 4000,
     "tdp": 8,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7300
     }
@@ -1505,7 +1404,6 @@
     "storageType": "SATA SSD",
     "capacityGb": 2000,
     "tdp": 4,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 560
     }
@@ -1519,7 +1417,6 @@
     "storageType": "HDD",
     "capacityGb": 8000,
     "tdp": 8,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 210
     }
@@ -1532,7 +1429,6 @@
     "price": 169.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1545,7 +1441,6 @@
     "price": 109.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -1558,7 +1453,6 @@
     "price": 89.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1571,7 +1465,6 @@
     "price": 59.99,
     "wattage": 550,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Bronze"
     }
@@ -1584,7 +1477,6 @@
     "price": 139.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1597,7 +1489,6 @@
     "price": 119.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1610,7 +1501,6 @@
     "price": 229.99,
     "wattage": 1200,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -1623,7 +1513,6 @@
     "price": 64.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Bronze"
     }
@@ -1636,7 +1525,6 @@
     "price": 84.99,
     "wattage": 600,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1649,7 +1537,6 @@
     "price": 269.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Titanium"
     }
@@ -1662,7 +1549,6 @@
     "price": 159.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -1675,7 +1561,6 @@
     "price": 44.99,
     "wattage": 500,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Bronze"
     }
@@ -1688,7 +1573,6 @@
     "price": 129.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1701,7 +1585,6 @@
     "price": 99.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1714,7 +1597,6 @@
     "price": 189.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1727,7 +1609,6 @@
     "price": 199.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Titanium"
     }
@@ -1740,7 +1621,6 @@
     "price": 179.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1753,7 +1633,6 @@
     "price": 139.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1766,7 +1645,6 @@
     "price": 74.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -1779,7 +1657,6 @@
     "price": 199.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -1798,7 +1675,6 @@
     "maxGpuLength": 467,
     "maxCoolerHeight": 188,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1817,7 +1693,6 @@
     "maxGpuLength": 381,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1836,7 +1711,6 @@
     "maxGpuLength": 369,
     "maxCoolerHeight": 190,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1854,7 +1728,6 @@
     "maxGpuLength": 270,
     "maxCoolerHeight": 159,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini Tower"
     }
@@ -1873,7 +1746,6 @@
     "maxGpuLength": 355,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1892,7 +1764,6 @@
     "maxGpuLength": 426,
     "maxCoolerHeight": 167,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1911,7 +1782,6 @@
     "maxGpuLength": 360,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1930,7 +1800,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 185,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -1949,7 +1818,6 @@
     "maxGpuLength": 461,
     "maxCoolerHeight": 185,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Full Tower"
     }
@@ -1966,7 +1834,6 @@
     "maxGpuLength": 330,
     "maxCoolerHeight": 155,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -1983,7 +1850,6 @@
     "maxGpuLength": 322,
     "maxCoolerHeight": 67,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -2002,7 +1868,6 @@
     "maxGpuLength": 360,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2021,7 +1886,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 162,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2040,7 +1904,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 176,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2059,7 +1922,6 @@
     "maxGpuLength": 362,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2078,7 +1940,6 @@
     "maxGpuLength": 420,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2097,7 +1958,6 @@
     "maxGpuLength": 435,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2116,7 +1976,6 @@
     "maxGpuLength": 405,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2133,7 +1992,6 @@
     "maxGpuLength": 336,
     "maxCoolerHeight": 155,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -2152,7 +2010,6 @@
     "maxGpuLength": 420,
     "maxCoolerHeight": 161,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -2171,7 +2028,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 165
@@ -2191,7 +2047,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 162
@@ -2211,7 +2066,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 158
@@ -2231,7 +2085,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -2251,7 +2104,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -2271,7 +2123,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 158
@@ -2291,7 +2142,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 160
@@ -2311,7 +2161,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 155
@@ -2331,7 +2180,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -2351,7 +2199,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -2371,7 +2218,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -2388,7 +2234,6 @@
       "AM4"
     ],
     "tdp": 3,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 37
@@ -2408,7 +2253,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 155
@@ -2428,7 +2272,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 155
@@ -2448,7 +2291,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 155
@@ -2468,7 +2310,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 165
@@ -2488,7 +2329,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -2508,7 +2348,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -2528,7 +2367,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -2548,7 +2386,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 125
@@ -2561,7 +2398,6 @@
     "brand": "Arctic",
     "price": 6.49,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2575,7 +2411,6 @@
     "brand": "Arctic",
     "price": 24.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2589,7 +2424,6 @@
     "brand": "Arctic",
     "price": 8.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -2603,7 +2437,6 @@
     "brand": "Noctua",
     "price": 29.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2617,7 +2450,6 @@
     "brand": "Noctua",
     "price": 24.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -2631,7 +2463,6 @@
     "brand": "Corsair",
     "price": 59.99,
     "tdp": 8,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2645,7 +2476,6 @@
     "brand": "Corsair",
     "price": 64.99,
     "tdp": 8,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2659,7 +2489,6 @@
     "brand": "Lian Li",
     "price": 54.99,
     "tdp": 8,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2673,7 +2502,6 @@
     "brand": "Lian Li",
     "price": 19.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2687,7 +2515,6 @@
     "brand": "Arctic",
     "price": 7.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -2701,7 +2528,6 @@
     "brand": "be quiet!",
     "price": 22.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2715,7 +2541,6 @@
     "brand": "Cooler Master",
     "price": 34.99,
     "tdp": 7,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2729,7 +2554,6 @@
     "brand": "DeepCool",
     "price": 29.99,
     "tdp": 7,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2743,7 +2567,6 @@
     "brand": "NZXT",
     "price": 19.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2757,7 +2580,6 @@
     "brand": "Thermaltake",
     "price": 32.99,
     "tdp": 5,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 2,
@@ -2771,7 +2593,6 @@
     "brand": "Arctic",
     "price": 21.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 3,
@@ -2785,7 +2606,6 @@
     "brand": "Noctua",
     "price": 32.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2799,7 +2619,6 @@
     "brand": "Corsair",
     "price": 79.99,
     "tdp": 8,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -2813,7 +2632,6 @@
     "brand": "Lian Li",
     "price": 49.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 2,
@@ -2827,7 +2645,6 @@
     "brand": "Arctic",
     "price": 9.99,
     "tdp": 3,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -2884,7 +2701,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 16,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z890"
     }
@@ -2899,7 +2715,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z890"
     }
@@ -2914,7 +2729,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 13,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z890"
     }
@@ -2929,7 +2743,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B860"
     }
@@ -2943,7 +2756,6 @@
     "socket": "AM5",
     "tdp": 170,
     "perfScore": 106,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.7
@@ -2958,7 +2770,6 @@
     "socket": "AM5",
     "tdp": 170,
     "perfScore": 103,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.7
@@ -2973,7 +2784,6 @@
     "socket": "AM5",
     "tdp": 120,
     "perfScore": 100,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5.2
@@ -2988,7 +2798,6 @@
     "socket": "AM5",
     "tdp": 120,
     "perfScore": 94,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 12,
       "boostClock": 5.6
@@ -3003,7 +2812,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 84,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5.5
@@ -3018,7 +2826,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 74,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5.4
@@ -3033,7 +2840,6 @@
     "socket": "LGA1851",
     "tdp": 125,
     "perfScore": 101,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 5.7
@@ -3048,7 +2854,6 @@
     "socket": "LGA1851",
     "tdp": 125,
     "perfScore": 90,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 20,
       "boostClock": 5.5
@@ -3063,7 +2868,6 @@
     "socket": "LGA1851",
     "tdp": 125,
     "perfScore": 80,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 14,
       "boostClock": 5.2
@@ -3078,7 +2882,6 @@
     "tdp": 575,
     "length": 357,
     "perfScore": 132,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 32,
       "memType": "GDDR7"
@@ -3093,7 +2896,6 @@
     "tdp": 360,
     "length": 340,
     "perfScore": 93,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR7"
@@ -3108,7 +2910,6 @@
     "tdp": 300,
     "length": 300,
     "perfScore": 86,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR7"
@@ -3123,7 +2924,6 @@
     "tdp": 250,
     "length": 250,
     "perfScore": 70,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR7"
@@ -3138,7 +2938,6 @@
     "tdp": 180,
     "length": 245,
     "perfScore": 55,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR7"
@@ -3153,7 +2952,6 @@
     "tdp": 145,
     "length": 200,
     "perfScore": 46,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR7"
@@ -3168,7 +2966,6 @@
     "tdp": 304,
     "length": 287,
     "perfScore": 80,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -3183,7 +2980,6 @@
     "tdp": 220,
     "length": 267,
     "perfScore": 72,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -3198,7 +2994,6 @@
     "tdp": 160,
     "length": 245,
     "perfScore": 53,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -3213,7 +3008,6 @@
     "tdp": 190,
     "length": 270,
     "perfScore": 43,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6"
@@ -3229,7 +3023,6 @@
     "speed": 8000,
     "capacityGb": 32,
     "tdp": 7,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3244,7 +3037,6 @@
     "speed": 6400,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3259,7 +3051,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X870"
     }
@@ -3274,7 +3065,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X870E"
     }
@@ -3289,7 +3079,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -3304,7 +3093,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -3319,7 +3107,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B860"
     }
@@ -3334,7 +3121,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3349,7 +3135,6 @@
     "speed": 5600,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3364,7 +3149,6 @@
     "speed": 6400,
     "capacityGb": 48,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3379,7 +3163,6 @@
     "speed": 6000,
     "capacityGb": 64,
     "tdp": 7,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3393,7 +3176,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 5000
     }
@@ -3407,7 +3189,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 5150
     }
@@ -3421,7 +3202,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 9,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 14700
     }
@@ -3435,7 +3215,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7000
     }
@@ -3449,7 +3228,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 4150
     }
@@ -3463,7 +3241,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7000
     }
@@ -3476,7 +3253,6 @@
     "price": 119.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3489,7 +3265,6 @@
     "price": 99.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3502,7 +3277,6 @@
     "price": 139.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3515,7 +3289,6 @@
     "price": 109.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3528,7 +3301,6 @@
     "price": 149.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3541,7 +3313,6 @@
     "price": 199.99,
     "wattage": 1200,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3560,7 +3331,6 @@
     "maxGpuLength": 392,
     "maxCoolerHeight": 180,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -3579,7 +3349,6 @@
     "maxGpuLength": 372,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -3596,7 +3365,6 @@
     "maxGpuLength": 322,
     "maxCoolerHeight": 77,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -3615,7 +3383,6 @@
     "maxGpuLength": 365,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -3634,7 +3401,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 168,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -3653,7 +3419,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 154
@@ -3672,7 +3437,6 @@
       "LGA1851"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "280mm"
@@ -3691,7 +3455,6 @@
       "LGA1851"
     ],
     "tdp": 10,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -3710,7 +3473,6 @@
       "LGA1200"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 150
@@ -3729,7 +3491,6 @@
       "LGA1851"
     ],
     "tdp": 6,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 168
@@ -3742,7 +3503,6 @@
     "brand": "Noctua",
     "price": 39.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -3756,7 +3516,6 @@
     "brand": "Arctic",
     "price": 24.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 4,
@@ -3796,7 +3555,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 63,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5
@@ -3811,7 +3569,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 66,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 10,
       "boostClock": 4.7
@@ -3826,7 +3583,6 @@
     "tdp": 320,
     "length": 336,
     "perfScore": 87,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6X"
@@ -3841,7 +3597,6 @@
     "tdp": 170,
     "length": 242,
     "perfScore": 34,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6"
@@ -3856,7 +3611,6 @@
     "tdp": 132,
     "length": 190,
     "perfScore": 30,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -3872,7 +3626,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -3887,7 +3640,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 13,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -3902,7 +3654,6 @@
     "speed": 5600,
     "capacityGb": 16,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3917,7 +3668,6 @@
     "speed": 3600,
     "capacityGb": 32,
     "tdp": 4,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -3931,7 +3681,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7250
     }
@@ -3945,7 +3694,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7100
     }
@@ -3958,7 +3706,6 @@
     "price": 79.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -3971,7 +3718,6 @@
     "price": 169.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -3990,7 +3736,6 @@
     "maxGpuLength": 365,
     "maxCoolerHeight": 163,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4009,7 +3754,6 @@
     "maxGpuLength": 467,
     "maxCoolerHeight": 185,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4027,7 +3771,6 @@
       "LGA1851"
     ],
     "tdp": 4,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 159
@@ -4046,7 +3789,6 @@
       "LGA1851"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -4059,7 +3801,6 @@
     "brand": "Noctua",
     "price": 13.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -4083,7 +3824,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 70,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 14,
       "boostClock": 4.8
@@ -4098,7 +3838,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 87,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 20,
       "boostClock": 5.4
@@ -4113,7 +3852,6 @@
     "socket": "LGA1700",
     "tdp": 150,
     "perfScore": 102,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 6.2
@@ -4128,7 +3866,6 @@
     "socket": "AM5",
     "tdp": 120,
     "perfScore": 93,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 12,
       "boostClock": 5.6
@@ -4143,7 +3880,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 72,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5.2
@@ -4158,7 +3894,6 @@
     "socket": "LGA1700",
     "tdp": 58,
     "perfScore": 47,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 4,
       "boostClock": 4.7
@@ -4173,7 +3908,6 @@
     "tdp": 220,
     "length": 242,
     "perfScore": 46,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -4188,7 +3922,6 @@
     "tdp": 320,
     "length": 285,
     "perfScore": 60,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 10,
       "memType": "GDDR6X"
@@ -4203,7 +3936,6 @@
     "tdp": 230,
     "length": 267,
     "perfScore": 45,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6"
@@ -4218,7 +3950,6 @@
     "tdp": 260,
     "length": 287,
     "perfScore": 70,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -4233,7 +3964,6 @@
     "tdp": 150,
     "length": 244,
     "perfScore": 38,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 10,
       "memType": "GDDR6"
@@ -4249,7 +3979,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -4264,7 +3993,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 14,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -4279,7 +4007,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -4294,7 +4021,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650E"
     }
@@ -4309,7 +4035,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -4324,7 +4049,6 @@
     "speed": 5600,
     "capacityGb": 16,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -4339,7 +4063,6 @@
     "speed": 6000,
     "capacityGb": 16,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -4354,7 +4077,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -4369,7 +4091,6 @@
     "speed": 5600,
     "capacityGb": 64,
     "tdp": 6,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -4384,7 +4105,6 @@
     "speed": 3200,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -4398,7 +4118,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7250
     }
@@ -4412,7 +4131,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 4150
     }
@@ -4426,7 +4144,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 5000
     }
@@ -4440,7 +4157,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7300
     }
@@ -4454,7 +4170,6 @@
     "storageType": "SATA SSD",
     "capacityGb": 4000,
     "tdp": 3,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 560
     }
@@ -4468,7 +4183,6 @@
     "storageType": "HDD",
     "capacityGb": 1000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 210
     }
@@ -4481,7 +4195,6 @@
     "price": 109.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -4494,7 +4207,6 @@
     "price": 159.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -4507,7 +4219,6 @@
     "price": 94.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -4520,7 +4231,6 @@
     "price": 119.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -4533,7 +4243,6 @@
     "price": 109.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -4552,7 +4261,6 @@
     "maxGpuLength": 341,
     "maxCoolerHeight": 169,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4571,7 +4279,6 @@
     "maxGpuLength": 432,
     "maxCoolerHeight": 185,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4590,7 +4297,6 @@
     "maxGpuLength": 435,
     "maxCoolerHeight": 185,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4609,7 +4315,6 @@
     "maxGpuLength": 375,
     "maxCoolerHeight": 160,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4628,7 +4333,6 @@
     "maxGpuLength": 410,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -4647,7 +4351,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 168
@@ -4667,7 +4370,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -4686,7 +4388,6 @@
       "LGA1851"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -4706,7 +4407,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 154
@@ -4726,7 +4426,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 158
@@ -4739,7 +4438,6 @@
     "brand": "be quiet!",
     "price": 24.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -4753,7 +4451,6 @@
     "brand": "Noctua",
     "price": 39.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -4767,7 +4464,6 @@
     "brand": "Phanteks",
     "price": 89.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -4781,7 +4477,6 @@
     "brand": "Corsair",
     "price": 119.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -4795,7 +4490,6 @@
     "brand": "Arctic",
     "price": 10.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 1,
@@ -4827,7 +4521,6 @@
     "socket": "LGA1700",
     "tdp": 58,
     "perfScore": 40,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 4,
       "boostClock": 4.3
@@ -4842,7 +4535,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 50,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 4.7
@@ -4857,7 +4549,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 74,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 14,
       "boostClock": 5.3
@@ -4872,7 +4563,6 @@
     "tdp": 75,
     "length": 200,
     "perfScore": 14,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 6,
       "memType": "GDDR6"
@@ -4887,7 +4577,6 @@
     "tdp": 107,
     "length": 200,
     "perfScore": 16,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 4,
       "memType": "GDDR6"
@@ -4902,7 +4591,6 @@
     "tdp": 75,
     "length": 229,
     "perfScore": 15,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 4,
       "memType": "GDDR6"
@@ -4917,7 +4605,6 @@
     "tdp": 70,
     "length": 200,
     "perfScore": 20,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 6,
       "memType": "GDDR6"
@@ -4933,7 +4620,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 10,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "H610"
     }
@@ -4948,7 +4634,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 10,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "A620"
     }
@@ -4963,7 +4648,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -4978,7 +4662,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -4993,7 +4676,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -5008,7 +4690,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X870E"
     }
@@ -5023,7 +4704,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "X870E"
     }
@@ -5038,7 +4718,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 15,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z890"
     }
@@ -5053,7 +4732,6 @@
     "speed": 3200,
     "capacityGb": 16,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -5068,7 +4746,6 @@
     "speed": 5600,
     "capacityGb": 16,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -5083,7 +4760,6 @@
     "speed": 7200,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -5098,7 +4774,6 @@
     "speed": 6400,
     "capacityGb": 64,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -5112,7 +4787,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 500,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 6000
     }
@@ -5126,7 +4800,6 @@
     "storageType": "HDD",
     "capacityGb": 2000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 190
     }
@@ -5140,7 +4813,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 4000,
     "tdp": 9,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7300
     }
@@ -5153,7 +4825,6 @@
     "price": 39.99,
     "wattage": 500,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ White"
     }
@@ -5166,7 +4837,6 @@
     "price": 69.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Bronze"
     }
@@ -5179,7 +4849,6 @@
     "price": 89.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -5192,7 +4861,6 @@
     "price": 109.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -5205,7 +4873,6 @@
     "price": 329.99,
     "wattage": 1200,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -5224,7 +4891,6 @@
     "maxGpuLength": 330,
     "maxCoolerHeight": 160,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -5242,7 +4908,6 @@
     "maxGpuLength": 350,
     "maxCoolerHeight": 155,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini Tower"
     }
@@ -5261,7 +4926,6 @@
     "maxGpuLength": 371,
     "maxCoolerHeight": 155,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -5280,7 +4944,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 185,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -5299,7 +4962,6 @@
     "maxGpuLength": 430,
     "maxCoolerHeight": 190,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -5318,7 +4980,6 @@
     "maxGpuLength": 460,
     "maxCoolerHeight": 167,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Full Tower"
     }
@@ -5337,7 +4998,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -5356,7 +5016,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 155
@@ -5376,7 +5035,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 150
@@ -5396,7 +5054,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 168
@@ -5409,7 +5066,6 @@
     "brand": "Thermalright",
     "price": 13.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -5423,7 +5079,6 @@
     "brand": "Arctic",
     "price": 24.99,
     "tdp": 10,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 5,
@@ -5437,7 +5092,6 @@
     "brand": "be quiet!",
     "price": 24.99,
     "tdp": 4,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 2,
@@ -5451,7 +5105,6 @@
     "brand": "Noctua",
     "price": 39.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -5465,7 +5118,6 @@
     "brand": "Noctua",
     "price": 69.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 3,
@@ -5479,7 +5131,6 @@
     "brand": "Lian Li",
     "price": 129.99,
     "tdp": 9,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -5495,7 +5146,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 58,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5
@@ -5510,7 +5160,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 76,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5
@@ -5525,7 +5174,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 69,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 5
@@ -5540,7 +5188,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 82,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 8,
       "boostClock": 5.4
@@ -5555,7 +5202,6 @@
     "socket": "AM5",
     "tdp": 65,
     "perfScore": 92,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 12,
       "boostClock": 5.4
@@ -5570,7 +5216,6 @@
     "socket": "LGA1700",
     "tdp": 60,
     "perfScore": 47,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 4,
       "boostClock": 4.5
@@ -5585,7 +5230,6 @@
     "socket": "LGA1700",
     "tdp": 60,
     "perfScore": 49,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 4,
       "boostClock": 4.7
@@ -5600,7 +5244,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 60,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 6,
       "boostClock": 4.6
@@ -5615,7 +5258,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 68,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 10,
       "boostClock": 4.9
@@ -5630,7 +5272,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 65,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 10,
       "boostClock": 4.6
@@ -5645,7 +5286,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 72,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 14,
       "boostClock": 5
@@ -5660,7 +5300,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 76,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 12,
       "boostClock": 5
@@ -5675,7 +5314,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 89,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 20,
       "boostClock": 5.6
@@ -5690,7 +5328,6 @@
     "socket": "LGA1700",
     "tdp": 125,
     "perfScore": 85,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 16,
       "boostClock": 5.2
@@ -5705,7 +5342,6 @@
     "socket": "LGA1700",
     "tdp": 65,
     "perfScore": 97,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 5.8
@@ -5720,7 +5356,6 @@
     "socket": "LGA1851",
     "tdp": 65,
     "perfScore": 71,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 10,
       "boostClock": 4.9
@@ -5735,7 +5370,6 @@
     "socket": "LGA1851",
     "tdp": 125,
     "perfScore": 90,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 20,
       "boostClock": 5.5
@@ -5750,7 +5384,6 @@
     "socket": "LGA1851",
     "tdp": 65,
     "perfScore": 97,
-    "modelPath": "/models/cpu.glb",
     "specs": {
       "cores": 24,
       "boostClock": 5.6
@@ -5765,7 +5398,6 @@
     "tdp": 120,
     "length": 229,
     "perfScore": 20,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 6,
       "memType": "GDDR6"
@@ -5780,7 +5412,6 @@
     "tdp": 170,
     "length": 242,
     "perfScore": 30,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -5795,7 +5426,6 @@
     "tdp": 200,
     "length": 242,
     "perfScore": 42,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -5810,7 +5440,6 @@
     "tdp": 290,
     "length": 267,
     "perfScore": 50,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6X"
@@ -5825,7 +5454,6 @@
     "tdp": 350,
     "length": 285,
     "perfScore": 66,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6X"
@@ -5840,7 +5468,6 @@
     "tdp": 350,
     "length": 313,
     "perfScore": 70,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 24,
       "memType": "GDDR6X"
@@ -5855,7 +5482,6 @@
     "tdp": 130,
     "length": 244,
     "perfScore": 38,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR7"
@@ -5870,7 +5496,6 @@
     "tdp": 180,
     "length": 244,
     "perfScore": 52,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR7"
@@ -5885,7 +5510,6 @@
     "tdp": 160,
     "length": 220,
     "perfScore": 36,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -5900,7 +5524,6 @@
     "tdp": 250,
     "length": 267,
     "perfScore": 55,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -5915,7 +5538,6 @@
     "tdp": 300,
     "length": 267,
     "perfScore": 62,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -5930,7 +5552,6 @@
     "tdp": 300,
     "length": 267,
     "perfScore": 68,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -5945,7 +5566,6 @@
     "tdp": 335,
     "length": 287,
     "perfScore": 71,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 16,
       "memType": "GDDR6"
@@ -5960,7 +5580,6 @@
     "tdp": 165,
     "length": 232,
     "perfScore": 40,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -5975,7 +5594,6 @@
     "tdp": 150,
     "length": 245,
     "perfScore": 48,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -5990,7 +5608,6 @@
     "tdp": 220,
     "length": 280,
     "perfScore": 76,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 12,
       "memType": "GDDR6"
@@ -6005,7 +5622,6 @@
     "tdp": 185,
     "length": 267,
     "perfScore": 30,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -6020,7 +5636,6 @@
     "tdp": 225,
     "length": 268,
     "perfScore": 36,
-    "modelPath": "/models/gpu.glb",
     "specs": {
       "vram": 8,
       "memType": "GDDR6"
@@ -6036,7 +5651,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 9,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -6051,7 +5665,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 8,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "A620"
     }
@@ -6066,7 +5679,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 8,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "A620"
     }
@@ -6081,7 +5693,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 9,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -6096,7 +5707,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 12,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -6111,7 +5721,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 13,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650E"
     }
@@ -6126,7 +5735,6 @@
     "formFactor": "ITX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B650"
     }
@@ -6141,7 +5749,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -6156,7 +5763,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B850"
     }
@@ -6171,7 +5777,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 10,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -6186,7 +5791,6 @@
     "formFactor": "mATX",
     "ramType": "DDR4",
     "tdp": 8,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "H610"
     }
@@ -6201,7 +5805,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 10,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B760"
     }
@@ -6216,7 +5819,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 14,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z790"
     }
@@ -6231,7 +5833,6 @@
     "formFactor": "mATX",
     "ramType": "DDR5",
     "tdp": 11,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "B860"
     }
@@ -6246,7 +5847,6 @@
     "formFactor": "ATX",
     "ramType": "DDR5",
     "tdp": 14,
-    "modelPath": "/models/motherboard.glb",
     "specs": {
       "chipset": "Z890"
     }
@@ -6261,7 +5861,6 @@
     "speed": 6000,
     "capacityGb": 64,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6276,7 +5875,6 @@
     "speed": 5200,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6291,7 +5889,6 @@
     "speed": 6400,
     "capacityGb": 96,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6306,7 +5903,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6321,7 +5917,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6336,7 +5931,6 @@
     "speed": 6000,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6351,7 +5945,6 @@
     "speed": 6000,
     "capacityGb": 48,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6366,7 +5959,6 @@
     "speed": 5600,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6381,7 +5973,6 @@
     "speed": 6400,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6396,7 +5987,6 @@
     "speed": 6400,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6411,7 +6001,6 @@
     "speed": 3600,
     "capacityGb": 32,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6426,7 +6015,6 @@
     "speed": 3200,
     "capacityGb": 8,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 1
     }
@@ -6441,7 +6029,6 @@
     "speed": 3200,
     "capacityGb": 8,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 1
     }
@@ -6456,7 +6043,6 @@
     "speed": 3200,
     "capacityGb": 16,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6471,7 +6057,6 @@
     "speed": 3200,
     "capacityGb": 16,
     "tdp": 5,
-    "modelPath": "/models/ram.glb",
     "specs": {
       "sticks": 2
     }
@@ -6485,7 +6070,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7250
     }
@@ -6499,7 +6083,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7250
     }
@@ -6513,7 +6096,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 11,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 14500
     }
@@ -6527,7 +6109,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 5000
     }
@@ -6541,7 +6122,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 6000
     }
@@ -6555,7 +6135,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 6000
     }
@@ -6569,7 +6148,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7100
     }
@@ -6583,7 +6161,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 6,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7400
     }
@@ -6597,7 +6174,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 4000,
     "tdp": 7,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 7400
     }
@@ -6611,7 +6187,6 @@
     "storageType": "NVMe SSD",
     "capacityGb": 1000,
     "tdp": 5,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 5000
     }
@@ -6625,7 +6200,6 @@
     "storageType": "SATA SSD",
     "capacityGb": 500,
     "tdp": 3,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 560
     }
@@ -6639,7 +6213,6 @@
     "storageType": "SATA SSD",
     "capacityGb": 1000,
     "tdp": 3,
-    "modelPath": "/models/ssd.glb",
     "specs": {
       "readMbps": 540
     }
@@ -6653,7 +6226,6 @@
     "storageType": "HDD",
     "capacityGb": 6000,
     "tdp": 7,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 190
     }
@@ -6667,7 +6239,6 @@
     "storageType": "HDD",
     "capacityGb": 4000,
     "tdp": 6,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 180
     }
@@ -6681,7 +6252,6 @@
     "storageType": "HDD",
     "capacityGb": 8000,
     "tdp": 8,
-    "modelPath": "/models/hdd.glb",
     "specs": {
       "readMbps": 210
     }
@@ -6694,7 +6264,6 @@
     "price": 89.99,
     "wattage": 550,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6707,7 +6276,6 @@
     "price": 79.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Bronze"
     }
@@ -6720,7 +6288,6 @@
     "price": 159.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6733,7 +6300,6 @@
     "price": 169.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -6746,7 +6312,6 @@
     "price": 179.99,
     "wattage": 1000,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6759,7 +6324,6 @@
     "price": 74.99,
     "wattage": 650,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6772,7 +6336,6 @@
     "price": 64.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Bronze"
     }
@@ -6785,7 +6348,6 @@
     "price": 229.99,
     "wattage": 1250,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6798,7 +6360,6 @@
     "price": 109.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6811,7 +6372,6 @@
     "price": 109.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6824,7 +6384,6 @@
     "price": 119.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6837,7 +6396,6 @@
     "price": 129.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6850,7 +6408,6 @@
     "price": 89.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6863,7 +6420,6 @@
     "price": 169.99,
     "wattage": 850,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Platinum"
     }
@@ -6876,7 +6432,6 @@
     "price": 139.99,
     "wattage": 750,
     "tdp": 0,
-    "modelPath": "/models/psu.glb",
     "specs": {
       "rating": "80+ Gold"
     }
@@ -6895,7 +6450,6 @@
     "maxGpuLength": 413,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -6913,7 +6467,6 @@
     "maxGpuLength": 365,
     "maxCoolerHeight": 160,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Micro Tower"
     }
@@ -6930,7 +6483,6 @@
     "maxGpuLength": 325,
     "maxCoolerHeight": 70,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -6948,7 +6500,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Micro Tower"
     }
@@ -6967,7 +6518,6 @@
     "maxGpuLength": 360,
     "maxCoolerHeight": 170,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -6985,7 +6535,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Micro Tower"
     }
@@ -7004,7 +6553,6 @@
     "maxGpuLength": 365,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7021,7 +6569,6 @@
     "maxGpuLength": 325,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -7040,7 +6587,6 @@
     "maxGpuLength": 455,
     "maxCoolerHeight": 167,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7059,7 +6605,6 @@
     "maxGpuLength": 392,
     "maxCoolerHeight": 180,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7078,7 +6623,6 @@
     "maxGpuLength": 435,
     "maxCoolerHeight": 187,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Full Tower"
     }
@@ -7095,7 +6639,6 @@
     "maxGpuLength": 320,
     "maxCoolerHeight": 67,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -7113,7 +6656,6 @@
     "maxGpuLength": 344,
     "maxCoolerHeight": 159,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Micro Tower"
     }
@@ -7132,7 +6674,6 @@
     "maxGpuLength": 410,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7151,7 +6692,6 @@
     "maxGpuLength": 435,
     "maxCoolerHeight": 190,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7168,7 +6708,6 @@
     "maxGpuLength": 335,
     "maxCoolerHeight": 82,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mini ITX"
     }
@@ -7187,7 +6726,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 173,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7206,7 +6744,6 @@
     "maxGpuLength": 400,
     "maxCoolerHeight": 175,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7225,7 +6762,6 @@
     "maxGpuLength": 450,
     "maxCoolerHeight": 175,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Full Tower"
     }
@@ -7244,7 +6780,6 @@
     "maxGpuLength": 380,
     "maxCoolerHeight": 165,
     "tdp": 0,
-    "modelPath": "/models/case.glb",
     "specs": {
       "type": "Mid Tower"
     }
@@ -7263,7 +6798,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 158
@@ -7283,7 +6817,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 154
@@ -7303,7 +6836,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 155
@@ -7323,7 +6855,6 @@
       "LGA1200"
     ],
     "tdp": 6,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 160
@@ -7343,7 +6874,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 159
@@ -7363,7 +6893,6 @@
       "LGA1200"
     ],
     "tdp": 6,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 165
@@ -7383,7 +6912,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 163
@@ -7403,7 +6931,6 @@
       "LGA1200"
     ],
     "tdp": 6,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 154
@@ -7423,7 +6950,6 @@
       "LGA1200"
     ],
     "tdp": 5,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "Air",
       "height": 154
@@ -7443,7 +6969,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -7463,7 +6988,6 @@
       "LGA1200"
     ],
     "tdp": 8,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "240mm"
@@ -7483,7 +7007,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -7503,7 +7026,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -7523,7 +7045,6 @@
       "LGA1200"
     ],
     "tdp": 10,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "420mm"
@@ -7543,7 +7064,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "280mm"
@@ -7563,7 +7083,6 @@
       "LGA1200"
     ],
     "tdp": 10,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -7583,7 +7102,6 @@
       "LGA1200"
     ],
     "tdp": 10,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -7603,7 +7121,6 @@
       "LGA1200"
     ],
     "tdp": 9,
-    "modelPath": "/models/cooler.glb",
     "specs": {
       "type": "AIO",
       "radiator": "360mm"
@@ -7616,7 +7133,6 @@
     "brand": "Arctic",
     "price": 34.99,
     "tdp": 20,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 10,
@@ -7630,7 +7146,6 @@
     "brand": "Arctic",
     "price": 39.99,
     "tdp": 10,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "140mm",
       "count": 5,
@@ -7644,7 +7159,6 @@
     "brand": "Arctic",
     "price": 7.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -7658,7 +7172,6 @@
     "brand": "be quiet!",
     "price": 11.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -7672,7 +7185,6 @@
     "brand": "be quiet!",
     "price": 54.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -7686,7 +7198,6 @@
     "brand": "Noctua",
     "price": 24.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -7700,7 +7211,6 @@
     "brand": "Noctua",
     "price": 22.99,
     "tdp": 2,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 1,
@@ -7714,7 +7224,6 @@
     "brand": "Corsair",
     "price": 39.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -7728,7 +7237,6 @@
     "brand": "Thermalright",
     "price": 19.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -7742,7 +7250,6 @@
     "brand": "Phanteks",
     "price": 49.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -7756,7 +7263,6 @@
     "brand": "DeepCool",
     "price": 19.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -7770,7 +7276,6 @@
     "brand": "Lian Li",
     "price": 74.99,
     "tdp": 6,
-    "modelPath": "/models/fans.glb",
     "specs": {
       "size": "120mm",
       "count": 3,
@@ -7808,5 +7313,665 @@
     "brand": "Cooler Master",
     "price": 9.99,
     "tdp": 0
+  },
+  {
+    "id": "gpu-rtx-2060",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2060",
+    "brand": "NVIDIA",
+    "price": 149.99,
+    "tdp": 160,
+    "length": 229,
+    "perfScore": 29,
+    "legacy": true,
+    "specs": {
+      "vram": 6,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rtx-2060-super",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2060 Super",
+    "brand": "NVIDIA",
+    "price": 179.99,
+    "tdp": 175,
+    "length": 229,
+    "perfScore": 34,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rtx-2070",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2070",
+    "brand": "NVIDIA",
+    "price": 189.99,
+    "tdp": 175,
+    "length": 229,
+    "perfScore": 35,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rtx-2070-super",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2070 Super",
+    "brand": "NVIDIA",
+    "price": 219.99,
+    "tdp": 215,
+    "length": 267,
+    "perfScore": 40,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rtx-2080",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2080",
+    "brand": "NVIDIA",
+    "price": 239.99,
+    "tdp": 215,
+    "length": 267,
+    "perfScore": 42,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rtx-2080-super",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2080 Super",
+    "brand": "NVIDIA",
+    "price": 269.99,
+    "tdp": 250,
+    "length": 267,
+    "perfScore": 45,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rtx-2080-ti",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 2080 Ti",
+    "brand": "NVIDIA",
+    "price": 349.99,
+    "tdp": 250,
+    "length": 267,
+    "perfScore": 52,
+    "legacy": true,
+    "specs": {
+      "vram": 11,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-gtx-1050-ti",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1050 Ti",
+    "brand": "NVIDIA",
+    "price": 89.99,
+    "tdp": 75,
+    "length": 145,
+    "perfScore": 10,
+    "legacy": true,
+    "specs": {
+      "vram": 4,
+      "memType": "GDDR5"
+    }
+  },
+  {
+    "id": "gpu-gtx-1060-6gb",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1060 6GB",
+    "brand": "NVIDIA",
+    "price": 109.99,
+    "tdp": 120,
+    "length": 250,
+    "perfScore": 16,
+    "legacy": true,
+    "specs": {
+      "vram": 6,
+      "memType": "GDDR5"
+    }
+  },
+  {
+    "id": "gpu-gtx-1070",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1070",
+    "brand": "NVIDIA",
+    "price": 139.99,
+    "tdp": 150,
+    "length": 267,
+    "perfScore": 21,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR5"
+    }
+  },
+  {
+    "id": "gpu-gtx-1070-ti",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1070 Ti",
+    "brand": "NVIDIA",
+    "price": 159.99,
+    "tdp": 180,
+    "length": 267,
+    "perfScore": 24,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR5"
+    }
+  },
+  {
+    "id": "gpu-gtx-1080",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1080",
+    "brand": "NVIDIA",
+    "price": 169.99,
+    "tdp": 180,
+    "length": 267,
+    "perfScore": 26,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR5X"
+    }
+  },
+  {
+    "id": "gpu-gtx-1080-ti",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1080 Ti",
+    "brand": "NVIDIA",
+    "price": 229.99,
+    "tdp": 250,
+    "length": 267,
+    "perfScore": 32,
+    "legacy": true,
+    "specs": {
+      "vram": 11,
+      "memType": "GDDR5X"
+    }
+  },
+  {
+    "id": "gpu-rx-5500-xt",
+    "category": "gpu",
+    "name": "AMD Radeon RX 5500 XT 8GB",
+    "brand": "AMD",
+    "price": 119.99,
+    "tdp": 130,
+    "length": 200,
+    "perfScore": 18,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rx-5600-xt",
+    "category": "gpu",
+    "name": "AMD Radeon RX 5600 XT",
+    "brand": "AMD",
+    "price": 149.99,
+    "tdp": 150,
+    "length": 230,
+    "perfScore": 26,
+    "legacy": true,
+    "specs": {
+      "vram": 6,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rx-5700",
+    "category": "gpu",
+    "name": "AMD Radeon RX 5700",
+    "brand": "AMD",
+    "price": 169.99,
+    "tdp": 180,
+    "length": 254,
+    "perfScore": 30,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "gpu-rx-5700-xt",
+    "category": "gpu",
+    "name": "AMD Radeon RX 5700 XT",
+    "brand": "AMD",
+    "price": 199.99,
+    "tdp": 225,
+    "length": 272,
+    "perfScore": 34,
+    "legacy": true,
+    "specs": {
+      "vram": 8,
+      "memType": "GDDR6"
+    }
+  },
+  {
+    "id": "cpu-ryzen-5-5500",
+    "category": "cpu",
+    "name": "AMD Ryzen 5 5500",
+    "brand": "AMD",
+    "price": 79.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 50,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.2
+    }
+  },
+  {
+    "id": "cpu-ryzen-5-5600",
+    "category": "cpu",
+    "name": "AMD Ryzen 5 5600",
+    "brand": "AMD",
+    "price": 99.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 56,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.4
+    }
+  },
+  {
+    "id": "cpu-ryzen-5-5600x",
+    "category": "cpu",
+    "name": "AMD Ryzen 5 5600X",
+    "brand": "AMD",
+    "price": 119.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 58,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.6
+    }
+  },
+  {
+    "id": "cpu-ryzen-7-5700x",
+    "category": "cpu",
+    "name": "AMD Ryzen 7 5700X",
+    "brand": "AMD",
+    "price": 139.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 63,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 4.6
+    }
+  },
+  {
+    "id": "cpu-ryzen-7-5800x",
+    "category": "cpu",
+    "name": "AMD Ryzen 7 5800X",
+    "brand": "AMD",
+    "price": 159.99,
+    "socket": "AM4",
+    "tdp": 105,
+    "perfScore": 65,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 4.7
+    }
+  },
+  {
+    "id": "cpu-ryzen-7-5800x3d",
+    "category": "cpu",
+    "name": "AMD Ryzen 7 5800X3D",
+    "brand": "AMD",
+    "price": 229.99,
+    "socket": "AM4",
+    "tdp": 105,
+    "perfScore": 72,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 4.5
+    }
+  },
+  {
+    "id": "cpu-ryzen-9-5900x",
+    "category": "cpu",
+    "name": "AMD Ryzen 9 5900X",
+    "brand": "AMD",
+    "price": 219.99,
+    "socket": "AM4",
+    "tdp": 105,
+    "perfScore": 74,
+    "legacy": true,
+    "specs": {
+      "cores": 12,
+      "boostClock": 4.8
+    }
+  },
+  {
+    "id": "cpu-ryzen-9-5950x",
+    "category": "cpu",
+    "name": "AMD Ryzen 9 5950X",
+    "brand": "AMD",
+    "price": 319.99,
+    "socket": "AM4",
+    "tdp": 105,
+    "perfScore": 79,
+    "legacy": true,
+    "specs": {
+      "cores": 16,
+      "boostClock": 4.9
+    }
+  },
+  {
+    "id": "cpu-ryzen-5-3600",
+    "category": "cpu",
+    "name": "AMD Ryzen 5 3600",
+    "brand": "AMD",
+    "price": 74.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 44,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.2
+    }
+  },
+  {
+    "id": "cpu-ryzen-7-3700x",
+    "category": "cpu",
+    "name": "AMD Ryzen 7 3700X",
+    "brand": "AMD",
+    "price": 109.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 52,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 4.4
+    }
+  },
+  {
+    "id": "cpu-ryzen-9-3900x",
+    "category": "cpu",
+    "name": "AMD Ryzen 9 3900X",
+    "brand": "AMD",
+    "price": 169.99,
+    "socket": "AM4",
+    "tdp": 105,
+    "perfScore": 62,
+    "legacy": true,
+    "specs": {
+      "cores": 12,
+      "boostClock": 4.6
+    }
+  },
+  {
+    "id": "cpu-i5-10400f",
+    "category": "cpu",
+    "name": "Intel Core i5-10400F",
+    "brand": "Intel",
+    "price": 69.99,
+    "socket": "LGA1200",
+    "tdp": 65,
+    "perfScore": 48,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.3
+    }
+  },
+  {
+    "id": "cpu-i7-10700k",
+    "category": "cpu",
+    "name": "Intel Core i7-10700K",
+    "brand": "Intel",
+    "price": 129.99,
+    "socket": "LGA1200",
+    "tdp": 125,
+    "perfScore": 60,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 5.1
+    }
+  },
+  {
+    "id": "cpu-i9-10900k",
+    "category": "cpu",
+    "name": "Intel Core i9-10900K",
+    "brand": "Intel",
+    "price": 189.99,
+    "socket": "LGA1200",
+    "tdp": 125,
+    "perfScore": 66,
+    "legacy": true,
+    "specs": {
+      "cores": 10,
+      "boostClock": 5.3
+    }
+  },
+  {
+    "id": "cpu-i5-11400f",
+    "category": "cpu",
+    "name": "Intel Core i5-11400F",
+    "brand": "Intel",
+    "price": 84.99,
+    "socket": "LGA1200",
+    "tdp": 65,
+    "perfScore": 54,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.4
+    }
+  },
+  {
+    "id": "cpu-i7-11700k",
+    "category": "cpu",
+    "name": "Intel Core i7-11700K",
+    "brand": "Intel",
+    "price": 149.99,
+    "socket": "LGA1200",
+    "tdp": 125,
+    "perfScore": 63,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 5
+    }
+  },
+  {
+    "id": "cpu-i9-11900k",
+    "category": "cpu",
+    "name": "Intel Core i9-11900K",
+    "brand": "Intel",
+    "price": 199.99,
+    "socket": "LGA1200",
+    "tdp": 125,
+    "perfScore": 67,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 5.3
+    }
+  },
+  {
+    "id": "mb-msi-b450-tomahawk-max",
+    "category": "motherboard",
+    "name": "MSI B450 TOMAHAWK MAX II",
+    "brand": "MSI",
+    "price": 74.99,
+    "socket": "AM4",
+    "formFactor": "ATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B450"
+    }
+  },
+  {
+    "id": "mb-asrock-b450m-pro4",
+    "category": "motherboard",
+    "name": "ASRock B450M Pro4",
+    "brand": "ASRock",
+    "price": 64.99,
+    "socket": "AM4",
+    "formFactor": "mATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B450"
+    }
+  },
+  {
+    "id": "mb-gigabyte-b550m-ds3h",
+    "category": "motherboard",
+    "name": "Gigabyte B550M DS3H",
+    "brand": "Gigabyte",
+    "price": 79.99,
+    "socket": "AM4",
+    "formFactor": "mATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B550"
+    }
+  },
+  {
+    "id": "mb-asus-tuf-b550-plus",
+    "category": "motherboard",
+    "name": "ASUS TUF Gaming B550-PLUS",
+    "brand": "ASUS",
+    "price": 109.99,
+    "socket": "AM4",
+    "formFactor": "ATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B550"
+    }
+  },
+  {
+    "id": "mb-msi-mag-b550-tomahawk",
+    "category": "motherboard",
+    "name": "MSI MAG B550 TOMAHAWK",
+    "brand": "MSI",
+    "price": 119.99,
+    "socket": "AM4",
+    "formFactor": "ATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B550"
+    }
+  },
+  {
+    "id": "mb-asus-strix-x570e",
+    "category": "motherboard",
+    "name": "ASUS ROG Strix X570-E Gaming",
+    "brand": "ASUS",
+    "price": 199.99,
+    "socket": "AM4",
+    "formFactor": "ATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "X570"
+    }
+  },
+  {
+    "id": "mb-msi-b460m-pro-vdh",
+    "category": "motherboard",
+    "name": "MSI B460M PRO-VDH",
+    "brand": "MSI",
+    "price": 69.99,
+    "socket": "LGA1200",
+    "formFactor": "mATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B460"
+    }
+  },
+  {
+    "id": "mb-asus-prime-b560m-a",
+    "category": "motherboard",
+    "name": "ASUS PRIME B560M-A",
+    "brand": "ASUS",
+    "price": 84.99,
+    "socket": "LGA1200",
+    "formFactor": "mATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "B560"
+    }
+  },
+  {
+    "id": "mb-gigabyte-z490-aorus-elite",
+    "category": "motherboard",
+    "name": "Gigabyte Z490 AORUS Elite",
+    "brand": "Gigabyte",
+    "price": 129.99,
+    "socket": "LGA1200",
+    "formFactor": "ATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "Z490"
+    }
+  },
+  {
+    "id": "mb-msi-mag-z590-tomahawk",
+    "category": "motherboard",
+    "name": "MSI MAG Z590 TOMAHAWK WIFI",
+    "brand": "MSI",
+    "price": 149.99,
+    "socket": "LGA1200",
+    "formFactor": "ATX",
+    "ramType": "DDR4",
+    "tdp": 12,
+    "legacy": true,
+    "specs": {
+      "chipset": "Z590"
+    }
   }
 ]
