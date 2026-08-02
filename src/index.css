@@ -21,7 +21,13 @@
   --line-strong: #363B45;  /* emphasised borders / dividers */
   --ink: #EDEFF2;          /* primary text */
   --muted: #99A0AB;        /* secondary text / labels */
-  --faint: #6B7280;        /* tertiary text / disabled */
+  /* Tertiary text / disabled. Was #6B7280, which measured 3.91:1 on --ground,
+     3.60 on --surface and 3.17 on --surface-2 — all under the 4.5:1 WCAG AA
+     floor, and it is used at 10–11px so the large-text exemption cannot apply.
+     Raised until the WORST case (--surface-2, the lightest background) clears
+     AA at 4.66:1. Still visibly below --muted, so the three-step text hierarchy
+     survives. Pinned by paletteContrast.test.js — do not darken it back. */
+  --faint: #878E9C;        /* tertiary text / disabled */
   --accent: #F26B3A;       /* warm signal accent — brand + primary action */
   --accent-soft: rgba(242, 107, 58, 0.15); /* accent wash for active states */
   --accent-ink: #1B1206;   /* text/icon on a solid accent fill */
