@@ -14,7 +14,6 @@ export default function FeedbackPage() {
   const [rating, setRating] = useState(0)
   const [type, setType] = useState('idea')
   const [message, setMessage] = useState('')
-  const [email, setEmail] = useState('')
   const [company, setCompany] = useState('') // honeypot
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | done | error
@@ -28,7 +27,7 @@ export default function FeedbackPage() {
 
     // Field problems first: telling someone to "take another moment" when their
     // real problem is an empty message helps nobody.
-    const v = validateFeedback({ rating, type, message, email })
+    const v = validateFeedback({ rating, type, message })
     if (!v.ok) { setErrors(v.errors); return }
 
     // Then the cheap bot signals. The honeypot below stays silent on purpose —
@@ -48,7 +47,7 @@ export default function FeedbackPage() {
     if (company) { setStatus('done'); return } // bot filled the honeypot — silently succeed
     setStatus('sending')
     try {
-      await submitFeedback({ rating, type, message, email })
+      await submitFeedback({ rating, type, message })
       setStatus('done')
     } catch {
       setStatus('error')
@@ -120,18 +119,6 @@ export default function FeedbackPage() {
           <span className="text-bad">{errors.message}</span>
           <span className="text-muted">{message.length}/2000</span>
         </div>
-      </div>
-
-      <div>
-        <label htmlFor="fb-email" className="block text-sm text-muted mb-2">Email <span className="text-muted">(optional, if you want a reply)</span></label>
-        <input
-          id="fb-email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
-        />
-        {errors.email && <p className="text-xs text-bad mt-1">{errors.email}</p>}
       </div>
 
       <div>
