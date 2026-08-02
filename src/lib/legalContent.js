@@ -10,14 +10,16 @@
 // `purge-feedback-personal-data` pg_cron job in Supabase. Changing one without
 // the other makes this page a false statement.
 
-// STILL A BLOCKER: contactEmail. A privacy notice has to give people a route to
-// exercise their rights — without one the notice does not do the job it exists
-// to do, and the rights section below promises a reply it has no way to receive.
-// The pages must not go live until it is filled in; legalContent.test.js holds
-// an `it.fails` on exactly that, so the suite tells you when it is done.
+// The two things a privacy notice cannot omit: an identifiable controller and a
+// route to reach them. Both are now real, and legalContent.test.js asserts
+// neither has been reverted to a placeholder — so these pages are publishable.
+//
+// This address is published on a public page. It will be scraped. Do not swap it
+// for a personal mailbox without asking; it is deliberately a separate one, and
+// the rights section below commits to answering whatever arrives at it.
 export const OPERATOR = {
   name: 'Jacob Baker',
-  contactEmail: '[your contact email]',
+  contactEmail: 'jacob.business@gmail.com',
   location: 'the United Kingdom',
 }
 
