@@ -59,7 +59,11 @@ describe('assembly has no floating or intersecting parts', () => {
   // assemblyGeometry.test.js's 'seats the GPU's PCB in the slot'.
   it('seats every board-mounted part flush on the PCB surface', () => {
     for (const category of BOARD_MOUNTED) {
-      if (category === 'gpu') continue
+      // gpu: seated by its own PCB going into the slot, so its bracket reaches
+      // back past the board plane. storage: lifted proud of the board
+      // (MOUNTS.storage.zLiftMm) so the M.2 shows in front of the board's own
+      // heatsink instead of hiding flush behind it. Both are deliberate.
+      if (category === 'gpu' || category === 'storage') continue
       expect(partBox(category).min[2], `${category} back face`).toBeCloseTo(boardFaceZ(), 9)
     }
   })

@@ -71,11 +71,12 @@ export const PART_SPECS = {
   // one that has to line up with the board's PCIe slot.
   gpu: {
     raw: [4.381, 30.187, 12.819],
-    // 320 rather than the 3080 FE's real 285: at 285 the card's edge connector
-    // fell ~10 mm short of the slot's far end. Because the card is anchored on
-    // its PCB's leading edge (MOUNTS.gpu.pcbRearMm) the extra length all goes
-    // FORWARD, so the notch stays put and the connector fills the slot.
-    lengthMm: 320,
+    // 300: trimmed from 285→320→308→300 against the render. The card is anchored
+    // on its PCB's leading edge (MOUNTS.gpu.pcbRearMm), so length changes stretch
+    // it FORWARD only — the notch stays put and a shorter card just pulls the fan
+    // end back toward the slot. Still above the 3080 FE's real 285 because the
+    // mesh's own proportions read short at that figure.
+    lengthMm: 300,
     rotation: [0, 0, Math.PI / 2],
     powerInlet: [0.11, -2.74, 5.43],
     pcbOffset: [1.37, 3.77, 0.27],
@@ -116,9 +117,16 @@ export const PART_SPECS = {
   // when the board is the thing you can see it against.
   ram: { raw: [0.033, 0.226, 0.608], lengthMm: 142, rotation: [Math.PI / 2, 0, 0] },
 
-  // Flat M.2 stick lying on the board face: 80 mm along world X, 22 mm up, and
-  // near-zero thickness toward the glass.
-  storage: { raw: [4.332, 0.009, 1.201], lengthMm: 80, rotation: [Math.PI / 2, 0, 0] },
+  // Flat M.2 stick lying on the board face: 100 mm along world X to fill the
+  // drawn slot (a real 2280 is 80, but this board draws its slot longer, same as
+  // the GPU and RAM), its real 22 mm width up world Y, ~2 mm thick toward glass.
+  //
+  // sizeMm, not lengthMm: scaling the length uniformly to fill the slot also blew
+  // the width out to 27.7 mm, and that extra width dropped the stick's lower edge
+  // into the GPU's bounding box (a real M.2 sits above the top PCIe slot, clear of
+  // the card). Pinning the width to a real 22 mm keeps it centred on its slot and
+  // clear of the GPU. This and the PSU are the only sizeMm parts.
+  storage: { raw: [4.332, 0.009, 1.201], sizeMm: [100, 22, 2], rotation: [Math.PI / 2, 0, 0] },
 
   // The PSU mesh is near-cubic (20.4 x 21.9 x 22.7) but a real ATX unit is not:
   // 150 wide x 86 tall x ~160 deep. Any UNIFORM fit therefore has to be wrong on

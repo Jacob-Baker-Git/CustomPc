@@ -74,10 +74,23 @@ export const MOUNTS = {
   // mesh puts its PCB 17 mm in from the bracket (more than a real card), and
   // that gap grows with the card. Consequence: a long card's bracket ends up
   // within, and slightly through, the rear panel — see assemblyGeometry.test.js.
-  gpu: { pcbRearMm: -125.2, slotYMm: -36.7 },
+  // pcbRearMm -120 (from -125.2 → -122 → -120): nudged toward the front to seat
+  // the notch in the slot. +X is the case front, so less-negative moves it
+  // screen-right. Close to the limit: the card's I/O bracket bolts to the rear
+  // panel, and past about -119 the bracket lifts off it (assemblyGeometry.test.js
+  // pins the bracket into the panel). Any further right needs the mesh, not this.
+  //
+  // slotYMm -31 (from the ATX-derived -36.7): the card was rendering with its
+  // connector below the slot, so it was lifted ~6 mm. slotYMm is the height the
+  // PCB seats at, so less-negative raises the whole card.
+  gpu: { pcbRearMm: -120, slotYMm: -31 },
   // M.2_1, between the socket and the primary x16 — measured from the mesh's
   // own heatsink node (`Material.004`, 141 x 23 mm centred at -32, -10). The old
   // guess sat 10 mm lower and collided with the card once the GPU was seated on
   // its real slot. A real drive lives under that heatsink, so it barely shows.
-  storage: { xMm: -32, yMm: -10 },
+  // zLiftMm stands the drive proud of the board face — the mesh is near-zero
+  // thickness so it lay flush and hid behind the board's own M.2 heatsink,
+  // reading as "behind the motherboard". +3 mm sits it just off the board like a
+  // real M.2 under its heatsink; +8 read as floating/poking through.
+  storage: { xMm: -32, yMm: -10, zLiftMm: 3 },
 }

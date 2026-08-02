@@ -340,9 +340,13 @@ export function partCentre(category) {
     ? mm(mount.yMm)
     : mm(mount.slotYMm) - pcbPlaneOffset(category)[1]
 
+  // `zLiftMm` stands a part proud of its mounting face, toward the glass. The
+  // M.2 lies flush on the PCB by default (it is ~0 mm thick), which tucks it
+  // behind the board's drawn heatsink where it barely shows; lifting it a few mm
+  // seats it visibly in its slot. Absent, it is 0, so nothing else is affected.
   const z = PART_SPECS[category]?.pcbSize
     ? pcbSeatZ(category)
-    : mountBaseZ(category) + mountDepth(category) / 2 - offset[2]
+    : mountBaseZ(category) + mountDepth(category) / 2 - offset[2] + mm(mount.zLiftMm ?? 0)
 
   return [x - offset[0], y - offset[1], z]
 }

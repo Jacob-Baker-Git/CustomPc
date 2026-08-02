@@ -97,7 +97,7 @@ describe('partSize', () => {
   })
 
   it('lays the GPU horizontal, full-length front-to-back', () => {
-    near(partSize('gpu')[0], 320)
+    near(partSize('gpu')[0], 300)
   })
 
   it('stands a DIMM edge-on, tall and thin across the board', () => {
@@ -109,7 +109,7 @@ describe('partSize', () => {
 
   it('lays the M.2 flat against the board', () => {
     const [x, , z] = partSize('storage')
-    near(x, 80)
+    near(x, 100)
     expect(z).toBeLessThan(mm(5))
   })
 
