@@ -66,7 +66,7 @@ export function modelScale(category) {
 // still occupy the volume the real component does. Authored in world axes on
 // purpose — a case is reasoned about as depth/height/width, and this file has a
 // long history of bugs from mixing the two conventions.
-export function modelScaleAxes(category) {
+function modelScaleAxes(category) {
   const spec = PART_SPECS[category]
   if (!spec) return [0, 0, 0]
   if (!spec.sizeMm) {
