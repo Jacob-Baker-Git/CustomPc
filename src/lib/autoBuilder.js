@@ -39,6 +39,31 @@ function choosePsu(candidates, draw, remaining) {
   )
 }
 
+// Price of the cheapest PSU that could actually run a build drawing `draw`
+// watts, at the same 30% headroom choosePsu targets.
+//
+// This is what makes "can I afford this upgrade?" an honest question. The pass
+// used to compare a swap's price difference against a PSU reserve fixed before
+// any part was picked — so upgrading a £600 office build to a 300W graphics card
+// looked affordable, then the PSU it now needed cost more than the reserve and
+// choosePsu's last two fallbacks ignore `remaining` entirely. The build came out
+// at 136% of budget. A step has to be priced with the power supply it drags
+// along behind it.
+function psuPricer(candidates) {
+  const byPrice = [...candidates].sort((a, b) => a.price - b.price)
+  const cache = new Map()
+  return (draw) => {
+    const key = Math.ceil(draw / 25) * 25
+    if (!cache.has(key)) {
+      const fit = byPrice.find((p) => p.wattage >= key * 1.3)
+        || byPrice.find((p) => p.wattage >= key)
+        || byPrice[byPrice.length - 1]
+      cache.set(key, fit?.price ?? 0)
+    }
+    return cache.get(key)
+  }
+}
+
 // Head of a best-first pool, or a random one of its top k when an rng is given —
 // keeps a varied build inside the best tier. Deterministic (head) without rng.
 function pick(sortedBestFirst, rng, k = 3) {
@@ -49,11 +74,33 @@ function pick(sortedBestFirst, rng, k = 3) {
 
 function chooseBest(category, candidates, slice, remaining, rng) {
   if (candidates.length === 0) return null
-  let pool = candidates.filter((p) => p.price <= slice)
-  if (pool.length === 0) pool = candidates.filter((p) => p.price <= remaining)
-  if (pool.length === 0) return [...candidates].sort((a, b) => a.price - b.price)[0]
-  if (PERF.has(category)) return pick([...pool].sort((a, b) => (b.perfScore - a.perfScore) || (a.price - b.price)), rng)
-  return pick([...pool].sort((a, b) => a.price - b.price), rng)
+
+  const withinSlice = candidates.filter((p) => p.price <= slice)
+  if (withinSlice.length > 0) {
+    if (PERF.has(category)) {
+      return pick([...withinSlice].sort((a, b) => (b.perfScore - a.perfScore) || (a.price - b.price)), rng)
+    }
+    return pick([...withinSlice].sort((a, b) => a.price - b.price), rng)
+  }
+
+  // Nothing this category's share of the budget can buy. Take the CHEAPEST thing
+  // that still fits, not the best.
+  //
+  // The old fallback widened the pool to everything affordable and then, for
+  // CPU/GPU, took the highest performer in it — so a £600 office build, whose
+  // profile allots the graphics card about £84, bought a £429 RX 6800 XT simply
+  // because it was the strongest card under `remaining`. The build then could not
+  // afford the PSU that card needs and came out at 136% of budget.
+  //
+  // The slice is what the profile says this category is worth. Buy in, cheaply,
+  // and let the score-greedy maximise pass upgrade later if the money is really
+  // spare — it prices every step against the whole build, PSU included.
+  const affordableNow = candidates.filter((p) => p.price <= remaining)
+  if (affordableNow.length > 0) return [...affordableNow].sort((a, b) => a.price - b.price)[0]
+
+  // Genuinely nothing fits. Return the cheapest so the caller can see the build
+  // overshoot and report "budget too low" rather than silently omitting a part.
+  return [...candidates].sort((a, b) => a.price - b.price)[0]
 }
 
 export function autoBuild(selectedParts, budget, partsData, resolution = '1440p', options = {}) {
@@ -76,6 +123,13 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
   const weightSum = emptyCats.reduce((s, c) => s + (weights[c] ?? 0), 0) || 1
   // Hold back the PSU's slice so the upgrade pass can't spend the power budget.
   const psuReserve = result.psu ? 0 : ((weights.psu ?? 0) / weightSum) * available
+
+  const priceOfPsuFor = psuPricer(ofCategory(partsData, 'psu'))
+  const spendOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.price ?? 0), 0)
+  // What this selection really costs: the parts, plus the power supply it will
+  // need if one has not been chosen yet.
+  const projectedTotal = (sel) => spendOf(sel) + (sel.psu ? 0 : priceOfPsuFor(drawOf(sel)))
+  const affordable = (sel) => projectedTotal(sel) <= budget
 
   // Fill every empty category except PSU (sized last, after upgrades).
   for (const category of emptyCats) {
@@ -146,7 +200,8 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
       for (const category of upgradeOrder) {
         if (userCats.has(category)) continue
         const next = affordableUpgrade(category, true)
-        if (next) {
+        // Priced with the power supply it drags along — see psuPricer.
+        if (next && affordable({ ...result, [category]: next })) {
           remaining -= next.price - result[category].price
           result[category] = next
           stepped = true
@@ -173,14 +228,19 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
       for (const category of FILL_ORDER) {
         if (category === 'psu' || userCats.has(category) || !result[category]) continue
         for (const cand of upgradeCandidates(category)) {
+          const next = { ...result, [category]: cand }
+          if (!affordable(next)) continue
           const cost = cand.price - result[category].price
-          const gain = rateBuild({ ...result, [category]: cand }, rateFor, partsData).overall - base
+          const gain = rateBuild(next, rateFor, partsData).overall - base
           if (gain <= 0) continue
           steps.push({ category, cand, cost, value: cost > 0 ? gain / cost : Infinity })
         }
       }
       if (steps.length === 0) break
-      steps.sort((a, b) => b.value - a.value || a.cost - b.cost)
+      // Deterministic ordering: score-per-pound, then the cheaper step, then the
+      // part id — so ties never resolve on catalogue order, which shifts whenever
+      // the Supabase catalogue is re-fetched.
+      steps.sort((a, b) => b.value - a.value || a.cost - b.cost || (a.cand.id < b.cand.id ? -1 : 1))
       const step = pick(steps, rng, 2)
       remaining -= step.cost
       result[step.category] = step.cand

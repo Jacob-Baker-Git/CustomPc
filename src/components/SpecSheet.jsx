@@ -1,9 +1,13 @@
 // Shared "Info" spec sheet used by hardware part cards and peripheral cards.
 // The derived copy and the spec table live in lib/specSheetContent.js.
 import { insight, gpuResChips, specRows } from '../lib/specSheetContent'
+import { derivedStats } from '../lib/partStats'
 
 export default function SpecSheet({ part }) {
   const note = insight(part)
+  // Computed metrics only — value per pound, efficiency, cooling capacity.
+  // specRows already prints every raw field, so nothing appears twice.
+  const derived = derivedStats(part)
   return (
     <div className="border-t border-line pt-2 mt-1">
       {note && <p className="text-[11px] leading-relaxed text-muted mb-2">{note}</p>}
@@ -15,6 +19,16 @@ export default function SpecSheet({ part }) {
             </span>
           ))}
         </div>
+      )}
+      {derived.length > 0 && (
+        <dl className="text-[11px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 mb-2 pb-2 border-b border-line">
+          {derived.map(({ label, value, unit, hint }) => (
+            <div key={label} className="contents">
+              <dt className="text-muted" title={hint || undefined}>{label}</dt>
+              <dd className="text-accent text-right font-mono tabular-nums">{value}{unit}</dd>
+            </div>
+          ))}
+        </dl>
       )}
       <dl className="text-[11px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
         {specRows(part).map(([label, value]) => (

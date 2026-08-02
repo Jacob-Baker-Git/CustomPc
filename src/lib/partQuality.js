@@ -1,3 +1,5 @@
+import { psuEfficiency, fanArea } from './partStats'
+
 // Ranks two parts of the SAME category on a comparable "which is the upgrade"
 // scale. Not a cross-category metric. Used by the whole-system upgrade scorer
 // and by the use-case builder's maximise pass.
@@ -22,8 +24,6 @@ const CHIPSET_TIER = {
   Z490: 50, B550: 48, B560: 40, B450: 32, A620: 30, B460: 30, H610: 28,
 }
 
-const FAN_SIZE_MM = (size) => (/(\d{2,3})/.exec(String(size ?? '')) ? Number(/(\d{2,3})/.exec(String(size))[1]) : 0)
-
 export function partQuality(part) {
   if (!part) return 0
   const s = part.specs ?? {}
@@ -32,11 +32,18 @@ export function partQuality(part) {
     case 'gpu':
       return part.perfScore ?? 0
     case 'ram':
-      return (part.capacityGb ?? 0) * 100 + (part.speed ?? 0) / 100
+      // Capacity still leads — running out of memory is a cliff, being slow is a
+      // slope. But /100 made speed almost invisible: two 32GB kits 1200 MT/s
+      // apart differed by 12 points out of 3200. /20 keeps capacity dominant
+      // while letting speed decide between kits of the same size.
+      return (part.capacityGb ?? 0) * 100 + (part.speed ?? 0) / 20
     case 'storage':
       return (s.readMbps ?? 0) + (part.capacityGb ?? 0)
     case 'psu':
-      return part.wattage ?? 0
+      // Wattage alone rated a 750W Bronze exactly level with a 750W Platinum.
+      // Efficiency is real money and real heat, so it shifts the ranking without
+      // ever overturning a genuine wattage gap.
+      return (part.wattage ?? 0) * (1 + (psuEfficiency(part) ?? 45) / 500)
     case 'cooler':
       return s.type === 'AIO' ? 300 + radiatorMm(s.radiator) : (s.height ?? 0)
     case 'motherboard':
@@ -46,8 +53,9 @@ export function partQuality(part) {
       // cooler, and therefore for airflow around both.
       return (part.maxGpuLength ?? 0) * 0.15 + (part.maxCoolerHeight ?? 0) * 0.25
     case 'fans':
-      // Total swept area — three 120s move more air than one very good 140.
-      return (s.count ?? 1) * FAN_SIZE_MM(s.size)
+      // Swept AREA, not diameter: airflow goes with the square of the radius, so
+      // counting millimetres understated how much a 140 beats a 120.
+      return fanArea(part) ?? 0
     default:
       return part.perfScore ?? 0
   }

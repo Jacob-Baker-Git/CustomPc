@@ -18,8 +18,19 @@ describe('partQuality', () => {
     const nvme = partQuality({ category: 'storage', capacityGb: 1000, specs: { readMbps: 7000 } })
     expect(nvme).toBeGreaterThan(sata)
   })
-  it('psu score is wattage', () => {
-    expect(partQuality({ category: 'psu', wattage: 750 })).toBe(750)
+  it('psu score leads on wattage but separates equal-wattage units by efficiency', () => {
+    // Wattage alone rated a 750W Bronze exactly level with a 750W Platinum, which
+    // is wrong in running cost, heat and noise. Efficiency now breaks that tie
+    // without ever overturning a real wattage gap.
+    const gold = partQuality({ category: 'psu', wattage: 750, specs: { rating: '80+ Gold' } })
+    const bronze = partQuality({ category: 'psu', wattage: 750, specs: { rating: '80+ Bronze' } })
+    expect(gold).toBeGreaterThan(bronze)
+
+    const biggerBronze = partQuality({ category: 'psu', wattage: 1000, specs: { rating: '80+ Bronze' } })
+    expect(biggerBronze).toBeGreaterThan(gold)
+
+    // Wattage still dominates the scale.
+    expect(partQuality({ category: 'psu', wattage: 750 })).toBeGreaterThan(partQuality({ category: 'psu', wattage: 650 }))
   })
   it('cooler: AIO outranks air', () => {
     const air = partQuality({ category: 'cooler', specs: { type: 'air', height: 158 } })

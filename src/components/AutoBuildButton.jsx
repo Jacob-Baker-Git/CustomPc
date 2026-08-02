@@ -13,10 +13,15 @@ export default function AutoBuildButton() {
   const [notice, setNotice] = useState(null)
 
   function handleClick() {
-    // Regenerate the best varied build for the budget + selected use case. Starts
-    // from scratch (not the current parts) so each click can differ — "build me
-    // the best one / try again".
-    const result = buildForUseCase(budget, useCase, partsData, { rng: Math.random })
+    // Deliberately NO rng. This used to pass Math.random so repeated clicks gave
+    // a varied build — "try again" rather than "the answer". Twelve clicks at
+    // £1700 gaming produced twelve different PCs, which reads as the tool being
+    // unsure rather than as choice. There is one best build for a budget and a
+    // use case, and clicking again should confirm it, not reroll it.
+    //
+    // autoBuild still accepts an `rng` for anyone who wants spread; nothing in
+    // the UI passes one.
+    const result = buildForUseCase(budget, useCase, partsData)
     const spend = Object.values(result).reduce((s, p) => s + (p?.price ?? 0), 0)
     if (spend > budget) {
       // chooseBest's cheapest fallback overshoots when the budget can't complete a
