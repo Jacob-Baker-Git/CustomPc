@@ -10,12 +10,12 @@ import { assemblyLayout } from '../lib/assemblyLayout'
 // reads as a smear over the model rather than a highlight of it. The store's
 // `hoveredCategory` and CategoryList's hover handlers went with it — they had no
 // other reader, and a write-only store field is how the last dead branch hid.
-export default function PartModel({ part, selectedParts }) {
+export default function PartModel({ part }) {
   // Fans are rendered by FanSystem (mounts + empty slots), not per-part here.
   if (part.category === 'fans' || part.category === 'paste') return null
 
   const ModelComponent = MODEL_REGISTRY[part.category]
-  const { position, rotation } = assemblyLayout(part.category, selectedParts)
+  const { position, rotation } = assemblyLayout(part.category)
   const gltf = GLTF_MODELS[part.category]
 
   // The procedural (primitive) model — also the fallback when a GLTF is missing

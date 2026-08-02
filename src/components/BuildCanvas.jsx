@@ -46,10 +46,15 @@ export default function BuildCanvas({ selectedParts }) {
         <pointLight position={[0, 0.4, 0.55]} intensity={3.6} distance={5} decay={1.6} />
 
         {parts.map((part) => (
-          <PartModel key={part.id} part={part} selectedParts={selectedParts} />
+          <PartModel key={part.id} part={part} />
         ))}
         <CableHarness selectedParts={selectedParts} />
-        {selectedParts.case && selectedParts.motherboard && (
+        {/* Fans render at their mount points whenever fans are selected, case or
+            not. With a case but no fans, the empty slot outlines show where they
+            go — the outlines belong to the case, which is the thing with the
+            mounts. Cables stay driven by selectedParts: they only appear when
+            both parts they connect are present. */}
+        {(selectedParts.fans || selectedParts.case) && (
           <FanSystem filled={Boolean(selectedParts.fans)} />
         )}
 
