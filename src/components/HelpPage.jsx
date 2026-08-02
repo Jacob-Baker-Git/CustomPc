@@ -1,3 +1,5 @@
+import { MODEL_CREDITS } from '../lib/siteContent'
+
 const FAQS = [
   { q: 'How does "Build a new PC" work?', a: 'Enter a budget and pick how you\'ll use the PC. We pick the strongest set of compatible parts that fits your budget for that use case — so the same budget produces a different build for gaming than for office work.' },
   { q: 'What do the use-case ratings mean?', a: 'Each part is scored out of 100 two ways: how well it suits your task, and how well it works with the rest of the build (a great GPU held back by a weak CPU, too little RAM, or an undersized PSU loses points). The lower of the two is the part\'s score, and we tell you what\'s holding it back.' },
@@ -5,17 +7,6 @@ const FAQS = [
   { q: 'Are the prices real?', a: 'Prices are curated estimates from July 2026, shown so builds compare sensibly. Use the "View on Amazon" links to check live pricing.' },
   { q: 'What does compatibility checking cover?', a: 'CPU/motherboard sockets, DDR4 vs DDR5, GPU length vs case, air-cooler height vs case, and PSU wattage headroom. Incompatible parts are shown locked with the reason.' },
   { q: 'Do I need an account?', a: 'No. It\'s free with no sign-up — your builds are saved in your browser only.' },
-]
-
-// CC BY 4.0 requires visible attribution: title, author, source, licence. The
-// 3D view uses these models generically (a GPU model stands in for any GPU).
-const MODEL_CREDITS = [
-  { part: 'Graphics card', title: 'GeForce RTX 3080', author: '_surovic_' },
-  { part: 'Motherboard', title: 'Asus Strix B550-F', author: 'MUSHROOM_BUILDS' },
-  { part: 'CPU cooler', title: 'Liquid CPU Cooling', author: 'Denzerru' },
-  { part: 'Power supply', title: 'PSU', author: 'Groovex' },
-  { part: 'Storage', title: 'Samsung 990 Pro M.2', author: 'lime.ball.animations' },
-  { part: 'Memory', title: 'Corsair Vengeance RGB Pro', author: 'Nouraiz' },
 ]
 
 export default function HelpPage() {
@@ -47,12 +38,22 @@ export default function HelpPage() {
           >
             CC BY 4.0
           </a>
-          . The case and fans are our own.
+          . Each has been resized and re-oriented to fit the build, and some have
+          unused parts of the mesh hidden — so these are modified versions of the
+          originals, not the originals themselves. The case is our own work.
         </p>
         <ul className="space-y-1 text-sm text-muted">
           {MODEL_CREDITS.map((c) => (
             <li key={c.part}>
               <span className="text-ink">{c.part}:</span> &ldquo;{c.title}&rdquo; by {c.author}
+              {c.source && (
+                <>
+                  {' — '}
+                  <a href={c.source} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                    source
+                  </a>
+                </>
+              )}
             </li>
           ))}
         </ul>
