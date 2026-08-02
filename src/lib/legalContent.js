@@ -10,10 +10,13 @@
 // `purge-feedback-personal-data` pg_cron job in Supabase. Changing one without
 // the other makes this page a false statement.
 
-// Fill these in before the pages go live — they are the two things a privacy
-// notice cannot legally omit, and neither can be inferred from the code.
+// STILL A BLOCKER: contactEmail. A privacy notice has to give people a route to
+// exercise their rights — without one the notice does not do the job it exists
+// to do, and the rights section below promises a reply it has no way to receive.
+// The pages must not go live until it is filled in; legalContent.test.js holds
+// an `it.fails` on exactly that, so the suite tells you when it is done.
 export const OPERATOR = {
-  name: '[Your name or trading name]',
+  name: 'Jacob Baker',
   contactEmail: '[your contact email]',
   location: 'the United Kingdom',
 }

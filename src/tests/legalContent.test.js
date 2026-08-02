@@ -48,11 +48,18 @@ describe('legal content', () => {
     expect(LAST_UPDATED).toMatch(/\d{4}/)
   })
 
-  // Deliberately failing until the operator details are filled in: a privacy
-  // notice with no identifiable controller and no contact route does not do the
-  // job it exists to do.
-  it.fails('names a real operator and contact address', () => {
+  // These were one test until the operator was named. Kept apart now because a
+  // single assertion covering both would keep failing on the missing email and
+  // silently stop guarding the name — one blocker hiding behind another.
+  it('names an identifiable controller', () => {
     expect(OPERATOR.name).not.toMatch(/^\[/)
+  })
+
+  // Deliberately failing until the contact address is filled in. A privacy
+  // notice with no contact route does not do the job it exists to do: the
+  // rights section promises a reply the site has no way to receive. When this
+  // is filled in, flip it to a normal `it` and the pages can go live.
+  it.fails('gives people a contact route to exercise their rights', () => {
     expect(OPERATOR.contactEmail).not.toMatch(/^\[/)
   })
 })
