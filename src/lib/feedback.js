@@ -22,8 +22,10 @@ export function validateFeedback({ rating, type, message } = {}) {
 
 export async function submitFeedback(input) {
   if (!validateFeedback(input).ok) throw new Error('Invalid feedback')
-  // Never forward an email even if a caller passes one — the column is going
-  // away and this is the only writer, so the payload is built explicitly.
+  // Never forward an email even if a caller passes one. The column no longer
+  // exists in the database, so an extra key here is not merely redundant — it
+  // makes PostgREST reject the whole insert. Payload built explicitly for that
+  // reason, not out of tidiness.
   const body = { rating: input.rating, type: input.type, message: input.message.trim() }
   const res = await fetch(`${SUPABASE_URL}/rest/v1/feedback`, {
     method: 'POST',
