@@ -50,15 +50,14 @@ export const PRIVACY = {
       body: [
         'If you submit feedback we store what you typed: a rating, a category and your message. There is no email field and we do not ask who you are, so feedback reaches us anonymously and we have no way to reply to it.',
         'If you put your own contact details inside the message we will have them, because we store the message as written. Please do not, unless you mean to.',
-        'We also store a one-way hash of your IP address. It exists solely to stop one person flooding the form, and it cannot be reversed back into your IP address.',
+        'We do not store your IP address, or a hash of it, or anything else that identifies your device. We previously kept a one-way hash of it to stop one person flooding the form; that was removed, along with the ability to rate-limit an individual, because it was the last identifying thing we held.',
       ],
     },
     {
       heading: 'How long we keep it',
       body: [
-        'The IP hash is erased automatically 30 days after submission.',
-        'The message itself may be kept longer to inform how the site is improved, but once the IP hash has gone there is nothing left linking it to you.',
-        'That deletion runs on a scheduled job — it is not something we have to remember to do.',
+        'Indefinitely, because there is nothing personal in it to expire. A stored row is a rating, a category, a message and the time it arrived.',
+        'There is no deletion schedule any more and no longer anything for one to delete. If that changes — if we ever start collecting something that identifies you — this page changes first.',
       ],
     },
     {
@@ -78,13 +77,15 @@ export const PRIVACY = {
     {
       heading: 'Lawful basis',
       body: [
-        'Where UK GDPR applies, we rely on legitimate interests: running the site and preventing abuse of the feedback form. That is the only purpose the IP hash serves, and it is the only personal data we hold.',
+        'We hold no personal data, so for the most part UK GDPR has nothing to attach to. There are no accounts, no cookies, no analytics, no IP logging and no contact details.',
+        'The one exception is anything you choose to type into a feedback message. Where that happens we rely on legitimate interests — reading feedback in order to improve the site — and you can ask us to erase it.',
       ],
     },
     {
       heading: 'Your rights',
       body: [
-        'You can ask us for a copy of what we hold about you, ask us to correct it, or ask us to erase it. Because there are no accounts and feedback is anonymous, please tell us the approximate date and content of your message so we can find it.',
+        'You can ask us for a copy of what we hold about you, ask us to correct it, or ask us to erase it. In practice there will usually be nothing to find, because feedback is anonymous and nothing else is ever stored.',
+        'If you did put something identifying in a message and want it gone, tell us the approximate date and what it said, and we will delete the row.',
         'If you think we have handled your data badly you can complain to the Information Commissioner’s Office (ico.org.uk).',
       ],
     },

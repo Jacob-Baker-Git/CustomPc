@@ -5,23 +5,19 @@ import { PRIVACY, TERMS, OPERATOR, LAST_UPDATED } from '../lib/legalContent'
 const allText = (doc) => [doc.intro, ...doc.sections.flatMap((s) => [s.heading, ...s.body])].join(' ')
 
 describe('legal content', () => {
-  it('states the retention period the database actually enforces', () => {
-    // This number is the one in the `purge_feedback_personal_data` pg_cron job
-    // (ip_hash at 30 days). If someone changes the job without changing the
-    // page, the privacy notice becomes a false statement — which is a worse
-    // position than having no notice at all.
-    const text = allText(PRIVACY)
-    expect(text).toMatch(/IP hash is erased automatically 30 days/)
-  })
-
-  // The form collects no email address. These assertions are the whole reason
-  // the ICO fee question is answerable, so they guard the claim from both
-  // directions: the page must say we do not ask, and must not carry the old
-  // "erased after 90 days" promise that implied we do.
-  it('does not claim to collect or retain an email address', () => {
+  // The database now holds no personal data at all: the `email` and `ip_hash`
+  // columns were dropped, and the `purge_feedback_personal_data` pg_cron job
+  // was unscheduled and dropped with them. This page has to match that exactly.
+  // A privacy notice describing collection that no longer happens is a false
+  // statement, which is a worse position than having no notice at all.
+  it('claims no personal data, and describes no retention schedule', () => {
     const text = allText(PRIVACY)
     expect(text).toMatch(/no email field/i)
+    expect(text).toMatch(/do not store your IP address/i)
+    expect(text).toMatch(/hold no personal data/i)
+    // The old promises. If any reappears, the DB and the page have diverged.
     expect(text).not.toMatch(/email address is erased/i)
+    expect(text).not.toMatch(/IP hash is erased automatically/i)
     expect(text).not.toMatch(/if you chose to give one/i)
   })
 
