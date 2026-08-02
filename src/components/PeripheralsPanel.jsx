@@ -5,6 +5,7 @@ import useCatalogStore from '../store/useCatalogStore'
 import SpecSheet from './SpecSheet'
 import { PANEL, TELEMETRY } from '../lib/uiTokens'
 import { priceBands, inBand } from '../lib/priceBands'
+import { filterPeripherals, specValues, specLabel, SORTS, DEFAULT_SORT } from '../lib/peripheralFilter'
 
 const CATEGORIES = [
   { id: 'monitor',  label: 'Monitor',  icon: Monitor,    blurb: 'The one part you actually look at' },
@@ -65,15 +66,29 @@ export default function PeripheralsPanel() {
   const total            = useBuilderStore(selPeripheralsTotal)
   const peripheralsData  = useCatalogStore((s) => s.peripherals)
   const [bandByCategory, setBandByCategory] = useState({})
+  const [specByCategory, setSpecByCategory] = useState({})
+  const [query, setQuery] = useState('')
+  const [sort, setSort] = useState(DEFAULT_SORT)
 
   const byCategory = useMemo(() => {
     const map = {}
     for (const { id } of CATEGORIES) {
       const all = peripheralsData.filter((p) => p.category === id).sort((a, b) => a.price - b.price)
-      map[id] = { all, bands: priceBands(all.map((p) => p.price)) }
+      map[id] = { all, bands: priceBands(all.map((p) => p.price)), specs: specValues(all, id) }
     }
     return map
   }, [peripheralsData])
+
+  const anyFilter = query.trim() !== '' || sort !== DEFAULT_SORT
+    || Object.values(specByCategory).some((v) => v && v !== 'all')
+    || Object.values(bandByCategory).some(Boolean)
+
+  const clearAll = () => {
+    setQuery('')
+    setSort(DEFAULT_SORT)
+    setSpecByCategory({})
+    setBandByCategory({})
+  }
 
   const pickedCount = CATEGORIES.filter((c) => selected[c.id]).length
 
@@ -99,9 +114,38 @@ export default function PeripheralsPanel() {
           </div>
         </div>
 
+        {/* Search and sort apply across all four groups — with ~120 items and no
+            way to look one up, price bands alone were doing too much work. */}
+        <div className="flex flex-wrap gap-2 items-center mb-6">
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search peripherals…"
+            aria-label="Search peripherals by name or brand"
+            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-accent"
+          />
+          <select
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+            aria-label="Sort peripherals"
+            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-accent"
+          >
+            {Object.entries(SORTS).map(([id, s]) => <option key={id} value={id}>{s.label}</option>)}
+          </select>
+          {anyFilter && (
+            <button
+              onClick={clearAll}
+              className="text-xs px-3 py-2 rounded-lg border border-line text-muted hover:text-ink hover:border-line-strong transition-colors"
+            >
+              Clear filters
+            </button>
+          )}
+        </div>
+
         <div className="space-y-8">
           {CATEGORIES.map(({ id, label, icon: Icon, blurb }) => {
-            const { all, bands } = byCategory[id] ?? { all: [], bands: [] }
+            const { all, bands, specs } = byCategory[id] ?? { all: [], bands: [], specs: [] }
             // Resolve the band FIRST, then take the id back off it. Band ids are
             // derived from the catalogue's own prices, so when the live Supabase
             // catalogue swaps in and shifts a boundary, a stored id can stop
@@ -110,7 +154,14 @@ export default function PeripheralsPanel() {
             // to All — an invalid ARIA state and an unexplained UI change.
             const activeBand = bands.find((b) => b.id === bandByCategory[id]) ?? bands[0]
             const activeBandId = activeBand?.id ?? 'all'
-            const shown = activeBand ? all.filter((p) => inBand(p.price, activeBand)) : all
+            const activeSpec = specByCategory[id] ?? 'all'
+            const shown = filterPeripherals(all, {
+              category: id,
+              band: activeBand,
+              spec: activeSpec,
+              query,
+              sort,
+            })
             const picked = selected[id]
             return (
               <section key={id}>
@@ -146,8 +197,34 @@ export default function PeripheralsPanel() {
                     })}
                   </div>
                 )}
+                {specs.length > 1 && (
+                  <div role="radiogroup" aria-label={`${label} ${specLabel(id)?.toLowerCase() ?? 'type'}`} className="flex flex-wrap gap-1.5 mb-3">
+                    {['all', ...specs].map((v) => {
+                      const on = v === activeSpec
+                      return (
+                        <button
+                          key={v}
+                          role="radio"
+                          aria-checked={on}
+                          onClick={() => setSpecByCategory((prev) => ({ ...prev, [id]: v }))}
+                          className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition-colors active:scale-95
+                            ${on
+                              ? 'chip-pick border-accent bg-accent text-accent-ink'
+                              : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
+                        >
+                          {/* "Any", not "All" — the price row above already has
+                              an "All" chip and two of them side by side reads as
+                              a duplicate rather than two separate filters. */}
+                          {v === 'all' ? 'Any' : v}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
                 {shown.length === 0 ? (
-                  <p className="text-xs text-faint">Nothing in this price band.</p>
+                  <p className="text-xs text-muted">
+                    Nothing matches here. <button onClick={clearAll} className="text-accent hover:underline">Clear filters</button>
+                  </p>
                 ) : (
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     {shown.map((p) => {
