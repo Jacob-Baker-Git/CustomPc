@@ -49,7 +49,11 @@ function Panel({ args, position, color, opacity = 1, glass = false }) {
 // there are no coplanar surfaces to z-fight with whatever sits in the hole.
 // Only vented holes get them — you don't put bars over the USB ports.
 function Slats({ holes, axis, offset, sign }) {
-  return holes.filter((h) => h.kind === 'fan' || h.kind === 'radiator').flatMap((h) => {
+  // `hi` is part of the key because these are flatMapped into ONE sibling list:
+  // every vented hole restarts `i` at 0, so a panel with three fan cut-outs
+  // emitted fan0..fanN three times over. React logged a duplicate-key error on
+  // every frame and is free to drop or reorder the duplicates.
+  return holes.filter((h) => h.kind === 'fan' || h.kind === 'radiator').flatMap((h, hi) => {
     const span = h.a1 - h.a0
     const count = Math.max(1, Math.round(span / GRILLE_PITCH) - 1)
     const step = span / (count + 1)
@@ -61,7 +65,7 @@ function Slats({ holes, axis, offset, sign }) {
       // axis 0 = roof (bars run across Z, stepped along X); 1 = end wall.
       const position = axis === 0 ? [a, at, midB] : [at, a, midB]
       const args = axis === 0 ? [GRILLE_BAR, GRILLE_BAR, depth] : [GRILLE_BAR, GRILLE_BAR, depth]
-      return <Panel key={`${h.kind}${i}`} args={args} position={position} color="#2a2d34" />
+      return <Panel key={`${h.kind}${hi}-${i}`} args={args} position={position} color="#2a2d34" />
     })
   })
 }
