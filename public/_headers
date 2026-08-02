@@ -12,11 +12,23 @@
 #                            motherboard.glb requires EXT_meshopt_compression,
 #                            whose decoder compiles WebAssembly. This token
 #                            permits WASM only — it does NOT allow JS eval().
+#
+# There is deliberately no third-party host here other than the Supabase catalog
+# API. Fonts used to come from fonts.googleapis.com/fonts.gstatic.com, which sent
+# every visitor's IP to Google before they consented to anything; they are now
+# self-hosted in public/fonts and declared in src/fonts.css. Re-adding a font CDN
+# would reintroduce that transfer.
 # Covered by src/tests/cspHeaders.test.js.
 /*
+  # Netlify already redirects HTTP→HTTPS, but that first plaintext request is
+  # still interceptable (SSL stripping). This tells the browser never to try
+  # HTTP again for a year. No `preload` token on purpose: preloading is a
+  # browser-baked commitment that is slow and awkward to reverse, and it is not
+  # needed for the protection above.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' blob: https://igeggndtnmdpauxovnwv.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob: https://igeggndtnmdpauxovnwv.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'

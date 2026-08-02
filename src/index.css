@@ -1,3 +1,7 @@
+/* Self-hosted @font-face declarations — must precede Tailwind's base layer so
+   the families are known before anything resolves font-family against them. */
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

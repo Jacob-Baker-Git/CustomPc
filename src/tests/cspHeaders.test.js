@@ -57,4 +57,29 @@ describe('production CSP (public/_headers)', () => {
     expect(directives['script-src']).toContain("'self'")
     expect(directives['object-src']).toContain("'none'")
   })
+
+  // Fonts are self-hosted (src/fonts.css + public/fonts). Pulling them from
+  // Google again would send every visitor's IP to a third party before they
+  // consent to anything, so the policy is what stops it coming back by accident.
+  it('allows no third-party host except the Supabase catalog API', () => {
+    const hosts = Object.values(directives)
+      .flat()
+      .filter((v) => v.startsWith('http'))
+    expect(hosts).toEqual(['https://igeggndtnmdpauxovnwv.supabase.co'])
+  })
+
+  it('serves fonts only from our own origin', () => {
+    expect(directives['font-src']).toEqual(["'self'"])
+  })
+
+  it('sends HSTS so the first request cannot be downgraded to HTTP', () => {
+    const hsts = headers
+      .split('\n')
+      .map((l) => l.trim())
+      .find((l) => l.toLowerCase().startsWith('strict-transport-security:'))
+    expect(hsts).toBeTruthy()
+    // A year, in seconds. Anything shorter narrows the protection window.
+    const maxAge = Number(/max-age=(\d+)/.exec(hsts)?.[1])
+    expect(maxAge).toBeGreaterThanOrEqual(31536000)
+  })
 })
