@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const PAGES = ['help', 'parts', 'glossary', 'feedback']
+const PAGES = ['help', 'parts', 'glossary', 'feedback', 'privacy', 'terms']
 
 // Content pages use slashed hashes (#/help) so they never collide with the
 // builder's single-word view hashes (#build, #summary) from useHashView.

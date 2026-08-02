@@ -1,20 +1,28 @@
+import { AFFILIATE_DISCLOSURE } from '../lib/legalContent'
+import { PRICE_SNAPSHOT } from '../lib/siteContent'
+
 // Simple anchor nav — hrefs drive usePageRoute via hashchange, no prop drilling.
 const LINKS = [
   { href: '#/help', label: 'Help & FAQ' },
   { href: '#/parts', label: 'Parts browser' },
   { href: '#/glossary', label: 'Glossary' },
   { href: '#/feedback', label: 'Feedback' },
+  { href: '#/privacy', label: 'Privacy' },
+  { href: '#/terms', label: 'Terms' },
 ]
 
+// text-muted rather than text-faint on the footer body: it carries the affiliate
+// disclosure and the policy links, and faint is 3.9:1 here — below WCAG AA.
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-line py-6 text-center text-xs text-faint">
+    <footer className="mt-16 border-t border-line py-6 text-center text-xs text-muted">
       <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         {LINKS.map((l) => (
           <a key={l.href} href={l.href} className="hover:text-accent transition-colors">{l.label}</a>
         ))}
       </nav>
-      <p className="mt-4">Prices are curated estimates (July 2026). Free · no sign-up.</p>
+      <p className="mt-4">Prices are curated estimates ({PRICE_SNAPSHOT}). Free · no sign-up.</p>
+      <p className="mt-1.5 max-w-xl mx-auto leading-relaxed">{AFFILIATE_DISCLOSURE}</p>
     </footer>
   )
 }

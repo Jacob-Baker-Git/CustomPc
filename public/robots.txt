@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Share links carry a build in a query param — the same page, one variant per
+# possible build. Nothing to gain from crawling them.
+Disallow: /*?build=
+
+Sitemap: https://custompcbuilder.netlify.app/sitemap.xml

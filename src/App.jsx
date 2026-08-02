@@ -8,12 +8,20 @@ import HelpPage from './components/HelpPage'
 import PartsBrowser from './components/PartsBrowser'
 import GlossaryPage from './components/GlossaryPage'
 import FeedbackPage from './components/FeedbackPage'
+import { PrivacyPage, TermsPage } from './components/LegalPage'
 import useBuilderStore from './store/useBuilderStore'
 import { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
 import { enterBuildTab } from './lib/enterBuildTab'
 
-const PAGES = { help: HelpPage, parts: PartsBrowser, glossary: GlossaryPage, feedback: FeedbackPage }
+const PAGES = {
+  help: HelpPage,
+  parts: PartsBrowser,
+  glossary: GlossaryPage,
+  feedback: FeedbackPage,
+  privacy: PrivacyPage,
+  terms: TermsPage,
+}
 
 export default function App() {
   const flow    = useBuilderStore((s) => s.flow)

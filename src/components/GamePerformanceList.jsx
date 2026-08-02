@@ -1,5 +1,6 @@
 import useCatalogStore from '../store/useCatalogStore'
 import { gameFps } from '../lib/gameFps'
+import { FPS_CAVEAT } from '../lib/siteContent'
 
 function dotColor(fps) {
   return fps >= 60 ? 'bg-good' : fps >= 30 ? 'bg-ok' : 'bg-bad'
@@ -27,6 +28,10 @@ export default function GamePerformanceList({ cpu, gpu, resolution, quality = 'h
           <span className="font-mono text-sm text-muted">{fps}</span>
         </div>
       ))}
+      {/* text-muted, not text-faint: faint is 3.9:1 on this background and
+          fails WCAG AA for body text. A disclaimer nobody can read is not a
+          disclaimer. Same reasoning everywhere legal copy appears. */}
+      <p className="mt-2 text-[11px] text-muted leading-relaxed">{FPS_CAVEAT}</p>
     </div>
   )
 }

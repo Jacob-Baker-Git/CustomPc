@@ -1,3 +1,14 @@
+// When the price snapshot was taken. Lived in three components as a hardcoded
+// "July 2026" that would silently rot at different rates; keep it here so the
+// Summary, the footer and the Help page can never disagree about it.
+export const PRICE_SNAPSHOT = 'July 2026'
+
+// Every frame-rate figure on the site is model output, not a measurement.
+// Shown as bare integers they read as a promise we can't stand behind, so this
+// travels with them — the same reason prices carry a caveat in BuildSummary.
+export const FPS_CAVEAT =
+  'Modelled estimates, not measured benchmarks — real frame rates vary with settings, drivers and the game version.'
+
 // CC BY 4.0 requires crediting the author, naming the work, linking the source
 // where practicable, and stating that changes were made. Every model is scaled
 // and re-oriented to the assembly's 1 wu = 122 mm scale and some have stray

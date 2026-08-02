@@ -3,6 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import useCatalogStore from '../store/useCatalogStore'
 import { browseParts } from '../lib/browseParts'
 import { searchUrl } from '../lib/retailerLinks'
+import { AFFILIATE_DISCLOSURE } from '../lib/legalContent'
 
 const CATEGORIES = ['all', 'cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans', 'paste']
 const SORTS = [
@@ -56,6 +57,9 @@ export default function PartsBrowser() {
         </select>
       </div>
 
+      {/* Every row below carries an outbound retailer link, so the disclosure
+          has to be above them — visible before the click, not in the footer. */}
+      <p className="text-[11px] text-muted mb-3 leading-relaxed">{AFFILIATE_DISCLOSURE}</p>
       <p className="text-xs text-muted mb-3">{results.length} parts</p>
       <ul className="space-y-2">
         {results.map((p) => (

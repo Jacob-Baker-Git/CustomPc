@@ -5,6 +5,7 @@ import useCatalogStore from '../store/useCatalogStore'
 import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRatings'
 import ScoreInfo from './ScoreInfo'
 import { PANEL, TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
+import { FPS_CAVEAT } from '../lib/siteContent'
 
 const CAT_LABEL = {
   cpu: 'CPU', gpu: 'GPU', ram: 'RAM', storage: 'Storage', psu: 'PSU',
@@ -164,6 +165,8 @@ export default function BuildRatingPanel() {
               )
             })}
           </div>
+          {/* The "+N fps" gains above are modelled, same as the frame-rate list. */}
+          <p className="mt-3 text-[11px] text-muted leading-relaxed">{FPS_CAVEAT}</p>
         </>
       )}
     </div>
