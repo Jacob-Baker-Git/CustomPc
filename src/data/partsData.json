@@ -792,6 +792,7 @@
     "tdp": 125,
     "length": 229,
     "perfScore": 22,
+    "legacy": true,
     "specs": {
       "vram": 6,
       "memType": "GDDR6"
@@ -4591,6 +4592,7 @@
     "tdp": 75,
     "length": 229,
     "perfScore": 15,
+    "legacy": true,
     "specs": {
       "vram": 4,
       "memType": "GDDR6"
@@ -5398,6 +5400,7 @@
     "tdp": 120,
     "length": 229,
     "perfScore": 20,
+    "legacy": true,
     "specs": {
       "vram": 6,
       "memType": "GDDR6"
