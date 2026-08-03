@@ -5,16 +5,25 @@ import * as feedback from '../lib/feedback'
 
 afterEach(() => vi.restoreAllMocks())
 
+// Advances past the 2.5s submit floor without a real wait.
+function skipTheFloor() {
+  const real = Date.now()
+  vi.spyOn(Date, 'now').mockReturnValue(real + 60_000)
+}
+
+function fillValid() {
+  fireEvent.click(screen.getByRole('button', { name: /rate 5/i }))
+  fireEvent.change(screen.getByLabelText(/tell us more/i), { target: { value: 'Really useful' } })
+}
+
 it('submits valid feedback and shows a thank-you', async () => {
   const spy = vi.spyOn(feedback, 'submitFeedback').mockResolvedValue()
   render(<FeedbackPage />)
-  fireEvent.click(screen.getByRole('button', { name: /rate 5/i }))
-  fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Really useful' } })
-  fireEvent.change(screen.getByLabelText(/what is \d+ \+ \d+\?/i), { target: { value: String(answerFrom()) } })
+  fillValid()
   skipTheFloor()
   fireEvent.click(screen.getByRole('button', { name: /send feedback/i }))
   await waitFor(() => expect(screen.getByText(/thank/i)).toBeInTheDocument())
-  expect(spy).toHaveBeenCalled()
+  expect(spy).toHaveBeenCalledWith({ rating: 5, type: 'idea', message: 'Really useful' })
 })
 
 it('blocks submit and shows an error when the message is empty', () => {
@@ -26,90 +35,58 @@ it('blocks submit and shows an error when the message is empty', () => {
   expect(spy).not.toHaveBeenCalled()
 })
 
-// Fills everything except the challenge, so each test only varies that.
-function fillValidFeedback() {
-  fireEvent.click(screen.getByRole('button', { name: /rate 5/i }))
-  fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Great tool' } })
-}
-
-// Reads the sum off the rendered label rather than importing makeChallenge —
-// that is what proves the challenge actually reaches the user.
-function answerFrom() {
-  const [, a, b] = screen.getByText(/what is \d+ \+ \d+\?/i).textContent.match(/(\d+) \+ (\d+)/)
-  return Number(a) + Number(b)
-}
-
-// Advances past the submit-time floor without a real wait.
-function skipTheFloor() {
-  const real = Date.now()
-  vi.spyOn(Date, 'now').mockReturnValue(real + 60_000)
-}
-
-it('asks a sum before it will send', () => {
-  render(<FeedbackPage />)
-  expect(screen.getByText(/what is \d+ \+ \d+\?/i)).toBeInTheDocument()
-})
-
-it('refuses to send on a wrong answer', async () => {
+it('blocks submit when no rating is chosen', () => {
   const spy = vi.spyOn(feedback, 'submitFeedback').mockResolvedValue()
   render(<FeedbackPage />)
-  fillValidFeedback()
+  fireEvent.change(screen.getByLabelText(/tell us more/i), { target: { value: 'No stars yet' } })
   skipTheFloor()
-  fireEvent.change(screen.getByLabelText(/what is \d+ \+ \d+\?/i), { target: { value: '0' } })
   fireEvent.click(screen.getByRole('button', { name: /send feedback/i }))
-
-  expect(await screen.findByText(/that answer is not right/i)).toBeInTheDocument()
+  expect(screen.getByText(/rating from 1 to 5/i)).toBeInTheDocument()
   expect(spy).not.toHaveBeenCalled()
 })
 
-it('gives a fresh sum after a wrong answer, so guessing gains nothing', () => {
-  vi.spyOn(feedback, 'submitFeedback').mockResolvedValue()
+it('reflects the selected category with aria-pressed', () => {
   render(<FeedbackPage />)
-  fillValidFeedback()
-  skipTheFloor()
-  const before = screen.getByText(/what is \d+ \+ \d+\?/i).textContent
-
-  fireEvent.change(screen.getByLabelText(/what is \d+ \+ \d+\?/i), { target: { value: '0' } })
-  fireEvent.click(screen.getByRole('button', { name: /send feedback/i }))
-
-  // The input is cleared and a new sum is posed (it may coincidentally repeat,
-  // so assert on the cleared input, which is deterministic).
-  expect(screen.getByLabelText(/what is \d+ \+ \d+\?/i)).toHaveValue('')
-  expect(before).toMatch(/what is \d+ \+ \d+\?/i)
+  expect(screen.getByRole('button', { name: /idea/i })).toHaveAttribute('aria-pressed', 'true')
+  fireEvent.click(screen.getByRole('button', { name: /bug/i }))
+  expect(screen.getByRole('button', { name: /bug/i })).toHaveAttribute('aria-pressed', 'true')
+  expect(screen.getByRole('button', { name: /idea/i })).toHaveAttribute('aria-pressed', 'false')
 })
 
 // A form completed faster than a human can read it is a script.
-it('refuses an instant submit even with the right answer', async () => {
+it('refuses an instant submit even with valid fields', async () => {
   const spy = vi.spyOn(feedback, 'submitFeedback').mockResolvedValue()
   render(<FeedbackPage />)
-  fillValidFeedback()
-  fireEvent.change(screen.getByLabelText(/what is \d+ \+ \d+\?/i), { target: { value: String(answerFrom()) } })
+  fillValid()
   fireEvent.click(screen.getByRole('button', { name: /send feedback/i }))
-
   expect(await screen.findByText(/take another moment/i)).toBeInTheDocument()
   expect(spy).not.toHaveBeenCalled()
 })
 
-// Field problems are named before the challenge is mentioned.
-it('still reports an empty message rather than complaining about the check', () => {
+// Field problems are named before the bot check.
+it('reports an empty message before anything else', () => {
   vi.spyOn(feedback, 'submitFeedback').mockResolvedValue()
   render(<FeedbackPage />)
   fireEvent.click(screen.getByRole('button', { name: /rate 4/i }))
   skipTheFloor()
   fireEvent.click(screen.getByRole('button', { name: /send feedback/i }))
-
   expect(screen.getByText(/short message/i)).toBeInTheDocument()
-  expect(screen.queryByText(/that answer is not right/i)).toBeNull()
+  expect(screen.queryByText(/take another moment/i)).toBeNull()
 })
 
-it('sends once the answer is right and the form has been open long enough', async () => {
+it('silently succeeds without sending when the honeypot is filled', async () => {
   const spy = vi.spyOn(feedback, 'submitFeedback').mockResolvedValue()
-  render(<FeedbackPage />)
-  fillValidFeedback()
-  fireEvent.change(screen.getByLabelText(/what is \d+ \+ \d+\?/i), { target: { value: String(answerFrom()) } })
+  const { container } = render(<FeedbackPage />)
+  fillValid()
   skipTheFloor()
+  const honeypot = container.querySelector('input[aria-hidden="true"]')
+  fireEvent.change(honeypot, { target: { value: 'bot corp' } })
   fireEvent.click(screen.getByRole('button', { name: /send feedback/i }))
-
   await waitFor(() => expect(screen.getByText(/thank/i)).toBeInTheDocument())
-  expect(spy).toHaveBeenCalled()
+  expect(spy).not.toHaveBeenCalled()
+})
+
+it('no longer shows the math challenge', () => {
+  render(<FeedbackPage />)
+  expect(screen.queryByText(/what is \d+ \+ \d+\?/i)).toBeNull()
 })

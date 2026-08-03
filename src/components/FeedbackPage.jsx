@@ -1,45 +1,38 @@
 import { useState, useRef, useEffect } from 'react'
-import { Star } from 'lucide-react'
+import { Star, Lightbulb, Bug, Heart, MoreHorizontal } from 'lucide-react'
 import { validateFeedback, submitFeedback } from '../lib/feedback'
-import { makeChallenge, checkAnswer, submittedTooFast } from '../lib/humanCheck'
+import { submittedTooFast } from '../lib/humanCheck'
 
 const TYPES = [
-  { id: 'idea', label: 'Idea' },
-  { id: 'bug', label: 'Bug' },
-  { id: 'praise', label: 'Praise' },
-  { id: 'other', label: 'Other' },
+  { id: 'idea', label: 'Idea', Icon: Lightbulb },
+  { id: 'bug', label: 'Bug', Icon: Bug },
+  { id: 'praise', label: 'Praise', Icon: Heart },
+  { id: 'other', label: 'Other', Icon: MoreHorizontal },
 ]
 
 export default function FeedbackPage() {
   const [rating, setRating] = useState(0)
+  const [hoveredRating, setHoveredRating] = useState(0)
   const [type, setType] = useState('idea')
   const [message, setMessage] = useState('')
   const [company, setCompany] = useState('') // honeypot
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | done | error
-  const [challenge, setChallenge] = useState(() => makeChallenge())
-  const [challengeInput, setChallengeInput] = useState('')
   const mountedAt = useRef(0)
   useEffect(() => { mountedAt.current = Date.now() }, [])
 
   async function onSubmit(e) {
     e.preventDefault()
 
-    // Field problems first: telling someone to "take another moment" when their
-    // real problem is an empty message helps nobody.
+    // Field problems first: naming the bot check when the real problem is an
+    // empty message helps nobody.
     const v = validateFeedback({ rating, type, message })
     if (!v.ok) { setErrors(v.errors); return }
 
-    // Then the cheap bot signals. The honeypot below stays silent on purpose —
-    // telling a bot it was caught just teaches it which field to leave alone.
+    // Then the cheap bot signal. The honeypot below stays silent on purpose —
+    // telling a bot it was caught only teaches it which field to leave alone.
     if (submittedTooFast(mountedAt.current)) {
-      setErrors({ challenge: 'Take another moment to look that over, then send.' })
-      return
-    }
-    if (!checkAnswer(challenge, challengeInput)) {
-      setErrors({ challenge: 'That answer is not right — try the new sum.' })
-      setChallenge(makeChallenge())
-      setChallengeInput('')
+      setErrors({ form: 'Take another moment to look that over, then send.' })
       return
     }
 
@@ -63,78 +56,73 @@ export default function FeedbackPage() {
     )
   }
 
+  const shown = hoveredRating || rating
+
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold mb-1">Feedback</h1>
+    <form onSubmit={onSubmit} className="flex flex-col gap-5">
+      <div className="flex flex-col gap-[5px]">
+        <h1 className="text-3xl font-bold">Feedback</h1>
         <p className="text-muted text-sm">Tell us what works, what doesn't, or what you'd like next.</p>
       </div>
 
-      <div>
-        <span className="block text-sm text-muted mb-2">Your rating</span>
-        <div className="flex gap-1">
+      <div className="flex flex-col gap-[9px]">
+        <span className="text-sm text-muted">What's this about?</span>
+        <div className="grid grid-cols-2 min-[460px]:grid-cols-4 gap-[7px]">
+          {TYPES.map(({ id, label, Icon }) => {
+            const on = type === id
+            return (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={on}
+                onClick={() => setType(id)}
+                className={`flex flex-col items-center gap-1 px-1 py-2 rounded-[9px] border text-xs transition-colors ${on ? 'border-accent text-accent bg-accent-soft' : 'border-line-strong text-muted hover:border-accent'}`}
+              >
+                <Icon size={16} />
+                {label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-[9px]">
+        <label htmlFor="fb-msg" className="text-sm text-muted">Tell us more</label>
+        <div className="relative">
+          <textarea
+            id="fb-msg"
+            value={message}
+            maxLength={2000}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={5}
+            className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
+          />
+          {/* Counter floats below-right: it must never add a row or the even
+              spacing between groups breaks (see the spec's spacing rules). */}
+          <span className="absolute top-full right-0 mt-1 text-xs text-faint">{message.length}/2000</span>
+        </div>
+        {errors.message && <p className="text-xs text-bad">{errors.message}</p>}
+      </div>
+
+      <div className="flex flex-col gap-[9px]">
+        <span className="text-sm text-muted">Your rating</span>
+        <div className="flex gap-1.5" onMouseLeave={() => setHoveredRating(0)}>
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               key={n}
               type="button"
               aria-label={`Rate ${n}`}
               onClick={() => setRating(n)}
+              onMouseEnter={() => setHoveredRating(n)}
+              onFocus={() => setHoveredRating(n)}
+              onBlur={() => setHoveredRating(0)}
               className="p-1"
             >
-              <Star size={26} className={n <= rating ? 'fill-accent text-accent' : 'text-faint'} />
+              <Star size={30} className={n <= shown ? 'fill-accent text-accent' : 'text-faint'} />
             </button>
           ))}
         </div>
-        {errors.rating && <p className="text-xs text-bad mt-1">{errors.rating}</p>}
-      </div>
-
-      <div>
-        <span className="block text-sm text-muted mb-2">Category</span>
-        <div className="flex flex-wrap gap-2">
-          {TYPES.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              aria-pressed={type === t.id}
-              onClick={() => setType(t.id)}
-              className={`px-3 py-1.5 rounded-lg border text-sm transition-colors ${type === t.id ? 'border-accent text-accent bg-accent-soft' : 'border-line text-muted hover:border-accent'}`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="fb-msg" className="block text-sm text-muted mb-2">Message</label>
-        <textarea
-          id="fb-msg"
-          value={message}
-          maxLength={2000}
-          onChange={(e) => setMessage(e.target.value)}
-          rows={5}
-          className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
-        />
-        <div className="flex justify-between text-xs mt-1">
-          <span className="text-bad">{errors.message}</span>
-          <span className="text-muted">{message.length}/2000</span>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="fb-human" className="block text-sm text-muted mb-2">
-          Quick check — {challenge.question}
-        </label>
-        <input
-          id="fb-human"
-          type="text"
-          inputMode="numeric"
-          autoComplete="off"
-          value={challengeInput}
-          onChange={(e) => setChallengeInput(e.target.value)}
-          className="w-24 bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink font-mono tabular-nums focus:outline-none focus:border-accent"
-        />
-        {errors.challenge && <p className="text-xs text-bad mt-1">{errors.challenge}</p>}
+        {errors.rating && <p className="text-xs text-bad">{errors.rating}</p>}
       </div>
 
       {/* Honeypot: hidden from humans, tempting to bots. */}
@@ -148,12 +136,13 @@ export default function FeedbackPage() {
         aria-hidden="true"
       />
 
+      {errors.form && <p className="text-sm text-bad">{errors.form}</p>}
       {status === 'error' && <p className="text-sm text-bad">Something went wrong sending that. Please try again.</p>}
 
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="bg-accent hover:brightness-110 disabled:opacity-60 text-ink font-semibold px-8 py-3 rounded-lg transition-colors"
+        className="self-start bg-accent hover:brightness-110 disabled:opacity-60 text-ink font-semibold px-8 py-3 rounded-lg transition-colors"
       >
         {status === 'sending' ? 'Sending…' : 'Send feedback'}
       </button>
