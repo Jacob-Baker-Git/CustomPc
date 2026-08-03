@@ -17,6 +17,7 @@ import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
 import ViewTabs from '../components/ViewTabs'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
+import { PANEL } from '../lib/uiTokens'
 
 export default function BuilderScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
@@ -62,7 +63,7 @@ export default function BuilderScreen() {
                   build spins, and it reads as a bug. The frame plus the hint
                   below say "this rectangle is the 3D toy, everything outside
                   it is the page". */}
-              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[520px] rounded-xl border border-line hover:border-line-strong transition-colors overflow-hidden">
+              <div className={`area-viz ${PANEL} relative h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px] hover:border-line-strong transition-colors overflow-hidden`}>
                 <CanvasErrorBoundary>
                   <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                     <BuildCanvas selectedParts={selectedParts} />

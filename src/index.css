@@ -104,7 +104,12 @@ body {
     align-items: start;
     gap: 1rem;
   }
-  .build-grid > .area-viz       { grid-area: viz; }
+  /* Stretch, not height:100%. The grid is align-items:start, and a percentage
+     height on a start-aligned item is a spec grey area — it only resolves
+     against the row if the browser sizes the row first, so it can come out as
+     `auto` and let the 3D panel hang below the column beside it. align-self
+     pins the two to the same bottom edge by definition. */
+  .build-grid > .area-viz       { grid-area: viz; align-self: stretch; }
   .build-grid > .area-left      { grid-area: left; }
   .build-grid > .area-banner    { grid-area: banner; }
   .build-grid > .area-parts     { grid-area: parts; }

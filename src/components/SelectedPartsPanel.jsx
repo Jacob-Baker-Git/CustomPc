@@ -37,13 +37,14 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
           <span className="text-xs font-semibold text-good">All essentials covered</span>
         )}
         <span className={`ml-auto ${TELEMETRY} text-sm font-semibold text-accent`}>£{spend.toFixed(0)}</span>
-        {/* Neutral until hovered: findable without shouting, since the red of a
-            permanently-red button next to the running total reads as an error. */}
+        {/* Lifted off the panel with its own surface and carrying the warning
+            colour, matching "Clear build" on the Summary tab — a destructive
+            action that blends into the card behind it is one people miss. */}
         <button
           type="button"
           onClick={() => setClearOpen(true)}
           disabled={isEmpty}
-          className="text-[11px] px-2.5 py-1 rounded-lg border border-line text-muted transition-colors enabled:hover:border-bad enabled:hover:text-bad disabled:opacity-40 disabled:cursor-not-allowed"
+          className="text-[11px] px-2.5 py-1 rounded-lg bg-surface-2 border border-bad text-bad hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
           Clear all
         </button>
