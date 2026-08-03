@@ -15,7 +15,11 @@ import { mm, FAN_MM } from './pcScale'
 const HALF = mm(FAN_MM) / 2
 
 // Clearance cut around a component's own box.
-const IO_MARGIN_MM = 4   // room around the port stack so nothing clips its edge
+// Room around the port stack so nothing clips its edge. 4 mm cut a visible ring
+// of daylight all round the USB block — the stack's outer face also stops 5.4 mm
+// short of the panel, so that ring looked into the case. 1.5 mm is enough
+// clearance for a measured box and reads as a panel seam instead of a gap.
+const IO_MARGIN_MM = 1.5
 const RAD_MARGIN_MM = 6  // a little air around the radiator's fans
 
 // The mains inlet only needs a socket-sized hole, not the PSU's whole face — a

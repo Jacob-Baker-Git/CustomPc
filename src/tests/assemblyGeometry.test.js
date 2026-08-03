@@ -78,10 +78,14 @@ describe('partSize', () => {
     near(partSize('motherboard')[1], 305)
   })
 
-  it('gives the PSU a real ATX unit\'s three dimensions, not a cube', () => {
+  // Depth and width are a real ATX unit's; the height is deliberately 80 rather
+  // than 86 (asked for a slightly shorter supply). The point of the test is that
+  // all three differ — the mesh is near-cubic, so any uniform fit is wrong on
+  // two axes.
+  it('gives the PSU three distinct dimensions, not a cube', () => {
     const [depth, height, width] = partSize('psu')
     near(depth, 160)
-    near(height, 86)
+    near(height, 80)
     near(width, 150)
   })
 
@@ -118,8 +122,8 @@ describe('partSize', () => {
     expect(x).toBeGreaterThan(y)
   })
 
-  it('pins the PSU to a real 86mm height via fitAxis', () => {
-    near(partSize('psu')[1], 86)
+  it('pins the PSU height independently of its other two axes', () => {
+    near(partSize('psu')[1], 80)
   })
 
   it('returns a zero-size box for an unknown category', () => {
@@ -365,16 +369,21 @@ describe('caseInterior', () => {
   it('seats the PSU against the rear wall, the tray and the basement floor', () => {
     const inner = caseInterior()
     const psu = partBox('psu')
-    expect(psu.min[0] - inner.min[0]).toBeCloseTo(mm(2), 6)
+    // FLUSH on the rear face — its mains socket comes through that panel, and a
+    // 2 mm standoff left a visible gap round the cut-out.
+    expect(psu.min[0] - inner.min[0]).toBeCloseTo(0, 6)
     expect(psu.min[1] - inner.min[1]).toBeCloseTo(mm(2), 6)
     expect(psu.min[2] - inner.min[2]).toBeCloseTo(mm(2), 6)
   })
 
-  // It cannot go higher than this: the board's lower edge is directly above.
-  it('raises the PSU as far as the board above it allows', () => {
+  // The unit must never reach the board's lower edge. The headroom grew from
+  // 2 mm to 8 mm when the PSU was deliberately shortened 86 -> 80; the bay
+  // itself is unchanged, so this bounds the clearance rather than pinning the
+  // unit to a ceiling it no longer touches.
+  it('keeps the PSU clear of the board above it', () => {
     const gap = partBox('motherboard').min[1] - partBox('psu').max[1]
     expect(gap).toBeGreaterThan(0)
-    expect(gap).toBeLessThanOrEqual(mm(4))
+    expect(gap).toBeLessThanOrEqual(mm(10))
   })
 
   // The basement exists to hold the PSU and nothing else. Dead air under it is

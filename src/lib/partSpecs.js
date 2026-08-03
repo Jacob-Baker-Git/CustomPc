@@ -163,7 +163,11 @@ export const PART_SPECS = {
     body: [20.446, 10.499, 22.73],
     bodyOffset: [0, -5.7185, 0],
     hideNodes: ['Object_78'],
-    sizeMm: [160, 86, 150],
+    // 80 rather than a real ATX unit's 86: asked to take the height down a
+    // touch. Only the Y axis moves — this is a `sizeMm` part precisely so one
+    // axis can change without the uniform fit dragging the other two with it
+    // (the mistake that widened the M.2 into the GPU).
+    sizeMm: [160, 80, 150],
     rotation: [0, Math.PI / 2, 0],
     // Offset from the BODY's centre (everything here is), which is why this is
     // not the raw -6.857 the node dump reports against the whole mesh.

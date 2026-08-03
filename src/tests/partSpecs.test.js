@@ -14,7 +14,7 @@ describe('partSpecs', () => {
     // because its mesh is near-cubic where a real unit is not, and the M.2
     // because filling the slot's length uniformly over-widened it into the GPU,
     // so its real 22 mm width is pinned separately.
-    expect(PART_SPECS.psu.sizeMm).toEqual([160, 86, 150])
+    expect(PART_SPECS.psu.sizeMm).toEqual([160, 80, 150]) // ATX is 86 tall; shortened on request
     expect(PART_SPECS.storage.sizeMm).toEqual([100, 22, 2]) // M.2 2280 is 80 long; filled to the drawn slot
   })
 

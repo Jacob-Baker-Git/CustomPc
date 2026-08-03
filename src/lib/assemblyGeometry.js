@@ -295,7 +295,10 @@ function mountBaseZ(category) {
 // 110 → 95 → 90 that way. **The PSU is now at its ceiling**: its top sits 2 mm
 // below the board's lower edge, so it cannot rise further without eating the
 // board, and any more height has to come out of the floor.
-const PSU_BAY = { rearGapMm: 2, trayGapMm: 2, floorGapMm: 2 }
+// rearGapMm is 0 so the unit is FLUSH with the panel its mains socket comes
+// through. At 2 mm the socket sat just behind its own cut-out and you could see
+// daylight round it — a real supply bolts hard against that wall.
+const PSU_BAY = { rearGapMm: 0, trayGapMm: 2, floorGapMm: 2 }
 
 // Centre of a part in world units, derived from its mount point. Mounted parts
 // sit against the board's +Z face and extend outward by half their mounting
