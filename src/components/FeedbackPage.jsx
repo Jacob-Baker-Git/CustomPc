@@ -56,7 +56,7 @@ export default function FeedbackPage() {
     )
   }
 
-  const shown = hoveredRating || rating
+  const previewRating = hoveredRating || rating
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5">
@@ -118,7 +118,7 @@ export default function FeedbackPage() {
               onBlur={() => setHoveredRating(0)}
               className="p-1"
             >
-              <Star size={30} className={n <= shown ? 'fill-accent text-accent' : 'text-faint'} />
+              <Star size={30} className={n <= previewRating ? 'fill-accent text-accent' : 'text-faint'} />
             </button>
           ))}
         </div>

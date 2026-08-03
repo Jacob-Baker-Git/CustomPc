@@ -90,3 +90,28 @@ it('no longer shows the math challenge', () => {
   render(<FeedbackPage />)
   expect(screen.queryByText(/what is \d+ \+ \d+\?/i)).toBeNull()
 })
+
+// The hover/focus preview is the one substantial interactive piece here, and it
+// is easy to get subtly wrong (e.g. leaking into the committed rating, or not
+// reverting). Assert on the rendered svg classes rather than component state.
+it('previews the rating on hover and focus, then reverts on leave/blur', () => {
+  render(<FeedbackPage />)
+  const star = (n) => screen.getByRole('button', { name: `Rate ${n}` })
+  const isFilled = (n) => star(n).querySelector('svg').classList.contains('fill-accent')
+  const isUnfilled = (n) => star(n).querySelector('svg').classList.contains('text-faint')
+  const row = star(1).parentElement
+
+  fireEvent.mouseEnter(star(3))
+  expect([1, 2, 3].every(isFilled)).toBe(true)
+  expect([4, 5].every(isUnfilled)).toBe(true)
+
+  fireEvent.mouseLeave(row)
+  expect([1, 2, 3, 4, 5].every(isUnfilled)).toBe(true) // no rating clicked, reverts to 0
+
+  fireEvent.focus(star(4))
+  expect([1, 2, 3, 4].every(isFilled)).toBe(true)
+  expect(isUnfilled(5)).toBe(true)
+
+  fireEvent.blur(star(4))
+  expect([1, 2, 3, 4, 5].every(isUnfilled)).toBe(true)
+})
