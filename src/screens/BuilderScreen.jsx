@@ -56,13 +56,24 @@ export default function BuilderScreen() {
                   — 512px of dead space below the score at a 2400px-tall viewport.
                   A px floor only bites when the left column is genuinely short
                   (an empty build), which is the only case it was ever for. */}
-              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[520px]">
+              {/* Bordered on purpose. The canvas swallows the scroll wheel to
+                  zoom, so without a visible edge people cannot tell where the
+                  page stops scrolling and the model starts — they scroll, the
+                  build spins, and it reads as a bug. The frame plus the hint
+                  below say "this rectangle is the 3D toy, everything outside
+                  it is the page". */}
+              <div className="area-viz relative h-[42vh] md:h-[48vh] lg:h-full lg:min-h-[520px] rounded-xl border border-line hover:border-line-strong transition-colors overflow-hidden">
                 <CanvasErrorBoundary>
                   <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
                     <BuildCanvas selectedParts={selectedParts} />
                   </Suspense>
                 </CanvasErrorBoundary>
                 <InfoDisclaimer />
+                {/* pointer-events-none so the hint never eats a drag aimed at
+                    the model underneath it. */}
+                <div className="pointer-events-none absolute bottom-3 left-3 z-30 rounded-lg border border-line bg-surface/85 px-2.5 py-1 text-[11px] text-muted">
+                  Drag to rotate · scroll to zoom
+                </div>
                 <div className="absolute bottom-3 right-3"><CaseToggle /></div>
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
