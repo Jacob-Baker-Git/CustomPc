@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import CategoryList from './CategoryList'
+import ConfirmDialog from './ConfirmDialog'
+import useBuilderStore from '../store/useBuilderStore'
 import { countEssentials } from '../lib/recommendedOrder'
 import { PANEL, TELEMETRY } from '../lib/uiTokens'
 
@@ -8,6 +11,18 @@ import { PANEL, TELEMETRY } from '../lib/uiTokens'
 export default function SelectedPartsPanel({ selectedParts, onSelectCategory, onDeselect }) {
   const { chosen, total, missing } = countEssentials(selectedParts)
   const spend = Object.values(selectedParts).reduce((sum, p) => sum + (p?.price ?? 0), 0)
+
+  // Clearing lives here as well as on the Summary tab: this is where people are
+  // looking when they decide to start over, and making them cross a tab to do
+  // it is the kind of small tax that gets a build abandoned instead of redone.
+  const clearBuild = useBuilderStore((s) => s.clearBuild)
+  const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
+  const [clearOpen, setClearOpen] = useState(false)
+  // Peripherals count too — clearBuild empties both, so a build with only a
+  // monitor picked still has something to clear.
+  const isEmpty =
+    Object.values(selectedParts).filter(Boolean).length === 0 &&
+    Object.values(selectedPeripherals).filter(Boolean).length === 0
 
   return (
     <section className={`${PANEL} p-4`}>
@@ -22,6 +37,16 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
           <span className="text-xs font-semibold text-good">All essentials covered</span>
         )}
         <span className={`ml-auto ${TELEMETRY} text-sm font-semibold text-accent`}>£{spend.toFixed(0)}</span>
+        {/* Neutral until hovered: findable without shouting, since the red of a
+            permanently-red button next to the running total reads as an error. */}
+        <button
+          type="button"
+          onClick={() => setClearOpen(true)}
+          disabled={isEmpty}
+          className="text-[11px] px-2.5 py-1 rounded-lg border border-line text-muted transition-colors enabled:hover:border-bad enabled:hover:text-bad disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          Clear all
+        </button>
       </div>
       <CategoryList
         selectedParts={selectedParts}
@@ -30,6 +55,17 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
         columns={2}
         emphasiseMissing
       />
+
+      {clearOpen && (
+        <ConfirmDialog
+          title="Clear the whole build?"
+          ariaLabel="Clear build"
+          body="This removes every selected part and peripheral. Saved builds are kept."
+          confirmLabel="Clear everything"
+          onConfirm={() => { clearBuild(); setClearOpen(false) }}
+          onCancel={() => setClearOpen(false)}
+        />
+      )}
     </section>
   )
 }

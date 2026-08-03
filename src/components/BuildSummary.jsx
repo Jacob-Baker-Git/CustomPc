@@ -13,6 +13,7 @@ import { PANEL, PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
+import ConfirmDialog from './ConfirmDialog'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
@@ -299,16 +300,14 @@ export default function BuildSummary() {
       )}
 
       {clearOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
-          <div role="dialog" aria-modal="true" aria-label="Clear build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-ink text-sm font-semibold mb-2">Clear the whole build?</h3>
-            <p className="text-xs text-muted">This removes every selected part and peripheral. Saved builds are kept.</p>
-            <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setClearOpen(false)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmClear} className="text-xs px-3.5 py-2 rounded-lg border border-bad text-bad hover:brightness-110 transition-colors">Clear everything</button>
-            </div>
-          </div>
-        </div>
+        <ConfirmDialog
+          title="Clear the whole build?"
+          ariaLabel="Clear build"
+          body="This removes every selected part and peripheral. Saved builds are kept."
+          confirmLabel="Clear everything"
+          onConfirm={confirmClear}
+          onCancel={() => setClearOpen(false)}
+        />
       )}
     </div>
   )

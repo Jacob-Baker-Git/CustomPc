@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, it, expect, beforeEach } from 'vitest'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
+import useBuilderStore from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
 
 const cpu = partsData.find((p) => p.id === 'cpu-ryzen-7-7700x')
@@ -43,5 +44,45 @@ describe('SelectedPartsPanel', () => {
   it('turns the loud missing treatment on for its list', () => {
     render(<SelectedPartsPanel selectedParts={{ cpu }} onSelectCategory={noop} onDeselect={noop} />)
     expect(screen.getAllByText('Missing').length).toBeGreaterThan(0)
+  })
+})
+
+// Clearing is duplicated from the Summary tab on purpose — this is where people
+// are looking when they decide to start over.
+describe('SelectedPartsPanel clear all', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    useBuilderStore.setState({ selectedParts: { cpu }, selectedPeripherals: {} })
+  })
+
+  it('disables Clear all when there is nothing to clear', () => {
+    useBuilderStore.setState({ selectedParts: {}, selectedPeripherals: {} })
+    render(<SelectedPartsPanel selectedParts={{}} onSelectCategory={noop} onDeselect={noop} />)
+    expect(screen.getByRole('button', { name: /clear all/i })).toBeDisabled()
+  })
+
+  // A monitor-only selection still has something to clear, so the button must
+  // not key off parts alone.
+  it('stays enabled when only peripherals are chosen', () => {
+    useBuilderStore.setState({ selectedParts: {}, selectedPeripherals: { monitor: { id: 'mon', price: 100 } } })
+    render(<SelectedPartsPanel selectedParts={{}} onSelectCategory={noop} onDeselect={noop} />)
+    expect(screen.getByRole('button', { name: /clear all/i })).toBeEnabled()
+  })
+
+  it('asks first, then empties the build on confirm', () => {
+    render(<SelectedPartsPanel selectedParts={{ cpu }} onSelectCategory={noop} onDeselect={noop} />)
+    fireEvent.click(screen.getByRole('button', { name: /clear all/i }))
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /clear everything/i }))
+    expect(useBuilderStore.getState().selectedParts).toEqual({})
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('keeps the build when the dialog is cancelled', () => {
+    render(<SelectedPartsPanel selectedParts={{ cpu }} onSelectCategory={noop} onDeselect={noop} />)
+    fireEvent.click(screen.getByRole('button', { name: /clear all/i }))
+    fireEvent.click(screen.getByRole('button', { name: /cancel/i }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(useBuilderStore.getState().selectedParts.cpu).toBeDefined()
   })
 })
