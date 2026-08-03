@@ -130,8 +130,52 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
   const projectedTotal = (sel) => spendOf(sel) + (sel.psu ? 0 : priceOfPsuFor(drawOf(sel)))
   const affordable = (sel) => projectedTotal(sel) <= budget
 
+  // The least a category can possibly be filled for. Ignores compatibility, so
+  // it is a lower bound — which is what a reserve wants to be.
+  const floorPrice = {}
+  for (const c of FILL_ORDER) {
+    const list = ofCategory(partsData, c)
+    floorPrice[c] = list.length ? Math.min(...list.map((p) => p.price)) : 0
+  }
+
+  // What a CPU costs beyond its own sticker: the cheapest board that takes its
+  // socket, plus the cheapest memory that board's type accepts.
+  //
+  // A CPU commits the whole build to a platform, and nothing here backtracks.
+  // Priced on the chip alone, programming at £500 bought a £139.99 AM5 part
+  // over an £84.99 LGA1700 one, then had to buy the AM5 board (£69.99) and
+  // DDR5 memory (£44.99) that follow from it — where the cheaper chip would
+  // have taken a £64.99 board and £29.99 of DDR4. A £55 upgrade that really
+  // costs £75, on a build with £79 of headroom, is how you land over budget.
+  const cheapestRamOf = {}
+  for (const r of ofCategory(partsData, 'ram')) {
+    if (cheapestRamOf[r.ramType] == null || r.price < cheapestRamOf[r.ramType]) {
+      cheapestRamOf[r.ramType] = r.price
+    }
+  }
+  const platformCost = (cpu) => {
+    let best = Infinity
+    for (const b of ofCategory(partsData, 'motherboard')) {
+      if (b.socket !== cpu.socket) continue
+      const ram = cheapestRamOf[b.ramType]
+      if (ram != null) best = Math.min(best, b.price + ram)
+    }
+    return best
+  }
+
   // Fill every empty category except PSU (sized last, after upgrades).
-  for (const category of emptyCats) {
+  //
+  // Each pick keeps back enough to fill everything still unchosen, PSU
+  // included. Reserving only the PSU's WEIGHT SLICE let an early category eat
+  // money a later one needed, and the build then overshot a budget it could
+  // genuinely have met: programming at £500 came out at 100.9% and creation at
+  // £450 at 105.4%, against a cheapest-possible complete build of £421. The
+  // caller then reports "not enough budget" for a budget that was enough.
+  //
+  // A weight slice is the wrong instrument for this because it answers "what is
+  // this category worth?", not "what does the rest of the build still cost?".
+  for (let i = 0; i < emptyCats.length; i++) {
+    const category = emptyCats[i]
     if (category === 'psu') continue
     const slice = ((weights[category] ?? 0) / weightSum) * available
     let candidates = ofCategory(partsData, category).filter((p) => checkCompatibility(result, p).compatible)
@@ -140,7 +184,22 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     if (category === 'case' && result.gpu) {
       candidates = candidates.filter((p) => result.gpu.length <= p.maxGpuLength)
     }
-    const chosen = chooseBest(category, candidates, slice, remaining - psuReserve, rng)
+    const reserve = emptyCats.slice(i + 1).reduce((s, c) => s + (floorPrice[c] ?? 0), 0)
+
+    // Judge a CPU on chip + platform. The board and memory are reserved through
+    // platformCost instead of their own floors, so they are not counted twice.
+    if (category === 'cpu') {
+      const others = emptyCats.slice(i + 1)
+        .filter((c) => c !== 'motherboard' && c !== 'ram')
+        .reduce((s, c) => s + (floorPrice[c] ?? 0), 0)
+      const affordablePlatform = candidates.filter((p) => p.price + platformCost(p) <= remaining - others)
+      // Only narrow if something survives — when nothing does, the build is
+      // genuinely unaffordable and must still overshoot visibly so the caller
+      // can say so rather than quietly shipping a part short.
+      if (affordablePlatform.length > 0) candidates = affordablePlatform
+    }
+
+    const chosen = chooseBest(category, candidates, slice, remaining - reserve, rng)
     if (chosen) {
       result[category] = chosen
       remaining -= chosen.price

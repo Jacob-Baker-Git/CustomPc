@@ -5,6 +5,7 @@ import { partQuality } from '../lib/partQuality'
 import { BUILD_PROFILES } from '../lib/buildProfiles'
 import { checkCompatibility } from '../lib/compatibility'
 import { rateBuild } from '../lib/partRatings'
+import { buildForUseCase } from '../lib/useCaseBuilder'
 
 const CATS = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans']
 const idMap = (b) => Object.fromEntries(Object.entries(b).map(([k, v]) => [k, v.id]))
@@ -150,5 +151,53 @@ describe('autoBuild variety + lockExisting', () => {
     const unlocked = autoBuild(seed, 2500, partsData, '1440p', { ...opts, lockExisting: false })
     expect(locked.cpu.id).toBe(cheapCpu.id)
     expect(partQuality(unlocked.cpu)).toBeGreaterThan(partQuality(cheapCpu))
+  })
+})
+
+// A CPU commits the build to a platform, and nothing backtracks. Choosing one
+// on its sticker price alone let an AM5 chip drag a pricier board and DDR5
+// memory in behind it, so the build overshot budgets it could actually have
+// met: creation at £450 landed at 105.4% and programming at £500 at 100.9%,
+// against a cheapest-possible complete build of about £421.
+describe('autoBuild budget discipline', () => {
+  const ESSENTIALS = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans']
+  const spendOf = (b) => Object.values(b).reduce((s, p) => s + (p?.price ?? 0), 0)
+
+  // Ignores compatibility, so the true floor is at or above this.
+  const floor = ESSENTIALS.reduce((sum, c) => {
+    const cheapest = partsData
+      .filter((p) => p.category === c && !p.legacy)
+      .sort((a, b) => a.price - b.price)[0]
+    return sum + (cheapest?.price ?? 0)
+  }, 0)
+
+  it('has a cheapest-possible build well under the budgets tested below', () => {
+    expect(floor).toBeGreaterThan(0)
+    expect(floor).toBeLessThan(450)
+  })
+
+  it('never exceeds a budget that can genuinely complete a build', () => {
+    for (const useCase of Object.keys(BUILD_PROFILES)) {
+      for (const budget of [450, 500, 600, 800, 1200, 1700, 2500, 4000]) {
+        const build = buildForUseCase(budget, useCase, partsData)
+        expect(spendOf(build), `${useCase} at £${budget}`).toBeLessThanOrEqual(budget)
+      }
+    }
+  })
+
+  it('still completes every category at those budgets', () => {
+    for (const useCase of Object.keys(BUILD_PROFILES)) {
+      const build = buildForUseCase(600, useCase, partsData)
+      for (const c of ESSENTIALS) expect(build[c], `${useCase} missing ${c}`).toBeTruthy()
+    }
+  })
+
+  // Below the floor there is no build to find, so overshooting is correct — it
+  // is how AutoBuildButton knows to say "raise the budget" instead of applying
+  // a rig with a part missing.
+  it('overshoots visibly when the budget cannot buy a whole PC', () => {
+    const build = buildForUseCase(300, 'gaming', partsData)
+    expect(spendOf(build)).toBeGreaterThan(300)
+    for (const c of ESSENTIALS) expect(build[c], `missing ${c}`).toBeTruthy()
   })
 })
