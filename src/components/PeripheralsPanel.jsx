@@ -1,11 +1,15 @@
 import { useMemo, useState } from 'react'
-import { Monitor, Keyboard, Mouse, Headphones, Check } from 'lucide-react'
+import { Monitor, Keyboard, Mouse, Headphones, Check, SlidersHorizontal } from 'lucide-react'
 import useBuilderStore, { selPeripheralsTotal } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import SpecSheet from './SpecSheet'
+import PeripheralFilterPanel from './PeripheralFilterPanel'
 import { PANEL, TELEMETRY } from '../lib/uiTokens'
-import { priceBands, inBand } from '../lib/priceBands'
-import { filterPeripherals, specValues, specLabel, SORTS, DEFAULT_SORT } from '../lib/peripheralFilter'
+import {
+  filterPeripherals, specValues, SORTS, DEFAULT_SORT,
+  brandValues, refreshBandsFor, toFilterOptions,
+  EMPTY_FILTERS, activeFilterCount,
+} from '../lib/peripheralFilter'
 
 const CATEGORIES = [
   { id: 'monitor',  label: 'Monitor',  icon: Monitor,    blurb: 'The one part you actually look at' },
@@ -65,8 +69,8 @@ export default function PeripheralsPanel() {
   const removePeripheral = useBuilderStore((s) => s.removePeripheral)
   const total            = useBuilderStore(selPeripheralsTotal)
   const peripheralsData  = useCatalogStore((s) => s.peripherals)
-  const [bandByCategory, setBandByCategory] = useState({})
-  const [specByCategory, setSpecByCategory] = useState({})
+  const [filters, setFilters] = useState(EMPTY_FILTERS)
+  const [filterOpen, setFilterOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState(DEFAULT_SORT)
 
@@ -74,20 +78,29 @@ export default function PeripheralsPanel() {
     const map = {}
     for (const { id } of CATEGORIES) {
       const all = peripheralsData.filter((p) => p.category === id).sort((a, b) => a.price - b.price)
-      map[id] = { all, bands: priceBands(all.map((p) => p.price)), specs: specValues(all, id) }
+      map[id] = { all }
     }
     return map
   }, [peripheralsData])
 
-  const anyFilter = query.trim() !== '' || sort !== DEFAULT_SORT
-    || Object.values(specByCategory).some((v) => v && v !== 'all')
-    || Object.values(bandByCategory).some(Boolean)
+  // Everything the filter panel can offer, derived from the catalogue so a
+  // chip never exists for a value nothing has. Brands are pooled across all
+  // four categories because the filter itself is global.
+  const filterOptions = useMemo(() => ({
+    brands: brandValues(peripheralsData),
+    resolution: specValues(byCategory.monitor?.all ?? [], 'monitor'),
+    refreshBands: refreshBandsFor(byCategory.monitor?.all ?? []),
+    switch: specValues(byCategory.keyboard?.all ?? [], 'keyboard'),
+    type: specValues(byCategory.headset?.all ?? [], 'headset'),
+  }), [peripheralsData, byCategory])
+
+  const filterCount = activeFilterCount(filters)
+  const anyFilter = query.trim() !== '' || sort !== DEFAULT_SORT || filterCount > 0
 
   const clearAll = () => {
     setQuery('')
     setSort(DEFAULT_SORT)
-    setSpecByCategory({})
-    setBandByCategory({})
+    setFilters(EMPTY_FILTERS)
   }
 
   const pickedCount = CATEGORIES.filter((c) => selected[c.id]).length
@@ -133,6 +146,23 @@ export default function PeripheralsPanel() {
           >
             {Object.entries(SORTS).map(([id, s]) => <option key={id} value={id}>{s.label}</option>)}
           </select>
+          <button
+            type="button"
+            onClick={() => setFilterOpen(true)}
+            aria-haspopup="dialog"
+            className={`flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg border transition-colors
+              ${filterCount > 0
+                ? 'border-accent text-accent bg-accent-soft'
+                : 'border-line text-muted hover:text-ink hover:border-line-strong'}`}
+          >
+            <SlidersHorizontal size={13} aria-hidden="true" />
+            Filters
+            {filterCount > 0 && (
+              <span className={`${TELEMETRY} rounded-full bg-accent text-accent-ink px-1.5 text-[10px] font-bold`}>
+                {filterCount}
+              </span>
+            )}
+          </button>
           {anyFilter && (
             <button
               onClick={clearAll}
@@ -145,23 +175,12 @@ export default function PeripheralsPanel() {
 
         <div className="space-y-8">
           {CATEGORIES.map(({ id, label, icon: Icon, blurb }) => {
-            const { all, bands, specs } = byCategory[id] ?? { all: [], bands: [], specs: [] }
-            // Resolve the band FIRST, then take the id back off it. Band ids are
-            // derived from the catalogue's own prices, so when the live Supabase
-            // catalogue swaps in and shifts a boundary, a stored id can stop
-            // existing. Keying the chips off the stored id directly left the
-            // radiogroup with nothing checked while the list had silently reset
-            // to All — an invalid ARIA state and an unexplained UI change.
-            const activeBand = bands.find((b) => b.id === bandByCategory[id]) ?? bands[0]
-            const activeBandId = activeBand?.id ?? 'all'
-            const activeSpec = specByCategory[id] ?? 'all'
-            const shown = filterPeripherals(all, {
-              category: id,
-              band: activeBand,
-              spec: activeSpec,
-              query,
-              sort,
-            })
+            const { all } = byCategory[id] ?? { all: [] }
+            // Price bands and the single spec chip row used to live inline here,
+            // one set per category. They are in the Filters panel now — four
+            // stacked chip rows pushed the actual products below the fold, and
+            // multi-select does not fit a radiogroup.
+            const shown = filterPeripherals(all, toFilterOptions(id, filters, { query, sort }))
             const picked = selected[id]
             return (
               <section key={id}>
@@ -175,52 +194,6 @@ export default function PeripheralsPanel() {
                       : `${shown.length} option${shown.length === 1 ? '' : 's'}`}
                   </span>
                 </div>
-                {bands.length > 1 && (
-                  <div role="radiogroup" aria-label={`${label} price`} className="flex flex-wrap gap-1.5 mb-3">
-                    {bands.map((b) => {
-                      const on = b.id === activeBandId
-                      const count = all.filter((p) => inBand(p.price, b)).length
-                      return (
-                        <button
-                          key={b.id}
-                          role="radio"
-                          aria-checked={on}
-                          onClick={() => setBandByCategory((prev) => ({ ...prev, [id]: b.id }))}
-                          className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition-colors active:scale-95
-                            ${on
-                              ? 'chip-pick border-accent bg-accent text-accent-ink'
-                              : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
-                        >
-                          {b.label} <span className={on ? 'opacity-70' : 'text-faint'}>{count}</span>
-                        </button>
-                      )
-                    })}
-                  </div>
-                )}
-                {specs.length > 1 && (
-                  <div role="radiogroup" aria-label={`${label} ${specLabel(id)?.toLowerCase() ?? 'type'}`} className="flex flex-wrap gap-1.5 mb-3">
-                    {['all', ...specs].map((v) => {
-                      const on = v === activeSpec
-                      return (
-                        <button
-                          key={v}
-                          role="radio"
-                          aria-checked={on}
-                          onClick={() => setSpecByCategory((prev) => ({ ...prev, [id]: v }))}
-                          className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition-colors active:scale-95
-                            ${on
-                              ? 'chip-pick border-accent bg-accent text-accent-ink'
-                              : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
-                        >
-                          {/* "Any", not "All" — the price row above already has
-                              an "All" chip and two of them side by side reads as
-                              a duplicate rather than two separate filters. */}
-                          {v === 'all' ? 'Any' : v}
-                        </button>
-                      )
-                    })}
-                  </div>
-                )}
                 {shown.length === 0 ? (
                   <p className="text-xs text-muted">
                     Nothing matches here. <button onClick={clearAll} className="text-accent hover:underline">Clear filters</button>
@@ -245,6 +218,15 @@ export default function PeripheralsPanel() {
           })}
         </div>
       </div>
+
+      {filterOpen && (
+        <PeripheralFilterPanel
+          initial={filters}
+          options={filterOptions}
+          onApply={(next) => { setFilters(next); setFilterOpen(false) }}
+          onCancel={() => setFilterOpen(false)}
+        />
+      )}
     </div>
   )
 }

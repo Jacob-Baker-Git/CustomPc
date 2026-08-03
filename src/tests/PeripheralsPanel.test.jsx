@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, within, act } from '@testing-library/react'
+import { render, screen, fireEvent, within } from '@testing-library/react'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import useBuilderStore from '../store/useBuilderStore'
@@ -47,79 +47,105 @@ describe('PeripheralsPanel', () => {
     expect(useBuilderStore.getState().selectedPeripherals.monitor).toBeUndefined()
   })
 
-  // Bands are per category and stated in money: one global Value/Mid/High-end
-  // chip meant ~£30 for a mouse and ~£300 for a monitor simultaneously.
-  describe('price filters', () => {
+  // Filters moved out of four stacked inline chip rows and into one panel that
+  // only takes effect on Apply.
+  describe('filter panel', () => {
     const cheapest = (cat) =>
       peripheralsData.filter((p) => p.category === cat).sort((a, b) => a.price - b.price)[0]
     const dearest = (cat) =>
       peripheralsData.filter((p) => p.category === cat).sort((a, b) => b.price - a.price)[0]
 
-    it('shows every option under All', () => {
+    const openPanel = () => {
+      fireEvent.click(screen.getByRole('button', { name: /^filters/i }))
+      return screen.getByRole('dialog', { name: /filter peripherals/i })
+    }
+
+    it('shows every option before anything is filtered', () => {
       render(<PeripheralsPanel />)
       expect(screen.getByText(cheapest('monitor').name)).toBeInTheDocument()
       expect(screen.getByText(dearest('monitor').name)).toBeInTheDocument()
     })
 
-    it('gives each category its own filter group', () => {
+    it('opens from the Filters button and closes on Cancel', () => {
       render(<PeripheralsPanel />)
-      for (const cat of ['Monitor', 'Keyboard', 'Mouse', 'Headset']) {
-        expect(screen.getByRole('radiogroup', { name: new RegExp(`${cat} price`, 'i') })).toBeInTheDocument()
-      }
+      openPanel()
+      fireEvent.click(screen.getByRole('button', { name: /^cancel$/i }))
+      expect(screen.queryByRole('dialog')).toBeNull()
     })
 
-    it('labels every chip in money, never as an abstract tier', () => {
+    it('offers a brand filter, which the tab never had before', () => {
       render(<PeripheralsPanel />)
-      const group = screen.getByRole('radiogroup', { name: /mouse price/i })
-      for (const chip of within(group).getAllByRole('radio')) {
-        expect(chip.textContent).not.toMatch(/value|mid|high-end/i)
-      }
+      const panel = openPanel()
+      expect(within(panel).getByRole('button', { name: 'Dell' })).toBeInTheDocument()
     })
 
-    it('the cheapest band keeps the cheapest option and drops the dearest', () => {
+    // The whole point of a panel over live chips: nothing moves until Apply.
+    it('does not filter until Apply is pressed', () => {
       render(<PeripheralsPanel />)
-      const group = screen.getByRole('radiogroup', { name: /monitor price/i })
-      fireEvent.click(within(group).getAllByRole('radio')[1]) // first band after All
+      openPanel()
+      fireEvent.change(screen.getByLabelText(/maximum price/i), { target: { value: '100' } })
+      expect(screen.getByText(dearest('monitor').name)).toBeInTheDocument()
 
-      expect(screen.getByText(cheapest('monitor').name)).toBeInTheDocument()
+      fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
       expect(screen.queryByText(dearest('monitor').name)).toBeNull()
+      expect(screen.getByText(cheapest('monitor').name)).toBeInTheDocument()
     })
 
-    // Band ids are derived from the catalogue's own prices, and the live
-    // Supabase catalogue swaps in after mount. A stored id can therefore stop
-    // existing, which used to leave the radiogroup with NOTHING checked while
-    // the list had silently reset to All.
-    it('keeps exactly one band checked when the catalogue swaps underneath it', () => {
+    it('throws away the draft when cancelled', () => {
       render(<PeripheralsPanel />)
-      const group = () => screen.getByRole('radiogroup', { name: /monitor price/i })
-      fireEvent.click(within(group()).getAllByRole('radio')[2])
-      expect(within(group()).getAllByRole('radio').filter((r) => r.getAttribute('aria-checked') === 'true')).toHaveLength(1)
-
-      // Live catalogue arrives with every monitor at one price, which collapses
-      // the bands entirely — so the previously selected id certainly no longer
-      // exists. (A milder reshuffle can coincidentally keep an id alive, which
-      // would not exercise this path at all.)
-      act(() => {
-        useCatalogStore.setState({
-          peripherals: peripheralsData.map((p) =>
-            p.category === 'monitor' ? { ...p, price: 42 } : p
-          ),
-        })
-      })
-
-      const checked = within(group()).getAllByRole('radio').filter((r) => r.getAttribute('aria-checked') === 'true')
-      expect(checked).toHaveLength(1)
-      expect(checked[0]).toHaveTextContent(/^All/)
+      openPanel()
+      fireEvent.change(screen.getByLabelText(/maximum price/i), { target: { value: '100' } })
+      fireEvent.click(screen.getByRole('button', { name: /^cancel$/i }))
+      expect(screen.getByText(dearest('monitor').name)).toBeInTheDocument()
     })
 
-    // The old filter was global, which is most of why it made no sense.
-    it('filtering one category leaves the others alone', () => {
+    it('filters by brand across every category at once', () => {
       render(<PeripheralsPanel />)
-      const group = screen.getByRole('radiogroup', { name: /monitor price/i })
-      fireEvent.click(within(group).getAllByRole('radio')[1])
+      const panel = openPanel()
+      fireEvent.click(within(panel).getByRole('button', { name: 'Dell' }))
+      fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
 
+      // Dell make monitors here and nothing else, so the other categories empty
+      // out rather than keeping their unfiltered lists.
+      expect(screen.queryByText(dearest('mouse').name)).toBeNull()
+      const dell = peripheralsData.find((p) => p.brand === 'Dell')
+      expect(screen.getByText(dell.name)).toBeInTheDocument()
+    })
+
+    it('badges how many filters are active', () => {
+      render(<PeripheralsPanel />)
+      const panel = openPanel()
+      fireEvent.click(within(panel).getByRole('button', { name: 'Dell' }))
+      fireEvent.change(screen.getByLabelText(/minimum price/i), { target: { value: '50' } })
+      fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
+
+      expect(screen.getByRole('button', { name: /^filters/i })).toHaveTextContent('2')
+    })
+
+    it('multi-select keeps both chosen resolutions', () => {
+      render(<PeripheralsPanel />)
+      const panel = openPanel()
+      fireEvent.click(within(panel).getByRole('button', { name: '1080p' }))
+      fireEvent.click(within(panel).getByRole('button', { name: '4k' }))
+      fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
+
+      const monitors = peripheralsData.filter((p) => p.category === 'monitor')
+      expect(screen.getByText(monitors.find((p) => p.resolution === '1080p').name)).toBeInTheDocument()
+      expect(screen.getByText(monitors.find((p) => p.resolution === '4k').name)).toBeInTheDocument()
+      expect(screen.queryByText(monitors.find((p) => p.resolution === '1440p').name)).toBeNull()
+    })
+
+    it('Clear filters resets the badge and the list', () => {
+      render(<PeripheralsPanel />)
+      const panel = openPanel()
+      fireEvent.click(within(panel).getByRole('button', { name: 'Dell' }))
+      fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
+      expect(screen.queryByText(dearest('mouse').name)).toBeNull()
+
+      // The emptied category sections each offer their own "Clear filters"
+      // link, so this deliberately takes the toolbar's — the first in the DOM.
+      fireEvent.click(screen.getAllByRole('button', { name: /clear filters/i })[0])
       expect(screen.getByText(dearest('mouse').name)).toBeInTheDocument()
-      expect(screen.getByText(dearest('keyboard').name)).toBeInTheDocument()
     })
   })
 
