@@ -35,7 +35,7 @@ function reachableFrom(anchorPartKey, byPart, byCell) {
       for (const sibling of byCell.get(o.cellKey) ?? []) {
         if (!parts.has(sibling.partKey)) {
           parts.add(sibling.partKey)
-          queue.push(sibling.partKey)
+          stack.push(sibling.partKey)
         }
       }
     }
