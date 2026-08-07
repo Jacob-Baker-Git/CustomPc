@@ -1,5 +1,5 @@
 import FpsCardGrid from './FpsCardGrid'
-import { FPS_CAVEAT } from '../../lib/siteContent'
+import { PERF_CAVEAT } from '../../lib/siteContent'
 
 export default function PerformanceReport({ report }) {
   if (!report) return null
@@ -34,7 +34,7 @@ export default function PerformanceReport({ report }) {
           {coverage.gamesExact > 0 && `, ${coverage.gamesExact} measured directly`} ·
           {' '}model {report.modelVersion} · data as of {report.datasetVersion}
         </p>
-        <p className="mt-1">{FPS_CAVEAT}</p>
+        <p className="mt-1">{PERF_CAVEAT}</p>
       </footer>
     </section>
   )

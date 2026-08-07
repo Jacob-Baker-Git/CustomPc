@@ -9,6 +9,18 @@ export const PRICE_SNAPSHOT = 'July 2026'
 export const FPS_CAVEAT =
   'Modelled estimates, not measured benchmarks — real frame rates vary with settings, drivers and the game version.'
 
+// The performance engine needs its OWN caveat, because FPS_CAVEAT is a claim
+// the engine contradicts. That text says nothing here is measured, which is
+// true of the legacy heuristic above and false of the engine — whose report
+// counts, in the line directly above this one, how many figures came from a
+// real measurement. Rendering both put "3 measured directly" immediately above
+// "not measured benchmarks" and made the page argue with itself.
+//
+// What still needs saying: even a measured figure came off somebody else's
+// test bench, not this build.
+export const PERF_CAVEAT =
+  'Estimated from published benchmark measurements. Figures marked "measured" come from a review of that exact combination; the rest are derived from the same data. Either way your frame rates will vary with settings, drivers, the game version and the specific scene.'
+
 // CC BY 4.0 requires crediting the author, naming the work, linking the source
 // where practicable, and stating that changes were made. Every model is scaled
 // and re-oriented to the assembly's 1 wu = 122 mm scale and some have stray

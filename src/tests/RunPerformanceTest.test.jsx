@@ -76,6 +76,18 @@ describe('RunPerformanceTest', () => {
     expect(screen.queryByRole('img', { name: /of the frame is GPU work/i })).not.toBeInTheDocument()
   })
 
+  it('carries its own caveat, not the legacy one that contradicts it', async () => {
+    // FPS_CAVEAT says nothing on the site is measured. True of the old
+    // heuristic; false here, where the footer counts how many figures came
+    // from a real measurement. Rendering it put "3 measured directly"
+    // immediately above "not measured benchmarks".
+    const { FPS_CAVEAT, PERF_CAVEAT } = await import('../lib/siteContent')
+    setup()
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText(PERF_CAVEAT)).toBeInTheDocument()
+    expect(screen.queryByText(FPS_CAVEAT)).not.toBeInTheDocument()
+  })
+
   it('toggles closed again', async () => {
     setup()
     const button = screen.getByRole('button', { name: /run performance test/i })

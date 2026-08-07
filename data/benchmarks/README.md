@@ -11,9 +11,14 @@ shipped to the browser** — `npm run perf:fit` turns this into
    it usually breaches the outlet's terms independently of copyright.
 2. **No source may exceed 20% of entries.** Spreading across outlets is the
    whole licensing position: nobody's compilation is substantially taken.
-   ⚠️ **This is currently a rule you keep by hand.** The automatic check —
-   `npm run perf:fit` failing above 20% and warning above 15% — arrives with
-   the fit pipeline. Until then nothing enforces it, so count as you go.
+   `npm run perf:fit` enforces this — it fails above 20% and warns above 15%,
+   so you do not need to count by hand.
+   Two deliberate carve-outs, because the cap alone is unsatisfiable on a young
+   corpus (with N evenly-split outlets each holds 1/N, so nothing under five
+   sources could ever pass): the check is skipped entirely below **40 entries**,
+   and any source holding fewer than **15 entries** is exempt whatever its
+   share. What the law weighs is whether a substantial part of somebody's
+   compilation was taken, and twelve figures is not that.
 3. **Every entry needs its source, and every source needs a URL, a date and a
    full test system.** An unattributed number cannot be normalised, audited or
    withdrawn.
