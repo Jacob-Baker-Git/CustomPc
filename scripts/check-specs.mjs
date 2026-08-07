@@ -60,7 +60,7 @@ for (const [id, spec] of Object.entries(gpus)) {
   // silently trusting one source over the other is how a wrong number becomes
   // permanent.
   const diffs = spec.knownDiff ?? {}
-  if (part.tdp > 0 && spec.tdpW !== part.tdp) {
+  if (spec.tdpW != null && part.tdp > 0 && spec.tdpW !== part.tdp) {
     const line = `${at}: TDP ${spec.tdpW}W from the spec sheet vs ${part.tdp}W in the catalogue`
     if (diffs.tdpW) warnings.push(`${line} — accepted: ${diffs.tdpW}`)
     else problems.push(line)
@@ -86,8 +86,43 @@ for (const [id, spec] of Object.entries(gpus)) {
     }
   }
 
-  for (const field of ['shaders', 'boostMhz', 'vramGb', 'busBits', 'bandwidthGbs', 'tdpW']) {
+  // tdpW is optional: several sources leave it blank, and the capability model
+  // does not use it — it exists here only as a second opinion to cross-check
+  // the catalogue against. A row without one is less verified, not unusable.
+  for (const field of ['shaders', 'boostMhz', 'vramGb', 'busBits', 'bandwidthGbs']) {
     if (!(spec[field] > 0)) problems.push(`${at}: ${field} is missing or not positive`)
+  }
+  if (spec.tdpW == null) {
+    warnings.push(`${at}: no TDP in the source, so the catalogue's ${part.tdp}W is uncorroborated`)
+  } else if (!(spec.tdpW > 0)) {
+    problems.push(`${at}: tdpW is present but not positive`)
+  }
+}
+
+// --- CPUs -----------------------------------------------------------------
+// Only boostGhz can be cross-checked; the catalogue has no cache field, so
+// l3Mb is single-sourced and that fact is surfaced rather than assumed away.
+const { cpus } = read('../data/specs/cpuSpecs.json')
+let cpusChecked = 0
+let singleSourcedCache = 0
+
+for (const [id, spec] of Object.entries(cpus)) {
+  const part = byId.get(id)
+  const at = `${id}${part ? ` (${part.name})` : ''}`
+  if (!part) { problems.push(`${at}: not a catalogue part id`); continue }
+  cpusChecked += 1
+
+  const catBoost = part.specs?.boostClock
+  if (catBoost > 0 && Math.abs(spec.boostGhz - catBoost) > 0.001) {
+    problems.push(`${at}: boost ${spec.boostGhz} GHz from the spec sheet vs ${catBoost} GHz in the catalogue`)
+  }
+  if (!(spec.l3Mb > 0)) problems.push(`${at}: l3Mb is missing or not positive`)
+  else singleSourcedCache += 1
+
+  // Cores are deliberately absent — see the file's own _readme. A second copy
+  // taken from a source that got them wrong would be worse than none.
+  if (spec.cores != null) {
+    problems.push(`${at}: cores must not be recorded here; the catalogue is the source for those`)
   }
 }
 
@@ -98,6 +133,11 @@ const missing = allGpus.filter((p) => !gpus[p.id])
 if (missing.length) {
   warnings.push(`${missing.length} of ${allGpus.length} catalogue GPUs have no specs yet`)
 }
+const allCpus = parts.filter((p) => p.category === 'cpu')
+const missingCpus = allCpus.filter((p) => !cpus[p.id])
+if (missingCpus.length) {
+  warnings.push(`${missingCpus.length} of ${allCpus.length} catalogue CPUs have no specs yet`)
+}
 
 for (const w of warnings) console.warn(`WARN: ${w}`)
 if (problems.length) {
@@ -106,6 +146,8 @@ if (problems.length) {
   exit(1)
 }
 console.log(`${checked} GPU spec rows verified against the catalogue and against bandwidth arithmetic.`)
+console.log(`${cpusChecked} CPU spec rows verified on boost clock; `
+  + `${singleSourcedCache} L3 cache figures are single-sourced and uncorroborated.`)
 if (missing.length) {
   console.log(`Still to transcribe: ${missing.slice(0, 8).map((p) => p.id).join(', ')}${missing.length > 8 ? ', …' : ''}`)
 }

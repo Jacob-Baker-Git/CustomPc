@@ -1,0 +1,48 @@
+{
+  "_readme": "Published CPU specifications. Deliberately records ONLY what the catalogue does not already hold, plus one field it does (boost clock) purely so the two can corroborate each other. Core counts are NOT recorded here: the source's P-core/E-core columns proved unreliable (it gave the i7-13700K the 14700K's layout), while the catalogue's counts are correct — so cores keep coming from the catalogue and are not duplicated into a second, worse copy. Verified by scripts/check-specs.mjs.",
+  "_corroboration": "boostGhz is cross-checked against the catalogue and fails the build on a mismatch. l3Mb CANNOT be cross-checked — the catalogue has no cache field — so it is single-sourced. That is recorded here rather than hidden, and any claim resting on it should say so.",
+  "sources": {
+    "zen-5": { "title": "Zen 5", "url": "https://en.wikipedia.org/wiki/Zen_5", "accessed": "2026-08-07" },
+    "zen-4": { "title": "Zen 4", "url": "https://en.wikipedia.org/wiki/Zen_4", "accessed": "2026-08-07" },
+    "zen-3": { "title": "Zen 3", "url": "https://en.wikipedia.org/wiki/Zen_3", "accessed": "2026-08-07" },
+    "raptor-lake": { "title": "Raptor Lake", "url": "https://en.wikipedia.org/wiki/Raptor_Lake", "accessed": "2026-08-07" }
+  },
+  "cpus": {
+    "cpu-ryzen-9-9950x3d": { "source": "zen-5", "boostGhz": 5.7, "l3Mb": 128 },
+    "cpu-ryzen-9-9950x": { "source": "zen-5", "boostGhz": 5.7, "l3Mb": 64 },
+    "cpu-ryzen-9-9900x": { "source": "zen-5", "boostGhz": 5.6, "l3Mb": 64 },
+    "cpu-ryzen-7-9800x3d": { "source": "zen-5", "boostGhz": 5.2, "l3Mb": 96 },
+    "cpu-ryzen-7-9700x": { "source": "zen-5", "boostGhz": 5.5, "l3Mb": 32 },
+
+    "cpu-ryzen-9-7950x": { "source": "zen-4", "boostGhz": 5.7, "l3Mb": 64 },
+    "cpu-ryzen-7-7700x": { "source": "zen-4", "boostGhz": 5.4, "l3Mb": 32 },
+    "cpu-ryzen-7-7800x3d": { "source": "zen-4", "boostGhz": 5.0, "l3Mb": 96 },
+    "cpu-ryzen-5-7600x": { "source": "zen-4", "boostGhz": 5.3, "l3Mb": 32 },
+
+    "cpu-ryzen-9-5950x": { "source": "zen-3", "boostGhz": 4.9, "l3Mb": 64 },
+    "cpu-ryzen-7-5800x3d": { "source": "zen-3", "boostGhz": 4.5, "l3Mb": 96 },
+    "cpu-ryzen-7-5800x": { "source": "zen-3", "boostGhz": 4.7, "l3Mb": 32 },
+    "cpu-ryzen-7-5700x": { "source": "zen-3", "boostGhz": 4.6, "l3Mb": 32 },
+    "cpu-ryzen-5-5600x": { "source": "zen-3", "boostGhz": 4.6, "l3Mb": 32 },
+    "cpu-ryzen-5-5600": { "source": "zen-3", "boostGhz": 4.4, "l3Mb": 32 },
+
+    "cpu-i9-14900ks": { "source": "raptor-lake", "boostGhz": 6.2, "l3Mb": 36 },
+    "cpu-i9-14900k": { "source": "raptor-lake", "boostGhz": 6.0, "l3Mb": 36 },
+    "cpu-i7-14700k": { "source": "raptor-lake", "boostGhz": 5.6, "l3Mb": 33 },
+    "cpu-i7-14700kf": { "source": "raptor-lake", "boostGhz": 5.6, "l3Mb": 33 },
+    "cpu-i7-14700": { "source": "raptor-lake", "boostGhz": 5.4, "l3Mb": 33 },
+    "cpu-i5-14600k": { "source": "raptor-lake", "boostGhz": 5.3, "l3Mb": 24 },
+    "cpu-i5-14600kf": { "source": "raptor-lake", "boostGhz": 5.3, "l3Mb": 24 },
+    "cpu-i9-13900k": { "source": "raptor-lake", "boostGhz": 5.8, "l3Mb": 36 },
+    "cpu-i9-13900kf": { "source": "raptor-lake", "boostGhz": 5.8, "l3Mb": 36 },
+    "cpu-i7-13700k": { "source": "raptor-lake", "boostGhz": 5.4, "l3Mb": 30 },
+    "cpu-i7-13700f": { "source": "raptor-lake", "boostGhz": 5.2, "l3Mb": 30 },
+    "cpu-i5-13600k": { "source": "raptor-lake", "boostGhz": 5.1, "l3Mb": 24 }
+  },
+  "unverified": {
+    "cpu-ryzen-9-5900x": "source boost 4.7 GHz vs catalogue 4.8 GHz, unresolved",
+    "cpu-ryzen-5-9600x": "boost clock absent from source",
+    "cpu-ryzen-7-9700f": "not listed in the source table",
+    "cpu-ryzen-9-9900": "not listed in the source table"
+  }
+}

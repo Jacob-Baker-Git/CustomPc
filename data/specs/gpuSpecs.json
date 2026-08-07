@@ -20,6 +20,36 @@
       "title": "Radeon RX 7000 series",
       "url": "https://en.wikipedia.org/wiki/Radeon_RX_7000_series",
       "accessed": "2026-08-07"
+    },
+    "rtx-20": {
+      "title": "GeForce RTX 20 series",
+      "url": "https://en.wikipedia.org/wiki/GeForce_RTX_20_series",
+      "accessed": "2026-08-07"
+    },
+    "gtx-16": {
+      "title": "GeForce 16 series",
+      "url": "https://en.wikipedia.org/wiki/GeForce_16_series",
+      "accessed": "2026-08-07"
+    },
+    "gtx-10": {
+      "title": "GeForce 10 series",
+      "url": "https://en.wikipedia.org/wiki/GeForce_10_series",
+      "accessed": "2026-08-07"
+    },
+    "rx-6000": {
+      "title": "Radeon RX 6000 series",
+      "url": "https://en.wikipedia.org/wiki/Radeon_RX_6000_series",
+      "accessed": "2026-08-07"
+    },
+    "rx-9000": {
+      "title": "Radeon RX 9000 series",
+      "url": "https://en.wikipedia.org/wiki/Radeon_RX_9000_series",
+      "accessed": "2026-08-07"
+    },
+    "arc": {
+      "title": "Intel Arc",
+      "url": "https://en.wikipedia.org/wiki/Intel_Arc",
+      "accessed": "2026-08-07"
     }
   },
   "gpus": {
@@ -241,11 +271,220 @@
       "busBits": 128,
       "bandwidthGbs": 288,
       "tdpW": 165
+    },
+    "gpu-rtx-2060": {
+      "source": "rtx-20",
+      "shaders": 1920,
+      "boostMhz": 1680,
+      "vramGb": 6,
+      "busBits": 192,
+      "bandwidthGbs": 336,
+      "tdpW": 160
+    },
+    "gpu-rtx-2080-super": {
+      "source": "rtx-20",
+      "shaders": 3072,
+      "boostMhz": 1815,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 496,
+      "tdpW": 250
+    },
+    "gpu-gtx-1660": {
+      "source": "gtx-16",
+      "shaders": 1408,
+      "boostMhz": 1785,
+      "vramGb": 6,
+      "busBits": 192,
+      "bandwidthGbs": 192,
+      "tdpW": 120
+    },
+    "gpu-gtx-1660s": {
+      "source": "gtx-16",
+      "shaders": 1408,
+      "boostMhz": 1785,
+      "vramGb": 6,
+      "busBits": 192,
+      "bandwidthGbs": 336,
+      "tdpW": 125
+    },
+    "gpu-gtx-1660-ti": {
+      "source": "gtx-16",
+      "shaders": 1536,
+      "boostMhz": 1770,
+      "vramGb": 6,
+      "busBits": 192,
+      "bandwidthGbs": 288,
+      "tdpW": 120
+    },
+    "gpu-gtx-1050-ti": {
+      "source": "gtx-10",
+      "shaders": 768,
+      "boostMhz": 1392,
+      "vramGb": 4,
+      "busBits": 128,
+      "bandwidthGbs": 112,
+      "tdpW": 75
+    },
+    "gpu-gtx-1080-ti": {
+      "source": "gtx-10",
+      "shaders": 3584,
+      "boostMhz": 1582,
+      "vramGb": 11,
+      "busBits": 352,
+      "bandwidthGbs": 484,
+      "tdpW": 250
+    },
+    "gpu-rx-6500xt": {
+      "source": "rx-6000",
+      "shaders": 1024,
+      "boostMhz": 2815,
+      "vramGb": 4,
+      "busBits": 64,
+      "bandwidthGbs": 144,
+      "tdpW": 107
+    },
+    "gpu-rx-6600": {
+      "source": "rx-6000",
+      "shaders": 1792,
+      "boostMhz": 2491,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 224,
+      "tdpW": 132
+    },
+    "gpu-rx-6600-xt": {
+      "source": "rx-6000",
+      "shaders": 2048,
+      "boostMhz": 2589,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 256,
+      "tdpW": 160
+    },
+    "gpu-rx-6650xt": {
+      "source": "rx-6000",
+      "shaders": 2048,
+      "boostMhz": 2635,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 280,
+      "tdpW": 180
+    },
+    "gpu-rx-6700-xt": {
+      "source": "rx-6000",
+      "shaders": 2560,
+      "boostMhz": 2581,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 384,
+      "tdpW": 230
+    },
+    "gpu-rx-6750xt": {
+      "source": "rx-6000",
+      "shaders": 2560,
+      "boostMhz": 2600,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 432,
+      "tdpW": 250
+    },
+    "gpu-rx-6800": {
+      "source": "rx-6000",
+      "shaders": 3840,
+      "boostMhz": 2105,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 512,
+      "tdpW": null
+    },
+    "gpu-rx-6950-xt": {
+      "source": "rx-6000",
+      "shaders": 5120,
+      "boostMhz": 2310,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 576,
+      "tdpW": 335
+    },
+    "gpu-rx-9060xt": {
+      "source": "rx-9000",
+      "shaders": 2048,
+      "boostMhz": 3130,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 640,
+      "tdpW": 160
+    },
+    "gpu-rx-9060-xt-8gb": {
+      "source": "rx-9000",
+      "shaders": 2048,
+      "boostMhz": 3130,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 576,
+      "tdpW": 150
+    },
+    "gpu-rx-9070-gre": {
+      "source": "rx-9000",
+      "shaders": 3072,
+      "boostMhz": 2790,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 432,
+      "tdpW": 220
+    },
+    "gpu-arc-a380": {
+      "source": "arc",
+      "shaders": 1024,
+      "boostMhz": 2050,
+      "vramGb": 6,
+      "busBits": 96,
+      "bandwidthGbs": 186,
+      "tdpW": null,
+      "vendorUnits": "Intel Xe: 8 Xe-cores x 128 = 1024 vector engines; NOT comparable with CUDA cores or stream processors without per-architecture calibration"
+    },
+    "gpu-arc-b570": {
+      "source": "arc",
+      "shaders": 2304,
+      "boostMhz": 2500,
+      "vramGb": 10,
+      "busBits": 160,
+      "bandwidthGbs": 380,
+      "tdpW": 150,
+      "vendorUnits": "Intel Xe2: 18 Xe-cores"
+    },
+    "gpu-intel-arc-b580": {
+      "source": "arc",
+      "shaders": 2560,
+      "boostMhz": 2670,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 456,
+      "tdpW": 190,
+      "vendorUnits": "Intel Xe2: 20 Xe-cores"
     }
   },
   "unverified": {
     "gpu-rtx-5060": "source lists 192-bit with 448 GB/s at 28 Gbps; those imply 128-bit. Bus width unresolved.",
     "gpu-rtx-5060ti": "source lists 256-bit with 672 GB/s at 28 Gbps; those imply 192-bit. Bus width unresolved.",
-    "gpu-rtx-5050": "source memory clock 20 Gbps is a GDDR6 rate, but the catalogue records GDDR7. One of the two is wrong."
+    "gpu-rtx-5050": "source memory clock 20 Gbps is a GDDR6 rate, but the catalogue records GDDR7. One of the two is wrong.",
+    "gpu-rtx-2070": "source TDP column read 599, which is the launch price; wattage unresolved",
+    "gpu-rtx-2080": "source TDP column read 799, which is the launch price; wattage unresolved",
+    "gpu-rtx-2080-ti": "source TDP column read 1199, which is the launch price; wattage unresolved",
+    "gpu-rtx-2060-super": "boost clock absent from source",
+    "gpu-rtx-2070-super": "bus width absent from source",
+    "gpu-gtx-1650": "source lists two variants and a 192-bit bus whose bandwidth implies 8 Gbps not the 12 stated",
+    "gpu-gtx-1060-6gb": "boost clock absent from source",
+    "gpu-gtx-1070": "boost clock absent from source",
+    "gpu-gtx-1070-ti": "boost clock and bandwidth absent from source",
+    "gpu-gtx-1080": "boost clock absent from source",
+    "gpu-rx-6800-xt": "memory clock and bandwidth absent from source",
+    "gpu-rx-6900-xt": "memory clock, bandwidth and TDP all absent from source",
+    "gpu-rx-9070": "source lists 304W for the 9070 and leaves the 9070 XT blank; the catalogue has 220W and 304W respectively, so the source rows look misaligned",
+    "gpu-rx-9070xt": "see gpu-rx-9070 — the pair cannot be told apart from this source",
+    "gpu-arc-a580": "source TDP 175W vs catalogue 185W, unresolved",
+    "gpu-arc-a750": "memory size, bus and bandwidth all absent from source",
+    "gpu-intel-arc-a770": "memory bus absent from source"
   }
 }
