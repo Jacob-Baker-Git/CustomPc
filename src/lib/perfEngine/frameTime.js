@@ -24,6 +24,11 @@ export function blendFrameTime(tGpu, tCpu, k) {
 // How much of the frame the CPU is responsible for: 0 = purely GPU-bound,
 // 1 = purely CPU-bound. It falls out of the same p-norm as the frame time, so
 // the bottleneck verdict and the frame rate can never contradict each other.
+// ⚠️ With BOTH terms absent this returns 0, which limitedBy() reads as
+// "GPU-led" — it cannot distinguish no data from a confirmed GPU bound. Every
+// caller is expected to establish coverage before asking, the way
+// estimateBuildPerformance checks both indices are > 0 first. Do not call it
+// to find out whether you have data; call it once you know you do.
 export function cpuShare(tGpu, tCpu, k) {
   if (!(tGpu > 0)) return tCpu > 0 ? 1 : 0
   if (!(tCpu > 0)) return 0
