@@ -45,6 +45,13 @@ export function exactKey({ cpu, gpu, game, resolution, presetId }) {
 // data is that where it exists it is used directly, so this short-circuits the
 // model rather than feeding it.
 export function exactFor(model, context) {
+  // Guard the way the index accessors do. Without it a missing part stringifies
+  // to the literal "undefined" in the key, and a table containing a key of that
+  // shape would match it. Unreachable through estimateBuildPerformance, which
+  // returns early without a CPU and a GPU — but this module's entire contract
+  // is that a caller cannot accidentally receive a number it did not earn, and
+  // an accessor that depends on someone else checking first does not honour it.
+  if (!context?.cpu?.id || !context?.gpu?.id || !context?.game?.id) return null
   return model?.exact?.[exactKey(context)] ?? null
 }
 

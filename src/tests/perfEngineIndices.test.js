@@ -69,6 +69,21 @@ describe('exactFor', () => {
     expect(exactFor(model, { ...base, cpu: { id: 'cpu-other' } })).toBeNull()
   })
 
+  it('refuses a key built from a missing part, rather than stringifying it', () => {
+    // `${undefined}` is "undefined", so an unguarded key would be
+    // "undefined|undefined|cyberpunk|1440p|high" — and a table holding a key of
+    // that shape would match it and hand back a frame time for a build that
+    // has no parts.
+    const booby = {
+      exact: { 'undefined|undefined|cyberpunk|1440p|high':
+                 { frameTimeMs: 999, sources: 1, entries: 1 } },
+    }
+    const ctx = { game: { id: 'cyberpunk' }, resolution: '1440p', presetId: 'high' }
+    expect(exactFor(booby, { ...ctx, cpu: null, gpu: undefined })).toBeNull()
+    expect(exactFor(booby, { ...ctx, cpu: { id: 'cpu-x' }, gpu: null })).toBeNull()
+    expect(exactFor(booby, { ...ctx, game: null, cpu: { id: 'a' }, gpu: { id: 'b' } })).toBeNull()
+  })
+
   it('returns null against a model with no exact table', () => {
     expect(exactFor({}, { cpu: { id: 'a' }, gpu: { id: 'b' }, game: { id: 'c' },
                           resolution: '1440p', presetId: 'high' })).toBeNull()
