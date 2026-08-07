@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import partsData from '../data/partsData.json'
 import gamesData from '../data/gamesData.json'
 import { estimateFps } from '../lib/fpsEstimate'
@@ -68,17 +70,14 @@ describe('the legacy FPS path is untouched by the performance engine', () => {
     }
   })
 
-  it('the legacy modules import nothing from the performance engine', async () => {
-    const fs = await import('node:fs/promises')
-    const path = await import('node:path')
+  it('the legacy modules import nothing from the performance engine', () => {
     for (const file of ['fpsEstimate.js', 'gameFps.js', 'bottleneck.js', 'partSynergy.js']) {
       // NOTE: not `new URL(relative, import.meta.url)` — jsdom's global URL
       // polyfill mishandles file: bases with a Windows drive letter and
       // silently resolves to http://localhost:3000/..., which then 404s as
-      // an ENOENT from fs.readFile. path.resolve against cwd (vitest runs
-      // from the repo root) sidesteps that jsdom shadowing entirely.
-      const filePath = path.default.resolve(process.cwd(), 'src/lib', file)
-      const src = await fs.readFile(filePath, 'utf8')
+      // an ENOENT from readFileSync. Resolving against cwd (vitest runs from
+      // the repo root) sidesteps that jsdom shadowing entirely.
+      const src = readFileSync(resolve(process.cwd(), 'src/lib', file), 'utf8')
       expect(src).not.toMatch(/perfEngine|perfModel/)
     }
   })
