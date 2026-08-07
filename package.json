@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "og:image": "node scripts/og-image.mjs",
     "perf:fit": "node scripts/fit-perf-model.mjs",
-    "perf:add": "node scripts/add-bench-entry.mjs"
+    "perf:add": "node scripts/add-bench-entry.mjs",
+    "perf:import": "node scripts/import-bench-tsv.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

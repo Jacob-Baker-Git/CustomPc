@@ -1,0 +1,18 @@
+# Copy this file, fill in the header from the review's test-system page, then
+# add one row per bar on its charts. Run:  npm run perf:import -- <this file>
+# Lines starting with # are ignored. Columns are tab OR comma separated.
+
+outlet:    Example Outlet
+title:     Example GPU Review
+url:       https://example.com/review
+published: 2026-02-19
+kind:      gpu-scaling
+cpu:       cpu-ryzen-7-9800x3d
+ram:       DDR5 6000 32 2
+os:        Windows 11 24H2
+driver:    NVIDIA 572.16
+scene:     built-in benchmark
+
+game        res     preset  part               avg    low
+cyberpunk   1440p   ultra   gpu-rtx-5070       78.0   61.0
+cyberpunk   1440p   ultra   gpu-rtx-4070ti     71.2   55.4

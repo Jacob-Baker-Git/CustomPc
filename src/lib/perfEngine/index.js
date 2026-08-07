@@ -3,6 +3,7 @@ import { gpuIndexFor, cpuIndexFor, cellFor, exactFor } from './indices'
 import { lowFrameTime } from './lows'
 import { estimatePower, estimateThermals } from './power'
 import { memoryProfile } from './memory'
+import { bottleneckSummary } from './bottleneck'
 import { resolvePreset } from '../gamePresets'
 
 // The public contract of the performance engine.
@@ -29,7 +30,7 @@ function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, prese
         const tGpu = cell.A / gpuIdx.value
         const tCpu = (cell.B * (model.resCpuScale?.[resolution] ?? 1)) / cpuIdx.value
         const share = cpuShare(tGpu, tCpu, model.blendK)
-        return { frameTimeMs: blendFrameTime(tGpu, tCpu, model.blendK), share }
+        return { frameTimeMs: blendFrameTime(tGpu, tCpu, model.blendK), share, tGpu, tCpu }
       })()
     : null
 
@@ -75,6 +76,10 @@ function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, prese
     lowBasis: low.basis,
     cpuShare: modelled ? Number(modelled.share.toFixed(3)) : null,
     limitedBy: modelled ? limitedBy(modelled.share) : null,
+    // What each side could deliver ALONE, if the other were infinitely fast.
+    // The gap between them is the bottleneck, in the units people think in.
+    gpuOnlyFps: modelled ? Math.round(msToFps(modelled.tGpu)) : null,
+    cpuOnlyFps: modelled ? Math.round(msToFps(modelled.tCpu)) : null,
     atEngineCap,
     basis: source.basis,
     sources: source.sources,
@@ -122,6 +127,10 @@ export function estimateBuildPerformance({
     power: estimatePower(parts, meanCpuShare ?? 0.5),
     thermals: estimateThermals(parts),
     memory: memoryProfile(parts),
+    // null until the corpus covers at least one game — a bottleneck verdict
+    // with no measured frames behind it is the guess this engine exists to
+    // avoid, and every FPS calculator on the internet already sells it.
+    bottleneck: bottleneckSummary(rows),
     meanCpuShare,
     build: {
       cpu: { id: cpu.id, name: cpu.name },

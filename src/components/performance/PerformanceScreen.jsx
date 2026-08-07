@@ -138,6 +138,36 @@ export default function PerformanceScreen() {
         </StatPanel>
 
         <StatPanel
+          title="Bottleneck"
+          subtitle={report?.bottleneck
+            ? report.bottleneck.verdict
+            : 'Which part holds this build back differs per game, so this is worked out from the frame rates rather than by comparing the two parts in the abstract. It needs benchmark data.'}
+          footnote={report?.bottleneck?.nextUpgrade?.reason}
+        >
+          {report?.bottleneck ? (
+            <>
+              <StatRow label="Leaning"
+                       value={report.bottleneck.leaning === 'cpu' ? 'processor'
+                         : report.bottleneck.leaning === 'gpu' ? 'graphics' : 'balanced'}
+                       tone={report.bottleneck.leaning === 'cpu' ? 'bad' : 'good'} />
+              <StatRow label="Processor-limited" value={report.bottleneck.cpuLedGames}
+                       unit={`of ${report.bottleneck.gamesConsidered}`} />
+              <StatRow label="Graphics-limited" value={report.bottleneck.gpuLedGames}
+                       unit={`of ${report.bottleneck.gamesConsidered}`} />
+              <StatRow label="Worst case" value={report.bottleneck.worstCase.name} />
+              <StatRow label="Lost to the weaker part"
+                       value={report.bottleneck.worstCase.lostToWeakerSide} unit="%"
+                       hint={`${report.bottleneck.worstCase.name}: card could do ${report.bottleneck.worstCase.gpuOnlyFps}, chip could feed ${report.bottleneck.worstCase.cpuOnlyFps}`}
+                       tone={report.bottleneck.worstCase.lostToWeakerSide > 25 ? 'bad' : 'ok'} />
+              <StatRow label="Upgrade next"
+                       value={report.bottleneck.nextUpgrade.category === 'cpu' ? 'processor' : 'graphics card'} />
+            </>
+          ) : (
+            <StatRow label="Status" value="needs benchmark data" />
+          )}
+        </StatPanel>
+
+        <StatPanel
           title="Frame rates"
           subtitle={`At ${resolution}, High preset.`}
         >
