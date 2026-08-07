@@ -1,0 +1,72 @@
+import { describe, it, expect } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import RunPerformanceTest from '../components/RunPerformanceTest'
+
+const cpu = { id: 'cpu-ryzen-5-7600x', name: 'AMD Ryzen 5 7600X', socket: 'AM5' }
+const gpu = { id: 'gpu-rtx-5070', name: 'NVIDIA GeForce RTX 5070', specs: { vram: 12 } }
+const games = [
+  { id: 'cyberpunk', name: 'Cyberpunk 2077', fpsFactor: 0.5, cpuFactor: 0.75 },
+  { id: 'starfield', name: 'Starfield', fpsFactor: 0.65, cpuFactor: 0.7 },
+]
+const model = {
+  modelVersion: '1.0.0', datasetVersion: '2026-08-07', blendK: 5.1,
+  resCpuScale: { '1440p': 1.012 },
+  gpuIndex: { 'gpu-rtx-5070': { '1440p': 62.0, basis: 'measured', anchors: 11 } },
+  cpuIndex: { 'cpu-ryzen-5-7600x': { value: 71.2, basis: 'measured', anchors: 9 } },
+  gameConst: { cyberpunk: { '1440p': { high: { A: 399.0, B: 402.0, sources: 3 } } } },
+}
+
+const setup = (over = {}) => render(
+  <RunPerformanceTest parts={{ cpu, gpu }} resolution="1440p" model={model} games={games} {...over} />,
+)
+
+describe('RunPerformanceTest', () => {
+  it('is disabled with a reason until a CPU and a GPU are picked', () => {
+    setup({ parts: { cpu } })
+    const button = screen.getByRole('button', { name: /performance test/i })
+    expect(button).toBeDisabled()
+    expect(screen.getByText(/pick a cpu and a graphics card/i)).toBeInTheDocument()
+  })
+
+  it('shows no report until the button is clicked', () => {
+    setup()
+    expect(screen.queryByText('Cyberpunk 2077')).not.toBeInTheDocument()
+  })
+
+  it('renders the FPS cards on click', async () => {
+    setup()
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText('Cyberpunk 2077')).toBeInTheDocument()
+    expect(screen.getByText('143')).toBeInTheDocument()
+  })
+
+  it('says so plainly for a game with no data, instead of showing a number', async () => {
+    setup()
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText('Starfield')).toBeInTheDocument()
+    expect(screen.getByText(/no benchmark data yet/i)).toBeInTheDocument()
+  })
+
+  it('toggles closed again', async () => {
+    setup()
+    const button = screen.getByRole('button', { name: /run performance test/i })
+    await userEvent.click(button)
+    await userEvent.click(screen.getByRole('button', { name: /hide performance test/i }))
+    expect(screen.queryByText('Cyberpunk 2077')).not.toBeInTheDocument()
+  })
+
+  it('shows the coverage count and model version in the footer', async () => {
+    setup()
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText(/1 of 2 games estimated/i)).toBeInTheDocument()
+    expect(screen.getByText(/model 1\.0\.0/i)).toBeInTheDocument()
+  })
+
+  it('explains itself when the corpus covers nothing at all', async () => {
+    const empty = { ...model, gpuIndex: {}, cpuIndex: {}, gameConst: {} }
+    setup({ model: empty })
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText(/no benchmark data for these parts yet/i)).toBeInTheDocument()
+  })
+})
