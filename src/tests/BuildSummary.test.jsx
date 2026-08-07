@@ -105,4 +105,22 @@ describe('BuildSummary', () => {
     fireEvent.click(screen.getByRole('button', { name: /^save$/i }))
     expect(useSavedStore.getState().saved.some((b) => b.name === 'Test Rig')).toBe(true)
   })
+
+  it('offers a performance test alongside the existing frame-rate list', () => {
+    // useCase is set explicitly (not left to the store default) because the
+    // frame-rate block only renders for paced use cases, and this store is a
+    // persisted singleton — an earlier test in this file leaves it on 'office'.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'gaming' })
+    render(<BuildSummary />)
+    expect(screen.getByRole('button', { name: /run performance test/i })).toBeInTheDocument()
+    // The old list stays. It quotes the old model, which still drives the
+    // CustomPC score — the two coexist until Phase 6 migrates it.
+    expect(screen.getByRole('button', { name: /frame rates @/i })).toBeInTheDocument()
+  })
+
+  it('disables the performance test until a CPU and a GPU are picked', () => {
+    useBuilderStore.setState({ selectedParts: { cpu } })
+    render(<BuildSummary />)
+    expect(screen.getByRole('button', { name: /run performance test/i })).toBeDisabled()
+  })
 })
