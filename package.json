@@ -14,7 +14,8 @@
     "og:image": "node scripts/og-image.mjs",
     "perf:fit": "node scripts/fit-perf-model.mjs",
     "perf:add": "node scripts/add-bench-entry.mjs",
-    "perf:import": "node scripts/import-bench-tsv.mjs"
+    "perf:import": "node scripts/import-bench-tsv.mjs",
+    "specs:check": "node scripts/check-specs.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

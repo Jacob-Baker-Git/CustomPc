@@ -1,0 +1,251 @@
+{
+  "_readme": "Published hardware specifications, hand-transcribed from the sources below. FACTS about manufacturer products (shader counts, clocks, bandwidth) — not measurements, and not anyone's compilation. Verified by scripts/check-specs.mjs against the catalogue's own fields AND against the arithmetic that relates bus width, memory clock and bandwidth. Never edit a value without re-running that check.",
+  "sources": {
+    "rtx-50": {
+      "title": "GeForce RTX 50 series",
+      "url": "https://en.wikipedia.org/wiki/GeForce_RTX_50_series",
+      "accessed": "2026-08-07"
+    },
+    "rtx-40": {
+      "title": "GeForce RTX 40 series",
+      "url": "https://en.wikipedia.org/wiki/GeForce_RTX_40_series",
+      "accessed": "2026-08-07"
+    },
+    "rtx-30": {
+      "title": "GeForce RTX 30 series",
+      "url": "https://en.wikipedia.org/wiki/GeForce_RTX_30_series",
+      "accessed": "2026-08-07"
+    },
+    "rx-7000": {
+      "title": "Radeon RX 7000 series",
+      "url": "https://en.wikipedia.org/wiki/Radeon_RX_7000_series",
+      "accessed": "2026-08-07"
+    }
+  },
+  "gpus": {
+    "gpu-rtx-5090": {
+      "source": "rtx-50",
+      "shaders": 21760,
+      "boostMhz": 2410,
+      "vramGb": 32,
+      "busBits": 512,
+      "bandwidthGbs": 1792,
+      "tdpW": 575
+    },
+    "gpu-rtx-5080": {
+      "source": "rtx-50",
+      "shaders": 10752,
+      "boostMhz": 2620,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 960,
+      "tdpW": 360
+    },
+    "gpu-rtx-5070ti": {
+      "source": "rtx-50",
+      "shaders": 8960,
+      "boostMhz": 2450,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 896,
+      "tdpW": 300
+    },
+    "gpu-rtx-5070": {
+      "source": "rtx-50",
+      "shaders": 6144,
+      "boostMhz": 2510,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 672,
+      "tdpW": 250
+    },
+    "gpu-rtx-4090": {
+      "source": "rtx-40",
+      "shaders": 16384,
+      "boostMhz": 2520,
+      "vramGb": 24,
+      "busBits": 384,
+      "bandwidthGbs": 1008,
+      "tdpW": 450
+    },
+    "gpu-rtx-4080": {
+      "source": "rtx-40",
+      "shaders": 9728,
+      "boostMhz": 2505,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 716.8,
+      "tdpW": 320
+    },
+    "gpu-rtx-4070ti": {
+      "source": "rtx-40",
+      "shaders": 7680,
+      "boostMhz": 2610,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 504.2,
+      "tdpW": 285
+    },
+    "gpu-rtx-4070": {
+      "source": "rtx-40",
+      "shaders": 5888,
+      "boostMhz": 2475,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 504.2,
+      "tdpW": 200
+    },
+    "gpu-rtx-4060ti": {
+      "source": "rtx-40",
+      "shaders": 4352,
+      "boostMhz": 2540,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 288,
+      "tdpW": 160,
+      "knownDiff": {
+        "tdpW": "spec sheet gives 160W for the 8GB card and 165W for the 16GB; the catalogue figure is a curated estimate, so the spec sheet is taken as authoritative here."
+      }
+    },
+    "gpu-rtx-4060": {
+      "source": "rtx-40",
+      "shaders": 3072,
+      "boostMhz": 2460,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 272,
+      "tdpW": 115
+    },
+    "gpu-rtx-3090-ti": {
+      "source": "rtx-30",
+      "shaders": 10752,
+      "boostMhz": 1860,
+      "vramGb": 24,
+      "busBits": 384,
+      "bandwidthGbs": 1008,
+      "tdpW": 450
+    },
+    "gpu-rtx-3090": {
+      "source": "rtx-30",
+      "shaders": 10496,
+      "boostMhz": 1695,
+      "vramGb": 24,
+      "busBits": 384,
+      "bandwidthGbs": 936,
+      "tdpW": 350
+    },
+    "gpu-rtx-3080-ti": {
+      "source": "rtx-30",
+      "shaders": 10240,
+      "boostMhz": 1665,
+      "vramGb": 12,
+      "busBits": 384,
+      "bandwidthGbs": 912,
+      "tdpW": 350
+    },
+    "gpu-rtx-3080": {
+      "source": "rtx-30",
+      "shaders": 8704,
+      "boostMhz": 1710,
+      "vramGb": 10,
+      "busBits": 320,
+      "bandwidthGbs": 760,
+      "tdpW": 320
+    },
+    "gpu-rtx-3070-ti": {
+      "source": "rtx-30",
+      "shaders": 6144,
+      "boostMhz": 1770,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 608,
+      "tdpW": 290
+    },
+    "gpu-rtx-3070": {
+      "source": "rtx-30",
+      "shaders": 5888,
+      "boostMhz": 1725,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 448,
+      "tdpW": 220
+    },
+    "gpu-rtx-3060-ti": {
+      "source": "rtx-30",
+      "shaders": 4864,
+      "boostMhz": 1665,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 448,
+      "tdpW": 200
+    },
+    "gpu-rtx-3060-12gb": {
+      "source": "rtx-30",
+      "shaders": 3584,
+      "boostMhz": 1777,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 360,
+      "tdpW": 170
+    },
+    "gpu-rtx-3050": {
+      "source": "rtx-30",
+      "shaders": 2560,
+      "boostMhz": 1777,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 224,
+      "tdpW": 130
+    },
+    "gpu-rx-7900xtx": {
+      "source": "rx-7000",
+      "shaders": 6144,
+      "boostMhz": 2500,
+      "vramGb": 24,
+      "busBits": 384,
+      "bandwidthGbs": 960,
+      "tdpW": 355
+    },
+    "gpu-rx-7900xt": {
+      "source": "rx-7000",
+      "shaders": 5376,
+      "boostMhz": 2400,
+      "vramGb": 20,
+      "busBits": 320,
+      "bandwidthGbs": 800,
+      "tdpW": 315
+    },
+    "gpu-rx-7800xt": {
+      "source": "rx-7000",
+      "shaders": 3840,
+      "boostMhz": 2430,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 624,
+      "tdpW": 263
+    },
+    "gpu-rx-7700xt": {
+      "source": "rx-7000",
+      "shaders": 3456,
+      "boostMhz": 2544,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 432,
+      "tdpW": 245
+    },
+    "gpu-rx-7600": {
+      "source": "rx-7000",
+      "shaders": 2048,
+      "boostMhz": 2655,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 288,
+      "tdpW": 165
+    }
+  },
+  "unverified": {
+    "gpu-rtx-5060": "source lists 192-bit with 448 GB/s at 28 Gbps; those imply 128-bit. Bus width unresolved.",
+    "gpu-rtx-5060ti": "source lists 256-bit with 672 GB/s at 28 Gbps; those imply 192-bit. Bus width unresolved.",
+    "gpu-rtx-5050": "source memory clock 20 Gbps is a GDDR6 rate, but the catalogue records GDDR7. One of the two is wrong."
+  }
+}
