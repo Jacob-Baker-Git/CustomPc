@@ -50,6 +50,11 @@
       "title": "Intel Arc",
       "url": "https://en.wikipedia.org/wiki/Intel_Arc",
       "accessed": "2026-08-07"
+    },
+    "rx-5000": {
+      "title": "Radeon RX 5000 series",
+      "url": "https://en.wikipedia.org/wiki/Radeon_RX_5000_series",
+      "accessed": "2026-08-07"
     }
   },
   "gpus": {
@@ -60,7 +65,10 @@
       "vramGb": 32,
       "busBits": 512,
       "bandwidthGbs": 1792,
-      "tdpW": 575
+      "tdpW": 575,
+      "vendor": "nvidia",
+      "architecture": "Blackwell",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-5080": {
       "source": "rtx-50",
@@ -69,7 +77,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 960,
-      "tdpW": 360
+      "tdpW": 360,
+      "vendor": "nvidia",
+      "architecture": "Blackwell",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-5070ti": {
       "source": "rtx-50",
@@ -78,7 +89,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 896,
-      "tdpW": 300
+      "tdpW": 300,
+      "vendor": "nvidia",
+      "architecture": "Blackwell",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-5070": {
       "source": "rtx-50",
@@ -87,7 +101,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 672,
-      "tdpW": 250
+      "tdpW": 250,
+      "vendor": "nvidia",
+      "architecture": "Blackwell",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-4090": {
       "source": "rtx-40",
@@ -96,7 +113,10 @@
       "vramGb": 24,
       "busBits": 384,
       "bandwidthGbs": 1008,
-      "tdpW": 450
+      "tdpW": 450,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-4080": {
       "source": "rtx-40",
@@ -105,7 +125,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 716.8,
-      "tdpW": 320
+      "tdpW": 320,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-4070ti": {
       "source": "rtx-40",
@@ -114,7 +137,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 504.2,
-      "tdpW": 285
+      "tdpW": 285,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-4070": {
       "source": "rtx-40",
@@ -123,7 +149,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 504.2,
-      "tdpW": 200
+      "tdpW": 200,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-4060ti": {
       "source": "rtx-40",
@@ -135,7 +164,10 @@
       "tdpW": 160,
       "knownDiff": {
         "tdpW": "spec sheet gives 160W for the 8GB card and 165W for the 16GB; the catalogue figure is a curated estimate, so the spec sheet is taken as authoritative here."
-      }
+      },
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-4060": {
       "source": "rtx-40",
@@ -144,7 +176,10 @@
       "vramGb": 8,
       "busBits": 128,
       "bandwidthGbs": 272,
-      "tdpW": 115
+      "tdpW": 115,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3090-ti": {
       "source": "rtx-30",
@@ -153,7 +188,10 @@
       "vramGb": 24,
       "busBits": 384,
       "bandwidthGbs": 1008,
-      "tdpW": 450
+      "tdpW": 450,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3090": {
       "source": "rtx-30",
@@ -162,7 +200,10 @@
       "vramGb": 24,
       "busBits": 384,
       "bandwidthGbs": 936,
-      "tdpW": 350
+      "tdpW": 350,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3080-ti": {
       "source": "rtx-30",
@@ -171,7 +212,10 @@
       "vramGb": 12,
       "busBits": 384,
       "bandwidthGbs": 912,
-      "tdpW": 350
+      "tdpW": 350,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3080": {
       "source": "rtx-30",
@@ -180,7 +224,10 @@
       "vramGb": 10,
       "busBits": 320,
       "bandwidthGbs": 760,
-      "tdpW": 320
+      "tdpW": 320,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3070-ti": {
       "source": "rtx-30",
@@ -189,7 +236,10 @@
       "vramGb": 8,
       "busBits": 256,
       "bandwidthGbs": 608,
-      "tdpW": 290
+      "tdpW": 290,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3070": {
       "source": "rtx-30",
@@ -198,7 +248,10 @@
       "vramGb": 8,
       "busBits": 256,
       "bandwidthGbs": 448,
-      "tdpW": 220
+      "tdpW": 220,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3060-ti": {
       "source": "rtx-30",
@@ -207,7 +260,10 @@
       "vramGb": 8,
       "busBits": 256,
       "bandwidthGbs": 448,
-      "tdpW": 200
+      "tdpW": 200,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3060-12gb": {
       "source": "rtx-30",
@@ -216,7 +272,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 360,
-      "tdpW": 170
+      "tdpW": 170,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-3050": {
       "source": "rtx-30",
@@ -225,7 +284,10 @@
       "vramGb": 8,
       "busBits": 128,
       "bandwidthGbs": 224,
-      "tdpW": 130
+      "tdpW": 130,
+      "vendor": "nvidia",
+      "architecture": "Ampere",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rx-7900xtx": {
       "source": "rx-7000",
@@ -234,7 +296,10 @@
       "vramGb": 24,
       "busBits": 384,
       "bandwidthGbs": 960,
-      "tdpW": 355
+      "tdpW": 355,
+      "vendor": "amd",
+      "architecture": "RDNA 3",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-7900xt": {
       "source": "rx-7000",
@@ -243,7 +308,10 @@
       "vramGb": 20,
       "busBits": 320,
       "bandwidthGbs": 800,
-      "tdpW": 315
+      "tdpW": 315,
+      "vendor": "amd",
+      "architecture": "RDNA 3",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-7800xt": {
       "source": "rx-7000",
@@ -252,7 +320,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 624,
-      "tdpW": 263
+      "tdpW": 263,
+      "vendor": "amd",
+      "architecture": "RDNA 3",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-7700xt": {
       "source": "rx-7000",
@@ -261,7 +332,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 432,
-      "tdpW": 245
+      "tdpW": 245,
+      "vendor": "amd",
+      "architecture": "RDNA 3",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-7600": {
       "source": "rx-7000",
@@ -270,7 +344,10 @@
       "vramGb": 8,
       "busBits": 128,
       "bandwidthGbs": 288,
-      "tdpW": 165
+      "tdpW": 165,
+      "vendor": "amd",
+      "architecture": "RDNA 3",
+      "shaderUnit": "stream processors"
     },
     "gpu-rtx-2060": {
       "source": "rtx-20",
@@ -279,7 +356,10 @@
       "vramGb": 6,
       "busBits": 192,
       "bandwidthGbs": 336,
-      "tdpW": 160
+      "tdpW": 160,
+      "vendor": "nvidia",
+      "architecture": "Turing",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rtx-2080-super": {
       "source": "rtx-20",
@@ -288,7 +368,10 @@
       "vramGb": 8,
       "busBits": 256,
       "bandwidthGbs": 496,
-      "tdpW": 250
+      "tdpW": 250,
+      "vendor": "nvidia",
+      "architecture": "Turing",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-gtx-1660": {
       "source": "gtx-16",
@@ -297,7 +380,10 @@
       "vramGb": 6,
       "busBits": 192,
       "bandwidthGbs": 192,
-      "tdpW": 120
+      "tdpW": 120,
+      "vendor": "nvidia",
+      "architecture": "Turing",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-gtx-1660s": {
       "source": "gtx-16",
@@ -306,7 +392,10 @@
       "vramGb": 6,
       "busBits": 192,
       "bandwidthGbs": 336,
-      "tdpW": 125
+      "tdpW": 125,
+      "vendor": "nvidia",
+      "architecture": "Turing",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-gtx-1660-ti": {
       "source": "gtx-16",
@@ -315,7 +404,10 @@
       "vramGb": 6,
       "busBits": 192,
       "bandwidthGbs": 288,
-      "tdpW": 120
+      "tdpW": 120,
+      "vendor": "nvidia",
+      "architecture": "Turing",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-gtx-1050-ti": {
       "source": "gtx-10",
@@ -324,7 +416,10 @@
       "vramGb": 4,
       "busBits": 128,
       "bandwidthGbs": 112,
-      "tdpW": 75
+      "tdpW": 75,
+      "vendor": "nvidia",
+      "architecture": "Pascal",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-gtx-1080-ti": {
       "source": "gtx-10",
@@ -333,7 +428,10 @@
       "vramGb": 11,
       "busBits": 352,
       "bandwidthGbs": 484,
-      "tdpW": 250
+      "tdpW": 250,
+      "vendor": "nvidia",
+      "architecture": "Pascal",
+      "shaderUnit": "CUDA cores"
     },
     "gpu-rx-6500xt": {
       "source": "rx-6000",
@@ -342,7 +440,10 @@
       "vramGb": 4,
       "busBits": 64,
       "bandwidthGbs": 144,
-      "tdpW": 107
+      "tdpW": 107,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6600": {
       "source": "rx-6000",
@@ -351,7 +452,10 @@
       "vramGb": 8,
       "busBits": 128,
       "bandwidthGbs": 224,
-      "tdpW": 132
+      "tdpW": 132,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6600-xt": {
       "source": "rx-6000",
@@ -360,7 +464,10 @@
       "vramGb": 8,
       "busBits": 128,
       "bandwidthGbs": 256,
-      "tdpW": 160
+      "tdpW": 160,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6650xt": {
       "source": "rx-6000",
@@ -369,7 +476,10 @@
       "vramGb": 8,
       "busBits": 128,
       "bandwidthGbs": 280,
-      "tdpW": 180
+      "tdpW": 180,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6700-xt": {
       "source": "rx-6000",
@@ -378,7 +488,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 384,
-      "tdpW": 230
+      "tdpW": 230,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6750xt": {
       "source": "rx-6000",
@@ -387,7 +500,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 432,
-      "tdpW": 250
+      "tdpW": 250,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6800": {
       "source": "rx-6000",
@@ -396,7 +512,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 512,
-      "tdpW": null
+      "tdpW": null,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-6950-xt": {
       "source": "rx-6000",
@@ -405,7 +524,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 576,
-      "tdpW": 335
+      "tdpW": 335,
+      "vendor": "amd",
+      "architecture": "RDNA 2",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-9060xt": {
       "source": "rx-9000",
@@ -414,7 +536,10 @@
       "vramGb": 16,
       "busBits": 256,
       "bandwidthGbs": 640,
-      "tdpW": 160
+      "tdpW": 160,
+      "vendor": "amd",
+      "architecture": "RDNA 4",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-9060-xt-8gb": {
       "source": "rx-9000",
@@ -423,7 +548,10 @@
       "vramGb": 8,
       "busBits": 256,
       "bandwidthGbs": 576,
-      "tdpW": 150
+      "tdpW": 150,
+      "vendor": "amd",
+      "architecture": "RDNA 4",
+      "shaderUnit": "stream processors"
     },
     "gpu-rx-9070-gre": {
       "source": "rx-9000",
@@ -432,7 +560,10 @@
       "vramGb": 12,
       "busBits": 192,
       "bandwidthGbs": 432,
-      "tdpW": 220
+      "tdpW": 220,
+      "vendor": "amd",
+      "architecture": "RDNA 4",
+      "shaderUnit": "stream processors"
     },
     "gpu-arc-a380": {
       "source": "arc",
@@ -442,7 +573,10 @@
       "busBits": 96,
       "bandwidthGbs": 186,
       "tdpW": null,
-      "vendorUnits": "Intel Xe: 8 Xe-cores x 128 = 1024 vector engines; NOT comparable with CUDA cores or stream processors without per-architecture calibration"
+      "vendorUnits": "Intel Xe: 8 Xe-cores x 128 = 1024 vector engines; NOT comparable with CUDA cores or stream processors without per-architecture calibration",
+      "vendor": "intel",
+      "architecture": "Xe Alchemist",
+      "shaderUnit": "Xe vector engines"
     },
     "gpu-arc-b570": {
       "source": "arc",
@@ -452,7 +586,10 @@
       "busBits": 160,
       "bandwidthGbs": 380,
       "tdpW": 150,
-      "vendorUnits": "Intel Xe2: 18 Xe-cores"
+      "vendorUnits": "Intel Xe2: 18 Xe-cores",
+      "vendor": "intel",
+      "architecture": "Xe2 Battlemage",
+      "shaderUnit": "Xe vector engines"
     },
     "gpu-intel-arc-b580": {
       "source": "arc",
@@ -462,7 +599,94 @@
       "busBits": 192,
       "bandwidthGbs": 456,
       "tdpW": 190,
-      "vendorUnits": "Intel Xe2: 20 Xe-cores"
+      "vendorUnits": "Intel Xe2: 20 Xe-cores",
+      "vendor": "intel",
+      "architecture": "Xe2 Battlemage",
+      "shaderUnit": "Xe vector engines"
+    },
+    "gpu-rx-5500-xt": {
+      "source": "rx-5000",
+      "shaders": 1408,
+      "boostMhz": 1845,
+      "vramGb": 8,
+      "busBits": 128,
+      "bandwidthGbs": 224,
+      "tdpW": 130,
+      "vendor": "amd",
+      "architecture": "RDNA",
+      "shaderUnit": "stream processors"
+    },
+    "gpu-rx-5700": {
+      "source": "rx-5000",
+      "shaders": 2304,
+      "boostMhz": 1725,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 448,
+      "tdpW": 180,
+      "vendor": "amd",
+      "architecture": "RDNA",
+      "shaderUnit": "stream processors"
+    },
+    "gpu-rx-5700-xt": {
+      "source": "rx-5000",
+      "shaders": 2560,
+      "boostMhz": 1905,
+      "vramGb": 8,
+      "busBits": 256,
+      "bandwidthGbs": 448,
+      "tdpW": 225,
+      "vendor": "amd",
+      "architecture": "RDNA",
+      "shaderUnit": "stream processors"
+    },
+    "gpu-rtx-4080-super": {
+      "source": "rtx-40",
+      "shaders": 10240,
+      "boostMhz": 2550,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 736,
+      "tdpW": null,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
+    },
+    "gpu-rtx-4070ti-super": {
+      "source": "rtx-40",
+      "shaders": 8448,
+      "boostMhz": 2610,
+      "vramGb": 16,
+      "busBits": 256,
+      "bandwidthGbs": 672,
+      "tdpW": null,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
+    },
+    "gpu-rtx-4070-super": {
+      "source": "rtx-40",
+      "shaders": 7168,
+      "boostMhz": 2475,
+      "vramGb": 12,
+      "busBits": 192,
+      "bandwidthGbs": 504,
+      "tdpW": 220,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
+    },
+    "gpu-rtx-4060ti-16gb": {
+      "source": "rtx-40",
+      "shaders": 4352,
+      "boostMhz": 2540,
+      "vramGb": 16,
+      "busBits": 128,
+      "bandwidthGbs": 288,
+      "tdpW": 165,
+      "vendor": "nvidia",
+      "architecture": "Ada Lovelace",
+      "shaderUnit": "CUDA cores"
     }
   },
   "unverified": {
@@ -485,6 +709,14 @@
     "gpu-rx-9070xt": "see gpu-rx-9070 — the pair cannot be told apart from this source",
     "gpu-arc-a580": "source TDP 175W vs catalogue 185W, unresolved",
     "gpu-arc-a750": "memory size, bus and bandwidth all absent from source",
-    "gpu-intel-arc-a770": "memory bus absent from source"
+    "gpu-intel-arc-a770": "memory bus absent from source",
+    "gpu-rx-5600-xt": "source boost-clock cell reads 14000, which is the memory speed not the GPU clock"
+  },
+  "_units": {
+    "warning": "shaders is NOT a cross-vendor unit. Each vendor counts a different physical thing under a similar name, so comparing the raw numbers ranks cards wrongly. Concretely: the RX 7900 XTX has 6144 and the RTX 4070 Ti has 7680, yet the AMD card is faster in rasterised games.",
+    "nvidia": "CUDA cores. From Ampere on, an SM second datapath is shared FP32/INT32, so the headline count roughly doubled versus Turing without throughput doubling.",
+    "amd": "Stream processors. RDNA3 added dual-issue FP32; AMD quotes 6144 and 12288 for the same RX 7900 XTX silicon depending on the document. The figures here are the non-dual-issue count.",
+    "intel": "Xe vector engines, grouped into Xe-cores. Organised differently again from either of the above.",
+    "howToCompare": "Never compare shaders across architecture. A per-architecture calibration factor converts them onto one scale, and that factor is a FITTED MODEL PARAMETER, not a published specification, so it lives in the model and not in this file."
   }
 }
