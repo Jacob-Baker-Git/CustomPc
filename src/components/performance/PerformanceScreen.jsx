@@ -4,7 +4,10 @@ import useCatalogStore from '../../store/useCatalogStore'
 import { estimateBuildPerformance } from '../../lib/perfEngine'
 import { estimatePower, estimateThermals } from '../../lib/perfEngine/power'
 import { memoryProfile } from '../../lib/perfEngine/memory'
+import { gpuCapability, cpuCapability } from '../../lib/perfEngine/capability'
 import perfModel from '../../data/perfModel.json'
+import gpuSpecs from '../../../data/specs/gpuSpecs.json'
+import cpuSpecs from '../../../data/specs/cpuSpecs.json'
 import { PERF_CAVEAT } from '../../lib/siteContent'
 import StatPanel from './StatPanel'
 import StatRow from './StatRow'
@@ -37,6 +40,8 @@ export default function PerformanceScreen() {
   )
   const thermals = useMemo(() => estimateThermals(selectedParts), [selectedParts])
   const memory = useMemo(() => memoryProfile(selectedParts), [selectedParts])
+  const gpuCap = useMemo(() => gpuCapability(gpu, gpuSpecs), [gpu])
+  const cpuCap = useMemo(() => cpuCapability(cpu, cpuSpecs), [cpu])
 
   const measured = report?.coverage?.gamesExact ?? 0
   const answered = report?.coverage?.gamesAnswered ?? 0
@@ -126,6 +131,41 @@ export default function PerformanceScreen() {
               <strong className="font-normal">{n.text}.</strong> {n.detail}
             </p>
           ))}
+        </StatPanel>
+
+        <StatPanel
+          title="Graphics capability"
+          subtitle={gpuCap.basis === 'spec-derived'
+            ? `Computed from published specifications, indexed against an RTX 4090 at 100.`
+            : 'No published specifications transcribed for this card yet.'}
+          footnote={gpuCap.basis === 'spec-derived'
+            ? `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures — ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things, so comparing this figure with a rival brand needs measured data we do not have yet.`
+            : undefined}
+        >
+          <StatRow label="Capability index" value={gpuCap.index}
+                   hint={gpuCap.architecture ? `vs other ${gpuCap.architecture} cards` : undefined} />
+          <StatRow label="Compute" value={gpuCap.tflops} unit="TFLOPS"
+                   hint="Theoretical FP32 peak" />
+          <StatRow label="Memory bandwidth" value={gpuCap.bandwidthGbs} unit="GB/s" />
+          <StatRow label={gpuCap.shaderUnit ? gpuCap.shaderUnit.replace(/^./, (m) => m.toUpperCase()) : 'Shaders'}
+                   value={gpuSpecs.gpus?.[gpu?.id]?.shaders} />
+          <StatRow label="Architecture" value={gpuCap.architecture} />
+        </StatPanel>
+
+        <StatPanel
+          title="Processor capability"
+          subtitle={cpuCap.basis === 'spec-derived'
+            ? 'Clock leads, cores saturate at eight because games cannot use more, and cache counts for more than its size suggests.'
+            : 'No published specifications transcribed for this processor yet.'}
+          footnote={cpuCap.cacheBasis === 'single-sourced'
+            ? 'The cache figure comes from a single source with nothing to corroborate it — unlike the boost clock, which matches the catalogue independently.'
+            : undefined}
+        >
+          <StatRow label="Capability index" value={cpuCap.index} />
+          <StatRow label="Boost clock" value={cpuCap.boostGhz} unit="GHz" />
+          <StatRow label="Cores" value={cpuCap.cores}
+                   hint={cpuCap.cores > 8 ? 'games use about eight' : undefined} />
+          <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB" />
         </StatPanel>
 
         <StatPanel title="The parts that decide it">
