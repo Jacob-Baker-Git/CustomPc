@@ -40,7 +40,12 @@ function reachableFrom(anchorPartKey, byPart, byCell) {
       }
     }
   }
-  return parts
+  // Cells matter as much as parts. A cell measured ONLY by parts outside the
+  // anchor's component gets a constant fitted in that component's own arbitrary
+  // gauge, and nothing about its shape says so — combine it with a properly
+  // anchored part index later and you get the same fabricated number the part
+  // filter was added to prevent, one level up.
+  return { parts, cells }
 }
 
 function weightedMean(rows, valueOf) {
@@ -56,17 +61,21 @@ function weightedMean(rows, valueOf) {
 
 // observations: [{ cellKey, partKey, logT, weight? }]
 // Returns { index, cellConst, anchorPartKey, iterations, converged, connected,
-// disconnected }. The two maps hold LINEAR values (already exponentiated).
-// `connected` is a Set for O(1) "may I trust this part?" checks; `disconnected`
-// is an Array because callers enumerate and report it.
+// connectedCells, disconnected } — the SAME shape on every path, including the
+// empty-corpus one. The two maps hold LINEAR values (already exponentiated).
+// `connected`/`connectedCells` are Sets for O(1) "may I trust this?" checks;
+// `disconnected` is an Array because callers enumerate and report it.
 export function fitTwoWay(observations, {
   anchorPartKey, anchorValue = 100, tol = 1e-10, maxIter = 500,
 } = {}) {
   const partKeys = [...new Set(observations.map((o) => o.partKey))]
   const cellKeys = [...new Set(observations.map((o) => o.cellKey))]
   if (partKeys.length === 0) {
+    // Every field the populated path returns, so callers never have to guess
+    // whether the empty case is shaped differently. It is not.
     return { index: new Map(), cellConst: new Map(), anchorPartKey: null,
-             iterations: 0, converged: true }
+             iterations: 0, converged: true,
+             connected: new Set(), connectedCells: new Set(), disconnected: [] }
   }
 
   const byCell = new Map(cellKeys.map((k) => [k, []]))
@@ -112,7 +121,7 @@ export function fitTwoWay(observations, {
   // Only the anchor's own component has a meaningful scale (see reachableFrom).
   // Everything else is reported so the caller can refuse to use it, rather than
   // silently quoting a number no measurement supports.
-  const connected = reachableFrom(anchor, byPart, byCell)
+  const { parts: connected, cells: connectedCells } = reachableFrom(anchor, byPart, byCell)
   const disconnected = partKeys.filter((k) => !connected.has(k))
 
   return {
@@ -122,6 +131,7 @@ export function fitTwoWay(observations, {
     iterations,
     converged,
     connected,
+    connectedCells,
     disconnected,
   }
 }

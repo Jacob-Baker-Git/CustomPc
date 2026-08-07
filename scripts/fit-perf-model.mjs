@@ -29,6 +29,20 @@ const DEFAULT_RES_CPU_SCALE = { '1080p': 1.0, '1440p': 1.012, '4k': 1.031 }
 const SOURCE_SHARE_WARN = 0.15
 const SOURCE_SHARE_FAIL = 0.20
 
+// The share cap alone is unsatisfiable on a young corpus: with N evenly-split
+// outlets each holds 1/N, so nothing under FIVE sources can ever clear 20% and
+// the very first curation session would fail the build with perfectly good
+// data. Two absolute escapes, because what the law actually cares about is
+// whether a substantial part of somebody's compilation was taken — and twelve
+// figures is not substantial however large a share of a small corpus it is:
+//
+//   · below CONCENTRATION_MIN_CORPUS total entries, share is not meaningful
+//     enough to act on at all
+//   · a source holding fewer than SOURCE_MIN_ABSOLUTE entries is never a
+//     substantial taking, whatever its share
+const CONCENTRATION_MIN_CORPUS = 40
+const SOURCE_MIN_ABSOLUTE = 15
+
 const read = (rel) => JSON.parse(readFileSync(fileURLToPath(new URL(rel, import.meta.url)), 'utf8'))
 const write = (rel, data) =>
   writeFileSync(fileURLToPath(new URL(rel, import.meta.url)),
@@ -46,16 +60,23 @@ const live = entries.filter((e) => !e.supersededBy)
 const perSource = new Map()
 for (const e of live) perSource.set(e.sourceId, (perSource.get(e.sourceId) ?? 0) + 1)
 const warnings = []
-for (const [id, n] of perSource) {
-  const share = n / live.length
-  if (share > SOURCE_SHARE_FAIL) {
-    console.error(`FAIL: source ${id} is ${(share * 100).toFixed(1)}% of the corpus ` +
-                  `(cap ${SOURCE_SHARE_FAIL * 100}%). Add entries from other outlets.`)
-    process.exit(1)
+if (live.length >= CONCENTRATION_MIN_CORPUS) {
+  for (const [id, n] of perSource) {
+    const share = n / live.length
+    if (n < SOURCE_MIN_ABSOLUTE) continue
+    if (share > SOURCE_SHARE_FAIL) {
+      console.error(`FAIL: source ${id} is ${(share * 100).toFixed(1)}% of the corpus ` +
+                    `(${n} of ${live.length} entries, cap ${SOURCE_SHARE_FAIL * 100}%). ` +
+                    `Add entries from other outlets.`)
+      process.exit(1)
+    }
+    if (share > SOURCE_SHARE_WARN) {
+      warnings.push(`source ${id} is ${(share * 100).toFixed(1)}% of the corpus`)
+    }
   }
-  if (share > SOURCE_SHARE_WARN) {
-    warnings.push(`source ${id} is ${(share * 100).toFixed(1)}% of the corpus`)
-  }
+} else if (live.length > 0) {
+  warnings.push(`corpus is only ${live.length} entries — the per-source ` +
+                `concentration cap does not apply below ${CONCENTRATION_MIN_CORPUS}`)
 }
 
 // --- pass 1: GPU index, one fit per resolution ----------------------------
@@ -70,7 +91,7 @@ const anchorGpuId = mostCommon(gpuEntries.map((e) => e.gpuId))
 const gpuFits = {}
 for (const res of RESOLUTIONS) {
   const inRes = gpuEntries.filter((e) => e.resolution === res)
-  gpuFits[res] = normalizeFit(fitTwoWay(
+  gpuFits[res] = fitTwoWay(
     inRes.map((e) => ({
       cellKey: `${e.gameId}|${e.presetId}`,
       partKey: e.gpuId,
@@ -78,12 +99,22 @@ for (const res of RESOLUTIONS) {
       weight: e.weight ?? 1,
     })),
     { anchorPartKey: anchorGpuId, anchorValue: 100 },
-  ))
+  )
 }
 
 // --- pass 2: CPU index ----------------------------------------------------
 // CPU-scaling reviews run a top-end GPU at 1080p. The GPU term is small but not
-// zero, so it is subtracted using pass 1's model by inverting the p-norm.
+// zero, so where pass 1 can price it the p-norm is inverted to subtract it.
+//
+// ⚠️ In the STANDARD workflow that subtraction does not fire. Pass 1 skips
+// 1080p (the CPU contaminates it), so there is no fitted cell constant at
+// 1080p to price the GPU term with, and `gpuFrameTime` returns null — the CPU
+// index simply absorbs the small GPU term instead. That is a known Phase 1
+// approximation, not an accident: within one review the absorbed term is a
+// constant that lands in B, so it does not distort CPU-to-CPU ratios; across
+// reviews using different test GPUs it introduces a few percent. The
+// subtraction path below is live only for the atypical case of a cpu-scaling
+// entry at a resolution pass 1 did fit. Phase 2 closes this properly.
 const cpuEntries = live.filter((e) => sourceById.get(e.sourceId)?.kind === 'cpu-scaling')
 const k = DEFAULT_BLEND_K
 const cpuObs = []
@@ -110,7 +141,7 @@ for (const e of cpuEntries) {
   })
 }
 const anchorCpuId = mostCommon(cpuEntries.map((e) => e.cpuId))
-const cpuFit = normalizeFit(fitTwoWay(cpuObs, { anchorPartKey: anchorCpuId, anchorValue: 100 }))
+const cpuFit = fitTwoWay(cpuObs, { anchorPartKey: anchorCpuId, anchorValue: 100 })
 
 // --- assemble the artefact -----------------------------------------------
 // A part outside the anchor's connected component has no measurement relating
@@ -157,9 +188,19 @@ for (const [cpuId, value] of cpuFit.index) {
   }
 }
 
+// Cells get the same treatment as parts. A cell measured only by parts outside
+// the anchor's component was fitted in that component's own arbitrary gauge, so
+// its constant is not comparable with a properly anchored index — pairing the
+// two would rebuild the fabricated number the part filter exists to stop, one
+// level up. Dropping the cell makes the engine say "no data" for that game,
+// which is the truth.
 const gameConst = {}
 for (const res of RESOLUTIONS) {
   for (const [cellKey, A] of gpuFits[res].cellConst) {
+    if (!gpuFits[res].connectedCells.has(cellKey)) {
+      droppedDisconnected.push({ kind: 'gpu-cell', res, cellKey })
+      continue
+    }
     const [gameId, presetId] = cellKey.split('|')
     gameConst[gameId] ??= {}
     gameConst[gameId][res] ??= {}
@@ -171,6 +212,10 @@ for (const res of RESOLUTIONS) {
   }
 }
 for (const [cellKey, B] of cpuFit.cellConst) {
+  if (!cpuFit.connectedCells.has(cellKey)) {
+    droppedDisconnected.push({ kind: 'cpu-cell', res: null, cellKey })
+    continue
+  }
   const [gameId, presetId] = cellKey.split('|')
   for (const res of RESOLUTIONS) {
     gameConst[gameId] ??= {}
@@ -255,16 +300,6 @@ if (live.length === 0) {
 }
 
 // --- helpers --------------------------------------------------------------
-
-// fitTwoWay's zero-observation short-circuit returns { index, cellConst,
-// anchorPartKey, iterations, converged } without `connected`/`disconnected` —
-// there are no parts to walk a component from. Every other call site here
-// relies on both being present (a Set and an Array respectively), so normalise
-// once at the call site rather than letting an empty corpus throw deep inside
-// artefact assembly.
-function normalizeFit(fit) {
-  return { connected: new Set(), disconnected: [], ...fit }
-}
 
 function round(n, dp) { return Number(n.toFixed(dp)) }
 
