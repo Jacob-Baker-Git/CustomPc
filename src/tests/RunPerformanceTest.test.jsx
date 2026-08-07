@@ -48,6 +48,34 @@ describe('RunPerformanceTest', () => {
     expect(screen.getByText(/no benchmark data yet/i)).toBeInTheDocument()
   })
 
+  it('marks a measured row, so it is not identical to a modelled one', async () => {
+    const withExact = {
+      ...model,
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|cyberpunk|1440p|high':
+                 { frameTimeMs: 7.4074, sources: 2, entries: 2 } },
+    }
+    setup({ model: withExact })
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText('measured')).toBeInTheDocument()
+  })
+
+  it('says the split is unmodelled rather than drawing a bar it cannot justify', async () => {
+    // A measured frame time with no fitted cell: the duration is known, the
+    // division of it is not. `1 - null` is 1, so an unguarded bar would render
+    // 100% GPU and label it "Balanced" at the same time.
+    const measuredOnly = {
+      ...model,
+      gameConst: {},
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|cyberpunk|1440p|high':
+                 { frameTimeMs: 8.0, sources: 1, entries: 1 } },
+    }
+    setup({ model: measuredOnly })
+    await userEvent.click(screen.getByRole('button', { name: /run performance test/i }))
+    expect(screen.getByText('125')).toBeInTheDocument()
+    expect(screen.getByText(/split not modelled/i)).toBeInTheDocument()
+    expect(screen.queryByRole('img', { name: /of the frame is GPU work/i })).not.toBeInTheDocument()
+  })
+
   it('toggles closed again', async () => {
     setup()
     const button = screen.getByRole('button', { name: /run performance test/i })
