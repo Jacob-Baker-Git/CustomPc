@@ -12,6 +12,37 @@
 // NO IMPORTS. scripts/fit-perf-model.mjs loads this under plain Node, which
 // cannot resolve the extensionless imports used elsewhere in src/lib.
 
+// Which parts are reachable from the anchor by walking part -> shared cell ->
+// part. The decomposition determines index ratios only WITHIN a connected
+// component: two components sharing no cell have no measurement relating them,
+// so their relative scale is not in the data at all.
+//
+// This is not a hypothetical. It is what happens when two reviews share no
+// hardware and no game. Alternating least squares does not fail on it — it
+// converges happily and hands back a confident-looking cross-component ratio
+// that is purely an artefact of both components starting from the same
+// initialisation. A number nobody measured, presented exactly like one that was
+// measured, is the single failure this engine exists to prevent, so the caller
+// is told which parts it may trust.
+function reachableFrom(anchorPartKey, byPart, byCell) {
+  const parts = new Set([anchorPartKey])
+  const cells = new Set()
+  const queue = [anchorPartKey]
+  while (queue.length > 0) {
+    for (const o of byPart.get(queue.pop()) ?? []) {
+      if (cells.has(o.cellKey)) continue
+      cells.add(o.cellKey)
+      for (const sibling of byCell.get(o.cellKey) ?? []) {
+        if (!parts.has(sibling.partKey)) {
+          parts.add(sibling.partKey)
+          queue.push(sibling.partKey)
+        }
+      }
+    }
+  }
+  return parts
+}
+
 function weightedMean(rows, valueOf) {
   let totalWeight = 0
   let total = 0
@@ -76,11 +107,19 @@ export function fitTwoWay(observations, {
   for (const p of partKeys) logIndex.set(p, logIndex.get(p) + shift)
   for (const c of cellKeys) logCell.set(c, logCell.get(c) + shift)
 
+  // Only the anchor's own component has a meaningful scale (see reachableFrom).
+  // Everything else is reported so the caller can refuse to use it, rather than
+  // silently quoting a number no measurement supports.
+  const connected = reachableFrom(anchor, byPart, byCell)
+  const disconnected = partKeys.filter((k) => !connected.has(k))
+
   return {
     index: new Map([...logIndex].map(([k, v]) => [k, Math.exp(v)])),
     cellConst: new Map([...logCell].map(([k, v]) => [k, Math.exp(v)])),
     anchorPartKey: anchor,
     iterations,
     converged,
+    connected,
+    disconnected,
   }
 }

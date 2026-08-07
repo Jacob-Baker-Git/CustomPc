@@ -50,6 +50,51 @@ describe('fitTwoWay', () => {
     expect(fit.converged).toBe(true)
   })
 
+  it('reports every part as connected when the corpus is one component', () => {
+    const fit = fitTwoWay(makeObservations({ dropRate: 0.3 }), { anchorPartKey: 'a' })
+    expect(fit.disconnected).toEqual([])
+    expect(fit.connected.size).toBe(Object.keys(TRUE_INDEX).length)
+  })
+
+  it('names the parts whose scale the data cannot relate to the anchor', () => {
+    // Two reviews sharing no hardware AND no game. The fit converges happily
+    // and produces a cross-cluster ratio that is an artefact of both clusters
+    // starting from the same initialisation — a number nobody measured,
+    // indistinguishable from one that was. This is the case that has to be
+    // caught, because the fit itself gives no hint of it.
+    const twoClusters = [
+      { cellKey: 'g1', partKey: 'a', logT: Math.log(4) },
+      { cellKey: 'g1', partKey: 'b', logT: Math.log(8) },
+      { cellKey: 'g2', partKey: 'a', logT: Math.log(6) },
+      { cellKey: 'g2', partKey: 'b', logT: Math.log(12) },
+      { cellKey: 'g3', partKey: 'c', logT: Math.log(5) },
+      { cellKey: 'g3', partKey: 'd', logT: Math.log(400) },
+      { cellKey: 'g4', partKey: 'c', logT: Math.log(7) },
+      { cellKey: 'g4', partKey: 'd', logT: Math.log(560) },
+    ]
+    const fit = fitTwoWay(twoClusters, { anchorPartKey: 'a', anchorValue: 100 })
+    expect(fit.converged).toBe(true)          // it does NOT fail loudly on its own
+    expect([...fit.connected].sort()).toEqual(['a', 'b'])
+    expect(fit.disconnected.sort()).toEqual(['c', 'd'])
+
+    // Ratios WITHIN a component are still sound — b is half of a in both.
+    expect(fit.index.get('a') / fit.index.get('b')).toBeCloseTo(2, 6)
+    expect(fit.index.get('c') / fit.index.get('d')).toBeCloseTo(80, 6)
+  })
+
+  it('one shared cell is enough to connect two otherwise separate reviews', () => {
+    const bridged = [
+      { cellKey: 'g1', partKey: 'a', logT: Math.log(4) },
+      { cellKey: 'g1', partKey: 'b', logT: Math.log(8) },
+      { cellKey: 'g2', partKey: 'b', logT: Math.log(12) },
+      { cellKey: 'g2', partKey: 'c', logT: Math.log(6) },
+    ]
+    const fit = fitTwoWay(bridged, { anchorPartKey: 'a', anchorValue: 100 })
+    expect(fit.disconnected).toEqual([])
+    // a:b = 2 from g1, b:c = 1:2 from g2, so a:c = 1:1 through the bridge.
+    expect(fit.index.get('a') / fit.index.get('c')).toBeCloseTo(1, 6)
+  })
+
   it('honours weights — a downweighted outlier moves the fit less', () => {
     const clean = makeObservations()
     const withOutlier = [...clean,
