@@ -88,6 +88,37 @@ describe('estimateBuildPerformance', () => {
     expect(row.atEngineCap).toBe(true)
   })
 
+  it('flags the cap when a measurement sits exactly on it', () => {
+    // The likeliest real reading for a hard-locked game: a reviewer benchmarks
+    // Elden Ring's rock-solid 60 and records exactly 60. Comparing frame times
+    // to decide "was it capped" answers no here, because flooring changed
+    // nothing — and says "not at the cap" for the one game everybody knows is.
+    const atCap = {
+      ...model,
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|elden-ring|1440p|high':
+                 { frameTimeMs: 1000 / 60, sources: 2, entries: 2 } },
+    }
+    const row = run({ model: atCap }).games.find((g) => g.gameId === 'elden-ring')
+    expect(row.avgFps).toBe(60)
+    expect(row.atEngineCap).toBe(true)
+  })
+
+  it('caps a measurement that exceeds the engine lock, and says it did', () => {
+    // A reading above a hard lock is bad corpus data. The ceiling still
+    // applies, so the number shown is no longer the raw measurement — which is
+    // exactly why atEngineCap has to be true here rather than the basis label
+    // quietly implying the 200 was observed.
+    const overCap = {
+      ...model,
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|elden-ring|1440p|high':
+                 { frameTimeMs: 5.0, sources: 1, entries: 1 } },
+    }
+    const row = run({ model: overCap }).games.find((g) => g.gameId === 'elden-ring')
+    expect(row.avgFps).toBe(60)
+    expect(row.atEngineCap).toBe(true)
+    expect(row.basis).toBe('measured')
+  })
+
   it('reports no data rather than guessing for an uncovered game', () => {
     const row = run().games.find((g) => g.gameId === 'starfield')
     expect(row.basis).toBe('none')

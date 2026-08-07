@@ -43,13 +43,26 @@ function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, prese
   }
 
   const capped = applyFpsCap(source.ms, game.fpsCap)
+  const avgFps = Math.round(msToFps(capped))
+
+  // "the reported rate sits at the engine's ceiling", NOT "flooring changed the
+  // number". Those agree everywhere except exactly at the cap — which is the
+  // likeliest real reading there is for a hard-locked game, since a reviewer
+  // benchmarking a rock-solid 60 fps lock records exactly 60. Comparing frame
+  // times instead reported false in precisely that case.
+  //
+  // It also does the disclosure work for a measured row the cap binds: the
+  // number shown is then the ceiling rather than the raw reading, and this is
+  // what says so.
+  const atEngineCap = Boolean(game.fpsCap && avgFps >= game.fpsCap)
+
   return {
     ...base,
-    avgFps: Math.round(msToFps(capped)),
+    avgFps,
     frameTimeMs: Number(capped.toFixed(2)),
     cpuShare: modelled ? Number(modelled.share.toFixed(3)) : null,
     limitedBy: modelled ? limitedBy(modelled.share) : null,
-    atEngineCap: Boolean(game.fpsCap && capped > source.ms),
+    atEngineCap,
     basis: source.basis,
     sources: source.sources,
   }
