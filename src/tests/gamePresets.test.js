@@ -49,3 +49,27 @@ describe('gamePresets', () => {
     }
   })
 })
+
+describe('game slugs', () => {
+  it('every game has a URL-safe slug', () => {
+    for (const game of gamesData) {
+      expect(game.slug, `${game.id} has no slug`).toBeTruthy()
+      expect(game.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+    }
+  })
+
+  it('slugs are unique', () => {
+    const slugs = gamesData.map((g) => g.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+
+  it('the legacy fields the old engine reads are all still present', () => {
+    // gameFps still drives the CustomPC score. Adding fields is fine; losing
+    // one would move every rating in the app.
+    for (const game of gamesData) {
+      expect(typeof game.fpsFactor).toBe('number')
+      expect(typeof game.cpuFactor).toBe('number')
+      expect(typeof game.name).toBe('string')
+    }
+  })
+})
