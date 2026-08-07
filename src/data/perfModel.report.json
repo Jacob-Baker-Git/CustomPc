@@ -1,0 +1,39 @@
+{
+  "fittedAt": "2026-08-07T17:06:00.644Z",
+  "warnings": [],
+  "gpuFit": {
+    "1080p": {
+      "iterations": 0,
+      "converged": true,
+      "parts": 0
+    },
+    "1440p": {
+      "iterations": 0,
+      "converged": true,
+      "parts": 0
+    },
+    "4k": {
+      "iterations": 0,
+      "converged": true,
+      "parts": 0
+    }
+  },
+  "cpuFit": {
+    "iterations": 0,
+    "converged": true,
+    "parts": 0
+  },
+  "droppedGpuBound": [],
+  "droppedDisconnected": [],
+  "coverage": {
+    "gpusMeasured": 0,
+    "gpusTotal": 79,
+    "cpusMeasured": 0,
+    "cpusTotal": 80
+  },
+  "validation": {
+    "n": 0,
+    "mapeAvg": null,
+    "mapeLow": null
+  }
+}

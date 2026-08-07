@@ -1,0 +1,22 @@
+{
+  "modelVersion": "1.0.0",
+  "datasetVersion": "2026-08-07",
+  "fittedAt": "2026-08-07T17:06:00.644Z",
+  "entryCount": 0,
+  "sourceCount": 0,
+  "blendK": 5.1,
+  "blendKBasis": "default",
+  "resCpuScale": {
+    "1080p": 1,
+    "1440p": 1.012,
+    "4k": 1.031
+  },
+  "anchors": {
+    "gpu": null,
+    "cpu": null
+  },
+  "gpuIndex": {},
+  "cpuIndex": {},
+  "gameConst": {},
+  "exact": {}
+}
