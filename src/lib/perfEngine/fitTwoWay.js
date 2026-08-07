@@ -27,9 +27,9 @@
 function reachableFrom(anchorPartKey, byPart, byCell) {
   const parts = new Set([anchorPartKey])
   const cells = new Set()
-  const queue = [anchorPartKey]
-  while (queue.length > 0) {
-    for (const o of byPart.get(queue.pop()) ?? []) {
+  const stack = [anchorPartKey]
+  while (stack.length > 0) {
+    for (const o of byPart.get(stack.pop()) ?? []) {
       if (cells.has(o.cellKey)) continue
       cells.add(o.cellKey)
       for (const sibling of byCell.get(o.cellKey) ?? []) {
@@ -55,8 +55,10 @@ function weightedMean(rows, valueOf) {
 }
 
 // observations: [{ cellKey, partKey, logT, weight? }]
-// Returns { index, cellConst, anchorPartKey, iterations, converged }, the two
-// maps holding LINEAR values (already exponentiated).
+// Returns { index, cellConst, anchorPartKey, iterations, converged, connected,
+// disconnected }. The two maps hold LINEAR values (already exponentiated).
+// `connected` is a Set for O(1) "may I trust this part?" checks; `disconnected`
+// is an Array because callers enumerate and report it.
 export function fitTwoWay(observations, {
   anchorPartKey, anchorValue = 100, tol = 1e-10, maxIter = 500,
 } = {}) {
