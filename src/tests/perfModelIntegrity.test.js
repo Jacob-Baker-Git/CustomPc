@@ -73,6 +73,21 @@ describe('benchmark corpus integrity', () => {
     expect(problems.join(' ')).toMatch(/lowFps/)
   })
 
+  it('rejects a numeric field typed as a string', () => {
+    // `"200" >= 1` is true in JavaScript, so a bare range check waves this
+    // through. Hand-typed JSON is exactly where it happens.
+    const ctx = { sourceIds: new Set(['s1']), partIds: new Set(partsData.map((p) => p.id)),
+                  gameIds: new Set(gamesData.map((g) => g.id)) }
+    const base = { id: 'e5', sourceId: 's1', gameId: 'cs2', resolution: '1440p',
+                   presetId: 'high', gpuId: 'gpu-rtx-5070', cpuId: 'cpu-ryzen-5-7600x' }
+    expect(validateEntry({ ...base, avgFps: '200' }, ctx).join(' ')).toMatch(/avgFps/)
+    expect(validateEntry({ ...base, avgFps: 200, lowFps: '150', lowKind: '1%' }, ctx).join(' '))
+      .toMatch(/lowFps/)
+    expect(validateEntry({ ...base, avgFps: 200, weight: '1' }, ctx).join(' ')).toMatch(/weight/)
+    // and the valid forms still pass, so this is not rejecting everything
+    expect(validateEntry({ ...base, avgFps: 200, weight: 1 }, ctx)).toEqual([])
+  })
+
   it('rejects duplicate entry ids', () => {
     const dupe = { id: 'same', sourceId: 's1', gameId: 'cs2', resolution: '1440p',
                    presetId: 'high', gpuId: 'gpu-rtx-5070', cpuId: 'cpu-ryzen-5-7600x',

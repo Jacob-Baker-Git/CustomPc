@@ -9,9 +9,11 @@ shipped to the browser** — `npm run perf:fit` turns this into
 1. **Enter by hand, through `npm run perf:add`.** Never scrape. Automated
    collection is what turns "recording facts" into "extracting a database", and
    it usually breaches the outlet's terms independently of copyright.
-2. **No source may exceed 20% of entries.** `npm run perf:fit` fails above that
-   and warns above 15%. Spreading across outlets is the whole licensing
-   position: nobody's compilation is substantially taken.
+2. **No source may exceed 20% of entries.** Spreading across outlets is the
+   whole licensing position: nobody's compilation is substantially taken.
+   ⚠️ **This is currently a rule you keep by hand.** The automatic check —
+   `npm run perf:fit` failing above 20% and warning above 15% — arrives with
+   the fit pipeline. Until then nothing enforces it, so count as you go.
 3. **Every entry needs its source, and every source needs a URL, a date and a
    full test system.** An unattributed number cannot be normalised, audited or
    withdrawn.
@@ -33,8 +35,12 @@ shipped to the browser** — `npm run perf:fit` turns this into
   CPU term.
 - **`pair`** — one specific combination. Goes in `validation.json`, not
   `entries.json`.
+- **`memory-scaling`** — one fixed system, several RAM configurations. Isolates
+  how much memory speed and capacity move a given game. Not used by the fit
+  yet; it feeds the memory term, which lands later. Worth recording when you
+  come across one, because these reviews are rare.
 
-These two shapes are why the corpus needs ~50 GPU rows and ~50 CPU rows rather
+The first two shapes are why the corpus needs ~50 GPU rows and ~50 CPU rows rather
 than 2,500 pairs: the model fits the two terms separately and derives the cross
 product.
 

@@ -17,6 +17,12 @@ const isIsoDate = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v)
 const isHttpUrl = (v) => typeof v === 'string' && /^https?:\/\/\S+$/.test(v)
 const nonEmpty = (v) => typeof v === 'string' && v.trim().length > 0
 
+// Type-check before range-checking. `"200" >= 1` is true in JavaScript, so a
+// bare comparison waves through a hand-typed string — which is precisely the
+// mistake this schema exists to catch at 11pm on entry number forty.
+const isNumber = (v) => typeof v === 'number' && Number.isFinite(v)
+const inRange = (v, lo, hi) => isNumber(v) && v >= lo && v <= hi
+
 export function validateSource(source) {
   const p = []
   const at = source?.id ?? '(no id)'
@@ -36,7 +42,9 @@ export function validateSource(source) {
   else {
     if (!nonEmpty(ts.cpu)) p.push(`${at}: testSystem.cpu is required`)
     if (!ts.ram || typeof ts.ram !== 'object') p.push(`${at}: testSystem.ram is required`)
-    else if (!(ts.ram.speed > 0)) p.push(`${at}: testSystem.ram.speed is required`)
+    else if (!(isNumber(ts.ram.speed) && ts.ram.speed > 0)) {
+      p.push(`${at}: testSystem.ram.speed must be a positive number (MT/s)`)
+    }
   }
   return p
 }
@@ -53,12 +61,12 @@ export function validateEntry(entry, { sourceIds, partIds, gameIds }) {
     p.push(`${at}: resolution must be one of ${RESOLUTIONS.join(', ')}`)
   }
   if (!nonEmpty(entry?.presetId)) p.push(`${at}: presetId is required`)
-  if (!(entry?.avgFps >= FPS_MIN && entry?.avgFps <= FPS_MAX)) {
-    p.push(`${at}: avgFps must be between ${FPS_MIN} and ${FPS_MAX}`)
+  if (!inRange(entry?.avgFps, FPS_MIN, FPS_MAX)) {
+    p.push(`${at}: avgFps must be a number between ${FPS_MIN} and ${FPS_MAX}`)
   }
   if (entry?.lowFps != null) {
-    if (!(entry.lowFps >= FPS_MIN && entry.lowFps <= FPS_MAX)) {
-      p.push(`${at}: lowFps must be between ${FPS_MIN} and ${FPS_MAX}`)
+    if (!inRange(entry.lowFps, FPS_MIN, FPS_MAX)) {
+      p.push(`${at}: lowFps must be a number between ${FPS_MIN} and ${FPS_MAX}`)
     } else if (entry.lowFps > entry.avgFps) {
       p.push(`${at}: lowFps ${entry.lowFps} is above avgFps ${entry.avgFps}`)
     }
@@ -66,8 +74,8 @@ export function validateEntry(entry, { sourceIds, partIds, gameIds }) {
       p.push(`${at}: lowKind must be one of ${LOW_KINDS.join(', ')} when lowFps is present`)
     }
   }
-  if (entry?.weight != null && !(entry.weight > 0 && entry.weight <= 1)) {
-    p.push(`${at}: weight must be in (0, 1]`)
+  if (entry?.weight != null && !(isNumber(entry.weight) && entry.weight > 0 && entry.weight <= 1)) {
+    p.push(`${at}: weight must be a number in (0, 1]`)
   }
   return p
 }
