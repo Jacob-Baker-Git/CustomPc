@@ -11,8 +11,6 @@ import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
 import useSavedStore from '../store/useSavedStore'
 import { PANEL, PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import GamePerformanceList from './GamePerformanceList'
-import RunPerformanceTest from './RunPerformanceTest'
-import perfModel from '../data/perfModel.json'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
 import ConfirmDialog from './ConfirmDialog'
@@ -67,7 +65,6 @@ export default function BuildSummary() {
   const resolution = useBuilderStore((s) => s.resolution)
   const useCase = useBuilderStore((s) => s.useCase)
   const partsData = useCatalogStore((s) => s.parts)
-  const gamesData = useCatalogStore((s) => s.games)
   const [copied, setCopied] = useState(false)
   const [showFps, setShowFps] = useState(false)
 
@@ -218,12 +215,6 @@ export default function BuildSummary() {
                   )}
                 </div>
               )}
-              <RunPerformanceTest
-                parts={selectedParts}
-                resolution={resolution}
-                model={perfModel}
-                games={gamesData}
-              />
               <div className="mt-5">
                 <div className="text-[11px] uppercase tracking-wider text-muted mb-1">Physical dimensions</div>
                 <DimensionsChecklist />

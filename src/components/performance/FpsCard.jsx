@@ -33,18 +33,28 @@ export default function FpsCard({ row }) {
         <span className="text-[11px] uppercase tracking-wider text-muted">{row.preset}</span>
       </div>
 
-      <div className="mt-2 flex items-baseline gap-1.5">
-        <span className="font-mono text-2xl text-ink">{row.avgFps}</span>
-        <span className="text-[11px] text-muted">fps average</span>
-        {/* Whether somebody measured THIS combination or the model derived it
-            is the distinction the engine exists to preserve. The footer counts
-            them in aggregate; without this the two are identical on the card. */}
-        {row.basis === 'measured' && (
-          <span className="ml-1.5 text-[10px] uppercase tracking-wider text-good">measured</span>
-        )}
-        {row.atEngineCap && (
-          <span className="ml-auto text-[10px] text-muted">engine cap</span>
-        )}
+      {/* Average and 1% low at EQUAL weight. The gap between them is the most
+          useful thing on the card — 120/95 and 120/48 are completely different
+          machines to sit in front of, and only the second number says so.
+          Quoting the average alone is how frame-rate figures usually mislead. */}
+      <div className="mt-2 flex items-end gap-4">
+        <div>
+          <div className="font-mono text-2xl leading-none text-ink">{row.avgFps}</div>
+          <div className="mt-1 text-[10px] uppercase tracking-wider text-muted">average</div>
+        </div>
+        <div>
+          <div className="font-mono text-2xl leading-none text-ink">{row.lowFps ?? '—'}</div>
+          <div className="mt-1 text-[10px] uppercase tracking-wider text-muted">1% low</div>
+        </div>
+        <div className="ml-auto text-right">
+          {row.basis === 'measured' && (
+            <div className="text-[10px] uppercase tracking-wider text-good">measured</div>
+          )}
+          {row.atEngineCap && (
+            <div className="text-[10px] text-muted">engine cap</div>
+          )}
+          <div className="font-mono text-[10px] text-muted">{row.frameTimeMs} ms</div>
+        </div>
       </div>
 
       {/* The split is stated in words as well as drawn: a bar alone is

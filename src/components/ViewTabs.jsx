@@ -1,7 +1,7 @@
-import { Cpu, Keyboard, ClipboardList } from 'lucide-react'
+import { Cpu, Keyboard, Gauge, ClipboardList } from 'lucide-react'
 import { VIEWS } from '../hooks/useHashView'
 
-const ICONS = { build: Cpu, peripherals: Keyboard, summary: ClipboardList }
+const ICONS = { build: Cpu, peripherals: Keyboard, performance: Gauge, summary: ClipboardList }
 
 // The builder's view switcher, in two shapes. `inline` sits in the top bar on
 // wide screens; `bar` is the bottom bar everywhere else, which keeps the header

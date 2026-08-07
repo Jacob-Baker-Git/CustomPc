@@ -1,5 +1,8 @@
 import { blendFrameTime, cpuShare, limitedBy, applyFpsCap, msToFps } from './frameTime'
 import { gpuIndexFor, cpuIndexFor, cellFor, exactFor } from './indices'
+import { lowFrameTime } from './lows'
+import { estimatePower, estimateThermals } from './power'
+import { memoryProfile } from './memory'
 import { resolvePreset } from '../gamePresets'
 
 // The public contract of the performance engine.
@@ -38,12 +41,19 @@ function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, prese
       : null
 
   if (!source) {
-    return { ...base, avgFps: null, frameTimeMs: null, cpuShare: null,
+    return { ...base, avgFps: null, lowFps: null, frameTimeMs: null,
+             lowFrameTimeMs: null, lowBasis: 'none', cpuShare: null,
              limitedBy: null, atEngineCap: false, basis: 'none', sources: 0 }
   }
 
   const capped = applyFpsCap(source.ms, game.fpsCap)
   const avgFps = Math.round(msToFps(capped))
+
+  // The stutter number. Modelled off the average frame time and the CPU share,
+  // so it exists wherever the average does. An engine cap floors it too — a
+  // locked game cannot stutter above its own lock.
+  const low = lowFrameTime(capped, { cell, cpuShare: modelled?.share ?? null, model })
+  const lowCapped = low.lowMs == null ? null : applyFpsCap(low.lowMs, game.fpsCap)
 
   // "the reported rate sits at the engine's ceiling", NOT "flooring changed the
   // number". Those agree everywhere except exactly at the cap — which is the
@@ -59,7 +69,10 @@ function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, prese
   return {
     ...base,
     avgFps,
+    lowFps: lowCapped == null ? null : Math.round(msToFps(lowCapped)),
     frameTimeMs: Number(capped.toFixed(2)),
+    lowFrameTimeMs: lowCapped == null ? null : Number(lowCapped.toFixed(2)),
+    lowBasis: low.basis,
     cpuShare: modelled ? Number(modelled.share.toFixed(3)) : null,
     limitedBy: modelled ? limitedBy(modelled.share) : null,
     atEngineCap,
@@ -91,11 +104,25 @@ export function estimateBuildPerformance({
       return (b.avgFps ?? 0) - (a.avgFps ?? 0)
     })
 
+  // Mean CPU share across the rows that have one. Feeds the power model, which
+  // draws less from the graphics card when the CPU is setting the pace. With no
+  // frame data at all it stays null and power falls back to a neutral split —
+  // the power figures do not depend on the benchmark corpus, and must not start
+  // depending on it.
+  const shares = rows.map((r) => r.cpuShare).filter((s) => s != null)
+  const meanCpuShare = shares.length
+    ? shares.reduce((a, b) => a + b, 0) / shares.length
+    : null
+
   return {
     modelVersion: model.modelVersion,
     datasetVersion: model.datasetVersion,
     resolution,
     presetId,
+    power: estimatePower(parts, meanCpuShare ?? 0.5),
+    thermals: estimateThermals(parts),
+    memory: memoryProfile(parts),
+    meanCpuShare,
     build: {
       cpu: { id: cpu.id, name: cpu.name },
       gpu: { id: gpu.id, name: gpu.name, vramGb: gpu.specs?.vram ?? null },

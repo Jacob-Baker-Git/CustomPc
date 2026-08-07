@@ -9,6 +9,7 @@ import UseCaseChips from '../components/UseCaseChips'
 import BuildRatingPanel from '../components/BuildRatingPanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
+import PerformanceScreen from '../components/performance/PerformanceScreen'
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
@@ -97,6 +98,8 @@ export default function BuilderScreen() {
           </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
+        ) : view === 'performance' ? (
+          <PerformanceScreen />
         ) : (
           <BuildSummary />
         )}

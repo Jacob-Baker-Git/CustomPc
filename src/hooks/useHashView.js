@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 // The builder's own views. "saved" is deliberately absent — saved builds are a
 // library spanning every build, not a view of the current one, so they live on
 // the hub instead.
-export const VIEWS = ['build', 'peripherals', 'summary']
+export const VIEWS = ['build', 'peripherals', 'performance', 'summary']
 
 // Tab state synced to the URL hash so views are deep-linkable and the
 // browser back button works between tabs.

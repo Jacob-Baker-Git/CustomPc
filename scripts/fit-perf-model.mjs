@@ -208,6 +208,7 @@ for (const res of RESOLUTIONS) {
       ...(gameConst[gameId][res][presetId] ?? {}),
       A: round(A, 2),
       ...cellStats(live, gameId, res, presetId),
+      ...lowBaseFor(live, gameId, res, presetId),
     }
   }
 }
@@ -315,6 +316,30 @@ function gpuFrameTime(entry) {
   const idx = gpuFits[entry.resolution]?.index.get(entry.gpuId)
   const A = gpuFits[entry.resolution]?.cellConst.get(`${entry.gameId}|${entry.presetId}`)
   return idx > 0 && A > 0 ? A / idx : null
+}
+
+// The 1% low, as a RATIO of the average frame time rather than an absolute.
+// Reviews publish avg and 1% low together, and the ratio between them is far
+// more stable across hardware than either number is on its own — which is what
+// makes it interpolable at all.
+//
+// Only `lowKind: '1%'` counts. A 0.1% low and a hard minimum are different
+// statistics measuring different things, and averaging them together would
+// produce a figure describing none of them.
+function lowBaseFor(rows, gameId, res, presetId) {
+  const withLows = rows.filter((e) =>
+    e.gameId === gameId && e.resolution === res && e.presetId === presetId &&
+    e.lowKind === '1%' && e.lowFps > 0 && e.avgFps > 0)
+  if (withLows.length === 0) return {}
+
+  let totalWeight = 0
+  let total = 0
+  for (const e of withLows) {
+    const w = e.weight ?? 1
+    totalWeight += w
+    total += w * (e.avgFps / e.lowFps)   // ratio of frame TIMES, inverted fps
+  }
+  return { lowBase: round(total / totalWeight, 4), lowSources: withLows.length }
 }
 
 // Source count and spread for a cell — the honest measure of how much the
