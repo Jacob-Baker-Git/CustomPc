@@ -14,6 +14,9 @@ export const CANONICAL_PRESETS = [
   { id: 'ultra', label: 'Ultra', tier: 4 },
 ]
 
+// High, not Medium. An unrecognised preset id resolves to the higher rung so
+// the estimate errs toward a LOWER frame rate. Under-promising is the safer
+// direction for a number somebody is about to spend money on.
 const DEFAULT_TIER = 3
 
 export function presetsFor(game) {
@@ -30,7 +33,17 @@ export function resolvePreset(game, presetId) {
 
   const wantedTier =
     CANONICAL_PRESETS.find((p) => p.id === presetId)?.tier ?? DEFAULT_TIER
-  const nearest = presets.reduce((best, p) =>
-    Math.abs(p.tier - wantedTier) < Math.abs(best.tier - wantedTier) ? p : best)
+  // Seeded explicitly rather than leaning on reduce's no-initial-value form,
+  // matching snapToLadder in priceBands.js.
+  //
+  // ⚠️ On an exact tie the FIRST entry in the array wins. That is unreachable
+  // on the canonical ladder, whose tiers are unique — an exact id match always
+  // fires before this. It goes live the moment a game gets its own `presets`
+  // in gamesData.json, and at that point the order you write them in silently
+  // decides ties. Write them lowest tier first.
+  const nearest = presets.reduce(
+    (best, p) => (Math.abs(p.tier - wantedTier) < Math.abs(best.tier - wantedTier) ? p : best),
+    presets[0],
+  )
   return { preset: nearest, exact: false }
 }

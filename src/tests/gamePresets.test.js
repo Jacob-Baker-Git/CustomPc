@@ -37,9 +37,15 @@ describe('gamePresets', () => {
     expect(r.exact).toBe(false)
   })
 
-  it('every catalogue game resolves a high preset', () => {
+  it('every catalogue game resolves a high preset exactly', () => {
+    // No catalogue game has its own presets yet, so all 22 take the canonical
+    // ladder and match exactly. Asserting the id and the flag rather than mere
+    // truthiness means this notices when that stops being true — which is
+    // precisely when the curation harness starts populating game.presets.
     for (const game of gamesData) {
-      expect(resolvePreset(game, 'high').preset).toBeTruthy()
+      const { preset, exact } = resolvePreset(game, 'high')
+      expect(preset.id, `${game.id} resolved ${preset.id}`).toBe('high')
+      expect(exact, `${game.id} was not an exact match`).toBe(true)
     }
   })
 })
