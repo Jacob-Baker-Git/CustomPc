@@ -1,6 +1,7 @@
 {
   "_readme": "Published CPU specifications. Deliberately records ONLY what the catalogue does not already hold, plus one field it does (boost clock) purely so the two can corroborate each other. Core counts are NOT recorded here: the source's P-core/E-core columns proved unreliable (it gave the i7-13700K the 14700K's layout), while the catalogue's counts are correct — so cores keep coming from the catalogue and are not duplicated into a second, worse copy. Verified by scripts/check-specs.mjs.",
   "_corroboration": "boostGhz is cross-checked against the catalogue and fails the build on a mismatch. l3Mb CANNOT be cross-checked — the catalogue has no cache field — so it is single-sourced. That is recorded here rather than hidden, and any claim resting on it should say so.",
+  "_ccds": "ccds and l3MaxCcdMb appear only on AMD chiplet parts that have more than one CCD. L3 is private to a CCD — it is not shared across them — so l3Mb is a package total that no single core can ever reach, and l3MaxCcdMb is what one can: the largest CCD's L3. On the dual-CCD X3D parts that is the chiplet carrying the stacked cache (32 MB base + 64 MB stacked = 96 MB) while the other holds 32 MB. Absence means one L3 domain, which covers single-CCD Ryzens and Intel's monolithic dies alike. Same single-sourced caveat as l3Mb.",
   "sources": {
     "zen-5": {
       "title": "Zen 5",
@@ -42,17 +43,23 @@
     "cpu-ryzen-9-9950x3d": {
       "source": "zen-5",
       "boostGhz": 5.7,
-      "l3Mb": 128
+      "l3Mb": 128,
+      "ccds": 2,
+      "l3MaxCcdMb": 96
     },
     "cpu-ryzen-9-9950x": {
       "source": "zen-5",
       "boostGhz": 5.7,
-      "l3Mb": 64
+      "l3Mb": 64,
+      "ccds": 2,
+      "l3MaxCcdMb": 32
     },
     "cpu-ryzen-9-9900x": {
       "source": "zen-5",
       "boostGhz": 5.6,
-      "l3Mb": 64
+      "l3Mb": 64,
+      "ccds": 2,
+      "l3MaxCcdMb": 32
     },
     "cpu-ryzen-7-9800x3d": {
       "source": "zen-5",
@@ -67,7 +74,9 @@
     "cpu-ryzen-9-7950x": {
       "source": "zen-4",
       "boostGhz": 5.7,
-      "l3Mb": 64
+      "l3Mb": 64,
+      "ccds": 2,
+      "l3MaxCcdMb": 32
     },
     "cpu-ryzen-7-7700x": {
       "source": "zen-4",
@@ -87,7 +96,9 @@
     "cpu-ryzen-9-5950x": {
       "source": "zen-3",
       "boostGhz": 4.9,
-      "l3Mb": 64
+      "l3Mb": 64,
+      "ccds": 2,
+      "l3MaxCcdMb": 32
     },
     "cpu-ryzen-7-5800x3d": {
       "source": "zen-3",
@@ -232,17 +243,23 @@
     "cpu-ryzen-9-7950x3d": {
       "source": "zen-4",
       "boostGhz": 5.7,
-      "l3Mb": 128
+      "l3Mb": 128,
+      "ccds": 2,
+      "l3MaxCcdMb": 96
     },
     "cpu-ryzen-9-7900x3d": {
       "source": "zen-4",
       "boostGhz": 5.6,
-      "l3Mb": 128
+      "l3Mb": 128,
+      "ccds": 2,
+      "l3MaxCcdMb": 96
     },
     "cpu-ryzen-9-7900": {
       "source": "zen-4",
       "boostGhz": 5.4,
-      "l3Mb": 64
+      "l3Mb": 64,
+      "ccds": 2,
+      "l3MaxCcdMb": 32
     },
     "cpu-ryzen-7-7700": {
       "source": "zen-4",

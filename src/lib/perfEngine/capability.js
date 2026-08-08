@@ -126,20 +126,28 @@ const CACHE_WEIGHT = 0.22
 
 const CPU_REFERENCE_GHZ = 5.7
 
-// ⚠️ KNOWN LIMITATION, and it is visible in the output today.
+// L3 is private to a CCD. On AMD's chiplet parts the package total is a number
+// no single core can reach: a 7950X's 64 MB is two separate 32 MB pools, and a
+// 7900X3D's 128 MB is 96 MB on the chiplet carrying the stacked cache plus 32
+// on the other. Dividing the package total by the cores a game uses credits
+// every dual-CCD part with cache that is architecturally out of reach — which
+// is what `l3MaxCcdMb` in cpuSpecs.json exists to correct. It is a published
+// fact, not a fitted one.
+const usableL3Mb = (spec) => (spec.ccds > 1 ? spec.l3MaxCcdMb : spec.l3Mb)
+
+// ⚠️ KNOWN LIMITATION, and it is still visible in the output today.
 //
-// `l3Mb` is a whole-chip total, and on AMD's two-chiplet X3D parts the stacked
-// cache sits on ONE chiplet only. A game scheduled onto the other one loses it
-// entirely. So a Ryzen 9 7900X3D reads as 128 MB here and behaves in games
-// much closer to a 64 MB part — which is why this model currently ranks it
-// above the 9800X3D, and reality does not.
-//
-// Fixing it needs cache-per-chiplet, which is not in the specs transcribed so
-// far, plus the Zen 4 vs Zen 5 IPC gap that ARCH_EFFICIENCY is holding at 1.0.
-// Both are calibration, not arithmetic. Recorded here rather than patched
-// around, because a fudge that fixed this pair would break others silently.
+// Per-CCD cache fixes the dual-CCD parts as a family, but it does NOT reorder
+// the pair this note was originally written about. A 7900X3D's cache chiplet
+// holds 96 MB across 6 cores — 16 MB per core, MORE than the 9800X3D's 96 MB
+// across 8 — and it clocks 400 MHz higher, so it still ranks above a chip that
+// beats it in every real game. What is missing is the Zen 4 to Zen 5 IPC gap,
+// and that is calibration: no spec sheet states it, and the corpus cannot yet
+// yield it either, because the one CPU-scaling review in it fields no Zen 4
+// part at all. Recorded rather than patched around — a constant chosen to fix
+// this pair would silently break others.
 export const KNOWN_LIMITATIONS = [
-  'Whole-chip L3 hides that AMD dual-chiplet X3D parts stack cache on one chiplet only, so they rank too high.',
+  'Zen 4 vs Zen 5 IPC is uncalibrated, so a 7900X3D still ranks above a 9800X3D on clock and cache-per-core alone.',
   'Cross-architecture comparison is uncalibrated while ARCH_EFFICIENCY is 1.0 — see the note at the top of this file.',
 ]
 
@@ -158,14 +166,20 @@ export function cpuCapability(cpu, cpuSpecs) {
   const effectiveCores = Math.min(cores, CORE_SATURATION)
   const coreTerm = (effectiveCores / CORE_SATURATION) ** CORE_WEIGHT
 
+  const l3Mb = usableL3Mb(spec)
   let cacheTerm = 1
   let cacheBasis = 'absent'
-  if (spec.l3Mb > 0) {
-    // Divided by the cores a GAME can use, not every core on the die. Dividing
-    // by all of them punishes Intel for its E-cores — an i9-14900K's 36 MB
-    // looks thin across 24 cores and generous across the 8 a game actually
-    // runs on, and the second reading is the one that describes the frame.
-    const perCore = spec.l3Mb / effectiveCores
+  if (l3Mb > 0) {
+    // Divided by the cores that SHARE this pool, not every core on the die.
+    // Dividing by all of them punishes Intel for its E-cores — an i9-14900K's
+    // 36 MB looks thin across 24 cores and generous across the 8 a game
+    // actually runs on, and the second reading is the one that describes the
+    // frame. On a chiplet part the pool is one CCD's, so the divisor is that
+    // CCD's cores rather than the package's.
+    const coresSharing = spec.ccds > 1
+      ? Math.min(cores / spec.ccds, CORE_SATURATION)
+      : effectiveCores
+    const perCore = l3Mb / coresSharing
     cacheTerm = (perCore / CACHE_BASELINE_MB_PER_CORE) ** CACHE_WEIGHT
     // Single-sourced: the catalogue has no cache field to corroborate it.
     cacheBasis = 'single-sourced'
@@ -176,7 +190,10 @@ export function cpuCapability(cpu, cpuSpecs) {
     basis: 'spec-derived',
     comparable: ARCH_CALIBRATED ? 'all' : 'within-architecture',
     boostGhz: spec.boostGhz,
-    l3Mb: spec.l3Mb ?? null,
+    // The cache a core can actually reach, not the package total — quoting 128
+    // MB for a 7900X3D would overstate it by a third.
+    l3Mb: l3Mb ?? null,
+    l3PackageMb: spec.l3Mb ?? null,
     cores,
     cacheBasis,
   }

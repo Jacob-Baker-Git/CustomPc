@@ -272,7 +272,13 @@ export default function PerformanceScreen() {
           <StatRow label="Boost clock" value={cpuCap.boostGhz} unit="GHz" />
           <StatRow label="Cores" value={cpuCap.cores}
                    hint={cpuCap.cores > 8 ? 'games use about eight' : undefined} />
-          <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB" />
+          {/* The reachable figure, not the package total. On a multi-chiplet
+              part those differ and the spec sheet quotes the larger one, so
+              say which this is rather than look like a typo. */}
+          <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB"
+                   hint={cpuCap.l3PackageMb > cpuCap.l3Mb
+                     ? `per chiplet, of ${cpuCap.l3PackageMb} MB total — L3 is not shared between chiplets`
+                     : undefined} />
         </StatPanel>
       </div>
       </Section>

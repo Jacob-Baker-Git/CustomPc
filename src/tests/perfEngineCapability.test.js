@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { gpuCapability, cpuCapability, teraflops, ARCH_EFFICIENCY, ARCH_CALIBRATED }
+import { gpuCapability, cpuCapability, teraflops, ARCH_EFFICIENCY, ARCH_CALIBRATED, KNOWN_LIMITATIONS }
   from '../lib/perfEngine/capability'
 import gpuSpecs from '../../data/specs/gpuSpecs.json'
 import cpuSpecs from '../../data/specs/cpuSpecs.json'
@@ -113,5 +113,47 @@ describe('cpuCapability', () => {
   it('marks the cache figure as single-sourced', () => {
     // The catalogue has no cache column, so nothing corroborates it.
     expect(cpuCapability(part('cpu-ryzen-7-9800x3d'), cpuSpecs).cacheBasis).toBe('single-sourced')
+  })
+
+  it('quotes the L3 a core can reach, not the package total', () => {
+    // L3 is private to a CCD. A 7900X3D's 128 MB is 96 on the chiplet with the
+    // stacked cache and 32 on the other; no core sees 128.
+    const x3d = cpuCapability(part('cpu-ryzen-9-7900x3d'), cpuSpecs)
+    expect(x3d.l3Mb).toBe(96)
+    expect(x3d.l3PackageMb).toBe(128)
+
+    // Single-CCD parts are unaffected, and still report both.
+    const single = cpuCapability(part('cpu-ryzen-7-9800x3d'), cpuSpecs)
+    expect(single.l3Mb).toBe(96)
+    expect(single.l3PackageMb).toBe(96)
+  })
+
+  it('stops crediting dual-CCD parts with cache a game cannot reach', () => {
+    // A 7950X is two 32 MB pools, not one 64 MB pool, so on cache alone it is
+    // a 7700X — the extra chiplet buys threads, not hit rate. Before per-CCD
+    // cache it scored a clear step above.
+    const big = cpuCapability(part('cpu-ryzen-9-7950x'), cpuSpecs)
+    const small = cpuCapability(part('cpu-ryzen-7-7700x'), cpuSpecs)
+    expect(big.l3Mb).toBe(small.l3Mb)
+    expect(big.l3PackageMb).toBe(2 * small.l3Mb)
+
+    // With the cache and core terms now identical, the whole gap between them
+    // is clock — 5.7 GHz against 5.4. If a future change reintroduces a cache
+    // or core advantage for the second chiplet, this ratio moves off the clock
+    // ratio and the test fails.
+    expect(big.index / small.index)
+      .toBeCloseTo(big.boostGhz / small.boostGhz, 3)
+  })
+
+  it('still cannot order Zen 4 against Zen 5, and says so', () => {
+    // This is the known limitation, pinned so it cannot be "fixed" by accident
+    // and quietly claimed. A 7900X3D outranks a 9800X3D here on clock and
+    // cache-per-core, and reality is the other way round — the missing piece
+    // is IPC, which no spec sheet states.
+    expect(cpuIdx('cpu-ryzen-9-7900x3d')).toBeGreaterThan(cpuIdx('cpu-ryzen-7-9800x3d'))
+    // Which is exactly why the model refuses to call them comparable.
+    expect(cpuCapability(part('cpu-ryzen-9-7900x3d'), cpuSpecs).comparable)
+      .toBe('within-architecture')
+    expect(KNOWN_LIMITATIONS.some((l) => /Zen 4 vs Zen 5/.test(l))).toBe(true)
   })
 })

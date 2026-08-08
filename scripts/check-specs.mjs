@@ -124,6 +124,28 @@ for (const [id, spec] of Object.entries(cpus)) {
   if (spec.cores != null) {
     problems.push(`${at}: cores must not be recorded here; the catalogue is the source for those`)
   }
+
+  // Per-CCD cache. The two fields only mean anything together, and the
+  // arithmetic between them and the catalogue's core count is checkable even
+  // though the cache figure itself is single-sourced.
+  const cores = part.specs?.cores
+  if (spec.ccds != null || spec.l3MaxCcdMb != null) {
+    if (!(spec.ccds > 1)) {
+      problems.push(`${at}: ccds is only recorded for parts with more than one CCD`)
+    } else if (!(spec.l3MaxCcdMb > 0)) {
+      problems.push(`${at}: ccds ${spec.ccds} without l3MaxCcdMb — a package total nobody can reach is exactly what this field exists to replace`)
+    } else {
+      if (spec.l3MaxCcdMb >= spec.l3Mb) {
+        problems.push(`${at}: l3MaxCcdMb ${spec.l3MaxCcdMb} is not less than the package total ${spec.l3Mb}`)
+      }
+      // Every AMD chiplet part in the catalogue is symmetric. If an asymmetric
+      // one ever lands, cores/ccds stops being the cores sharing one pool and
+      // this must be revisited rather than quietly rounded.
+      if (cores > 0 && cores % spec.ccds !== 0) {
+        problems.push(`${at}: ${cores} cores do not divide evenly across ${spec.ccds} CCDs — the per-CCD cache model assumes symmetry`)
+      }
+    }
+  }
 }
 
 // Coverage is a warning, not a failure — the capability model falls back for
