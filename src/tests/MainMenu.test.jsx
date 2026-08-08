@@ -17,7 +17,7 @@ describe('MainMenu', () => {
 
   it('reaches the content pages through the footer, and only through it', () => {
     render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    for (const href of ['#/parts', '#/glossary', '#/help', '#/feedback']) {
+    for (const href of ['/parts', '/glossary', '/help', '/feedback']) {
       // Exactly one route to each: the tile row that duplicated the footer is gone.
       expect(document.querySelectorAll(`a[href="${href}"]`)).toHaveLength(1)
     }

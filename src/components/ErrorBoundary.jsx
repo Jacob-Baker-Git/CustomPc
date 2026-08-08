@@ -112,7 +112,7 @@ export default class ErrorBoundary extends Component {
 
           <p className="text-xs text-faint mt-5">
             Seeing this a lot?{' '}
-            <a href="#/feedback" className="text-accent hover:underline">Tell us what you were doing</a>.
+            <a href="/feedback" className="text-accent hover:underline">Tell us what you were doing</a>.
           </p>
         </div>
       </div>

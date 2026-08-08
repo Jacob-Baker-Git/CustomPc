@@ -1,0 +1,13 @@
+# Content pages are real paths (/help, /glossary, …) served by one SPA bundle,
+# so every unknown path has to return index.html — with 200, not 301. A redirect
+# would send a crawler back to / and undo the entire point of having paths.
+#
+# Netlify matches these top to bottom and stops at the first hit, so the asset
+# directories are listed first: without them a mistyped /models/foo.glb would
+# return the HTML page with a 200 and the loader would try to parse it as GLTF.
+/assets/*   /assets/:splat   404
+/models/*   /models/:splat   404
+/fonts/*    /fonts/:splat    404
+/hdri/*     /hdri/:splat     404
+
+/*          /index.html      200

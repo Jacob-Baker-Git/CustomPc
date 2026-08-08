@@ -93,7 +93,7 @@ export default function TopBar({ view, onViewChange }) {
         <ViewTabs view={view} onChange={onViewChange} />
       </div>
       <div className="flex items-center gap-3 md:gap-4 lg:flex-1 lg:justify-end">
-        <a href="#/feedback" className="text-xs text-muted hover:text-accent transition-colors">Feedback</a>
+        <a href="/feedback" className="text-xs text-muted hover:text-accent transition-colors">Feedback</a>
         {/* xl, not lg: at 1024 the tabs have just moved in and the meters no
             longer fit beside them without wrapping the header. */}
         <div className="hidden xl:flex gap-3">

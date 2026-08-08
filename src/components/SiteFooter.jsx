@@ -1,13 +1,16 @@
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 
-// Simple anchor nav — hrefs drive usePageRoute via hashchange, no prop drilling.
+// Plain anchors with real hrefs, which is what makes them crawlable — and also
+// the site's whole internal link graph. usePageRoute intercepts the click and
+// turns it into a pushState, so they stay instant without needing route
+// context passed down here.
 const LINKS = [
-  { href: '#/help', label: 'Help & FAQ' },
-  { href: '#/parts', label: 'Parts browser' },
-  { href: '#/glossary', label: 'Glossary' },
-  { href: '#/feedback', label: 'Feedback' },
-  { href: '#/privacy', label: 'Privacy' },
-  { href: '#/terms', label: 'Terms' },
+  { href: '/help', label: 'Help & FAQ' },
+  { href: '/parts', label: 'Parts browser' },
+  { href: '/glossary', label: 'Glossary' },
+  { href: '/feedback', label: 'Feedback' },
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' },
 ]
 
 // text-muted rather than text-faint on the footer body: it carries the price

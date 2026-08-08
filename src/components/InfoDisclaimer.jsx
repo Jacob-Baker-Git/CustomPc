@@ -24,7 +24,7 @@ export default function InfoDisclaimer() {
           {TEXT}
           <p className="mt-2">
             {/* CC BY 4.0 attribution for the part models lives on the Help page. */}
-            <a href="#/help" className="text-accent hover:underline">3D model credits</a>
+            <a href="/help" className="text-accent hover:underline">3D model credits</a>
           </p>
         </div>
       )}

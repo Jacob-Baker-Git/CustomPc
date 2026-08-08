@@ -27,7 +27,7 @@ function Policy({ title, subtitle, doc }) {
           <p className="text-sm text-muted leading-relaxed">
             This site is operated by {OPERATOR.name}, based in {OPERATOR.location}.
             {' '}Reach us at <span className="text-ink">{OPERATOR.contactEmail}</span>, or through the{' '}
-            <a href="#/feedback" className="text-accent hover:underline">feedback form</a>.
+            <a href="/feedback" className="text-accent hover:underline">feedback form</a>.
           </p>
         </section>
       </div>

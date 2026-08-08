@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Every page is a hash route (#/help, #/parts, ...), which crawlers treat as
-     the same document, so the root is genuinely the only URL there is. -->
+<!-- These were hash routes (#/help, #/parts, ...) until 2026-08-08, which meant
+     crawlers saw one document and the root was genuinely the only URL there was.
+     They are real paths now, so each page can be indexed on its own content.
+     Keep this list in step with PAGES in src/hooks/usePageRoute.js. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://custompcbuilder.netlify.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://custompcbuilder.netlify.app/parts</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://custompcbuilder.netlify.app/help</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://custompcbuilder.netlify.app/glossary</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://custompcbuilder.netlify.app/feedback</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://custompcbuilder.netlify.app/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://custompcbuilder.netlify.app/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>
