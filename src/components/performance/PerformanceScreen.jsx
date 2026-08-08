@@ -1,24 +1,39 @@
 import { useMemo } from 'react'
 import useBuilderStore from '../../store/useBuilderStore'
-import useCatalogStore from '../../store/useCatalogStore'
 import { estimateBuildPerformance } from '../../lib/perfEngine'
 import { estimatePower, estimateThermals } from '../../lib/perfEngine/power'
 import { memoryProfile } from '../../lib/perfEngine/memory'
 import { gpuCapability, cpuCapability } from '../../lib/perfEngine/capability'
 import perfModel from '../../data/perfModel.json'
+import perfGames from '../../data/perfGames.json'
 import gpuSpecs from '../../../data/specs/gpuSpecs.json'
 import cpuSpecs from '../../../data/specs/cpuSpecs.json'
 import { PERF_CAVEAT } from '../../lib/siteContent'
 import StatPanel from './StatPanel'
 import StatRow from './StatRow'
 import FpsCardGrid from './FpsCardGrid'
+import Section from './Section'
+import SummaryStrip from './SummaryStrip'
+
+// One grid definition for every band, so the panels line up across sections
+// rather than each group inventing its own rhythm.
+const GRID = 'grid gap-3 sm:grid-cols-2 xl:grid-cols-3'
 
 const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${gb}GB`)
 
 export default function PerformanceScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const resolution = useBuilderStore((s) => s.resolution)
-  const games = useCatalogStore((s) => s.games)
+  // The engine's game list is the MEASURED one, not the catalogue's. The legacy
+  // 22 exist to drive the CustomPC score and almost none of them appear in a
+  // modern GPU roundup, so pointing the Performance tab at them guarantees 22
+  // rows of "no benchmark data yet". perfGames.json holds the games real
+  // reviews actually publish, and it grows as the corpus does.
+  //
+  // It is a bundled import rather than useCatalogStore: the catalogue swaps to
+  // live Supabase data at runtime, and the Supabase `games` table mirrors the
+  // legacy 22. Reading from the store would drop these on the first fetch.
+  const games = perfGames
 
   const { cpu, gpu } = selectedParts
   const hasCore = Boolean(cpu && gpu)
@@ -57,7 +72,92 @@ export default function PerformanceScreen() {
         </p>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+
+      <Section
+        title="Frame rates"
+        blurb={`At ${resolution}, High preset. Games are listed in the engine's own order — covered first, fastest first — and anything without a published measurement behind it says so rather than showing a number.`}
+      >
+        {!hasCore ? (
+          <p className="text-xs text-muted leading-relaxed">
+            Pick a CPU and a graphics card to estimate frame rates.
+          </p>
+        ) : answered === 0 ? (
+          <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
+            No benchmark data for these parts yet. The engine only reports figures it
+            can trace to a published measurement, so rather than estimate around the
+            gap it says nothing. Coverage grows as the benchmark corpus does — every
+            section below is computed from the parts themselves and does not depend
+            on it.
+          </p>
+        ) : (
+          <FpsCardGrid rows={report.games} />
+        )}
+
+        <p className="mt-3 max-w-[80ch] text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
+        {report?.coverage?.gpuResolutionCopied && (
+          <p className="mt-1.5 max-w-[80ch] text-[11px] text-ok leading-relaxed">
+            No measurements exist for this card at {resolution}, so its index was carried
+            over from 1440p. Treat these as the shape of the result rather than the figure.
+          </p>
+        )}
+        <p className="mt-1.5 text-[10px] text-muted">
+          Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
+          {hasCore && ` · ${answered} of ${report.coverage.gamesTotal} games answered, ${measured} measured directly`}
+        </p>
+      </Section>
+
+      <Section
+        title="What's holding it back"
+        blurb="Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract."
+      >
+        <div className="grid gap-3 sm:grid-cols-2">
+          <StatPanel
+            title="Bottleneck"
+            subtitle={report?.bottleneck
+              ? report.bottleneck.verdict
+              : 'Needs benchmark data before it can say anything.'}
+            footnote={report?.bottleneck?.nextUpgrade?.reason}
+          >
+            {report?.bottleneck ? (
+              <>
+                <StatRow label="Leaning"
+                         value={report.bottleneck.leaning === 'cpu' ? 'processor'
+                           : report.bottleneck.leaning === 'gpu' ? 'graphics' : 'balanced'}
+                         tone={report.bottleneck.leaning === 'cpu' ? 'bad' : 'good'} />
+                <StatRow label="Processor-limited" value={report.bottleneck.cpuLedGames}
+                         unit={`of ${report.bottleneck.gamesConsidered}`} />
+                <StatRow label="Graphics-limited" value={report.bottleneck.gpuLedGames}
+                         unit={`of ${report.bottleneck.gamesConsidered}`} />
+                <StatRow label="Worst case" value={report.bottleneck.worstCase.name} />
+                <StatRow label="Lost to the weaker part"
+                         value={report.bottleneck.worstCase.lostToWeakerSide} unit="%"
+                         hint={`${report.bottleneck.worstCase.name}: card could do ${report.bottleneck.worstCase.gpuOnlyFps}, chip could feed ${report.bottleneck.worstCase.cpuOnlyFps}`}
+                         tone={report.bottleneck.worstCase.lostToWeakerSide > 25 ? 'bad' : 'ok'} />
+                <StatRow label="Upgrade next"
+                         value={report.bottleneck.nextUpgrade.category === 'cpu' ? 'processor' : 'graphics card'} />
+              </>
+            ) : (
+              <StatRow label="Status" value="needs benchmark data" />
+            )}
+          </StatPanel>
+
+          <StatPanel title="The parts that decide it">
+            <StatRow label="Processor" value={cpu?.name} />
+            <StatRow label="Cores" value={cpu?.specs?.cores} />
+            <StatRow label="Boost clock" value={cpu?.specs?.boostClock} unit="GHz" />
+            <StatRow label="Graphics" value={gpu?.name} />
+            <StatRow label="VRAM" value={gpu?.specs?.vram} unit="GB" />
+            <StatRow label="Storage" value={selectedParts.storage?.storageType} />
+          </StatPanel>
+        </div>
+      </Section>
+
+      <Section
+        title="Power and cooling"
+        blurb="What the build draws, whether the supply has room for it, and whether the cooler can shed it."
+      >
+      <div className={GRID}>
         <StatPanel
           title="Power"
           subtitle={hasCore
@@ -110,7 +210,14 @@ export default function PerformanceScreen() {
           />
           <StatRow label="Verdict" value={thermals.verdict} />
         </StatPanel>
+      </div>
+      </Section>
 
+      <Section
+        title="The hardware"
+        blurb="What the parts can do on paper. Computed from published specifications, so this half works whether or not anyone has benchmarked your exact combination."
+      >
+      <div className={GRID}>
         <StatPanel
           title="Memory"
           subtitle={memory
@@ -167,75 +274,8 @@ export default function PerformanceScreen() {
                    hint={cpuCap.cores > 8 ? 'games use about eight' : undefined} />
           <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB" />
         </StatPanel>
-
-        <StatPanel title="The parts that decide it">
-          <StatRow label="Processor" value={cpu?.name} />
-          <StatRow label="Cores" value={cpu?.specs?.cores} />
-          <StatRow label="Boost clock" value={cpu?.specs?.boostClock} unit="GHz" />
-          <StatRow label="Graphics" value={gpu?.name} />
-          <StatRow label="VRAM" value={gpu?.specs?.vram} unit="GB" />
-          <StatRow label="Storage" value={selectedParts.storage?.storageType} />
-        </StatPanel>
-
-        <StatPanel
-          title="Bottleneck"
-          subtitle={report?.bottleneck
-            ? report.bottleneck.verdict
-            : 'Which part holds this build back differs per game, so this is worked out from the frame rates rather than by comparing the two parts in the abstract. It needs benchmark data.'}
-          footnote={report?.bottleneck?.nextUpgrade?.reason}
-        >
-          {report?.bottleneck ? (
-            <>
-              <StatRow label="Leaning"
-                       value={report.bottleneck.leaning === 'cpu' ? 'processor'
-                         : report.bottleneck.leaning === 'gpu' ? 'graphics' : 'balanced'}
-                       tone={report.bottleneck.leaning === 'cpu' ? 'bad' : 'good'} />
-              <StatRow label="Processor-limited" value={report.bottleneck.cpuLedGames}
-                       unit={`of ${report.bottleneck.gamesConsidered}`} />
-              <StatRow label="Graphics-limited" value={report.bottleneck.gpuLedGames}
-                       unit={`of ${report.bottleneck.gamesConsidered}`} />
-              <StatRow label="Worst case" value={report.bottleneck.worstCase.name} />
-              <StatRow label="Lost to the weaker part"
-                       value={report.bottleneck.worstCase.lostToWeakerSide} unit="%"
-                       hint={`${report.bottleneck.worstCase.name}: card could do ${report.bottleneck.worstCase.gpuOnlyFps}, chip could feed ${report.bottleneck.worstCase.cpuOnlyFps}`}
-                       tone={report.bottleneck.worstCase.lostToWeakerSide > 25 ? 'bad' : 'ok'} />
-              <StatRow label="Upgrade next"
-                       value={report.bottleneck.nextUpgrade.category === 'cpu' ? 'processor' : 'graphics card'} />
-            </>
-          ) : (
-            <StatRow label="Status" value="needs benchmark data" />
-          )}
-        </StatPanel>
-
-        <StatPanel
-          title="Frame rates"
-          subtitle={`At ${resolution}, High preset.`}
-        >
-          <StatRow label="Games with an estimate" value={hasCore ? `${answered} of ${report.coverage.gamesTotal}` : null} />
-          <StatRow label="From a direct measurement" value={hasCore ? measured : null} />
-          <StatRow label="Model" value={perfModel.modelVersion} />
-          <StatRow label="Data as of" value={perfModel.datasetVersion} />
-        </StatPanel>
       </div>
-
-      <section className="mt-5">
-        <h3 className="mb-2.5 text-sm text-ink">Per game</h3>
-        {!hasCore ? (
-          <p className="text-xs text-muted leading-relaxed">
-            Pick a CPU and a graphics card to estimate frame rates.
-          </p>
-        ) : answered === 0 ? (
-          <p className="text-xs text-muted leading-relaxed">
-            No benchmark data for these parts yet. The engine only reports figures it
-            can trace to a published measurement, so rather than estimate around the
-            gap it says nothing. Coverage grows as the benchmark corpus does — the
-            panels above do not depend on it.
-          </p>
-        ) : (
-          <FpsCardGrid rows={report.games} />
-        )}
-        <p className="mt-3 text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
-      </section>
+      </Section>
     </div>
   )
 }
