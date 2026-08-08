@@ -1,9 +1,9 @@
 {
   "modelVersion": "1.0.0",
-  "datasetVersion": "2026-08-07",
-  "fittedAt": "2026-08-07T17:10:59.711Z",
-  "entryCount": 0,
-  "sourceCount": 0,
+  "datasetVersion": "2026-08-08",
+  "fittedAt": "2026-08-08T15:22:02.845Z",
+  "entryCount": 37,
+  "sourceCount": 2,
   "blendK": 5.1,
   "blendKBasis": "default",
   "resCpuScale": {
@@ -12,11 +12,557 @@
     "4k": 1.031
   },
   "anchors": {
-    "gpu": null,
-    "cpu": null
+    "gpu": "gpu-rtx-5090",
+    "cpu": "cpu-ryzen-7-9800x3d"
   },
-  "gpuIndex": {},
-  "cpuIndex": {},
-  "gameConst": {},
-  "exact": {}
+  "gpuIndex": {
+    "gpu-rtx-5090": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 100,
+      "1080p": 100,
+      "4k": 100,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4090": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 80.77,
+      "1080p": 80.77,
+      "4k": 80.77,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-5080": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 64.74,
+      "1080p": 64.74,
+      "4k": 64.74,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-9070xt": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 61.89,
+      "1080p": 61.89,
+      "4k": 61.89,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-7900xtx": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 61.89,
+      "1080p": 61.89,
+      "4k": 61.89,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4080-super": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 60.11,
+      "1080p": 60.11,
+      "4k": 60.11,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-5070ti": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 57.69,
+      "1080p": 57.69,
+      "4k": 57.69,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-9070": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 54.99,
+      "1080p": 54.99,
+      "4k": 54.99,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-7900xt": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 52.99,
+      "1080p": 52.99,
+      "4k": 52.99,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4070ti-super": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 52.85,
+      "1080p": 52.85,
+      "4k": 52.85,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4070-super": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 45.01,
+      "1080p": 45.01,
+      "4k": 45.01,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-5070": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 43.95,
+      "1080p": 43.95,
+      "4k": 43.95,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-7900-gre": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 41.24,
+      "1080p": 41.24,
+      "4k": 41.24,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-6800-xt": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 41.24,
+      "1080p": 41.24,
+      "4k": 41.24,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-3080": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 41.03,
+      "1080p": 41.03,
+      "4k": 41.03,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-7800xt": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 39.67,
+      "1080p": 39.67,
+      "4k": 39.67,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4070": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 39.53,
+      "1080p": 39.53,
+      "4k": 39.53,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-intel-arc-b580": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 36.18,
+      "1080p": 36.18,
+      "4k": 36.18,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-7700xt": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 33.26,
+      "1080p": 33.26,
+      "4k": 33.26,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-intel-arc-a770": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 29.99,
+      "1080p": 29.99,
+      "4k": 29.99,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4060ti": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 28.63,
+      "1080p": 28.63,
+      "4k": 28.63,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-3060-ti": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 28.21,
+      "1080p": 28.21,
+      "4k": 28.21,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-6700-xt": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 27.21,
+      "1080p": 27.21,
+      "4k": 27.21,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rtx-4060": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 24.57,
+      "1080p": 24.57,
+      "4k": 24.57,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    },
+    "gpu-rx-7600": {
+      "basis": "measured",
+      "anchors": 1,
+      "1440p": 21.08,
+      "1080p": 21.08,
+      "4k": 21.08,
+      "copiedResolutions": [
+        "1080p",
+        "4k"
+      ]
+    }
+  },
+  "cpuIndex": {
+    "cpu-ryzen-7-9800x3d": {
+      "value": 100,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-i9-14900ks": {
+      "value": 89.71,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-i9-14900k": {
+      "value": 87.45,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-i7-14700k": {
+      "value": 87.35,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-ryzen-7-9700x": {
+      "value": 86.65,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-ryzen-9-9900x": {
+      "value": 84.69,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-ryzen-5-9600x": {
+      "value": 84.29,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-ryzen-9-9950x": {
+      "value": 81.68,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-i5-14600k": {
+      "value": 79.47,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-intel-ultra-9-285k": {
+      "value": 77.16,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-intel-ultra-7-265k": {
+      "value": 74.5,
+      "basis": "measured",
+      "anchors": 1
+    },
+    "cpu-intel-ultra-5-245k": {
+      "value": 71.89,
+      "basis": "measured",
+      "anchors": 1
+    }
+  },
+  "gameConst": {
+    "ghost-of-tsushima": {
+      "1440p": {
+        "sehr-hoch": {
+          "A": 712.25,
+          "sources": 1,
+          "cv": 0.3955,
+          "lowBase": 1.0753,
+          "lowSources": 25,
+          "B": 502.01
+        }
+      },
+      "1080p": {
+        "sehr-hoch": {
+          "B": 502.01
+        }
+      },
+      "4k": {
+        "sehr-hoch": {
+          "B": 502.01
+        }
+      }
+    }
+  },
+  "exact": {
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 7.1225,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4090|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 8.8183,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5080|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 11.0011,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-9070xt|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 11.5075,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7900xtx|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 11.5075,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4080-super|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 11.8483,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5070ti|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 12.3457,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-9070|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 12.9534,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7900xt|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 13.4409,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070ti-super|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 13.4771,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070-super|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 15.8228,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5070|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 16.2075,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7900-gre|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 17.2712,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-6800-xt|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 17.2712,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-3080|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 17.3611,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7800xt|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 17.9533,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 18.018,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-intel-arc-b580|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 19.685,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7700xt|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 21.4133,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-intel-arc-a770|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 23.753,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4060ti|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 24.8756,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-3060-ti|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 25.2525,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-6700-xt|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 26.178,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4060|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 28.9855,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7600|ghost-of-tsushima|1440p|sehr-hoch": {
+      "frameTimeMs": 33.7838,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.0201,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.596,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.7405,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i7-14700k|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.7471,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.7937,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.9277,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 5.9559,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 6.1463,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600k|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 6.3171,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 6.5062,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-7-265k|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 6.7385,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-5-245k|gpu-rtx-4090|ghost-of-tsushima|720p|sehr-hoch": {
+      "frameTimeMs": 6.9832,
+      "sources": 1,
+      "entries": 1
+    }
+  }
 }

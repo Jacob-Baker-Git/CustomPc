@@ -1,0 +1,43 @@
+# ComputerBase — AMD Radeon RX 9070 (XT) im Test, Gaming-Benchmarks Part 2.
+# Ghost of Tsushima, 2560x1440, "Sehr-Hoch-Preset", rendered NATIVE (the
+# parcours enables upsampling for other titles, not this one — hence the
+# per-row `up` column).
+# Figures transcribed from the article's WQHD chart; avg and P1 percentile.
+
+outlet:    ComputerBase
+title:     AMD Radeon RX 9070 (XT) im Test
+url:       https://www.computerbase.de/artikel/grafikkarten/amd-radeon-rx-9070-xt-rx-9070-test.91578/seite-4
+published: 2025-03-05
+kind:      gpu-scaling
+cpu:       cpu-ryzen-7-9800x3d
+ram:       DDR5 6000 48 2
+os:        Windows 11 24H2
+driver:    AMD Adrenalin 24.20.19.05 / RX 9070 24.30.31.03; NVIDIA 566.14 / RTX 50 572.02-572.50
+scene:     ComputerBase in-game test sequence (exact scene not stated in the article)
+
+game               res     preset     up       part                   avg     low
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-5090           140.4   121.4
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4090           113.4   105.2
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-5080           90.9    84.6
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-9070xt          86.9    82.6
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-7900xtx         86.9    81.9
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4080-super     84.4    78.8
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-5070ti         81.0    75.4
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-9070            77.2    72.5
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-7900xt          74.4    69.1
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4070ti-super   74.2    69.8
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4070-super     63.2    58.9
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-5070           61.7    56.8
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-7900-gre        57.9    54.5
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-6800-xt         57.9    54.2
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-3080           57.6    53.6
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-7800xt          55.7    52.1
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4070           55.5    52.5
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-intel-arc-b580     50.8    46.3
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-7700xt          46.7    44.7
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-intel-arc-a770     42.1    39.0
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4060ti         40.2    37.4
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-3060-ti        39.6    37.3
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-6700-xt         38.2    36.1
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rtx-4060           34.5    31.9
+ghost-of-tsushima  1440p   sehr-hoch  native   gpu-rx-7600            29.6    26.4

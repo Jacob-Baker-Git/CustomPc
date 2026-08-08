@@ -1,1 +1,48 @@
-[]
+[
+  {
+    "id": "src-computerbase-2025-03-05-amd-radeon-rx-9070-xt-im",
+    "outlet": "ComputerBase",
+    "title": "AMD Radeon RX 9070 (XT) im Test",
+    "url": "https://www.computerbase.de/artikel/grafikkarten/amd-radeon-rx-9070-xt-rx-9070-test.91578/seite-4",
+    "published": "2025-03-05",
+    "accessed": "2026-08-08",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 48,
+        "sticks": 2
+      },
+      "os": "Windows 11 24H2",
+      "gpuDriver": "AMD Adrenalin 24.20.19.05 / RX 9070 24.30.31.03; NVIDIA 566.14 / RTX 50 572.02-572.50"
+    },
+    "notes": ""
+  },
+  {
+    "id": "src-computerbase-2024-11-06-amd-ryzen-7-9800x3d-vs-7",
+    "outlet": "ComputerBase",
+    "title": "AMD Ryzen 7 9800X3D vs. 7800X3D, 5800X3D & Core Ultra im Test",
+    "url": "https://www.computerbase.de/artikel/prozessoren/amd-ryzen-7-9800x3d-test.90151/seite-2",
+    "published": "2024-11-06",
+    "accessed": "2026-08-08",
+    "kind": "cpu-scaling",
+    "testSystem": {
+      "cpu": "varies — one per entry",
+      "gpu": "gpu-rtx-4090",
+      "gpuId": "gpu-rtx-4090",
+      "ram": {
+        "type": "DDR5",
+        "speed": 5600,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 24H2 (Build 26100.2033)",
+      "gpuDriver": "NVIDIA GeForce 565.90"
+    },
+    "notes": ""
+  }
+]

@@ -1,6 +1,8 @@
 {
-  "fittedAt": "2026-08-07T17:10:59.711Z",
-  "warnings": [],
+  "fittedAt": "2026-08-08T15:22:02.845Z",
+  "warnings": [
+    "corpus is only 37 entries — the per-source concentration cap does not apply below 40"
+  ],
   "gpuFit": {
     "1080p": {
       "iterations": 0,
@@ -8,9 +10,9 @@
       "parts": 0
     },
     "1440p": {
-      "iterations": 0,
+      "iterations": 2,
       "converged": true,
-      "parts": 0
+      "parts": 25
     },
     "4k": {
       "iterations": 0,
@@ -19,16 +21,16 @@
     }
   },
   "cpuFit": {
-    "iterations": 0,
+    "iterations": 2,
     "converged": true,
-    "parts": 0
+    "parts": 12
   },
   "droppedGpuBound": [],
   "droppedDisconnected": [],
   "coverage": {
-    "gpusMeasured": 0,
+    "gpusMeasured": 25,
     "gpusTotal": 79,
-    "cpusMeasured": 0,
+    "cpusMeasured": 12,
     "cpusTotal": 80
   },
   "validation": {
