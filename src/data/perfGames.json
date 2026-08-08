@@ -3,6 +3,8 @@
     "presets": [{ "id": "kino", "label": "Kino", "tier": 4 }] },
   { "id": "cod-black-ops-6", "name": "Call of Duty: Black Ops 6", "slug": "call-of-duty-black-ops-6",
     "presets": [{ "id": "extrem", "label": "Extrem", "tier": 4 }] },
+  { "id": "doom-the-dark-ages", "name": "Doom: The Dark Ages", "slug": "doom-the-dark-ages",
+    "presets": [{ "id": "max-details", "label": "Max. Details, TAA nativ", "tier": 4 }] },
   { "id": "dragon-age-veilguard", "name": "Dragon Age: The Veilguard", "slug": "dragon-age-the-veilguard",
     "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
   { "id": "dragons-dogma-2", "name": "Dragon's Dogma 2", "slug": "dragons-dogma-2",

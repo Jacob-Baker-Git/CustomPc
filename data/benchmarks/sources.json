@@ -44,5 +44,28 @@
       "gpuDriver": "NVIDIA GeForce 565.90"
     },
     "notes": ""
+  },
+  {
+    "id": "src-pc-games-hardware-2025-05-09-doom-the-dark-ages-im-te",
+    "outlet": "PC Games Hardware",
+    "title": "Doom: The Dark Ages im Test",
+    "url": "https://www.pcgameshardware.de/Doom-The-Dark-Ages-Spiel-74718/Specials/Test-Release-Review-Steam-Benchmarks-Raytracing-1471919/3/",
+    "published": "2025-05-09",
+    "accessed": "2026-08-08",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6400,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11",
+      "gpuDriver": "AMD 25.5.1 / Intel GOD 6793 / NVIDIA GRD 576.40"
+    },
+    "notes": "Article datePublished 2025-05-09, last updated 2025-05-14 (the title carries \"[Update]\"); the drivers in the chart metadata are the May 2025 set, so these figures are the updated run."
   }
 ]
