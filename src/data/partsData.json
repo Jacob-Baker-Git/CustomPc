@@ -7976,5 +7976,78 @@
     "specs": {
       "chipset": "Z590"
     }
+  },
+  {
+    "id": "gpu-gtx-1660",
+    "category": "gpu",
+    "name": "NVIDIA GeForce GTX 1660",
+    "brand": "NVIDIA",
+    "price": 134.99,
+    "tdp": 120,
+    "length": 229,
+    "perfScore": 18,
+    "legacy": true,
+    "specs": {
+      "vram": 6,
+      "memType": "GDDR5"
+    }
+  },
+  {
+    "id": "gpu-rtx-3090-ti",
+    "category": "gpu",
+    "name": "NVIDIA GeForce RTX 3090 Ti",
+    "brand": "NVIDIA",
+    "price": 849.99,
+    "tdp": 450,
+    "length": 313,
+    "perfScore": 76,
+    "specs": {
+      "vram": 24,
+      "memType": "GDDR6X"
+    }
+  },
+  {
+    "id": "cpu-ryzen-5-5600g",
+    "category": "cpu",
+    "name": "AMD Ryzen 5 5600G",
+    "brand": "AMD",
+    "price": 94.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 52,
+    "legacy": true,
+    "specs": {
+      "cores": 6,
+      "boostClock": 4.4
+    }
+  },
+  {
+    "id": "cpu-ryzen-7-5700g",
+    "category": "cpu",
+    "name": "AMD Ryzen 7 5700G",
+    "brand": "AMD",
+    "price": 129.99,
+    "socket": "AM4",
+    "tdp": 65,
+    "perfScore": 58,
+    "legacy": true,
+    "specs": {
+      "cores": 8,
+      "boostClock": 4.6
+    }
+  },
+  {
+    "id": "cpu-i9-12900ks",
+    "category": "cpu",
+    "name": "Intel Core i9-12900KS",
+    "brand": "Intel",
+    "price": 369.99,
+    "socket": "LGA1700",
+    "tdp": 150,
+    "perfScore": 87,
+    "specs": {
+      "cores": 16,
+      "boostClock": 5.5
+    }
   }
 ]
