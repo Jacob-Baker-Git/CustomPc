@@ -13,6 +13,12 @@ os:        Windows 11 24H2
 driver:    NVIDIA 572.16
 scene:     built-in benchmark
 
-game        res     preset  part               avg    low
-cyberpunk   1440p   ultra   gpu-rtx-5070       78.0   61.0
-cyberpunk   1440p   ultra   gpu-rtx-4070ti     71.2   55.4
+# `up` is the upsampling mode: native | ultra-quality | quality | balanced |
+# performance. It is per ROW because review parcours set it per GAME. There is
+# no default — a row nobody stated a render scale for is rejected, not guessed,
+# because an upscaled frame rate is not a native one.
+# `low` is optional and must stay LAST.
+
+game        res     preset  up       part               avg    low
+cyberpunk   1440p   ultra   native   gpu-rtx-5070       78.0   61.0
+cyberpunk   1440p   ultra   native   gpu-rtx-4070ti     71.2   55.4

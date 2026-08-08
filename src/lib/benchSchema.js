@@ -4,9 +4,27 @@
 // and the integrity test can share exactly one definition of "valid". A rule
 // enforced in only one of those two places is a rule that leaks.
 
-export const RESOLUTIONS = ['1080p', '1440p', '4k']
+// 720p is a MEASUREMENT resolution, not a display one. CPU-scaling reviews run
+// there deliberately: the point is to remove the graphics card as a limit so
+// the processors separate, and at 1080p on a 4090 half the field is still GPU-
+// bound. The engine never quotes a 720p figure — fit-perf-model.mjs keeps its
+// own display list — but the corpus has to be able to record what was actually
+// measured. Relabelling a 720p run as 1080p to fit the old list would be
+// falsifying the measurement to satisfy a validator.
+export const RESOLUTIONS = ['720p', '1080p', '1440p', '4k']
 export const SOURCE_KINDS = ['gpu-scaling', 'cpu-scaling', 'pair', 'memory-scaling']
 export const LOW_KINDS = ['1%', '0.1%', 'min']
+
+// Upsampling is not a detail — it is most of the frame rate. A card rendering
+// at 66% of 1440p and upscaling is doing roughly half the pixel work of one
+// running native, so mixing the two produces an index that describes neither.
+//
+// Modern review parcours enable it BY DEFAULT and vary it per game, which is
+// what makes this mandatory rather than optional: the numbers look identical in
+// a table and are not comparable. Vendor-neutral on purpose — DLSS Quality,
+// FSR Quality and XeSS Quality all render at the same fraction, and the fit
+// cares about the fraction, not whose marketing name is on it.
+export const UPSCALING = ['native', 'ultra-quality', 'quality', 'balanced', 'performance']
 
 // Nothing renders faster than this, and nothing playable is slower. A figure
 // outside the range is a transcription error, not a measurement.
@@ -61,6 +79,10 @@ export function validateEntry(entry, { sourceIds, partIds, gameIds }) {
     p.push(`${at}: resolution must be one of ${RESOLUTIONS.join(', ')}`)
   }
   if (!nonEmpty(entry?.presetId)) p.push(`${at}: presetId is required`)
+  if (!UPSCALING.includes(entry?.upscaling)) {
+    p.push(`${at}: upscaling must be one of ${UPSCALING.join(', ')} — ` +
+           `an upscaled frame rate is not a native one`)
+  }
   if (!inRange(entry?.avgFps, FPS_MIN, FPS_MAX)) {
     p.push(`${at}: avgFps must be a number between ${FPS_MIN} and ${FPS_MAX}`)
   }

@@ -1,7 +1,14 @@
 import { describe, it, expect } from 'vitest'
-import { auditCorpus, validateSource, validateEntry, RESOLUTIONS } from '../lib/benchSchema'
+import { auditCorpus, validateSource, validateEntry, RESOLUTIONS, UPSCALING } from '../lib/benchSchema'
 import partsData from '../data/partsData.json'
-import gamesData from '../data/gamesData.json'
+import perfGames from '../data/perfGames.json'
+import legacyGames from '../data/gamesData.json'
+
+// The corpus may cite either a measured game or a legacy catalogue one, so the
+// audit resolves ids against the union — the same list the curation scripts
+// build. Auditing against the legacy 22 alone would reject every real entry,
+// because modern GPU roundups benchmark almost none of them.
+const gamesData = [...perfGames, ...legacyGames]
 import sources from '../../data/benchmarks/sources.json'
 import entries from '../../data/benchmarks/entries.json'
 import validation from '../../data/benchmarks/validation.json'
@@ -50,7 +57,9 @@ describe('benchmark corpus integrity', () => {
         gameIds: new Set(gamesData.map((g) => g.id)) },
     )
     expect(problems.join(' ')).toMatch(/resolution/)
-    expect(RESOLUTIONS).toEqual(['1080p', '1440p', '4k'])
+    // 720p is legal in the CORPUS because that is where CPU-scaling reviews
+    // measure. It is not a resolution the engine ever quotes.
+    expect(RESOLUTIONS).toEqual(['720p', '1080p', '1440p', '4k'])
   })
 
   it('rejects a non-positive or absurd frame rate', () => {
@@ -85,7 +94,28 @@ describe('benchmark corpus integrity', () => {
       .toMatch(/lowFps/)
     expect(validateEntry({ ...base, avgFps: 200, weight: '1' }, ctx).join(' ')).toMatch(/weight/)
     // and the valid forms still pass, so this is not rejecting everything
-    expect(validateEntry({ ...base, avgFps: 200, weight: 1 }, ctx)).toEqual([])
+    expect(validateEntry({ ...base, avgFps: 200, weight: 1, upscaling: 'native' }, ctx))
+      .toEqual([])
+  })
+
+  it('requires an upscaling mode, because a DLSS number is not a native one', () => {
+    // ComputerBase — the one outlet whose figures are machine-readable — runs
+    // upsampling by DEFAULT and varies it per game: Ghost of Tsushima native,
+    // Black Myth: Wukong at DLSS/FSR Quality. Two rows that differ only by that
+    // are not the same measurement, and nothing downstream could tell them
+    // apart afterwards. So the intake refuses the row rather than the fit
+    // silently averaging a native figure against an upscaled one.
+    const ctx = { sourceIds: new Set(['s1']), partIds: new Set(partsData.map((p) => p.id)),
+                  gameIds: new Set(gamesData.map((g) => g.id)) }
+    const base = { id: 'e6', sourceId: 's1', gameId: 'cs2', resolution: '1440p',
+                   presetId: 'high', gpuId: 'gpu-rtx-5070', cpuId: 'cpu-ryzen-5-7600x',
+                   avgFps: 200 }
+    expect(validateEntry(base, ctx).join(' ')).toMatch(/upscaling/)
+    expect(validateEntry({ ...base, upscaling: 'dlss-ultra' }, ctx).join(' ')).toMatch(/upscaling/)
+    for (const mode of UPSCALING) {
+      expect(validateEntry({ ...base, upscaling: mode }, ctx), mode).toEqual([])
+    }
+    expect(UPSCALING).toContain('native')
   })
 
   it('rejects duplicate entry ids', () => {

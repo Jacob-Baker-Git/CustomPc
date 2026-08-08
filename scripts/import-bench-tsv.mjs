@@ -23,13 +23,20 @@
 //   driver:    NVIDIA 572.16
 //   scene:     built-in benchmark
 //
-//   game        res     preset  part               avg    low
-//   cyberpunk   1440p   ultra   gpu-rtx-5070       78.0   61.0
-//   cyberpunk   1440p   ultra   gpu-rtx-4070ti     71.2   55.4
+//   game        res     preset  up       part             avg    low
+//   cyberpunk   1440p   ultra   native   gpu-rtx-5070     78.0   61.0
+//   cyberpunk   1440p   ultra   native   gpu-rtx-4070ti   71.2   55.4
 //
 // `part` is the one that VARIES across the review — a GPU for gpu-scaling, a
-// CPU for cpu-scaling. The fixed side comes from the header. `low` is optional;
-// leave it blank when the review does not publish 1% lows.
+// CPU for cpu-scaling. The fixed side comes from the header. `low` is optional
+// and must stay LAST; leave it off when the review publishes no 1% lows.
+//
+// `up` is the upsampling mode — native | ultra-quality | quality | balanced |
+// performance — and it is per row because review parcours set it per GAME. It
+// falls back to an `upscaling:` header line if every row shares one. There is
+// no default: a row whose render scale nobody stated is rejected, not guessed.
+// Ray tracing stays header-level (`raytracing: yes`), because outlets publish
+// raster and RT as separate charts — import them as two files.
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { argv, exit } from 'node:process'
@@ -46,7 +53,12 @@ if (!file) {
 }
 
 const parts = read('../src/data/partsData.json')
-const games = read('../src/data/gamesData.json')
+// The engine's game list is driven by what has actually been MEASURED, not by
+// the legacy catalogue — reviews benchmark what is new, and almost none of the
+// 22 legacy rows appear in a modern GPU roundup. perfGames.json is the
+// data-backed list; gamesData.json stays in the union so any legacy id that
+// does turn up in a review is still importable.
+const games = [...read('../src/data/perfGames.json'), ...read('../src/data/gamesData.json')]
 const sources = read('../data/benchmarks/sources.json')
 const entries = read('../data/benchmarks/entries.json')
 const validation = read('../data/benchmarks/validation.json')
@@ -133,21 +145,40 @@ for (; i < lines.length; i++) {
   // a file however it was pasted or hand-aligned, rather than demanding real
   // tab characters that most editors silently convert.
   const cols = line.split(/[\s,]+/).map((c) => c.trim()).filter(Boolean)
-  if (cols.length < 4) { rowProblems.push(`line ${i + 1}: expected at least 4 columns`); continue }
+  if (cols.length < 6) {
+    rowProblems.push(`line ${i + 1}: expected at least 6 columns ` +
+                     `(game res preset up part avg [low])`)
+    continue
+  }
   if (cols[0] === 'game') continue                       // the header row, if pasted
 
-  const [gameId, resolution, presetId, partId, avg, low] = cols
+  // `up` sits BEFORE the optional trailing `low`. Appending it after would
+  // misparse every row that omits the 1% low, silently reading the upscaling
+  // token as a frame rate.
+  const [gameId, resolution, presetId, up, partId, avg, low] = cols
   const varying = partId
   const gpuId = fixedIsGpu ? fixedId : varying
   const cpuId = fixedIsGpu ? varying : fixedId
 
+  // Upsampling is per-ROW with a header fallback, not header-only: a modern
+  // parcours sets it per GAME — ComputerBase runs Ghost of Tsushima native and
+  // Black Myth: Wukong at Quality in the same review — so one value for the
+  // whole file would mislabel most of it.
+  //
+  // No default. The old `?? 'off'` quietly asserted a render scale about every
+  // row whose review never stated one, which is the exact move this corpus
+  // exists to refuse: validateEntry rejects the row instead.
+  const upscaling = up ?? head.upscaling
+  const rayTracing = /^(y|yes|true|on)$/i.test(head.raytracing ?? '')
+
   const entry = {
-    id: `be-${slug(head.outlet)}-${gameId}-${resolution}-${presetId}-${gpuId}-${cpuId}`,
+    id: `be-${slug(head.outlet)}-${gameId}-${resolution}-${presetId}-${gpuId}-${cpuId}`
+      + `-${upscaling ?? 'unspecified'}${rayTracing ? '-rt' : ''}`,
     sourceId: source.id, gameId, resolution, presetId, gpuId, cpuId,
     avgFps: Number(avg),
     ...(low ? { lowFps: Number(low), lowKind: '1%' } : {}),
-    upscaling: head.upscaling ?? 'off',
-    rayTracing: /^(y|yes|true|on)$/i.test(head.raytracing ?? ''),
+    upscaling,
+    rayTracing,
     frameGen: /^(y|yes|true|on)$/i.test(head.framegen ?? ''),
     sceneNote: head.scene,
     weight: Number(head.weight ?? 1),
