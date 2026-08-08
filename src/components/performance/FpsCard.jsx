@@ -3,6 +3,16 @@
 // A row with no data shows that fact rather than being dropped: a game silently
 // missing from the list reads as a bug, and a game showing an invented number
 // is worse than either.
+
+// How each tier is named on the card. `modelled` says interpolated-from-
+// measurements and `spec-derived` says computed-from-a-spec-sheet, and a reader
+// deserves to know which of the three produced the number they are looking at.
+const BASIS_LABEL = {
+  measured: 'measured',
+  modelled: 'modelled',
+  'spec-derived': 'from specs',
+}
+
 export default function FpsCard({ row }) {
   if (row.basis === 'none') {
     return (
@@ -47,9 +57,16 @@ export default function FpsCard({ row }) {
           <div className="mt-1 text-[10px] uppercase tracking-wider text-muted">1% low</div>
         </div>
         <div className="ml-auto text-right">
-          {row.basis === 'measured' && (
-            <div className="text-[10px] uppercase tracking-wider text-good">measured</div>
-          )}
+          {/* EVERY tier is labelled, not just the good one. Badging only
+              `measured` left a modelled number sitting bare on the card — no
+              worse-looking than a measured one, and directly beside a list
+              headed "no benchmark data yet". Answering in tiers is the whole
+              point of the engine, so an unlabelled tier collapses it. */}
+          <div className={`text-[10px] uppercase tracking-wider ${
+            row.basis === 'measured' ? 'text-good' : 'text-muted'}`}
+          >
+            {BASIS_LABEL[row.basis] ?? row.basis}
+          </div>
           {row.atEngineCap && (
             <div className="text-[10px] text-muted">engine cap</div>
           )}
