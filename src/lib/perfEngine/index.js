@@ -25,7 +25,10 @@ function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, prese
   // TIME is a measurement — a measurement is a duration, not an attribution of
   // it. Without the fitted constants there is nothing to attribute with, so the
   // split is reported as unknown rather than invented.
-  const modelled = cell && gpuIdx.value > 0 && cpuIdx.value > 0
+  // `cell.B > 0` is checked here rather than inside cellFor: B is the CPU-side
+  // constant and only the split needs it, so a cell without one is still a
+  // perfectly good source of A and lowBase.
+  const modelled = cell?.B > 0 && gpuIdx.value > 0 && cpuIdx.value > 0
     ? (() => {
         const tGpu = cell.A / gpuIdx.value
         const tCpu = (cell.B * (model.resCpuScale?.[resolution] ?? 1)) / cpuIdx.value
@@ -147,6 +150,13 @@ export function estimateBuildPerformance({
       gamesTotal: rows.length,
       gpuBasis: gpuIdx.basis,
       cpuBasis: cpuIdx.basis,
+      // The fit copies the 1440p GPU index into any resolution with no data of
+      // its own. That is a reasonable fallback and a terrible thing to leave
+      // silent: the row still says basis "measured", so without this the UI
+      // would present a 4K figure derived from a 1440p measurement exactly as
+      // it presents a real one. `indices.js` has computed this since the
+      // beginning and nothing consumed it.
+      gpuResolutionCopied: gpuIdx.resolutionCopied,
     },
   }
 }

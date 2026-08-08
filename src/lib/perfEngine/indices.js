@@ -31,9 +31,19 @@ export function cpuIndexFor(model, cpu) {
 }
 
 // The fitted per-cell constants. A is the GPU-side constant, B the CPU-side.
+//
+// Existence is A. B is NOT required here, because a gpu-scaling review — the
+// most common and most useful shape — pins one CPU on purpose and so can never
+// produce one. Demanding B discarded the entire cell for those reviews, and
+// with it the measured `lowBase` sitting right beside A: a 1% low backed by 25
+// real rows silently reverted to the 1.35 default and was then rendered under a
+// "measured" badge, understating it by 20%.
+//
+// Callers that need the two-way SPLIT must check `cell.B > 0` themselves —
+// see the `modelled` guard in index.js. That is the one thing B is for.
 export function cellFor(model, game, resolution, presetId) {
   const cell = model?.gameConst?.[game?.id]?.[resolution]?.[presetId]
-  if (!(cell?.A > 0) || !(cell?.B > 0)) return null
+  if (!(cell?.A > 0)) return null
   return cell
 }
 
@@ -58,9 +68,11 @@ export function exactFor(model, context) {
 // Can this exact combination be estimated from measurement alone? Phase 1
 // answers only where this is true and says "not enough data" everywhere else.
 export function hasCoverage(model, { cpu, gpu, game, resolution, presetId }) {
+  // Asks for a FULL two-way estimate, so it wants B as well — unlike cellFor,
+  // whose job is only to say the cell exists.
   return (
     gpuIndexFor(model, gpu, resolution).value > 0 &&
     cpuIndexFor(model, cpu).value > 0 &&
-    cellFor(model, game, resolution, presetId) != null
+    cellFor(model, game, resolution, presetId)?.B > 0
   )
 }

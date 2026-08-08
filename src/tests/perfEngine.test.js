@@ -136,6 +136,10 @@ describe('estimateBuildPerformance', () => {
     expect(report.coverage).toEqual({
       gamesAnswered: 2, gamesExact: 0, gamesTotal: 3,
       gpuBasis: 'measured', cpuBasis: 'measured',
+      // False here because the fixture's index carries a real figure for this
+      // resolution. True means the fit had no data at the requested resolution
+      // and carried 1440p over, which the report has to disclose.
+      gpuResolutionCopied: false,
     })
   })
 

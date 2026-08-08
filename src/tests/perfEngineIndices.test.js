@@ -51,6 +51,24 @@ describe('cellFor', () => {
     expect(cellFor(model, { id: 'cyberpunk' }, '4k', 'high')).toBeNull()
     expect(cellFor(model, { id: 'starfield' }, '1440p', 'high')).toBeNull()
   })
+
+  it('still returns a cell fitted from a GPU-only review, which has no B', () => {
+    // B is the CPU-side constant, and a gpu-scaling review cannot produce one —
+    // it pins a single CPU on purpose. Requiring B here threw the whole cell
+    // away, taking its measured `lowBase` with it, so a 1% low backed by 25
+    // measured rows silently became the 1.35 default and rendered under a
+    // "measured" badge. B gates the two-way SPLIT, nothing else; the cell's
+    // existence is A.
+    const gpuOnly = { gameConst: { 'ghost-of-tsushima': { '1440p': {
+      'sehr-hoch': { A: 712.25, sources: 1, lowBase: 1.0753, lowSources: 25 } } } } }
+    const cell = cellFor(gpuOnly, { id: 'ghost-of-tsushima' }, '1440p', 'sehr-hoch')
+    expect(cell).toMatchObject({ A: 712.25, lowBase: 1.0753 })
+  })
+
+  it('still returns null when even A is missing', () => {
+    const noA = { gameConst: { g: { '1440p': { high: { lowBase: 1.2 } } } } }
+    expect(cellFor(noA, { id: 'g' }, '1440p', 'high')).toBeNull()
+  })
 })
 
 describe('exactFor', () => {
