@@ -24,8 +24,18 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
     <div className="relative min-h-screen flex flex-col items-center justify-center text-ink bg-ground py-12">
       <Backdrop />
       <div className="relative z-10 flex flex-col items-center px-4 w-full max-w-2xl">
-        <h1 className="rise font-display text-5xl font-extrabold mb-3 text-ink tracking-tight">PC <span className="text-accent">Builder</span></h1>
-        <p className="rise text-muted mb-1 text-lg">Pick parts that actually work together.</p>
+        {/* Two visible lines, both inside the h1. The heading used to be the
+            wordmark alone — "PC Builder" — which told a reader nothing the logo
+            had not already said and gave the root URL, the one page with no path
+            to describe it, no heading worth indexing. The second line is the same
+            promise index.html's <title> and description already make, so the
+            page and its metadata finally agree. Deliberately NOT an sr-only
+            span: if it is worth telling a crawler it is worth showing a reader. */}
+        <h1 className="rise font-display mb-3 text-ink tracking-tight text-center">
+          <span className="block text-5xl font-extrabold">Custom PC <span className="text-accent">Builder</span></span>
+          <span className="block mt-2 text-lg font-semibold text-muted">Build and price a gaming PC in 3D</span>
+        </h1>
+        <p className="rise text-muted mb-1">Pick parts that actually work together.</p>
         <p className="rise text-faint text-xs mb-10">Free · no sign-up · everything runs in your browser</p>
 
         <div className="rise rise-2 w-full flex flex-col gap-3">

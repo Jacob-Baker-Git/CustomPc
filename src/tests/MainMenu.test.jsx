@@ -8,6 +8,46 @@ beforeEach(() => {
   useBuilderStore.setState({ budget: 0, selectedParts: {}, selectedPeripherals: {} })
 })
 
+// The landing page is the one URL with no path to describe it, and its heading
+// was the single word pair "PC Builder" — a wordmark, saying nothing about what
+// the page does. index.html already commits to "Custom PC Builder — Build &
+// Price Your Gaming PC in 3D"; the visible heading has to agree with it rather
+// than leaving the title tag to carry the meaning on its own.
+describe('the landing heading says what the page is', () => {
+  const heading = () => {
+    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    return screen.getByRole('heading', { level: 1 })
+  }
+
+  it('is the only h1 on the page', () => {
+    heading()
+    expect(document.querySelectorAll('h1')).toHaveLength(1)
+  })
+
+  it('keeps the wordmark', () => {
+    expect(heading()).toHaveTextContent(/custom pc builder/i)
+  })
+
+  it('describes the thing the page actually does', () => {
+    const text = heading().textContent
+    // The terms the title tag and meta description already stake out. A heading
+    // that agrees with them is the point; one that merely repeats "PC Builder"
+    // gives a crawler nothing the <title> did not already say.
+    for (const term of [/gaming pc/i, /3d/i]) {
+      expect(text, `h1 text: ${text}`).toMatch(term)
+    }
+  })
+
+  // Visible text, not a hidden keyword stuffing. Anything in the h1 has to be on
+  // screen for a reader too, which is why the descriptive half is a second line
+  // rather than an sr-only span.
+  it('shows every word of the heading on screen', () => {
+    for (const span of heading().querySelectorAll('span')) {
+      expect(span.className).not.toMatch(/sr-only|hidden/)
+    }
+  })
+})
+
 describe('MainMenu', () => {
   it('offers starting a build and the saved-builds library', () => {
     render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
