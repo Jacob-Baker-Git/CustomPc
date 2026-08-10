@@ -10,6 +10,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { fitTwoWay } from '../src/lib/perfEngine/fitTwoWay.js'
 import { concentration } from '../src/lib/perfEngine/concentration.js'
+import { fitArchEfficiency } from '../src/lib/perfEngine/archEfficiency.js'
 
 const MODEL_VERSION = '1.0.0'
 const RESOLUTIONS = ['1080p', '1440p', '4k']
@@ -59,6 +60,7 @@ const sources = read('../data/benchmarks/sources.json')
 const entries = read('../data/benchmarks/entries.json')
 const validation = read('../data/benchmarks/validation.json')
 const parts = read('../src/data/partsData.json')
+const gpuSpecs = read('../data/specs/gpuSpecs.json')
 
 const sourceById = new Map(sources.map((s) => [s.id, s]))
 const live = entries.filter((e) => !e.supersededBy)
@@ -245,6 +247,22 @@ for (const [key, rows] of Object.entries(exactGroups)) {
   }
 }
 
+// --- arch efficiency -------------------------------------------------------
+// The per-architecture correction the spec-derived capability index needs. Fitted
+// here rather than hand-written in capability.js so it cannot drift from the
+// corpus it came from, and so growing the corpus re-derives it for free.
+const archEfficiency = fitArchEfficiency({ gpuIndex, gpuSpecs })
+if (archEfficiency.calibrated.length) {
+  console.log(`ARCH_EFFICIENCY fitted against ${archEfficiency.reference} = 1.0: ` +
+    archEfficiency.calibrated.map((a) =>
+      `${a} ${archEfficiency.byArch[a].efficiency} (n=${archEfficiency.byArch[a].parts}, ` +
+      `spread ${archEfficiency.byArch[a].spreadPct}%)`).join(', '))
+}
+if (archEfficiency.uncalibrated.length) {
+  warnings.push(`architectures with fewer than ${archEfficiency.minParts} measured parts stay ` +
+                `uncalibrated at 1.0: ${archEfficiency.uncalibrated.join(', ')}`)
+}
+
 const model = {
   modelVersion: MODEL_VERSION,
   datasetVersion: new Date().toISOString().slice(0, 10),
@@ -259,6 +277,11 @@ const model = {
   cpuIndex,
   gameConst,
   exact,
+  // Per-architecture correction for the spec-derived capability index, with the
+  // part count and spread behind each value. Shipped to the client because
+  // capability.js needs it at render time; architectures below the minimum stay
+  // at exactly 1.0 and are listed as uncalibrated rather than omitted.
+  archEfficiency,
 }
 
 write('../src/data/perfModel.json', model)

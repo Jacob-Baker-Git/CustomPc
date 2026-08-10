@@ -19,18 +19,23 @@
 // and the 7900 XTX is the faster card in rasterised games. Ranking on raw
 // throughput gets that pair BACKWARDS.
 //
-// So ARCH_EFFICIENCY below is the correction — and it is a fitted model
-// parameter, not a specification. It ships at 1.0 for everything, which means
-// this module currently ranks correctly WITHIN an architecture and is
-// explicitly uncalibrated ACROSS architectures. Callers are told which, via
-// `comparable`. Do not quietly set these to guessed values: the whole point of
-// the number is that it says when it does not know.
+// So ARCH_EFFICIENCY is the correction — and it is a FITTED MODEL PARAMETER, not
+// a specification. It is no longer hand-written here: `npm run perf:fit` derives
+// it from the corpus (see archEfficiency.js) and ships it in perfModel.json, so
+// it cannot drift from the measurements it came from. Pass it in via
+// `archEfficiency` and this module uses it; omit it and every architecture stays
+// at 1.0, which is the uncalibrated behaviour this file shipped with.
+//
+// Calibration is PER ARCHITECTURE and so is the claim. An architecture the
+// corpus covers with fewer than three cards is left at 1.0 and reported as
+// uncalibrated — `comparable` answers for the part in hand, not for the model as
+// a whole. Do not hand-edit these to guessed values: the point of the number is
+// that it says when it does not know.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Per-architecture realised fraction of theoretical throughput, relative to
-// each other. 1.0 everywhere = uncalibrated, and every architecture is listed
-// explicitly so that fitting one later is an obvious, reviewable diff rather
-// than a new key appearing.
+// The uncalibrated fallback, used when no fitted map is supplied. Every
+// architecture is listed explicitly so a missing key is visible as a gap rather
+// than silently defaulting.
 export const ARCH_EFFICIENCY = {
   Blackwell: 1.0,
   'Ada Lovelace': 1.0,
@@ -45,6 +50,9 @@ export const ARCH_EFFICIENCY = {
   'Xe Alchemist': 1.0,
 }
 
+// True only of the fallback above. What matters at render time is whether the
+// architecture of the part in hand was calibrated, which `gpuCapability` reads
+// off the fitted map.
 export const ARCH_CALIBRATED = false
 
 // Games are limited by compute AND by memory bandwidth, never purely by one.
@@ -71,13 +79,16 @@ export function teraflops(spec) {
   return (spec.shaders * spec.boostMhz * 2) / 1e6
 }
 
-// { index, basis, comparable, tflops, bandwidthGbs, vramGb, architecture }
+// { index, basis, comparable, tflops, bandwidthGbs, vramGb, architecture, ... }
 //
-// `basis` is 'spec-derived' when specs were found and 'none' when not — never
-// a silent fallback. `comparable` is 'within-architecture' while
-// ARCH_CALIBRATED is false, which is the caller's signal not to rank a GeForce
-// against a Radeon on this number alone.
-export function gpuCapability(gpu, gpuSpecs) {
+// `basis` is 'spec-derived' when specs were found and 'none' when not — never a
+// silent fallback. `comparable` is 'all' only when THIS part's architecture was
+// calibrated against measurements, and 'within-architecture' otherwise, which is
+// the caller's signal not to rank it against another vendor on this number alone.
+//
+// `archEfficiency` is the fitted map from perfModel.json. Omit it and the
+// uncalibrated 1.0 fallback applies, so existing callers keep their old numbers.
+export function gpuCapability(gpu, gpuSpecs, { archEfficiency } = {}) {
   const spec = gpu?.id ? gpuSpecs?.gpus?.[gpu.id] : null
   const none = {
     index: null, basis: 'none', comparable: null, tflops: null,
@@ -88,7 +99,11 @@ export function gpuCapability(gpu, gpuSpecs) {
   const tf = teraflops(spec)
   if (!(tf > 0) || !(spec.bandwidthGbs > 0)) return none
 
-  const efficiency = ARCH_EFFICIENCY[spec.architecture] ?? 1.0
+  const fitted = archEfficiency?.byArch?.[spec.architecture]
+  const efficiency = fitted?.calibrated
+    ? fitted.efficiency
+    : (ARCH_EFFICIENCY[spec.architecture] ?? 1.0)
+
   const computeTerm = (tf * efficiency) / GPU_REFERENCE_TFLOPS
   const bandwidthTerm = spec.bandwidthGbs / GPU_REFERENCE_BANDWIDTH
 
@@ -97,13 +112,19 @@ export function gpuCapability(gpu, gpuSpecs) {
   return {
     index: Number(index.toFixed(1)),
     basis: 'spec-derived',
-    comparable: ARCH_CALIBRATED ? 'all' : 'within-architecture',
+    comparable: fitted?.calibrated ? 'all' : 'within-architecture',
     tflops: Number(tf.toFixed(1)),
     bandwidthGbs: spec.bandwidthGbs,
     vramGb: spec.vramGb,
     architecture: spec.architecture,
     shaderUnit: spec.shaderUnit,
     vendor: spec.vendor,
+    // What is behind the correction applied, so the UI can say how well it holds
+    // rather than presenting a fitted scalar as a measurement.
+    archEfficiency: efficiency,
+    archCalibrated: !!fitted?.calibrated,
+    archParts: fitted?.parts ?? 0,
+    archSpreadPct: fitted?.spreadPct ?? null,
   }
 }
 
@@ -148,7 +169,9 @@ const usableL3Mb = (spec) => (spec.ccds > 1 ? spec.l3MaxCcdMb : spec.l3Mb)
 // this pair would silently break others.
 export const KNOWN_LIMITATIONS = [
   'Zen 4 vs Zen 5 IPC is uncalibrated, so a 7900X3D still ranks above a 9800X3D on clock and cache-per-core alone.',
-  'Cross-architecture comparison is uncalibrated while ARCH_EFFICIENCY is 1.0 — see the note at the top of this file.',
+  'GPU cross-architecture comparison is calibrated only for architectures the corpus covers with at least three cards; the rest stay at 1.0 and report themselves as within-architecture only.',
+  'The GPU correction is one scalar per architecture, and the cards behind it do not all agree — the spread runs from 6% on RDNA 3 to over 50% on RDNA 2, so a narrow gap between two brands is inside the noise.',
+  'The correction depends on the game mix: the same comparison computed over a different parcours gives RDNA 3 over Ada as anything from 1.4 to 1.75, so it describes this corpus rather than a universal constant.',
 ]
 
 export function cpuCapability(cpu, cpuSpecs) {

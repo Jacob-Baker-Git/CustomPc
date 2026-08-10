@@ -54,10 +54,46 @@ test.describe('the performance tab', () => {
     await expect(page.getByText(/not measured benchmarks/i)).toHaveCount(0)
   })
 
-  test('states what is uncalibrated instead of implying a ranking', async ({ page }) => {
-    // Cross-architecture comparison is uncalibrated while ARCH_EFFICIENCY is
-    // 1.0, and the capability panel is required to say so rather than let a
-    // reader rank a GeForce against a Radeon on the index.
+  // ARCH_EFFICIENCY used to be 1.0 for everything and this test asserted the
+  // panel said so. It is now FITTED from the corpus, per architecture, so the
+  // panel's claim differs by card — and the requirement is unchanged: it must
+  // state which footing the index is on rather than leave a reader to rank a
+  // GeForce against a Radeon on a number that cannot carry it.
+  test('states which footing the capability index is on', async ({ page }) => {
+    const panel = page.getByText(/capability index/i).first()
+    await expect(panel).toBeVisible()
+
+    // Exactly one of the two claims, never both and never neither.
+    const calibrated = page.getByText(/calibrated across architectures from \d+ measured/i)
+    const uncalibrated = page.getByText(/not yet calibrated across architectures/i)
+    const claims = (await calibrated.count()) + (await uncalibrated.count())
+    expect(claims, 'the capability panel states its calibration status').toBeGreaterThan(0)
+
+    // Where it does claim cross-brand comparability, it has to show the evidence:
+    // how many cards the correction came from and how far they spread around it.
+    // A fitted scalar presented bare is the same defect as an unmeasured frame
+    // rate presented as measured.
+    if (await calibrated.count()) {
+      await expect(page.getByText(/spread \d+(\.\d+)?% around it/i)).toBeVisible()
+    }
+  })
+
+  test('never claims comparability for an architecture the corpus barely covers', async ({ page }) => {
+    // An Arc A380 is the only Xe2 Battlemage part measured, which is below the
+    // three-card floor, so its panel must still refuse the cross-brand reading.
+    await page.evaluate(() => {
+      const key = 'custompc-builder-v1'
+      const store = JSON.parse(window.localStorage.getItem(key))
+      store.state.selectedParts.gpu = {
+        id: 'gpu-intel-arc-b580', category: 'gpu', name: 'Intel Arc B580',
+        brand: 'Intel', price: 249.99, tdp: 190, length: 272, perfScore: 40,
+        specs: { vram: 12, memType: 'GDDR6' },
+      }
+      window.localStorage.setItem(key, JSON.stringify(store))
+    })
+    await page.reload()
+    await openTab(page, 'performance')
     await expect(page.getByText(/not yet calibrated across architectures/i)).toBeVisible()
+    await expect(page.getByText(/fewer than three .* cards have been measured/i)).toBeVisible()
   })
 })

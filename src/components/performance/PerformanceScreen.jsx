@@ -55,7 +55,11 @@ export default function PerformanceScreen() {
   )
   const thermals = useMemo(() => estimateThermals(selectedParts), [selectedParts])
   const memory = useMemo(() => memoryProfile(selectedParts), [selectedParts])
-  const gpuCap = useMemo(() => gpuCapability(gpu, gpuSpecs), [gpu])
+  // archEfficiency is fitted by perf:fit from the corpus, not hand-written, so the
+  // capability index corrects for the fact that vendors count shaders differently.
+  // Architectures the corpus covers with fewer than three cards come back
+  // uncalibrated and the panel says so.
+  const gpuCap = useMemo(() => gpuCapability(gpu, gpuSpecs, { archEfficiency: perfModel.archEfficiency }), [gpu])
   const cpuCap = useMemo(() => cpuCapability(cpu, cpuSpecs), [cpu])
 
   const measured = report?.coverage?.gamesExact ?? 0
@@ -245,12 +249,19 @@ export default function PerformanceScreen() {
           subtitle={gpuCap.basis === 'spec-derived'
             ? `Computed from published specifications, indexed against an RTX 4090 at 100.`
             : 'No published specifications transcribed for this card yet.'}
-          footnote={gpuCap.basis === 'spec-derived'
-            ? `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures — ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things, so comparing this figure with a rival brand needs measured data we do not have yet.`
-            : undefined}
+          footnote={gpuCap.basis !== 'spec-derived'
+            ? undefined
+            : gpuCap.archCalibrated
+              // The vendors still count different things; what has changed is that
+              // the corpus now says by how much, so the figure is corrected rather
+              // than merely caveated. The spread is quoted because the correction
+              // is an average over cards that do not all agree — on some
+              // architectures it is wide enough to matter.
+              ? `Calibrated across architectures from ${gpuCap.archParts} measured ${gpuCap.architecture} cards, so this is comparable with a rival brand. The correction (x${gpuCap.archEfficiency}) is a fitted average and those cards spread ${gpuCap.archSpreadPct}% around it — read a gap narrower than that as noise, not a ranking.`
+              : `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures — ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things. Fewer than three ${gpuCap.architecture} cards have been measured, so comparing this figure with a rival brand still needs data we do not have.`}
         >
           <StatRow label="Capability index" value={gpuCap.index}
-                   hint={gpuCap.architecture ? `vs other ${gpuCap.architecture} cards` : undefined} />
+                   hint={gpuCap.archCalibrated ? 'comparable across brands' : gpuCap.architecture ? `vs other ${gpuCap.architecture} cards` : undefined} />
           <StatRow label="Compute" value={gpuCap.tflops} unit="TFLOPS"
                    hint="Theoretical FP32 peak" />
           <StatRow label="Memory bandwidth" value={gpuCap.bandwidthGbs} unit="GB/s" />

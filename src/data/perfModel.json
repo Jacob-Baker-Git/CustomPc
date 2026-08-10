@@ -1,7 +1,7 @@
 {
   "modelVersion": "1.0.0",
   "datasetVersion": "2026-08-10",
-  "fittedAt": "2026-08-10T18:13:58.879Z",
+  "fittedAt": "2026-08-10T18:25:33.096Z",
   "entryCount": 804,
   "sourceCount": 22,
   "blendK": 5.1,
@@ -4924,5 +4924,73 @@
       "sources": 1,
       "entries": 1
     }
+  },
+  "archEfficiency": {
+    "resolution": "1440p",
+    "reference": "Ada Lovelace",
+    "referenceNote": "Ada Lovelace is anchored at 1.0; every value is relative to it, not an absolute realised fraction",
+    "minParts": 3,
+    "byArch": {
+      "Ada Lovelace": {
+        "efficiency": 1,
+        "parts": 8,
+        "spreadPct": 34.9,
+        "calibrated": true
+      },
+      "Ampere": {
+        "efficiency": 0.911,
+        "parts": 4,
+        "spreadPct": 24.9,
+        "calibrated": true
+      },
+      "Blackwell": {
+        "efficiency": 0.8466,
+        "parts": 4,
+        "spreadPct": 46.4,
+        "calibrated": true
+      },
+      "RDNA": {
+        "efficiency": 1,
+        "parts": 1,
+        "spreadPct": 0,
+        "calibrated": false
+      },
+      "RDNA 2": {
+        "efficiency": 0.9765,
+        "parts": 3,
+        "spreadPct": 54.3,
+        "calibrated": true
+      },
+      "RDNA 3": {
+        "efficiency": 1.1377,
+        "parts": 5,
+        "spreadPct": 6.3,
+        "calibrated": true
+      },
+      "Turing": {
+        "efficiency": 1.0654,
+        "parts": 3,
+        "spreadPct": 27.4,
+        "calibrated": true
+      },
+      "Xe2 Battlemage": {
+        "efficiency": 1,
+        "parts": 1,
+        "spreadPct": 0,
+        "calibrated": false
+      }
+    },
+    "calibrated": [
+      "Ada Lovelace",
+      "Ampere",
+      "Blackwell",
+      "RDNA 2",
+      "RDNA 3",
+      "Turing"
+    ],
+    "uncalibrated": [
+      "RDNA",
+      "Xe2 Battlemage"
+    ]
   }
 }

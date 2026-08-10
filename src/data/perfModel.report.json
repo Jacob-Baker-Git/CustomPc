@@ -1,8 +1,9 @@
 {
-  "fittedAt": "2026-08-10T18:13:58.879Z",
+  "fittedAt": "2026-08-10T18:25:33.096Z",
   "warnings": [
     "Notebookcheck supplies 73.1% of the corpus (588 of 804 entries, from 19 reviews) — dilute when data allows",
-    "ComputerBase supplies 21.4% of the corpus (172 of 804 entries, from 2 reviews) — dilute when data allows"
+    "ComputerBase supplies 21.4% of the corpus (172 of 804 entries, from 2 reviews) — dilute when data allows",
+    "architectures with fewer than 3 measured parts stay uncalibrated at 1.0: RDNA, Xe2 Battlemage"
   ],
   "gpuFit": {
     "1080p": {
