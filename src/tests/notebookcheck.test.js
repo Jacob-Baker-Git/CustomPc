@@ -170,6 +170,40 @@ describe('toRows keeps only what is valid and says why it dropped the rest', () 
     expect(rows[0].low).toBeNull()
   })
 
+  // A 6.5 fps average with a 0.8 fps 1% low is a real measurement of something
+  // unplayable, but the schema's low floor is 1 fps and it rejects the whole file
+  // over it. Drop the LOW and keep the average — the average is measured and
+  // there is no reason to lose it — rather than discarding the row or nudging the
+  // figure up to fit.
+  it('drops a 1% low the schema cannot hold, and keeps the average', () => {
+    const { rows, rejected } = toRows([row({ avgFps: 6.5, min: 0.5, p01: 0.6, p1: 0.8 })], opts)
+    expect(rows).toHaveLength(1)
+    expect(rows[0].avg).toBe(6.5)
+    expect(rows[0].low).toBeNull()
+    expect(rejected).toEqual([])
+  })
+
+  // Two DIFFERENT measurements of one configuration collide on entry id, and the
+  // importer keeps whichever lands first — silently, which is how a re-test's
+  // numbers end up filed as the original. Neither can be preferred from the page,
+  // so both go and the pair is counted.
+  it('refuses a configuration measured twice with different results', () => {
+    const dupes = [
+      row({ game: 'Hogwarts Legacy', presetFull: 'High', avgFps: 18.0, p1: 12.7, min: 10 }),
+      row({ game: 'Hogwarts Legacy', presetFull: 'High', avgFps: 13.2, p1: 11.7, min: 10 }),
+    ]
+    const { rows, rejected } = toRows(dupes, opts)
+    expect(rows).toEqual([])
+    expect(rejected).toHaveLength(2)
+    for (const r of rejected) expect(r.reason).toMatch(/measured more than once/i)
+  })
+
+  it('keeps a configuration measured twice with the SAME result, which is not a conflict', () => {
+    const same = [row({ avgFps: 78.3, p1: 61.2 }), row({ avgFps: 78.3, p1: 61.2 })]
+    const { rows } = toRows(same, opts)
+    expect(rows).toHaveLength(1)
+  })
+
   // The corpus records one CPU per source, so a page's rows have to be filtered
   // to the bench being imported. Silently mixing three test systems under one
   // source would attribute one machine's numbers to another.

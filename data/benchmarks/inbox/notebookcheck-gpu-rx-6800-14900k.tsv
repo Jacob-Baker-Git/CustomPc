@@ -1,0 +1,41 @@
+outlet:    Notebookcheck
+title:     RX 6800 (14900K) benchmarks
+url:       https://www.notebookcheck.net/AMD-Radeon-RX-6800-Desktop-GPU-Benchmarks-and-Specs.516398.0.html
+published: 2026-08-10
+kind:      gpu-scaling
+cpu:       cpu-i9-14900k
+ram:       DDR5 6000 32 2
+os:        Windows 11 Pro
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+f1-24	1080p	ultra	native	gpu-rx-6800	66.0	45.0
+f1-24	4k	ultra	native	gpu-rx-6800	20.6	13.0
+hellblade-2	1080p	low	native	gpu-rx-6800	89.3	81.3
+hellblade-2	1080p	medium	native	gpu-rx-6800	74.8	68.8
+hellblade-2	1080p	high	native	gpu-rx-6800	56.6	52.8
+hellblade-2	1440p	high	native	gpu-rx-6800	41.1	38.3
+hellblade-2	4k	high	native	gpu-rx-6800	22.7	21.7
+ghost-of-tsushima	1080p	low	native	gpu-rx-6800	155.2	122.1
+ghost-of-tsushima	1080p	medium	native	gpu-rx-6800	129.6	106.2
+ghost-of-tsushima	1080p	high	native	gpu-rx-6800	118.4	97.5
+ghost-of-tsushima	1080p	very-high	native	gpu-rx-6800	91.3	76.8
+ghost-of-tsushima	1440p	very-high	native	gpu-rx-6800	72.8	61.7
+ghost-of-tsushima	4k	very-high	native	gpu-rx-6800	47.2	40.0
+horizon-forbidden-west	1080p	low	native	gpu-rx-6800	152.3	122.3
+horizon-forbidden-west	1080p	medium	native	gpu-rx-6800	135.5	111.0
+horizon-forbidden-west	1080p	high	native	gpu-rx-6800	93.8	77.2
+horizon-forbidden-west	1080p	very-high	native	gpu-rx-6800	90.1	74.4
+horizon-forbidden-west	1440p	very-high	native	gpu-rx-6800	71.2	60.3
+horizon-forbidden-west	4k	very-high	native	gpu-rx-6800	44.2	38.0
+dragons-dogma-2	1080p	low	native	gpu-rx-6800	98.1	73.5
+dragons-dogma-2	1080p	high	native	gpu-rx-6800	89.7	66.1
+dragons-dogma-2	1440p	high	native	gpu-rx-6800	72.2	54.7
+dragons-dogma-2	4k	high	native	gpu-rx-6800	44.4	34.1
+helldivers2	1080p	low	native	gpu-rx-6800	170.0	154.3
+helldivers2	1080p	medium	native	gpu-rx-6800	136.6	126.3
+helldivers2	1080p	high	native	gpu-rx-6800	122.3	111.5
+helldivers2	1080p	ultra	native	gpu-rx-6800	119.9	109.8
+helldivers2	1440p	ultra	native	gpu-rx-6800	84.5	77.3
+helldivers2	4k	ultra	native	gpu-rx-6800	44.5	41.3

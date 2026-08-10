@@ -1,0 +1,44 @@
+outlet:    Notebookcheck
+title:     RX 6800 (7950X) benchmarks
+url:       https://www.notebookcheck.net/AMD-Radeon-RX-6800-Desktop-GPU-Benchmarks-and-Specs.516398.0.html
+published: 2026-08-10
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-7950x
+ram:       DDR5 6000 32 2
+os:        Windows 11 Pro
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+alan-wake-2	1080p	low	native	gpu-rx-6800	96.8	42.0
+alan-wake-2	1080p	medium	native	gpu-rx-6800	86.3	61.3
+alan-wake-2	1080p	high	native	gpu-rx-6800	80.8	56.7
+alan-wake-2	1440p	high	native	gpu-rx-6800	52.4	37.1
+alan-wake-2	4k	high	native	gpu-rx-6800	27.3	20.2
+cs2	1080p	low	native	gpu-rx-6800	350.0	166.5
+cs2	1080p	medium	native	gpu-rx-6800	349.0	166.7
+cs2	1080p	high	native	gpu-rx-6800	280.0	155.1
+cs2	1080p	very-high	native	gpu-rx-6800	238.0	147.5
+cs2	1440p	very-high	native	gpu-rx-6800	174.6	106.3
+cs2	4k	very-high	native	gpu-rx-6800	93.0	47.4
+cyberpunk	1080p	low	native	gpu-rx-6800	185.9
+cyberpunk	1080p	medium	native	gpu-rx-6800	148.4
+cyberpunk	1080p	high	native	gpu-rx-6800	110.7
+cyberpunk	1440p	ultra	native	gpu-rx-6800	70.4
+cyberpunk	4k	ultra	native	gpu-rx-6800	28.3
+bg3	1080p	low	native	gpu-rx-6800	198.0	168.2
+bg3	1080p	medium	native	gpu-rx-6800	167.9	147.5
+bg3	1080p	high	native	gpu-rx-6800	137.4	123.1
+bg3	1080p	ultra	native	gpu-rx-6800	134.1	120.3
+bg3	1440p	ultra	native	gpu-rx-6800	94.5	85.9
+bg3	4k	ultra	native	gpu-rx-6800	50.2	45.8
+starfield	1080p	low	native	gpu-rx-6800	104.0	86.1
+starfield	1080p	medium	native	gpu-rx-6800	92.9	74.7
+starfield	1080p	high	native	gpu-rx-6800	78.0	64.1
+starfield	1080p	ultra	native	gpu-rx-6800	70.6	55.3
+starfield	1440p	ultra	native	gpu-rx-6800	57.0	46.5
+starfield	4k	ultra	native	gpu-rx-6800	35.1	30.4
+hogwarts	1080p	low	native	gpu-rx-6800	208.0	164.4
+hogwarts	1080p	ultra	native	gpu-rx-6800	96.3	75.1
+hogwarts	1440p	ultra	native	gpu-rx-6800	72.8	59.8
+hogwarts	4k	ultra	native	gpu-rx-6800	35.1	29.8

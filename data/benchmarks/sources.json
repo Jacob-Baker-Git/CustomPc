@@ -67,5 +67,442 @@
       "gpuDriver": "AMD 25.5.1 / Intel GOD 6793 / NVIDIA GRD 576.40"
     },
     "notes": "Article datePublished 2025-05-09, last updated 2025-05-14 (the title carries \"[Update]\"); the drivers in the chart metadata are the May 2025 set, so these figures are the updated run."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-arc-a380-14900k-benchmar",
+    "outlet": "Notebookcheck",
+    "title": "Arc A380 (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/Intel-Arc-A380-Desktop-GPU-Benchmarks-and-Specs.937585.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-gtx-1650-9800x3d-benchma",
+    "outlet": "Notebookcheck",
+    "title": "GTX 1650 (9800X3D) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1650-Desktop-GPU-Benchmarks-and-Specs.421420.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the ASRock X870E Taichi / 9800X3D bench, whose memory spec is verified from the RTX 5090 FE and PNY RTX 5060 Ti reviews (32 GB DDR5-6000, X870E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-gtx-1660-14900k-benchmar",
+    "outlet": "Notebookcheck",
+    "title": "GTX 1660 (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Desktop-GPU-Benchmarks-and-Specs.448672.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-gtx-1660-7950x-benchmark",
+    "outlet": "Notebookcheck",
+    "title": "GTX 1660 (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Desktop-GPU-Benchmarks-and-Specs.448672.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-gtx-1660-super-14900k-be",
+    "outlet": "Notebookcheck",
+    "title": "GTX 1660 Super (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Super-Desktop-GPU-Benchmarks-and-Specs.448675.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-gtx-1660-super-7950x-ben",
+    "outlet": "Notebookcheck",
+    "title": "GTX 1660 Super (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Super-Desktop-GPU-Benchmarks-and-Specs.448675.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-gtx-1660-super-9800x3d-b",
+    "outlet": "Notebookcheck",
+    "title": "GTX 1660 Super (9800X3D) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Super-Desktop-GPU-Benchmarks-and-Specs.448675.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the ASRock X870E Taichi / 9800X3D bench, whose memory spec is verified from the RTX 5090 FE and PNY RTX 5060 Ti reviews (32 GB DDR5-6000, X870E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rtx-2060-super-14900k-be",
+    "outlet": "Notebookcheck",
+    "title": "RTX 2060 Super (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-RTX-2060-Super-Desktop-GPU-Benchmarks-and-Specs.426823.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rtx-2060-super-7950x-ben",
+    "outlet": "Notebookcheck",
+    "title": "RTX 2060 Super (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-RTX-2060-Super-Desktop-GPU-Benchmarks-and-Specs.426823.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rtx-2060-super-9800x3d-b",
+    "outlet": "Notebookcheck",
+    "title": "RTX 2060 Super (9800X3D) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-RTX-2060-Super-Desktop-GPU-Benchmarks-and-Specs.426823.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the ASRock X870E Taichi / 9800X3D bench, whose memory spec is verified from the RTX 5090 FE and PNY RTX 5060 Ti reviews (32 GB DDR5-6000, X870E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rtx-4070-7950x-benchmark",
+    "outlet": "Notebookcheck",
+    "title": "RTX 4070 (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-RTX-4070-Desktop-GPU-Benchmarks-and-Specs.742254.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rtx-4070-9800x3d-benchma",
+    "outlet": "Notebookcheck",
+    "title": "RTX 4070 (9800X3D) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-RTX-4070-Desktop-GPU-Benchmarks-and-Specs.742254.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the ASRock X870E Taichi / 9800X3D bench, whose memory spec is verified from the RTX 5090 FE and PNY RTX 5060 Ti reviews (32 GB DDR5-6000, X870E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rtx-4070-super-13900k-be",
+    "outlet": "Notebookcheck",
+    "title": "RTX 4070 SUPER (13900K) benchmarks",
+    "url": "https://www.notebookcheck.net/NVIDIA-GeForce-RTX-4070-SUPER-Desktop-GPU-Benchmarks-and-Specs.793708.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-13900k",
+      "cpuId": "cpu-i9-13900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6400,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte Z790 Aorus Master / 13900K bench, whose memory spec is verified from the RTX 4070 Super FE review (2x16 GB Kingston Fury Renegade DDR5-6400). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rx-5500-xt-14900k-benchm",
+    "outlet": "Notebookcheck",
+    "title": "RX 5500 XT (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/AMD-Radeon-RX-5500-XT-Desktop-GPU-Benchmarks-and-Specs.539160.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rx-5500-xt-7950x-benchma",
+    "outlet": "Notebookcheck",
+    "title": "RX 5500 XT (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/AMD-Radeon-RX-5500-XT-Desktop-GPU-Benchmarks-and-Specs.539160.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rx-5600-xt-14900k-benchm",
+    "outlet": "Notebookcheck",
+    "title": "RX 5600 XT (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/AMD-Radeon-RX-5600-XT-Desktop-GPU-Benchmarks-and-Specs.459227.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rx-5600-xt-7950x-benchma",
+    "outlet": "Notebookcheck",
+    "title": "RX 5600 XT (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/AMD-Radeon-RX-5600-XT-Desktop-GPU-Benchmarks-and-Specs.459227.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rx-6800-14900k-benchmark",
+    "outlet": "Notebookcheck",
+    "title": "RX 6800 (14900K) benchmarks",
+    "url": "https://www.notebookcheck.net/AMD-Radeon-RX-6800-Desktop-GPU-Benchmarks-and-Specs.516398.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-i9-14900k",
+      "cpuId": "cpu-i9-14900k",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Intel Z690 / 14900K bench, whose memory spec is verified from the RTX 4080 Super review (32 GB DDR5-6000 CL30, Z690). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
+  },
+  {
+    "id": "src-notebookcheck-2026-08-10-rx-6800-7950x-benchmarks",
+    "outlet": "Notebookcheck",
+    "title": "RX 6800 (7950X) benchmarks",
+    "url": "https://www.notebookcheck.net/AMD-Radeon-RX-6800-Desktop-GPU-Benchmarks-and-Specs.516398.0.html",
+    "published": "2026-08-10",
+    "accessed": "2026-08-10",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x",
+      "cpuId": "cpu-ryzen-9-7950x",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 Pro",
+      "gpuDriver": "not stated"
+    },
+    "notes": "Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent."
   }
 ]

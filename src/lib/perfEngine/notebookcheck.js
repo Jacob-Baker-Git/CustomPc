@@ -197,6 +197,12 @@ export function extractRows(html, { expectGpu } = {}) {
 // Extracted rows -> importable rows, with a stated reason for every refusal.
 // Nothing is repaired or defaulted: a row that cannot be attributed, or whose own
 // figures contradict each other, is dropped and counted.
+// The schema will not hold a low outside this range. A 0.8 fps 1% low under a
+// 6.5 fps average is a real measurement of something unplayable, so the low is
+// dropped and the average kept rather than losing the row or nudging the figure.
+const LOW_MIN_FPS = 1
+const LOW_MAX_FPS = 2000
+
 export function toRows(extracted, { gpuId, onlyCpuId } = {}) {
   const rows = []
   const rejected = []
@@ -230,10 +236,35 @@ export function toRows(extracted, { gpuId, onlyCpuId } = {}) {
       drop(r, `average below the 1% low (${r.avgFps} < ${r.p1})`); continue
     }
 
+    const low = r.p1 != null && r.p1 >= LOW_MIN_FPS && r.p1 <= LOW_MAX_FPS ? r.p1 : null
+
     rows.push({
       gameId, resolution: r.resolution, presetId, upscaling,
-      partId: gpuId, cpuId, avg: r.avgFps, low: r.p1 ?? null,
+      partId: gpuId, cpuId, avg: r.avgFps, low,
     })
   }
-  return { rows, rejected }
+
+  // One configuration measured twice with DIFFERENT results cannot be resolved
+  // from the page, and the two rows collide on entry id — where the importer
+  // keeps whichever lands first, silently, which is how a re-test's numbers get
+  // filed as the original. So the whole conflicting set is refused and counted.
+  // Identical repeats are not a conflict and collapse to one.
+  const keyOf = (r) => `${r.gameId}|${r.resolution}|${r.presetId}|${r.upscaling}|${r.partId}|${r.cpuId}`
+  const groups = new Map()
+  for (const r of rows) {
+    if (!groups.has(keyOf(r))) groups.set(keyOf(r), [])
+    groups.get(keyOf(r)).push(r)
+  }
+
+  const kept = []
+  for (const [, group] of groups) {
+    const distinct = new Set(group.map((r) => `${r.avg}|${r.low}`))
+    if (distinct.size === 1) { kept.push(group[0]); continue }
+    for (const r of group) {
+      drop(r, `configuration measured more than once with different results ` +
+              `(${group.map((g) => g.avg).join(' vs ')})`)
+    }
+  }
+
+  return { rows: kept, rejected }
 }

@@ -1,0 +1,18 @@
+outlet:    Notebookcheck
+title:     RTX 2060 Super (9800X3D) benchmarks
+url:       https://www.notebookcheck.net/NVIDIA-GeForce-RTX-2060-Super-Desktop-GPU-Benchmarks-and-Specs.426823.0.html
+published: 2026-08-10
+kind:      gpu-scaling
+cpu:       cpu-ryzen-7-9800x3d
+ram:       DDR5 6000 32 2
+os:        Windows 11 Pro
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-10; rows restricted to the ASRock X870E Taichi / 9800X3D bench, whose memory spec is verified from the RTX 5090 FE and PNY RTX 5060 Ti reviews (32 GB DDR5-6000, X870E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+kingdom-come-deliverance-2	1080p	low	native	gpu-rtx-2060-super	104.9	90.8
+kingdom-come-deliverance-2	1080p	medium	native	gpu-rtx-2060-super	79.2	72.4
+kingdom-come-deliverance-2	1080p	high	native	gpu-rtx-2060-super	65.6	57.6
+kingdom-come-deliverance-2	1080p	ultra	native	gpu-rtx-2060-super	46.1	38.1
+kingdom-come-deliverance-2	1440p	ultra	native	gpu-rtx-2060-super	32.6	28.2
+kingdom-come-deliverance-2	4k	ultra	native	gpu-rtx-2060-super	17.7	15.8

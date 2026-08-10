@@ -16,6 +16,7 @@
     "perf:fit": "node scripts/fit-perf-model.mjs",
     "perf:add": "node scripts/add-bench-entry.mjs",
     "perf:import": "node scripts/import-bench-tsv.mjs",
+    "perf:nbc": "node scripts/fetch-notebookcheck.mjs",
     "specs:check": "node scripts/check-specs.mjs"
   },
   "dependencies": {

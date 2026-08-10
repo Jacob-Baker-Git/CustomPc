@@ -1,0 +1,45 @@
+outlet:    Notebookcheck
+title:     GTX 1660 (7950X) benchmarks
+url:       https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Desktop-GPU-Benchmarks-and-Specs.448672.0.html
+published: 2026-08-10
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-7950x
+ram:       DDR5 6000 32 2
+os:        Windows 11 Pro
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+alan-wake-2	1080p	low	native	gpu-gtx-1660	37.7	32.0
+alan-wake-2	1080p	medium	native	gpu-gtx-1660	31.7	26.6
+alan-wake-2	1080p	high	native	gpu-gtx-1660	29.1	24.4
+alan-wake-2	1440p	high	native	gpu-gtx-1660	17.3	14.6
+alan-wake-2	4k	high	native	gpu-gtx-1660	9.2	4.2
+cs2	1080p	low	native	gpu-gtx-1660	271.0	125.4
+cs2	1080p	medium	native	gpu-gtx-1660	223.0	118.7
+cs2	1080p	high	native	gpu-gtx-1660	132.5	72.0
+cs2	1080p	very-high	native	gpu-gtx-1660	81.2	56.7
+cs2	1440p	very-high	native	gpu-gtx-1660	62.3	41.3
+cs2	4k	very-high	native	gpu-gtx-1660	31.3	20.3
+cyberpunk	1080p	low	native	gpu-gtx-1660	71.9
+cyberpunk	1080p	medium	native	gpu-gtx-1660	56.4
+cyberpunk	1080p	high	native	gpu-gtx-1660	47.7
+cyberpunk	1080p	ultra	native	gpu-gtx-1660	43.1
+cyberpunk	1440p	ultra	native	gpu-gtx-1660	26.1
+cyberpunk	4k	ultra	native	gpu-gtx-1660	11.2
+bg3	1080p	low	native	gpu-gtx-1660	67.7	60.1
+bg3	1080p	medium	native	gpu-gtx-1660	54.6	48.2
+bg3	1080p	high	native	gpu-gtx-1660	45.2	39.6
+bg3	1080p	ultra	native	gpu-gtx-1660	45.0	38.7
+bg3	1440p	ultra	native	gpu-gtx-1660	30.1	26.4
+bg3	4k	ultra	native	gpu-gtx-1660	15.7	13.7
+starfield	1080p	low	native	gpu-gtx-1660	38.4	30.7
+starfield	1080p	medium	native	gpu-gtx-1660	32.8	27.3
+starfield	1080p	high	native	gpu-gtx-1660	26.2	21.5
+starfield	1080p	ultra	native	gpu-gtx-1660	23.5	19.9
+starfield	1440p	ultra	native	gpu-gtx-1660	18.6	16.4
+starfield	4k	ultra	native	gpu-gtx-1660	11.3	9.0
+hogwarts	1080p	low	native	gpu-gtx-1660	78.9	68.4
+hogwarts	1080p	ultra	native	gpu-gtx-1660	35.7	27.3
+hogwarts	1440p	ultra	native	gpu-gtx-1660	24.3	19.7
+hogwarts	4k	ultra	native	gpu-gtx-1660	12.8	11.0
