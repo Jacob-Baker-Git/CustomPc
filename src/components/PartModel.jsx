@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
 import { MODEL_REGISTRY } from './models/partModelRegistry'
-import { GLTF_MODELS } from '../lib/gltfModels'
+import { gltfModelFor } from '../lib/gltfModels'
 import GltfPart from './models/GltfPart'
 import ModelErrorBoundary from './models/ModelErrorBoundary'
 import { assemblyLayout } from '../lib/assemblyLayout'
+import { sizeOverrides } from '../lib/partOverrides'
 
 // Hovering a part in the list used to draw a translucent orange box around it in
 // the scene. It was removed on request: an inflated AABB around a non-boxy part
@@ -15,8 +16,14 @@ export default function PartModel({ part }) {
   if (part.category === 'fans' || part.category === 'paste') return null
 
   const ModelComponent = MODEL_REGISTRY[part.category]
-  const { position, rotation } = assemblyLayout(part.category)
-  const gltf = GLTF_MODELS[part.category]
+  // The real dimensions of THIS part, where the catalogue records one that the
+  // representative mesh cannot carry — a card's length, which spans 145–357 mm
+  // across the catalogue against the mesh's single 300 mm figure. Both the
+  // placement and the mesh fit are derived from the same override, which is what
+  // stops the geometry and the render disagreeing about how long the card is.
+  const overrides = sizeOverrides({ [part.category]: part })
+  const { position, rotation } = assemblyLayout(part.category, overrides)
+  const gltf = gltfModelFor(part.category, overrides)
 
   // The procedural (primitive) model — also the fallback when a GLTF is missing
   // or fails to load.

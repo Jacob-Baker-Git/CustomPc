@@ -50,12 +50,52 @@ function fitExtents(spec) {
 
 // Uniform scale taking raw model units to world units for a category.
 // Meaningless for a spec sized by `sizeMm` — use modelScaleAxes for those.
+//
+// Always the SPEC's own uniform fit. A size override is not uniform by
+// definition — it stretches one axis and leaves the other two alone — so it
+// cannot be expressed here; modelScaleAxes is the override-aware path and
+// everything that has to respect a selected part's real dimensions goes through
+// it. The only callers left on this are the ones fitting a whole mesh uniformly.
 export function modelScale(category) {
   const spec = PART_SPECS[category]
   if (!spec) return 0
   const rotated = rotateExtents(fitExtents(spec), spec.rotation)
   const basis = spec.fitAxis === undefined ? Math.max(...rotated) : rotated[spec.fitAxis]
   return mm(spec.lengthMm) / basis
+}
+
+// Which of the MODEL's own axes carries the world axis `lengthMm` addresses.
+//
+// rotateExtents is a pure permutation, so applying it to [0,1,2] says which model
+// index landed at each world position — no second convention to keep in step with
+// it. Needed because a size override names a WORLD length while the scale is
+// applied per model axis, and this file's history is mostly bugs from mixing the
+// two conventions by hand.
+function lengthModelAxis(spec) {
+  const rotated = rotateExtents(fitExtents(spec), spec.rotation)
+  const worldAxis = spec.fitAxis === undefined ? rotated.indexOf(Math.max(...rotated)) : spec.fitAxis
+  return rotateExtents([0, 1, 2], spec.rotation)[worldAxis]
+}
+
+// The overridden length for a category, or undefined to use the spec's own.
+//
+// Overrides are keyed BY CATEGORY rather than passed as a bare length because a
+// part's placement can depend on another part's box — a cooler stacks on the CPU
+// — and a bare length would leak onto whatever category that lookup landed on.
+//
+// A `sizeMm` part throws rather than being silently left at its default. Half the
+// bugs this scene has produced were a value that was quietly ignored while
+// everything around it looked consistent, so an override that cannot be honoured
+// has to say so.
+function overriddenLengthMm(category, overrides) {
+  const named = overrides?.[category]?.lengthMm
+  if (named === undefined) return undefined
+  const spec = PART_SPECS[category]
+  if (!spec) return undefined
+  if (spec.sizeMm) {
+    throw new Error(`${category} is sized per-axis by sizeMm and has no single length to override`)
+  }
+  return named
 }
 
 // Per-axis scale from raw model units to world units, in the MODEL's own axes.
@@ -66,12 +106,28 @@ export function modelScale(category) {
 // still occupy the volume the real component does. Authored in world axes on
 // purpose — a case is reasoned about as depth/height/width, and this file has a
 // long history of bugs from mixing the two conventions.
-function modelScaleAxes(category) {
+export function modelScaleAxes(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec) return [0, 0, 0]
+  // Resolved before the branch, so a `sizeMm` part carrying an override throws
+  // here rather than falling through to the per-axis path and quietly ignoring it.
+  const lengthMm = overriddenLengthMm(category, overrides)
   if (!spec.sizeMm) {
     const s = modelScale(category)
-    return [s, s, s]
+    if (lengthMm === undefined) return [s, s, s]
+    // ONE axis moves. A uniform rescale would drag the other two with it, and for
+    // a graphics card that is plainly wrong: the PCIe bracket height and the slot
+    // thickness are fixed by the standard, so a 145 mm card is as tall and as
+    // thick as a 357 mm one, just shorter. Scaling all three rendered a compact
+    // card as a 21 mm-thick scale model of a big one. Round nine learned the same
+    // lesson from the other side, when filling the M.2 slot lengthways also
+    // widened the stick into the graphics card's box.
+    //
+    // Expressed as a ratio off the uniform scale so an override equal to the
+    // spec's own length is exactly, bit-for-bit, no change at all.
+    const axes = [s, s, s]
+    axes[lengthModelAxis(spec)] = s * (lengthMm / spec.lengthMm)
+    return axes
   }
   // Against the BODY, not the raw box — same reason modelScale() fits the body.
   // Dividing by `raw` sized the whole mesh to sizeMm, so any stray geometry
@@ -84,10 +140,10 @@ function modelScaleAxes(category) {
 }
 
 // World-space size of a part, in world units, after its model rotation.
-export function partSize(category) {
+export function partSize(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec) return [0, 0, 0]
-  return rotateExtents(partLocalSize(category), spec.rotation)
+  return rotateExtents(partLocalSize(category, overrides), spec.rotation)
 }
 
 // Size in the MODEL's own axes — i.e. before the placement group applies
@@ -98,29 +154,29 @@ export function partSize(category) {
 // Reports the BODY where one is declared: layout and collision care about the
 // board, not about the shroud and stray geometry drawn around it. The renderer
 // needs the whole mesh instead — that is meshLocalSize.
-export function partLocalSize(category) {
+export function partLocalSize(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec) return null
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   return fitExtents(spec).map((v, i) => v * axes[i])
 }
 
 // The whole mesh's size in model axes, decoration included. Only the renderer
 // wants this — it has to fit the actual GLB, not the functional body inside it.
-export function meshLocalSize(category) {
+export function meshLocalSize(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec) return null
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   return spec.raw.map((v, i) => v * axes[i])
 }
 
 // How far the mesh must shift so its BODY lands on the group origin, in model
 // axes. Without it the board's PCB sits ~30 mm from the origin that MOUNTS
 // measures from, and every mounted part inherits the error.
-export function bodyShiftLocal(category) {
+export function bodyShiftLocal(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec?.bodyOffset) return [0, 0, 0]
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   return spec.bodyOffset.map((v, i) => -v * axes[i])
 }
 
@@ -142,14 +198,14 @@ export function boardFaceZ() {
 // — the board's rear I/O stack and the PSU's mains inlet — are things the case's
 // back panel has to be cut for, and both are stored as an offset from the part's
 // own centre plus a size, in raw model units.
-function featureBox(category, feature) {
+function featureBox(category, feature, overrides) {
   const spec = PART_SPECS[category]
   const f = spec?.[feature]
   if (!f) return null
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   const offset = rotateVector(f.offset.map((v, i) => v * axes[i]), spec.rotation)
   const size = rotateExtents(f.size.map((v, i) => v * axes[i]), spec.rotation)
-  const centre = partCentre(category).map((c, i) => c + offset[i])
+  const centre = partCentre(category, overrides).map((c, i) => c + offset[i])
   return {
     min: centre.map((c, i) => c - size[i] / 2),
     max: centre.map((c, i) => c + size[i] / 2),
@@ -167,10 +223,10 @@ export const psuSocketBox = () => featureBox('psu', 'ioSocket')
 
 // Offset from a part's bbox centre to its anchor node, in world units and world
 // axes. Zero for parts that mount by their body rather than a named connector.
-function anchorOffsetWorld(category) {
+function anchorOffsetWorld(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec?.anchorOffset) return [0, 0, 0]
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   // Scale in model axes first, then rotate — the scale is per-model-axis, so
   // applying it after the rotation would stretch the wrong component.
   const scaled = spec.anchorOffset.map((v, i) => v * axes[i])
@@ -183,10 +239,10 @@ function anchorOffsetWorld(category) {
 // An expansion card is held by its PCB, but a triple-slot cooler's bounding box
 // is dominated by the heatsink hanging off it — so the PCB sits ~13 mm off the
 // box centre and seating the box on the slot leaves the card hovering above it.
-function pcbPlaneOffset(category) {
+function pcbPlaneOffset(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec?.pcbOffset) return [0, 0, 0]
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   return rotateVector(spec.pcbOffset.map((v, i) => v * axes[i]), spec.rotation)
 }
 
@@ -195,16 +251,17 @@ function pcbPlaneOffset(category) {
 const SLOT_SEAT_MM = 2
 
 // A card's own PCB size in world axes.
-function pcbWorldSize(category) {
+function pcbWorldSize(category, overrides) {
   const spec = PART_SPECS[category]
   if (!spec?.pcbSize) return [0, 0, 0]
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   return rotateExtents(spec.pcbSize.map((v, i) => v * axes[i]), spec.rotation)
 }
 
 // Where the PCB's leading edge sits relative to the card's bbox centre — the end
 // that goes into the slot.
-const pcbLeadX = (category) => pcbPlaneOffset(category)[0] - pcbWorldSize(category)[0] / 2
+const pcbLeadX = (category, overrides) =>
+  pcbPlaneOffset(category, overrides)[0] - pcbWorldSize(category, overrides)[0] / 2
 
 // Where a card's centre must sit for its PCB's lower edge to meet the slot.
 //
@@ -214,19 +271,19 @@ const pcbLeadX = (category) => pcbPlaneOffset(category)[0] - pcbWorldSize(catego
 // that actually goes in the slot — hovered 10 mm above it with nothing bridging
 // the gap. The bracket now reaches back past the board plane instead, which is
 // what it does in a real machine.
-function pcbSeatZ(category) {
-  const half = pcbWorldSize(category)[2] / 2
-  return boardFaceZ() + mm(SLOT_SEAT_MM) + half - pcbPlaneOffset(category)[2]
+function pcbSeatZ(category, overrides) {
+  const half = pcbWorldSize(category, overrides)[2] / 2
+  return boardFaceZ() + mm(SLOT_SEAT_MM) + half - pcbPlaneOffset(category, overrides)[2]
 }
 
 // A card's own PCB in world space — the sheet that goes in the slot, as opposed
 // to the bounding box, which on a triple-slot cooler is mostly heatsink and
 // bracket. This is what "seated" has to be judged against.
-export function pcbBox(category) {
+export function pcbBox(category, overrides) {
   if (!PART_SPECS[category]?.pcbSize) return null
-  const size = pcbWorldSize(category)
-  const offset = pcbPlaneOffset(category)
-  const centre = partCentre(category).map((c, i) => c + offset[i])
+  const size = pcbWorldSize(category, overrides)
+  const offset = pcbPlaneOffset(category, overrides)
+  const centre = partCentre(category, overrides).map((c, i) => c + offset[i])
   return {
     min: centre.map((c, i) => c - size[i] / 2),
     max: centre.map((c, i) => c + size[i] / 2),
@@ -257,11 +314,11 @@ export function radiatorFanBox() {
 // the connector's own depth — an AIO touches the board only at its pump block,
 // so placing its whole bounding box against the face would shove the radiator
 // through the side panel.
-function mountDepth(category) {
+function mountDepth(category, overrides) {
   const spec = PART_SPECS[category]
-  const [, , depth] = partSize(category)
+  const [, , depth] = partSize(category, overrides)
   if (!spec?.anchorSize) return depth
-  const axes = modelScaleAxes(category)
+  const axes = modelScaleAxes(category, overrides)
   return rotateExtents(spec.anchorSize.map((v, i) => v * axes[i]), spec.rotation)[2]
 }
 
@@ -270,9 +327,12 @@ function mountDepth(category) {
 // clamps onto the CPU's heat spreader, not onto the PCB. Without this every part
 // started at the board face, so the pump block and the CPU both began at the same
 // Z and the pump simply swallowed the whole CPU.
-function mountBaseZ(category) {
+// `overrides` carries through to the part underneath because it is keyed by
+// category: a cooler stacking on the CPU looks up the CPU's own entry, not the
+// cooler's, so a card's length can never leak onto the part it stacks against.
+function mountBaseZ(category, overrides) {
   const on = PART_SPECS[category]?.mountsOn
-  return on ? partBox(on).max[2] : boardFaceZ()
+  return on ? partBox(on, overrides).max[2] : boardFaceZ()
 }
 
 // The PSU is the one part with no board connector, so it cannot come from
@@ -304,12 +364,12 @@ const PSU_BAY = { rearGapMm: 0, trayGapMm: 2, floorGapMm: 2 }
 // sit against the board's +Z face and extend outward by half their mounting
 // depth; anchored parts are shifted so their connector, not their centre, lands
 // on the mount point.
-export function partCentre(category) {
+export function partCentre(category, overrides) {
   if (category === 'motherboard') return [0, 0, 0]
 
   if (category === 'psu') {
     const inner = caseInterior()
-    const size = partSize('psu')
+    const size = partSize('psu', overrides)
     // Sits in the basement, against the rear wall (so the socket is reachable),
     // up against the motherboard tray, on a small gap off the floor.
     return [
@@ -322,7 +382,7 @@ export function partCentre(category) {
   const mount = MOUNTS[category]
   if (!mount) return [0, 0, 0]
 
-  const offset = anchorOffsetWorld(category)
+  const offset = anchorOffsetWorld(category, overrides)
   // A card declaring `rearInsetMm` is placed by its rear (bracket) edge against
   // the board's, rather than by its centre — see MOUNTS.gpu.
   // `pcbRearMm` places a card by the LEADING EDGE OF ITS PCB — the end that
@@ -332,31 +392,31 @@ export function partCentre(category) {
   // that gap scales with the card, so every length change dragged the connector
   // out of the slot.
   const x = mount.pcbRearMm !== undefined
-    ? mm(mount.pcbRearMm) - pcbLeadX(category)
+    ? mm(mount.pcbRearMm) - pcbLeadX(category, overrides)
     : mount.rearInsetMm === undefined
       ? mm(mount.xMm)
-      : caseInterior().min[0] + partSize(category)[0] / 2 + mm(mount.rearInsetMm)
+      : caseInterior().min[0] + partSize(category, overrides)[0] / 2 + mm(mount.rearInsetMm)
 
   // A card declaring `slotYMm` is seated by its PCB on the slot's centreline;
   // everything else is placed by its own centre.
   const y = mount.slotYMm === undefined
     ? mm(mount.yMm)
-    : mm(mount.slotYMm) - pcbPlaneOffset(category)[1]
+    : mm(mount.slotYMm) - pcbPlaneOffset(category, overrides)[1]
 
   // `zLiftMm` stands a part proud of its mounting face, toward the glass. The
   // M.2 lies flush on the PCB by default (it is ~0 mm thick), which tucks it
   // behind the board's drawn heatsink where it barely shows; lifting it a few mm
   // seats it visibly in its slot. Absent, it is 0, so nothing else is affected.
   const z = PART_SPECS[category]?.pcbSize
-    ? pcbSeatZ(category)
-    : mountBaseZ(category) + mountDepth(category) / 2 - offset[2] + mm(mount.zLiftMm ?? 0)
+    ? pcbSeatZ(category, overrides)
+    : mountBaseZ(category, overrides) + mountDepth(category, overrides) / 2 - offset[2] + mm(mount.zLiftMm ?? 0)
 
   return [x - offset[0], y - offset[1], z]
 }
 
-export function partBox(category) {
-  const size = partSize(category)
-  const centre = partCentre(category)
+export function partBox(category, overrides) {
+  const size = partSize(category, overrides)
+  const centre = partCentre(category, overrides)
   return {
     min: centre.map((c, i) => c - size[i] / 2),
     max: centre.map((c, i) => c + size[i] / 2),
@@ -405,6 +465,13 @@ export const CASE = {
 // the GPU's bracket bolted to thin air. Depth went 450 → 380 at the same time:
 // with the void behind the board closed, 450 just moved that void in front of
 // the card. See assemblyGeometry.test.js.
+//
+// Takes NO size overrides, deliberately. The case is one fixed tower, and a
+// selected card must not be able to resize the machine around it — every other
+// part is positioned off this box, so a case that grew with the graphics card
+// would move the PSU, the fans and every panel cut-out whenever the card
+// changed. A card too long for the tower is a compatibility question, answered
+// in the catalogue rules, not something the geometry silently accommodates.
 export function caseInterior() {
   const board = partBox('motherboard')
   const rearX = board.min[0] - mm(CASE.rearGapMm)

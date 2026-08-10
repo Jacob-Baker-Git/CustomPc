@@ -15,12 +15,19 @@ const MOUNTED_CATEGORIES = ['motherboard', 'cpu', 'cooler', 'ram', 'storage', 'g
 
 const DEFAULT_TRANSFORM = { position: [0, 0, 0], rotation: [0, 0, 0] }
 
-// `category` is all this needs — no selection argument. Callers may still pass
-// one (it is ignored), which is what proves the result is selection-independent.
-export function assemblyLayout(category) {
+// `category` decides WHERE a part goes — no selection argument, which is what
+// keeps the layout selection-independent: nothing already placed moves when
+// another part is added or removed.
+//
+// `overrides` is a different thing and does not reopen that. It carries the real
+// dimensions of the part in this slot (a card's own length, see partOverrides),
+// so it changes how big THIS part is drawn, never where any other part sits.
+// Only the card's own forward extent moves with it; its edge connector, the case
+// and every other mount stay exactly where they were.
+export function assemblyLayout(category, overrides) {
   if (MOUNTED_CATEGORIES.includes(category)) {
     return {
-      position: partCentre(category),
+      position: partCentre(category, overrides),
       rotation: PART_SPECS[category]?.rotation ?? [0, 0, 0],
     }
   }
