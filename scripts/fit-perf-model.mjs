@@ -9,6 +9,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { fitTwoWay } from '../src/lib/perfEngine/fitTwoWay.js'
+import { concentration } from '../src/lib/perfEngine/concentration.js'
 
 const MODEL_VERSION = '1.0.0'
 const RESOLUTIONS = ['1080p', '1440p', '4k']
@@ -24,24 +25,30 @@ const GPU_FIT_RESOLUTIONS = ['1440p', '4k']
 const DEFAULT_BLEND_K = 5.1
 const DEFAULT_RES_CPU_SCALE = { '1080p': 1.0, '1440p': 1.012, '4k': 1.031 }
 
-// No single outlet may dominate: the licensing position rests on nobody's
-// compilation being substantially taken.
-const SOURCE_SHARE_WARN = 0.15
-const SOURCE_SHARE_FAIL = 0.20
-
-// The share cap alone is unsatisfiable on a young corpus: with N evenly-split
-// outlets each holds 1/N, so nothing under FIVE sources can ever clear 20% and
-// the very first curation session would fail the build with perfectly good
-// data. Two absolute escapes, because what the law actually cares about is
-// whether a substantial part of somebody's compilation was taken — and twelve
-// figures is not substantial however large a share of a small corpus it is:
+// Source concentration is MEASURED AND REPORTED, not gated.
 //
-//   · below CONCENTRATION_MIN_CORPUS total entries, share is not meaningful
-//     enough to act on at all
-//   · a source holding fewer than SOURCE_MIN_ABSOLUTE entries is never a
-//     substantial taking, whatever its share
-const CONCENTRATION_MIN_CORPUS = 40
-const SOURCE_MIN_ABSOLUTE = 15
+// This used to be a hard 20%-of-corpus cap per source, and it failed the build
+// the moment real data arrived: one ComputerBase review supplied 74% of 216
+// entries, so 216 genuine measurements sat unused and the Performance tab kept
+// answering a single game. Two problems with that as a rule:
+//
+//   · it was applied per REVIEW while appealing to not taking one OUTLET's
+//     compilation, so two articles from the same outlet read as two independent
+//     sources and ComputerBase's real 80% presented itself as 74%;
+//   · a share cap can be satisfied by taking MORE from everybody, which reduces
+//     nobody's taking. Growing the corpus to 800 rows would have made the same
+//     160 look acceptable.
+//
+// The deliberate decision (2026-08-10) is to accept any VALID data while the
+// corpus is being built, because measurements for an individual part are hard to
+// come by, and to dilute or corroborate once there is a complete set. Validity is
+// still enforced everywhere it was — a row missing an upscaling mode, a part that
+// cannot be mapped, or a low that contradicts its own minimum is still rejected.
+// What is gone is only the refusal to run.
+//
+// The imbalance is written into the artefact (sourceConcentration) so the
+// dilution work is driven by a number rather than by somebody remembering.
+const OUTLET_SHARE_NOTE = 0.20
 
 const read = (rel) => JSON.parse(readFileSync(fileURLToPath(new URL(rel, import.meta.url)), 'utf8'))
 const write = (rel, data) =>
@@ -57,26 +64,14 @@ const sourceById = new Map(sources.map((s) => [s.id, s]))
 const live = entries.filter((e) => !e.supersededBy)
 
 // --- source concentration -------------------------------------------------
-const perSource = new Map()
-for (const e of live) perSource.set(e.sourceId, (perSource.get(e.sourceId) ?? 0) + 1)
+const spread = concentration(entries, sources)
 const warnings = []
-if (live.length >= CONCENTRATION_MIN_CORPUS) {
-  for (const [id, n] of perSource) {
-    const share = n / live.length
-    if (n < SOURCE_MIN_ABSOLUTE) continue
-    if (share > SOURCE_SHARE_FAIL) {
-      console.error(`FAIL: source ${id} is ${(share * 100).toFixed(1)}% of the corpus ` +
-                    `(${n} of ${live.length} entries, cap ${SOURCE_SHARE_FAIL * 100}%). ` +
-                    `Add entries from other outlets.`)
-      process.exit(1)
-    }
-    if (share > SOURCE_SHARE_WARN) {
-      warnings.push(`source ${id} is ${(share * 100).toFixed(1)}% of the corpus`)
-    }
+for (const o of spread.byOutlet) {
+  if (o.share > OUTLET_SHARE_NOTE) {
+    warnings.push(`${o.outlet} supplies ${(o.share * 100).toFixed(1)}% of the corpus ` +
+                  `(${o.entries} of ${spread.total} entries, from ${o.sources.length} ` +
+                  `review${o.sources.length === 1 ? '' : 's'}) — dilute when data allows`)
   }
-} else if (live.length > 0) {
-  warnings.push(`corpus is only ${live.length} entries — the per-source ` +
-                `concentration cap does not apply below ${CONCENTRATION_MIN_CORPUS}`)
 }
 
 // --- pass 1: GPU index, one fit per resolution ----------------------------
@@ -286,6 +281,18 @@ write('../src/data/perfModel.report.json', {
     gpusTotal: parts.filter((p) => p.category === 'gpu').length,
     cpusMeasured: Object.keys(cpuIndex).length,
     cpusTotal: parts.filter((p) => p.category === 'cpu').length,
+  },
+  // How lopsided the corpus is, by outlet and by review. Recorded rather than
+  // enforced: the corpus takes any valid data while it is being built and gets
+  // diluted once there is a complete set, so this is the number that says how
+  // much dilution is still owed and which outlet owes it.
+  sourceConcentration: {
+    total: spread.total,
+    topOutlet: spread.topOutlet,
+    topOutletShare: spread.topOutletShare == null ? null : round(spread.topOutletShare, 4),
+    byOutlet: spread.byOutlet.map((o) => ({
+      outlet: o.outlet, entries: o.entries, share: round(o.share, 4), reviews: o.sources.length,
+    })),
   },
   // Populated in Phase 2, once there is enough corpus to hold data back.
   validation: { n: validation.length, mapeAvg: null, mapeLow: null },

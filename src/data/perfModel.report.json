@@ -1,7 +1,8 @@
 {
-  "fittedAt": "2026-08-08T15:22:02.845Z",
+  "fittedAt": "2026-08-10T17:52:48.031Z",
   "warnings": [
-    "corpus is only 37 entries — the per-source concentration cap does not apply below 40"
+    "ComputerBase supplies 79.6% of the corpus (172 of 216 entries, from 2 reviews) — dilute when data allows",
+    "PC Games Hardware supplies 20.4% of the corpus (44 of 216 entries, from 1 review) — dilute when data allows"
   ],
   "gpuFit": {
     "1080p": {
@@ -10,14 +11,14 @@
       "parts": 0
     },
     "1440p": {
-      "iterations": 2,
+      "iterations": 18,
       "converged": true,
-      "parts": 25
+      "parts": 33
     },
     "4k": {
-      "iterations": 0,
+      "iterations": 14,
       "converged": true,
-      "parts": 0
+      "parts": 18
     }
   },
   "cpuFit": {
@@ -28,10 +29,29 @@
   "droppedGpuBound": [],
   "droppedDisconnected": [],
   "coverage": {
-    "gpusMeasured": 25,
+    "gpusMeasured": 33,
     "gpusTotal": 79,
     "cpusMeasured": 12,
     "cpusTotal": 80
+  },
+  "sourceConcentration": {
+    "total": 216,
+    "topOutlet": "ComputerBase",
+    "topOutletShare": 0.7963,
+    "byOutlet": [
+      {
+        "outlet": "ComputerBase",
+        "entries": 172,
+        "share": 0.7963,
+        "reviews": 2
+      },
+      {
+        "outlet": "PC Games Hardware",
+        "entries": 44,
+        "share": 0.2037,
+        "reviews": 1
+      }
+    ]
   },
   "validation": {
     "n": 0,
