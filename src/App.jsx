@@ -9,10 +9,12 @@ import PartsBrowser from './components/PartsBrowser'
 import GlossaryPage from './components/GlossaryPage'
 import FeedbackPage from './components/FeedbackPage'
 import { PrivacyPage, TermsPage } from './components/LegalPage'
+import PartPage from './components/PartPage'
 import useBuilderStore from './store/useBuilderStore'
-import { loadCatalog } from './store/useCatalogStore'
+import useCatalogStore, { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
 import { enterBuildTab } from './lib/enterBuildTab'
+import { partById, partPageMeta } from './lib/partPages'
 
 const PAGES = {
   help: HelpPage,
@@ -72,20 +74,35 @@ const captureRootMeta = () => (rootMeta ??= {
 export default function App() {
   const flow    = useBuilderStore((s) => s.flow)
   const setFlow = useBuilderStore((s) => s.setFlow)
-  const { page, navigate } = usePageRoute()
+  const parts   = useCatalogStore((s) => s.parts)
+  const { page, partId, navigate } = usePageRoute()
 
   useEffect(() => { loadCatalog() }, [])
 
   useEffect(() => {
-    const meta = PAGE_META[page] ?? captureRootMeta()
+    // A part page's copy comes from the part itself. 540 pages sharing the parts
+    // browser's title and canonical would be the hash-routing problem again, only
+    // 90 times over — and a shared canonical is a direct instruction not to index
+    // any of them separately.
+    const part = partId ? partById(parts, partId) : null
+    const meta = part ? partPageMeta(part) : (PAGE_META[page] ?? captureRootMeta())
     document.title = meta.title
     setMeta('meta[name="description"]', 'content', meta.description)
     setMeta('meta[property="og:title"]', 'content', meta.title)
     setMeta('meta[property="og:description"]', 'content', meta.description)
     // A canonical still pointing at / would tell Google these pages are the
     // root, which is the exact instruction not to index them separately.
-    setMeta('link[rel="canonical"]', 'href', page ? `${SITE}/${page}` : `${SITE}/`)
-  }, [page])
+    const path = part ? `parts/${part.id}` : page
+    setMeta('link[rel="canonical"]', 'href', path ? `${SITE}/${path}` : `${SITE}/`)
+  }, [page, partId, parts])
+
+  if (partId) {
+    return (
+      <SiteChrome onBack={() => navigate('parts')}>
+        <PartPage partId={partId} onNavigate={navigate} />
+      </SiteChrome>
+    )
+  }
 
   if (page) {
     const Page = PAGES[page]

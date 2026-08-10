@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { partIdFromPath } from '../lib/partPages'
 
 export const PAGES = ['help', 'parts', 'glossary', 'feedback', 'privacy', 'terms']
 
@@ -16,10 +17,22 @@ export const PAGES = ['help', 'parts', 'glossary', 'feedback', 'privacy', 'terms
 // via public/_redirects; `vite dev` and `vite preview` do it natively.
 const pathOf = (p) => (p ? `/${p}` : '/')
 
-const fromPath = () => {
-  const p = window.location.pathname.replace(/^\/+|\/+$/g, '')
-  return PAGES.includes(p) ? p : null
+// A route is a page plus, for the one page that has children, which part.
+//
+// PAGES is an exact-match list and could not express /parts/<id> — there are 540
+// of those, one per catalogue part, which is where the long-tail search traffic
+// for a builder actually is. So the part route is matched as a SEGMENT (see
+// partPages.partIdFromPath, which also rejects anything that is not a bare id)
+// and reported alongside its parent page: a part page is a child of /parts, so
+// the chrome, the back link and the crawl path all still lead through it.
+const routeOf = (path) => {
+  const partId = partIdFromPath(path)
+  if (partId) return { page: 'parts', partId }
+  const p = path.replace(/^\/+|\/+$/g, '')
+  return { page: PAGES.includes(p) ? p : null, partId: null }
 }
+
+const fromPath = () => routeOf(window.location.pathname)
 
 // Old links still exist — in the wild, in anyone's bookmarks, and in the
 // Search Console property. Rewriting the hash form to the path form on arrival
@@ -30,22 +43,24 @@ const canonicaliseLegacyHash = () => {
   const m = /^#\/([a-z]+)$/.exec(window.location.hash)
   if (m && PAGES.includes(m[1])) {
     window.history.replaceState(null, '', pathOf(m[1]))
-    return m[1]
+    return { page: m[1], partId: null }
   }
   return null
 }
 
 export function usePageRoute() {
-  const [page, setPage] = useState(() => canonicaliseLegacyHash() ?? fromPath())
+  const [route, setRoute] = useState(() => canonicaliseLegacyHash() ?? fromPath())
 
+  // Takes a path body — 'parts', 'parts/gpu-rtx-4090', or null for the root — so
+  // one function still covers both depths and callers never build a URL by hand.
   const navigate = (p) => {
     window.history.pushState(null, '', pathOf(p))
-    setPage(p ?? null)
+    setRoute(routeOf(pathOf(p)))
     window.scrollTo(0, 0)
   }
 
   useEffect(() => {
-    const onPop = () => setPage(fromPath())
+    const onPop = () => setRoute(fromPath())
     window.addEventListener('popstate', onPop)
 
     // One delegated listener rather than an onClick on every link. The site's
@@ -61,7 +76,11 @@ export function usePageRoute() {
       if (a.origin !== window.location.origin) return
 
       const to = a.pathname.replace(/^\/+|\/+$/g, '')
-      if (to !== '' && !PAGES.includes(to)) return
+      // A part link is a plain <a href="/parts/gpu-rtx-4090"> like every other
+      // link on the site — crawlable, right-clickable, and handled here so it
+      // does not reload the app. Without this branch all 540 of them would.
+      const isPart = partIdFromPath(a.pathname) !== null
+      if (to !== '' && !isPart && !PAGES.includes(to)) return
       if (a.hash) return                       // in-page anchors keep working
 
       e.preventDefault()
@@ -75,5 +94,5 @@ export function usePageRoute() {
     }
   }, [])
 
-  return { page, navigate }
+  return { page: route.page, partId: route.partId, navigate }
 }

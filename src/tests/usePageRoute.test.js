@@ -71,3 +71,67 @@ describe('usePageRoute', () => {
     }
   })
 })
+
+// /parts is an exact-match page; /parts/<id> is 540-odd more. The router's page
+// list could not express that — it tested membership of a fixed array — so the
+// part route is a separate segment match rather than another entry in PAGES.
+describe('usePageRoute for a single part', () => {
+  it('reads the part id out of the path, keeping the parts page as its parent', () => {
+    at('/parts/gpu-rtx-4090')
+    const { result } = renderHook(() => usePageRoute())
+    expect(result.current.page).toBe('parts')
+    expect(result.current.partId).toBe('gpu-rtx-4090')
+  })
+
+  it('leaves the parts browser itself with no part', () => {
+    at('/parts')
+    const { result } = renderHook(() => usePageRoute())
+    expect(result.current.page).toBe('parts')
+    expect(result.current.partId).toBeNull()
+  })
+
+  it('does not resolve a deeper or malformed path', () => {
+    for (const path of ['/parts/gpu-rtx-4090/specs', '/parts/Not An Id']) {
+      at(path)
+      expect(renderHook(() => usePageRoute()).result.current.page, path).toBeNull()
+    }
+  })
+
+  it('navigates to a part and back to the browser', () => {
+    const { result } = renderHook(() => usePageRoute())
+    act(() => result.current.navigate('parts/cpu-ryzen-7-7700x'))
+    expect(window.location.pathname).toBe('/parts/cpu-ryzen-7-7700x')
+    expect(result.current.page).toBe('parts')
+    expect(result.current.partId).toBe('cpu-ryzen-7-7700x')
+
+    act(() => result.current.navigate('parts'))
+    expect(window.location.pathname).toBe('/parts')
+    expect(result.current.partId).toBeNull()
+  })
+
+  it('follows Back off a part page', () => {
+    at('/parts/gpu-rtx-4090')
+    const { result } = renderHook(() => usePageRoute())
+    act(() => {
+      at('/parts')
+      window.dispatchEvent(new PopStateEvent('popstate'))
+    })
+    expect(result.current.partId).toBeNull()
+    expect(result.current.page).toBe('parts')
+  })
+
+  // The delegated click listener is what keeps every part link a plain crawlable
+  // anchor. If it does not recognise the deeper path, each of the 540 links
+  // becomes a full page reload.
+  it('intercepts a click on a part link instead of reloading', () => {
+    const { result } = renderHook(() => usePageRoute())
+    const a = document.createElement('a')
+    a.href = '/parts/gpu-rtx-4090'
+    document.body.appendChild(a)
+    const ev = new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 })
+    act(() => { a.dispatchEvent(ev) })
+    expect(ev.defaultPrevented).toBe(true)
+    expect(result.current.partId).toBe('gpu-rtx-4090')
+    a.remove()
+  })
+})

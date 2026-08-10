@@ -3,6 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import useCatalogStore from '../store/useCatalogStore'
 import { browseParts } from '../lib/browseParts'
 import { searchUrl } from '../lib/retailerLinks'
+import { hasPartPage, partPath } from '../lib/partPages'
 
 const CATEGORIES = ['all', 'cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans', 'paste']
 const SORTS = [
@@ -11,6 +12,40 @@ const SORTS = [
   { id: 'perf', label: 'Performance' },
   { id: 'name', label: 'Name' },
 ]
+
+// The name half of a row, linked to the part's own page where there is one.
+//
+// A plain anchor with a real href, because this list is the ONLY route a crawler
+// has into those 540 pages — a sitemap alone cannot rescue an orphan, and an
+// onClick on a div is not a link. Thermal paste carries no specs so it has no
+// page (see partPages.js); those rows stay plain text rather than linking
+// somewhere that would only say "not found".
+function PartName({ part }) {
+  const body = (
+    <>
+      <span className="block text-sm text-ink truncate group-hover:text-accent">
+        {part.name}
+        {/* Say so plainly. These are listed so you can tell us what you already
+            own; the retailer link will mostly find used or third-party stock at
+            whatever price it likes. */}
+        {part.legacy && (
+          <span className="ml-2 align-middle text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
+            Discontinued
+          </span>
+        )}
+      </span>
+      <span className="block text-xs text-muted capitalize">
+        {part.category} · {part.brand}{part.perfScore ? ` · perf ${part.perfScore}` : ''}
+      </span>
+    </>
+  )
+
+  if (!hasPartPage(part)) return <div className="min-w-0">{body}</div>
+
+  return (
+    <a href={partPath(part)} className="min-w-0 group">{body}</a>
+  )
+}
 
 export default function PartsBrowser() {
   const parts = useCatalogStore((s) => s.parts)
@@ -60,20 +95,7 @@ export default function PartsBrowser() {
       <ul className="space-y-2">
         {results.map((p) => (
           <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2">
-            <div className="min-w-0">
-              <p className="text-sm text-ink truncate">
-                {p.name}
-                {/* Say so plainly. These are listed so you can tell us what you
-                    already own; the retailer link will mostly find used or
-                    third-party stock at whatever price it likes. */}
-                {p.legacy && (
-                  <span className="ml-2 align-middle text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
-                    Discontinued
-                  </span>
-                )}
-              </p>
-              <p className="text-xs text-muted capitalize">{p.category} · {p.brand}{p.perfScore ? ` · perf ${p.perfScore}` : ''}</p>
-            </div>
+            <PartName part={p} />
             <div className="flex items-center gap-3 shrink-0">
               <span className="font-mono text-sm text-accent">£{p.price.toFixed(2)}</span>
               <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="text-muted hover:text-accent" aria-label={`Search ${p.name} on Amazon`}>

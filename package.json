@@ -12,6 +12,7 @@
     "test:run": "vitest run",
     "test:e2e": "playwright test",
     "og:image": "node scripts/og-image.mjs",
+    "sitemap": "node scripts/build-sitemap.mjs",
     "perf:fit": "node scripts/fit-perf-model.mjs",
     "perf:add": "node scripts/add-bench-entry.mjs",
     "perf:import": "node scripts/import-bench-tsv.mjs",
