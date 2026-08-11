@@ -7,22 +7,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -34,17 +38,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -56,17 +63,20 @@
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ],
     "fpsCap": 300
@@ -79,22 +89,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -106,17 +120,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -128,22 +145,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -155,22 +176,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "kino",
-        "label": "Kino",
-        "tier": 4
+        "label": "Kino (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },
@@ -182,7 +207,8 @@
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -194,22 +220,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "very-high",
         "label": "Very high",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -221,22 +251,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -248,12 +282,14 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -265,22 +301,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -292,22 +332,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -319,17 +363,20 @@
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -341,7 +388,8 @@
       {
         "id": "max-details",
         "label": "Max. Details, TAA nativ",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -353,12 +401,14 @@
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -370,12 +420,14 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -387,22 +439,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ],
     "fpsCap": 60
@@ -415,7 +471,8 @@
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -427,22 +484,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -454,12 +515,14 @@
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "epic",
         "label": "Epic",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -471,27 +534,32 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "sehr-hoch",
         "label": "Sehr hoch",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       },
       {
         "id": "very-high",
         "label": "Very high",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -503,17 +571,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -525,17 +596,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -547,22 +621,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -574,7 +652,8 @@
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ],
     "fpsCap": 180
@@ -587,17 +666,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -609,22 +691,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -636,17 +722,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -658,22 +747,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "very-high",
         "label": "Very high",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -685,17 +778,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -707,22 +803,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -734,17 +834,20 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -756,22 +859,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -783,22 +890,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "epic",
         "label": "Epic",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -810,22 +921,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "very-high",
         "label": "Very high",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -837,17 +952,20 @@
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -859,22 +977,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "epic",
         "label": "Epic",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -886,22 +1008,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -913,22 +1039,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "very-high",
         "label": "Very high",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -940,22 +1070,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "epic",
         "label": "Epic",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -967,22 +1101,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "epic",
         "label": "Epic",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -994,22 +1132,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -1021,22 +1163,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -1048,22 +1194,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "epic",
         "label": "Epic",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -1075,22 +1225,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -1102,17 +1256,20 @@
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -1124,22 +1281,26 @@
       {
         "id": "low",
         "label": "Low",
-        "tier": 1
+        "tier": 1,
+        "upscaling": "native"
       },
       {
         "id": "medium",
         "label": "Medium",
-        "tier": 2
+        "tier": 2,
+        "upscaling": "native"
       },
       {
         "id": "high",
         "label": "High",
-        "tier": 3
+        "tier": 3,
+        "upscaling": "native"
       },
       {
         "id": "ultra",
         "label": "Ultra",
-        "tier": 4
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   }

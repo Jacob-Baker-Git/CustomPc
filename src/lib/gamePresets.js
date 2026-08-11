@@ -7,11 +7,16 @@
 // actually tested, and that populates `game.presets` over time. Until a game
 // has its own, the canonical ladder applies and the report says which preset it
 // is quoting.
+// `upscaling` is native on every rung. This ladder is the fallback for a game
+// the corpus has no measured presets for, so there is no upscaled measurement to
+// describe — and the field must be present rather than undefined, because it is
+// half of the cell key and `${undefined}` would build a real-looking
+// "high|undefined" that matches nothing.
 export const CANONICAL_PRESETS = [
-  { id: 'low', label: 'Low', tier: 1 },
-  { id: 'medium', label: 'Medium', tier: 2 },
-  { id: 'high', label: 'High', tier: 3 },
-  { id: 'ultra', label: 'Ultra', tier: 4 },
+  { id: 'low', label: 'Low', tier: 1, upscaling: 'native' },
+  { id: 'medium', label: 'Medium', tier: 2, upscaling: 'native' },
+  { id: 'high', label: 'High', tier: 3, upscaling: 'native' },
+  { id: 'ultra', label: 'Ultra', tier: 4, upscaling: 'native' },
 ]
 
 // High, not Medium. An unrecognised preset id resolves to the higher rung so

@@ -17,14 +17,58 @@ const model = {
   gpuIndex: { 'gpu-rtx-5070': { '1440p': 62.0, basis: 'measured', anchors: 11 } },
   cpuIndex: { 'cpu-ryzen-5-7600x': { value: 71.2, basis: 'measured', anchors: 9 } },
   gameConst: {
-    cyberpunk: { '1440p': { high: { A: 399.0, B: 402.0, sources: 3, cv: 0.052 } } },
-    'elden-ring': { '1440p': { high: { A: 200.0, B: 200.0, sources: 2, cv: 0.03 } } },
+    cyberpunk: { '1440p': { 'high|native': { A: 399.0, B: 402.0, sources: 3, cv: 0.052 } } },
+    'elden-ring': { '1440p': { 'high|native': { A: 200.0, B: 200.0, sources: 2, cv: 0.03 } } },
   },
 }
 
 const run = (over = {}) => estimateBuildPerformance({
   parts: { cpu, gpu }, resolution: '1440p', presetId: 'high',
   model, games, ...over,
+})
+
+describe('render scale is part of a row', () => {
+  it('gives a native and an upscaled row of one preset different identities', () => {
+    const scaledGames = [{
+      id: 'wukong',
+      name: 'Black Myth: Wukong',
+      presets: [
+        { id: 'kino', label: 'Kino', tier: 4, upscaling: 'native' },
+        { id: 'kino', label: 'Kino (DLSS/FSR Quality)', tier: 4, upscaling: 'quality' },
+      ],
+    }]
+    const scaledModel = {
+      blendK: 5.1,
+      resCpuScale: { '1440p': 1.0 },
+      gpuIndex: { 'gpu-rtx-5070': { '1440p': 100, basis: 'measured' } },
+      cpuIndex: { 'cpu-ryzen-5-7600x': { value: 100, basis: 'measured' } },
+      gameConst: {
+        wukong: {
+          '1440p': {
+            'kino|native': { A: 2000, B: 800 },
+            'kino|quality': { A: 1250, B: 800 },
+          },
+        },
+      },
+      exact: {},
+    }
+
+    const out = estimateBuildPerformance({
+      parts: { cpu, gpu }, resolution: '1440p', model: scaledModel, games: scaledGames,
+    })
+
+    const ids = out.games.map((r) => r.rowId)
+    expect(ids).toContain('wukong|kino|native')
+    expect(ids).toContain('wukong|kino|quality')
+
+    const native = out.games.find((r) => r.rowId === 'wukong|kino|native')
+    const quality = out.games.find((r) => r.rowId === 'wukong|kino|quality')
+    // Upscaling renders fewer pixels, so the same preset runs faster. If the two
+    // shared a cell one of these numbers would describe the other's measurement.
+    expect(quality.avgFps).toBeGreaterThan(native.avgFps)
+    expect(native.upscaling).toBe('native')
+    expect(quality.upscaling).toBe('quality')
+  })
 })
 
 describe('estimateBuildPerformance', () => {
@@ -55,7 +99,7 @@ describe('estimateBuildPerformance', () => {
     // entire point of curating real data.
     const withExact = {
       ...model,
-      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|cyberpunk|1440p|high':
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|cyberpunk|1440p|high|native':
                  { frameTimeMs: 7.4074, sources: 2, entries: 2 } },
     }
     const row = run({ model: withExact }).games.find((g) => g.gameId === 'cyberpunk')
@@ -70,7 +114,7 @@ describe('estimateBuildPerformance', () => {
   it('reports a measurement even when the cell itself was never fitted', () => {
     const onlyExact = {
       ...model, gameConst: {},
-      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|cyberpunk|1440p|high':
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|cyberpunk|1440p|high|native':
                  { frameTimeMs: 8.0, sources: 1, entries: 1 } },
     }
     const row = run({ model: onlyExact }).games.find((g) => g.gameId === 'cyberpunk')
@@ -110,7 +154,7 @@ describe('estimateBuildPerformance', () => {
     // quietly implying the 200 was observed.
     const overCap = {
       ...model,
-      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|elden-ring|1440p|high':
+      exact: { 'cpu-ryzen-5-7600x|gpu-rtx-5070|elden-ring|1440p|high|native':
                  { frameTimeMs: 5.0, sources: 1, entries: 1 } },
     }
     const row = run({ model: overCap }).games.find((g) => g.gameId === 'elden-ring')
@@ -141,7 +185,8 @@ describe('estimateBuildPerformance', () => {
     // whether the caller said "high" or the game's own top preset.
     const cyberpunk = run().games.filter((g) => g.gameId === 'cyberpunk')
     expect(new Set(cyberpunk.map((g) => g.rowId))).toEqual(new Set([
-      'cyberpunk|ultra', 'cyberpunk|high', 'cyberpunk|medium', 'cyberpunk|low',
+      'cyberpunk|ultra|native', 'cyberpunk|high|native',
+      'cyberpunk|medium|native', 'cyberpunk|low|native',
     ]))
     // Only `high` is in the fixture's gameConst, so only that row answers — and
     // an answered row sorts ahead of an unanswered one whatever its tier, which

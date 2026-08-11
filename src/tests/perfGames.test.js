@@ -32,17 +32,40 @@ describe('perfGames.json is derived from the corpus', () => {
     expect(measured.filter((id) => !listed.has(id))).toEqual([])
   })
 
-  it('lists no preset the corpus does not hold for that game', () => {
+  it('lists no preset the corpus does not hold for that game, AT THAT RENDER SCALE', () => {
+    // Compared on presetId AND upscaling. Matching on the preset alone would
+    // pass a row listed as "Ultra (DLSS/FSR Quality)" that the corpus only ever
+    // measured natively — the cell would answer nothing, and the page would
+    // advertise a setting nobody benchmarked.
     const held = new Map()
     for (const e of entries.filter((x) => !x.supersededBy)) {
       if (!held.has(e.gameId)) held.set(e.gameId, new Set())
-      held.get(e.gameId).add(e.presetId)
+      held.get(e.gameId).add(`${e.presetId}|${e.upscaling}`)
     }
     const stray = []
     for (const g of perfGames) {
-      for (const p of g.presets) if (!held.get(g.id)?.has(p.id)) stray.push(`${g.id}|${p.id}`)
+      for (const p of g.presets) {
+        if (!held.get(g.id)?.has(`${p.id}|${p.upscaling}`)) stray.push(`${g.id}|${p.id}|${p.upscaling}`)
+      }
     }
     expect(stray).toEqual([])
+  })
+
+  it('lists every preset the corpus DOES hold, so a measurement cannot go unlisted', () => {
+    // The inverse of the test above. Deep equality against the generated file
+    // already covers this, but only while the generator is correct — this asks
+    // the corpus directly, so a generator bug that drops a preset is caught by
+    // something that does not share its code path.
+    const listed = new Map()
+    for (const g of perfGames) {
+      listed.set(g.id, new Set(g.presets.map((p) => `${p.id}|${p.upscaling}`)))
+    }
+    const missing = []
+    for (const e of entries.filter((x) => !x.supersededBy)) {
+      const key = `${e.presetId}|${e.upscaling}`
+      if (!listed.get(e.gameId)?.has(key)) missing.push(`${e.gameId}|${key}`)
+    }
+    expect([...new Set(missing)]).toEqual([])
   })
 
   it('has unique ids', () => {

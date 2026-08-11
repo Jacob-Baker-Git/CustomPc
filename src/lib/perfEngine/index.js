@@ -15,18 +15,25 @@ import { presetsFor } from '../gamePresets'
 // before it can say how good the filling is has no way to earn trust back.
 
 function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx, cpuIdx, resolution }) {
-  const cell = cellFor(model, game, resolution, preset.id)
-  const measured = exactFor(model, { cpu, gpu, game, resolution, presetId: preset.id })
+  const cell = cellFor(model, game, resolution, preset.id, preset.upscaling)
+  const measured = exactFor(model, {
+    cpu, gpu, game, resolution, presetId: preset.id, upscaling: preset.upscaling,
+  })
 
   const base = {
-    // One row per game AND preset, so the row needs its own key — two presets of
-    // one game are two different measurements and React needs to tell them apart.
-    rowId: `${game.id}|${preset.id}`,
+    // One row per game, preset AND render scale, so the row needs its own key —
+    // two presets of one game are two different measurements, and so are a
+    // native and an upscaled run of the same preset. React needs to tell all of
+    // them apart.
+    rowId: `${game.id}|${preset.id}|${preset.upscaling}`,
     gameId: game.id,
     name: game.name,
     preset: preset.label,
     presetId: preset.id,
     presetTier: preset.tier,
+    // Carried so the UI can label the scale without re-deriving it from the
+    // label string it was baked into.
+    upscaling: preset.upscaling,
     // Whether THIS row is the preset the caller asked for. Every row is now an
     // exact preset of its own, so this reports which one was requested rather
     // than whether a fallback happened.
