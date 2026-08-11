@@ -113,6 +113,14 @@ describe('game names map to catalogue ids', () => {
     expect(gameIdFor('Stalker 2')).toBe('stalker-2')
   })
 
+  it("maps the outlet's own spelling for titles the catalogue already has", () => {
+    // Both ids predate the performance engine and live in gamesData.json. The
+    // reader knew neither spelling, so their rows were refused as "game not in
+    // the catalogue" while the id sat in the list all along.
+    expect(gameIdFor('GTA V')).toBe('gta5')
+    expect(gameIdFor('Dota 2 Reborn')).toBe('dota2')
+  })
+
   it('returns null for a title with no catalogue game, rather than inventing one', () => {
     expect(gameIdFor('Company of Heroes 3')).toBeNull()
     expect(gameIdFor('')).toBeNull()

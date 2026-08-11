@@ -23,6 +23,7 @@
       "name": "Doom: The Dark Ages", "slug": "doom-the-dark-ages",
       "presetLabels": { "max-details": "Max. Details, TAA nativ" }
     },
+    "dota2": { "name": "Dota 2", "slug": "dota-2" },
     "dragon-age-veilguard": { "name": "Dragon Age: The Veilguard", "slug": "dragon-age-the-veilguard" },
     "dragons-dogma-2": { "name": "Dragon's Dogma 2", "slug": "dragons-dogma-2" },
     "elden-ring": { "name": "Elden Ring", "slug": "elden-ring" },
@@ -31,6 +32,7 @@
     "fortnite": { "name": "Fortnite", "slug": "fortnite" },
     "frostpunk-2": { "name": "Frostpunk 2", "slug": "frostpunk-2" },
     "ghost-of-tsushima": { "name": "Ghost of Tsushima", "slug": "ghost-of-tsushima" },
+    "gta5": { "name": "GTA V", "slug": "gta-v" },
     "god-of-war-ragnarok": { "name": "God of War Ragnarök", "slug": "god-of-war-ragnarok" },
     "hellblade-2": { "name": "Senua's Saga: Hellblade II", "slug": "senuas-saga-hellblade-2" },
     "helldivers2": { "name": "Helldivers 2", "slug": "helldivers-2" },

@@ -52,6 +52,11 @@ export const GAME_IDS = {
   'Fortnite': 'fortnite',
   'Apex Legends': 'apex',
   'Marvel Rivals': 'marvel-rivals',
+  // Two ids the catalogue has carried since the legacy list was written. The
+  // reader was simply never told this outlet's spelling for them, so 134 cached
+  // rows were refused as "game not in the catalogue".
+  'GTA V': 'gta5',
+  'Dota 2 Reborn': 'dota2',
   // Titles the existing sources also cover. At least one shared game is what
   // connects a new source to the fit — without one the corpus splits into
   // islands and the new parts get dropped as unrelatable to the anchor.
