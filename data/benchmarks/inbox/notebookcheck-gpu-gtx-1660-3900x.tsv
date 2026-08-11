@@ -10,6 +10,16 @@ scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not 
 notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the MSI MEG X570 Godlike / 3900X bench, whose memory spec is verified from the Radeon RX 5600 XT review (G-Skill Trident Z Royal Gold DDR4-3600 memory kit 2 x 8 GB, runs as DDR4-3600 CL16-16-16-36; BIOS 1.20, XMP 1). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
 
 # game  res  preset  up  part  avg  low
+watch-dogs-legion	1080p	medium	native	gpu-gtx-1660	77.9	61.5
+watch-dogs-legion	1080p	high	native	gpu-gtx-1660	65.9	52.6
+watch-dogs-legion	1080p	ultra	native	gpu-gtx-1660	29.4	18.1
+watch-dogs-legion	1440p	ultra	native	gpu-gtx-1660	19.4	12.0
+watch-dogs-legion	4k	ultra	native	gpu-gtx-1660	12.0	7.6
+doom-eternal	1080p	medium	native	gpu-gtx-1660	138.0	104.2
+doom-eternal	1080p	high	native	gpu-gtx-1660	121.0	95.2
+doom-eternal	1080p	ultra	native	gpu-gtx-1660	115.0	89.3
+doom-eternal	1440p	ultra	native	gpu-gtx-1660	71.7	55.6
+doom-eternal	4k	ultra	native	gpu-gtx-1660	38.2	26.3
 rdr2	1080p	medium	native	gpu-gtx-1660	73.0	62.5
 rdr2	1080p	high	native	gpu-gtx-1660	49.1	37.0
 rdr2	1080p	ultra	native	gpu-gtx-1660	30.9	21.3

@@ -10,12 +10,26 @@ scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not 
 notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the Asus X570 ROG Crosshair VIII Hero WiFi / 5900X bench, whose memory spec is verified from the KFA2 RTX 3080 SG 12GB review (G.Skill Trident Z Neo RGB DDR4-4000 memory kit 2 x 16 GB; BIOS 2402, default settings, XMP 1 for DDR4-4000). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
 
 # game  res  preset  up  part  avg  low
+ghostwire-tokyo	1080p	low	native	gpu-rx-6800	219.0	163.8
+ghostwire-tokyo	1080p	medium	native	gpu-rx-6800	209.0	156.0
+ghostwire-tokyo	1440p	high	native	gpu-rx-6800	148.4	103.4
+ghostwire-tokyo	4k	high	native	gpu-rx-6800	74.6	44.0
 elden-ring	1080p	low	native	gpu-rx-6800	60.0
 elden-ring	1080p	medium	native	gpu-rx-6800	60.0
 elden-ring	1080p	high	native	gpu-rx-6800	60.0
 elden-ring	1080p	ultra	native	gpu-rx-6800	60.0
 elden-ring	1440p	ultra	native	gpu-rx-6800	60.0
 elden-ring	4k	ultra	native	gpu-rx-6800	59.6	51.6
+god-of-war	1080p	low	native	gpu-rx-6800	135.0	91.4
+god-of-war	1080p	high	native	gpu-rx-6800	128.0	91.1
+god-of-war	1080p	ultra	native	gpu-rx-6800	93.8	77.7
+god-of-war	1440p	ultra	native	gpu-rx-6800	78.0	66.0
+god-of-war	4k	ultra	native	gpu-rx-6800	51.7	45.7
+watch-dogs-legion	1080p	medium	native	gpu-rx-6800	115.0	77.1
+watch-dogs-legion	1080p	high	native	gpu-rx-6800	104.0	73.7
+watch-dogs-legion	1080p	ultra	native	gpu-rx-6800	87.7	64.1
+watch-dogs-legion	1440p	ultra	native	gpu-rx-6800	72.3	56.5
+watch-dogs-legion	4k	ultra	native	gpu-rx-6800	44.5	36.7
 dota2	1080p	high	native	gpu-rx-6800	117.0
 dota2	1080p	ultra	native	gpu-rx-6800	112.2
 dota2	4k	ultra	native	gpu-rx-6800	98.3

@@ -10,6 +10,16 @@ scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not 
 notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the MSI Prestige X570 Creation / 5950X bench, whose memory spec is verified from the Radeon RX 6900 XT review (32 GB, 2 x 16 GB G.SKILL Trident Z Neo DDR4-3600, timings 16-19-19-39; Windows 10 20H2). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
 
 # game  res  preset  up  part  avg  low
+watch-dogs-legion	1080p	medium	native	gpu-rx-6800-xt	169.0	122.5
+watch-dogs-legion	1080p	high	native	gpu-rx-6800-xt	150.0	110.1
+watch-dogs-legion	1080p	ultra	native	gpu-rx-6800-xt	112.0	88.0
+watch-dogs-legion	1440p	ultra	native	gpu-rx-6800-xt	84.5	69.5
+watch-dogs-legion	4k	ultra	native	gpu-rx-6800-xt	49.3	41.5
+doom-eternal	1080p	medium	native	gpu-rx-6800-xt	401.0	188.7
+doom-eternal	1080p	high	native	gpu-rx-6800-xt	365.0	188.7
+doom-eternal	1080p	ultra	native	gpu-rx-6800-xt	356.0	185.2
+doom-eternal	1440p	ultra	native	gpu-rx-6800-xt	278.0	185.2
+doom-eternal	4k	ultra	native	gpu-rx-6800-xt	153.0	131.6
 rdr2	1080p	medium	native	gpu-rx-6800-xt	197.0	143.0
 rdr2	1080p	high	native	gpu-rx-6800-xt	156.0	143.0
 rdr2	1080p	ultra	native	gpu-rx-6800-xt	102.0	76.9

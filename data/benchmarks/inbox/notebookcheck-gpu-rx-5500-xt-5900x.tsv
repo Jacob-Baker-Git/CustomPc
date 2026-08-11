@@ -16,6 +16,20 @@ elden-ring	1080p	high	native	gpu-rx-5500-xt	56.5	43.9
 elden-ring	1080p	ultra	native	gpu-rx-5500-xt	46.8	35.3
 elden-ring	1440p	ultra	native	gpu-rx-5500-xt	34.7	27.7
 elden-ring	4k	ultra	native	gpu-rx-5500-xt	22.0	17.8
+god-of-war	1080p	low	native	gpu-rx-5500-xt	75.1	66.0
+god-of-war	1080p	high	native	gpu-rx-5500-xt	48.7	43.2
+god-of-war	1440p	ultra	native	gpu-rx-5500-xt	26.3	22.7
+god-of-war	4k	ultra	native	gpu-rx-5500-xt	16.4	14.9
+watch-dogs-legion	1080p	medium	native	gpu-rx-5500-xt	73.5	56.4
+watch-dogs-legion	1080p	high	native	gpu-rx-5500-xt	63.8	48.4
+watch-dogs-legion	1080p	ultra	native	gpu-rx-5500-xt	35.8	27.9
+watch-dogs-legion	1440p	ultra	native	gpu-rx-5500-xt	25.5	20.5
+watch-dogs-legion	4k	ultra	native	gpu-rx-5500-xt	14.4	11.7
+doom-eternal	1080p	medium	native	gpu-rx-5500-xt	138.6
+doom-eternal	1080p	high	native	gpu-rx-5500-xt	122.6
+doom-eternal	1080p	ultra	native	gpu-rx-5500-xt	114.4
+doom-eternal	1440p	ultra	native	gpu-rx-5500-xt	90.9
+doom-eternal	4k	ultra	native	gpu-rx-5500-xt	24.7
 rdr2	1080p	medium	native	gpu-rx-5500-xt	74.0
 rdr2	1080p	high	native	gpu-rx-5500-xt	47.3
 rdr2	1080p	ultra	native	gpu-rx-5500-xt	29.8

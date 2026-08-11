@@ -25,6 +25,14 @@ bg3	1080p	high	native	gpu-rtx-4070-super	198.8	166.6
 bg3	1080p	ultra	native	gpu-rtx-4070-super	194.3	162.4
 bg3	1440p	ultra	native	gpu-rtx-4070-super	140.3	120.1
 bg3	4k	ultra	native	gpu-rtx-4070-super	71.6	61.5
+ghostwire-tokyo	1080p	medium	native	gpu-rtx-4070-super	285.0	212.0
+ghostwire-tokyo	1440p	high	native	gpu-rtx-4070-super	189.6	125.3
+ghostwire-tokyo	4k	high	native	gpu-rtx-4070-super	87.5	49.2
+watch-dogs-legion	1080p	medium	native	gpu-rtx-4070-super	169.2	129.2
+watch-dogs-legion	1080p	high	native	gpu-rtx-4070-super	159.1	125.2
+watch-dogs-legion	1080p	ultra	native	gpu-rtx-4070-super	135.5	105.7
+watch-dogs-legion	1440p	ultra	native	gpu-rtx-4070-super	106.0	85.7
+watch-dogs-legion	4k	ultra	native	gpu-rtx-4070-super	61.4	48.5
 dota2	1080p	high	native	gpu-rtx-4070-super	221.0
 dota2	1080p	ultra	native	gpu-rtx-4070-super	208.0
 dota2	4k	ultra	native	gpu-rtx-4070-super	192.9

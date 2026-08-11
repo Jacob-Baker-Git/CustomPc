@@ -71,3 +71,9 @@ helldivers2	1080p	high	native	gpu-rtx-2060-super	79.5	71.1
 helldivers2	1080p	ultra	native	gpu-rtx-2060-super	77.8	70.2
 helldivers2	1440p	ultra	native	gpu-rtx-2060-super	54.1	48.2
 helldivers2	4k	ultra	native	gpu-rtx-2060-super	26.6	23.7
+palworld	1080p	low	native	gpu-rtx-2060-super	124.7	104.2
+palworld	1080p	medium	native	gpu-rtx-2060-super	105.0	89.9
+palworld	1080p	high	native	gpu-rtx-2060-super	82.0	68.8
+palworld	1080p	epic	native	gpu-rtx-2060-super	75.1	63.3
+palworld	1440p	epic	native	gpu-rtx-2060-super	51.5	43.5
+palworld	4k	epic	native	gpu-rtx-2060-super	25.9	14.1

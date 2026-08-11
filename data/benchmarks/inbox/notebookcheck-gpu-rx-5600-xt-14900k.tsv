@@ -36,3 +36,9 @@ helldivers2	1080p	high	native	gpu-rx-5600-xt	62.1	56.7
 helldivers2	1080p	ultra	native	gpu-rx-5600-xt	61.1	56.2
 helldivers2	1440p	ultra	native	gpu-rx-5600-xt	39.6	30.9
 helldivers2	4k	ultra	native	gpu-rx-5600-xt	18.8	16.2
+palworld	1080p	low	native	gpu-rx-5600-xt	109.8	76.9
+palworld	1080p	medium	native	gpu-rx-5600-xt	89.2	63.2
+palworld	1080p	high	native	gpu-rx-5600-xt	66.5	45.3
+palworld	1080p	epic	native	gpu-rx-5600-xt	62.4	47.1
+palworld	1440p	epic	native	gpu-rx-5600-xt	42.8	33.0
+palworld	4k	epic	native	gpu-rx-5600-xt	21.7	13.5

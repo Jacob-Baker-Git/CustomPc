@@ -36,3 +36,9 @@ helldivers2	1080p	high	native	gpu-rx-5500-xt	42.5	38.8
 helldivers2	1080p	ultra	native	gpu-rx-5500-xt	41.9	38.3
 helldivers2	1440p	ultra	native	gpu-rx-5500-xt	29.1	26.6
 helldivers2	4k	ultra	native	gpu-rx-5500-xt	12.9	9.5
+palworld	1080p	low	native	gpu-rx-5500-xt	71.8	49.8
+palworld	1080p	medium	native	gpu-rx-5500-xt	60.7	42.1
+palworld	1080p	high	native	gpu-rx-5500-xt	43.4	32.0
+palworld	1080p	epic	native	gpu-rx-5500-xt	40.8	30.9
+palworld	1440p	epic	native	gpu-rx-5500-xt	28.0	21.9
+palworld	4k	epic	native	gpu-rx-5500-xt	14.9	11.9

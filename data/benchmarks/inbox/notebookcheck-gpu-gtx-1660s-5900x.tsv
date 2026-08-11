@@ -10,9 +10,18 @@ scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not 
 notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the Asus X570 ROG Crosshair VIII Hero WiFi / 5900X bench, whose memory spec is verified from the KFA2 RTX 3080 SG 12GB review (G.Skill Trident Z Neo RGB DDR4-4000 memory kit 2 x 16 GB; BIOS 2402, default settings, XMP 1 for DDR4-4000). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
 
 # game  res  preset  up  part  avg  low
+ghostwire-tokyo	1080p	low	native	gpu-gtx-1660s	93.6	56.9
+ghostwire-tokyo	1080p	medium	native	gpu-gtx-1660s	92.2	56.5
+ghostwire-tokyo	1440p	high	native	gpu-gtx-1660s	57.3	32.0
+ghostwire-tokyo	4k	high	native	gpu-gtx-1660s	26.7	13.9
 elden-ring	1080p	low	native	gpu-gtx-1660s	59.9	51.0
 elden-ring	1080p	medium	native	gpu-gtx-1660s	59.9	49.9
 elden-ring	1080p	high	native	gpu-gtx-1660s	59.8	50.4
 elden-ring	1080p	ultra	native	gpu-gtx-1660s	57.1	47.8
 elden-ring	1440p	ultra	native	gpu-gtx-1660s	47.0	38.8
 elden-ring	4k	ultra	native	gpu-gtx-1660s	27.7	23.6
+god-of-war	1080p	low	native	gpu-gtx-1660s	82.1	72.9
+god-of-war	1080p	high	native	gpu-gtx-1660s	53.4	48.8
+god-of-war	1080p	ultra	native	gpu-gtx-1660s	35.8	30.5
+god-of-war	1440p	ultra	native	gpu-gtx-1660s	29.2	26.5
+god-of-war	4k	ultra	native	gpu-gtx-1660s	20.9	19.0

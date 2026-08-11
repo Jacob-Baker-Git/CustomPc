@@ -36,3 +36,9 @@ helldivers2	1080p	high	native	gpu-gtx-1660	52.6	47.7
 helldivers2	1080p	ultra	native	gpu-gtx-1660	51.6	46.6
 helldivers2	1440p	ultra	native	gpu-gtx-1660	35.3	31.8
 helldivers2	4k	ultra	native	gpu-gtx-1660	18.1	16.1
+palworld	1080p	low	native	gpu-gtx-1660	81.7	71.4
+palworld	1080p	medium	native	gpu-gtx-1660	67.9	60.4
+palworld	1080p	high	native	gpu-gtx-1660	51.4	43.7
+palworld	1080p	epic	native	gpu-gtx-1660	46.7	39.1
+palworld	1440p	epic	native	gpu-gtx-1660	33.6	21.4
+palworld	4k	epic	native	gpu-gtx-1660	17.2	8.8

@@ -126,7 +126,19 @@ describe('game names map to catalogue ids', () => {
     expect(gameIdFor('Diablo 4')).toBe('diablo-4')
     expect(gameIdFor('The Last of Us')).toBe('the-last-of-us')
     expect(gameIdFor('God of War')).toBe('god-of-war')
-    expect(gameIdFor('Resident Evil 4 Remake')).toBe('resident-evil-4-remake')
+    expect(gameIdFor('Watch Dogs Legion')).toBe('watch-dogs-legion')
+  })
+
+  it('drops a mapping that produced no importable rows', () => {
+    // Resident Evil 4 Remake and Enshrouded were mapped and yielded nothing:
+    // every row of theirs was refused for some other reason. A mapping with no
+    // output is the same defect the derived game list exists to prevent, one
+    // layer down — the reader claiming to cover a title it contributes none of.
+    // Same for four titles the ComputerBase parcours named but never landed.
+    for (const title of ['Resident Evil 4 Remake', 'Enshrouded', 'Satisfactory',
+      'Frostpunk 2', 'Silent Hill 2', 'Dragon Age: The Veilguard', 'Marvel Rivals']) {
+      expect(gameIdFor(title), `"${title}" is mapped but has no measurements`).toBeNull()
+    }
   })
 
   it('refuses a re-measure of an already-mapped title under an old patch', () => {

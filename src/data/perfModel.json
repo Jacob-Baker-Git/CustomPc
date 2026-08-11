@@ -1,9 +1,9 @@
 {
   "modelVersion": "1.0.0",
   "datasetVersion": "2026-08-11",
-  "fittedAt": "2026-08-11T03:05:37.271Z",
-  "entryCount": 940,
-  "sourceCount": 40,
+  "fittedAt": "2026-08-11T03:08:45.111Z",
+  "entryCount": 1752,
+  "sourceCount": 52,
   "blendK": 5.1,
   "blendKBasis": "default",
   "resCpuScale": {
@@ -12,16 +12,16 @@
     "4k": 1.031
   },
   "anchors": {
-    "gpu": "gpu-rtx-4070",
+    "gpu": "gpu-rtx-2060-super",
     "cpu": "cpu-ryzen-7-9800x3d"
   },
   "gpuIndex": {
     "gpu-rtx-5090": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 217.31,
-      "4k": 247.01,
-      "1080p": 217.31,
+      "1440p": 487.53,
+      "4k": 530.64,
+      "1080p": 487.53,
       "copiedResolutions": [
         "1080p"
       ]
@@ -29,9 +29,9 @@
     "gpu-rtx-4090": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 192.61,
-      "4k": 200.81,
-      "1080p": 192.61,
+      "1440p": 432.11,
+      "4k": 431.38,
+      "1080p": 432.11,
       "copiedResolutions": [
         "1080p"
       ]
@@ -39,9 +39,9 @@
     "gpu-rtx-5080": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 156.94,
-      "4k": 163.02,
-      "1080p": 156.94,
+      "1440p": 352.09,
+      "4k": 350.2,
+      "1080p": 352.09,
       "copiedResolutions": [
         "1080p"
       ]
@@ -49,9 +49,9 @@
     "gpu-rx-9070xt": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 133.6,
-      "4k": 132.08,
-      "1080p": 133.6,
+      "1440p": 299.74,
+      "4k": 283.73,
+      "1080p": 299.74,
       "copiedResolutions": [
         "1080p"
       ]
@@ -59,9 +59,9 @@
     "gpu-rx-7900xtx": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 139.67,
-      "4k": 138.72,
-      "1080p": 139.67,
+      "1440p": 313.35,
+      "4k": 298,
+      "1080p": 313.35,
       "copiedResolutions": [
         "1080p"
       ]
@@ -69,9 +69,9 @@
     "gpu-rtx-4080-super": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 148.97,
-      "4k": 147.63,
-      "1080p": 148.97,
+      "1440p": 334.21,
+      "4k": 317.14,
+      "1080p": 334.21,
       "copiedResolutions": [
         "1080p"
       ]
@@ -79,9 +79,9 @@
     "gpu-rtx-5070ti": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 138.58,
-      "4k": 143.23,
-      "1080p": 138.58,
+      "1440p": 310.91,
+      "4k": 307.68,
+      "1080p": 310.91,
       "copiedResolutions": [
         "1080p"
       ]
@@ -89,9 +89,9 @@
     "gpu-rx-9070": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 117.79,
-      "4k": 115.61,
-      "1080p": 117.79,
+      "1440p": 264.27,
+      "4k": 248.36,
+      "1080p": 264.27,
       "copiedResolutions": [
         "1080p"
       ]
@@ -99,9 +99,9 @@
     "gpu-rx-7900xt": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 122.06,
-      "4k": 119.45,
-      "1080p": 122.06,
+      "1440p": 273.84,
+      "4k": 256.61,
+      "1080p": 273.84,
       "copiedResolutions": [
         "1080p"
       ]
@@ -109,19 +109,19 @@
     "gpu-rtx-4070ti-super": {
       "basis": "measured",
       "anchors": 8,
-      "1440p": 129.87,
-      "4k": 129.4,
-      "1080p": 129.87,
+      "1440p": 291.22,
+      "4k": 277.4,
+      "1080p": 291.22,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rtx-4070-super": {
       "basis": "measured",
-      "anchors": 19,
-      "1440p": 110.9,
-      "4k": 105.86,
-      "1080p": 110.9,
+      "anchors": 23,
+      "1440p": 249.75,
+      "4k": 229.53,
+      "1080p": 249.75,
       "copiedResolutions": [
         "1080p"
       ]
@@ -129,9 +129,9 @@
     "gpu-rtx-5070": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 113.21,
-      "4k": 107.54,
-      "1080p": 113.21,
+      "1440p": 253.98,
+      "4k": 231.01,
+      "1080p": 253.98,
       "copiedResolutions": [
         "1080p"
       ]
@@ -139,19 +139,19 @@
     "gpu-rx-7900-gre": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 98.53,
-      "4k": 96.86,
-      "1080p": 98.53,
+      "1440p": 221.05,
+      "4k": 208.08,
+      "1080p": 221.05,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rx-6800-xt": {
       "basis": "measured",
-      "anchors": 13,
-      "1440p": 82.5,
-      "4k": 77.91,
-      "1080p": 82.5,
+      "anchors": 17,
+      "1440p": 192.1,
+      "4k": 186.06,
+      "1080p": 192.1,
       "copiedResolutions": [
         "1080p"
       ]
@@ -159,9 +159,9 @@
     "gpu-rtx-3080": {
       "basis": "measured",
       "anchors": 6,
-      "1440p": 99.01,
-      "4k": 61.56,
-      "1080p": 99.01,
+      "1440p": 222.12,
+      "4k": 133.33,
+      "1080p": 222.12,
       "copiedResolutions": [
         "1080p"
       ]
@@ -169,19 +169,19 @@
     "gpu-rx-7800xt": {
       "basis": "measured",
       "anchors": 10,
-      "1440p": 90.77,
-      "4k": 87.05,
-      "1080p": 90.77,
+      "1440p": 203.63,
+      "4k": 187,
+      "1080p": 203.63,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rtx-4070": {
       "basis": "measured",
-      "anchors": 42,
-      "1440p": 100,
-      "4k": 100,
-      "1080p": 100,
+      "anchors": 68,
+      "1440p": 216.88,
+      "4k": 209.38,
+      "1080p": 216.88,
       "copiedResolutions": [
         "1080p"
       ]
@@ -189,9 +189,9 @@
     "gpu-intel-arc-b580": {
       "basis": "measured",
       "anchors": 5,
-      "1440p": 62.14,
-      "1080p": 62.14,
-      "4k": 62.14,
+      "1440p": 139.4,
+      "1080p": 139.4,
+      "4k": 139.4,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -200,9 +200,9 @@
     "gpu-rx-7700xt": {
       "basis": "measured",
       "anchors": 4,
-      "1440p": 76.67,
-      "1080p": 76.67,
-      "4k": 76.67,
+      "1440p": 171.93,
+      "1080p": 171.93,
+      "4k": 171.93,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -211,9 +211,9 @@
     "gpu-intel-arc-a770": {
       "basis": "measured",
       "anchors": 5,
-      "1440p": 53.39,
-      "1080p": 53.39,
-      "4k": 53.39,
+      "1440p": 119.79,
+      "1080p": 119.79,
+      "4k": 119.79,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -222,9 +222,9 @@
     "gpu-rtx-4060ti": {
       "basis": "measured",
       "anchors": 5,
-      "1440p": 69.81,
-      "1080p": 69.81,
-      "4k": 69.81,
+      "1440p": 156.63,
+      "1080p": 156.63,
+      "4k": 156.63,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -233,9 +233,9 @@
     "gpu-rtx-3060-ti": {
       "basis": "measured",
       "anchors": 4,
-      "1440p": 66.45,
-      "1080p": 66.45,
-      "4k": 66.45,
+      "1440p": 149,
+      "1080p": 149,
+      "4k": 149,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -244,9 +244,9 @@
     "gpu-rx-6700-xt": {
       "basis": "measured",
       "anchors": 5,
-      "1440p": 59.12,
-      "1080p": 59.12,
-      "4k": 59.12,
+      "1440p": 132.63,
+      "1080p": 132.63,
+      "4k": 132.63,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -255,9 +255,9 @@
     "gpu-rtx-4060": {
       "basis": "measured",
       "anchors": 4,
-      "1440p": 58.15,
-      "1080p": 58.15,
-      "4k": 58.15,
+      "1440p": 130.4,
+      "1080p": 130.4,
+      "4k": 130.4,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -266,9 +266,9 @@
     "gpu-rx-7600": {
       "basis": "measured",
       "anchors": 5,
-      "1440p": 45.73,
-      "1080p": 45.73,
-      "4k": 45.73,
+      "1440p": 102.59,
+      "1080p": 102.59,
+      "4k": 102.59,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -277,9 +277,9 @@
     "gpu-rtx-3090-ti": {
       "basis": "measured",
       "anchors": 2,
-      "1440p": 124.18,
-      "4k": 124.13,
-      "1080p": 124.18,
+      "1440p": 279.16,
+      "4k": 268.86,
+      "1080p": 279.16,
       "copiedResolutions": [
         "1080p"
       ]
@@ -287,9 +287,9 @@
     "gpu-rx-6600": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 21.49,
-      "1080p": 21.49,
-      "4k": 21.49,
+      "1440p": 48.32,
+      "1080p": 48.32,
+      "4k": 48.32,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -298,9 +298,9 @@
     "gpu-rtx-2060": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 28.66,
-      "1080p": 28.66,
-      "4k": 28.66,
+      "1440p": 64.42,
+      "1080p": 64.42,
+      "4k": 64.42,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -309,9 +309,9 @@
     "gpu-rtx-3070": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 66.07,
-      "1080p": 66.07,
-      "4k": 66.07,
+      "1440p": 148.53,
+      "1080p": 148.53,
+      "4k": 148.53,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -320,9 +320,9 @@
     "gpu-rtx-5060ti": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 83.98,
-      "1080p": 83.98,
-      "4k": 83.98,
+      "1440p": 188.79,
+      "1080p": 188.79,
+      "4k": 188.79,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -331,9 +331,9 @@
     "gpu-rtx-2080-ti": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 72.84,
-      "1080p": 72.84,
-      "4k": 72.84,
+      "1440p": 163.74,
+      "1080p": 163.74,
+      "4k": 163.74,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -342,9 +342,9 @@
     "gpu-rx-7600xt": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 51.94,
-      "1080p": 51.94,
-      "4k": 51.94,
+      "1440p": 116.77,
+      "1080p": 116.77,
+      "4k": 116.77,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -353,9 +353,9 @@
     "gpu-rtx-4060ti-16gb": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 75.82,
-      "1080p": 75.82,
-      "4k": 75.82,
+      "1440p": 170.45,
+      "1080p": 170.45,
+      "4k": 170.45,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -363,70 +363,70 @@
     },
     "gpu-gtx-1660": {
       "basis": "measured",
-      "anchors": 24,
-      "1440p": 28.18,
-      "4k": 28.25,
-      "1080p": 28.18,
+      "anchors": 58,
+      "1440p": 63.24,
+      "4k": 57.01,
+      "1080p": 63.24,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-gtx-1660s": {
       "basis": "measured",
-      "anchors": 28,
-      "1440p": 30.58,
-      "4k": 29.52,
-      "1080p": 30.58,
+      "anchors": 64,
+      "1440p": 67.73,
+      "4k": 59.19,
+      "1080p": 67.73,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rtx-2060-super": {
       "basis": "measured",
-      "anchors": 39,
-      "1440p": 44.52,
-      "4k": 46.87,
-      "1080p": 44.52,
+      "anchors": 74,
+      "1440p": 100,
+      "4k": 100,
+      "1080p": 100,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rx-5500-xt": {
       "basis": "measured",
-      "anchors": 28,
-      "1440p": 24.57,
-      "4k": 24.87,
-      "1080p": 24.57,
+      "anchors": 64,
+      "1440p": 57.41,
+      "4k": 54.35,
+      "1080p": 57.41,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rx-5600-xt": {
       "basis": "measured",
-      "anchors": 28,
-      "1440p": 36.26,
-      "4k": 36.68,
-      "1080p": 36.26,
+      "anchors": 64,
+      "1440p": 82.15,
+      "4k": 76.84,
+      "1080p": 82.15,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rx-6800": {
       "basis": "measured",
-      "anchors": 28,
-      "1440p": 76.27,
-      "4k": 76.95,
-      "1080p": 76.27,
+      "anchors": 62,
+      "1440p": 173.64,
+      "4k": 172.93,
+      "1080p": 173.64,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-gtx-1650": {
       "basis": "measured",
-      "anchors": 4,
-      "1440p": 23,
-      "4k": 22.12,
-      "1080p": 23,
+      "anchors": 8,
+      "1440p": 42.28,
+      "4k": 40.7,
+      "1080p": 42.28,
       "copiedResolutions": [
         "1080p"
       ]
@@ -498,7 +498,7 @@
     "ghost-of-tsushima": {
       "1440p": {
         "sehr-hoch": {
-          "A": 1620.73,
+          "A": 3636.8,
           "sources": 1,
           "cv": 0.3955,
           "lowBase": 1.0753,
@@ -506,7 +506,7 @@
           "B": 502.01
         },
         "very-high": {
-          "A": 1075.15,
+          "A": 2427.7,
           "sources": 5,
           "cv": 0.4541,
           "lowBase": 1.226,
@@ -515,7 +515,7 @@
       },
       "4k": {
         "sehr-hoch": {
-          "A": 2556.92,
+          "A": 5486.01,
           "sources": 1,
           "cv": 0.3175,
           "lowBase": 1.0657,
@@ -523,7 +523,7 @@
           "B": 502.01
         },
         "very-high": {
-          "A": 2091.43,
+          "A": 4497.19,
           "sources": 5,
           "cv": 0.6103,
           "lowBase": 1.2167,
@@ -539,7 +539,7 @@
     "black-myth-wukong": {
       "1440p": {
         "kino": {
-          "A": 2858.94,
+          "A": 6415.22,
           "sources": 1,
           "cv": 0.3916,
           "lowBase": 1.1577,
@@ -548,7 +548,7 @@
       },
       "4k": {
         "kino": {
-          "A": 3858.58,
+          "A": 8278.78,
           "sources": 1,
           "cv": 0.2929,
           "lowBase": 1.1526,
@@ -559,7 +559,7 @@
     "stalker-2": {
       "1440p": {
         "epic": {
-          "A": 1669.34,
+          "A": 3741.3,
           "sources": 3,
           "cv": 0.3958,
           "lowBase": 1.2274,
@@ -568,7 +568,7 @@
       },
       "4k": {
         "epic": {
-          "A": 2876.46,
+          "A": 6162.19,
           "sources": 2,
           "cv": 0.3117,
           "lowBase": 1.1715,
@@ -579,7 +579,7 @@
     "space-marine-2": {
       "1440p": {
         "ultra": {
-          "A": 1460.37,
+          "A": 3271.58,
           "sources": 4,
           "cv": 0.4747,
           "lowBase": 1.1241,
@@ -588,7 +588,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 2655.07,
+          "A": 5686.56,
           "sources": 3,
           "cv": 0.393,
           "lowBase": 1.1338,
@@ -599,7 +599,7 @@
     "doom-the-dark-ages": {
       "1440p": {
         "max-details": {
-          "A": 1990.06,
+          "A": 4473.78,
           "sources": 1,
           "cv": 0.5014,
           "lowBase": 1.0949,
@@ -608,7 +608,7 @@
       },
       "4k": {
         "max-details": {
-          "A": 3382.35,
+          "A": 7325.92,
           "sources": 1,
           "cv": 0.3564,
           "lowBase": 1.1082,
@@ -619,7 +619,7 @@
     "horizon-forbidden-west": {
       "1440p": {
         "very-high": {
-          "A": 1106.38,
+          "A": 2489.27,
           "sources": 7,
           "cv": 0.5419,
           "lowBase": 1.3904,
@@ -628,7 +628,7 @@
       },
       "4k": {
         "very-high": {
-          "A": 2032.98,
+          "A": 4288.95,
           "sources": 7,
           "cv": 0.6322,
           "lowBase": 1.2812,
@@ -639,7 +639,7 @@
     "dragons-dogma-2": {
       "1440p": {
         "high": {
-          "A": 1014.23,
+          "A": 2295.95,
           "sources": 6,
           "cv": 0.4532,
           "lowBase": 1.2201,
@@ -648,7 +648,7 @@
       },
       "4k": {
         "high": {
-          "A": 1783.97,
+          "A": 3768.38,
           "sources": 6,
           "cv": 0.5036,
           "lowBase": 1.255,
@@ -659,7 +659,7 @@
     "helldivers2": {
       "1440p": {
         "ultra": {
-          "A": 841.49,
+          "A": 1893.28,
           "sources": 7,
           "cv": 0.5751,
           "lowBase": 1.1292,
@@ -668,7 +668,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 1707.31,
+          "A": 3601.9,
           "sources": 7,
           "cv": 0.6385,
           "lowBase": 1.1503,
@@ -679,7 +679,7 @@
     "alan-wake-2": {
       "1440p": {
         "high": {
-          "A": 1566.81,
+          "A": 3525.61,
           "sources": 8,
           "cv": 0.6544,
           "lowBase": 1.3003,
@@ -688,7 +688,7 @@
       },
       "4k": {
         "high": {
-          "A": 2962.2,
+          "A": 6270.7,
           "sources": 8,
           "cv": 0.6585,
           "lowBase": 1.3462,
@@ -699,7 +699,7 @@
     "cs2": {
       "1440p": {
         "very-high": {
-          "A": 448.61,
+          "A": 1015.52,
           "sources": 6,
           "cv": 0.4945,
           "lowBase": 1.5901,
@@ -708,7 +708,7 @@
       },
       "4k": {
         "very-high": {
-          "A": 919.06,
+          "A": 1941.38,
           "sources": 6,
           "cv": 0.5487,
           "lowBase": 1.656,
@@ -719,14 +719,14 @@
     "cyberpunk": {
       "1440p": {
         "ultra": {
-          "A": 1173.1,
+          "A": 2653.62,
           "sources": 7,
           "cv": 0.587
         }
       },
       "4k": {
         "ultra": {
-          "A": 2820.43,
+          "A": 5970.58,
           "sources": 8,
           "cv": 0.5552
         }
@@ -735,7 +735,7 @@
     "bg3": {
       "1440p": {
         "ultra": {
-          "A": 871.22,
+          "A": 1960.41,
           "sources": 8,
           "cv": 0.6533,
           "lowBase": 1.1294,
@@ -744,7 +744,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 1653.53,
+          "A": 3500.36,
           "sources": 8,
           "cv": 0.6402,
           "lowBase": 1.1474,
@@ -755,7 +755,7 @@
     "starfield": {
       "1440p": {
         "ultra": {
-          "A": 1372.11,
+          "A": 3087.14,
           "sources": 7,
           "cv": 0.686,
           "lowBase": 1.1578,
@@ -764,7 +764,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 2221.84,
+          "A": 4687.39,
           "sources": 7,
           "cv": 0.7583,
           "lowBase": 1.2069,
@@ -775,7 +775,7 @@
     "hogwarts": {
       "1440p": {
         "ultra": {
-          "A": 1069.6,
+          "A": 2406.52,
           "sources": 7,
           "cv": 0.4629,
           "lowBase": 1.2329,
@@ -784,7 +784,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 2100.16,
+          "A": 4436.27,
           "sources": 6,
           "cv": 0.4487,
           "lowBase": 1.1667,
@@ -795,7 +795,7 @@
     "god-of-war-ragnarok": {
       "1440p": {
         "ultra": {
-          "A": 878.67,
+          "A": 1941.76,
           "sources": 3,
           "cv": 0.6991,
           "lowBase": 1.1256,
@@ -804,7 +804,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 1551.14,
+          "A": 3278.57,
           "sources": 2,
           "cv": 0.5654,
           "lowBase": 1.095,
@@ -815,7 +815,7 @@
     "kingdom-come-deliverance-2": {
       "1440p": {
         "ultra": {
-          "A": 1416.71,
+          "A": 3130.78,
           "sources": 3,
           "cv": 0.5994,
           "lowBase": 1.1557,
@@ -824,7 +824,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 3050.91,
+          "A": 6336.02,
           "sources": 3,
           "cv": 0.7288,
           "lowBase": 1.1441,
@@ -835,7 +835,7 @@
     "final-fantasy-16": {
       "1440p": {
         "ultra": {
-          "A": 1524.43,
+          "A": 3364.75,
           "sources": 2,
           "cv": 0.4815,
           "lowBase": 1.3515,
@@ -844,7 +844,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 2898.55,
+          "A": 6068.87,
           "sources": 1,
           "cv": null,
           "lowBase": 1.2148,
@@ -855,7 +855,7 @@
     "star-wars-outlaws": {
       "1440p": {
         "ultra": {
-          "A": 2337.08,
+          "A": 5158.46,
           "sources": 2,
           "cv": 0.6996,
           "lowBase": 1.2276,
@@ -864,7 +864,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 3508.77,
+          "A": 7346.53,
           "sources": 1,
           "cv": null,
           "lowBase": 1.122,
@@ -875,7 +875,7 @@
     "f1-24": {
       "1440p": {
         "ultra": {
-          "A": 1415.03,
+          "A": 3123.27,
           "sources": 2,
           "cv": 0.6457,
           "lowBase": 1.2388,
@@ -884,7 +884,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 3548.92,
+          "A": 7771.4,
           "sources": 2,
           "cv": 0.2746,
           "lowBase": 1.4241,
@@ -895,7 +895,7 @@
     "hellblade-2": {
       "1440p": {
         "high": {
-          "A": 2494.66,
+          "A": 5632.96,
           "sources": 5,
           "cv": 0.7253,
           "lowBase": 1.1032,
@@ -904,7 +904,7 @@
       },
       "4k": {
         "high": {
-          "A": 3918.75,
+          "A": 8453.94,
           "sources": 3,
           "cv": 0.4366,
           "lowBase": 1.0509,
@@ -915,7 +915,7 @@
     "indiana-jones-great-circle": {
       "1440p": {
         "ultra": {
-          "A": 1142.86,
+          "A": 2478.68,
           "sources": 1,
           "cv": null,
           "lowBase": 1.1204,
@@ -924,7 +924,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 1945.53,
+          "A": 4073.46,
           "sources": 1,
           "cv": null,
           "lowBase": 1.0983,
@@ -935,7 +935,7 @@
     "rdr2": {
       "1440p": {
         "ultra": {
-          "A": 1121.34,
+          "A": 2472.01,
           "sources": 7,
           "cv": 0.6222,
           "lowBase": 1.3418,
@@ -944,7 +944,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 1656.1,
+          "A": 3639.74,
           "sources": 4,
           "cv": 0.576,
           "lowBase": 1.2089,
@@ -955,7 +955,7 @@
     "gta5": {
       "1440p": {
         "high": {
-          "A": 691.16,
+          "A": 1496.57,
           "sources": 5,
           "cv": 0.3835,
           "lowBase": 1.6498,
@@ -964,7 +964,7 @@
       },
       "4k": {
         "high": {
-          "A": 638.28,
+          "A": 1418.04,
           "sources": 4,
           "cv": 0.1367,
           "lowBase": 1.6943,
@@ -975,7 +975,7 @@
     "apex": {
       "1440p": {
         "ultra": {
-          "A": 415.92,
+          "A": 947.25,
           "sources": 5,
           "cv": 0.3311,
           "lowBase": 1.1095,
@@ -984,7 +984,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 690.05,
+          "A": 1436.57,
           "sources": 6,
           "cv": 0.656,
           "lowBase": 1.1237,
@@ -995,7 +995,7 @@
     "elden-ring": {
       "1440p": {
         "ultra": {
-          "A": 767.61,
+          "A": 1737.66,
           "sources": 6,
           "cv": 0.2046,
           "lowBase": 1.2111,
@@ -1004,7 +1004,7 @@
       },
       "4k": {
         "ultra": {
-          "A": 1087.11,
+          "A": 2296.35,
           "sources": 6,
           "cv": 0.4481,
           "lowBase": 1.1971,
@@ -1015,23 +1015,383 @@
     "fortnite": {
       "1440p": {
         "epic": {
-          "A": 468.61,
+          "A": 1052.63,
           "sources": 1,
           "cv": null
         }
       },
       "4k": {
         "epic": {
-          "A": 1005.71,
+          "A": 2145.92,
           "sources": 1,
           "cv": null
+        }
+      }
+    },
+    "watch-dogs-legion": {
+      "1440p": {
+        "ultra": {
+          "A": 2639.75,
+          "sources": 10,
+          "cv": 0.6959,
+          "lowBase": 1.3413,
+          "lowSources": 10
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 4433.31,
+          "sources": 10,
+          "cv": 0.7061,
+          "lowBase": 1.2883,
+          "lowSources": 10
+        }
+      }
+    },
+    "doom-eternal": {
+      "1440p": {
+        "ultra": {
+          "A": 832.02,
+          "sources": 7,
+          "cv": 0.7124,
+          "lowBase": 1.3051,
+          "lowSources": 6
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 1730.34,
+          "sources": 7,
+          "cv": 0.8745,
+          "lowBase": 1.2558,
+          "lowSources": 6
+        }
+      }
+    },
+    "palworld": {
+      "1440p": {
+        "epic": {
+          "A": 1961.3,
+          "sources": 6,
+          "cv": 0.4635,
+          "lowBase": 1.3961,
+          "lowSources": 6
+        }
+      },
+      "4k": {
+        "epic": {
+          "A": 3572.67,
+          "sources": 6,
+          "cv": 0.4892,
+          "lowBase": 1.6374,
+          "lowSources": 6
+        }
+      }
+    },
+    "ghostwire-tokyo": {
+      "1440p": {
+        "high": {
+          "A": 1242.62,
+          "sources": 8,
+          "cv": 0.5736,
+          "lowBase": 1.7073,
+          "lowSources": 8
+        }
+      },
+      "4k": {
+        "high": {
+          "A": 2495.08,
+          "sources": 8,
+          "cv": 0.569,
+          "lowBase": 1.8841,
+          "lowSources": 8
+        }
+      }
+    },
+    "god-of-war": {
+      "1440p": {
+        "ultra": {
+          "A": 2241.35,
+          "sources": 7,
+          "cv": 0.5495,
+          "lowBase": 1.1455,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 3173.83,
+          "sources": 6,
+          "cv": 0.6108,
+          "lowBase": 1.1255,
+          "lowSources": 6
+        }
+      }
+    },
+    "ready-or-not": {
+      "1440p": {
+        "epic": {
+          "A": 1659.33,
+          "sources": 6,
+          "cv": 0.5483,
+          "lowBase": 1.9295,
+          "lowSources": 6
+        }
+      },
+      "4k": {
+        "epic": {
+          "A": 4201.61,
+          "sources": 6,
+          "cv": 0.6818,
+          "lowBase": 2.0441,
+          "lowSources": 6
+        }
+      }
+    },
+    "the-finals": {
+      "1440p": {
+        "epic": {
+          "A": 1552.03,
+          "sources": 7,
+          "cv": 0.5442,
+          "lowBase": 1.2907,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "epic": {
+          "A": 3303.79,
+          "sources": 7,
+          "cv": 0.5867,
+          "lowBase": 1.306,
+          "lowSources": 7
+        }
+      }
+    },
+    "lords-of-the-fallen": {
+      "1440p": {
+        "ultra": {
+          "A": 4693.04,
+          "sources": 7,
+          "cv": 0.8003,
+          "lowBase": 1.171,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 9652.77,
+          "sources": 7,
+          "cv": 0.9132,
+          "lowBase": 1.2341,
+          "lowSources": 7
+        }
+      }
+    },
+    "armored-core-6": {
+      "1440p": {
+        "ultra": {
+          "A": 1467.99,
+          "sources": 6,
+          "cv": 0.3218,
+          "lowBase": 1.1908,
+          "lowSources": 6
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 2784.33,
+          "sources": 6,
+          "cv": 0.4947,
+          "lowBase": 1.1778,
+          "lowSources": 6
+        }
+      }
+    },
+    "ratchet-and-clank-rift-apart": {
+      "1440p": {
+        "very-high": {
+          "A": 2756.36,
+          "sources": 6,
+          "cv": 0.579,
+          "lowBase": 1.4294,
+          "lowSources": 6
+        }
+      },
+      "4k": {
+        "very-high": {
+          "A": 4074.27,
+          "sources": 6,
+          "cv": 0.6028,
+          "lowBase": 1.4827,
+          "lowSources": 6
+        }
+      }
+    },
+    "diablo-4": {
+      "1440p": {
+        "ultra": {
+          "A": 1085.42,
+          "sources": 7,
+          "cv": 0.5634,
+          "lowBase": 1.2509,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 1983,
+          "sources": 7,
+          "cv": 0.5643,
+          "lowBase": 1.3444,
+          "lowSources": 7
+        }
+      }
+    },
+    "star-wars-jedi-survivor": {
+      "1440p": {
+        "epic": {
+          "A": 2828.24,
+          "sources": 7,
+          "cv": 0.5259,
+          "lowBase": 1.2929,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "epic": {
+          "A": 5610.21,
+          "sources": 7,
+          "cv": 0.5461,
+          "lowBase": 1.2747,
+          "lowSources": 7
+        }
+      }
+    },
+    "dead-island-2": {
+      "1440p": {
+        "ultra": {
+          "A": 1429.81,
+          "sources": 7,
+          "cv": 0.6282,
+          "lowBase": 1.8208,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 2773.32,
+          "sources": 7,
+          "cv": 0.6388,
+          "lowBase": 1.9839,
+          "lowSources": 7
+        }
+      }
+    },
+    "the-last-of-us": {
+      "1440p": {
+        "ultra": {
+          "A": 3141.61,
+          "sources": 7,
+          "cv": 0.6129,
+          "lowBase": 1.2494,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 8232.01,
+          "sources": 6,
+          "cv": 0.809,
+          "lowBase": 1.7527,
+          "lowSources": 6
+        }
+      }
+    },
+    "dead-space-remake": {
+      "1440p": {
+        "ultra": {
+          "A": 2319.11,
+          "sources": 7,
+          "cv": 0.5206,
+          "lowBase": 1.2582,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 4662.11,
+          "sources": 6,
+          "cv": 0.564,
+          "lowBase": 1.2337,
+          "lowSources": 6
+        }
+      }
+    },
+    "witcher-3": {
+      "1440p": {
+        "ultra": {
+          "A": 1547.21,
+          "sources": 7,
+          "cv": 0.4057,
+          "lowBase": 1.1658,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 2689.95,
+          "sources": 7,
+          "cv": 0.4093,
+          "lowBase": 1.1463,
+          "lowSources": 7
+        }
+      }
+    },
+    "spider-man-miles-morales": {
+      "1440p": {
+        "very-high": {
+          "A": 1627.7,
+          "sources": 7,
+          "cv": 0.5093,
+          "lowBase": 1.3297,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "very-high": {
+          "A": 3009.67,
+          "sources": 7,
+          "cv": 0.6039,
+          "lowBase": 1.3389,
+          "lowSources": 7
+        }
+      }
+    },
+    "a-plague-tale-requiem": {
+      "1440p": {
+        "ultra": {
+          "A": 3272.73,
+          "sources": 7,
+          "cv": 0.5159,
+          "lowBase": 1.1296,
+          "lowSources": 7
+        }
+      },
+      "4k": {
+        "ultra": {
+          "A": 5568.97,
+          "sources": 7,
+          "cv": 0.5421,
+          "lowBase": 1.1092,
+          "lowSources": 7
         }
       }
     },
     "dota2": {
       "4k": {
         "ultra": {
-          "A": 444.26,
+          "A": 937.59,
           "sources": 9,
           "cv": 0.4382
         }
@@ -5718,6 +6078,4066 @@
       "frameTimeMs": 7.4627,
       "sources": 1,
       "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|palworld|1080p|low": {
+      "frameTimeMs": 21.5983,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|palworld|1080p|medium": {
+      "frameTimeMs": 26.738,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|palworld|1080p|high": {
+      "frameTimeMs": 36.4964,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|palworld|1080p|epic": {
+      "frameTimeMs": 40.9836,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ready-or-not|1080p|low": {
+      "frameTimeMs": 11.6686,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ready-or-not|1080p|medium": {
+      "frameTimeMs": 14.2248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ready-or-not|1080p|high": {
+      "frameTimeMs": 14.7059,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ready-or-not|1080p|epic": {
+      "frameTimeMs": 22.8311,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-finals|1080p|low": {
+      "frameTimeMs": 11.6279,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-finals|1080p|medium": {
+      "frameTimeMs": 16.0256,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-finals|1080p|high": {
+      "frameTimeMs": 18.5874,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-finals|1080p|epic": {
+      "frameTimeMs": 24.6914,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 40.1606,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 39.8406,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 46.5116,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 57.1429,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lies-of-p|1080p|low": {
+      "frameTimeMs": 17.1233,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lies-of-p|1080p|medium": {
+      "frameTimeMs": 19.802,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|lies-of-p|1080p|high": {
+      "frameTimeMs": 22.8833,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|armored-core-6|1080p|low": {
+      "frameTimeMs": 14.3062,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|armored-core-6|1080p|medium": {
+      "frameTimeMs": 18.1488,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|armored-core-6|1080p|high": {
+      "frameTimeMs": 21.097,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 26.8817,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 23.9234,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 32.3625,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 40.6504,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 47.3934,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|diablo-4|1080p|low": {
+      "frameTimeMs": 11.7786,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|diablo-4|1080p|medium": {
+      "frameTimeMs": 13.4953,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|diablo-4|1080p|high": {
+      "frameTimeMs": 15.674,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|diablo-4|1080p|ultra": {
+      "frameTimeMs": 18.1818,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 38.3142,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 43.8596,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 46.2963,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 49.0196,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|dead-island-2|1080p|low": {
+      "frameTimeMs": 11.325,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 25.3807,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-last-of-us|1080p|low": {
+      "frameTimeMs": 32.6797,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 40.9836,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-last-of-us|1080p|high": {
+      "frameTimeMs": 46.5116,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 56.4972,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|atomic-heart|1080p|low": {
+      "frameTimeMs": 15.4321,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|atomic-heart|1080p|medium": {
+      "frameTimeMs": 20.7039,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|atomic-heart|1080p|high": {
+      "frameTimeMs": 30.9598,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|dead-space-remake|1080p|low": {
+      "frameTimeMs": 33.4448,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 34.4828,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|dead-space-remake|1080p|high": {
+      "frameTimeMs": 39.5257,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 39.6825,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|witcher-3|1080p|low": {
+      "frameTimeMs": 13.1579,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|witcher-3|1080p|medium": {
+      "frameTimeMs": 17.301,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|witcher-3|1080p|high": {
+      "frameTimeMs": 20.3252,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|witcher-3|1080p|ultra": {
+      "frameTimeMs": 24.8139,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 17.9856,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 20.4499,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 22.0751,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 25.1256,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 25.641,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 34.3643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 46.5116,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 61.7284,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 18.1488,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 19.8807,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|god-of-war|1080p|low": {
+      "frameTimeMs": 22.3714,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|god-of-war|1080p|high": {
+      "frameTimeMs": 32.8947,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|god-of-war|1080p|ultra": {
+      "frameTimeMs": 45.8716,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 18.1818,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 20.8333,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-arc-a380|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 40,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 17.8571,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 21.0084,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 47.1698,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 69.9301,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 125,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|doom-eternal|1080p|medium": {
+      "frameTimeMs": 12.4378,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|doom-eternal|1080p|high": {
+      "frameTimeMs": 16.2866,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 14.3885,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 24.8139,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1650|doom-eternal|4k|ultra": {
+      "frameTimeMs": 48.0769,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 33.0033,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 33.7838,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 42.3729,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 57.8035,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lies-of-p|1080p|low": {
+      "frameTimeMs": 14.0056,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lies-of-p|1080p|medium": {
+      "frameTimeMs": 16.1031,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-gtx-1650|lies-of-p|1080p|high": {
+      "frameTimeMs": 18.9753,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660|palworld|1080p|low": {
+      "frameTimeMs": 12.2399,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660|palworld|1080p|medium": {
+      "frameTimeMs": 14.7275,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660|palworld|1080p|high": {
+      "frameTimeMs": 19.4553,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660|palworld|1080p|epic": {
+      "frameTimeMs": 21.4133,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660|palworld|1440p|epic": {
+      "frameTimeMs": 29.7619,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660|palworld|4k|epic": {
+      "frameTimeMs": 58.1395,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 12.837,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 15.1745,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 34.0136,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 51.5464,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 83.3333,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|doom-eternal|1080p|medium": {
+      "frameTimeMs": 7.2464,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|doom-eternal|1080p|high": {
+      "frameTimeMs": 8.2645,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 8.6957,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 13.947,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660|doom-eternal|4k|ultra": {
+      "frameTimeMs": 26.178,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 11.8906,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 11.9332,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 19.3798,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 44.843,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|god-of-war|1080p|low": {
+      "frameTimeMs": 13.6426,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|god-of-war|1080p|high": {
+      "frameTimeMs": 21.2766,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|god-of-war|1080p|ultra": {
+      "frameTimeMs": 31.25,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660|god-of-war|1440p|ultra": {
+      "frameTimeMs": 36.3636,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ready-or-not|1080p|low": {
+      "frameTimeMs": 7.2046,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ready-or-not|1080p|medium": {
+      "frameTimeMs": 8.7951,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ready-or-not|1080p|high": {
+      "frameTimeMs": 9.2937,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ready-or-not|1080p|epic": {
+      "frameTimeMs": 15.6986,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ready-or-not|1440p|epic": {
+      "frameTimeMs": 28.3286,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ready-or-not|4k|epic": {
+      "frameTimeMs": 91.7431,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-finals|1080p|low": {
+      "frameTimeMs": 6.5062,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-finals|1080p|medium": {
+      "frameTimeMs": 9.1158,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-finals|1080p|high": {
+      "frameTimeMs": 10.4384,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-finals|1080p|epic": {
+      "frameTimeMs": 14.2653,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-finals|1440p|epic": {
+      "frameTimeMs": 23.8095,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-finals|4k|epic": {
+      "frameTimeMs": 61.3497,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 19.685,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 24.57,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 33.8983,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 50.7614,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 76.9231,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 204.0816,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lies-of-p|1080p|low": {
+      "frameTimeMs": 9.3809,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lies-of-p|1080p|medium": {
+      "frameTimeMs": 10.8696,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|lies-of-p|1080p|high": {
+      "frameTimeMs": 12.9702,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|armored-core-6|1080p|low": {
+      "frameTimeMs": 9.7087,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|armored-core-6|1080p|medium": {
+      "frameTimeMs": 12.3609,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|armored-core-6|1080p|high": {
+      "frameTimeMs": 13.4953,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 18.2482,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|armored-core-6|1440p|ultra": {
+      "frameTimeMs": 16.5289,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|armored-core-6|4k|ultra": {
+      "frameTimeMs": 52.9101,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 16.7785,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 20.284,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 27.4725,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 31.348,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ratchet-and-clank-rift-apart|1440p|very-high": {
+      "frameTimeMs": 46.2963,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|ratchet-and-clank-rift-apart|4k|very-high": {
+      "frameTimeMs": 74.0741,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|diablo-4|1080p|low": {
+      "frameTimeMs": 7.0671,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|diablo-4|1080p|medium": {
+      "frameTimeMs": 8.1766,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|diablo-4|1080p|high": {
+      "frameTimeMs": 9.2764,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|diablo-4|1080p|ultra": {
+      "frameTimeMs": 11.2233,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|diablo-4|1440p|ultra": {
+      "frameTimeMs": 17.452,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|diablo-4|4k|ultra": {
+      "frameTimeMs": 34.3643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 20.6612,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 24.3902,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 25.9067,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 27.7008,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 45.045,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 98.0392,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-island-2|1080p|low": {
+      "frameTimeMs": 6.3939,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 14.771,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 23.0415,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-island-2|4k|ultra": {
+      "frameTimeMs": 54.9451,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-last-of-us|1080p|low": {
+      "frameTimeMs": 16.7504,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 21.2314,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-last-of-us|1080p|high": {
+      "frameTimeMs": 25.7069,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 31.6456,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 52.9101,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|atomic-heart|1080p|low": {
+      "frameTimeMs": 8.9767,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|atomic-heart|1080p|medium": {
+      "frameTimeMs": 11.9904,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|atomic-heart|1080p|high": {
+      "frameTimeMs": 20.6186,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-space-remake|1080p|low": {
+      "frameTimeMs": 19.3424,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 20.6612,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-space-remake|1080p|high": {
+      "frameTimeMs": 23.753,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 23.9234,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 37.037,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|witcher-3|1080p|low": {
+      "frameTimeMs": 8.0972,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|witcher-3|1080p|medium": {
+      "frameTimeMs": 10.7643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|witcher-3|1080p|high": {
+      "frameTimeMs": 12.8205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|witcher-3|1080p|ultra": {
+      "frameTimeMs": 15.6495,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|witcher-3|1440p|ultra": {
+      "frameTimeMs": 22.6244,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|witcher-3|4k|ultra": {
+      "frameTimeMs": 42.0168,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 11.7509,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 13.4771,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 13.8504,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 16.0514,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 24.3902,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 57.8035,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 14.771,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 20,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 27.3224,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 36.63,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 52.6316,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 100,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660|god-of-war|4k|ultra": {
+      "frameTimeMs": 54.6448,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660s|palworld|1080p|low": {
+      "frameTimeMs": 11.0742,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660s|palworld|1080p|medium": {
+      "frameTimeMs": 13.587,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660s|palworld|1080p|high": {
+      "frameTimeMs": 17.5747,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660s|palworld|1080p|epic": {
+      "frameTimeMs": 19.0114,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660s|palworld|1440p|epic": {
+      "frameTimeMs": 29.0698,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-gtx-1660s|palworld|4k|epic": {
+      "frameTimeMs": 57.1429,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 12.1212,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 14.1243,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 31.8471,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 42.5532,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 81.3008,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|doom-eternal|1080p|medium": {
+      "frameTimeMs": 6.993,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|doom-eternal|1080p|high": {
+      "frameTimeMs": 7.9365,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 8.1967,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 13.624,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-gtx-1660s|doom-eternal|4k|ultra": {
+      "frameTimeMs": 29.0698,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 10.6838,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 10.846,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 17.452,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 37.4532,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|god-of-war|1080p|low": {
+      "frameTimeMs": 12.1803,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|god-of-war|1080p|high": {
+      "frameTimeMs": 18.7266,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|god-of-war|1080p|ultra": {
+      "frameTimeMs": 27.933,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|god-of-war|1440p|ultra": {
+      "frameTimeMs": 34.2466,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-gtx-1660s|god-of-war|4k|ultra": {
+      "frameTimeMs": 47.8469,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ready-or-not|1080p|low": {
+      "frameTimeMs": 6.9348,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ready-or-not|1080p|medium": {
+      "frameTimeMs": 7.8003,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ready-or-not|1080p|high": {
+      "frameTimeMs": 8.8889,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ready-or-not|1080p|epic": {
+      "frameTimeMs": 14.3678,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ready-or-not|1440p|epic": {
+      "frameTimeMs": 25.5102,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ready-or-not|4k|epic": {
+      "frameTimeMs": 105.2632,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-finals|1080p|low": {
+      "frameTimeMs": 6.0459,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-finals|1080p|medium": {
+      "frameTimeMs": 8.5985,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-finals|1080p|high": {
+      "frameTimeMs": 9.8328,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-finals|1080p|epic": {
+      "frameTimeMs": 13.2802,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-finals|1440p|epic": {
+      "frameTimeMs": 22.6757,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-finals|4k|epic": {
+      "frameTimeMs": 55.2486,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 18.0505,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 22.3214,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 46.9484,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 76.3359,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 188.6792,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lies-of-p|1080p|low": {
+      "frameTimeMs": 8.881,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lies-of-p|1080p|medium": {
+      "frameTimeMs": 10.2145,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|lies-of-p|1080p|high": {
+      "frameTimeMs": 11.8624,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|armored-core-6|1080p|low": {
+      "frameTimeMs": 8.673,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|armored-core-6|1080p|medium": {
+      "frameTimeMs": 10.2881,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|armored-core-6|1080p|high": {
+      "frameTimeMs": 11.6959,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 14.5985,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|armored-core-6|1440p|ultra": {
+      "frameTimeMs": 20.202,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|armored-core-6|4k|ultra": {
+      "frameTimeMs": 49.0196,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 15.7729,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 19.084,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 22.3714,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 29.9401,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ratchet-and-clank-rift-apart|1440p|very-high": {
+      "frameTimeMs": 37.594,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|ratchet-and-clank-rift-apart|4k|very-high": {
+      "frameTimeMs": 69.9301,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|diablo-4|1080p|low": {
+      "frameTimeMs": 5.9844,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|diablo-4|1080p|medium": {
+      "frameTimeMs": 7.0225,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|diablo-4|1080p|high": {
+      "frameTimeMs": 8.0128,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|diablo-4|1080p|ultra": {
+      "frameTimeMs": 9.8328,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|diablo-4|1440p|ultra": {
+      "frameTimeMs": 15.2905,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|diablo-4|4k|ultra": {
+      "frameTimeMs": 30.2115,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 19.2678,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 22.8833,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 24.1546,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 25.7732,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 42.3729,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 95.2381,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-island-2|1080p|low": {
+      "frameTimeMs": 5.9488,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 13.4048,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 22.8833,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-island-2|4k|ultra": {
+      "frameTimeMs": 46.729,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-last-of-us|1080p|low": {
+      "frameTimeMs": 14.9701,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 19.1205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-last-of-us|1080p|high": {
+      "frameTimeMs": 23.1481,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 30.4878,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 50.2513,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|the-last-of-us|4k|ultra": {
+      "frameTimeMs": 270.2703,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|atomic-heart|1080p|low": {
+      "frameTimeMs": 8.0515,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|atomic-heart|1080p|medium": {
+      "frameTimeMs": 11.0254,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|atomic-heart|1080p|high": {
+      "frameTimeMs": 19.2308,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-space-remake|1080p|low": {
+      "frameTimeMs": 17.3913,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 18.622,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-space-remake|1080p|high": {
+      "frameTimeMs": 21.322,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 21.5983,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 33.0033,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|dead-space-remake|4k|ultra": {
+      "frameTimeMs": 69.9301,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|witcher-3|1080p|low": {
+      "frameTimeMs": 7.0922,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|witcher-3|1080p|medium": {
+      "frameTimeMs": 9.4518,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|witcher-3|1080p|high": {
+      "frameTimeMs": 11.4155,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|witcher-3|1080p|ultra": {
+      "frameTimeMs": 14.0056,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|witcher-3|1440p|ultra": {
+      "frameTimeMs": 20.0803,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|witcher-3|4k|ultra": {
+      "frameTimeMs": 36.3636,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 10.7759,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 12.0627,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 12.2399,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 14.4928,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 26.3852,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 55.8659,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 13.6426,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 18.4843,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 25.1256,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 33.557,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 48.0769,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-gtx-1660s|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 90.0901,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-2060-super|palworld|1080p|low": {
+      "frameTimeMs": 8.0192,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-2060-super|palworld|1080p|medium": {
+      "frameTimeMs": 9.5238,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-2060-super|palworld|1080p|high": {
+      "frameTimeMs": 12.1951,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-2060-super|palworld|1080p|epic": {
+      "frameTimeMs": 13.3156,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-2060-super|palworld|1440p|epic": {
+      "frameTimeMs": 19.4175,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-2060-super|palworld|4k|epic": {
+      "frameTimeMs": 38.61,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 9.6154,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 11.0619,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 16.9205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 22.8833,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 40.4858,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|doom-eternal|1080p|medium": {
+      "frameTimeMs": 4.9505,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|doom-eternal|1080p|high": {
+      "frameTimeMs": 5.5249,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 5.5556,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 8.7719,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rtx-2060-super|doom-eternal|4k|ultra": {
+      "frameTimeMs": 17.0358,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 8.0386,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 8.1367,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 13.1062,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|god-of-war|1080p|low": {
+      "frameTimeMs": 8.8496,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|god-of-war|1080p|high": {
+      "frameTimeMs": 13.2626,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|god-of-war|1080p|ultra": {
+      "frameTimeMs": 19.1205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rtx-2060-super|god-of-war|1440p|ultra": {
+      "frameTimeMs": 23.5849,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ready-or-not|1080p|low": {
+      "frameTimeMs": 4.902,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ready-or-not|1080p|medium": {
+      "frameTimeMs": 5.4945,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ready-or-not|1080p|high": {
+      "frameTimeMs": 6.2657,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ready-or-not|1080p|epic": {
+      "frameTimeMs": 9.2764,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ready-or-not|1440p|epic": {
+      "frameTimeMs": 16.2602,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ready-or-not|4k|epic": {
+      "frameTimeMs": 38.1679,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-finals|1080p|low": {
+      "frameTimeMs": 4.5455,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-finals|1080p|medium": {
+      "frameTimeMs": 6.3171,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-finals|1080p|high": {
+      "frameTimeMs": 7.1582,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-finals|1080p|epic": {
+      "frameTimeMs": 9.3545,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-finals|1440p|epic": {
+      "frameTimeMs": 15.2905,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-finals|4k|epic": {
+      "frameTimeMs": 33.2226,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 13.5318,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 16.0514,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 22.2717,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 32.5733,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 48.5437,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 96.1538,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lies-of-p|1080p|low": {
+      "frameTimeMs": 6.5147,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lies-of-p|1080p|medium": {
+      "frameTimeMs": 7.2674,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|lies-of-p|1080p|high": {
+      "frameTimeMs": 8.4246,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|armored-core-6|1080p|low": {
+      "frameTimeMs": 8.3682,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|armored-core-6|1080p|medium": {
+      "frameTimeMs": 8.643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|armored-core-6|1080p|high": {
+      "frameTimeMs": 9.3197,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 11.2867,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|armored-core-6|1440p|ultra": {
+      "frameTimeMs": 15.2439,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|armored-core-6|4k|ultra": {
+      "frameTimeMs": 26.3852,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 12.7551,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 14.5773,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 17.9533,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 20.3252,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ratchet-and-clank-rift-apart|1440p|very-high": {
+      "frameTimeMs": 25.0627,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ratchet-and-clank-rift-apart|4k|very-high": {
+      "frameTimeMs": 39.0625,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|diablo-4|1080p|low": {
+      "frameTimeMs": 4.329,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|diablo-4|1080p|medium": {
+      "frameTimeMs": 5.0994,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|diablo-4|1080p|high": {
+      "frameTimeMs": 5.7837,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|diablo-4|1080p|ultra": {
+      "frameTimeMs": 7.0621,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|diablo-4|1440p|ultra": {
+      "frameTimeMs": 10.6383,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|diablo-4|4k|ultra": {
+      "frameTimeMs": 21.2766,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 13.8889,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 16.0772,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 17.5131,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 18.4502,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 29.6736,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 59.5238,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-island-2|1080p|low": {
+      "frameTimeMs": 4.4248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 9.8814,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 14.556,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-island-2|4k|ultra": {
+      "frameTimeMs": 29.6736,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-last-of-us|1080p|low": {
+      "frameTimeMs": 11.5207,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 14.2653,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-last-of-us|1080p|high": {
+      "frameTimeMs": 16.2338,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 22.1239,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 34.3643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|the-last-of-us|4k|ultra": {
+      "frameTimeMs": 78.7402,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|atomic-heart|1080p|low": {
+      "frameTimeMs": 5.9418,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|atomic-heart|1080p|medium": {
+      "frameTimeMs": 8.0451,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|atomic-heart|1080p|high": {
+      "frameTimeMs": 13.7552,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-space-remake|1080p|low": {
+      "frameTimeMs": 12.5945,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 13.2802,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-space-remake|1080p|high": {
+      "frameTimeMs": 15.1515,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 15.4321,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 23.4742,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|dead-space-remake|4k|ultra": {
+      "frameTimeMs": 45.4545,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|witcher-3|1080p|low": {
+      "frameTimeMs": 5.2138,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|witcher-3|1080p|medium": {
+      "frameTimeMs": 6.5232,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|witcher-3|1080p|high": {
+      "frameTimeMs": 7.9491,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|witcher-3|1080p|ultra": {
+      "frameTimeMs": 9.98,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|witcher-3|1440p|ultra": {
+      "frameTimeMs": 14.0252,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|witcher-3|4k|ultra": {
+      "frameTimeMs": 24.8139,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 8.6356,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 9.2507,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 9.8912,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 10.2249,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 14.7493,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 28.49,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 10.2145,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 13.4771,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 18.2482,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 24.0385,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 34.2466,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 60.9756,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-2060-super|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 27.027,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|witcher-3|1080p|high": {
+      "frameTimeMs": 7.0771,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|witcher-3|1080p|ultra": {
+      "frameTimeMs": 8.3056,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|witcher-3|1440p|ultra": {
+      "frameTimeMs": 13.2979,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|witcher-3|4k|ultra": {
+      "frameTimeMs": 26.0417,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 6.0459,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 13.587,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 6.1087,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 8.0386,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 10.7181,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 20.202,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|diablo-4|1080p|low": {
+      "frameTimeMs": 2.5189,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|diablo-4|1080p|medium": {
+      "frameTimeMs": 2.6455,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|diablo-4|1080p|high": {
+      "frameTimeMs": 2.9586,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|diablo-4|1080p|ultra": {
+      "frameTimeMs": 3.5088,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|diablo-4|1440p|ultra": {
+      "frameTimeMs": 5.1894,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|diablo-4|4k|ultra": {
+      "frameTimeMs": 10.2881,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 7.8309,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 7.6805,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 8.2508,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 9.3721,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 14.3678,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 29.1545,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|dead-island-2|1080p|low": {
+      "frameTimeMs": 3.0675,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 4.0161,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 5.9524,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|dead-island-2|4k|ultra": {
+      "frameTimeMs": 12.5786,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|the-last-of-us|1080p|low": {
+      "frameTimeMs": 6.0716,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 7.2098,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|the-last-of-us|1080p|high": {
+      "frameTimeMs": 8.15,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 9.1912,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 13.7931,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|the-last-of-us|4k|ultra": {
+      "frameTimeMs": 28.4091,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|atomic-heart|1080p|low": {
+      "frameTimeMs": 3.125,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|atomic-heart|1080p|medium": {
+      "frameTimeMs": 4,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|atomic-heart|1080p|high": {
+      "frameTimeMs": 6.7431,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|witcher-3|1080p|low": {
+      "frameTimeMs": 4.4248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|witcher-3|1080p|medium": {
+      "frameTimeMs": 3.8911,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 5.4113,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 5.6689,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 6.0132,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 6.2383,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 8.0515,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 14.1243,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 5.5679,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 6.7889,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 8.9606,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 11.6414,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 16.3934,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 28.9017,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 3.6765,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 3.8462,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|god-of-war|1080p|low": {
+      "frameTimeMs": 4.2918,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|god-of-war|1080p|high": {
+      "frameTimeMs": 6.5876,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|god-of-war|1080p|ultra": {
+      "frameTimeMs": 9.4697,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|god-of-war|1440p|ultra": {
+      "frameTimeMs": 10.7991,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rtx-4070|god-of-war|4k|ultra": {
+      "frameTimeMs": 15.8479,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|the-finals|1080p|low": {
+      "frameTimeMs": 2.5189,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|the-finals|1080p|medium": {
+      "frameTimeMs": 3.268,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|the-finals|1080p|high": {
+      "frameTimeMs": 3.6496,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|the-finals|1080p|epic": {
+      "frameTimeMs": 4.7619,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|the-finals|1440p|epic": {
+      "frameTimeMs": 7.3638,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|the-finals|4k|epic": {
+      "frameTimeMs": 15.6986,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 6.6401,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 7.2046,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 8.5106,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 10.6383,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 14.9031,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 27.8552,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lies-of-p|1080p|low": {
+      "frameTimeMs": 3.0581,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lies-of-p|1080p|medium": {
+      "frameTimeMs": 3.5088,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|lies-of-p|1080p|high": {
+      "frameTimeMs": 4.0816,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|dead-space-remake|1080p|low": {
+      "frameTimeMs": 7.4074,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 7.734,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|dead-space-remake|1080p|high": {
+      "frameTimeMs": 8.8731,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 8.7566,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 13.1062,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4070|dead-space-remake|4k|ultra": {
+      "frameTimeMs": 25.5754,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 3.5088,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 5.2743,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 11.4286,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 5.9102,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 6.2854,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 7.3801,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 9.434,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-13900k|gpu-rtx-4070-super|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 16.2866,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5500-xt|palworld|1080p|low": {
+      "frameTimeMs": 13.9276,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5500-xt|palworld|1080p|medium": {
+      "frameTimeMs": 16.4745,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5500-xt|palworld|1080p|high": {
+      "frameTimeMs": 23.0415,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5500-xt|palworld|1080p|epic": {
+      "frameTimeMs": 24.5098,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5500-xt|palworld|1440p|epic": {
+      "frameTimeMs": 35.7143,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5500-xt|palworld|4k|epic": {
+      "frameTimeMs": 67.1141,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|god-of-war|1080p|low": {
+      "frameTimeMs": 13.3156,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|god-of-war|1080p|high": {
+      "frameTimeMs": 20.5339,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|god-of-war|1440p|ultra": {
+      "frameTimeMs": 38.0228,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|god-of-war|4k|ultra": {
+      "frameTimeMs": 60.9756,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 13.6054,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 15.674,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 27.933,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 39.2157,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 69.4444,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|doom-eternal|1080p|medium": {
+      "frameTimeMs": 7.215,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|doom-eternal|1080p|high": {
+      "frameTimeMs": 8.1566,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 8.7413,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 11.0011,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5500-xt|doom-eternal|4k|ultra": {
+      "frameTimeMs": 40.4858,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ready-or-not|1080p|low": {
+      "frameTimeMs": 9.3371,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ready-or-not|1080p|medium": {
+      "frameTimeMs": 10.5263,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ready-or-not|1080p|high": {
+      "frameTimeMs": 10.8932,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ready-or-not|1080p|epic": {
+      "frameTimeMs": 17.5131,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ready-or-not|1440p|epic": {
+      "frameTimeMs": 29.1545,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ready-or-not|4k|epic": {
+      "frameTimeMs": 66.6667,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-finals|1080p|low": {
+      "frameTimeMs": 7.4019,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-finals|1080p|medium": {
+      "frameTimeMs": 10.0301,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-finals|1080p|high": {
+      "frameTimeMs": 12.1065,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-finals|1080p|epic": {
+      "frameTimeMs": 15.9744,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-finals|1440p|epic": {
+      "frameTimeMs": 27.248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-finals|4k|epic": {
+      "frameTimeMs": 59.8802,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 21.7865,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 26.455,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 40.1606,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 58.4795,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 88.4956,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 204.0816,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lies-of-p|1080p|low": {
+      "frameTimeMs": 10.6045,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lies-of-p|1080p|medium": {
+      "frameTimeMs": 12.3609,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|lies-of-p|1080p|high": {
+      "frameTimeMs": 14.2857,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|armored-core-6|1080p|low": {
+      "frameTimeMs": 11.4155,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|armored-core-6|1080p|medium": {
+      "frameTimeMs": 14.43,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|armored-core-6|1080p|high": {
+      "frameTimeMs": 16.1031,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 19.685,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|armored-core-6|1440p|ultra": {
+      "frameTimeMs": 26.6667,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|armored-core-6|4k|ultra": {
+      "frameTimeMs": 45.6621,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 22.4719,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 26.3158,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 34.965,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 40.4858,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ratchet-and-clank-rift-apart|1440p|very-high": {
+      "frameTimeMs": 51.0204,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ratchet-and-clank-rift-apart|4k|very-high": {
+      "frameTimeMs": 82.6446,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|diablo-4|1080p|low": {
+      "frameTimeMs": 8.4175,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|diablo-4|1080p|medium": {
+      "frameTimeMs": 10.1112,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|diablo-4|1080p|high": {
+      "frameTimeMs": 11.4025,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|diablo-4|1080p|ultra": {
+      "frameTimeMs": 13.4953,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|diablo-4|1440p|ultra": {
+      "frameTimeMs": 19.9203,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|diablo-4|4k|ultra": {
+      "frameTimeMs": 37.3134,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 23.5294,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 27.6243,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 29.8507,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 31.6456,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 49.505,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 98.0392,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-island-2|1080p|low": {
+      "frameTimeMs": 7.3638,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 16.8634,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 25.641,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-island-2|4k|ultra": {
+      "frameTimeMs": 52.356,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-last-of-us|1080p|low": {
+      "frameTimeMs": 17.4825,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 21.9298,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-last-of-us|1080p|high": {
+      "frameTimeMs": 30.303,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 51.0204,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|the-last-of-us|4k|ultra": {
+      "frameTimeMs": 109.8901,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|atomic-heart|1080p|low": {
+      "frameTimeMs": 10.2564,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|atomic-heart|1080p|medium": {
+      "frameTimeMs": 13.2626,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|atomic-heart|1080p|high": {
+      "frameTimeMs": 23.0415,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-space-remake|1080p|low": {
+      "frameTimeMs": 21.4592,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 22.3714,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-space-remake|1080p|high": {
+      "frameTimeMs": 26.9542,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 26.738,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 40.1606,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|dead-space-remake|4k|ultra": {
+      "frameTimeMs": 86.9565,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|witcher-3|1080p|low": {
+      "frameTimeMs": 9.3721,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|witcher-3|1080p|medium": {
+      "frameTimeMs": 12.1065,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|witcher-3|1080p|high": {
+      "frameTimeMs": 14.0845,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|witcher-3|1080p|ultra": {
+      "frameTimeMs": 17.2414,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|witcher-3|1440p|ultra": {
+      "frameTimeMs": 24.3309,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|witcher-3|4k|ultra": {
+      "frameTimeMs": 44.4444,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 12.8866,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 15.2207,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 14.7929,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 17.6678,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 24.9377,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 51.5464,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 16.7504,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 21.8818,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 30.581,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 40.8163,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 54.3478,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 98.0392,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 12.8205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 13.7363,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 21.2314,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 45.8716,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5500-xt|god-of-war|1080p|ultra": {
+      "frameTimeMs": 35.0877,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5600-xt|palworld|1080p|low": {
+      "frameTimeMs": 9.1075,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5600-xt|palworld|1080p|medium": {
+      "frameTimeMs": 11.2108,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5600-xt|palworld|1080p|high": {
+      "frameTimeMs": 15.0376,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5600-xt|palworld|1080p|epic": {
+      "frameTimeMs": 16.0256,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5600-xt|palworld|1440p|epic": {
+      "frameTimeMs": 23.3645,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-5600-xt|palworld|4k|epic": {
+      "frameTimeMs": 46.0829,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 9.6154,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 11.2867,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 28.5714,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 46.729,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 92.5926,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|doom-eternal|1080p|medium": {
+      "frameTimeMs": 5.5866,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|doom-eternal|1080p|high": {
+      "frameTimeMs": 6.3291,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 6.7568,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 10.2775,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-3900x|gpu-rx-5600-xt|doom-eternal|4k|ultra": {
+      "frameTimeMs": 26.3852,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5600-xt|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 8.9206,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5600-xt|god-of-war|1080p|low": {
+      "frameTimeMs": 8.9286,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5600-xt|god-of-war|1080p|high": {
+      "frameTimeMs": 13.5135,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5600-xt|god-of-war|1080p|ultra": {
+      "frameTimeMs": 19.305,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5600-xt|god-of-war|1440p|ultra": {
+      "frameTimeMs": 24.1546,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-5600-xt|god-of-war|4k|ultra": {
+      "frameTimeMs": 40.9836,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ready-or-not|1080p|low": {
+      "frameTimeMs": 6.7705,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ready-or-not|1080p|medium": {
+      "frameTimeMs": 7.1891,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ready-or-not|1080p|high": {
+      "frameTimeMs": 7.8431,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ready-or-not|1080p|epic": {
+      "frameTimeMs": 12.0048,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ready-or-not|1440p|epic": {
+      "frameTimeMs": 19.9203,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ready-or-not|4k|epic": {
+      "frameTimeMs": 46.2963,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-finals|1080p|low": {
+      "frameTimeMs": 6.0643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-finals|1080p|medium": {
+      "frameTimeMs": 9.2851,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-finals|1080p|high": {
+      "frameTimeMs": 7.7519,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-finals|1080p|epic": {
+      "frameTimeMs": 12.4378,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-finals|1440p|epic": {
+      "frameTimeMs": 18.4502,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-finals|4k|epic": {
+      "frameTimeMs": 39.5257,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 16.0772,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 19.0476,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 28.0899,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 40,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 61.3497,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 131.5789,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lies-of-p|1080p|low": {
+      "frameTimeMs": 7.5758,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lies-of-p|1080p|medium": {
+      "frameTimeMs": 8.6881,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|lies-of-p|1080p|high": {
+      "frameTimeMs": 9.9305,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|armored-core-6|1080p|low": {
+      "frameTimeMs": 9.434,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|armored-core-6|1080p|medium": {
+      "frameTimeMs": 11.8483,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|armored-core-6|1080p|high": {
+      "frameTimeMs": 13.0548,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 15.3374,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|armored-core-6|1440p|ultra": {
+      "frameTimeMs": 19.6078,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|armored-core-6|4k|ultra": {
+      "frameTimeMs": 35.9712,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 16.2075,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 19.2678,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 23.8663,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 35.2113,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ratchet-and-clank-rift-apart|1440p|very-high": {
+      "frameTimeMs": 40.1606,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ratchet-and-clank-rift-apart|4k|very-high": {
+      "frameTimeMs": 52.6316,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|diablo-4|1080p|low": {
+      "frameTimeMs": 5.9347,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|diablo-4|1080p|medium": {
+      "frameTimeMs": 6.9832,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|diablo-4|1080p|high": {
+      "frameTimeMs": 7.764,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|diablo-4|1080p|ultra": {
+      "frameTimeMs": 9.0744,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|diablo-4|1440p|ultra": {
+      "frameTimeMs": 13.2275,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|diablo-4|4k|ultra": {
+      "frameTimeMs": 24.9377,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 14.3885,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 16.0772,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 16.8634,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 18.0505,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 29.3255,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 64.5161,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-island-2|1080p|low": {
+      "frameTimeMs": 5.1308,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 11.0742,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 16.6945,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-island-2|4k|ultra": {
+      "frameTimeMs": 32.5733,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-last-of-us|1080p|low": {
+      "frameTimeMs": 13.0719,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 16.3132,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-last-of-us|1080p|high": {
+      "frameTimeMs": 19.0114,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 23.8095,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 36.3636,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|the-last-of-us|4k|ultra": {
+      "frameTimeMs": 153.8462,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|atomic-heart|1080p|low": {
+      "frameTimeMs": 6.8259,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|atomic-heart|1080p|medium": {
+      "frameTimeMs": 8.726,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|atomic-heart|1080p|high": {
+      "frameTimeMs": 15.083,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-space-remake|1080p|low": {
+      "frameTimeMs": 13.947,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 14.7275,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-space-remake|1080p|high": {
+      "frameTimeMs": 17.4825,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 17.5747,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 26.2467,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|dead-space-remake|4k|ultra": {
+      "frameTimeMs": 68.9655,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|witcher-3|1080p|low": {
+      "frameTimeMs": 6.2933,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|witcher-3|1080p|medium": {
+      "frameTimeMs": 8.1301,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|witcher-3|1080p|high": {
+      "frameTimeMs": 9.5057,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|witcher-3|1080p|ultra": {
+      "frameTimeMs": 11.2867,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|witcher-3|1440p|ultra": {
+      "frameTimeMs": 16.129,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|witcher-3|4k|ultra": {
+      "frameTimeMs": 29.7619,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 9.8522,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 11.1857,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 12.3305,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 15.083,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 20.0401,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 37.037,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 10.7759,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 13.986,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 19.1571,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 25.4453,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 34.8432,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 62.1118,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 8.7489,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 14.7929,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-5600-xt|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 29.5858,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-6800|palworld|1080p|low": {
+      "frameTimeMs": 4.7847,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-6800|palworld|1080p|medium": {
+      "frameTimeMs": 5.9595,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-6800|palworld|1080p|high": {
+      "frameTimeMs": 8.0645,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-6800|palworld|1080p|epic": {
+      "frameTimeMs": 8.5179,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-6800|palworld|1440p|epic": {
+      "frameTimeMs": 11.5741,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rx-6800|palworld|4k|epic": {
+      "frameTimeMs": 21.5054,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|ghostwire-tokyo|1080p|low": {
+      "frameTimeMs": 4.5662,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|ghostwire-tokyo|1080p|medium": {
+      "frameTimeMs": 4.7847,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|ghostwire-tokyo|1440p|high": {
+      "frameTimeMs": 6.7385,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|ghostwire-tokyo|4k|high": {
+      "frameTimeMs": 13.4048,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|god-of-war|1080p|low": {
+      "frameTimeMs": 7.4074,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|god-of-war|1080p|high": {
+      "frameTimeMs": 7.8125,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|god-of-war|1080p|ultra": {
+      "frameTimeMs": 10.661,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|god-of-war|1440p|ultra": {
+      "frameTimeMs": 12.8205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|god-of-war|4k|ultra": {
+      "frameTimeMs": 19.3424,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 8.6957,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 9.6154,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 11.4025,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 13.8313,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5900x|gpu-rx-6800|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 22.4719,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|watch-dogs-legion|1080p|medium": {
+      "frameTimeMs": 5.9172,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|watch-dogs-legion|1080p|high": {
+      "frameTimeMs": 6.6667,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|watch-dogs-legion|1080p|ultra": {
+      "frameTimeMs": 8.9286,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|watch-dogs-legion|1440p|ultra": {
+      "frameTimeMs": 11.8343,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|watch-dogs-legion|4k|ultra": {
+      "frameTimeMs": 20.284,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|doom-eternal|1080p|medium": {
+      "frameTimeMs": 2.4938,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|doom-eternal|1080p|high": {
+      "frameTimeMs": 2.7397,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|doom-eternal|1080p|ultra": {
+      "frameTimeMs": 2.809,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|doom-eternal|1440p|ultra": {
+      "frameTimeMs": 3.5971,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-5950x|gpu-rx-6800-xt|doom-eternal|4k|ultra": {
+      "frameTimeMs": 6.5359,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ready-or-not|1080p|low": {
+      "frameTimeMs": 3.5842,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ready-or-not|1080p|medium": {
+      "frameTimeMs": 3.6101,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ready-or-not|1080p|high": {
+      "frameTimeMs": 3.8168,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ready-or-not|1080p|epic": {
+      "frameTimeMs": 5.3476,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ready-or-not|1440p|epic": {
+      "frameTimeMs": 8.7184,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ready-or-not|4k|epic": {
+      "frameTimeMs": 19.8413,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-finals|1080p|low": {
+      "frameTimeMs": 2.8571,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-finals|1080p|medium": {
+      "frameTimeMs": 3.8314,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-finals|1080p|high": {
+      "frameTimeMs": 4.3103,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-finals|1080p|epic": {
+      "frameTimeMs": 5.8241,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-finals|1440p|epic": {
+      "frameTimeMs": 9.3284,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-finals|4k|epic": {
+      "frameTimeMs": 20.1207,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lords-of-the-fallen|1080p|low": {
+      "frameTimeMs": 7.8003,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lords-of-the-fallen|1080p|medium": {
+      "frameTimeMs": 9.1912,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lords-of-the-fallen|1080p|high": {
+      "frameTimeMs": 13.245,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lords-of-the-fallen|1080p|ultra": {
+      "frameTimeMs": 19.9203,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lords-of-the-fallen|1440p|ultra": {
+      "frameTimeMs": 28.5714,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lords-of-the-fallen|4k|ultra": {
+      "frameTimeMs": 55.2486,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lies-of-p|1080p|low": {
+      "frameTimeMs": 3.7453,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lies-of-p|1080p|medium": {
+      "frameTimeMs": 4.2918,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|lies-of-p|1080p|high": {
+      "frameTimeMs": 5.0327,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|armored-core-6|1080p|low": {
+      "frameTimeMs": 8.3472,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|armored-core-6|1080p|medium": {
+      "frameTimeMs": 8.3472,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|armored-core-6|1080p|high": {
+      "frameTimeMs": 8.4104,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|armored-core-6|1080p|ultra": {
+      "frameTimeMs": 9.1912,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|armored-core-6|1440p|ultra": {
+      "frameTimeMs": 10.7181,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|armored-core-6|4k|ultra": {
+      "frameTimeMs": 17.0068,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ratchet-and-clank-rift-apart|1080p|low": {
+      "frameTimeMs": 7.4906,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ratchet-and-clank-rift-apart|1080p|medium": {
+      "frameTimeMs": 8.4818,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ratchet-and-clank-rift-apart|1080p|high": {
+      "frameTimeMs": 10.2881,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ratchet-and-clank-rift-apart|1080p|very-high": {
+      "frameTimeMs": 11.6959,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ratchet-and-clank-rift-apart|1440p|very-high": {
+      "frameTimeMs": 13.986,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|ratchet-and-clank-rift-apart|4k|very-high": {
+      "frameTimeMs": 21.322,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|diablo-4|1080p|low": {
+      "frameTimeMs": 2.8736,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|diablo-4|1080p|medium": {
+      "frameTimeMs": 3.2895,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|diablo-4|1080p|high": {
+      "frameTimeMs": 3.6232,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|diablo-4|1080p|ultra": {
+      "frameTimeMs": 4.2373,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|diablo-4|1440p|ultra": {
+      "frameTimeMs": 6.0096,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|diablo-4|4k|ultra": {
+      "frameTimeMs": 11.1732,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|star-wars-jedi-survivor|1080p|low": {
+      "frameTimeMs": 7.758,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|star-wars-jedi-survivor|1080p|medium": {
+      "frameTimeMs": 8.7951,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|star-wars-jedi-survivor|1080p|high": {
+      "frameTimeMs": 9.6061,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|star-wars-jedi-survivor|1080p|epic": {
+      "frameTimeMs": 10.3093,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|star-wars-jedi-survivor|1440p|epic": {
+      "frameTimeMs": 16.1031,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|star-wars-jedi-survivor|4k|epic": {
+      "frameTimeMs": 33.4448,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-island-2|1080p|low": {
+      "frameTimeMs": 2.809,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-island-2|1080p|ultra": {
+      "frameTimeMs": 5.9809,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-island-2|1440p|ultra": {
+      "frameTimeMs": 8.2102,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-island-2|4k|ultra": {
+      "frameTimeMs": 15.1286,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-last-of-us|1080p|low": {
+      "frameTimeMs": 7.4074,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-last-of-us|1080p|medium": {
+      "frameTimeMs": 8.8028,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-last-of-us|1080p|high": {
+      "frameTimeMs": 9.7466,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-last-of-us|1080p|ultra": {
+      "frameTimeMs": 11.8624,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-last-of-us|1440p|ultra": {
+      "frameTimeMs": 16.9779,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|the-last-of-us|4k|ultra": {
+      "frameTimeMs": 34.0136,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|atomic-heart|1080p|low": {
+      "frameTimeMs": 3.8168,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|atomic-heart|1080p|medium": {
+      "frameTimeMs": 5.0582,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|atomic-heart|1080p|high": {
+      "frameTimeMs": 8.3333,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-space-remake|1080p|low": {
+      "frameTimeMs": 6.6445,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-space-remake|1080p|medium": {
+      "frameTimeMs": 6.9686,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-space-remake|1080p|high": {
+      "frameTimeMs": 8.1169,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-space-remake|1080p|ultra": {
+      "frameTimeMs": 8.1566,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-space-remake|1440p|ultra": {
+      "frameTimeMs": 11.9617,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|dead-space-remake|4k|ultra": {
+      "frameTimeMs": 23.5294,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|witcher-3|1080p|low": {
+      "frameTimeMs": 3.5842,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|witcher-3|1080p|medium": {
+      "frameTimeMs": 4.4053,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|witcher-3|1080p|high": {
+      "frameTimeMs": 5.1867,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|witcher-3|1080p|ultra": {
+      "frameTimeMs": 6.2854,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|witcher-3|1440p|ultra": {
+      "frameTimeMs": 8.3893,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|witcher-3|4k|ultra": {
+      "frameTimeMs": 15.2905,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|spider-man-miles-morales|1080p|low": {
+      "frameTimeMs": 7.8064,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|spider-man-miles-morales|1080p|medium": {
+      "frameTimeMs": 7.7459,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|spider-man-miles-morales|1080p|high": {
+      "frameTimeMs": 7.8927,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|spider-man-miles-morales|1080p|very-high": {
+      "frameTimeMs": 8.0906,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|spider-man-miles-morales|1440p|very-high": {
+      "frameTimeMs": 10.4167,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|spider-man-miles-morales|4k|very-high": {
+      "frameTimeMs": 17.6678,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|a-plague-tale-requiem|1080p|low": {
+      "frameTimeMs": 6.4809,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|a-plague-tale-requiem|1080p|medium": {
+      "frameTimeMs": 8.3963,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|a-plague-tale-requiem|1080p|high": {
+      "frameTimeMs": 10.989,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|a-plague-tale-requiem|1080p|ultra": {
+      "frameTimeMs": 14.6843,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|a-plague-tale-requiem|1440p|ultra": {
+      "frameTimeMs": 19.6464,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x|gpu-rx-6800|a-plague-tale-requiem|4k|ultra": {
+      "frameTimeMs": 33.67,
+      "sources": 1,
+      "entries": 1
     }
   },
   "archEfficiency": {
@@ -5729,17 +10149,17 @@
       "Ada Lovelace": {
         "efficiency": 1,
         "parts": 8,
-        "spreadPct": 34.8,
+        "spreadPct": 35,
         "calibrated": true
       },
       "Ampere": {
-        "efficiency": 0.9083,
+        "efficiency": 0.9123,
         "parts": 4,
-        "spreadPct": 25.1,
+        "spreadPct": 24.9,
         "calibrated": true
       },
       "Blackwell": {
-        "efficiency": 0.8447,
+        "efficiency": 0.8478,
         "parts": 4,
         "spreadPct": 46.4,
         "calibrated": true
@@ -5751,19 +10171,19 @@
         "calibrated": false
       },
       "RDNA 2": {
-        "efficiency": 0.9677,
+        "efficiency": 0.9773,
         "parts": 3,
-        "spreadPct": 52.9,
+        "spreadPct": 54.2,
         "calibrated": true
       },
       "RDNA 3": {
-        "efficiency": 1.1353,
+        "efficiency": 1.1393,
         "parts": 5,
         "spreadPct": 6.3,
         "calibrated": true
       },
       "Turing": {
-        "efficiency": 1.1076,
+        "efficiency": 1.1075,
         "parts": 3,
         "spreadPct": 33.3,
         "calibrated": true

@@ -1,5 +1,32 @@
 [
   {
+    "id": "a-plague-tale-requiem",
+    "name": "A Plague Tale: Requiem",
+    "slug": "a-plague-tale-requiem",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
     "id": "alan-wake-2",
     "name": "Alan Wake 2",
     "slug": "alan-wake-2",
@@ -43,6 +70,55 @@
       }
     ],
     "fpsCap": 300
+  },
+  {
+    "id": "armored-core-6",
+    "name": "Armored Core VI: Fires of Rubicon",
+    "slug": "armored-core-6",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "atomic-heart",
+    "name": "Atomic Heart",
+    "slug": "atomic-heart",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ]
   },
   {
     "id": "bg3",
@@ -147,6 +223,99 @@
         "label": "Low",
         "tier": 1
       },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "dead-island-2",
+    "name": "Dead Island 2",
+    "slug": "dead-island-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "dead-space-remake",
+    "name": "Dead Space (2023)",
+    "slug": "dead-space-remake",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "diablo-4",
+    "name": "Diablo IV",
+    "slug": "diablo-iv",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "doom-eternal",
+    "name": "Doom Eternal",
+    "slug": "doom-eternal",
+    "presets": [
       {
         "id": "medium",
         "label": "Medium",
@@ -322,6 +491,50 @@
       {
         "id": "very-high",
         "label": "Very high",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "ghostwire-tokyo",
+    "name": "Ghostwire: Tokyo",
+    "slug": "ghostwire-tokyo",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ]
+  },
+  {
+    "id": "god-of-war",
+    "name": "God of War (2018)",
+    "slug": "god-of-war-2018",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
         "tier": 4
       }
     ]
@@ -514,6 +727,109 @@
     ]
   },
   {
+    "id": "lies-of-p",
+    "name": "Lies of P",
+    "slug": "lies-of-p",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ]
+  },
+  {
+    "id": "lords-of-the-fallen",
+    "name": "Lords of the Fallen",
+    "slug": "lords-of-the-fallen",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "palworld",
+    "name": "Palworld",
+    "slug": "palworld",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "ratchet-and-clank-rift-apart",
+    "name": "Ratchet & Clank: Rift Apart",
+    "slug": "ratchet-and-clank-rift-apart",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "very-high",
+        "label": "Very high",
+        "tier": 4
+      }
+    ]
+  },
+  {
     "id": "rdr2",
     "name": "Red Dead Redemption 2",
     "slug": "red-dead-redemption-2",
@@ -531,6 +847,33 @@
       {
         "id": "ultra",
         "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "ready-or-not",
+    "name": "Ready or Not",
+    "slug": "ready-or-not",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
         "tier": 4
       }
     ]
@@ -563,9 +906,63 @@
     ]
   },
   {
+    "id": "spider-man-miles-morales",
+    "name": "Marvel's Spider-Man: Miles Morales",
+    "slug": "marvels-spider-man-miles-morales",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "very-high",
+        "label": "Very high",
+        "tier": 4
+      }
+    ]
+  },
+  {
     "id": "stalker-2",
     "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
     "slug": "stalker-2-heart-of-chornobyl",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "star-wars-jedi-survivor",
+    "name": "Star Wars Jedi: Survivor",
+    "slug": "star-wars-jedi-survivor",
     "presets": [
       {
         "id": "low",
@@ -620,6 +1017,109 @@
     "id": "starfield",
     "name": "Starfield",
     "slug": "starfield",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "the-finals",
+    "name": "The Finals",
+    "slug": "the-finals",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "the-last-of-us",
+    "name": "The Last of Us Part I",
+    "slug": "the-last-of-us-part-i",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "watch-dogs-legion",
+    "name": "Watch Dogs: Legion",
+    "slug": "watch-dogs-legion",
+    "presets": [
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "witcher-3",
+    "name": "The Witcher 3: Wild Hunt",
+    "slug": "the-witcher-3-wild-hunt",
     "presets": [
       {
         "id": "low",

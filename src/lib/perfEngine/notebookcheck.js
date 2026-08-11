@@ -51,7 +51,6 @@ export const GAME_IDS = {
   'Counter-Strike 2': 'cs2',
   'Fortnite': 'fortnite',
   'Apex Legends': 'apex',
-  'Marvel Rivals': 'marvel-rivals',
   // Two ids the catalogue has carried since the legacy list was written. The
   // reader was simply never told this outlet's spelling for them, so 134 cached
   // rows were refused as "game not in the catalogue".
@@ -72,12 +71,8 @@ export const GAME_IDS = {
   'Indiana Jones and the Great Circle': 'indiana-jones-great-circle',
   'Call of Duty Black Ops 6': 'cod-black-ops-6',
   "Senua's Saga Hellblade 2": 'hellblade-2',
-  'Dragon Age: The Veilguard': 'dragon-age-veilguard',
   "Dragon's Dogma 2": 'dragons-dogma-2',
-  'Silent Hill 2': 'silent-hill-2',
   'Star Wars Outlaws': 'star-wars-outlaws',
-  'Satisfactory': 'satisfactory',
-  'Frostpunk 2': 'frostpunk-2',
 
   // Mainstream titles the cached benches measure with near-complete 1% lows.
   // Selected on three rules, in order: the cache has a P1 on essentially every
@@ -95,7 +90,6 @@ export const GAME_IDS = {
   // manage 18 of 63.
   'Watch Dogs Legion': 'watch-dogs-legion',
   'Lies of P': 'lies-of-p',
-  'Enshrouded': 'enshrouded',
   'Lords of the Fallen': 'lords-of-the-fallen',
   'Ghostwire Tokyo': 'ghostwire-tokyo',
   'The Finals': 'the-finals',
@@ -109,7 +103,6 @@ export const GAME_IDS = {
   'Spider-Man Miles Morales': 'spider-man-miles-morales',
   'The Last of Us': 'the-last-of-us',
   'Dead Space Remake': 'dead-space-remake',
-  'Resident Evil 4 Remake': 'resident-evil-4-remake',
   'Palworld': 'palworld',
   'Ready or Not': 'ready-or-not',
   'Armored Core 6': 'armored-core-6',
