@@ -72,6 +72,31 @@ describe('the game map resolves against the permitted ids', () => {
   })
 })
 
+describe('the older desktop benches', () => {
+  it('recognises them by their model token', () => {
+    expect(cpuIdFor('AMD Ryzen 9 5900X 3.7GHz')).toBe('cpu-ryzen-9-5900x')
+    expect(cpuIdFor('AMD Ryzen 9 3900X 3.8GHz')).toBe('cpu-ryzen-9-3900x')
+    expect(cpuIdFor('AMD Ryzen 9 5950X 3.4GHz')).toBe('cpu-ryzen-9-5950x')
+  })
+
+  it('keeps the three AM4 twelve/sixteen-core parts apart', () => {
+    // 5900X, 5950X and 3900X differ only in digits that a loose match would
+    // happily confuse, and attributing one machine's frame rates to another is
+    // the worst thing this corpus could do.
+    expect(cpuIdFor('AMD Ryzen 9 5950X 3.4GHz')).not.toBe('cpu-ryzen-9-5900x')
+    expect(cpuIdFor('AMD Ryzen 9 3900X 3.8GHz')).not.toBe('cpu-ryzen-9-5900x')
+    expect(cpuIdFor('AMD Ryzen 9 5900X 3.7GHz')).not.toBe('cpu-ryzen-9-5950x')
+  })
+
+  it('still refuses the benches whose CPU is not a catalogue part', () => {
+    // 667 rows on the 2700X and 174 on the 9900K, knowingly left behind:
+    // import-bench-tsv refuses a whole file whose fixed side cannot resolve to
+    // a catalogue part, so mapping these would fail the import, not widen it.
+    expect(cpuIdFor('AMD Ryzen 7 2700X 3.7GHz')).toBeNull()
+    expect(cpuIdFor('Intel Core i9-9900K 3.6GHz')).toBeNull()
+  })
+})
+
 describe('game names map to catalogue ids', () => {
   it('maps the titles the corpus has no coverage of', () => {
     expect(gameIdFor('Cyberpunk 2077')).toBe('cyberpunk')

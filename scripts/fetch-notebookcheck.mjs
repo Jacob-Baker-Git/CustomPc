@@ -64,6 +64,45 @@ const BENCHES = {
     mainboard: 'Gigabyte Z790 Aorus Master',
     verifiedFrom: 'RTX 4070 Super FE review (2x16 GB Kingston Fury Renegade DDR5-6400)',
   },
+
+  // --- the older AM4 benches ------------------------------------------------
+  // These three carry most of the coverage for cards the current bench never
+  // tested, and they are the reason Fortnite, Apex Legends, Elden Ring and Red
+  // Dead Redemption 2 can enter the corpus at all.
+  //
+  // Their memory differs three ways — DDR4-4000/32 GB, DDR4-3600/16 GB and
+  // DDR4-3600/32 GB — which is the whole argument for looking each one up. A
+  // single "AM4 means DDR4-3200" default would have been wrong for all three.
+  //
+  // Neither review states an operating system, so neither claims one. 'not
+  // stated' is what the importer records for an absent field, and writing a
+  // plausible Windows build instead would be inventing a fact about somebody
+  // else's machine.
+  'cpu-ryzen-9-5900x': {
+    short: '5900X',
+    ram: 'DDR4 4000 32 2',
+    os: 'not stated',
+    mainboard: 'Asus X570 ROG Crosshair VIII Hero WiFi',
+    verifiedFrom: 'KFA2 RTX 3080 SG 12GB review (G.Skill Trident Z Neo RGB DDR4-4000 '
+      + 'memory kit 2 x 16 GB; BIOS 2402, default settings, XMP 1 for DDR4-4000)',
+  },
+  'cpu-ryzen-9-3900x': {
+    short: '3900X',
+    // Sixteen gigabytes, not thirty-two: two 8 GB sticks.
+    ram: 'DDR4 3600 16 2',
+    os: 'not stated',
+    mainboard: 'MSI MEG X570 Godlike',
+    verifiedFrom: 'Radeon RX 5600 XT review (G-Skill Trident Z Royal Gold DDR4-3600 '
+      + 'memory kit 2 x 8 GB, runs as DDR4-3600 CL16-16-16-36; BIOS 1.20, XMP 1)',
+  },
+  'cpu-ryzen-9-5950x': {
+    short: '5950X',
+    ram: 'DDR4 3600 32 2',
+    os: 'Windows 10 20H2',
+    mainboard: 'MSI Prestige X570 Creation',
+    verifiedFrom: 'Radeon RX 6900 XT review (32 GB, 2 x 16 GB G.SKILL Trident Z Neo '
+      + 'DDR4-3600, timings 16-19-19-39; Windows 10 20H2)',
+  },
 }
 
 // Their in-house sequence per game. Named because two outlets benchmarking

@@ -89,6 +89,16 @@ const CPU_IDS = {
   '12900k': 'cpu-i9-12900k',
   '5800x3d': 'cpu-ryzen-7-5800x3d',
   '9950x': 'cpu-ryzen-9-9950x',
+  // The older desktop benches. Notebookcheck re-bases periodically and each page
+  // pools rows from every generation of its bench, so these three carry most of
+  // the coverage for the cards the current bench never tested.
+  //
+  // The Ryzen 7 2700X and Core i9-9900K benches are deliberately ABSENT: neither
+  // is a catalogue part, and import-bench-tsv refuses a whole file whose fixed
+  // side does not resolve. 841 rows are left on the table by that, knowingly.
+  '5900x': 'cpu-ryzen-9-5900x',
+  '3900x': 'cpu-ryzen-9-3900x',
+  '5950x': 'cpu-ryzen-9-5950x',
 }
 
 export function cpuIdFor(name) {
