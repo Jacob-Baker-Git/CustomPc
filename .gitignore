@@ -20,6 +20,9 @@ dist-ssr
 # Superpowers visual-brainstorm scratch (mockups, server state)
 .superpowers/
 
+# Throwaway measurement scripts (coverage sweeps, before/after captures)
+scratch/
+
 # Playwright
 test-results
 playwright-report
