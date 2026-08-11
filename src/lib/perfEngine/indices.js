@@ -41,14 +41,28 @@ export function cpuIndexFor(model, cpu) {
 //
 // Callers that need the two-way SPLIT must check `cell.B > 0` themselves —
 // see the `modelled` guard in index.js. That is the one thing B is for.
-export function cellFor(model, game, resolution, presetId) {
-  const cell = model?.gameConst?.[game?.id]?.[resolution]?.[presetId]
+export function cellFor(model, game, resolution, presetId, upscaling) {
+  const cell = model?.gameConst?.[game?.id]?.[resolution]?.[cellKeyFor(presetId, upscaling)]
   if (!(cell?.A > 0)) return null
   return cell
 }
 
-export function exactKey({ cpu, gpu, game, resolution, presetId }) {
-  return `${cpu?.id}|${gpu?.id}|${game?.id}|${resolution}|${presetId}`
+// The cell key, built in ONE place so no caller concatenates it by hand.
+//
+// Upscaling is part of the key because it is part of the measurement. Without it
+// an `A` fitted from DLSS-Quality rows pairs with a `B` fitted from native rows,
+// and the blended frame time describes neither — the eighth instance of this
+// engine's founding failure mode, a number nobody measured presented exactly
+// like one that was.
+//
+// scripts/fit-perf-model.mjs builds the same key when it writes the artefact. A
+// mismatch between the two is SILENT: the table simply never hits.
+export function cellKeyFor(presetId, upscaling) {
+  return `${presetId}|${upscaling}`
+}
+
+export function exactKey({ cpu, gpu, game, resolution, presetId, upscaling }) {
+  return `${cpu?.id}|${gpu?.id}|${game?.id}|${resolution}|${cellKeyFor(presetId, upscaling)}`
 }
 
 // A combination somebody actually measured. The whole point of curating real
@@ -67,12 +81,12 @@ export function exactFor(model, context) {
 
 // Can this exact combination be estimated from measurement alone? Phase 1
 // answers only where this is true and says "not enough data" everywhere else.
-export function hasCoverage(model, { cpu, gpu, game, resolution, presetId }) {
+export function hasCoverage(model, { cpu, gpu, game, resolution, presetId, upscaling }) {
   // Asks for a FULL two-way estimate, so it wants B as well — unlike cellFor,
   // whose job is only to say the cell exists.
   return (
     gpuIndexFor(model, gpu, resolution).value > 0 &&
     cpuIndexFor(model, cpu).value > 0 &&
-    cellFor(model, game, resolution, presetId)?.B > 0
+    cellFor(model, game, resolution, presetId, upscaling)?.B > 0
   )
 }
