@@ -15,7 +15,7 @@ const META = {
 }
 
 const entry = (over) => ({
-  gameId: 'alpha', presetId: 'high', supersededBy: null, ...over,
+  gameId: 'alpha', presetId: 'high', upscaling: 'native', supersededBy: null, ...over,
 })
 
 describe('buildPerfGames', () => {
@@ -84,6 +84,29 @@ describe('buildPerfGames', () => {
       meta: META, entries: [entry({ presetId: 'cinematic' })],
     })
     expect(problems.join(' ')).toMatch(/cinematic/)
+  })
+
+  it('lists a preset once per render scale it was measured at', () => {
+    const { games, problems } = buildPerfGames({
+      meta: META,
+      entries: [
+        entry({ presetId: 'ultra', upscaling: 'native' }),
+        entry({ presetId: 'ultra', upscaling: 'quality' }),
+        entry({ presetId: 'ultra', upscaling: 'quality' }),
+      ],
+    })
+    expect(problems).toEqual([])
+    expect(games[0].presets).toEqual([
+      { id: 'ultra', label: 'Ultra (DLSS/FSR Quality)', tier: 4, upscaling: 'quality' },
+      { id: 'ultra', label: 'Ultra', tier: 4, upscaling: 'native' },
+    ])
+  })
+
+  it('reports an unknown render scale rather than letting it read as native', () => {
+    const { problems } = buildPerfGames({
+      meta: META, entries: [entry({ upscaling: '70-percent-tsr' })],
+    })
+    expect(problems.join(' ')).toMatch(/70-percent-tsr/)
   })
 
   it('is sorted by id, so the diff is stable across runs', () => {
