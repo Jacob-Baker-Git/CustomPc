@@ -121,6 +121,29 @@ describe('game names map to catalogue ids', () => {
     expect(gameIdFor('Dota 2 Reborn')).toBe('dota2')
   })
 
+  it('maps the mainstream titles the cached benches measure well', () => {
+    expect(gameIdFor('The Finals')).toBe('the-finals')
+    expect(gameIdFor('Diablo 4')).toBe('diablo-4')
+    expect(gameIdFor('The Last of Us')).toBe('the-last-of-us')
+    expect(gameIdFor('God of War')).toBe('god-of-war')
+    expect(gameIdFor('Resident Evil 4 Remake')).toBe('resident-evil-4-remake')
+  })
+
+  it('refuses a re-measure of an already-mapped title under an old patch', () => {
+    // 99 rows between them, and taking either would attribute a 2020 build's
+    // performance to the current entry. They are measurements of a different
+    // build of the game, not extra samples of the same one.
+    expect(gameIdFor('Cyberpunk 2077 1.6')).toBeNull()
+    expect(gameIdFor('Cyberpunk 2077 1.0')).toBeNull()
+    // Same rule, opposite side: the v4 rows are mapped, the pre-v4 ones are not.
+    expect(gameIdFor('The Witcher 3 v4')).toBe('witcher-3')
+    expect(gameIdFor('The Witcher 3')).toBeNull()
+  })
+
+  it('keeps God of War and God of War Ragnarök apart', () => {
+    expect(gameIdFor('God of War')).not.toBe(gameIdFor('God of War Ragnarök'))
+  })
+
   it('returns null for a title with no catalogue game, rather than inventing one', () => {
     expect(gameIdFor('Company of Heroes 3')).toBeNull()
     expect(gameIdFor('')).toBeNull()

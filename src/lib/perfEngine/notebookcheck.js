@@ -78,6 +78,43 @@ export const GAME_IDS = {
   'Star Wars Outlaws': 'star-wars-outlaws',
   'Satisfactory': 'satisfactory',
   'Frostpunk 2': 'frostpunk-2',
+
+  // Mainstream titles the cached benches measure with near-complete 1% lows.
+  // Selected on three rules, in order: the cache has a P1 on essentially every
+  // row (a title measured without one weakens the lowBase fit for its cell); a
+  // visitor would recognise it; and it is not a re-measure of an already-mapped
+  // title under a different patch.
+  //
+  // That last rule is why "Cyberpunk 2077 1.6" and "Cyberpunk 2077 1.0" are
+  // deliberately absent despite 99 rows between them: they are measurements of
+  // a different build of the game, and filing them under the current entry
+  // attributes one version's performance to another.
+  //
+  // "The Witcher 3 v4" is mapped and the bare "The Witcher 3" is not, for the
+  // same reason — and the v4 rows carry a P1 on 46 of 46 where the older ones
+  // manage 18 of 63.
+  'Watch Dogs Legion': 'watch-dogs-legion',
+  'Lies of P': 'lies-of-p',
+  'Enshrouded': 'enshrouded',
+  'Lords of the Fallen': 'lords-of-the-fallen',
+  'Ghostwire Tokyo': 'ghostwire-tokyo',
+  'The Finals': 'the-finals',
+  'Diablo 4': 'diablo-4',
+  'A Plague Tale Requiem': 'a-plague-tale-requiem',
+  'Star Wars Jedi Survivor': 'star-wars-jedi-survivor',
+  'Dead Island 2': 'dead-island-2',
+  'Atomic Heart': 'atomic-heart',
+  'The Witcher 3 v4': 'witcher-3',
+  'God of War': 'god-of-war',
+  'Spider-Man Miles Morales': 'spider-man-miles-morales',
+  'The Last of Us': 'the-last-of-us',
+  'Dead Space Remake': 'dead-space-remake',
+  'Resident Evil 4 Remake': 'resident-evil-4-remake',
+  'Palworld': 'palworld',
+  'Ready or Not': 'ready-or-not',
+  'Armored Core 6': 'armored-core-6',
+  'Ratchet & Clank Rift Apart': 'ratchet-and-clank-rift-apart',
+  'Doom Eternal': 'doom-eternal',
 }
 
 export const gameIdFor = (name) => GAME_IDS[String(name ?? '').trim()] ?? null
