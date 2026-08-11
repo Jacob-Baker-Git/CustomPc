@@ -1,40 +1,68 @@
 {
   "_comment": "Editorial metadata for the performance corpus. This is the set of game ids the corpus is ALLOWED to hold, and it is a SUPERSET of what ships: the importer validates against it, and build-perf-games.mjs emits perfGames.json for the subset that has measurements. Every id any reader maps needs a row here, measured or not, because a mapped title can start producing rows at any import and the builder will not invent a display name. Display names belong to the id and are shared by every outlet; an outlet's own spelling belongs in that outlet's reader (GAME_IDS in notebookcheck.js).",
   "presets": {
-    "low": {
-      "label": "Low",
-      "tier": 1
+    "epic": {
+      "label": "Epic",
+      "tier": 4
     },
-    "medium": {
-      "label": "Medium",
-      "tier": 2
+    "episch": {
+      "label": "Episch",
+      "tier": 4
+    },
+    "extrem": {
+      "label": "Extrem",
+      "tier": 4
+    },
+    "grafik-priorisieren": {
+      "label": "Grafik priorisieren",
+      "tier": 4
     },
     "high": {
       "label": "High",
       "tier": 3
     },
-    "very-high": {
-      "label": "Very high",
+    "hoch": {
+      "label": "Hoch",
+      "tier": 3
+    },
+    "kino": {
+      "label": "Kino",
+      "tier": 4
+    },
+    "low": {
+      "label": "Low",
+      "tier": 1
+    },
+    "max-details": {
+      "label": "Max. Details",
+      "tier": 4
+    },
+    "maximale-grafikdetails": {
+      "label": "Maximale Grafikdetails",
+      "tier": 4
+    },
+    "medium": {
+      "label": "Medium",
+      "tier": 2
+    },
+    "sehr-hoch": {
+      "label": "Sehr hoch",
       "tier": 4
     },
     "ultra": {
       "label": "Ultra",
       "tier": 4
     },
-    "epic": {
-      "label": "Epic",
+    "ultra-high": {
+      "label": "Ultra-High",
       "tier": 4
     },
-    "sehr-hoch": {
-      "label": "Sehr hoch",
+    "ultrahoch": {
+      "label": "Ultrahoch",
       "tier": 4
     },
-    "kino": {
-      "label": "Kino",
-      "tier": 4
-    },
-    "max-details": {
-      "label": "Max. Details",
+    "very-high": {
+      "label": "Very high",
       "tier": 4
     }
   },
@@ -106,6 +134,10 @@
       "name": "Dota 2",
       "slug": "dota-2"
     },
+    "dragon-age-veilguard": {
+      "name": "Dragon Age: The Veilguard",
+      "slug": "dragon-age-the-veilguard"
+    },
     "dragons-dogma-2": {
       "name": "Dragon's Dogma 2",
       "slug": "dragons-dogma-2"
@@ -113,6 +145,10 @@
     "elden-ring": {
       "name": "Elden Ring",
       "slug": "elden-ring"
+    },
+    "empire-of-the-ants": {
+      "name": "Empire of the Ants",
+      "slug": "empire-of-the-ants"
     },
     "f1-24": {
       "name": "F1 24",
@@ -126,6 +162,10 @@
       "name": "Fortnite",
       "slug": "fortnite"
     },
+    "frostpunk-2": {
+      "name": "Frostpunk 2",
+      "slug": "frostpunk-2"
+    },
     "ghost-of-tsushima": {
       "name": "Ghost of Tsushima",
       "slug": "ghost-of-tsushima"
@@ -134,10 +174,6 @@
       "name": "Ghostwire: Tokyo",
       "slug": "ghostwire-tokyo"
     },
-    "gta5": {
-      "name": "GTA V",
-      "slug": "gta-v"
-    },
     "god-of-war": {
       "name": "God of War (2018)",
       "slug": "god-of-war-2018"
@@ -145,6 +181,10 @@
     "god-of-war-ragnarok": {
       "name": "God of War Ragnarök",
       "slug": "god-of-war-ragnarok"
+    },
+    "gta5": {
+      "name": "GTA V",
+      "slug": "gta-v"
     },
     "hellblade-2": {
       "name": "Senua's Saga: Hellblade II",
@@ -178,6 +218,14 @@
       "name": "Lords of the Fallen",
       "slug": "lords-of-the-fallen"
     },
+    "mechwarrior-5-clans": {
+      "name": "MechWarrior 5: Clans",
+      "slug": "mechwarrior-5-clans"
+    },
+    "outcast-2": {
+      "name": "Outcast: A New Beginning",
+      "slug": "outcast-a-new-beginning"
+    },
     "palworld": {
       "name": "Palworld",
       "slug": "palworld"
@@ -194,9 +242,21 @@
       "name": "Ready or Not",
       "slug": "ready-or-not"
     },
+    "satisfactory": {
+      "name": "Satisfactory",
+      "slug": "satisfactory"
+    },
+    "silent-hill-2": {
+      "name": "Silent Hill 2",
+      "slug": "silent-hill-2"
+    },
     "space-marine-2": {
       "name": "Warhammer 40,000: Space Marine 2",
       "slug": "warhammer-40k-space-marine-2"
+    },
+    "spider-man-2": {
+      "name": "Marvel's Spider-Man 2",
+      "slug": "marvels-spider-man-2"
     },
     "spider-man-miles-morales": {
       "name": "Marvel's Spider-Man: Miles Morales",

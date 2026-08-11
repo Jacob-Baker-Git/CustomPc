@@ -205,6 +205,12 @@
     "slug": "call-of-duty-black-ops-6",
     "presets": [
       {
+        "id": "extrem",
+        "label": "Extrem",
+        "tier": 4,
+        "upscaling": "native"
+      },
+      {
         "id": "ultra",
         "label": "Ultra",
         "tier": 4,
@@ -413,6 +419,19 @@
     ]
   },
   {
+    "id": "dragon-age-veilguard",
+    "name": "Dragon Age: The Veilguard",
+    "slug": "dragon-age-the-veilguard",
+    "presets": [
+      {
+        "id": "ultra",
+        "label": "Ultra (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
     "id": "dragons-dogma-2",
     "name": "Dragon's Dogma 2",
     "slug": "dragons-dogma-2",
@@ -427,6 +446,12 @@
         "id": "high",
         "label": "High",
         "tier": 3,
+        "upscaling": "native"
+      },
+      {
+        "id": "grafik-priorisieren",
+        "label": "Grafik priorisieren",
+        "tier": 4,
         "upscaling": "native"
       }
     ]
@@ -464,10 +489,29 @@
     "fpsCap": 60
   },
   {
+    "id": "empire-of-the-ants",
+    "name": "Empire of the Ants",
+    "slug": "empire-of-the-ants",
+    "presets": [
+      {
+        "id": "hoch",
+        "label": "Hoch (DLSS/FSR Ultra Quality)",
+        "tier": 3,
+        "upscaling": "ultra-quality"
+      }
+    ]
+  },
+  {
     "id": "f1-24",
     "name": "F1 24",
     "slug": "f1-24",
     "presets": [
+      {
+        "id": "ultrahoch",
+        "label": "Ultrahoch",
+        "tier": 4,
+        "upscaling": "native"
+      },
       {
         "id": "ultra",
         "label": "Ultra",
@@ -501,6 +545,12 @@
       },
       {
         "id": "ultra",
+        "label": "Ultra (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      },
+      {
+        "id": "ultra",
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
@@ -521,6 +571,19 @@
       {
         "id": "epic",
         "label": "Epic",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "frostpunk-2",
+    "name": "Frostpunk 2",
+    "slug": "frostpunk-2",
+    "presets": [
+      {
+        "id": "ultra-high",
+        "label": "Ultra-High",
         "tier": 4,
         "upscaling": "native"
       }
@@ -676,6 +739,12 @@
         "upscaling": "native"
       },
       {
+        "id": "hoch",
+        "label": "Hoch (DLSS/FSR Quality)",
+        "tier": 3,
+        "upscaling": "quality"
+      },
+      {
         "id": "high",
         "label": "High",
         "tier": 3,
@@ -763,6 +832,12 @@
         "upscaling": "native"
       },
       {
+        "id": "sehr-hoch",
+        "label": "Sehr hoch",
+        "tier": 4,
+        "upscaling": "native"
+      },
+      {
         "id": "very-high",
         "label": "Very high",
         "tier": 4,
@@ -820,6 +895,12 @@
       },
       {
         "id": "ultra",
+        "label": "Ultra (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      },
+      {
+        "id": "ultra",
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
@@ -874,6 +955,32 @@
         "tier": 3,
         "upscaling": "native"
       },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "mechwarrior-5-clans",
+    "name": "MechWarrior 5: Clans",
+    "slug": "mechwarrior-5-clans",
+    "presets": [
+      {
+        "id": "maximale-grafikdetails",
+        "label": "Maximale Grafikdetails",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "outcast-2",
+    "name": "Outcast: A New Beginning",
+    "slug": "outcast-a-new-beginning",
+    "presets": [
       {
         "id": "ultra",
         "label": "Ultra",
@@ -1001,6 +1108,32 @@
     ]
   },
   {
+    "id": "satisfactory",
+    "name": "Satisfactory",
+    "slug": "satisfactory",
+    "presets": [
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "silent-hill-2",
+    "name": "Silent Hill 2",
+    "slug": "silent-hill-2",
+    "presets": [
+      {
+        "id": "episch",
+        "label": "Episch (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
     "id": "space-marine-2",
     "name": "Warhammer 40,000: Space Marine 2",
     "slug": "warhammer-40k-space-marine-2",
@@ -1026,6 +1159,19 @@
       {
         "id": "ultra",
         "label": "Ultra",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "spider-man-2",
+    "name": "Marvel's Spider-Man 2",
+    "slug": "marvels-spider-man-2",
+    "presets": [
+      {
+        "id": "sehr-hoch",
+        "label": "Sehr hoch",
         "tier": 4,
         "upscaling": "native"
       }
