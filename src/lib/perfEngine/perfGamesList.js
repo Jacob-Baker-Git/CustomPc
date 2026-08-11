@@ -26,6 +26,7 @@ const UPSCALING_LABELS = {
   quality: 'DLSS/FSR Quality',
   balanced: 'DLSS/FSR Balanced',
   performance: 'DLSS/FSR Performance',
+  'ultra-performance': 'DLSS/FSR Ultra Performance',
 }
 
 export function buildPerfGames({ meta, entries, legacy = [] }) {

@@ -1,0 +1,201 @@
+# ComputerBase — AMD Ryzen 7 9800X3D vs. 7800X3D, 5800X3D & Core Ultra im Test.
+# Gaming-Benchmarks, 720p. 720p is deliberate: a CPU-scaling review removes the
+# graphics card as a limit so the processors actually separate.
+#
+# THE WHOLE PARCOURS, not one game. The file this replaces took Ghost of
+# Tsushima alone from a review that benchmarks 15 games across 47 charts.
+#
+# ⚠️ THIS REVIEW SHARES A RENDER SCALE WITH THE RX 9070 GPU REVIEW ON ONLY THREE
+# GAMES — ghost-of-tsushima, horizon-forbidden-west and f1-24 — because a CPU
+# test reaches for aggressive upsampling ON PURPOSE. Frostpunk 2, Hellblade 2 and
+# Space Marine 2 run DLSS Ultra Performance here and native in the GPU review, so
+# their cells stay separate and answer nothing rather than blending a third-scale
+# render with a native one. That is the upscaling cell key doing its job.
+#
+# Settings read per game off "Die Einstellungen der 15 Spiele im Detail" on the
+# article's benchmark page. Never inferred, and never carried across from the GPU
+# review — same outlet is not the same setting.
+#
+# DELIBERATELY EXCLUDED, so every row here shares the one recorded test system:
+#   · Ryzen 7 7800X3D — ran DDR5-5200CL30, not the DDR5-5600CL32 standard
+#   · Ryzen 7 5800X3D — AM4 on DDR4-3200CL14, a different platform entirely
+#   · every Turbo-Mode and DDR5-OC row — non-stock configurations that collide on
+#     entry id with their stock counterparts, where the importer's dedupe
+#     silently keeps whichever landed first
+#   · Cyberpunk — run with RT Niedrig and no preset named
+#   · Homeworld 3 — "DLSS" with no quality stated; the corpus refuses an
+#     upscaler whose render fraction nobody wrote down
+#   · every CPU Package Power chart — a wattage, not a frame rate
+# Intel's "(Perf.)" rows ARE kept: that is the stock power profile, and it is
+# what the twelve rows previously committed from this review used.
+# RAM capacity/sticks are ComputerBase's standard kit; the article states the
+# speed and timing (DDR5-5600CL32) but not the capacity.
+
+outlet:    ComputerBase
+title:     AMD Ryzen 7 9800X3D vs. 7800X3D, 5800X3D & Core Ultra im Test
+url:       https://www.computerbase.de/artikel/prozessoren/amd-ryzen-7-9800x3d-test.90151/seite-2
+published: 2024-11-06
+kind:      cpu-scaling
+gpu:       gpu-rtx-4090
+ram:       DDR5 5600 32 2
+os:        Windows 11 24H2 (Build 26100.2033)
+driver:    NVIDIA GeForce 565.90
+scene:     ComputerBase in-game test sequence (exact scene not stated in the article)
+
+game                    res    preset            up                 part                      avg     low
+anno-1800               720p   ultrahoch         native             cpu-ryzen-7-9800x3d       136     90
+anno-1800               720p   ultrahoch         native             cpu-i9-14900ks            100.6   76.9
+anno-1800               720p   ultrahoch         native             cpu-i9-14900k             97.1    74.7
+anno-1800               720p   ultrahoch         native             cpu-i7-14700k             94.8    72.1
+anno-1800               720p   ultrahoch         native             cpu-i5-14600k             90.4    68.1
+anno-1800               720p   ultrahoch         native             cpu-intel-ultra-9-285k    81.3    70.1
+anno-1800               720p   ultrahoch         native             cpu-ryzen-9-9950x         79.1    60.8
+anno-1800               720p   ultrahoch         native             cpu-intel-ultra-7-265k    78.7    65.8
+anno-1800               720p   ultrahoch         native             cpu-ryzen-7-9700x         77.4    62
+anno-1800               720p   ultrahoch         native             cpu-ryzen-5-9600x         76.7    59
+anno-1800               720p   ultrahoch         native             cpu-intel-ultra-5-245k    75.9    62.5
+anno-1800               720p   ultrahoch         native             cpu-ryzen-9-9900x         75.6    57.8
+bg3                     720p   ultra             native             cpu-ryzen-7-9800x3d       255.7   202.9
+bg3                     720p   ultra             native             cpu-i9-14900k             164.1   124.3
+bg3                     720p   ultra             native             cpu-i9-14900ks            163.6   124.8
+bg3                     720p   ultra             native             cpu-ryzen-9-9950x         161     126.7
+bg3                     720p   ultra             native             cpu-i7-14700k             160.4   121.4
+bg3                     720p   ultra             native             cpu-ryzen-7-9700x         159.5   124.8
+bg3                     720p   ultra             native             cpu-intel-ultra-9-285k    153.2   122.6
+bg3                     720p   ultra             native             cpu-ryzen-5-9600x         152     117.2
+bg3                     720p   ultra             native             cpu-ryzen-9-9900x         147.9   115.9
+bg3                     720p   ultra             native             cpu-intel-ultra-7-265k    145.8   116.2
+bg3                     720p   ultra             native             cpu-intel-ultra-5-245k    140.9   113
+bg3                     720p   ultra             native             cpu-i5-14600k             139.8   103.6
+cities-skylines-2       720p   hoch              ultra-performance  cpu-intel-ultra-9-285k    49.8    24.3
+cities-skylines-2       720p   hoch              ultra-performance  cpu-i9-14900ks            46.7    22.9
+cities-skylines-2       720p   hoch              ultra-performance  cpu-i9-14900k             46.2    24.5
+cities-skylines-2       720p   hoch              ultra-performance  cpu-i7-14700k             45.7    22.5
+cities-skylines-2       720p   hoch              ultra-performance  cpu-ryzen-9-9900x         45.2    17.5
+cities-skylines-2       720p   hoch              ultra-performance  cpu-ryzen-7-9800x3d       45.1    24.9
+cities-skylines-2       720p   hoch              ultra-performance  cpu-intel-ultra-7-265k    44.7    19
+cities-skylines-2       720p   hoch              ultra-performance  cpu-ryzen-9-9950x         43.8    21.2
+cities-skylines-2       720p   hoch              ultra-performance  cpu-ryzen-7-9700x         43.5    18.5
+cities-skylines-2       720p   hoch              ultra-performance  cpu-i5-14600k             43.4    16
+cities-skylines-2       720p   hoch              ultra-performance  cpu-intel-ultra-5-245k    38.2    15.5
+cities-skylines-2       720p   hoch              ultra-performance  cpu-ryzen-5-9600x         36.7    16.2
+dragons-dogma-2         720p   hoch              native             cpu-ryzen-7-9800x3d       116.2   82.9
+dragons-dogma-2         720p   hoch              native             cpu-i7-14700k             92.8    62.4
+dragons-dogma-2         720p   hoch              native             cpu-i9-14900ks            91.9    61.3
+dragons-dogma-2         720p   hoch              native             cpu-i9-14900k             91.4    59.3
+dragons-dogma-2         720p   hoch              native             cpu-intel-ultra-9-285k    88.1    64
+dragons-dogma-2         720p   hoch              native             cpu-intel-ultra-7-265k    85.5    60.8
+dragons-dogma-2         720p   hoch              native             cpu-i5-14600k             82      54.7
+dragons-dogma-2         720p   hoch              native             cpu-ryzen-7-9700x         79.8    64.1
+dragons-dogma-2         720p   hoch              native             cpu-intel-ultra-5-245k    79.2    55.9
+dragons-dogma-2         720p   hoch              native             cpu-ryzen-9-9950x         78.5    61.9
+dragons-dogma-2         720p   hoch              native             cpu-ryzen-5-9600x         76      59.9
+dragons-dogma-2         720p   hoch              native             cpu-ryzen-9-9900x         75.8    59.4
+f1-24                   720p   ultrahoch         native             cpu-ryzen-7-9800x3d       271     141.3
+f1-24                   720p   ultrahoch         native             cpu-i9-14900k             207     128.9
+f1-24                   720p   ultrahoch         native             cpu-i9-14900ks            205.9   127.8
+f1-24                   720p   ultrahoch         native             cpu-ryzen-9-9950x         201.1   111.1
+f1-24                   720p   ultrahoch         native             cpu-i7-14700k             200.8   121.9
+f1-24                   720p   ultrahoch         native             cpu-ryzen-7-9700x         197     112.6
+f1-24                   720p   ultrahoch         native             cpu-ryzen-9-9900x         190.2   106.2
+f1-24                   720p   ultrahoch         native             cpu-ryzen-5-9600x         190     108.4
+f1-24                   720p   ultrahoch         native             cpu-i5-14600k             183.7   114.7
+f1-24                   720p   ultrahoch         native             cpu-intel-ultra-7-265k    179.4   107.8
+f1-24                   720p   ultrahoch         native             cpu-intel-ultra-9-285k    175.2   108.2
+f1-24                   720p   ultrahoch         native             cpu-intel-ultra-5-245k    168.3   105.8
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-ryzen-7-9800x3d       77.3    59.1
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-i9-14900ks            64.4    45.5
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-i7-14700k             63.1    45.9
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-i9-14900k             62.9    45.8
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-i5-14600k             58.5    41.3
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-ryzen-7-9700x         57.7    43.6
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-ryzen-9-9950x         56.7    43.2
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-ryzen-5-9600x         56      41.9
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-intel-ultra-9-285k    55.7    45.8
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-ryzen-9-9900x         55.7    39.5
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-intel-ultra-7-265k    54.8    44.3
+frostpunk-2             720p   ultra-high        ultra-performance  cpu-intel-ultra-5-245k    54.5    41.4
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-ryzen-7-9800x3d       199.2   158.8
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-i9-14900ks            178.7   128.2
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-i9-14900k             174.2   125.9
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-i7-14700k             174     130.4
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-ryzen-7-9700x         172.6   150.5
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-ryzen-9-9900x         168.7   147
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-ryzen-5-9600x         167.9   140.6
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-ryzen-9-9950x         162.7   142.5
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-i5-14600k             158.3   115.9
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-intel-ultra-9-285k    153.7   133
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-intel-ultra-7-265k    148.4   126.1
+ghost-of-tsushima       720p   sehr-hoch         native             cpu-intel-ultra-5-245k    143.2   122.1
+hellblade-2             720p   hoch              ultra-performance  cpu-ryzen-7-9800x3d       165.7   118.3
+hellblade-2             720p   hoch              ultra-performance  cpu-intel-ultra-9-285k    151.4   111.9
+hellblade-2             720p   hoch              ultra-performance  cpu-intel-ultra-7-265k    149.6   119.1
+hellblade-2             720p   hoch              ultra-performance  cpu-ryzen-7-9700x         147.6   121.1
+hellblade-2             720p   hoch              ultra-performance  cpu-ryzen-9-9900x         145     115.7
+hellblade-2             720p   hoch              ultra-performance  cpu-ryzen-5-9600x         143.9   105.5
+hellblade-2             720p   hoch              ultra-performance  cpu-ryzen-9-9950x         142.6   109.8
+hellblade-2             720p   hoch              ultra-performance  cpu-intel-ultra-5-245k    142.5   108.4
+hellblade-2             720p   hoch              ultra-performance  cpu-i7-14700k             136.6   94.5
+hellblade-2             720p   hoch              ultra-performance  cpu-i9-14900ks            135.4   87.7
+hellblade-2             720p   hoch              ultra-performance  cpu-i5-14600k             134.9   84.8
+hellblade-2             720p   hoch              ultra-performance  cpu-i9-14900k             134.2   87.8
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-ryzen-7-9800x3d       240.7   164.8
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-intel-ultra-9-285k    208.2   150.9
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-intel-ultra-7-265k    198     144
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-intel-ultra-5-245k    196.9   145
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-i7-14700k             190.8   137.9
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-i9-14900k             189.6   137.4
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-i9-14900ks            187     133.8
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-ryzen-9-9900x         186.1   130.2
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-ryzen-7-9700x         181.9   128.5
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-i5-14600k             180.4   129.9
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-ryzen-5-9600x         174.7   125.2
+horizon-forbidden-west  720p   sehr-hoch         native             cpu-ryzen-9-9950x         168.5   125.2
+outcast-2               720p   ultra             performance        cpu-ryzen-7-9800x3d       151.4   104.1
+outcast-2               720p   ultra             performance        cpu-i9-14900ks            106.5   75.4
+outcast-2               720p   ultra             performance        cpu-i9-14900k             106     74.8
+outcast-2               720p   ultra             performance        cpu-i7-14700k             104.2   77.7
+outcast-2               720p   ultra             performance        cpu-ryzen-9-9900x         102.7   64.9
+outcast-2               720p   ultra             performance        cpu-i5-14600k             99.7    67.6
+outcast-2               720p   ultra             performance        cpu-ryzen-9-9950x         99.3    66.5
+outcast-2               720p   ultra             performance        cpu-ryzen-7-9700x         95      61
+outcast-2               720p   ultra             performance        cpu-ryzen-5-9600x         93.1    67.4
+outcast-2               720p   ultra             performance        cpu-intel-ultra-5-245k    92.9    60.3
+outcast-2               720p   ultra             performance        cpu-intel-ultra-7-265k    90      54.8
+outcast-2               720p   ultra             performance        cpu-intel-ultra-9-285k    89.6    55.4
+space-marine-2          720p   max               ultra-performance  cpu-ryzen-7-9800x3d       226.8   191.2
+space-marine-2          720p   max               ultra-performance  cpu-ryzen-9-9950x         186.6   148.3
+space-marine-2          720p   max               ultra-performance  cpu-ryzen-9-9900x         180.2   148.5
+space-marine-2          720p   max               ultra-performance  cpu-ryzen-5-9600x         179.4   148.1
+space-marine-2          720p   max               ultra-performance  cpu-ryzen-7-9700x         176.9   149.9
+space-marine-2          720p   max               ultra-performance  cpu-i7-14700k             155.6   117.9
+space-marine-2          720p   max               ultra-performance  cpu-intel-ultra-7-265k    151.7   134.5
+space-marine-2          720p   max               ultra-performance  cpu-i5-14600k             143.6   108.6
+space-marine-2          720p   max               ultra-performance  cpu-intel-ultra-9-285k    143.6   128.3
+space-marine-2          720p   max               ultra-performance  cpu-intel-ultra-5-245k    140.3   123.3
+space-marine-2          720p   max               ultra-performance  cpu-i9-14900ks            138.9   109.4
+space-marine-2          720p   max               ultra-performance  cpu-i9-14900k             136.8   109
+star-wars-outlaws       720p   ultra             performance        cpu-ryzen-7-9800x3d       185.5   125.1
+star-wars-outlaws       720p   ultra             performance        cpu-i7-14700k             153.4   114.9
+star-wars-outlaws       720p   ultra             performance        cpu-i9-14900ks            152     114
+star-wars-outlaws       720p   ultra             performance        cpu-i9-14900k             150.8   112.9
+star-wars-outlaws       720p   ultra             performance        cpu-intel-ultra-9-285k    145.9   109.8
+star-wars-outlaws       720p   ultra             performance        cpu-ryzen-9-9950x         138.8   102.8
+star-wars-outlaws       720p   ultra             performance        cpu-intel-ultra-7-265k    138.7   103.3
+star-wars-outlaws       720p   ultra             performance        cpu-ryzen-7-9700x         137.6   99.2
+star-wars-outlaws       720p   ultra             performance        cpu-i5-14600k             137     102.1
+star-wars-outlaws       720p   ultra             performance        cpu-intel-ultra-5-245k    133.6   99.2
+star-wars-outlaws       720p   ultra             performance        cpu-ryzen-9-9900x         130.3   95.1
+star-wars-outlaws       720p   ultra             performance        cpu-ryzen-5-9600x         124.9   94.5
+starfield               720p   ultra             native             cpu-ryzen-7-9800x3d       117.1   95.1
+starfield               720p   ultra             native             cpu-i7-14700k             104.9   77.9
+starfield               720p   ultra             native             cpu-i9-14900ks            101.2   72.7
+starfield               720p   ultra             native             cpu-i9-14900k             98.9    70.4
+starfield               720p   ultra             native             cpu-i5-14600k             93.2    76
+starfield               720p   ultra             native             cpu-intel-ultra-9-285k    92.6    77.2
+starfield               720p   ultra             native             cpu-ryzen-9-9950x         90      75
+starfield               720p   ultra             native             cpu-intel-ultra-7-265k    89.8    75.3
+starfield               720p   ultra             native             cpu-ryzen-7-9700x         85.9    70.4
+starfield               720p   ultra             native             cpu-intel-ultra-5-245k    83.4    72.5
+starfield               720p   ultra             native             cpu-ryzen-9-9900x         78.2    65.8
+starfield               720p   ultra             native             cpu-ryzen-5-9600x         75      63.3

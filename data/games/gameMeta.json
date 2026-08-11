@@ -33,6 +33,10 @@
       "label": "Low",
       "tier": 1
     },
+    "max": {
+      "label": "Max",
+      "tier": 4
+    },
     "max-details": {
       "label": "Max. Details",
       "tier": 4
@@ -75,6 +79,10 @@
       "name": "Alan Wake 2",
       "slug": "alan-wake-2"
     },
+    "anno-1800": {
+      "name": "Anno 1800",
+      "slug": "anno-1800"
+    },
     "apex": {
       "name": "Apex Legends",
       "slug": "apex-legends"
@@ -94,6 +102,10 @@
     "black-myth-wukong": {
       "name": "Black Myth: Wukong",
       "slug": "black-myth-wukong"
+    },
+    "cities-skylines-2": {
+      "name": "Cities: Skylines II",
+      "slug": "cities-skylines-2"
     },
     "cod-black-ops-6": {
       "name": "Call of Duty: Black Ops 6",

@@ -77,6 +77,30 @@ export const CB_GPU_IDS = {
   // Arc B570 is deliberately absent: no catalogue part, so its rows are refused.
 }
 
+// Same rule as CB_GPU_IDS: hand-written, never derived from the name.
+export const CB_CPU_IDS = {
+  'AMD Ryzen 5 9600X': 'cpu-ryzen-5-9600x',
+  'AMD Ryzen 7 9700X': 'cpu-ryzen-7-9700x',
+  'AMD Ryzen 7 9800X3D': 'cpu-ryzen-7-9800x3d',
+  'AMD Ryzen 9 9900X': 'cpu-ryzen-9-9900x',
+  'AMD Ryzen 9 9950X': 'cpu-ryzen-9-9950x',
+  'Intel Core i5-14600K': 'cpu-i5-14600k',
+  'Intel Core i7-14700K': 'cpu-i7-14700k',
+  'Intel Core i9-14900K': 'cpu-i9-14900k',
+  'Intel Core i9-14900KS': 'cpu-i9-14900ks',
+  'Intel Core Ultra 5 245K': 'cpu-intel-ultra-5-245k',
+  'Intel Core Ultra 7 265K': 'cpu-intel-ultra-7-265k',
+  'Intel Core Ultra 9 285K': 'cpu-intel-ultra-9-285k',
+  // Deliberately absent, so their rows are refused rather than filed against the
+  // review's recorded test system:
+  //   AMD Ryzen 7 7800X3D — ran DDR5-5200CL30, not the DDR5-5600CL32 standard
+  //   AMD Ryzen 7 5800X3D — AM4 on DDR4-3200CL14, a different platform entirely
+}
+
+// Every row this review reports ran the same memory. A row that did not is not
+// the recorded test system, whatever chip is on it.
+export const CB_9800X3D_MEMORY = 'DDR5-5600CL32'
+
 // Aggregate charts. They are a rating across the whole parcours, not a game.
 const RATING = /rating|percentil-rating|frametimes$/i
 
@@ -174,6 +198,71 @@ function rowsIn(groupHtml) {
     out.push({ part, value: Number(value[1]) })
   }
   return out
+}
+
+// Processor reviews use a DIFFERENT chart shape from graphics-card reviews:
+// the title carries the metric rather than the resolution ("Anno 1800 – FPS,
+// Durchschnitt"), there is one chart per metric instead of two groups in one,
+// and each row's power/memory configuration rides in a span inside chart__item.
+//
+// That span is what makes the non-stock rows separable mechanically rather than
+// by position. ComputerBase charts several configurations of one chip, and they
+// are NOT interchangeable: a Turbo-Mode or memory-overclocked row is a different
+// machine from the stock one and would collide with it on entry id, where the
+// importer's dedupe silently keeps whichever landed first.
+const CPU_ROW_QUALIFIER = /\((Turbo Mode|DDR5-OC|DDR4-OC)\)/i
+
+// "(Perf.)" is ComputerBase's stock Intel power profile, not an overclock, and
+// the rows already in the corpus are the (Perf.) ones. It is stripped from the
+// name rather than refused.
+const CPU_STOCK_PROFILE = /\s*\((Perf\.|Performance)\)\s*$/i
+
+// [{ game, rows: [{ part, memory, avg, low }] }] — one entry per game, with the
+// average and percentile charts already paired.
+export function extractCpuCharts(html) {
+  const byGame = new Map()
+  const blocks = html.split(/<div class="chart__title[^"]*">/).slice(1)
+
+  for (const block of blocks) {
+    const titleEnd = block.indexOf('</div>')
+    if (titleEnd < 0) continue
+    const title = decode(block.slice(0, titleEnd))
+    if (RATING.test(title)) continue
+
+    // "Game – FPS, Durchschnitt". Split on the en dash; the tail names the
+    // metric. "CPU Package Power" shares the chart shape and is a wattage, not
+    // a frame rate — importing it as one would be a category error.
+    const dash = title.search(/\s+[–—]\s+/)
+    if (dash < 0) continue
+    const game = title.slice(0, dash).trim()
+    const metric = title.slice(dash).trim()
+    const isAvg = /Durchschnitt/i.test(metric)
+    const isLow = /Perzentil/i.test(metric)
+    if (!isAvg && !isLow) continue
+
+    if (!byGame.has(game)) byGame.set(game, new Map())
+    const rows = byGame.get(game)
+
+    for (const chunk of block.split(/<li class="chart__row/).slice(1)) {
+      const item = /<div class="chart__item"[^>]*>([\s\S]*?)<\/div>/.exec(chunk)
+      const value = /<div class="chart__label[^"]*"[^>]*data-value="([\d.]+)"/.exec(chunk)
+      if (!item || !value) continue
+
+      const addtl = /<span class="chart__item-title-addtl">([\s\S]*?)<\/span>/.exec(item[1])
+      const memory = addtl ? decode(addtl[1]) : ''
+      const raw = decode(item[1].replace(
+        /<span class="chart__item-title-addtl">[\s\S]*?<\/span>/, ''))
+      if (!raw || CPU_ROW_QUALIFIER.test(raw)) continue
+
+      const part = raw.replace(CPU_STOCK_PROFILE, '').trim()
+      if (!rows.has(part)) rows.set(part, { part, memory, avg: null, low: null })
+      rows.get(part)[isAvg ? 'avg' : 'low'] = Number(value[1])
+    }
+  }
+
+  return [...byGame]
+    .map(([game, rows]) => ({ game, rows: [...rows.values()].filter((r) => r.avg != null) }))
+    .filter((g) => g.rows.length)
 }
 
 // [{ game, resolution, upscaling, rows: [{ part, avg, low }] }]

@@ -56,6 +56,19 @@
     ]
   },
   {
+    "id": "anno-1800",
+    "name": "Anno 1800",
+    "slug": "anno-1800",
+    "presets": [
+      {
+        "id": "ultrahoch",
+        "label": "Ultrahoch",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
     "id": "apex",
     "name": "Apex Legends",
     "slug": "apex-legends",
@@ -196,6 +209,19 @@
         "label": "Kino (DLSS/FSR Quality)",
         "tier": 4,
         "upscaling": "quality"
+      }
+    ]
+  },
+  {
+    "id": "cities-skylines-2",
+    "name": "Cities: Skylines II",
+    "slug": "cities-skylines-2",
+    "presets": [
+      {
+        "id": "hoch",
+        "label": "Hoch (DLSS/FSR Ultra Performance)",
+        "tier": 3,
+        "upscaling": "ultra-performance"
       }
     ]
   },
@@ -449,6 +475,12 @@
         "upscaling": "native"
       },
       {
+        "id": "hoch",
+        "label": "Hoch",
+        "tier": 3,
+        "upscaling": "native"
+      },
+      {
         "id": "grafik-priorisieren",
         "label": "Grafik priorisieren",
         "tier": 4,
@@ -586,6 +618,12 @@
         "label": "Ultra-High",
         "tier": 4,
         "upscaling": "native"
+      },
+      {
+        "id": "ultra-high",
+        "label": "Ultra-High (DLSS/FSR Ultra Performance)",
+        "tier": 4,
+        "upscaling": "ultra-performance"
       }
     ]
   },
@@ -749,6 +787,12 @@
         "label": "High",
         "tier": 3,
         "upscaling": "native"
+      },
+      {
+        "id": "hoch",
+        "label": "Hoch (DLSS/FSR Ultra Performance)",
+        "tier": 3,
+        "upscaling": "ultra-performance"
       }
     ]
   },
@@ -986,6 +1030,12 @@
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra (DLSS/FSR Performance)",
+        "tier": 4,
+        "upscaling": "performance"
       }
     ]
   },
@@ -1161,6 +1211,12 @@
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
+      },
+      {
+        "id": "max",
+        "label": "Max (DLSS/FSR Ultra Performance)",
+        "tier": 4,
+        "upscaling": "ultra-performance"
       }
     ]
   },
@@ -1292,6 +1348,12 @@
         "label": "High",
         "tier": 3,
         "upscaling": "native"
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra (DLSS/FSR Performance)",
+        "tier": 4,
+        "upscaling": "performance"
       },
       {
         "id": "ultra",

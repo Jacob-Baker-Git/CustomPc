@@ -24,7 +24,17 @@ export const LOW_KINDS = ['1%', '0.1%', 'min']
 // a table and are not comparable. Vendor-neutral on purpose — DLSS Quality,
 // FSR Quality and XeSS Quality all render at the same fraction, and the fit
 // cares about the fraction, not whose marketing name is on it.
-export const UPSCALING = ['native', 'ultra-quality', 'quality', 'balanced', 'performance']
+// Ordered by render fraction, roughly: native 100%, ultra-quality 77%,
+// quality 67%, balanced 58%, performance 50%, ultra-performance 33%.
+//
+// `ultra-performance` is not a synonym for `performance`. CPU-scaling reviews
+// reach for it deliberately — ComputerBase runs Frostpunk 2, Hellblade 2 and
+// Space Marine 2 at DLSS Ultra Performance precisely to take the graphics card
+// out of the measurement — so folding it into `performance` would file a
+// third-scale render as a half-scale one.
+export const UPSCALING = [
+  'native', 'ultra-quality', 'quality', 'balanced', 'performance', 'ultra-performance',
+]
 
 // Nothing renders faster than this, and nothing playable is slower. A figure
 // outside the range is a transcription error, not a measurement.

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { parseChartTitle, extractCharts, CB_RESOLUTIONS, CB_UPSCALING, CB_GPU_IDS }
-  from '../lib/perfEngine/computerbase'
+import { parseChartTitle, extractCharts, extractCpuCharts, CB_RESOLUTIONS, CB_UPSCALING,
+  CB_GPU_IDS, CB_CPU_IDS } from '../lib/perfEngine/computerbase'
 import parts from '../data/partsData.json'
 
 // Markup copied verbatim from the RX 9070 review, including the two class
@@ -122,6 +122,94 @@ describe('parseChartTitle', () => {
   it('exposes its vocabularies so a caller can assert on them', () => {
     expect(CB_RESOLUTIONS['2.560 × 1.440']).toBe('1440p')
     expect(CB_UPSCALING['DLSS/FSR Quality']).toBe('quality')
+  })
+})
+
+// Verbatim from the 9800X3D review, keeping one of each row shape that has to
+// be told apart: stock, Turbo Mode, memory-overclocked, a non-standard memory
+// kit, and Intel's stock "(Perf.)" profile.
+const CPU_CHART = `
+<div class="chart__title nojs-block">Ghost of Tsushima – FPS, Durchschnitt</div>
+<ul class="chart__groups"><li class="chart__group"><ul class="chart__group-body">
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 7 9800X3D (Turbo Mode)<br>
+  <span class="chart__item-title-addtl">120/162 W, DDR5-5600CL32</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="202.7">202,7</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 7 9800X3D (DDR5-OC)<br>
+  <span class="chart__item-title-addtl">120/162 W, DDR5-7800CL38</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="200.4">200,4</div></div></div></li>
+<li class="chart__row"><div class="chart__item"><strong><u>AMD Ryzen 7 9800X3D</u></strong><br>
+  <span class="chart__item-title-addtl">120/162 W, DDR5-5600CL32</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="199.2">199,2</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 7 7800X3D<br>
+  <span class="chart__item-title-addtl">120/162 W, DDR5-5200CL30</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="191.3">191,3</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  Intel Core i9-14900KS (Perf.)<br>
+  <span class="chart__item-title-addtl">253/253 W, DDR5-5600CL32</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="178.7">178,7</div></div></div></li>
+</ul></li></ul>
+<div class="chart__title nojs-block">Ghost of Tsushima – FPS, 1% Perzentil</div>
+<ul class="chart__groups"><li class="chart__group"><ul class="chart__group-body">
+<li class="chart__row"><div class="chart__item"><strong><u>AMD Ryzen 7 9800X3D</u></strong><br>
+  <span class="chart__item-title-addtl">120/162 W, DDR5-5600CL32</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="158.8">158,8</div></div></div></li>
+</ul></li></ul>
+<div class="chart__title nojs-block">Ghost of Tsushima – CPU Package Power</div>
+<ul class="chart__groups"><li class="chart__group"><ul class="chart__group-body">
+<li class="chart__row"><div class="chart__item"><strong><u>AMD Ryzen 7 9800X3D</u></strong><br>
+  <span class="chart__item-title-addtl">120/162 W, DDR5-5600CL32</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="67">67</div></div></div></li>
+</ul></li></ul>
+`
+
+describe('extractCpuCharts', () => {
+  const [chart] = extractCpuCharts(CPU_CHART)
+
+  it('pairs the average and percentile charts of one game', () => {
+    expect(chart.game).toBe('Ghost of Tsushima')
+    const stock = chart.rows.find((r) => r.part === 'AMD Ryzen 7 9800X3D')
+    expect(stock).toMatchObject({ avg: 199.2, low: 158.8, memory: '120/162 W, DDR5-5600CL32' })
+  })
+
+  it('refuses non-stock configurations of a chip already in the chart', () => {
+    // Turbo Mode and DDR5-OC are different machines from the stock row and
+    // collide with it on entry id, where the importer's dedupe silently keeps
+    // whichever landed first.
+    expect(chart.rows.map((r) => r.part)).not.toContain('AMD Ryzen 7 9800X3D (Turbo Mode)')
+    expect(chart.rows.map((r) => r.part)).not.toContain('AMD Ryzen 7 9800X3D (DDR5-OC)')
+    expect(chart.rows.filter((r) => r.part === 'AMD Ryzen 7 9800X3D')).toHaveLength(1)
+  })
+
+  it("keeps Intel's stock (Perf.) profile, stripping the suffix from the name", () => {
+    // (Perf.) is the stock power profile, not an overclock — the rows already in
+    // the corpus are the (Perf.) ones.
+    const ks = chart.rows.find((r) => r.part === 'Intel Core i9-14900KS')
+    expect(ks.avg).toBe(178.7)
+  })
+
+  it('carries the memory configuration, so a non-standard kit can be refused', () => {
+    // The 7800X3D ran DDR5-5200CL30 — not the review's recorded test system.
+    const odd = chart.rows.find((r) => r.part === 'AMD Ryzen 7 7800X3D')
+    expect(odd.memory).toBe('120/162 W, DDR5-5200CL30')
+  })
+
+  it('ignores the CPU Package Power chart, which is a wattage not a frame rate', () => {
+    const stock = chart.rows.find((r) => r.part === 'AMD Ryzen 7 9800X3D')
+    expect(stock.avg).toBe(199.2)
+    expect(stock.avg).not.toBe(67)
+  })
+})
+
+describe('CB_CPU_IDS', () => {
+  it('resolves every mapped name to a real catalogue part', () => {
+    const byId = new Set(parts.filter((p) => p.category === 'cpu').map((p) => p.id))
+    const unresolved = Object.entries(CB_CPU_IDS)
+      .filter(([, id]) => !byId.has(id))
+      .map(([name, id]) => `${name} -> ${id}`)
+    expect(unresolved).toEqual([])
   })
 })
 
