@@ -20,9 +20,21 @@ const read = (rel) => JSON.parse(readFileSync(path(rel), 'utf8'))
 const write = (rel, data) => writeFileSync(path(rel), `${JSON.stringify(data, null, 2)}\n`)
 
 const parts = read('../src/data/partsData.json')
-// Measured games first (see perfGames.json), legacy catalogue games after, so
-// either id resolves. Kept in step with import-bench-tsv.mjs.
-const games = [...read('../src/data/perfGames.json'), ...read('../src/data/gamesData.json')]
+// Measured games first (perfGames.json is derived from the corpus, so these are
+// the ones a review is most likely to be adding to), then every other permitted
+// id from gameMeta.json, then the legacy catalogue — so the common case is at
+// the top of the picker and nothing permitted is unreachable. Kept in step with
+// import-bench-tsv.mjs, which validates against the same permitted set.
+const measured = read('../src/data/perfGames.json')
+const meta = read('../data/games/gameMeta.json')
+const measuredIds = new Set(measured.map((g) => g.id))
+const games = [
+  ...measured,
+  ...Object.entries(meta.games)
+    .filter(([id]) => !measuredIds.has(id))
+    .map(([id, g]) => ({ id, name: g.name })),
+  ...read('../src/data/gamesData.json'),
+]
 const sources = read('../data/benchmarks/sources.json')
 const entries = read('../data/benchmarks/entries.json')
 const validation = read('../data/benchmarks/validation.json')

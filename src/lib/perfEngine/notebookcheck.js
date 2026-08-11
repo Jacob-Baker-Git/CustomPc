@@ -38,7 +38,7 @@ export const NBC_GPU_PAGES = [
 // Notebookcheck's title -> catalogue game id. Only titles the catalogue actually
 // has; anything else returns null and its rows are refused rather than mapped to
 // something approximate.
-const GAME_IDS = {
+export const GAME_IDS = {
   // Titles the corpus had NO coverage of before this outlet.
   'Cyberpunk 2077': 'cyberpunk',
   "Baldur's Gate 3": 'bg3',

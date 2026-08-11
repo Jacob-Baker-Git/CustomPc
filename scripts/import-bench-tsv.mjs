@@ -53,12 +53,17 @@ if (!file) {
 }
 
 const parts = read('../src/data/partsData.json')
-// The engine's game list is driven by what has actually been MEASURED, not by
-// the legacy catalogue — reviews benchmark what is new, and almost none of the
-// 22 legacy rows appear in a modern GPU roundup. perfGames.json is the
-// data-backed list; gamesData.json stays in the union so any legacy id that
-// does turn up in a review is still importable.
-const games = [...read('../src/data/perfGames.json'), ...read('../src/data/gamesData.json')]
+// Validated against the PERMITTED set, not the LISTED one. perfGames.json is
+// derived from what has been imported, so validating against it would make a
+// new title unimportable: absent from the list until imported, refused at
+// import because it is absent from the list. gameMeta.json is the editorial
+// list of ids the corpus may hold; gamesData.json stays in the union so any
+// legacy id that does turn up in a review is still importable.
+const meta = read('../data/games/gameMeta.json')
+const games = [
+  ...Object.keys(meta.games).map((id) => ({ id })),
+  ...read('../src/data/gamesData.json'),
+]
 const sources = read('../data/benchmarks/sources.json')
 const entries = read('../data/benchmarks/entries.json')
 const validation = read('../data/benchmarks/validation.json')

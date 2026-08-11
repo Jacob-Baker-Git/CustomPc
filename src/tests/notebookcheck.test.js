@@ -1,7 +1,7 @@
-import { extractRows, NBC_GPU_PAGES, gameIdFor, cpuIdFor, presetIdFor, upscalingFor, toRows } from '../lib/perfEngine/notebookcheck'
+import { extractRows, NBC_GPU_PAGES, GAME_IDS, gameIdFor, cpuIdFor, presetIdFor, upscalingFor, toRows } from '../lib/perfEngine/notebookcheck'
 import parts from '../data/partsData.json'
-import perfGames from '../data/perfGames.json'
 import legacyGames from '../data/gamesData.json'
+import gameMeta from '../../data/games/gameMeta.json'
 
 const row = (over = {}) => ({
   game: 'Cyberpunk 2077', presetFull: 'Ultra Preset', preset: 'ultra',
@@ -38,24 +38,37 @@ describe('the GPU page map is explicit, never fuzzy', () => {
   })
 })
 
-// Same rule for the game map: the importer resolves game ids against the union of
-// the two lists, so an id that is right here and absent there fails at import
-// time with a whole file already written.
-describe('the game map resolves against the game lists', () => {
-  it('every mapped id is a real game', () => {
-    const ids = new Set([...perfGames, ...legacyGames].map((g) => g.id))
-    const mapped = ['Cyberpunk 2077', "Baldur's Gate 3", 'Starfield', 'Alan Wake 2', 'Hogwarts Legacy',
-      'Elden Ring', 'Red Dead Redemption 2', 'Helldivers 2', 'Counter-Strike 2', 'Fortnite',
-      'Apex Legends', 'Marvel Rivals', 'Ghost of Tsushima', 'Black Myth: Wukong', 'Stalker 2',
-      'Space Marine 2', 'F1 24', 'God of War Ragnarök', 'Final Fantasy XVI', 'Horizon Forbidden West',
-      'Kingdom Come Deliverance 2', 'Indiana Jones and the Great Circle', 'Call of Duty Black Ops 6',
-      "Senua's Saga Hellblade 2", 'Dragon Age: The Veilguard', "Dragon's Dogma 2", 'Silent Hill 2',
-      'Star Wars Outlaws', 'Satisfactory', 'Frostpunk 2']
-    for (const title of mapped) {
-      const id = gameIdFor(title)
-      expect(id, `"${title}" is not mapped`).toBeTruthy()
-      expect(ids.has(id), `"${title}" maps to ${id}, which is in neither game list`).toBe(true)
+// A mapped id that exists in NEITHER list fails at import time with a whole file
+// already written, so it is caught here instead. Resolved against gameMeta — the
+// PERMITTED set — not perfGames, which is derived from what has been imported
+// and so cannot vouch for a title that has not been imported yet.
+//
+// Derived from GAME_IDS rather than listed by hand: a hand-written list silently
+// stops covering the mappings added after it, and this one already had.
+describe('the game map resolves against the permitted ids', () => {
+  it('every mapped id is a permitted game', () => {
+    const ids = new Set([
+      ...Object.keys(gameMeta.games),
+      ...legacyGames.map((g) => g.id),
+    ])
+    const unknown = Object.entries(GAME_IDS)
+      .filter(([, id]) => !ids.has(id))
+      .map(([title, id]) => `"${title}" -> ${id}`)
+    expect(unknown).toEqual([])
+  })
+
+  it('maps at least the titles the corpus already covers', () => {
+    // A shared game is what connects a new source to the existing fit. Without
+    // one the corpus splits into islands and the new parts get dropped.
+    for (const title of ['Ghost of Tsushima', 'Black Myth: Wukong', 'Stalker 2']) {
+      expect(gameIdFor(title), `"${title}" is not mapped`).toBeTruthy()
     }
+  })
+
+  it('maps no title to an id twice, which would merge two games into one', () => {
+    const ids = Object.values(GAME_IDS)
+    const dupes = ids.filter((id, i) => ids.indexOf(id) !== i)
+    expect(dupes).toEqual([])
   })
 })
 
