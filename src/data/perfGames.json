@@ -1,50 +1,526 @@
 [
-  { "id": "black-myth-wukong", "name": "Black Myth: Wukong", "slug": "black-myth-wukong",
-    "presets": [{ "id": "kino", "label": "Kino", "tier": 4 }] },
-  { "id": "cod-black-ops-6", "name": "Call of Duty: Black Ops 6", "slug": "call-of-duty-black-ops-6",
-    "presets": [{ "id": "extrem", "label": "Extrem", "tier": 4 }] },
-  { "id": "doom-the-dark-ages", "name": "Doom: The Dark Ages", "slug": "doom-the-dark-ages",
-    "presets": [{ "id": "max-details", "label": "Max. Details, TAA nativ", "tier": 4 }] },
-  { "id": "dragon-age-veilguard", "name": "Dragon Age: The Veilguard", "slug": "dragon-age-the-veilguard",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
-  { "id": "dragons-dogma-2", "name": "Dragon's Dogma 2", "slug": "dragons-dogma-2",
-    "presets": [{ "id": "grafik-priorisieren", "label": "Grafik priorisieren, maximale Qualität", "tier": 4 }] },
-  { "id": "empire-of-the-ants", "name": "Empire of the Ants", "slug": "empire-of-the-ants",
-    "presets": [{ "id": "hoch", "label": "Hoch", "tier": 3 }] },
-  { "id": "f1-24", "name": "F1 24", "slug": "f1-24",
-    "presets": [{ "id": "ultrahoch", "label": "Ultrahoch, VRS aus", "tier": 4 }] },
-  { "id": "final-fantasy-16", "name": "Final Fantasy XVI", "slug": "final-fantasy-xvi",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
-  { "id": "frostpunk-2", "name": "Frostpunk 2", "slug": "frostpunk-2",
-    "presets": [{ "id": "ultra-high", "label": "Ultra High", "tier": 4 }] },
-  { "id": "ghost-of-tsushima", "name": "Ghost of Tsushima", "slug": "ghost-of-tsushima",
-    "presets": [{ "id": "sehr-hoch", "label": "Sehr hoch", "tier": 4 }] },
-  { "id": "god-of-war-ragnarok", "name": "God of War Ragnarök", "slug": "god-of-war-ragnarok",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
-  { "id": "horizon-forbidden-west", "name": "Horizon Forbidden West", "slug": "horizon-forbidden-west",
-    "presets": [{ "id": "sehr-hoch", "label": "Sehr hoch", "tier": 4 }] },
-  { "id": "indiana-jones-great-circle", "name": "Indiana Jones and the Great Circle", "slug": "indiana-jones-and-the-great-circle",
-    "presets": [{ "id": "hyper", "label": "Hyper", "tier": 4 }] },
-  { "id": "kingdom-come-deliverance-2", "name": "Kingdom Come: Deliverance 2", "slug": "kingdom-come-deliverance-2",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
-  { "id": "lego-horizon-adventures", "name": "Lego Horizon Adventures", "slug": "lego-horizon-adventures",
-    "presets": [{ "id": "episch", "label": "Episch", "tier": 4 }] },
-  { "id": "mechwarrior-5-clans", "name": "MechWarrior 5: Clans", "slug": "mechwarrior-5-clans",
-    "presets": [{ "id": "maximale-grafikdetails", "label": "Maximale Grafikdetails", "tier": 4 }] },
-  { "id": "outcast-a-new-beginning", "name": "Outcast: A New Beginning", "slug": "outcast-a-new-beginning",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
-  { "id": "satisfactory", "name": "Satisfactory", "slug": "satisfactory",
-    "presets": [{ "id": "ultra", "label": "Ultra, maximale Grafikdetails", "tier": 4 }] },
-  { "id": "hellblade-2", "name": "Senua's Saga: Hellblade II", "slug": "senuas-saga-hellblade-2",
-    "presets": [{ "id": "hoch", "label": "Hoch", "tier": 3 }] },
-  { "id": "silent-hill-2", "name": "Silent Hill 2", "slug": "silent-hill-2",
-    "presets": [{ "id": "episch", "label": "Episch", "tier": 4 }] },
-  { "id": "spider-man-2", "name": "Marvel's Spider-Man 2", "slug": "marvels-spider-man-2",
-    "presets": [{ "id": "sehr-hoch", "label": "Sehr hoch, maximale Grafikdetails", "tier": 4 }] },
-  { "id": "stalker-2", "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl", "slug": "stalker-2-heart-of-chornobyl",
-    "presets": [{ "id": "epic", "label": "Epic", "tier": 4 }] },
-  { "id": "star-wars-outlaws", "name": "Star Wars Outlaws", "slug": "star-wars-outlaws",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] },
-  { "id": "space-marine-2", "name": "Warhammer 40,000: Space Marine 2", "slug": "warhammer-40k-space-marine-2",
-    "presets": [{ "id": "ultra", "label": "Ultra", "tier": 4 }] }
+  {
+    "id": "alan-wake-2",
+    "name": "Alan Wake 2",
+    "slug": "alan-wake-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ]
+  },
+  {
+    "id": "bg3",
+    "name": "Baldur's Gate 3",
+    "slug": "baldurs-gate-3",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "black-myth-wukong",
+    "name": "Black Myth: Wukong",
+    "slug": "black-myth-wukong",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "kino",
+        "label": "Kino",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "cod-black-ops-6",
+    "name": "Call of Duty: Black Ops 6",
+    "slug": "call-of-duty-black-ops-6",
+    "presets": [
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "cs2",
+    "name": "Counter-Strike 2",
+    "slug": "counter-strike-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "very-high",
+        "label": "Very high",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "cyberpunk",
+    "name": "Cyberpunk 2077",
+    "slug": "cyberpunk-2077",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "doom-the-dark-ages",
+    "name": "Doom: The Dark Ages",
+    "slug": "doom-the-dark-ages",
+    "presets": [
+      {
+        "id": "max-details",
+        "label": "Max. Details, TAA nativ",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "dragons-dogma-2",
+    "name": "Dragon's Dogma 2",
+    "slug": "dragons-dogma-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ]
+  },
+  {
+    "id": "f1-24",
+    "name": "F1 24",
+    "slug": "f1-24",
+    "presets": [
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "final-fantasy-16",
+    "name": "Final Fantasy XVI",
+    "slug": "final-fantasy-xvi",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "ghost-of-tsushima",
+    "name": "Ghost of Tsushima",
+    "slug": "ghost-of-tsushima",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "sehr-hoch",
+        "label": "Sehr hoch",
+        "tier": 4
+      },
+      {
+        "id": "very-high",
+        "label": "Very high",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "god-of-war-ragnarok",
+    "name": "God of War Ragnarök",
+    "slug": "god-of-war-ragnarok",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "hellblade-2",
+    "name": "Senua's Saga: Hellblade II",
+    "slug": "senuas-saga-hellblade-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ]
+  },
+  {
+    "id": "helldivers2",
+    "name": "Helldivers 2",
+    "slug": "helldivers-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "hogwarts",
+    "name": "Hogwarts Legacy",
+    "slug": "hogwarts-legacy",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "horizon-forbidden-west",
+    "name": "Horizon Forbidden West",
+    "slug": "horizon-forbidden-west",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "very-high",
+        "label": "Very high",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "indiana-jones-great-circle",
+    "name": "Indiana Jones and the Great Circle",
+    "slug": "indiana-jones-and-the-great-circle",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "kingdom-come-deliverance-2",
+    "name": "Kingdom Come: Deliverance 2",
+    "slug": "kingdom-come-deliverance-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "space-marine-2",
+    "name": "Warhammer 40,000: Space Marine 2",
+    "slug": "warhammer-40k-space-marine-2",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "stalker-2",
+    "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+    "slug": "stalker-2-heart-of-chornobyl",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "star-wars-outlaws",
+    "name": "Star Wars Outlaws",
+    "slug": "star-wars-outlaws",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "starfield",
+    "name": "Starfield",
+    "slug": "starfield",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  }
 ]

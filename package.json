@@ -14,6 +14,7 @@
     "og:image": "node scripts/og-image.mjs",
     "sitemap": "node scripts/build-sitemap.mjs",
     "perf:fit": "node scripts/fit-perf-model.mjs",
+    "perf:games": "node scripts/build-perf-games.mjs",
     "perf:add": "node scripts/add-bench-entry.mjs",
     "perf:import": "node scripts/import-bench-tsv.mjs",
     "perf:nbc": "node scripts/fetch-notebookcheck.mjs",
