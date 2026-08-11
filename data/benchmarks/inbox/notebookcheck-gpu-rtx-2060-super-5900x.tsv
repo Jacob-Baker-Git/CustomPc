@@ -1,0 +1,18 @@
+outlet:    Notebookcheck
+title:     RTX 2060 Super (5900X) benchmarks
+url:       https://www.notebookcheck.net/NVIDIA-GeForce-RTX-2060-Super-Desktop-GPU-Benchmarks-and-Specs.426823.0.html
+published: 2026-08-11
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-5900x
+ram:       DDR4 4000 32 2
+os:        not stated
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the Asus X570 ROG Crosshair VIII Hero WiFi / 5900X bench, whose memory spec is verified from the KFA2 RTX 3080 SG 12GB review (G.Skill Trident Z Neo RGB DDR4-4000 memory kit 2 x 16 GB; BIOS 2402, default settings, XMP 1 for DDR4-4000). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+elden-ring	1080p	low	native	gpu-rtx-2060-super	59.9	51.4
+elden-ring	1080p	medium	native	gpu-rtx-2060-super	59.9	50.5
+elden-ring	1080p	high	native	gpu-rtx-2060-super	59.7	50.6
+elden-ring	1080p	ultra	native	gpu-rtx-2060-super	59.9	50.5
+elden-ring	1440p	ultra	native	gpu-rtx-2060-super	59.8	53.9
+elden-ring	4k	ultra	native	gpu-rtx-2060-super	56.9	48.5

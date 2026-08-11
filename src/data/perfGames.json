@@ -22,6 +22,29 @@
     ]
   },
   {
+    "id": "apex",
+    "name": "Apex Legends",
+    "slug": "apex-legends",
+    "presets": [
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ],
+    "fpsCap": 300
+  },
+  {
     "id": "bg3",
     "name": "Baldur's Gate 3",
     "slug": "baldurs-gate-3",
@@ -154,6 +177,23 @@
     ]
   },
   {
+    "id": "dota2",
+    "name": "Dota 2",
+    "slug": "dota-2",
+    "presets": [
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
     "id": "dragons-dogma-2",
     "name": "Dragon's Dogma 2",
     "slug": "dragons-dogma-2",
@@ -169,6 +209,34 @@
         "tier": 3
       }
     ]
+  },
+  {
+    "id": "elden-ring",
+    "name": "Elden Ring",
+    "slug": "elden-ring",
+    "presets": [
+      {
+        "id": "low",
+        "label": "Low",
+        "tier": 1
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ],
+    "fpsCap": 60
   },
   {
     "id": "f1-24",
@@ -205,6 +273,23 @@
       {
         "id": "ultra",
         "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "fortnite",
+    "name": "Fortnite",
+    "slug": "fortnite",
+    "presets": [
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
         "tier": 4
       }
     ]
@@ -267,6 +352,19 @@
         "tier": 4
       }
     ]
+  },
+  {
+    "id": "gta5",
+    "name": "GTA V",
+    "slug": "gta-v",
+    "presets": [
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      }
+    ],
+    "fpsCap": 180
   },
   {
     "id": "hellblade-2",
@@ -398,6 +496,28 @@
         "label": "Low",
         "tier": 1
       },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "tier": 2
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4
+      }
+    ]
+  },
+  {
+    "id": "rdr2",
+    "name": "Red Dead Redemption 2",
+    "slug": "red-dead-redemption-2",
+    "presets": [
       {
         "id": "medium",
         "label": "Medium",

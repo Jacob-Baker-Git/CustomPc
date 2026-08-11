@@ -1,0 +1,27 @@
+outlet:    Notebookcheck
+title:     RX 6800 XT (5950X) benchmarks
+url:       https://www.notebookcheck.net/AMD-Radeon-RX-6800-XT-Desktop-GPU-Benchmarks-and-Specs.516399.0.html
+published: 2026-08-11
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-5950x
+ram:       DDR4 3600 32 2
+os:        Windows 10 20H2
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the MSI Prestige X570 Creation / 5950X bench, whose memory spec is verified from the Radeon RX 6900 XT review (32 GB, 2 x 16 GB G.SKILL Trident Z Neo DDR4-3600, timings 16-19-19-39; Windows 10 20H2). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+rdr2	1080p	medium	native	gpu-rx-6800-xt	197.0	143.0
+rdr2	1080p	high	native	gpu-rx-6800-xt	156.0	143.0
+rdr2	1080p	ultra	native	gpu-rx-6800-xt	102.0	76.9
+rdr2	1440p	ultra	native	gpu-rx-6800-xt	82.7	66.7
+rdr2	4k	ultra	native	gpu-rx-6800-xt	52.9	45.5
+apex	1080p	medium	native	gpu-rx-6800-xt	144.0
+apex	1080p	high	native	gpu-rx-6800-xt	144.0
+apex	1080p	ultra	native	gpu-rx-6800-xt	144.0
+apex	1440p	ultra	native	gpu-rx-6800-xt	143.0
+apex	4k	ultra	native	gpu-rx-6800-xt	126.0
+dota2	1080p	high	native	gpu-rx-6800-xt	166.1
+dota2	1080p	ultra	native	gpu-rx-6800-xt	144.7
+dota2	4k	ultra	native	gpu-rx-6800-xt	122.2
+gta5	1440p	high	native	gpu-rx-6800-xt	120.0	58.8
+gta5	4k	high	native	gpu-rx-6800-xt	134.0	55.6

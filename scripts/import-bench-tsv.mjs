@@ -213,7 +213,15 @@ if (rows.length === 0) {
 const target = source.kind === 'pair' ? validation : entries
 const targetName = source.kind === 'pair' ? 'validation.json' : 'entries.json'
 
-if (!sources.some((s) => s.id === source.id)) sources.push(source)
+// The source is registered only if it actually contributes an entry.
+//
+// Entry ids do not encode the source, so re-running a fetch registers a NEW
+// source (its id carries the date it was read) whose rows then all dedupe
+// against the existing ones — leaving a source in the file with nothing
+// attached to it. That is a claim to have consulted a review that contributed
+// nothing, and `auditCorpus` rightly fails on it. Fourteen appeared the first
+// time the Notebookcheck fetch was re-run on a later date.
+const sourceIsNew = !sources.some((s) => s.id === source.id)
 let added = 0
 let skipped = 0
 for (const entry of rows) {
@@ -221,6 +229,7 @@ for (const entry of rows) {
   target.push(entry)
   added += 1
 }
+if (sourceIsNew && added > 0) sources.push(source)
 
 write('../data/benchmarks/sources.json', sources)
 write('../data/benchmarks/entries.json', entries)
@@ -228,4 +237,8 @@ write('../data/benchmarks/validation.json', validation)
 
 console.log(`${source.outlet} — ${source.title}`)
 console.log(`  ${added} entries added to ${targetName}${skipped ? `, ${skipped} already present (skipped)` : ''}`)
-console.log(`  Now run: npm run perf:fit`)
+if (sourceIsNew && added === 0) {
+  console.log('  source NOT registered — every row was already in the corpus under '
+    + 'an earlier reading of the same review')
+}
+console.log(`  Now run: npm run perf:fit && npm run perf:games`)

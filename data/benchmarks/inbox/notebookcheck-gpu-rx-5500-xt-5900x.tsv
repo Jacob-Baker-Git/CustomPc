@@ -1,0 +1,31 @@
+outlet:    Notebookcheck
+title:     RX 5500 XT (5900X) benchmarks
+url:       https://www.notebookcheck.net/AMD-Radeon-RX-5500-XT-Desktop-GPU-Benchmarks-and-Specs.539160.0.html
+published: 2026-08-11
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-5900x
+ram:       DDR4 4000 32 2
+os:        not stated
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the Asus X570 ROG Crosshair VIII Hero WiFi / 5900X bench, whose memory spec is verified from the KFA2 RTX 3080 SG 12GB review (G.Skill Trident Z Neo RGB DDR4-4000 memory kit 2 x 16 GB; BIOS 2402, default settings, XMP 1 for DDR4-4000). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+elden-ring	1080p	low	native	gpu-rx-5500-xt	59.8	49.7
+elden-ring	1080p	medium	native	gpu-rx-5500-xt	59.6	49.1
+elden-ring	1080p	high	native	gpu-rx-5500-xt	56.5	43.9
+elden-ring	1080p	ultra	native	gpu-rx-5500-xt	46.8	35.3
+elden-ring	1440p	ultra	native	gpu-rx-5500-xt	34.7	27.7
+elden-ring	4k	ultra	native	gpu-rx-5500-xt	22.0	17.8
+rdr2	1080p	medium	native	gpu-rx-5500-xt	74.0
+rdr2	1080p	high	native	gpu-rx-5500-xt	47.3
+rdr2	1080p	ultra	native	gpu-rx-5500-xt	29.8
+rdr2	1440p	ultra	native	gpu-rx-5500-xt	23.7
+rdr2	4k	ultra	native	gpu-rx-5500-xt	15.1
+apex	1080p	medium	native	gpu-rx-5500-xt	131.7
+apex	1080p	high	native	gpu-rx-5500-xt	93.8
+apex	1080p	ultra	native	gpu-rx-5500-xt	93.7
+apex	1440p	ultra	native	gpu-rx-5500-xt	67.1
+apex	4k	ultra	native	gpu-rx-5500-xt	36.9
+dota2	1080p	high	native	gpu-rx-5500-xt	122.4
+dota2	1080p	ultra	native	gpu-rx-5500-xt	124.3
+dota2	4k	ultra	native	gpu-rx-5500-xt	77.4

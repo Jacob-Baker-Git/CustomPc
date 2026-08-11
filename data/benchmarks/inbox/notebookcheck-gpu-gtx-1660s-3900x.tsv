@@ -1,0 +1,24 @@
+outlet:    Notebookcheck
+title:     GTX 1660 Super (3900X) benchmarks
+url:       https://www.notebookcheck.net/NVIDIA-GeForce-GTX-1660-Super-Desktop-GPU-Benchmarks-and-Specs.448675.0.html
+published: 2026-08-11
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-3900x
+ram:       DDR4 3600 16 2
+os:        not stated
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the MSI MEG X570 Godlike / 3900X bench, whose memory spec is verified from the Radeon RX 5600 XT review (G-Skill Trident Z Royal Gold DDR4-3600 memory kit 2 x 8 GB, runs as DDR4-3600 CL16-16-16-36; BIOS 1.20, XMP 1). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+rdr2	1080p	medium	native	gpu-gtx-1660s	77.0	66.7
+rdr2	1080p	high	native	gpu-gtx-1660s	53.6	41.7
+rdr2	1080p	ultra	native	gpu-gtx-1660s	33.2	22.7
+rdr2	1440p	ultra	native	gpu-gtx-1660s	26.7	20.0
+apex	1080p	medium	native	gpu-gtx-1660s	144.0
+apex	1080p	high	native	gpu-gtx-1660s	116.0
+apex	1080p	ultra	native	gpu-gtx-1660s	120.0
+apex	1440p	ultra	native	gpu-gtx-1660s	82.0
+apex	4k	ultra	native	gpu-gtx-1660s	43.5
+dota2	1080p	high	native	gpu-gtx-1660s	146.6
+dota2	1080p	ultra	native	gpu-gtx-1660s	140.0
+dota2	4k	ultra	native	gpu-gtx-1660s	91.7

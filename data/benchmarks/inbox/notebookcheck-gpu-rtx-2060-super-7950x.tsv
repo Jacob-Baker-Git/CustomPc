@@ -1,13 +1,13 @@
 outlet:    Notebookcheck
 title:     RTX 2060 Super (7950X) benchmarks
 url:       https://www.notebookcheck.net/NVIDIA-GeForce-RTX-2060-Super-Desktop-GPU-Benchmarks-and-Specs.426823.0.html
-published: 2026-08-10
+published: 2026-08-11
 kind:      gpu-scaling
 cpu:       cpu-ryzen-9-7950x
 ram:       DDR5 6000 32 2
 os:        Windows 11 Pro
 scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
-notes:     Aggregate benchmark page read on 2026-08-10; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the Gigabyte X670E Aorus Master / 7950X bench, whose memory spec is verified from the KFA2 RTX 4070 EX Gamer review (32 GB DDR5-6000 EXPO, X670E). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
 
 # game  res  preset  up  part  avg  low
 alan-wake-2	1080p	low	native	gpu-rtx-2060-super	55.6	44.3

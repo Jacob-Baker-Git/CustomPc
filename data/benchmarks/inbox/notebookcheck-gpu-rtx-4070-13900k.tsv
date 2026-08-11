@@ -1,0 +1,15 @@
+outlet:    Notebookcheck
+title:     RTX 4070 (13900K) benchmarks
+url:       https://www.notebookcheck.net/NVIDIA-GeForce-RTX-4070-Desktop-GPU-Benchmarks-and-Specs.742254.0.html
+published: 2026-08-11
+kind:      gpu-scaling
+cpu:       cpu-i9-13900k
+ram:       DDR5 6400 32 2
+os:        Windows 11 Pro
+scene:     Notebookcheck in-house benchmark sequence (per game; exact scene not stated per title)
+notes:     Aggregate benchmark page read on 2026-08-11; rows restricted to the Gigabyte Z790 Aorus Master / 13900K bench, whose memory spec is verified from the RTX 4070 Super FE review (2x16 GB Kingston Fury Renegade DDR5-6400). Rows whose 1% low sits below their own stated minimum are excluded as internally inconsistent.
+
+# game  res  preset  up  part  avg  low
+dota2	1080p	high	native	gpu-rtx-4070	244.3
+dota2	1080p	ultra	native	gpu-rtx-4070	229.9
+gta5	4k	high	native	gpu-rtx-4070	145.7	100.0
