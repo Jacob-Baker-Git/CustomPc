@@ -90,7 +90,11 @@ for (const res of RESOLUTIONS) {
   const inRes = gpuEntries.filter((e) => e.resolution === res)
   gpuFits[res] = fitTwoWay(
     inRes.map((e) => ({
-      cellKey: `${e.gameId}|${e.presetId}`,
+      // Upscaling is part of the cell because it is part of the measurement.
+      // Without it an A fitted from DLSS-Quality rows pairs with a B fitted from
+      // native rows and the blend describes neither. indices.js builds the same
+      // key with cellKeyFor — a mismatch between the two is SILENT.
+      cellKey: `${e.gameId}|${e.presetId}|${e.upscaling}`,
       partKey: e.gpuId,
       logT: Math.log(1000 / e.avgFps),
       weight: e.weight ?? 1,
@@ -131,7 +135,7 @@ for (const e of cpuEntries) {
     tCpu = Math.pow(residual, 1 / k)
   }
   cpuObs.push({
-    cellKey: `${e.gameId}|${e.presetId}`,
+    cellKey: `${e.gameId}|${e.presetId}|${e.upscaling}`,
     partKey: e.cpuId,
     logT: Math.log(tCpu / (DEFAULT_RES_CPU_SCALE[e.resolution] ?? 1)),
     weight: e.weight ?? 1,
@@ -198,14 +202,15 @@ for (const res of RESOLUTIONS) {
       droppedDisconnected.push({ kind: 'gpu-cell', res, cellKey })
       continue
     }
-    const [gameId, presetId] = cellKey.split('|')
+    const [gameId, presetId, upscaling] = cellKey.split('|')
+    const leaf = `${presetId}|${upscaling}`
     gameConst[gameId] ??= {}
     gameConst[gameId][res] ??= {}
-    gameConst[gameId][res][presetId] = {
-      ...(gameConst[gameId][res][presetId] ?? {}),
+    gameConst[gameId][res][leaf] = {
+      ...(gameConst[gameId][res][leaf] ?? {}),
       A: round(A, 2),
-      ...cellStats(live, gameId, res, presetId),
-      ...lowBaseFor(live, gameId, res, presetId),
+      ...cellStats(live, gameId, res, presetId, upscaling),
+      ...lowBaseFor(live, gameId, res, presetId, upscaling),
     }
   }
 }
@@ -214,12 +219,13 @@ for (const [cellKey, B] of cpuFit.cellConst) {
     droppedDisconnected.push({ kind: 'cpu-cell', res: null, cellKey })
     continue
   }
-  const [gameId, presetId] = cellKey.split('|')
+  const [gameId, presetId, upscaling] = cellKey.split('|')
+  const leaf = `${presetId}|${upscaling}`
   for (const res of RESOLUTIONS) {
     gameConst[gameId] ??= {}
     gameConst[gameId][res] ??= {}
-    gameConst[gameId][res][presetId] = {
-      ...(gameConst[gameId][res][presetId] ?? {}), B: round(B, 2),
+    gameConst[gameId][res][leaf] = {
+      ...(gameConst[gameId][res][leaf] ?? {}), B: round(B, 2),
     }
   }
 }
@@ -232,7 +238,10 @@ for (const [cellKey, B] of cpuFit.cellConst) {
 // weights the fast source too heavily.
 const exactGroups = {}
 for (const e of live) {
-  const key = `${e.cpuId}|${e.gpuId}|${e.gameId}|${e.resolution}|${e.presetId}`
+  // Must stay identical to exactKey in indices.js, including the upscaling tail.
+  // A mismatch is silent: the table simply never hits, and every combination
+  // somebody actually measured quietly falls through to the modelled path.
+  const key = `${e.cpuId}|${e.gpuId}|${e.gameId}|${e.resolution}|${e.presetId}|${e.upscaling}`
   ;(exactGroups[key] ??= []).push(e)
 }
 const exact = {}
@@ -356,9 +365,13 @@ function gpuFrameTime(entry) {
 // Only `lowKind: '1%'` counts. A 0.1% low and a hard minimum are different
 // statistics measuring different things, and averaging them together would
 // produce a figure describing none of them.
-function lowBaseFor(rows, gameId, res, presetId) {
+// ⚠️ Filters on upscaling as well as preset. Without it the cell key separates
+// the render scales and then this pools them straight back together, so an
+// upscaled run's stutter ratio would be averaged into the native cell's lowBase.
+function lowBaseFor(rows, gameId, res, presetId, upscaling) {
   const withLows = rows.filter((e) =>
     e.gameId === gameId && e.resolution === res && e.presetId === presetId &&
+    e.upscaling === upscaling &&
     e.lowKind === '1%' && e.lowFps > 0 && e.avgFps > 0)
   if (withLows.length === 0) return {}
 
@@ -374,9 +387,10 @@ function lowBaseFor(rows, gameId, res, presetId) {
 
 // Source count and spread for a cell — the honest measure of how much the
 // outlets disagree, which feeds the confidence score in Phase 2.
-function cellStats(rows, gameId, res, presetId) {
+function cellStats(rows, gameId, res, presetId, upscaling) {
   const inCell = rows.filter((e) =>
-    e.gameId === gameId && e.resolution === res && e.presetId === presetId)
+    e.gameId === gameId && e.resolution === res && e.presetId === presetId &&
+    e.upscaling === upscaling)
   const sourceCount = new Set(inCell.map((e) => e.sourceId)).size
   if (inCell.length < 2) return { sources: sourceCount, cv: null }
   const fps = inCell.map((e) => e.avgFps)

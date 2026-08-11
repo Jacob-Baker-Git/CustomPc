@@ -1,5 +1,5 @@
 {
-  "fittedAt": "2026-08-11T03:08:45.111Z",
+  "fittedAt": "2026-08-11T21:26:20.152Z",
   "warnings": [
     "Notebookcheck supplies 87.7% of the corpus (1536 of 1752 entries, from 49 reviews) — dilute when data allows",
     "architectures with fewer than 3 measured parts stay uncalibrated at 1.0: RDNA, Xe2 Battlemage"
