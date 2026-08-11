@@ -126,15 +126,45 @@ describe('estimateBuildPerformance', () => {
   })
 
   it('sorts covered games above uncovered ones, fastest first', () => {
-    // cyberpunk 143, elden-ring capped at 60, starfield uncovered.
-    const ids = run().games.map((g) => g.gameId)
+    // cyberpunk 143, elden-ring capped at 60, starfield uncovered. These games
+    // carry no presets of their own, so each gets the canonical four rows —
+    // deduped here because this test is about the ORDER OF GAMES, and the
+    // per-preset ordering has its own test below.
+    const ids = [...new Set(run().games.map((g) => g.gameId))]
     expect(ids).toEqual(['cyberpunk', 'elden-ring', 'starfield'])
   })
 
-  it('summarises coverage across the selected games', () => {
+  it('reports every preset of a game, heaviest first, grouped with its game', () => {
+    // The engine answers all four canonical presets rather than picking one.
+    // Choosing a single preset made coverage depend on which one was asked for:
+    // the same corpus answered 8 games at 1440p and 3 at 1440p depending only on
+    // whether the caller said "high" or the game's own top preset.
+    const cyberpunk = run().games.filter((g) => g.gameId === 'cyberpunk')
+    expect(new Set(cyberpunk.map((g) => g.rowId))).toEqual(new Set([
+      'cyberpunk|ultra', 'cyberpunk|high', 'cyberpunk|medium', 'cyberpunk|low',
+    ]))
+    // Only `high` is in the fixture's gameConst, so only that row answers — and
+    // an answered row sorts ahead of an unanswered one whatever its tier, which
+    // is what lets the grid split covered from uncovered without re-sorting.
+    expect(cyberpunk[0].presetId).toBe('high')
+    expect(cyberpunk.filter((g) => g.basis !== 'none').map((g) => g.presetId)).toEqual(['high'])
+    // The unanswered remainder stays in tier order, heaviest first.
+    expect(cyberpunk.slice(1).map((g) => g.presetId)).toEqual(['ultra', 'medium', 'low'])
+  })
+
+  it('marks which row was the preset the caller asked for', () => {
+    const cyberpunk = run().games.filter((g) => g.gameId === 'cyberpunk')
+    expect(cyberpunk.filter((g) => g.presetExact).map((g) => g.presetId)).toEqual(['high'])
+  })
+
+  it('summarises coverage in GAMES, and rows separately', () => {
     const report = run()
     expect(report.coverage).toEqual({
+      // Two of three GAMES answered — not two of twelve rows. A row count
+      // measures how many settings a reviewer tested, which is a fact about the
+      // reviewer rather than about the build.
       gamesAnswered: 2, gamesExact: 0, gamesTotal: 3,
+      rowsAnswered: 2, rowsExact: 0, rowsTotal: 12,
       gpuBasis: 'measured', cpuBasis: 'measured',
       // False here because the fixture's index carries a real figure for this
       // resolution. True means the fit had no data at the requested resolution
@@ -160,7 +190,9 @@ describe('estimateBuildPerformance', () => {
   })
 
   it('limits to the requested games', () => {
-    expect(run({ gameIds: ['cyberpunk'] }).games.map((g) => g.gameId)).toEqual(['cyberpunk'])
+    const report = run({ gameIds: ['cyberpunk'] })
+    expect([...new Set(report.games.map((g) => g.gameId))]).toEqual(['cyberpunk'])
+    expect(report.coverage.gamesTotal).toBe(1)
   })
 
   it('is a pure function — the same input gives an identical result', () => {

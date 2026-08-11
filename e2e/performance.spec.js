@@ -14,22 +14,31 @@ test.describe('the performance tab', () => {
   })
 
   test('renders exactly as many frame rates as it claims coverage for', async ({ page }) => {
-    // The report footer states both counts outright: "N of M games answered,
-    // K measured directly". Reading them from there rather than from the
-    // summary tile is deliberate — the footer counting rows the list did not
-    // actually render is one of the bugs this file exists to catch.
+    // The report footer states every count outright: "N of M games answered ·
+    // R results shown, K measured directly". Reading them from there rather
+    // than from the summary tile is deliberate — the footer counting rows the
+    // list did not actually render is one of the bugs this file exists to catch.
+    //
+    // TWO UNITS, and the distinction is the point. Coverage is counted in GAMES;
+    // the cards are one per game AND preset, because the engine answers every
+    // preset the corpus holds rather than picking one. So badges are compared
+    // against the RESULT count and the uncovered heading against the GAME count.
+    // Comparing badges to the game count was how this test read before, and it
+    // would now fail for a page that is entirely correct.
     const footer = await page.getByText(/games answered/i).first().innerText()
-    const [, answered, total, measured] =
-      /(\d+)\s+of\s+(\d+)\s+games answered,\s*(\d+)\s+measured directly/i.exec(footer)
+    const [, answered, total] = /(\d+)\s+of\s+(\d+)\s+games answered/i.exec(footer)
+    const [, shown, measured] =
+      /(\d+)\s+results shown,\s*(\d+)\s+measured directly/i.exec(footer)
 
     expect(Number(total)).toBeGreaterThan(0)
+    expect(Number(shown)).toBeGreaterThanOrEqual(Number(answered))
 
     // A basis badge is the engine's own label for where a number came from. One
-    // per answered game, no more and no fewer: a badge with no frame rate beside
-    // it, or a frame rate with no badge, breaks this count.
+    // per result rendered, no more and no fewer: a badge with no frame rate
+    // beside it, or a frame rate with no badge, breaks this count.
     const badges = page.getByText(/^(measured|modelled|from specs)$/i)
-    expect(await badges.count(), `one basis badge per answered game — footer said "${footer}", badges seen: ${JSON.stringify(await badges.allInnerTexts())}`)
-      .toBe(Number(answered))
+    expect(await badges.count(), `one basis badge per result — footer said "${footer}", badges seen: ${JSON.stringify(await badges.allInnerTexts())}`)
+      .toBe(Number(shown))
 
     // And "measured" specifically may not outrun what was actually measured.
     const measuredBadges = page.getByText(/^measured$/i)

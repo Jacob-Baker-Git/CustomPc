@@ -62,7 +62,6 @@ export default function PerformanceScreen() {
   const gpuCap = useMemo(() => gpuCapability(gpu, gpuSpecs, { archEfficiency: perfModel.archEfficiency }), [gpu])
   const cpuCap = useMemo(() => cpuCapability(cpu, cpuSpecs), [cpu])
 
-  const measured = report?.coverage?.gamesExact ?? 0
   const answered = report?.coverage?.gamesAnswered ?? 0
 
   return (
@@ -105,9 +104,15 @@ export default function PerformanceScreen() {
             over from 1440p. Treat these as the shape of the result rather than the figure.
           </p>
         )}
+        {/* Two units, said separately on purpose. Coverage is counted in GAMES,
+            because "19 of 22 games" is what a reader wants to know. The cards
+            are one per game AND preset, so the result count is stated too —
+            without it the footer claims 19 while 43 cards sit above it, which
+            reads as a counting bug. */}
         <p className="mt-1.5 text-[10px] text-muted">
           Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
-          {hasCore && ` · ${answered} of ${report.coverage.gamesTotal} games answered, ${measured} measured directly`}
+          {hasCore && ` · ${answered} of ${report.coverage.gamesTotal} games answered`}
+          {hasCore && ` · ${report.coverage.rowsAnswered} results shown, ${report.coverage.rowsExact} measured directly`}
         </p>
       </Section>
 

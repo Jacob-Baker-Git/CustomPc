@@ -4,7 +4,7 @@ import { lowFrameTime } from './lows'
 import { estimatePower, estimateThermals } from './power'
 import { memoryProfile } from './memory'
 import { bottleneckSummary } from './bottleneck'
-import { resolvePreset } from '../gamePresets'
+import { presetsFor } from '../gamePresets'
 
 // The public contract of the performance engine.
 //
@@ -14,12 +14,24 @@ import { resolvePreset } from '../gamePresets'
 // Shipping the honest gap first is deliberate — an engine that fills holes
 // before it can say how good the filling is has no way to earn trust back.
 
-function estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, presetId }) {
-  const { preset, exact: presetExact } = resolvePreset(game, presetId)
+function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx, cpuIdx, resolution }) {
   const cell = cellFor(model, game, resolution, preset.id)
   const measured = exactFor(model, { cpu, gpu, game, resolution, presetId: preset.id })
 
-  const base = { gameId: game.id, name: game.name, preset: preset.label, presetExact }
+  const base = {
+    // One row per game AND preset, so the row needs its own key — two presets of
+    // one game are two different measurements and React needs to tell them apart.
+    rowId: `${game.id}|${preset.id}`,
+    gameId: game.id,
+    name: game.name,
+    preset: preset.label,
+    presetId: preset.id,
+    presetTier: preset.tier,
+    // Whether THIS row is the preset the caller asked for. Every row is now an
+    // exact preset of its own, so this reports which one was requested rather
+    // than whether a fallback happened.
+    presetExact: preset.id === requestedPresetId,
+  }
 
   // The frame SPLIT always comes from the fitted model, even when the frame
   // TIME is a measurement — a measurement is a duration, not an attribution of
@@ -103,21 +115,66 @@ export function estimateBuildPerformance({
     ? games.filter((g) => gameIds.includes(g.id))
     : games
 
-  const rows = selected
-    .map((game) => estimateGame({ game, model, cpu, gpu, gpuIdx, cpuIdx, resolution, presetId }))
-    // Covered games first, fastest first within each group. An uncovered row is
-    // still shown — a silently missing game reads as a bug, not as a gap.
-    .sort((a, b) => {
-      if ((a.avgFps == null) !== (b.avgFps == null)) return a.avgFps == null ? 1 : -1
-      return (b.avgFps ?? 0) - (a.avgFps ?? 0)
-    })
+  // EVERY preset the corpus holds for a game gets a row, rather than one row per
+  // game at a single chosen preset.
+  //
+  // The old shape asked resolvePreset for one preset and threw the rest away,
+  // which quietly made coverage depend on which preset happened to be asked for:
+  // once the game list carried real preset names, asking for "high" found an
+  // exact match on the Notebookcheck rows — which are concentrated at 1080p —
+  // and dropped the ComputerBase 1440p/4K rows measured at "Sehr hoch". Coverage
+  // at 1440p fell from 8 games to 3 without a single measurement changing.
+  // Reporting every preset removes the choice, and the caller can narrow later.
+  const rows = []
+  for (const game of selected) {
+    for (const preset of presetsFor(game)) {
+      rows.push(estimateGame({
+        game, preset, requestedPresetId: presetId, model, cpu, gpu, gpuIdx, cpuIdx, resolution,
+      }))
+    }
+  }
+
+  // Answered first; then games ordered by their best result, so the fastest game
+  // still leads; then a game's own presets together, heaviest first. Grouping by
+  // game matters now that one game owns several rows — sorting purely on frame
+  // rate would scatter a game's Low and Ultra rows to opposite ends of the list.
+  const bestFps = new Map()
+  for (const r of rows) {
+    if (r.avgFps == null) continue
+    bestFps.set(r.gameId, Math.max(bestFps.get(r.gameId) ?? 0, r.avgFps))
+  }
+  rows.sort((a, b) => {
+    if ((a.avgFps == null) !== (b.avgFps == null)) return a.avgFps == null ? 1 : -1
+    const ga = bestFps.get(a.gameId) ?? 0
+    const gb = bestFps.get(b.gameId) ?? 0
+    if (ga !== gb) return gb - ga
+    if (a.gameId !== b.gameId) return a.gameId.localeCompare(b.gameId)
+    return (b.presetTier ?? 0) - (a.presetTier ?? 0)
+  })
+
+  // The bottleneck reads one row per GAME, not per preset. Feeding it every
+  // preset would weight a game by how many presets somebody benchmarked, so a
+  // title measured at four settings would count four times toward "processor-
+  // limited in N of M games". Heaviest answered preset per game.
+  const perGame = new Map()
+  for (const r of rows) {
+    if (r.basis === 'none') continue
+    const held = perGame.get(r.gameId)
+    if (!held || (r.presetTier ?? 0) > (held.presetTier ?? 0)) perGame.set(r.gameId, r)
+  }
+  const gameRows = [...perGame.values()]
 
   // Mean CPU share across the rows that have one. Feeds the power model, which
   // draws less from the graphics card when the CPU is setting the pace. With no
   // frame data at all it stays null and power falls back to a neutral split —
   // the power figures do not depend on the benchmark corpus, and must not start
   // depending on it.
-  const shares = rows.map((r) => r.cpuShare).filter((s) => s != null)
+  // Averaged over GAMES, not over preset rows, for the same reason the
+  // bottleneck is: a game benchmarked at four presets would otherwise pull the
+  // build's power figure four times as hard as one benchmarked at a single
+  // setting, and the power model has no business depending on how thorough a
+  // reviewer was.
+  const shares = gameRows.map((r) => r.cpuShare).filter((s) => s != null)
   const meanCpuShare = shares.length
     ? shares.reduce((a, b) => a + b, 0) / shares.length
     : null
@@ -133,7 +190,7 @@ export function estimateBuildPerformance({
     // null until the corpus covers at least one game — a bottleneck verdict
     // with no measured frames behind it is the guess this engine exists to
     // avoid, and every FPS calculator on the internet already sells it.
-    bottleneck: bottleneckSummary(rows),
+    bottleneck: bottleneckSummary(gameRows),
     meanCpuShare,
     build: {
       cpu: { id: cpu.id, name: cpu.name },
@@ -145,9 +202,17 @@ export function estimateBuildPerformance({
       // combination. Collapsing the two would hide the difference between
       // "we measured this" and "we derived it", which is the distinction the
       // whole engine exists to preserve.
-      gamesAnswered: rows.filter((r) => r.basis !== 'none').length,
-      gamesExact: rows.filter((r) => r.basis === 'measured').length,
-      gamesTotal: rows.length,
+      //
+      // Counted in GAMES, while `games` above is one row per game AND preset.
+      // "19 of 22 games answered" is what a reader wants; "43 of 78 rows" counts
+      // how many settings a reviewer happened to test, which is a fact about the
+      // reviewer. The row-level totals are reported separately for the UI.
+      gamesAnswered: new Set(rows.filter((r) => r.basis !== 'none').map((r) => r.gameId)).size,
+      gamesExact: new Set(rows.filter((r) => r.basis === 'measured').map((r) => r.gameId)).size,
+      gamesTotal: selected.length,
+      rowsAnswered: rows.filter((r) => r.basis !== 'none').length,
+      rowsExact: rows.filter((r) => r.basis === 'measured').length,
+      rowsTotal: rows.length,
       gpuBasis: gpuIdx.basis,
       cpuBasis: cpuIdx.basis,
       // The fit copies the 1440p GPU index into any resolution with no data of
