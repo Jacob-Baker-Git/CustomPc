@@ -18,13 +18,34 @@ import { PAGES } from './prerender-routes.mjs'
 const DIST = new URL('../dist/', import.meta.url)
 const FRAGMENTS = new URL('../prerendered/', import.meta.url)
 
+// Safe for HTML attribute values (content="...", href="...") AND for RCDATA
+// text nodes (<title>...</title>) — one helper covers both rather than
+// risking the wrong one being reached for at a call site. & and " alone would
+// cover the attribute-value case, but <title> is RCDATA: a lone < is inert
+// there, while the literal sequence </title> ends the element early and
+// everything after it is parsed as markup — so < (and, for symmetry, >) must
+// be escaped too. Escaping them in an attribute value is harmless and valid,
+// so widening this one helper costs the attribute case nothing.
 export const escapeAttr = (s) =>
-  String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+  String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-// The root div is matched non-greedily up to its own closing pair. index.html is
-// ours and stable, and a mismatch throws rather than passing the input through:
-// a silent no-op would ship the boot screen as every page's content.
-const ROOT_RE = /<div id="root">[\s\S]*?<\/div><\/div>/
+// Matched GREEDILY, anchored on what precedes </body> — not on the root div's
+// own first closing pair. Verified by hand against a real `npm run build`:
+// Vite hoists <script type="module"> and the stylesheet <link> into <head>,
+// so <body> in dist/index.html contains nothing but the root div. That is
+// what makes anchoring on </body> safe rather than just convenient.
+//
+// A non-greedy [\s\S]*? up to the first </div></div> was tried first and is
+// wrong: if the boot placeholder ever gains a nesting level (a spinner ring
+// around a spinner dot), the FIRST </div></div> belongs to the inner
+// elements, not to root. The regex still matches — the guard below does not
+// throw — but on a PROPER PREFIX of the root div, leaving the rest of the
+// placeholder dangling outside the injected fragment. Anchoring on </body>
+// instead means the only way to match at all is to consume every nested
+// closing tag up to root's own, so a wrong-but-successful prefix match is not
+// possible: either the real root div is matched in full, or (if <body> ever
+// contains something after it) nothing matches and the guard throws.
+const ROOT_RE = /<div id="root">[\s\S]*<\/div>(?=\s*<\/body>)/
 
 export function injectFragment(html, fragment) {
   if (!ROOT_RE.test(html)) {

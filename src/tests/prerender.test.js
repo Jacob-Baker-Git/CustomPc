@@ -5,7 +5,10 @@ import { PAGES as APP_PAGES } from '../hooks/usePageRoute'
 import { PAGE_META, canonicalFor } from '../lib/pageMeta'
 
 // A miniature of index.html carrying one of every tag the injector rewrites,
-// plus the verification tag it must not touch.
+// plus the verification tag it must not touch. Modelled on a real
+// `npm run build` output (verified by hand), not the source index.html: Vite
+// hoists <script type="module"> and the stylesheet <link> into <head>, so
+// <body> in the built file contains nothing but the root div.
 const SHELL = `<!doctype html>
 <html lang="en"><head>
 <title>Custom PC Builder — Build &amp; Price Your Gaming PC in 3D</title>
@@ -17,9 +20,10 @@ const SHELL = `<!doctype html>
 <meta property="og:url" content="https://custompcbuilder.netlify.app/" />
 <meta name="twitter:title" content="Root title" />
 <meta name="twitter:description" content="Root description." />
+<script type="module" crossorigin src="/assets/index-ABC12345.js"></script>
+<link rel="stylesheet" crossorigin href="/assets/index-XYZ98765.css">
 </head><body style="margin:0;background:#0F1114">
 <div id="root"><div class="boot" style="position:fixed">Custom PC Builder…</div></div>
-<script type="module" src="/assets/index-ABC12345.js"></script>
 </body></html>`
 
 const decode = (s) => s.replace(/&quot;/g, '"').replace(/&amp;/g, '&')
@@ -72,6 +76,21 @@ describe('applyMeta', () => {
     expect(out).toContain('content="C $` D"')
     expect(out).toContain('href="https://x/$$"')
   })
+
+  it('escapes </title> in a title so it cannot terminate the element early', () => {
+    // <title> is RCDATA: a lone < is inert there, but the literal sequence
+    // </title> ends the element early and everything after it parses as
+    // markup. Titles are hand-authored today, but partPages.js builds titles
+    // from 540 catalogue parts, so a less-trusted string reaching here is
+    // plausible.
+    const out = applyMeta(SHELL, {
+      title: 'Weird </title><script>alert(1)</script> Title',
+      description: PAGE_META.help.description,
+      canonical: canonicalFor('help'),
+    })
+    expect(out).not.toContain('</title><script>')
+    expect(out).toContain('<title>Weird &lt;/title&gt;&lt;script&gt;alert(1)&lt;/script&gt; Title</title>')
+  })
 })
 
 describe('injectFragment', () => {
@@ -96,6 +115,25 @@ describe('injectFragment', () => {
     // of these the committed pre-render would be silently corrupted.
     const out = injectFragment(SHELL, '<p>cost $& and $` and $$ and $\'</p>')
     expect(out).toContain('<p>cost $& and $` and $$ and $\'</p>')
+  })
+
+  it('does not stop at the first nested </div></div>, only the div that actually closes root', () => {
+    // Regression: a NON-GREEDY ROOT_RE stops at the FIRST </div></div> pair.
+    // If the boot placeholder ever gains a nesting level (a spinner ring
+    // around a spinner dot), that first pair belongs to the inner elements,
+    // not to root — so the old regex still matched (the guard did not throw)
+    // but on a PROPER PREFIX of the root div, leaving "Loading…</div></div>"
+    // dangling outside the injected fragment. Silent, and still a 200.
+    const nestedShell = SHELL.replace(
+      '<div id="root"><div class="boot" style="position:fixed">Custom PC Builder…</div></div>',
+      '<div id="root"><div class="boot"><div class="spinner-ring"><div class="spinner-dot"></div></div>Loading…</div></div>',
+    )
+    const out = injectFragment(nestedShell, '<main>PAGE</main>')
+    expect(out).toContain('<div id="root"><main>PAGE</main></div>')
+    expect(out).not.toContain('Loading…')
+    // Nothing but </body> follows the fragment's own closing div — proves
+    // there is no stray </div> (or anything else) left dangling.
+    expect(out).toMatch(/<div id="root"><main>PAGE<\/main><\/div>\s*<\/body>/)
   })
 })
 
