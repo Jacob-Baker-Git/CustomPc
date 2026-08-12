@@ -91,15 +91,40 @@ export const CB_CPU_IDS = {
   'Intel Core Ultra 5 245K': 'cpu-intel-ultra-5-245k',
   'Intel Core Ultra 7 265K': 'cpu-intel-ultra-7-265k',
   'Intel Core Ultra 9 285K': 'cpu-intel-ultra-9-285k',
-  // Deliberately absent, so their rows are refused rather than filed against the
-  // review's recorded test system:
-  //   AMD Ryzen 7 7800X3D — ran DDR5-5200CL30, not the DDR5-5600CL32 standard
-  //   AMD Ryzen 7 5800X3D — AM4 on DDR4-3200CL14, a different platform entirely
+
+  // Added with the budget parcours. These are the chips people actually buy,
+  // and every one of them sits on a platform whose stock memory differs from the
+  // flagship's — which is exactly why they were unreachable before.
+  'AMD Ryzen 5 7500F': 'cpu-ryzen-5-7500f',
+  'AMD Ryzen 5 7600': 'cpu-ryzen-5-7600',
+  'AMD Ryzen 5 7600X': 'cpu-ryzen-5-7600x',
+  'AMD Ryzen 5 8400F': 'cpu-ryzen-5-8400f',
+  'AMD Ryzen 7 7700X': 'cpu-ryzen-7-7700x',
+  'AMD Ryzen 7 7800X3D': 'cpu-ryzen-7-7800x3d',
+  'AMD Ryzen 9 7950X3D': 'cpu-ryzen-9-7950x3d',
+  'AMD Ryzen 9 9950X3D': 'cpu-ryzen-9-9950x3d',
+  'Intel Core i3-12100F': 'cpu-i3-12100f',
+  'Intel Core i5-14400F': 'cpu-i5-14400f',
+  'Intel Core i5-14600KF': 'cpu-i5-14600kf',
+
+  // BOTH spellings of one chip, and this is why the map is hand-written. The
+  // 5800X3D is a Ryzen 7; the budget review's charts call it a Ryzen 5. Deriving
+  // an id from the name would either invent `cpu-ryzen-5-5800x3d` or drop 19
+  // games of the only AM4 processor in the corpus.
+  'AMD Ryzen 7 5800X3D': 'cpu-ryzen-7-5800x3d',
+  'AMD Ryzen 5 5800X3D': 'cpu-ryzen-7-5800x3d',
+
+  // Charted but deliberately absent, because no catalogue part matches: Ryzen 5
+  // 7600X3D, Ryzen 9 9900X3D, Core i5-12600KF, Core Ultra 5 225F, Core Ultra 5
+  // 235. Their rows are refused rather than filed against an approximate part.
 }
 
-// Every row this review reports ran the same memory. A row that did not is not
-// the recorded test system, whatever chip is on it.
+// The memory each review declares as its FLAGSHIP platform's configuration.
+// Not a filter any more — a row on different memory is grouped into its own
+// bench, one TSV per configuration, each declaring the memory it actually ran.
+// See CPU_ROW_QUALIFIER for what genuinely is refused.
 export const CB_9800X3D_MEMORY = 'DDR5-5600CL32'
+export const CB_BUDGET_MEMORY = 'DDR5-5600CL26'
 
 // Aggregate charts. They are a rating across the whole parcours, not a game.
 const RATING = /rating|percentil-rating|frametimes$/i
@@ -210,7 +235,24 @@ function rowsIn(groupHtml) {
 // are NOT interchangeable: a Turbo-Mode or memory-overclocked row is a different
 // machine from the stock one and would collide with it on entry id, where the
 // importer's dedupe silently keeps whichever landed first.
-const CPU_ROW_QUALIFIER = /\((Turbo Mode|DDR5-OC|DDR4-OC)\)/i
+//
+// ⚠️ These all describe the SAME CHIP run differently. That is the distinction
+// that matters, and it is not the same as "ran different memory from its
+// neighbours": a Ryzen 7 5800X3D on DDR4 is AM4 and physically cannot take
+// DDR5, so its memory is the platform's own stock configuration rather than a
+// deviation from a standard. Refusing by memory alone capped the corpus at one
+// platform per review, which is why only twelve processors were ever indexed.
+// Grouping rows into a bench per memory configuration is the extractor's job;
+// this regex only rejects a chip charted more than once.
+//
+//   (sim.)      a SIMULATED part — cores disabled on a larger chip to stand in
+//               for a product that does not exist. Nobody can buy it.
+//   (cTDP)      a configurable-TDP run of a chip charted stock elsewhere
+//   (Turbo GM)  AMD's Turbo Game Mode, likewise non-stock
+//   (CU)        a CUDIMM memory upgrade; ComputerBase charts the 285K both ways
+//               ON PURPOSE to show the difference, so both rows exist and
+//               collide on entry id
+const CPU_ROW_QUALIFIER = /\((Turbo Mode|DDR5-OC|DDR4-OC|sim\.|cTDP|Turbo GM|CU)\)/i
 
 // "(Perf.)" is ComputerBase's stock Intel power profile, not an overclock, and
 // the rows already in the corpus are the (Perf.) ones. It is stripped from the

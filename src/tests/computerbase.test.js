@@ -203,6 +203,74 @@ describe('extractCpuCharts', () => {
   })
 })
 
+// Verbatim row shapes from the "Sieben CPUs unter 200 Euro" review, which
+// charts four non-stock variants the 9800X3D review never used. Each is a
+// different machine from the stock row and would collide with it on entry id.
+const BUDGET_CHART = `
+<div class="chart__title nojs-block">Anno 1800 – FPS, Durchschnitt</div>
+<ul class="chart__groups"><li class="chart__group"><ul class="chart__group-body">
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 5 „9600X3D“ (sim.)<br>
+  <span class="chart__item-title-addtl">65/88 W, DDR5-5600CL26</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="188.1">188,1</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 7 9700X (cTDP)<br>
+  <span class="chart__item-title-addtl">105/142 W, DDR5-5600CL26</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="171.4">171,4</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 9 9950X3D (Turbo GM)<br>
+  <span class="chart__item-title-addtl">170/200 W, DDR5-5600CL26</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="196.3">196,3</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  Intel Core Ultra 9 285K (CU)<br>
+  <span class="chart__item-title-addtl">250/250 W, CU-DDR5-6400CL36</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="160.2">160,2</div></div></div></li>
+<li class="chart__row"><div class="chart__item"><strong><u>Intel Core Ultra 9 285K</u></strong><br>
+  <span class="chart__item-title-addtl">250/250 W, DDR5-5600CL26</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="151.8">151,8</div></div></div></li>
+<li class="chart__row"><div class="chart__item">
+  AMD Ryzen 7 5800X3D<br>
+  <span class="chart__item-title-addtl">105/142 W, DDR4-3200CL14</span></div>
+<div class="chart__value"><div class="chart__bar"><div class="chart__label" data-value="112.4">112,4</div></div></div></li>
+</ul></li></ul>
+`
+
+describe('extractCpuCharts — non-stock variants of the budget review', () => {
+  const [chart] = extractCpuCharts(BUDGET_CHART)
+  const names = chart.rows.map((r) => r.part)
+
+  it('refuses a SIMULATED part, which is not a product at all', () => {
+    // ComputerBase simulates a "9600X3D" by disabling cores on a larger chip.
+    // No such processor exists to buy, so filing it against a catalogue id would
+    // be inventing a measurement of a part that cannot be bought.
+    expect(names.some((n) => n.includes('9600X3D'))).toBe(false)
+  })
+
+  it('refuses cTDP and Turbo Game Mode rows', () => {
+    // Both are non-stock power configurations of a chip charted stock elsewhere.
+    expect(names).not.toContain('AMD Ryzen 7 9700X (cTDP)')
+    expect(names).not.toContain('AMD Ryzen 9 9950X3D (Turbo GM)')
+  })
+
+  it('refuses the CUDIMM row while keeping its stock twin', () => {
+    // The 285K is charted twice — DDR5-5600 and CUDIMM-6400 — precisely to show
+    // the memory difference. Keeping both collides on entry id, and the CUDIMM
+    // run is a memory upgrade, not the platform's stock configuration.
+    expect(names).not.toContain('Intel Core Ultra 9 285K (CU)')
+    const stock = chart.rows.filter((r) => r.part === 'Intel Core Ultra 9 285K')
+    expect(stock).toHaveLength(1)
+    expect(stock[0].avg).toBe(151.8)
+  })
+
+  it('KEEPS a chip on its own platform stock memory', () => {
+    // The 5800X3D is AM4 and physically cannot run DDR5. DDR4-3200CL14 is not a
+    // deviation from a standard — it is the only memory that chip takes, so it
+    // is a separate bench rather than a refused row.
+    const am4 = chart.rows.find((r) => r.part === 'AMD Ryzen 7 5800X3D')
+    expect(am4).toMatchObject({ avg: 112.4, memory: '105/142 W, DDR4-3200CL14' })
+  })
+})
+
 describe('CB_CPU_IDS', () => {
   it('resolves every mapped name to a real catalogue part', () => {
     const byId = new Set(parts.filter((p) => p.category === 'cpu').map((p) => p.id))
