@@ -31,13 +31,29 @@ export function injectFragment(html, fragment) {
     throw new Error('apply-prerender: could not find the #root placeholder in the shell — '
       + 'index.html changed shape, and injecting nothing would ship the boot screen')
   }
-  return html.replace(ROOT_RE, `<div id="root">${fragment}</div>`)
+  // A replacer FUNCTION, not a template string: fragment is arbitrary rendered
+  // page HTML captured by Playwright (Task 3). $&, $$, $` and $' are
+  // substitution syntax in a replacement STRING — insert-whole-match,
+  // literal-$, insert-text-before-match, insert-text-after-match — so a page
+  // that happens to render one of those sequences into a template string
+  // would silently splice matched or surrounding HTML into the fragment. A
+  // function's return value is inserted verbatim; nothing reprocesses it.
+  return html.replace(ROOT_RE, () => `<div id="root">${fragment}</div>`)
 }
 
-const swapAttr = (html, pattern, value) => html.replace(pattern, `$1${escapeAttr(value)}$2`)
+// A replacer FUNCTION, not a template string, for the same reason as
+// injectFragment above: title/description/canonical are content values, and
+// escapeAttr only escapes & and " — not $ — so e.g. the value "A $& B" becomes
+// "A $&amp; B", which still contains the literal substitution sequence $&. A
+// template string would let that overwrite p1/p2 with the pattern's own
+// matched text instead of the escaped value. The function's return value
+// bypasses $-substitution entirely.
+const swapAttr = (html, pattern, value) => html.replace(pattern, (_match, p1, p2) => `${p1}${escapeAttr(value)}${p2}`)
 
 export function applyMeta(html, { title, description, canonical }) {
-  let out = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(title)}</title>`)
+  // Same hazard as swapAttr: a title containing "$&" (or $$, $`, $') would be
+  // corrupted by a template-string replacement. See swapAttr above.
+  let out = html.replace(/<title>[\s\S]*?<\/title>/, () => `<title>${escapeAttr(title)}</title>`)
   out = swapAttr(out, /(<meta name="description" content=")[^"]*(")/, description)
   out = swapAttr(out, /(<meta property="og:title" content=")[^"]*(")/, title)
   out = swapAttr(out, /(<meta property="og:description" content=")[^"]*(")/, description)

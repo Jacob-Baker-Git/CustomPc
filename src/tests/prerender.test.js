@@ -61,6 +61,17 @@ describe('applyMeta', () => {
   it('leaves the asset script untouched', () => {
     expect(out).toContain('/assets/index-ABC12345.js')
   })
+
+  it('writes a meta value containing $& literally', () => {
+    // $&, $$, $` and $' are substitution syntax in a replacement STRING
+    // (whole-match, literal-$, before-match, after-match). Title/description/
+    // canonical are content values, not regex internals, so a literal one of
+    // these must survive untouched rather than splicing matched text in.
+    const out = applyMeta(SHELL, { title: 'A $& B', description: 'C $` D', canonical: 'https://x/$$' })
+    expect(out).toContain('<title>A $&amp; B</title>')
+    expect(out).toContain('content="C $` D"')
+    expect(out).toContain('href="https://x/$$"')
+  })
 })
 
 describe('injectFragment', () => {
@@ -77,6 +88,14 @@ describe('injectFragment', () => {
     // like a successful build. Fail loudly instead.
     expect(() => injectFragment('<body><div id="app"></div></body>', '<p>x</p>'))
       .toThrow(/root/i)
+  })
+
+  it('inserts a fragment containing $& and $` literally', () => {
+    // $&, $$, $` and $' are substitution syntax in a replacement STRING. A
+    // fragment is arbitrary rendered page HTML, so if any page ever renders one
+    // of these the committed pre-render would be silently corrupted.
+    const out = injectFragment(SHELL, '<p>cost $& and $` and $$ and $\'</p>')
+    expect(out).toContain('<p>cost $& and $` and $$ and $\'</p>')
   })
 })
 
