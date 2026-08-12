@@ -1,0 +1,58 @@
+# ComputerBase — Sieben CPUs von AMD und Intel unter 200 Euro im Test.
+# Gaming-Benchmarks, 720p, GeForce RTX 5090 FE. 720p is deliberate: it
+# removes the graphics card as a limit so the processors separate.
+#
+# THIS FILE IS ONE BENCH: DDR4-3200CL14 (AM4).
+# The review is cross-platform, so its rows are split into one file per
+# memory configuration. AM4 physically cannot take DDR5 — a chip's own
+# platform memory is its stock configuration, not a deviation from a
+# standard, so it is a separate bench rather than a refused row.
+#
+# REFUSED, with the reason rather than a silent gap:
+#   · CP2077 Phantom Liberty — run with "RT Niedrig" and no raster preset named — the cell key has no ray-tracing slot
+#   · Cyberpunk 2077 — run with "RT Niedrig" and no raster preset named — the cell key has no ray-tracing slot
+#   · Homeworld 3 — "Grafik-Preset Hoch, DLSS" states no DLSS quality; the corpus refuses an upscaler whose render fraction nobody wrote down
+#   · Microsoft Flight Simulator 2024 — ComputerBase itself excludes it from every rating — "extrem inkonsistente Werte", unstable on smaller CPUs
+#   · every (sim.) row — a SIMULATED "9600X3D", a part nobody can buy
+#   · every (cTDP), (Turbo GM) and (CU) row — the same chip run non-stock,
+#     charted alongside its own stock twin and colliding with it on entry id
+#   · every CPU Package Power chart — a wattage, not a frame rate
+#   · Ryzen 5 7600X3D, Ryzen 9 9900X3D, i5-12600KF, Core Ultra 5 225F and
+#     235 — charted, but no catalogue part matches
+#
+# ⚠️ ComputerBase states these results are NOT comparable with their own
+# earlier parcours (new GPU, patches, drivers, Windows updates). They share
+# cells with the 9800X3D review, whose rows ran an RTX 4090 — the fit is
+# relative so this is meta-analysis rather than an error, but cv on the
+# shared cells is the number to watch.
+# Settings read per game off "Die Einstellungen der 19 Spiele im Detail
+# (stets 720p-Auflösung)" on the article's own benchmark page.
+
+outlet:    ComputerBase
+title:     DDR4-3200CL14 — Sieben CPUs von AMD und Intel unter 200 Euro im Test
+url:       https://www.computerbase.de/artikel/prozessoren/cpu-test-amd-intel-50-200-euro.92391/seite-2
+published: 2025-05-08
+kind:      cpu-scaling
+gpu:       gpu-rtx-5090
+ram:       DDR4 3200 32 2
+os:        Windows 11 24H2 (Build 26100.33xx)
+driver:    GeForce 572.42
+scene:     ComputerBase 19-game parcours, 720p
+
+# game  res  preset  up  part  avg  low
+anno-1800	720p	ultrahoch	native	cpu-ryzen-7-5800x3d	89.5	64.3
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-7-5800x3d	235.8	138.3
+avowed	720p	episch	performance	cpu-ryzen-7-5800x3d	92.7	66.5
+bg3	720p	ultra	native	cpu-ryzen-7-5800x3d	175.6	134.6
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-7-5800x3d	32.8	20
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-7-5800x3d	142.3	100.8
+f1-24	720p	ultrahoch	native	cpu-ryzen-7-5800x3d	194.4	103.6
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-7-5800x3d	62.4	46.2
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-7-5800x3d	154.7	134.1
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-7-5800x3d	129.4	110.3
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-7-5800x3d	177.6	122.1
+outcast-2	720p	ultra	performance	cpu-ryzen-7-5800x3d	99.9	62.1
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-7-5800x3d	133.7	111.5
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-7-5800x3d	74.9	56.6
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-7-5800x3d	141.7	99
+starfield	720p	ultra	native	cpu-ryzen-7-5800x3d	78.2	62

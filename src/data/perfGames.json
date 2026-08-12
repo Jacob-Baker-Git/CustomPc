@@ -151,6 +151,32 @@
     ]
   },
   {
+    "id": "avatar-frontiers-of-pandora",
+    "name": "Avatar: Frontiers of Pandora",
+    "slug": "avatar-frontiers-of-pandora",
+    "presets": [
+      {
+        "id": "ultra",
+        "label": "Ultra (DLSS/FSR Ultra Performance)",
+        "tier": 4,
+        "upscaling": "ultra-performance"
+      }
+    ]
+  },
+  {
+    "id": "avowed",
+    "name": "Avowed",
+    "slug": "avowed",
+    "presets": [
+      {
+        "id": "episch",
+        "label": "Episch (DLSS/FSR Performance)",
+        "tier": 4,
+        "upscaling": "performance"
+      }
+    ]
+  },
+  {
     "id": "bg3",
     "name": "Baldur's Gate 3",
     "slug": "baldurs-gate-3",
@@ -469,14 +495,14 @@
         "upscaling": "native"
       },
       {
-        "id": "high",
-        "label": "High",
+        "id": "hoch",
+        "label": "Hoch",
         "tier": 3,
         "upscaling": "native"
       },
       {
-        "id": "hoch",
-        "label": "Hoch",
+        "id": "high",
+        "label": "High",
         "tier": 3,
         "upscaling": "native"
       },
@@ -783,16 +809,16 @@
         "upscaling": "quality"
       },
       {
-        "id": "high",
-        "label": "High",
-        "tier": 3,
-        "upscaling": "native"
-      },
-      {
         "id": "hoch",
         "label": "Hoch (DLSS/FSR Ultra Performance)",
         "tier": 3,
         "upscaling": "ultra-performance"
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "tier": 3,
+        "upscaling": "native"
       }
     ]
   },
@@ -1230,6 +1256,12 @@
         "label": "Sehr hoch",
         "tier": 4,
         "upscaling": "native"
+      },
+      {
+        "id": "sehr-hoch",
+        "label": "Sehr hoch (DLSS/FSR Performance)",
+        "tier": 4,
+        "upscaling": "performance"
       }
     ]
   },

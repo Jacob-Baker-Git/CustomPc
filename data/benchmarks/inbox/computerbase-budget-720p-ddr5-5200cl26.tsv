@@ -1,0 +1,154 @@
+# ComputerBase — Sieben CPUs von AMD und Intel unter 200 Euro im Test.
+# Gaming-Benchmarks, 720p, GeForce RTX 5090 FE. 720p is deliberate: it
+# removes the graphics card as a limit so the processors separate.
+#
+# THIS FILE IS ONE BENCH: DDR5-5200CL26 (AM5 Zen 4).
+# The review is cross-platform, so its rows are split into one file per
+# memory configuration. AM4 physically cannot take DDR5 — a chip's own
+# platform memory is its stock configuration, not a deviation from a
+# standard, so it is a separate bench rather than a refused row.
+#
+# REFUSED, with the reason rather than a silent gap:
+#   · CP2077 Phantom Liberty — run with "RT Niedrig" and no raster preset named — the cell key has no ray-tracing slot
+#   · Cyberpunk 2077 — run with "RT Niedrig" and no raster preset named — the cell key has no ray-tracing slot
+#   · Homeworld 3 — "Grafik-Preset Hoch, DLSS" states no DLSS quality; the corpus refuses an upscaler whose render fraction nobody wrote down
+#   · Microsoft Flight Simulator 2024 — ComputerBase itself excludes it from every rating — "extrem inkonsistente Werte", unstable on smaller CPUs
+#   · every (sim.) row — a SIMULATED "9600X3D", a part nobody can buy
+#   · every (cTDP), (Turbo GM) and (CU) row — the same chip run non-stock,
+#     charted alongside its own stock twin and colliding with it on entry id
+#   · every CPU Package Power chart — a wattage, not a frame rate
+#   · Ryzen 5 7600X3D, Ryzen 9 9900X3D, i5-12600KF, Core Ultra 5 225F and
+#     235 — charted, but no catalogue part matches
+#
+# ⚠️ ComputerBase states these results are NOT comparable with their own
+# earlier parcours (new GPU, patches, drivers, Windows updates). They share
+# cells with the 9800X3D review, whose rows ran an RTX 4090 — the fit is
+# relative so this is meta-analysis rather than an error, but cv on the
+# shared cells is the number to watch.
+# Settings read per game off "Die Einstellungen der 19 Spiele im Detail
+# (stets 720p-Auflösung)" on the article's own benchmark page.
+
+outlet:    ComputerBase
+title:     DDR5-5200CL26 — Sieben CPUs von AMD und Intel unter 200 Euro im Test
+url:       https://www.computerbase.de/artikel/prozessoren/cpu-test-amd-intel-50-200-euro.92391/seite-2
+published: 2025-05-08
+kind:      cpu-scaling
+gpu:       gpu-rtx-5090
+ram:       DDR5 5200 32 2
+os:        Windows 11 24H2 (Build 26100.33xx)
+driver:    GeForce 572.42
+scene:     ComputerBase 19-game parcours, 720p
+
+# game  res  preset  up  part  avg  low
+anno-1800	720p	ultrahoch	native	cpu-ryzen-5-7500f	65	45.5
+anno-1800	720p	ultrahoch	native	cpu-ryzen-5-7600	67.6	45.3
+anno-1800	720p	ultrahoch	native	cpu-ryzen-5-7600x	68.7	44.9
+anno-1800	720p	ultrahoch	native	cpu-ryzen-5-8400f	60	43.4
+anno-1800	720p	ultrahoch	native	cpu-ryzen-7-7700x	76.9	50
+anno-1800	720p	ultrahoch	native	cpu-ryzen-7-7800x3d	110.1	82.6
+anno-1800	720p	ultrahoch	native	cpu-ryzen-9-7950x3d	118	70.1
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-5-7500f	250	165.2
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-5-7600	248.6	166.9
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-5-7600x	244.1	157.8
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-5-8400f	212.4	150.2
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-7-7700x	242.9	151.3
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-7-7800x3d	236.8	148.8
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-ryzen-9-7950x3d	243	152.3
+avowed	720p	episch	performance	cpu-ryzen-5-7500f	103.3	67.1
+avowed	720p	episch	performance	cpu-ryzen-5-7600	103.7	75.9
+avowed	720p	episch	performance	cpu-ryzen-5-7600x	103.7	71
+avowed	720p	episch	performance	cpu-ryzen-5-8400f	93.1	59.9
+avowed	720p	episch	performance	cpu-ryzen-7-7700x	118.1	93
+avowed	720p	episch	performance	cpu-ryzen-7-7800x3d	134.5	85.1
+avowed	720p	episch	performance	cpu-ryzen-9-7950x3d	134	95.7
+bg3	720p	ultra	native	cpu-ryzen-5-7500f	143.7	114.7
+bg3	720p	ultra	native	cpu-ryzen-5-7600	143.8	114.9
+bg3	720p	ultra	native	cpu-ryzen-5-7600x	150.3	119.8
+bg3	720p	ultra	native	cpu-ryzen-5-8400f	145.8	123.1
+bg3	720p	ultra	native	cpu-ryzen-7-7700x	157.1	126.5
+bg3	720p	ultra	native	cpu-ryzen-7-7800x3d	206.5	165.2
+bg3	720p	ultra	native	cpu-ryzen-9-7950x3d	209.7	154.6
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-5-7500f	30.7	15.1
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-5-7600	30.5	16.4
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-5-7600x	31.6	15.6
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-5-8400f	35.7	21.3
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-7-7700x	44.6	26
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-7-7800x3d	46.4	28.1
+cities-skylines-2	720p	hoch	ultra-performance	cpu-ryzen-9-7950x3d	47	27.9
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-5-7500f	130.8	91.2
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-5-7600	125.8	89
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-5-7600x	140.3	104
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-5-8400f	117.1	87.1
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-7-7700x	137.7	102.3
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-7-7800x3d	182.5	129.1
+dragons-dogma-2	720p	hoch	native	cpu-ryzen-9-7950x3d	185.7	133.4
+f1-24	720p	ultrahoch	native	cpu-ryzen-5-7500f	174.2	101.4
+f1-24	720p	ultrahoch	native	cpu-ryzen-5-7600	173.5	98.8
+f1-24	720p	ultrahoch	native	cpu-ryzen-5-7600x	182.2	106.9
+f1-24	720p	ultrahoch	native	cpu-ryzen-5-8400f	147.8	86.1
+f1-24	720p	ultrahoch	native	cpu-ryzen-7-7700x	205.6	116.9
+f1-24	720p	ultrahoch	native	cpu-ryzen-7-7800x3d	250.5	129.3
+f1-24	720p	ultrahoch	native	cpu-ryzen-9-7950x3d	214.2	120.4
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-5-7500f	61.3	48.4
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-5-7600	63.1	49.1
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-5-7600x	66.2	51.6
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-5-8400f	57.2	45.8
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-7-7700x	68.8	52.9
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-7-7800x3d	77.5	58
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-ryzen-9-7950x3d	78.1	56.4
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-5-7500f	149.2	129.3
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-5-7600	152.3	131.4
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-5-7600x	155.3	132.8
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-5-8400f	126.5	109.8
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-7-7700x	160.5	140
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-7-7800x3d	183.8	166.5
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-ryzen-9-7950x3d	192.7	160.5
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-5-7500f	140.4	115.6
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-5-7600	139.2	109.4
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-5-7600x	145.5	108.2
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-5-8400f	116.1	91.1
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-7-7700x	151.6	125.7
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-7-7800x3d	168.6	141.6
+hellblade-2	720p	hoch	ultra-performance	cpu-ryzen-9-7950x3d	169.1	119.9
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-5-7500f	173.6	127.1
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-5-7600	173.6	128.8
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-5-7600x	179.4	132.5
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-5-8400f	139.1	105.3
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-7-7700x	194	139
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-7-7800x3d	222	154.1
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-ryzen-9-7950x3d	202.9	142.5
+outcast-2	720p	ultra	performance	cpu-ryzen-5-7500f	85.5	62.2
+outcast-2	720p	ultra	performance	cpu-ryzen-5-7600	86	65.5
+outcast-2	720p	ultra	performance	cpu-ryzen-5-7600x	88	63
+outcast-2	720p	ultra	performance	cpu-ryzen-5-8400f	74.6	54.6
+outcast-2	720p	ultra	performance	cpu-ryzen-7-7700x	91.3	70.2
+outcast-2	720p	ultra	performance	cpu-ryzen-7-7800x3d	124.8	91.3
+outcast-2	720p	ultra	performance	cpu-ryzen-9-7950x3d	114.5	82.7
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-5-7500f	142.2	122.2
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-5-7600	176	117.5
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-5-7600x	149.5	110.1
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-5-8400f	101.9	87.1
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-7-7700x	150.5	122
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-7-7800x3d	162.6	138.2
+space-marine-2	720p	max	ultra-performance	cpu-ryzen-9-7950x3d	151.1	122.2
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-5-7500f	87.3	71.9
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-5-7600	91.2	74.6
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-5-7600x	92.9	73.4
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-5-8400f	74.6	60.8
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-7-7700x	96.8	77.8
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-7-7800x3d	105.2	86.7
+spider-man-2	720p	sehr-hoch	performance	cpu-ryzen-9-7950x3d	112.1	86.4
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-5-7500f	139.1	105
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-5-7600	141.7	107.6
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-5-7600x	145.7	102.2
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-5-8400f	114.7	84.5
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-7-7700x	161.4	122
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-7-7800x3d	178.3	128.4
+star-wars-outlaws	720p	ultra	performance	cpu-ryzen-9-7950x3d	191.1	134.9
+starfield	720p	ultra	native	cpu-ryzen-5-7500f	76.8	65.9
+starfield	720p	ultra	native	cpu-ryzen-5-7600	76.1	64.1
+starfield	720p	ultra	native	cpu-ryzen-5-7600x	79.8	66.9
+starfield	720p	ultra	native	cpu-ryzen-5-8400f	69.8	57.8
+starfield	720p	ultra	native	cpu-ryzen-7-7700x	93.6	69.7
+starfield	720p	ultra	native	cpu-ryzen-7-7800x3d	106.2	76.2
+starfield	720p	ultra	native	cpu-ryzen-9-7950x3d	99.2	81.3

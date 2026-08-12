@@ -1,0 +1,74 @@
+# ComputerBase — Sieben CPUs von AMD und Intel unter 200 Euro im Test.
+# Gaming-Benchmarks, 720p, GeForce RTX 5090 FE. 720p is deliberate: it
+# removes the graphics card as a limit so the processors separate.
+#
+# THIS FILE IS ONE BENCH: DDR5-4800CL24 (LGA1700 locked and non-K).
+# The review is cross-platform, so its rows are split into one file per
+# memory configuration. AM4 physically cannot take DDR5 — a chip's own
+# platform memory is its stock configuration, not a deviation from a
+# standard, so it is a separate bench rather than a refused row.
+#
+# REFUSED, with the reason rather than a silent gap:
+#   · CP2077 Phantom Liberty — run with "RT Niedrig" and no raster preset named — the cell key has no ray-tracing slot
+#   · Cyberpunk 2077 — run with "RT Niedrig" and no raster preset named — the cell key has no ray-tracing slot
+#   · Homeworld 3 — "Grafik-Preset Hoch, DLSS" states no DLSS quality; the corpus refuses an upscaler whose render fraction nobody wrote down
+#   · Microsoft Flight Simulator 2024 — ComputerBase itself excludes it from every rating — "extrem inkonsistente Werte", unstable on smaller CPUs
+#   · every (sim.) row — a SIMULATED "9600X3D", a part nobody can buy
+#   · every (cTDP), (Turbo GM) and (CU) row — the same chip run non-stock,
+#     charted alongside its own stock twin and colliding with it on entry id
+#   · every CPU Package Power chart — a wattage, not a frame rate
+#   · Ryzen 5 7600X3D, Ryzen 9 9900X3D, i5-12600KF, Core Ultra 5 225F and
+#     235 — charted, but no catalogue part matches
+#
+# ⚠️ ComputerBase states these results are NOT comparable with their own
+# earlier parcours (new GPU, patches, drivers, Windows updates). They share
+# cells with the 9800X3D review, whose rows ran an RTX 4090 — the fit is
+# relative so this is meta-analysis rather than an error, but cv on the
+# shared cells is the number to watch.
+# Settings read per game off "Die Einstellungen der 19 Spiele im Detail
+# (stets 720p-Auflösung)" on the article's own benchmark page.
+
+outlet:    ComputerBase
+title:     DDR5-4800CL24 — Sieben CPUs von AMD und Intel unter 200 Euro im Test
+url:       https://www.computerbase.de/artikel/prozessoren/cpu-test-amd-intel-50-200-euro.92391/seite-2
+published: 2025-05-08
+kind:      cpu-scaling
+gpu:       gpu-rtx-5090
+ram:       DDR5 4800 32 2
+os:        Windows 11 24H2 (Build 26100.33xx)
+driver:    GeForce 572.42
+scene:     ComputerBase 19-game parcours, 720p
+
+# game  res  preset  up  part  avg  low
+anno-1800	720p	ultrahoch	native	cpu-i3-12100f	63	48.7
+anno-1800	720p	ultrahoch	native	cpu-i5-14400f	73.5	60.9
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-i3-12100f	181.5	126.8
+avatar-frontiers-of-pandora	720p	ultra	ultra-performance	cpu-i5-14400f	214.6	150.6
+avowed	720p	episch	performance	cpu-i3-12100f	69.3	45.9
+avowed	720p	episch	performance	cpu-i5-14400f	88.7	57.5
+bg3	720p	ultra	native	cpu-i3-12100f	118.6	97.1
+bg3	720p	ultra	native	cpu-i5-14400f	119.6	99.1
+cities-skylines-2	720p	hoch	ultra-performance	cpu-i3-12100f	21	9.5
+cities-skylines-2	720p	hoch	ultra-performance	cpu-i5-14400f	27.9	15.5
+dragons-dogma-2	720p	hoch	native	cpu-i3-12100f	89.4	61.1
+dragons-dogma-2	720p	hoch	native	cpu-i5-14400f	113.6	84.2
+f1-24	720p	ultrahoch	native	cpu-i3-12100f	126.8	79.1
+f1-24	720p	ultrahoch	native	cpu-i5-14400f	152	95.5
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-i3-12100f	57.6	50.4
+frostpunk-2	720p	ultra-high	ultra-performance	cpu-i5-14400f	52.3	42.5
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-i3-12100f	121.8	104.1
+ghost-of-tsushima	720p	sehr-hoch	native	cpu-i5-14400f	128.4	106
+hellblade-2	720p	hoch	ultra-performance	cpu-i3-12100f	103.1	85.5
+hellblade-2	720p	hoch	ultra-performance	cpu-i5-14400f	114.1	93
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-i3-12100f	114	87.9
+horizon-forbidden-west	720p	sehr-hoch	native	cpu-i5-14400f	134.6	98.6
+outcast-2	720p	ultra	performance	cpu-i3-12100f	69.3	49.8
+outcast-2	720p	ultra	performance	cpu-i5-14400f	80.3	58.1
+space-marine-2	720p	max	ultra-performance	cpu-i3-12100f	121.4	99.7
+space-marine-2	720p	max	ultra-performance	cpu-i5-14400f	126.5	105
+spider-man-2	720p	sehr-hoch	performance	cpu-i3-12100f	66.7	54.2
+spider-man-2	720p	sehr-hoch	performance	cpu-i5-14400f	73.8	59.8
+star-wars-outlaws	720p	ultra	performance	cpu-i3-12100f	98.4	74.6
+star-wars-outlaws	720p	ultra	performance	cpu-i5-14400f	112.6	77.3
+starfield	720p	ultra	native	cpu-i3-12100f	50.2	41.5
+starfield	720p	ultra	native	cpu-i5-14400f	68.5	57.1

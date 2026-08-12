@@ -3,6 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import PerformanceScreen from '../components/performance/PerformanceScreen'
 import useBuilderStore from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
+import perfModel from '../data/perfModel.json'
 import { PERF_CAVEAT } from '../lib/siteContent'
 
 const part = (id) => partsData.find((p) => p.id === id)
@@ -59,7 +60,16 @@ describe('PerformanceScreen', () => {
   })
 
   it('says frame rates need data, while still showing the stats panels', () => {
-    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    // The uncovered processor is CHOSEN FROM THE MODEL rather than hardcoded.
+    // This test used to pin cpu-ryzen-5-7600x, which then got indexed — so the
+    // test failed for the best possible reason and looked like a bug. Picking a
+    // genuinely unindexed chip keeps the premise true as the corpus grows, and
+    // the guard says so out loud if the corpus ever covers everything.
+    const uncovered = partsData.find(
+      (p) => p.category === 'cpu' && !perfModel.cpuIndex[p.id],
+    )
+    expect(uncovered, 'catalogue should still hold a CPU the corpus has not indexed').toBeTruthy()
+    useBuilderStore.setState({ selectedParts: { cpu: uncovered, gpu } })
     render(<PerformanceScreen />)
     expect(screen.getByText(/no benchmark data for these parts yet/i)).toBeInTheDocument()
     // and the spec-derived half is unaffected by that

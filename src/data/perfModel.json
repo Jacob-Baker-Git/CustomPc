@@ -1,9 +1,9 @@
 {
   "modelVersion": "1.0.0",
-  "datasetVersion": "2026-08-11",
-  "fittedAt": "2026-08-11T22:41:13.906Z",
-  "entryCount": 2535,
-  "sourceCount": 52,
+  "datasetVersion": "2026-08-12",
+  "fittedAt": "2026-08-12T11:37:48.802Z",
+  "entryCount": 2855,
+  "sourceCount": 56,
   "blendK": 5.1,
   "blendKBasis": "default",
   "resCpuScale": {
@@ -436,62 +436,122 @@
     "cpu-ryzen-7-9800x3d": {
       "value": 100,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-i9-14900ks": {
-      "value": 78.45,
+      "value": 83.62,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-i9-14900k": {
-      "value": 77.62,
+      "value": 82.32,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-i7-14700k": {
-      "value": 78.46,
+      "value": 77.98,
       "basis": "measured",
       "anchors": 13
     },
     "cpu-ryzen-7-9700x": {
-      "value": 73.96,
+      "value": 76.86,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-ryzen-9-9900x": {
-      "value": 72.54,
+      "value": 76.98,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-ryzen-5-9600x": {
-      "value": 70.22,
+      "value": 73.3,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-ryzen-9-9950x": {
-      "value": 74,
+      "value": 78.22,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-i5-14600k": {
-      "value": 72.41,
+      "value": 71.96,
       "basis": "measured",
       "anchors": 13
     },
     "cpu-intel-ultra-9-285k": {
-      "value": 73.97,
+      "value": 78.6,
       "basis": "measured",
-      "anchors": 13
+      "anchors": 29
     },
     "cpu-intel-ultra-7-265k": {
-      "value": 72.11,
+      "value": 71.66,
       "basis": "measured",
       "anchors": 13
     },
     "cpu-intel-ultra-5-245k": {
-      "value": 68.74,
+      "value": 68.32,
       "basis": "measured",
       "anchors": 13
+    },
+    "cpu-ryzen-7-5800x3d": {
+      "value": 72.22,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-i3-12100f": {
+      "value": 52.81,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-i5-14400f": {
+      "value": 60.75,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-5-7500f": {
+      "value": 69.63,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-5-7600": {
+      "value": 70.95,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-5-7600x": {
+      "value": 72.45,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-5-8400f": {
+      "value": 61.38,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-7-7700x": {
+      "value": 78.41,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-7-7800x3d": {
+      "value": 91.39,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-9-7950x3d": {
+      "value": 90.56,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-i5-14600kf": {
+      "value": 81.28,
+      "basis": "measured",
+      "anchors": 16
+    },
+    "cpu-ryzen-9-9950x3d": {
+      "value": 99.46,
+      "basis": "measured",
+      "anchors": 16
     }
   },
   "gameConst": {
@@ -503,7 +563,7 @@
           "cv": 0.3955,
           "lowBase": 1.0753,
           "lowSources": 25,
-          "B": 455.47
+          "B": 460.7
         },
         "very-high|native": {
           "A": 1130.8,
@@ -520,7 +580,7 @@
           "cv": 0.3175,
           "lowBase": 1.0657,
           "lowSources": 15,
-          "B": 455.47
+          "B": 460.7
         },
         "very-high|native": {
           "A": 2174.81,
@@ -532,7 +592,7 @@
       },
       "1080p": {
         "sehr-hoch|native": {
-          "B": 455.47
+          "B": 460.7
         }
       }
     },
@@ -586,7 +646,7 @@
           "lowSources": 28
         },
         "max|ultra-performance": {
-          "B": 468.78
+          "B": 497.39
         }
       },
       "4k": {
@@ -598,12 +658,12 @@
           "lowSources": 17
         },
         "max|ultra-performance": {
-          "B": 468.78
+          "B": 497.39
         }
       },
       "1080p": {
         "max|ultra-performance": {
-          "B": 468.78
+          "B": 497.39
         }
       }
     },
@@ -642,7 +702,7 @@
           "cv": 0.3919,
           "lowBase": 1.1433,
           "lowSources": 25,
-          "B": 396.03
+          "B": 417.5
         }
       },
       "4k": {
@@ -659,12 +719,12 @@
           "cv": 0.2985,
           "lowBase": 1.1059,
           "lowSources": 15,
-          "B": 396.03
+          "B": 417.5
         }
       },
       "1080p": {
         "sehr-hoch|native": {
-          "B": 396.03
+          "B": 417.5
         }
       }
     },
@@ -685,7 +745,7 @@
           "lowSources": 25
         },
         "hoch|native": {
-          "B": 881.86
+          "B": 648.39
         }
       },
       "4k": {
@@ -704,12 +764,12 @@
           "lowSources": 15
         },
         "hoch|native": {
-          "B": 881.86
+          "B": 648.39
         }
       },
       "1080p": {
         "hoch|native": {
-          "B": 881.86
+          "B": 648.39
         }
       }
     },
@@ -797,7 +857,7 @@
           "cv": 0.6533,
           "lowBase": 1.1294,
           "lowSources": 8,
-          "B": 473.33
+          "B": 467.34
         }
       },
       "4k": {
@@ -807,12 +867,12 @@
           "cv": 0.6402,
           "lowBase": 1.1474,
           "lowSources": 8,
-          "B": 473.33
+          "B": 467.34
         }
       },
       "1080p": {
         "ultra|native": {
-          "B": 473.33
+          "B": 467.34
         }
       }
     },
@@ -824,7 +884,7 @@
           "cv": 0.686,
           "lowBase": 1.1578,
           "lowSources": 7,
-          "B": 824.13
+          "B": 871.25
         }
       },
       "4k": {
@@ -834,12 +894,12 @@
           "cv": 0.7583,
           "lowBase": 1.2069,
           "lowSources": 7,
-          "B": 824.13
+          "B": 871.25
         }
       },
       "1080p": {
         "ultra|native": {
-          "B": 824.13
+          "B": 871.25
         }
       }
     },
@@ -961,7 +1021,7 @@
           "lowSources": 2
         },
         "ultra|performance": {
-          "B": 528.14
+          "B": 520.56
         }
       },
       "4k": {
@@ -973,12 +1033,12 @@
           "lowSources": 1
         },
         "ultra|performance": {
-          "B": 528.14
+          "B": 520.56
         }
       },
       "1080p": {
         "ultra|performance": {
-          "B": 528.14
+          "B": 520.56
         }
       }
     },
@@ -997,7 +1057,7 @@
           "cv": 0.3599,
           "lowBase": 1.1972,
           "lowSources": 25,
-          "B": 386.06
+          "B": 394.95
         }
       },
       "4k": {
@@ -1014,12 +1074,12 @@
           "cv": 0.2899,
           "lowBase": 1.1806,
           "lowSources": 15,
-          "B": 386.06
+          "B": 394.95
         }
       },
       "1080p": {
         "ultrahoch|native": {
-          "B": 386.06
+          "B": 394.95
         }
       }
     },
@@ -1040,7 +1100,7 @@
           "lowSources": 25
         },
         "hoch|ultra-performance": {
-          "B": 526.11
+          "B": 527.23
         }
       },
       "4k": {
@@ -1059,12 +1119,12 @@
           "lowSources": 15
         },
         "hoch|ultra-performance": {
-          "B": 526.11
+          "B": 527.23
         }
       },
       "1080p": {
         "hoch|ultra-performance": {
-          "B": 526.11
+          "B": 527.23
         }
       }
     },
@@ -1614,7 +1674,7 @@
           "lowSources": 25
         },
         "ultra-high|ultra-performance": {
-          "B": 1272.5
+          "B": 1176.57
         }
       },
       "4k": {
@@ -1626,12 +1686,12 @@
           "lowSources": 15
         },
         "ultra-high|ultra-performance": {
-          "B": 1272.5
+          "B": 1176.57
         }
       },
       "1080p": {
         "ultra-high|ultra-performance": {
-          "B": 1272.5
+          "B": 1176.57
         }
       }
     },
@@ -1665,7 +1725,7 @@
           "lowSources": 25
         },
         "ultra|performance": {
-          "B": 745.52
+          "B": 767.28
         }
       },
       "4k": {
@@ -1677,12 +1737,12 @@
           "lowSources": 15
         },
         "ultra|performance": {
-          "B": 745.52
+          "B": 767.28
         }
       },
       "1080p": {
         "ultra|performance": {
-          "B": 745.52
+          "B": 767.28
         }
       }
     },
@@ -1734,6 +1794,9 @@
           "cv": 0.4834,
           "lowBase": 1.5287,
           "lowSources": 24
+        },
+        "sehr-hoch|performance": {
+          "B": 792.42
         }
       },
       "4k": {
@@ -1743,6 +1806,14 @@
           "cv": 0.3082,
           "lowBase": 1.5767,
           "lowSources": 15
+        },
+        "sehr-hoch|performance": {
+          "B": 792.42
+        }
+      },
+      "1080p": {
+        "sehr-hoch|performance": {
+          "B": 792.42
         }
       }
     },
@@ -1758,34 +1829,68 @@
     "anno-1800": {
       "1080p": {
         "ultrahoch|native": {
-          "B": 866.92
+          "B": 890.49
         }
       },
       "1440p": {
         "ultrahoch|native": {
-          "B": 866.92
+          "B": 890.49
         }
       },
       "4k": {
         "ultrahoch|native": {
-          "B": 866.92
+          "B": 890.49
         }
       }
     },
     "cities-skylines-2": {
       "1080p": {
         "hoch|ultra-performance": {
-          "B": 1722.43
+          "B": 1852.65
         }
       },
       "1440p": {
         "hoch|ultra-performance": {
-          "B": 1722.43
+          "B": 1852.65
         }
       },
       "4k": {
         "hoch|ultra-performance": {
-          "B": 1722.43
+          "B": 1852.65
+        }
+      }
+    },
+    "avatar-frontiers-of-pandora": {
+      "1080p": {
+        "ultra|ultra-performance": {
+          "B": 327.72
+        }
+      },
+      "1440p": {
+        "ultra|ultra-performance": {
+          "B": 327.72
+        }
+      },
+      "4k": {
+        "ultra|ultra-performance": {
+          "B": 327.72
+        }
+      }
+    },
+    "avowed": {
+      "1080p": {
+        "episch|performance": {
+          "B": 675.39
+        }
+      },
+      "1440p": {
+        "episch|performance": {
+          "B": 675.39
+        }
+      },
+      "4k": {
+        "episch|performance": {
+          "B": 675.39
         }
       }
     }
@@ -14433,6 +14538,1606 @@
     },
     "cpu-ryzen-5-9600x|gpu-rtx-4090|starfield|720p|ultra|native": {
       "frameTimeMs": 13.3333,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 11.1732,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.2409,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 10.7875,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 5.6948,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 30.4878,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.0274,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 5.144,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 16.0256,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.4641,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 7.728,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.6306,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 10.01,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 7.4794,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 13.3511,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 7.0572,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-5800x3d|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 12.7877,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 15.873,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 13.6054,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 5.5096,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.6598,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 14.43,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 11.274,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 8.4317,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 8.3612,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 47.619,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 35.8423,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 11.1857,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 8.8028,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 7.8864,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 6.5789,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 17.3611,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 19.1205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 8.2102,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 7.7882,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 9.6993,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 8.7642,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 8.7719,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 7.4294,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 14.43,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 12.4533,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 8.2372,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 7.9051,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 14.9925,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 13.5501,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 10.1626,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 8.881,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i3-12100f|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 19.9203,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14400f|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 14.5985,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 15.3846,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 14.7929,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 14.556,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 16.6667,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 13.0039,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 9.0827,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 8.4746,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.0225,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.0967,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.7081,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.1169,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.223,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.1152,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 9.6805,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 9.6432,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 9.6432,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 10.7411,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 8.4674,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 7.4349,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 7.4627,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.9589,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.9541,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.6534,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.8587,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.3654,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 4.8426,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 4.7687,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 32.5733,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 32.7869,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 31.6456,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 28.0112,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 22.4215,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 21.5517,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 21.2766,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.6453,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.9491,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.1276,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 8.5397,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.2622,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 5.4795,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 5.385,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 5.7405,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 5.7637,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 5.4885,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 6.7659,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.8638,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 3.992,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.6685,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 16.3132,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 15.8479,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 15.1057,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 17.4825,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 14.5349,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 12.9032,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 12.8041,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.7024,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.566,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.4392,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 7.9051,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.2305,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.4407,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.1894,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 7.1225,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 7.1839,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.8729,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 8.6133,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.5963,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 5.9312,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 5.9137,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.7604,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.7604,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.5741,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 7.1891,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.1546,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.5045,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.9285,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 11.6959,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 11.6279,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 11.3636,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 13.4048,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 10.9529,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 8.0128,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 8.7336,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 7.0323,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 5.6818,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.689,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 9.8135,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.6445,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.1501,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.6181,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 11.4548,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 10.9649,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 10.7643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 13.4048,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 10.3306,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 9.5057,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 8.9206,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 7.1891,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 7.0572,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.8634,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 8.7184,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.1958,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 5.6085,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 5.2329,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7500f|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 13.0208,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 13.1406,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-7600x|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 12.5313,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-8400f|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 14.3266,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7700x|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 10.6838,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-7800x3d|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 9.4162,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-7950x3d|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 10.0806,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 10.2669,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 9.6061,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 9.434,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 11.4943,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 13.1406,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 12.3762,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 7.9936,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 12.1655,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 12.2699,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|anno-1800|720p|ultrahoch|native": {
+      "frameTimeMs": 7.0175,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.1632,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.2992,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.2808,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.3478,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.1017,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.008,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.2427,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.1649,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.1789,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|avatar-frontiers-of-pandora|720p|ultra|ultra-performance": {
+      "frameTimeMs": 4.2626,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 8.1967,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 7.3368,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 7.3475,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 7.9428,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 9.4073,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 9.0253,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 6.7159,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 8.6207,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 8.4317,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|avowed|720p|episch|performance": {
+      "frameTimeMs": 6.8634,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 5.5371,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 5.8411,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 5.7339,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.398,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.5232,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 6.2578,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 3.937,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 5.571,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 5.5679,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|bg3|720p|ultra|native": {
+      "frameTimeMs": 3.937,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 22.5225,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 21.1416,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 19.6464,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 18.6916,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 22.3714,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 20.9644,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 19.3798,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 21.3675,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 21.7391,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|cities-skylines-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 20.8333,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 6.68,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 6.2422,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 6.12,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 6.5147,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.5643,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 7.326,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 5.1921,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 6.6622,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 6.6489,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|dragons-dogma-2|720p|hoch|native": {
+      "frameTimeMs": 5.3022,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 5.1867,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.817,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.787,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 5.2411,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.99,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.7416,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 3.712,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.9727,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.7551,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|f1-24|720p|ultrahoch|native": {
+      "frameTimeMs": 4.1477,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 13.6799,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 12.8205,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 12.7877,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 13.2802,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 14.6843,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 14.5349,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 11.4548,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 14.5138,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 14.0252,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|frostpunk-2|720p|ultra-high|ultra-performance": {
+      "frameTimeMs": 11.1732,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.0459,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.339,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.2715,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 6.3573,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.6306,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.6915,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.4883,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.144,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.3248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|ghost-of-tsushima|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.3879,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.7204,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.12,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.1162,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.2305,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.5104,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.3573,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.1237,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.1425,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 6.0938,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|hellblade-2|720p|hoch|ultra-performance": {
+      "frameTimeMs": 5.9067,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.5835,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.5617,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.3135,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.6041,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.5835,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.2659,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.2827,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.2192,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 5.5066,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|horizon-forbidden-west|720p|sehr-hoch|native": {
+      "frameTimeMs": 4.5496,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 9.6432,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 9.1241,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 9.0744,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 10.4384,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 10.0705,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 9.9502,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 6.6401,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 9.5694,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 9.4877,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|outcast-2|720p|ultra|performance": {
+      "frameTimeMs": 7.0323,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.2228,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 5.787,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 5.6211,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.1125,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.4558,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.3331,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 5.8928,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.3532,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 6.4185,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|space-marine-2|720p|max|ultra-performance": {
+      "frameTimeMs": 5.9595,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 10.2249,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 8.4317,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 8.15,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 8.3403,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 10.9769,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 10.4493,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 8.5837,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 9.7656,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 9.7561,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|spider-man-2|720p|sehr-hoch|performance": {
+      "frameTimeMs": 8.2169,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.5531,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.12,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.0314,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.3573,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.9156,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.4641,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 5.0454,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.7568,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 6.1312,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|star-wars-outlaws|720p|ultra|performance": {
+      "frameTimeMs": 5.0865,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i5-14600kf|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 10.4384,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900k|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 9.6712,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-i9-14900ks|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 9.3721,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-intel-ultra-9-285k|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 10.6496,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-5-9600x|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 13.1234,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9700x|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 11.2233,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 8.6207,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9900x|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 12.1065,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 10.8225,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-9-9950x3d|gpu-rtx-5090|starfield|720p|ultra|native": {
+      "frameTimeMs": 9.1241,
       "sources": 1,
       "entries": 1
     }
