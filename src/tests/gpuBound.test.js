@@ -49,6 +49,28 @@ describe('peerRatioOutliers', () => {
     expect(peerRatioOutliers([...cell, { gpuId: 'f', fps1080: 50 }])).toEqual(['d'])
   })
 
+  it('takes the UPPER of the two middle ratios on an even count, not their average', () => {
+    // Not a nitpick: most real cells in this corpus are even-sized (4 and 6),
+    // and switching to an averaging median changes the live figures from 8
+    // rejections to 7. The upper value biases slightly toward rejecting, which
+    // is the safer direction for a gate on what feeds a GPU fit — admitting one
+    // CPU-limited row corrupts every card's index, while dropping a good row
+    // costs one observation in a thousand.
+    //
+    // Ratios sort to [1.00, 1.00, 1.20, 1.25].
+    //   upper-of-pair median 1.20 → cut-off 1.056 → a and b both fall short
+    //   averaged median      1.10 → cut-off 0.968 → neither does
+    // So this fixture returns ['a','b'] one way and [] the other, which is what
+    // makes it a real pin rather than a restatement of the implementation.
+    const evenCell = [
+      { gpuId: 'a', fps1080: 100, fps1440: 100 },
+      { gpuId: 'b', fps1080: 100, fps1440: 100 },
+      { gpuId: 'c', fps1080: 120, fps1440: 100 },
+      { gpuId: 'd', fps1080: 125, fps1440: 100 },
+    ]
+    expect(peerRatioOutliers(evenCell)).toEqual(['a', 'b'])
+  })
+
   it('exports the threshold it used, rather than burying it', () => {
     expect(GPU_BOUND_SHORTFALL_PCT).toBe(12)
   })

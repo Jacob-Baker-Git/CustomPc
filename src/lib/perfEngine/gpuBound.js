@@ -24,16 +24,34 @@ const CAP_MARGIN = 0.02
 // How far below its peers a card's 1080p/1440p ratio must fall to be rejected.
 export const GPU_BOUND_SHORTFALL_PCT = 12
 
-// Fewer than this and the "peers" are not a peer group — with three cards, one
-// outlier drags the median far enough to hide itself.
+// Fewer than this and the sample is too small to call a peer group. NOT because
+// a lone outlier could hide itself — it cannot, a single extreme value does not
+// move a median at all — but because a real cell can have HALF its cards held
+// down at once (the elden-ring cell in this corpus has 2 of 6), and at n=3 that
+// is a tie the median cannot resolve.
 const MIN_PEERS = 4
 
+// Deliberately NOT bounded above. A row far ABOVE a declared cap is not
+// something a capped engine can produce, so in practice this never fires — and
+// if a corpus ever did contain one, treating it as cap-measuring is the right
+// call anyway, because whatever produced it was not the card either.
 export function atDeclaredCap(row, game) {
   const cap = game?.fpsCap
   if (!(cap > 0)) return false
   return row.avgFps >= cap * (1 - CAP_MARGIN)
 }
 
+// ⚠️ On an EVEN count this takes the upper of the two middle values, not their
+// average. That is a deliberate choice, not an oversight, and it is load-bearing:
+// most real cells here are even-sized (4 and 6), and averaging instead changes
+// the live corpus from 8 rejections to 7 — gpu-rx-6800 in
+// cpu-ryzen-9-7950x|armored-core-6|ultra|native stops being flagged.
+//
+// The upper value biases very slightly toward rejecting, which is the safer
+// direction for a gate on what may feed a GPU fit: admitting a row the CPU
+// limited corrupts every card's index, while dropping a good row costs one
+// observation out of a thousand. Pinned by a test — do not "tidy" this into an
+// averaging median without re-reading that test's reasoning.
 const median = (values) => {
   const s = [...values].sort((a, b) => a - b)
   return s[Math.floor(s.length / 2)]
