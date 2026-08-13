@@ -1,5 +1,5 @@
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { readFileSync, readdirSync } from 'node:fs'
+import { join, resolve } from 'node:path'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { applyMeta, injectFragment, escapeAttr } from '../../scripts/apply-prerender.mjs'
 import { PAGES as SCRIPT_PAGES } from '../../scripts/prerender-routes.mjs'
@@ -235,6 +235,63 @@ describe('route list', () => {
     // This is the check that keeps them honest — the same contract
     // sitemap.test.js holds over the sitemap.
     expect([...SCRIPT_PAGES].sort()).toEqual([...APP_PAGES].sort())
+  })
+})
+
+describe('the committed fragments', () => {
+  // resolve off cwd, not import.meta.url, for the same reason as the marker
+  // contract test below: under jsdom import.meta.url is an http:// URL and
+  // readFileSync rejects it.
+  const dir = resolve(process.cwd(), 'prerendered')
+  const read = (n) => readFileSync(join(dir, `${n}.html`), 'utf8')
+  const names = readdirSync(dir).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''))
+
+  // The fragments are markup, and the copy they must contain is split across
+  // tags — the landing h1 is `Custom PC <span>Builder</span>`. Asserting on the
+  // rendered TEXT rather than the raw HTML tests the thing that actually
+  // matters (a crawler reads text) and does not break the next time someone
+  // wraps a word in a span for styling.
+  const textOf = (html) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+
+  it('covers the root and every content route, and nothing else', () => {
+    expect([...names].sort()).toEqual([...['index', ...APP_PAGES]].sort())
+  })
+
+  it('holds no boot placeholder and nothing trivially short', () => {
+    // A fragment captured before the app settled is worse than none: it ships a
+    // loading message as the page's indexable content.
+    for (const n of names) {
+      const html = read(n)
+      expect(html, `${n} still holds the boot placeholder`).not.toContain('class="boot"')
+      expect(html.length, `${n} is suspiciously short`).toBeGreaterThan(500)
+    }
+  })
+
+  it('embeds NO asset hash — the constraint the design rests on', () => {
+    // Vite rehashes every build. A committed hash means the next deploy serves
+    // HTML pointing at bundles that 404, while still returning 200.
+    for (const n of names) {
+      expect(read(n), `${n} embeds a hashed asset URL`).not.toMatch(/(assets|index)-[A-Za-z0-9_-]{8}\./)
+    }
+  })
+
+  it('carries no <!--app--> marker of its own', () => {
+    // The capture takes #root's innerHTML AFTER React has mounted, and
+    // createRoot clears the container (textContent = ''), which removes the
+    // markers along with the boot div — so a fragment should never contain
+    // them. If React ever stopped clearing, injectFragment would splice a
+    // marker-bearing fragment between the shell's own pair and the nested
+    // result would make a second apply-prerender run cut at the wrong place.
+    // Verified empirically on React 19.2 at capture time; this pins it.
+    for (const n of names) {
+      expect(read(n), `${n} carries an app marker`).not.toMatch(/<!--\/?app-->/)
+    }
+  })
+
+  it('puts real landing copy in the root fragment', () => {
+    const text = textOf(read('index'))
+    expect(text).toContain('Custom PC Builder')
+    expect(text).toMatch(/Build and price a gaming PC in 3D/i)
   })
 })
 
