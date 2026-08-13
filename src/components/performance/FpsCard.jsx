@@ -1,19 +1,38 @@
+import { useState } from 'react'
+
 // One game's result.
 //
 // A row with no data shows that fact rather than being dropped: a game silently
 // missing from the list reads as a bug, and a game showing an invented number
 // is worse than either.
 
-// How each tier is named on the card. `modelled` says interpolated-from-
-// measurements and `spec-derived` says computed-from-a-spec-sheet, and a reader
-// deserves to know which of the three produced the number they are looking at.
+// How each tier is named on the card. The wording draws the line a reader
+// actually cares about: did somebody measure this, or did we work it out?
 const BASIS_LABEL = {
-  measured: 'measured',
-  modelled: 'modelled',
-  'spec-derived': 'from specs',
+  measured: 'benchmarked',
+  modelled: 'backed by real data',
+  'spec-derived': 'estimate',
+  ceiling: 'estimate',
+}
+
+// Why, in words a reader can act on. Keys are the caveat ids from rowBasis.js.
+const CAVEAT_TEXT = {
+  'gpu-index-prior': 'The graphics card index came from its specs, not a benchmark of this card.',
+  'cpu-index-prior': 'The processor index came from its specs, not a benchmark of this chip.',
+  'no-cpu-constant': 'No review has measured processor performance in this game, so this is the graphics card’s ceiling.',
+  'resolution-copied': 'No data at this resolution for this card; the figure is carried across from 1440p.',
+  'index-extrapolated': 'This part sits outside the range the estimate was worked out over, so it is rougher than the ± figure suggests.',
 }
 
 export default function FpsCard({ row }) {
+  // Declared before the early return below, not after: a Hook called only on
+  // some renders (skipped whenever a row is basis 'none') breaks React's rule
+  // that Hooks run in the same order every render — harmless while nothing
+  // toggles a mounted card between 'none' and answered, but a landmine for
+  // whoever removes that assumption later. Costs nothing to avoid now.
+  const [showWhy, setShowWhy] = useState(false)
+  const isUpper = row.bound === 'upper'
+
   if (row.basis === 'none') {
     return (
       <div className="rounded-lg border border-line bg-surface p-3">
@@ -49,7 +68,10 @@ export default function FpsCard({ row }) {
           Quoting the average alone is how frame-rate figures usually mislead. */}
       <div className="mt-2 flex items-end gap-4">
         <div>
-          <div className="font-mono text-2xl leading-none text-ink">{row.avgFps}</div>
+          <div className="font-mono text-2xl leading-none text-ink">
+            {isUpper && <span className="mr-1 font-sans text-sm text-muted">up to</span>}
+            {row.avgFps}
+          </div>
           <div className="mt-1 text-[10px] uppercase tracking-wider text-muted">average</div>
         </div>
         <div>
@@ -66,6 +88,7 @@ export default function FpsCard({ row }) {
             row.basis === 'measured' ? 'text-good' : 'text-muted'}`}
           >
             {BASIS_LABEL[row.basis] ?? row.basis}
+            {row.errorPct != null && ` ±${Math.round(row.errorPct)}%`}
           </div>
           {row.atEngineCap && (
             <div className="text-[10px] text-muted">engine cap</div>
@@ -91,6 +114,26 @@ export default function FpsCard({ row }) {
         <p className="mt-2.5 text-[10px] uppercase tracking-wider text-muted">
           Split not modelled
         </p>
+      )}
+
+      {row.caveats?.length > 0 && (
+        <div className="mt-2">
+          <button
+            type="button"
+            onClick={() => setShowWhy((v) => !v)}
+            aria-expanded={showWhy}
+            className="text-[10px] uppercase tracking-wider text-muted underline decoration-dotted"
+          >
+            {showWhy ? 'Hide why' : 'Why?'}
+          </button>
+          {showWhy && (
+            <ul className="mt-1.5 space-y-1">
+              {row.caveats.map((c) => (
+                <li key={c} className="text-[11px] leading-snug text-muted">{CAVEAT_TEXT[c] ?? c}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
     </div>
   )

@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import useBuilderStore from '../../store/useBuilderStore'
 import { estimateBuildPerformance } from '../../lib/perfEngine'
+import { onlyRealData } from '../../lib/perfEngine/rowBasis'
 import { estimatePower, estimateThermals } from '../../lib/perfEngine/power'
 import { memoryProfile } from '../../lib/perfEngine/memory'
 import { gpuCapability, cpuCapability } from '../../lib/perfEngine/capability'
@@ -14,6 +15,7 @@ import StatRow from './StatRow'
 import FpsCardGrid from './FpsCardGrid'
 import Section from './Section'
 import SummaryStrip from './SummaryStrip'
+import BasisBar from './BasisBar'
 
 // One grid definition for every band, so the panels line up across sections
 // rather than each group inventing its own rhythm.
@@ -37,6 +39,7 @@ export default function PerformanceScreen() {
 
   const { cpu, gpu } = selectedParts
   const hasCore = Boolean(cpu && gpu)
+  const [realOnly, setRealOnly] = useState(false)
 
   // Two independent halves, and the split is deliberate. Everything below comes
   // from spec fields the catalogue already carries, so it works on day one with
@@ -63,6 +66,10 @@ export default function PerformanceScreen() {
   const cpuCap = useMemo(() => cpuCapability(cpu, cpuSpecs), [cpu])
 
   const answered = report?.coverage?.gamesAnswered ?? 0
+  // realOnly filters what's DRAWN, never what's COUNTED — BasisBar takes
+  // allRows so its totals can't be made to look stronger by hiding the rest.
+  const allRows = report?.games ?? []
+  const shownRows = realOnly ? onlyRealData(allRows) : allRows
 
   return (
     <div className="w-full max-w-2xl lg:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-3 pb-12">
@@ -76,6 +83,10 @@ export default function PerformanceScreen() {
       </header>
 
       <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+
+      <div className="mt-3">
+        <BasisBar rows={allRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
+      </div>
 
       <Section
         title="Frame rates"
@@ -94,7 +105,7 @@ export default function PerformanceScreen() {
             on it.
           </p>
         ) : (
-          <FpsCardGrid rows={report.games} />
+          <FpsCardGrid rows={shownRows} />
         )}
 
         <p className="mt-3 max-w-[80ch] text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
