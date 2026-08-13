@@ -15,6 +15,7 @@ import useCatalogStore, { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
 import { enterBuildTab } from './lib/enterBuildTab'
 import { partById, partPageMeta } from './lib/partPages'
+import { PAGE_META, canonicalFor } from './lib/pageMeta'
 
 const PAGES = {
   help: HelpPage,
@@ -23,38 +24,6 @@ const PAGES = {
   feedback: FeedbackPage,
   privacy: PrivacyPage,
   terms: TermsPage,
-}
-
-// Giving the pages their own URLs achieves nothing if all six then serve the
-// root's title, description and canonical — to a crawler that is six addresses
-// for one document, which is the problem hash routes had. index.html holds the
-// root's copy; these override it per page and are restored on the way out.
-const SITE = 'https://custompcbuilder.netlify.app'
-const PAGE_META = {
-  help: {
-    title: 'Help & FAQ — Custom PC Builder',
-    description: 'How to plan a build, read the CustomPC score, check compatibility and share what you have chosen.',
-  },
-  parts: {
-    title: 'PC Parts Browser — Prices & Specifications',
-    description: 'Browse processors, graphics cards, memory, storage and cases with specifications and curated UK price estimates.',
-  },
-  glossary: {
-    title: 'PC Hardware Glossary — Custom PC Builder',
-    description: 'Plain-English definitions of the PC building terms — sockets, chipsets, TDP, form factors, VRAM and the rest.',
-  },
-  feedback: {
-    title: 'Feedback — Custom PC Builder',
-    description: 'Tell us what worked, what did not, and what is missing.',
-  },
-  privacy: {
-    title: 'Privacy Policy — Custom PC Builder',
-    description: 'What this site stores about you, which is nothing personal, and why.',
-  },
-  terms: {
-    title: 'Terms of Use — Custom PC Builder',
-    description: 'The terms covering price estimates, compatibility checks and performance figures on this site.',
-  },
 }
 
 const setMeta = (selector, attr, value) => {
@@ -93,7 +62,7 @@ export default function App() {
     // A canonical still pointing at / would tell Google these pages are the
     // root, which is the exact instruction not to index them separately.
     const path = part ? `parts/${part.id}` : page
-    setMeta('link[rel="canonical"]', 'href', path ? `${SITE}/${path}` : `${SITE}/`)
+    setMeta('link[rel="canonical"]', 'href', canonicalFor(path))
   }, [page, partId, parts])
 
   if (partId) {
