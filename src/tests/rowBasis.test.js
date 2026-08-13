@@ -22,6 +22,13 @@ describe('composeBasis', () => {
     expect(composeBasis(inputs({ cpuBasis: 'prior' })).basis).toBe('spec-derived')
   })
 
+  it('does not treat an unrecognised index basis as a measurement', () => {
+    // indices.js returns 'none' for a part with no coverage. Reading that as
+    // strong as 'measured' would be the exact failure this module prevents.
+    expect(composeBasis(inputs({ gpuBasis: 'none' })).basis).toBe('spec-derived')
+    expect(composeBasis(inputs({ cpuBasis: 'none' })).basis).toBe('spec-derived')
+  })
+
   it('demotes to ceiling when the cell has no CPU constant, prior or not', () => {
     expect(composeBasis(inputs({ hasCellB: false })).basis).toBe('ceiling')
     expect(composeBasis(inputs({ hasCellB: false, gpuBasis: 'prior' })).basis).toBe('ceiling')
@@ -81,6 +88,18 @@ describe('composeBasis', () => {
     expect(composeBasis(inputs({ gpuExtrapolated: true })).caveats).not.toContain('index-extrapolated')
   })
 
+  it('says so when a prior was applied outside the range it was fitted over, on the CPU side', () => {
+    // The GPU and CPU sides are handled by the same condition in the
+    // implementation — mirrored here so a copy-paste that only wired up GPU
+    // would be caught.
+    const out = composeBasis(inputs({ cpuBasis: 'prior', cpuExtrapolated: true }))
+    expect(out.caveats).toContain('index-extrapolated')
+  })
+
+  it('does not cry extrapolation for a measured CPU index', () => {
+    expect(composeBasis(inputs({ cpuExtrapolated: true })).caveats).not.toContain('index-extrapolated')
+  })
+
   it('takes the WORST contributing band as errorPct, never a combination', () => {
     // These are held-out prediction errors, not measurement uncertainties.
     // Combining in quadrature would imply they are independent and quantified.
@@ -88,6 +107,14 @@ describe('composeBasis', () => {
       gpuBasis: 'prior', gpuErrorPct: 35, cpuBasis: 'prior', cpuErrorPct: 5.5,
     }))
     expect(out.errorPct).toBe(35)
+  })
+
+  it('ignores the error of a side that did not use a prior', () => {
+    // Deliberately puts the LARGER number on the measured side: a max() over
+    // both regardless of provenance would return 99 and pass a laxer test.
+    expect(composeBasis(inputs({
+      cpuBasis: 'prior', cpuErrorPct: 22, gpuErrorPct: 99,
+    })).errorPct).toBe(22)
   })
 
   it('gives a ceiling row no errorPct from the missing constant', () => {

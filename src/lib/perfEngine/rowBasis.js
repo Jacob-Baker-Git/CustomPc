@@ -3,7 +3,9 @@
 // A row is only as strong as its WEAKEST input. Spreading that rule across
 // estimateGame's branches is how a prior-derived number ends up rendered
 // identically to a benchmark: each branch looks locally reasonable and nothing
-// owns the composition. This module owns it.
+// owns the composition. This module owns it. Tier and caveats are related but
+// separate axes, though: resolution-copied and index-extrapolated flag a
+// specific concern without demoting the tier, so both must be read.
 //
 // Tier names are the ones the codebase already uses. `spec-derived` is not new
 // — FpsCard.jsx has carried it in BASIS_LABEL against a tier the engine never
@@ -38,10 +40,15 @@ export function composeBasis({
     caveats.push('index-extrapolated')
   }
 
-  const usedPrior = gpuBasis === 'prior' || cpuBasis === 'prior'
+  // Anything that is not an outright measurement is treated as derived. Not a
+  // defensive flourish: indices.js returns basis 'none' for a part with no
+  // coverage, and a `=== 'prior'` test would wave that through as if it were a
+  // benchmark. This module is meant to be the one place the rule cannot be
+  // bypassed, so it fails closed rather than trusting its caller to pre-filter.
+  const derivedIndex = gpuBasis !== 'measured' || cpuBasis !== 'measured'
 
   let basis = 'modelled'
-  if (usedPrior) basis = weakest(basis, 'spec-derived')
+  if (derivedIndex) basis = weakest(basis, 'spec-derived')
   if (!hasCellB) basis = weakest(basis, 'ceiling')
 
   // The worst contributing band, NOT a combination. See the test.
@@ -58,16 +65,27 @@ export function composeBasis({
   }
 }
 
-// The filter and the counter live beside the tier definition so a new tier
-// cannot be added without both being updated in the same file.
+// The filter and the counter live beside the tier definition, but neither
+// depends on an exhaustive list of tier names to stay correct: onlyRealData
+// keeps only the two strong tiers by name, and basisMix's `estimated` bucket
+// below is everything answered that is not one of those two — not a named
+// list of the weak tiers. A tier added later without this file being touched
+// is excluded from "real data" (the safe direction for a filter) and still
+// counted somewhere in the mix (the safe direction for a total), rather than
+// silently vanishing from either.
 export const onlyRealData = (rows) =>
   rows.filter((r) => r.basis === 'measured' || r.basis === 'modelled')
 
 export function basisMix(rows) {
   const answered = rows.filter((r) => r.avgFps > 0)
+  const measured = answered.filter((r) => r.basis === 'measured').length
+  const modelled = answered.filter((r) => r.basis === 'modelled').length
   return {
-    measured: answered.filter((r) => r.basis === 'measured').length,
-    modelled: answered.filter((r) => r.basis === 'modelled').length,
-    estimated: answered.filter((r) => r.basis === 'spec-derived' || r.basis === 'ceiling').length,
+    measured,
+    modelled,
+    // By subtraction, not by naming 'spec-derived' and 'ceiling': an
+    // unrecognised basis must still land here rather than making the three
+    // buckets undercount the answered total.
+    estimated: answered.length - measured - modelled,
   }
 }
