@@ -76,4 +76,14 @@ describe('BasisBar', () => {
     )
     expect(container).toBeEmptyDOMElement()
   })
+
+  it('does not crash when rows is undefined, and renders nothing', () => {
+    // The one caller today always passes report?.games ?? [], so this never
+    // fires in practice — but the component has no defence of its own without
+    // the default parameter, and basisMix(undefined) throws immediately.
+    const { container } = render(
+      <BasisBar rows={undefined} realOnly={false} onRealOnlyChange={() => {}} />,
+    )
+    expect(container).toBeEmptyDOMElement()
+  })
 })

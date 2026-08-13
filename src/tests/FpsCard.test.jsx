@@ -62,4 +62,12 @@ describe('FpsCard tiers', () => {
     render(<FpsCard row={row({ basis: 'none', avgFps: null })} />)
     expect(screen.getByText(/no benchmark data/i)).toBeInTheDocument()
   })
+
+  it('falls back to the raw basis string for an unrecognised tier, rather than blank', () => {
+    // BASIS_LABEL[row.basis] ?? row.basis — a tier the label map has not been
+    // taught yet must still say SOMETHING, not render an empty badge that
+    // reads as a rendering bug rather than an unlabelled tier.
+    render(<FpsCard row={row({ basis: 'totally-new-tier' })} />)
+    expect(screen.getByText('totally-new-tier')).toBeInTheDocument()
+  })
 })

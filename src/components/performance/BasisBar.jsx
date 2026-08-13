@@ -6,7 +6,7 @@ import { basisMix } from '../../lib/perfEngine/rowBasis'
 // Separate from SummaryStrip on purpose: that strip answers "how fast, held back
 // by what, drawing what". This answers "how much of that did anybody measure",
 // which is a different question and deserves its own row.
-export default function BasisBar({ rows, realOnly, onRealOnlyChange }) {
+export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
   const [showHelp, setShowHelp] = useState(false)
 
   // ⚠️ Counted from the UNFILTERED rows, always. If these totals moved when the
