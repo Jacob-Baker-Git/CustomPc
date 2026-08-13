@@ -27,12 +27,33 @@ describe('composeBasis', () => {
     expect(composeBasis(inputs({ hasCellB: false, gpuBasis: 'prior' })).basis).toBe('ceiling')
   })
 
-  it('NEVER reports measured when an input came from a prior', () => {
-    // The founding rule, as an assertion. An exact measurement of this exact
-    // combination needs no index at all, so the two cannot legitimately co-occur
-    // — but if they ever do, the weaker claim has to win.
-    const out = composeBasis(inputs({ exactMeasured: true, gpuBasis: 'prior' }))
-    expect(out.basis).not.toBe('measured')
+  it('NEVER reports measured for a row that was not exactly measured', () => {
+    // The founding rule, as an assertion: the only route to `measured` is an
+    // exact benchmark of this combination.
+    for (const over of [{ gpuBasis: 'prior' }, { cpuBasis: 'prior' }, { hasCellB: false }, {}]) {
+      expect(composeBasis(inputs(over)).basis).not.toBe('measured')
+    }
+  })
+
+  it('keeps an exact measurement measured however its indices were obtained', () => {
+    // The indices feed the SPLIT, never the frame time. exactFor does not
+    // require a part to be indexed, so a benchmark of an unindexed chip is
+    // reachable — and demoting it would hide a real reading behind the "only
+    // show real data" filter.
+    const out = composeBasis(inputs({
+      exactMeasured: true, gpuBasis: 'prior', cpuBasis: 'prior', hasCellB: false,
+    }))
+    expect(out.basis).toBe('measured')
+    expect(out.bound).toBe('point')
+  })
+
+  it('puts no caveats on an exact measurement', () => {
+    // Every caveat describes how a number was DERIVED. On a measured row they
+    // would all be false — "this is the graphics card's ceiling" is simply
+    // untrue of a reading somebody took.
+    expect(composeBasis(inputs({
+      exactMeasured: true, gpuBasis: 'prior', hasCellB: false, resolutionCopied: true,
+    })).caveats).toEqual([])
   })
 
   it('marks only ceiling rows as an upper bound', () => {

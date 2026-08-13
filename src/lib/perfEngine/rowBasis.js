@@ -17,6 +17,16 @@ export function composeBasis({
   exactMeasured, hasCellB, gpuBasis, cpuBasis, gpuErrorPct, cpuErrorPct, resolutionCopied,
   gpuExtrapolated = false, cpuExtrapolated = false,
 }) {
+  // An exact benchmark of THIS combination is a reading, not a derivation. The
+  // indices feed the split and nothing else, so neither a prior index nor a
+  // missing CPU constant changes what the frame time is worth — and every
+  // caveat below describes a derivation that did not happen here. Demoting
+  // would hide a real measurement behind the "only show real data" filter,
+  // which understates the evidence exactly as badly as overstating it.
+  if (exactMeasured) {
+    return { basis: 'measured', bound: 'point', caveats: [], errorPct: null }
+  }
+
   const caveats = []
   if (gpuBasis === 'prior') caveats.push('gpu-index-prior')
   if (cpuBasis === 'prior') caveats.push('cpu-index-prior')
@@ -30,10 +40,7 @@ export function composeBasis({
 
   const usedPrior = gpuBasis === 'prior' || cpuBasis === 'prior'
 
-  let basis = exactMeasured ? 'measured' : 'modelled'
-  // Demotions apply even to an exact measurement. That pairing should be
-  // unreachable — an exact row needs no index — but the rule is "weakest input
-  // wins", and a rule with an exception is the exception waiting to be hit.
+  let basis = 'modelled'
   if (usedPrior) basis = weakest(basis, 'spec-derived')
   if (!hasCellB) basis = weakest(basis, 'ceiling')
 
