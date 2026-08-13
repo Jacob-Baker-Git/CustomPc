@@ -11,6 +11,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:e2e": "playwright test",
+    "prerender": "node scripts/prerender.mjs",
     "og:image": "node scripts/og-image.mjs",
     "sitemap": "node scripts/build-sitemap.mjs",
     "perf:fit": "node scripts/fit-perf-model.mjs",
