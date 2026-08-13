@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { applyMeta, injectFragment, escapeAttr } from '../../scripts/apply-prerender.mjs'
 import { PAGES as SCRIPT_PAGES } from '../../scripts/prerender-routes.mjs'
@@ -5,10 +7,13 @@ import { PAGES as APP_PAGES } from '../hooks/usePageRoute'
 import { PAGE_META, canonicalFor } from '../lib/pageMeta'
 
 // A miniature of index.html carrying one of every tag the injector rewrites,
-// plus the verification tag it must not touch. Modelled on a real
-// `npm run build` output (verified by hand), not the source index.html: Vite
-// hoists <script type="module"> and the stylesheet <link> into <head>, so
-// <body> in the built file contains nothing but the root div.
+// plus the verification tag it must not touch, and the <!--app-->/<!--/app-->
+// markers injectFragment splices around. Modelled on a real `npm run build`
+// output (verified by hand), not the source index.html: Vite hoists
+// <script type="module"> and the stylesheet <link> into <head>, so <body> in
+// the built file contains nothing but the root div — and Vite preserves HTML
+// comments unchanged (also verified by hand against real dist output), which
+// is what makes the marker splice possible at all.
 const SHELL = `<!doctype html>
 <html lang="en"><head>
 <title>Custom PC Builder — Build &amp; Price Your Gaming PC in 3D</title>
@@ -23,7 +28,7 @@ const SHELL = `<!doctype html>
 <script type="module" crossorigin src="/assets/index-ABC12345.js"></script>
 <link rel="stylesheet" crossorigin href="/assets/index-XYZ98765.css">
 </head><body style="margin:0;background:#0F1114">
-<div id="root"><div class="boot" style="position:fixed">Custom PC Builder…</div></div>
+<div id="root"><!--app--><div class="boot" style="position:fixed">Custom PC Builder…</div><!--/app--></div>
 </body></html>`
 
 const decode = (s) => s.replace(/&quot;/g, '"').replace(/&amp;/g, '&')
@@ -103,86 +108,124 @@ describe('applyMeta', () => {
 })
 
 describe('injectFragment', () => {
-  it('replaces the boot placeholder with the fragment', () => {
+  it('replaces the boot placeholder with the fragment, keeping both markers', () => {
     const out = injectFragment(SHELL, '<main><h1>Glossary</h1></main>')
-    expect(out).toContain('<div id="root"><main><h1>Glossary</h1></main></div>')
+    expect(out).toContain('<div id="root"><!--app--><main><h1>Glossary</h1></main><!--/app--></div>')
     expect(out).not.toContain('class="boot"')
     expect(out).not.toContain('Custom PC Builder…')
   })
 
-  it('THROWS if the placeholder is not found', () => {
-    // If index.html's root div is ever restyled, a silent no-op would ship the
-    // boot screen as the pre-rendered content of all seven pages and still look
-    // like a successful build. Fail loudly instead.
-    expect(() => injectFragment('<body><div id="app"></div></body>', '<p>x</p>'))
-      .toThrow(/root/i)
+  it('THROWS if the markers are not found', () => {
+    // If index.html's boot placeholder is ever edited and the markers get
+    // dropped along with it, a silent no-op would ship the boot screen as the
+    // pre-rendered content of all seven pages and still look like a
+    // successful build. Fail loudly instead.
+    expect(() => injectFragment('<body><div id="something-else"></div></body>', '<p>x</p>'))
+      .toThrow(/marker/i)
+  })
+
+  it('throws if the markers are present but in the wrong order', () => {
+    // A hand-edit could paste the closing marker before the opening one by
+    // mistake. The markers ARE the entire contract now, so a reversed pair
+    // must throw rather than silently slicing head/tail from the wrong ends.
+    const shell = '<div id="root"><!--/app-->stuff<!--app--></div></body>'
+    expect(() => injectFragment(shell, '<main>PAGE</main>')).toThrow(/marker/i)
   })
 
   it('inserts a fragment containing $& and $` literally', () => {
-    // $&, $$, $` and $' are substitution syntax in a replacement STRING. A
-    // fragment is arbitrary rendered page HTML, so if any page ever renders one
-    // of these the committed pre-render would be silently corrupted.
+    // $&, $$, $` and $' are substitution syntax in a String.replace()
+    // replacement STRING. injectFragment does not call String.replace at all
+    // any more (see the comment above it), so this is structurally safe now
+    // — but it is still worth proving directly: a fragment is arbitrary
+    // rendered page HTML, and one of these sequences must survive untouched.
     const out = injectFragment(SHELL, '<p>cost $& and $` and $$ and $\'</p>')
     expect(out).toContain('<p>cost $& and $` and $$ and $\'</p>')
   })
 
-  it('does not stop at the first nested </div></div>, only the div that actually closes root', () => {
-    // Regression: a NON-GREEDY ROOT_RE stops at the FIRST </div></div> pair.
-    // If the boot placeholder ever gains a nesting level (a spinner ring
-    // around a spinner dot), that first pair belongs to the inner elements,
-    // not to root — so the old regex still matched (the guard did not throw)
-    // but on a PROPER PREFIX of the root div, leaving "Loading…</div></div>"
-    // dangling outside the injected fragment. Silent, and still a 200.
+  it('does not care how deeply the old boot placeholder nests', () => {
+    // Historical regression (implementation #1, a non-greedy regex): it
+    // stopped at the FIRST </div></div>, so a boot placeholder with an extra
+    // nesting level (a spinner ring around a spinner dot) under-matched and
+    // left the rest dangling in the output. The marker splice never looks at
+    // what is between the markers at all, so nesting depth is irrelevant by
+    // construction — there is no tag-counting logic left to regress.
     const nestedShell = SHELL.replace(
-      '<div id="root"><div class="boot" style="position:fixed">Custom PC Builder…</div></div>',
-      '<div id="root"><div class="boot"><div class="spinner-ring"><div class="spinner-dot"></div></div>Loading…</div></div>',
+      '<!--app--><div class="boot" style="position:fixed">Custom PC Builder…</div><!--/app-->',
+      '<!--app--><div class="boot"><div class="spinner-ring"><div class="spinner-dot"></div></div>Loading…</div><!--/app-->',
     )
     const out = injectFragment(nestedShell, '<main>PAGE</main>')
-    expect(out).toContain('<div id="root"><main>PAGE</main></div>')
+    expect(out).toContain('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>')
     expect(out).not.toContain('Loading…')
-    // Nothing but </body> follows the fragment's own closing div — proves
-    // there is no stray </div> (or anything else) left dangling.
-    expect(out).toMatch(/<div id="root"><main>PAGE<\/main><\/div>\s*<\/body>/)
+    expect(out).toMatch(/<div id="root"><!--app--><main>PAGE<\/main><!--\/app--><\/div>\s*<\/body>/)
   })
 
   it('preserves a trailing sibling <div> after root instead of deleting it', () => {
-    // Regression: the GREEDY match anchored on a "some </div> before </body>"
-    // lookahead over-matched. The lookahead has no idea WHICH </div> closes
-    // root, so it backtracked past root's own close and consumed a trailing
-    // sibling too — silently deleting a cookie-consent banner or modal portal
-    // root instead of preserving it.
+    // Historical regression (implementation #2, a greedy regex anchored on
+    // "some </div> before </body>"): it backtracked past root's own close and
+    // deleted a trailing sibling (a cookie-consent banner, a modal portal
+    // root) along with the placeholder. The marker splice only ever touches
+    // what is between the two markers, so a sibling outside <div id="root">
+    // entirely was never at risk.
     const shell = `<html><head></head><body>
-<div id="root"><div class="boot">Custom PC Builder…</div></div>
+<div id="root"><!--app--><div class="boot">Custom PC Builder…</div><!--/app--></div>
 <div id="cookie-consent"><p>We use cookies</p></div>
 </body></html>`
     const out = injectFragment(shell, '<main>PAGE</main>')
-    expect(out).toContain('<div id="root"><main>PAGE</main></div>')
+    expect(out).toContain('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>')
     expect(out).toContain('<div id="cookie-consent"><p>We use cookies</p></div>')
   })
 
   it('preserves a trailing <noscript> after root', () => {
     const shell = `<html><head></head><body>
-<div id="root"><div class="boot">Custom PC Builder…</div></div>
+<div id="root"><!--app--><div class="boot">Custom PC Builder…</div><!--/app--></div>
 <noscript>Enable JavaScript to use this site.</noscript>
 </body></html>`
     const out = injectFragment(shell, '<main>PAGE</main>')
-    expect(out).toContain('<div id="root"><main>PAGE</main></div>')
+    expect(out).toContain('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>')
     expect(out).toContain('<noscript>Enable JavaScript to use this site.</noscript>')
   })
 
-  it('throws on an unbalanced root div rather than matching a nonsense close', () => {
-    // <div class="a"> is opened but never closed before input ends, so depth
-    // never returns to zero. A regex anchored on "some </div> before </body>"
-    // would match div "b"'s close here and silently treat it as root's own —
-    // on markup that was never actually balanced. The scanner refuses.
-    const shell = '<div id="root"><div class="a"><div class="b"></div></body>'
-    expect(() => injectFragment(shell, '<main>PAGE</main>')).toThrow(/root/i)
+  it('preserves content after </body> unchanged', () => {
+    const shell = '<div id="root"><!--app--><div class="boot">Loading…</div><!--/app--></div>\n</body></html>\n<!-- trailing comment -->'
+    const out = injectFragment(shell, '<main>PAGE</main>')
+    expect(out).toBe('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>\n</body></html>\n<!-- trailing comment -->')
   })
 
-  it('preserves content after </body> unchanged', () => {
-    const shell = '<div id="root"><div class="boot">Loading…</div></div>\n</body></html>\n<!-- trailing comment -->'
+  it('handles a > inside a div attribute value between the markers', () => {
+    // Historical regression (implementation #3, a depth-counting scanner):
+    // <div\b[^>]*> stopped at the FIRST >, wherever it was, so a > inside an
+    // attribute value truncated the "opening tag" token and threw the depth
+    // count off — a stray dangling </div> in the output, no throw. The
+    // marker splice never looks at tag structure, so this is just opaque
+    // bytes between two comments.
+    const shell = '<div id="root"><!--app--><div title="a>b</div>c">TEXT</div><!--/app--></div>\n</body></html>'
     const out = injectFragment(shell, '<main>PAGE</main>')
-    expect(out).toBe('<div id="root"><main>PAGE</main></div>\n</body></html>\n<!-- trailing comment -->')
+    expect(out).toBe('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>\n</body></html>')
+  })
+
+  it('handles </div > with a space, plus a stray extra closing div, between the markers', () => {
+    // Historical regression (implementation #3): </div> was matched
+    // literally with no whitespace tolerance, so </div > (a space before the
+    // bracket) was never recognised as a close, throwing the depth count off
+    // against an unrelated stray </div> elsewhere in the same markup. The
+    // marker splice does not parse tags at all, so none of this is examined.
+    const shell = '<div id="root"><!--app--><div class="x">a</div ><div class="y"></div></div>text<!--/app--></div>\n</body></html>'
+    const out = injectFragment(shell, '<main>PAGE</main>')
+    expect(out).toBe('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>\n</body></html>')
+  })
+
+  it('is not fooled by a decoy <div id="root"> inside an earlier comment', () => {
+    // Historical regression (all three implementations): each located root
+    // by the FIRST occurrence of the literal string <div id="root">, so a
+    // decoy inside an HTML comment earlier in the document (a commented-out
+    // alternate skeleton, a stale snippet) would have the fragment spliced
+    // into the wrong target. The marker splice searches for <!--app--> only,
+    // which nothing in this decoy spells out.
+    const shell = '<!-- old skeleton: <div id="root"><div class="old"></div></div> -->'
+      + '<div id="root"><!--app--><div class="boot">Loading…</div><!--/app--></div>\n</body></html>'
+    const out = injectFragment(shell, '<main>PAGE</main>')
+    expect(out).toContain('<!-- old skeleton: <div id="root"><div class="old"></div></div> -->')
+    expect(out).toContain('<div id="root"><!--app--><main>PAGE</main><!--/app--></div>')
   })
 })
 
@@ -192,5 +235,26 @@ describe('route list', () => {
     // This is the check that keeps them honest — the same contract
     // sitemap.test.js holds over the sitemap.
     expect([...SCRIPT_PAGES].sort()).toEqual([...APP_PAGES].sort())
+  })
+})
+
+describe('index.html marker contract', () => {
+  it('carries <!--app--> and <!--/app--> around the boot placeholder inside #root', () => {
+    // apply-prerender.mjs splices each page's fragment in between these two
+    // literal comments and nowhere else — see injectFragment. If someone ever
+    // "cleans up" the boot div and drops the comments, `npm run build` would
+    // throw (injectFragment can't find them) — but that is a build-time
+    // failure. This test catches it at commit time instead, before it can
+    // reach a deploy at all.
+    //
+    // resolve off cwd, not import.meta.url: under jsdom that is an http:// URL
+    // and readFileSync rejects it. Same approach as sitemap.test.js.
+    const real = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')
+    const rootStart = real.indexOf('<div id="root">')
+    const startMarker = real.indexOf('<!--app-->')
+    const endMarker = real.indexOf('<!--/app-->')
+    expect(rootStart).toBeGreaterThan(-1)
+    expect(startMarker).toBeGreaterThan(rootStart)
+    expect(endMarker).toBeGreaterThan(startMarker)
   })
 })

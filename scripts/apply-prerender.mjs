@@ -29,66 +29,50 @@ const FRAGMENTS = new URL('../prerendered/', import.meta.url)
 export const escapeAttr = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-// injectFragment locates the root div's own closing tag by walking tags and
-// counting nesting depth, rather than matching it with a single regex. TWO
-// regex attempts were tried here first and BOTH failed silently:
-//   - a NON-GREEDY match up to the first </div></div> UNDER-matched: a boot
-//     placeholder with an extra nesting level (a spinner ring around a
-//     spinner dot) closes its own inner divs first, so the match stopped
-//     there. No throw — but the match was a proper prefix of the root div,
-//     and the rest of the placeholder was left dangling in the output.
-//   - a GREEDY match anchored on a "some </div> before </body>" lookahead
-//     OVER-matched: the lookahead has no idea WHICH </div> closes root, so it
-//     backtracked past root's own close and swallowed a trailing sibling (a
-//     cookie-consent banner, a modal portal root) — silently deleting it.
-// Matching balanced, nested tags isn't something a regular expression can do
-// (it isn't a regular language), so a third regex would only relocate the
-// hazard again. Counting depth is the structurally correct fix: it finds the
-// exact tag that brings nesting back to zero regardless of how deep the
-// placeholder nests or what comes after it, so both failure modes above are
-// impossible by construction. It also drops the </body> anchor entirely, so
-// it no longer depends on Vite hoisting the script and stylesheet out of
-// <body> — it would be equally correct if that ever changed.
-const DIV_TAG_RE = /<div\b[^>]*>|<\/div>/g
-const ROOT_OPEN = '<div id="root">'
-
-// Returns { head, tail } split around the root div's own matching close tag —
-// tail is everything from just after that close tag to the end of the input,
-// preserved untouched — or null if the opening tag is missing, or the tags
-// after it never bring the nesting depth back to zero before input runs out
-// (unbalanced markup).
-//
-// This is a scanner over our own build output, not a general HTML parser: it
-// assumes (as the old regex did too) well-formed tags with no literal '>'
-// inside a div's own attribute values, which holds for the hand-written boot
-// placeholder in index.html — the only markup it ever actually walks, since
-// the fragment being injected is never scanned, only spliced in as-is.
-function findRootBounds(html) {
-  const start = html.indexOf(ROOT_OPEN)
-  if (start === -1) return null
-
-  DIV_TAG_RE.lastIndex = start + ROOT_OPEN.length
-  let depth = 1
-  let tag
-  while ((tag = DIV_TAG_RE.exec(html))) {
-    depth += tag[0] === '</div>' ? -1 : 1
-    if (depth === 0) {
-      return { head: html.slice(0, start), tail: html.slice(DIV_TAG_RE.lastIndex) }
-    }
-  }
-  return null
-}
+// injectFragment splices the fragment in between two literal HTML comments,
+// <!--app--> and <!--/app-->, that index.html carries around the boot
+// placeholder (`<div id="root"><!--app-->…boot markup…<!--/app--></div>`) —
+// no parsing, no tag recognition, nothing examined on either side. THREE
+// regex/scanner attempts were tried here first, and each failed silently in
+// a NEW way:
+//   1. non-greedy [\s\S]*? stopped at the FIRST </div></div>: a boot
+//      placeholder with an extra nesting level (a spinner ring around a
+//      spinner dot) under-matched, leaving the rest of the placeholder
+//      dangling in the output.
+//   2. greedy [\s\S]* anchored on "some </div> before </body>" over-matched:
+//      it backtracked past root's own close and deleted a trailing sibling
+//      (a cookie-consent banner, a modal portal root) instead of preserving
+//      it.
+//   3. a depth-counting scanner over <div>/</div> tokens fixed both of those,
+//      but was still markup-shaped, and markup kept having new corners: a
+//      genuinely unbalanced div matched a nonsense close instead of
+//      throwing; a > inside a div's own attribute value truncated the
+//      "opening tag" token and threw the depth count off (a stray dangling
+//      </div> in the output, no throw); </div > with whitespace before the
+//      bracket was never recognised as a close at all; and a decoy
+//      <div id="root"> sitting inside an earlier HTML comment would have had
+//      the fragment spliced into the wrong target.
+// Every one of those came from trying to work out where the root div ends by
+// looking at markup — that is parsing, and a hand-rolled parser keeps
+// diverging from a real one in a new place each round. Two explicit markers
+// make the boundary a fact instead of an inference: this is immune BY
+// CONSTRUCTION to nesting depth, attribute values, whitespace in tags, tag
+// case, comments and trailing siblings, because none of it is ever examined
+// — and there is no String.replace pattern/replacement-string step left
+// either, so the earlier $-substitution hazard has nowhere left to hide.
+const START_MARKER = '<!--app-->'
+const END_MARKER = '<!--/app-->'
 
 export function injectFragment(html, fragment) {
-  const bounds = findRootBounds(html)
-  if (!bounds) {
-    throw new Error('apply-prerender: could not find a balanced #root placeholder in the shell — '
+  const start = html.indexOf(START_MARKER)
+  const end = html.indexOf(END_MARKER)
+  if (start === -1 || end === -1 || end < start) {
+    throw new Error('apply-prerender: could not find the <!--app-->…<!--/app--> markers, in order, in the shell — '
       + 'index.html changed shape, and injecting nothing would ship the boot screen')
   }
-  // Plain concatenation, not html.replace(pattern, replacement): there is no
-  // pattern/replacement-string step left to have a $-substitution hazard, but
-  // staying off String.replace here also means never reintroducing one.
-  return `${bounds.head}<div id="root">${fragment}</div>${bounds.tail}`
+  const head = html.slice(0, start)
+  const tail = html.slice(end + END_MARKER.length)
+  return `${head}${START_MARKER}${fragment}${END_MARKER}${tail}`
 }
 
 // A replacer FUNCTION, not a template string, for the same reason as
