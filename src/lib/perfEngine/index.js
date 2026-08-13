@@ -64,6 +64,13 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
       ? { ms: modelled.frameTimeMs, sources: cell.sources ?? 0 }
       : null
 
+  if (!source) {
+    return { ...base, avgFps: null, lowFps: null, frameTimeMs: null,
+             lowFrameTimeMs: null, lowBasis: 'none', cpuShare: null,
+             limitedBy: null, atEngineCap: false, basis: 'none', sources: 0,
+             bound: 'point', caveats: [], errorPct: null }
+  }
+
   // The tier is composed from the inputs, never asserted here — see rowBasis.js.
   const tier = composeBasis({
     exactMeasured: Boolean(measured),
@@ -76,13 +83,6 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
     gpuExtrapolated: gpuIdx.extrapolated ?? false,
     cpuExtrapolated: cpuIdx.extrapolated ?? false,
   })
-
-  if (!source) {
-    return { ...base, avgFps: null, lowFps: null, frameTimeMs: null,
-             lowFrameTimeMs: null, lowBasis: 'none', cpuShare: null,
-             limitedBy: null, atEngineCap: false, basis: 'none', sources: 0,
-             bound: 'point', caveats: [], errorPct: null }
-  }
 
   const capped = applyFpsCap(source.ms, game.fpsCap)
   const avgFps = Math.round(msToFps(capped))
