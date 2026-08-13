@@ -5,6 +5,7 @@ import { estimatePower, estimateThermals } from './power'
 import { memoryProfile } from './memory'
 import { bottleneckSummary } from './bottleneck'
 import { presetsFor } from '../gamePresets'
+import { composeBasis } from './rowBasis'
 
 // The public contract of the performance engine.
 //
@@ -58,15 +59,29 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
 
   // A real measurement of this exact combination beats a model of it.
   const source = measured
-    ? { ms: measured.frameTimeMs, basis: 'measured', sources: measured.sources }
+    ? { ms: measured.frameTimeMs, sources: measured.sources }
     : modelled
-      ? { ms: modelled.frameTimeMs, basis: 'modelled', sources: cell.sources ?? 0 }
+      ? { ms: modelled.frameTimeMs, sources: cell.sources ?? 0 }
       : null
+
+  // The tier is composed from the inputs, never asserted here — see rowBasis.js.
+  const tier = composeBasis({
+    exactMeasured: Boolean(measured),
+    hasCellB: cell?.B > 0,
+    gpuBasis: gpuIdx.basis,
+    cpuBasis: cpuIdx.basis,
+    gpuErrorPct: gpuIdx.errorPct ?? null,
+    cpuErrorPct: cpuIdx.errorPct ?? null,
+    resolutionCopied: gpuIdx.resolutionCopied,
+    gpuExtrapolated: gpuIdx.extrapolated ?? false,
+    cpuExtrapolated: cpuIdx.extrapolated ?? false,
+  })
 
   if (!source) {
     return { ...base, avgFps: null, lowFps: null, frameTimeMs: null,
              lowFrameTimeMs: null, lowBasis: 'none', cpuShare: null,
-             limitedBy: null, atEngineCap: false, basis: 'none', sources: 0 }
+             limitedBy: null, atEngineCap: false, basis: 'none', sources: 0,
+             bound: 'point', caveats: [], errorPct: null }
   }
 
   const capped = applyFpsCap(source.ms, game.fpsCap)
@@ -103,7 +118,10 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
     gpuOnlyFps: modelled ? Math.round(msToFps(modelled.tGpu)) : null,
     cpuOnlyFps: modelled ? Math.round(msToFps(modelled.tCpu)) : null,
     atEngineCap,
-    basis: source.basis,
+    basis: tier.basis,
+    bound: tier.bound,
+    caveats: tier.caveats,
+    errorPct: tier.errorPct,
     sources: source.sources,
   }
 }
