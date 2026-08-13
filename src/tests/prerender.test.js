@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { applyMeta, injectFragment, escapeAttr } from '../../scripts/apply-prerender.mjs'
 import { PAGES as SCRIPT_PAGES } from '../../scripts/prerender-routes.mjs'
 import { PAGES as APP_PAGES } from '../hooks/usePageRoute'
@@ -30,10 +30,19 @@ const decode = (s) => s.replace(/&quot;/g, '"').replace(/&amp;/g, '&')
 const attrOf = (html, re) => decode(re.exec(html)[1])
 
 describe('applyMeta', () => {
-  const out = applyMeta(SHELL, {
-    title: PAGE_META.help.title,
-    description: PAGE_META.help.description,
-    canonical: canonicalFor('help'),
+  // Computed fresh before EACH test, not once for the whole block: a throw in
+  // applyMeta used to fail all five tests below opaquely (describe-level setup
+  // runs once, so a broken shell would report as five unrelated failures with
+  // no clear cause). A beforeEach still runs once per test, so a throw here
+  // fails only the one test it was setting up, same as the newer tests below
+  // that already compute their own `out` inline.
+  let out
+  beforeEach(() => {
+    out = applyMeta(SHELL, {
+      title: PAGE_META.help.title,
+      description: PAGE_META.help.description,
+      canonical: canonicalFor('help'),
+    })
   })
 
   it('rewrites title, description and canonical to the page values', () => {
@@ -71,10 +80,10 @@ describe('applyMeta', () => {
     // (whole-match, literal-$, before-match, after-match). Title/description/
     // canonical are content values, not regex internals, so a literal one of
     // these must survive untouched rather than splicing matched text in.
-    const out = applyMeta(SHELL, { title: 'A $& B', description: 'C $` D', canonical: 'https://x/$$' })
-    expect(out).toContain('<title>A $&amp; B</title>')
-    expect(out).toContain('content="C $` D"')
-    expect(out).toContain('href="https://x/$$"')
+    const withDollar = applyMeta(SHELL, { title: 'A $& B', description: 'C $` D', canonical: 'https://x/$$' })
+    expect(withDollar).toContain('<title>A $&amp; B</title>')
+    expect(withDollar).toContain('content="C $` D"')
+    expect(withDollar).toContain('href="https://x/$$"')
   })
 
   it('escapes </title> in a title so it cannot terminate the element early', () => {
@@ -83,13 +92,13 @@ describe('applyMeta', () => {
     // markup. Titles are hand-authored today, but partPages.js builds titles
     // from 540 catalogue parts, so a less-trusted string reaching here is
     // plausible.
-    const out = applyMeta(SHELL, {
+    const withTitle = applyMeta(SHELL, {
       title: 'Weird </title><script>alert(1)</script> Title',
       description: PAGE_META.help.description,
       canonical: canonicalFor('help'),
     })
-    expect(out).not.toContain('</title><script>')
-    expect(out).toContain('<title>Weird &lt;/title&gt;&lt;script&gt;alert(1)&lt;/script&gt; Title</title>')
+    expect(withTitle).not.toContain('</title><script>')
+    expect(withTitle).toContain('<title>Weird &lt;/title&gt;&lt;script&gt;alert(1)&lt;/script&gt; Title</title>')
   })
 })
 
@@ -134,6 +143,46 @@ describe('injectFragment', () => {
     // Nothing but </body> follows the fragment's own closing div — proves
     // there is no stray </div> (or anything else) left dangling.
     expect(out).toMatch(/<div id="root"><main>PAGE<\/main><\/div>\s*<\/body>/)
+  })
+
+  it('preserves a trailing sibling <div> after root instead of deleting it', () => {
+    // Regression: the GREEDY match anchored on a "some </div> before </body>"
+    // lookahead over-matched. The lookahead has no idea WHICH </div> closes
+    // root, so it backtracked past root's own close and consumed a trailing
+    // sibling too — silently deleting a cookie-consent banner or modal portal
+    // root instead of preserving it.
+    const shell = `<html><head></head><body>
+<div id="root"><div class="boot">Custom PC Builder…</div></div>
+<div id="cookie-consent"><p>We use cookies</p></div>
+</body></html>`
+    const out = injectFragment(shell, '<main>PAGE</main>')
+    expect(out).toContain('<div id="root"><main>PAGE</main></div>')
+    expect(out).toContain('<div id="cookie-consent"><p>We use cookies</p></div>')
+  })
+
+  it('preserves a trailing <noscript> after root', () => {
+    const shell = `<html><head></head><body>
+<div id="root"><div class="boot">Custom PC Builder…</div></div>
+<noscript>Enable JavaScript to use this site.</noscript>
+</body></html>`
+    const out = injectFragment(shell, '<main>PAGE</main>')
+    expect(out).toContain('<div id="root"><main>PAGE</main></div>')
+    expect(out).toContain('<noscript>Enable JavaScript to use this site.</noscript>')
+  })
+
+  it('throws on an unbalanced root div rather than matching a nonsense close', () => {
+    // <div class="a"> is opened but never closed before input ends, so depth
+    // never returns to zero. A regex anchored on "some </div> before </body>"
+    // would match div "b"'s close here and silently treat it as root's own —
+    // on markup that was never actually balanced. The scanner refuses.
+    const shell = '<div id="root"><div class="a"><div class="b"></div></body>'
+    expect(() => injectFragment(shell, '<main>PAGE</main>')).toThrow(/root/i)
+  })
+
+  it('preserves content after </body> unchanged', () => {
+    const shell = '<div id="root"><div class="boot">Loading…</div></div>\n</body></html>\n<!-- trailing comment -->'
+    const out = injectFragment(shell, '<main>PAGE</main>')
+    expect(out).toBe('<div id="root"><main>PAGE</main></div>\n</body></html>\n<!-- trailing comment -->')
   })
 })
 

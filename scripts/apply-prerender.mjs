@@ -29,37 +29,66 @@ const FRAGMENTS = new URL('../prerendered/', import.meta.url)
 export const escapeAttr = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-// Matched GREEDILY, anchored on what precedes </body> — not on the root div's
-// own first closing pair. Verified by hand against a real `npm run build`:
-// Vite hoists <script type="module"> and the stylesheet <link> into <head>,
-// so <body> in dist/index.html contains nothing but the root div. That is
-// what makes anchoring on </body> safe rather than just convenient.
+// injectFragment locates the root div's own closing tag by walking tags and
+// counting nesting depth, rather than matching it with a single regex. TWO
+// regex attempts were tried here first and BOTH failed silently:
+//   - a NON-GREEDY match up to the first </div></div> UNDER-matched: a boot
+//     placeholder with an extra nesting level (a spinner ring around a
+//     spinner dot) closes its own inner divs first, so the match stopped
+//     there. No throw — but the match was a proper prefix of the root div,
+//     and the rest of the placeholder was left dangling in the output.
+//   - a GREEDY match anchored on a "some </div> before </body>" lookahead
+//     OVER-matched: the lookahead has no idea WHICH </div> closes root, so it
+//     backtracked past root's own close and swallowed a trailing sibling (a
+//     cookie-consent banner, a modal portal root) — silently deleting it.
+// Matching balanced, nested tags isn't something a regular expression can do
+// (it isn't a regular language), so a third regex would only relocate the
+// hazard again. Counting depth is the structurally correct fix: it finds the
+// exact tag that brings nesting back to zero regardless of how deep the
+// placeholder nests or what comes after it, so both failure modes above are
+// impossible by construction. It also drops the </body> anchor entirely, so
+// it no longer depends on Vite hoisting the script and stylesheet out of
+// <body> — it would be equally correct if that ever changed.
+const DIV_TAG_RE = /<div\b[^>]*>|<\/div>/g
+const ROOT_OPEN = '<div id="root">'
+
+// Returns { head, tail } split around the root div's own matching close tag —
+// tail is everything from just after that close tag to the end of the input,
+// preserved untouched — or null if the opening tag is missing, or the tags
+// after it never bring the nesting depth back to zero before input runs out
+// (unbalanced markup).
 //
-// A non-greedy [\s\S]*? up to the first </div></div> was tried first and is
-// wrong: if the boot placeholder ever gains a nesting level (a spinner ring
-// around a spinner dot), the FIRST </div></div> belongs to the inner
-// elements, not to root. The regex still matches — the guard below does not
-// throw — but on a PROPER PREFIX of the root div, leaving the rest of the
-// placeholder dangling outside the injected fragment. Anchoring on </body>
-// instead means the only way to match at all is to consume every nested
-// closing tag up to root's own, so a wrong-but-successful prefix match is not
-// possible: either the real root div is matched in full, or (if <body> ever
-// contains something after it) nothing matches and the guard throws.
-const ROOT_RE = /<div id="root">[\s\S]*<\/div>(?=\s*<\/body>)/
+// This is a scanner over our own build output, not a general HTML parser: it
+// assumes (as the old regex did too) well-formed tags with no literal '>'
+// inside a div's own attribute values, which holds for the hand-written boot
+// placeholder in index.html — the only markup it ever actually walks, since
+// the fragment being injected is never scanned, only spliced in as-is.
+function findRootBounds(html) {
+  const start = html.indexOf(ROOT_OPEN)
+  if (start === -1) return null
+
+  DIV_TAG_RE.lastIndex = start + ROOT_OPEN.length
+  let depth = 1
+  let tag
+  while ((tag = DIV_TAG_RE.exec(html))) {
+    depth += tag[0] === '</div>' ? -1 : 1
+    if (depth === 0) {
+      return { head: html.slice(0, start), tail: html.slice(DIV_TAG_RE.lastIndex) }
+    }
+  }
+  return null
+}
 
 export function injectFragment(html, fragment) {
-  if (!ROOT_RE.test(html)) {
-    throw new Error('apply-prerender: could not find the #root placeholder in the shell — '
+  const bounds = findRootBounds(html)
+  if (!bounds) {
+    throw new Error('apply-prerender: could not find a balanced #root placeholder in the shell — '
       + 'index.html changed shape, and injecting nothing would ship the boot screen')
   }
-  // A replacer FUNCTION, not a template string: fragment is arbitrary rendered
-  // page HTML captured by Playwright (Task 3). $&, $$, $` and $' are
-  // substitution syntax in a replacement STRING — insert-whole-match,
-  // literal-$, insert-text-before-match, insert-text-after-match — so a page
-  // that happens to render one of those sequences into a template string
-  // would silently splice matched or surrounding HTML into the fragment. A
-  // function's return value is inserted verbatim; nothing reprocesses it.
-  return html.replace(ROOT_RE, () => `<div id="root">${fragment}</div>`)
+  // Plain concatenation, not html.replace(pattern, replacement): there is no
+  // pattern/replacement-string step left to have a $-substitution hazard, but
+  // staying off String.replace here also means never reintroducing one.
+  return `${bounds.head}<div id="root">${fragment}</div>${bounds.tail}`
 }
 
 // A replacer FUNCTION, not a template string, for the same reason as
