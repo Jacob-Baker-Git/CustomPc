@@ -61,3 +61,84 @@ function compareCandidates(a, b) {
   // this back to localeCompare.
   return a.presetKey < b.presetKey ? -1 : a.presetKey > b.presetKey ? 1 : 0
 }
+
+const presetKeyOf = (r) => `${r.presetId}|${r.upscaling}`
+
+// `reports` is { '1080p': report, '1440p': report, '4k': report }. Missing
+// resolutions are tolerated so a caller can pass fewer.
+export function buildGameRows(reports, { resolutions = RESOLUTIONS } = {}) {
+  // gameId -> presetKey -> { candidate fields, rowByRes }
+  const games = new Map()
+
+  for (const res of resolutions) {
+    for (const r of reports?.[res]?.games ?? []) {
+      if (!(r.avgFps > 0)) continue
+      if (!games.has(r.gameId)) games.set(r.gameId, { name: r.name, presets: new Map() })
+      const g = games.get(r.gameId)
+      const key = presetKeyOf(r)
+      if (!g.presets.has(key)) {
+        g.presets.set(key, {
+          presetKey: key, presetId: r.presetId, preset: r.preset,
+          upscaling: r.upscaling, presetTier: r.presetTier,
+          basis: r.basis, avgFps: r.avgFps,
+          resolutions: new Set(), rowByRes: {},
+        })
+      }
+      const p = g.presets.get(key)
+      p.resolutions.add(res)
+      p.rowByRes[res] = r
+      // The candidate's basis and fps describe the preset as a whole, so take
+      // the weakest basis and the lowest rate across the resolutions it covers
+      // — the same conservative direction the tie-break uses.
+      if ((BASIS_RANK[r.basis] ?? -1) < (BASIS_RANK[p.basis] ?? -1)) p.basis = r.basis
+      if (r.avgFps < p.avgFps) p.avgFps = r.avgFps
+    }
+  }
+
+  const out = []
+  for (const [gameId, g] of games) {
+    const candidates = [...g.presets.values()]
+    const chosen = selectPreset(candidates)
+    if (!chosen) continue
+
+    const cells = {}
+    for (const res of resolutions) cells[res] = chosen.rowByRes[res] ?? null
+    const shown = resolutions.map((res) => cells[res]).filter(Boolean)
+
+    // Weakest basis across the cells actually shown, and the worst error band.
+    // Neither can overstate what the row is worth. See rowBasis.js.
+    const basis = shown.reduce(
+      (worst, r) => ((BASIS_RANK[r.basis] ?? -1) < (BASIS_RANK[worst] ?? -1) ? r.basis : worst),
+      shown[0].basis,
+    )
+    const bands = shown.map((r) => r.errorPct).filter((v) => v != null)
+
+    out.push({
+      gameId,
+      name: g.name,
+      preset: chosen.preset,
+      presetId: chosen.presetId,
+      upscaling: chosen.upscaling,
+      presetTier: chosen.presetTier,
+      cells,
+      basis,
+      errorPct: bands.length ? Math.max(...bands) : null,
+      // Every caveat seen on any shown cell, deduplicated — the expansion lists
+      // them, and a caveat true at one resolution is still true of the row.
+      caveats: [...new Set(shown.flatMap((r) => r.caveats ?? []))],
+      otherPresets: candidates
+        .filter((c) => c.presetKey !== chosen.presetKey)
+        .sort((a, b) => (b.presetTier ?? 0) - (a.presetTier ?? 0)),
+      bestFps: Math.max(...shown.map((r) => r.avgFps)),
+    })
+  }
+
+  // Fastest game first, matching the order the engine already sorts rows into.
+  // Byte comparison on the tie-break, not localeCompare — same reasoning as
+  // compareCandidates above: collation is locale-dependent, and a fixed
+  // grouping order must not change with the runtime's default locale.
+  return out.sort((a, b) => {
+    if (a.bestFps !== b.bestFps) return b.bestFps - a.bestFps
+    return a.gameId < b.gameId ? -1 : a.gameId > b.gameId ? 1 : 0
+  })
+}
