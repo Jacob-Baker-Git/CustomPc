@@ -5,29 +5,52 @@
 // something up" must never be indistinguishable to the caller, and the only way
 // to guarantee that is to make the basis impossible to drop.
 
-const EMPTY_INDEX = { value: null, basis: 'none', anchors: 0, resolutionCopied: false }
+import { applyPrior } from './prior'
+
+const EMPTY_INDEX = {
+  value: null, basis: 'none', anchors: 0, resolutionCopied: false,
+  errorPct: null, extrapolated: false,
+}
+
+// A measurement answers with no error band: `errorPct` describes how wrong a
+// PREDICTION usually is, and there is no prediction here. Null rather than zero
+// — zero would claim the reading is exact.
+const measuredIndex = (value, row, resolutionCopied) => ({
+  value,
+  basis: row.basis ?? 'measured',
+  anchors: row.anchors ?? 0,
+  resolutionCopied,
+  errorPct: null,
+  extrapolated: false,
+})
+
+// No measurement. The prior is data-derived and publishes its own held-out
+// error, so it is an answer — but never one that reports itself as measured.
+const priorIndex = (p) => ({
+  value: p.value,
+  basis: p.basis,
+  anchors: 0,
+  resolutionCopied: false,
+  errorPct: p.errorPct,
+  extrapolated: p.extrapolated,
+})
 
 export function gpuIndexFor(model, gpu, resolution) {
   const row = gpu?.id ? model?.gpuIndex?.[gpu.id] : null
   const value = row?.[resolution]
-  if (!(value > 0)) return { ...EMPTY_INDEX }
-  return {
-    value,
-    basis: row.basis ?? 'measured',
-    anchors: row.anchors ?? 0,
-    resolutionCopied: Boolean(row.copiedResolutions?.includes(resolution)),
+  if (value > 0) {
+    return measuredIndex(value, row, Boolean(row.copiedResolutions?.includes(resolution)))
   }
+  const p = applyPrior(model?.prior?.gpu?.[resolution], gpu?.perfScore)
+  return p ? priorIndex(p) : { ...EMPTY_INDEX }
 }
 
 export function cpuIndexFor(model, cpu) {
   const row = cpu?.id ? model?.cpuIndex?.[cpu.id] : null
-  if (!(row?.value > 0)) return { ...EMPTY_INDEX }
-  return {
-    value: row.value,
-    basis: row.basis ?? 'measured',
-    anchors: row.anchors ?? 0,
-    resolutionCopied: false,
-  }
+  if (row?.value > 0) return measuredIndex(row.value, row, false)
+
+  const p = applyPrior(model?.prior?.cpu, cpu?.perfScore)
+  return p ? priorIndex(p) : { ...EMPTY_INDEX }
 }
 
 // The fitted per-cell constants. A is the GPU-side constant, B the CPU-side.
@@ -79,14 +102,20 @@ export function exactFor(model, context) {
   return model?.exact?.[exactKey(context)] ?? null
 }
 
-// Can this exact combination be estimated from measurement alone? Phase 1
-// answers only where this is true and says "not enough data" everywhere else.
+// Can this exact combination be estimated from measurement alone?
+//
+// ⚠️ Tests the BASIS, not the value. Once the accessors fall back to the prior,
+// `value > 0` is true for a part nobody ever benchmarked — so the old test would
+// have kept its name while quietly answering a different question, and every
+// caller trusting "from measurement alone" would have been told yes for a
+// spec-derived guess. The engine reports the weaker tiers through rowBasis
+// instead; this stays the strict question.
 export function hasCoverage(model, { cpu, gpu, game, resolution, presetId, upscaling }) {
   // Asks for a FULL two-way estimate, so it wants B as well — unlike cellFor,
   // whose job is only to say the cell exists.
   return (
-    gpuIndexFor(model, gpu, resolution).value > 0 &&
-    cpuIndexFor(model, cpu).value > 0 &&
+    gpuIndexFor(model, gpu, resolution).basis === 'measured' &&
+    cpuIndexFor(model, cpu).basis === 'measured' &&
     cellFor(model, game, resolution, presetId, upscaling)?.B > 0
   )
 }

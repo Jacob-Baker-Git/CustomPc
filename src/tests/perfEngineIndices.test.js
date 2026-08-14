@@ -20,8 +20,12 @@ const model = {
 
 describe('gpuIndexFor', () => {
   it('returns the measured index for the requested resolution', () => {
-    expect(gpuIndexFor(model, { id: 'gpu-rtx-5070' }, '1440p'))
-      .toEqual({ value: 62.0, basis: 'measured', anchors: 11, resolutionCopied: false })
+    expect(gpuIndexFor(model, { id: 'gpu-rtx-5070' }, '1440p')).toEqual({
+      value: 62.0, basis: 'measured', anchors: 11, resolutionCopied: false,
+      // A measurement carries no error band: errorPct describes how wrong a
+      // PREDICTION usually is, and nothing was predicted here.
+      errorPct: null, extrapolated: false,
+    })
   })
 
   it('flags a resolution that was copied rather than measured', () => {
@@ -29,11 +33,16 @@ describe('gpuIndexFor', () => {
     expect(r.resolutionCopied).toBe(true)
   })
 
-  it('returns basis "none" for an uncovered card — never a guess', () => {
-    // Phase 2 replaces this with a perfScore-derived prior. Until then the
-    // honest answer is "no data", and the UI says so.
-    expect(gpuIndexFor(model, { id: 'gpu-rx-9999', perfScore: 50 }, '1440p'))
-      .toEqual({ value: null, basis: 'none', anchors: 0, resolutionCopied: false })
+  it('returns basis "none" for an uncovered card when no prior was fitted', () => {
+    // This used to read "never a guess", against a Phase 1 engine that had no
+    // prior at all. There is one now (see indicesPrior.test.js), and an
+    // uncovered card with a perfScore gets a spec-derived estimate. What this
+    // model has is no `prior` key, and the answer for that is still "no data" —
+    // an unfitted prior must not become a silent zero or an invented index.
+    expect(gpuIndexFor(model, { id: 'gpu-rx-9999', perfScore: 50 }, '1440p')).toEqual({
+      value: null, basis: 'none', anchors: 0, resolutionCopied: false,
+      errorPct: null, extrapolated: false,
+    })
   })
 
   it('returns basis "none" for a missing part', () => {

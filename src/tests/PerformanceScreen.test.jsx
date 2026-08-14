@@ -70,20 +70,37 @@ describe('PerformanceScreen', () => {
     expect(screen.getByText('comfortable')).toBeInTheDocument()
   })
 
-  it('says frame rates need data, while still showing the stats panels', () => {
+  it('answers for an unindexed processor, as an estimate, and still shows the stats panels', () => {
+    // This test used to assert the OPPOSITE — "no benchmark data for these
+    // parts yet" — and it was pinning the defect this work exists to remove: 54
+    // of 80 catalogue chips rendered a blank Frame rates section at every
+    // resolution. A chip nobody has benchmarked is now priced by the published
+    // spec-derived prior, so it answers.
+    //
+    // What must NOT change is that the answer says what it is. The assertions
+    // below are a pair: rows appear AND they are labelled an estimate. Dropping
+    // the second would let this pass against an engine that had started
+    // reporting a guess as a measurement.
+    //
     // The uncovered processor is CHOSEN FROM THE MODEL rather than hardcoded.
-    // This test used to pin cpu-ryzen-5-7600x, which then got indexed — so the
-    // test failed for the best possible reason and looked like a bug. Picking a
+    // This test once pinned cpu-ryzen-5-7600x, which then got indexed — so it
+    // failed for the best possible reason and looked like a bug. Picking a
     // genuinely unindexed chip keeps the premise true as the corpus grows, and
     // the guard says so out loud if the corpus ever covers everything.
     const uncovered = partsData.find(
-      (p) => p.category === 'cpu' && !perfModel.cpuIndex[p.id],
+      (p) => p.category === 'cpu' && !perfModel.cpuIndex[p.id] && p.perfScore > 0,
     )
     expect(uncovered, 'catalogue should still hold a CPU the corpus has not indexed').toBeTruthy()
     useBuilderStore.setState({ selectedParts: { cpu: uncovered, gpu } })
     render(<PerformanceScreen />)
-    expect(screen.getByText(/no benchmark data for these parts yet/i)).toBeInTheDocument()
-    // and the spec-derived half is unaffected by that
+
+    expect(screen.queryByText(/no benchmark data for these parts yet/i)).toBeNull()
+    expect(screen.getAllByText(/estimate/i).length).toBeGreaterThan(0)
+    // BasisBar's mix line, which counts the UNFILTERED rows. Nothing here was
+    // benchmarked, and it must say zero rather than omit the tier.
+    expect(screen.getByText(/^0 benchmarked$/)).toBeInTheDocument()
+
+    // and the spec-derived half is unaffected by any of it
     expect(screen.getByText('Power')).toBeInTheDocument()
     expect(screen.getByText('Cooling')).toBeInTheDocument()
   })
