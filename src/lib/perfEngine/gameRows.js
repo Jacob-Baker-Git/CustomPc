@@ -6,10 +6,21 @@
 // ONE preset per game: three columns that compare different settings are not a
 // comparison.
 
+import { ORDER as BASIS_ORDER } from './rowBasis'
+
 export const RESOLUTIONS = ['1080p', '1440p', '4k']
 
-// Strongest to weakest. Same names rowBasis.js composes.
-export const BASIS_RANK = { measured: 3, modelled: 2, 'spec-derived': 1, ceiling: 0 }
+// Strongest to weakest, DERIVED from rowBasis.js's ORDER rather than
+// hand-copied. A hand-copied list agrees with ORDER today and says nothing
+// about tomorrow: reordering ORDER or inserting a tier would silently
+// mis-rank candidates here with zero test failure, which is the exact kind of
+// silent wrongness rowBasis.js exists to prevent. Rank is distance from the
+// weakest end of ORDER, so the strongest basis gets the highest number —
+// measured: 3, modelled: 2, 'spec-derived': 1, ceiling: 0, the same shape
+// Task 2 and the corpus test both depend on.
+export const BASIS_RANK = Object.fromEntries(
+  BASIS_ORDER.map((basis, i) => [basis, BASIS_ORDER.length - 1 - i]),
+)
 
 // Which preset a game's collapsed row shows.
 //
@@ -39,6 +50,14 @@ function compareCandidates(a, b) {
   const ra = BASIS_RANK[a.basis] ?? -1
   const rb = BASIS_RANK[b.basis] ?? -1
   if (ra !== rb) return rb - ra                                  // best evidence
+  // avgFps is always Math.round()ed before it reaches here (see index.js), so
+  // this is an integer comparison — no float-equality risk to guard against.
   if (a.avgFps !== b.avgFps) return a.avgFps - b.avgFps           // under-promise
-  return a.presetKey.localeCompare(b.presetKey)                  // determinism
+  // Plain byte comparison, NOT localeCompare: collation is locale-dependent,
+  // and this level exists specifically to replace "decided by array order"
+  // with something deterministic. A comparison whose result can change with
+  // the runtime's default locale would undercut the one thing it's here for —
+  // dormant today since preset ids are ASCII kebab-case, but do not "tidy"
+  // this back to localeCompare.
+  return a.presetKey < b.presetKey ? -1 : a.presetKey > b.presetKey ? 1 : 0
 }

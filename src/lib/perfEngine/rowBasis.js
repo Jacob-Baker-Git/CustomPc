@@ -12,7 +12,9 @@
 // produced. `ceiling` is the only genuinely new one.
 
 // Strongest to weakest. A row lands on the weakest tier any input justifies.
-const ORDER = ['measured', 'modelled', 'spec-derived', 'ceiling']
+// Exported: gameRows.js derives its own basis ranking from this array rather
+// than hand-copying the names, so the two cannot drift apart.
+export const ORDER = ['measured', 'modelled', 'spec-derived', 'ceiling']
 const weakest = (a, b) => (ORDER.indexOf(a) > ORDER.indexOf(b) ? a : b)
 
 export function composeBasis({
