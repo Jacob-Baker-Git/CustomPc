@@ -185,6 +185,43 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     expect(screen.queryByText('Guesswork Grand Prix')).not.toBeInTheDocument()
   })
 
+  it('counts the results it is SHOWING, not the ones it has', async () => {
+    // The footer says "N results shown". BasisBar's mix line deliberately does
+    // NOT follow the filter — its totals must not be shrinkable by hiding rows.
+    // This line makes the opposite claim, about the display itself, so it must
+    // follow it: with the filter on it read "2 results shown" above a grid
+    // holding one.
+    estimateBuildPerformance.mockReturnValueOnce(mixedReport([measuredRow, estimatedRow]))
+    const user = userEvent.setup()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+
+    expect(screen.getByText(/2 results shown/)).toBeInTheDocument()
+    await user.click(screen.getByRole('checkbox', { name: /only show real data/i }))
+    expect(screen.getByText(/1 result shown/)).toBeInTheDocument()
+    expect(screen.queryByText(/2 results shown/)).toBeNull()
+  })
+
+  it('explains an empty grid rather than just emptying it', async () => {
+    // A build with nothing measured — the common case for the 54 catalogue CPUs
+    // no review has charted. Ticking the box removes every card, and a list that
+    // silently vanishes reads as a broken page rather than an answered question.
+    estimateBuildPerformance.mockReturnValueOnce(mixedReport([estimatedRow]))
+    const user = userEvent.setup()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+
+    expect(screen.getByText('Guesswork Grand Prix')).toBeInTheDocument()
+    expect(screen.queryByText(/nothing here was measured/i)).toBeNull()
+
+    await user.click(screen.getByRole('checkbox', { name: /only show real data/i }))
+
+    expect(screen.queryByText('Guesswork Grand Prix')).toBeNull()
+    expect(screen.getByText(/nothing here was measured/i)).toBeInTheDocument()
+    // and the mix line still reports what the build actually has
+    expect(screen.getByText(/1 estimated/)).toBeInTheDocument()
+  })
+
   it('leaves the checkbox unchecked on first mount', () => {
     estimateBuildPerformance.mockReturnValueOnce(mixedReport([measuredRow, estimatedRow]))
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })

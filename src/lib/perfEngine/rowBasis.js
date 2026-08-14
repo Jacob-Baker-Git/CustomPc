@@ -51,10 +51,18 @@ export function composeBasis({
   if (derivedIndex) basis = weakest(basis, 'spec-derived')
   if (!hasCellB) basis = weakest(basis, 'ceiling')
 
-  // The worst contributing band, NOT a combination. See the test.
+  // The worst CONTRIBUTING band, NOT a combination, and not every band in sight.
+  //
+  // ⚠️ The CPU index only contributes where there is a B to pair it with. A
+  // ceiling row's frame time is cell.A / gpuIndex and nothing else — the CPU
+  // index is not an input to it, which is precisely why the row is a ceiling. So
+  // the CPU prior's held-out error says nothing about that number, and printing
+  // it would attribute a band to an input that did not participate. The
+  // `cpu-index-prior` caveat still fires: it remains a true statement about the
+  // row, it just does not bound the figure.
   const bandErrors = [
     gpuBasis === 'prior' ? gpuErrorPct : null,
-    cpuBasis === 'prior' ? cpuErrorPct : null,
+    hasCellB && cpuBasis === 'prior' ? cpuErrorPct : null,
   ].filter((v) => v != null)
 
   return {

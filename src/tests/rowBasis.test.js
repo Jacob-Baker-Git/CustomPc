@@ -117,6 +117,47 @@ describe('composeBasis', () => {
     })).errorPct).toBe(22)
   })
 
+  it('does not put the CPU prior’s error on a row the CPU never entered', () => {
+    // A ceiling row's frame time is cell.A / gpuIndex. The CPU index is not an
+    // input to it at all — there is no B to pair it with, which is the whole
+    // reason the row is a ceiling. So the CPU prior's held-out error describes
+    // nothing about this number, and printing "up to 258 ±8%" attributes a band
+    // to an input that did not contribute.
+    //
+    // Caught in the browser, not by a test: every ceiling row on an unindexed
+    // chip was rendering the CPU band. The pre-existing assertion below passes
+    // because its indices are both measured, so it never reached this case.
+    const out = composeBasis(inputs({
+      hasCellB: false, cpuBasis: 'prior', cpuErrorPct: 7.8,
+    }))
+    expect(out.basis).toBe('ceiling')
+    expect(out.errorPct).toBeNull()
+    // the caveat still says the CPU index was a prior — that remains true of
+    // the row, it just does not bound the number
+    expect(out.caveats).toContain('cpu-index-prior')
+  })
+
+  it('still reports the GPU prior’s error on a ceiling row', () => {
+    // The GPU index IS the ceiling row's only numeric input, so its band is
+    // exactly the right thing to publish. Pairs with the test above: without
+    // this one, dropping errorPct for every ceiling row would also pass.
+    const out = composeBasis(inputs({
+      hasCellB: false, gpuBasis: 'prior', gpuErrorPct: 34.1,
+    }))
+    expect(out.basis).toBe('ceiling')
+    expect(out.errorPct).toBe(34.1)
+  })
+
+  it('takes the GPU band when a ceiling row has both indices from priors', () => {
+    const out = composeBasis(inputs({
+      hasCellB: false, gpuBasis: 'prior', gpuErrorPct: 6.6,
+      cpuBasis: 'prior', cpuErrorPct: 34.1,
+    }))
+    // 34.1 is the larger, and would win a naive `max` — but it is the CPU's,
+    // and the CPU did not contribute to this number.
+    expect(out.errorPct).toBe(6.6)
+  })
+
   it('gives a ceiling row no errorPct from the missing constant', () => {
     // The missing B is unbounded below, which is WHY the row is an upper bound.
     // Folding it into a percentage would claim a bound it does not have.

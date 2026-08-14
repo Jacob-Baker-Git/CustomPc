@@ -70,6 +70,9 @@ export default function PerformanceScreen() {
   // allRows so its totals can't be made to look stronger by hiding the rest.
   const allRows = report?.games ?? []
   const shownRows = realOnly ? onlyRealData(allRows) : allRows
+  // Answered rows actually on screen. `answered` above is in GAMES and ignores
+  // the filter; this is in ROWS and follows it.
+  const shownAnswered = shownRows.filter((r) => r.basis !== 'none').length
 
   return (
     <div className="w-full max-w-2xl lg:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-3 pb-12">
@@ -104,6 +107,18 @@ export default function PerformanceScreen() {
             section below is computed from the parts themselves and does not depend
             on it.
           </p>
+        ) : shownAnswered === 0 ? (
+          // Reachable only through the filter — `answered > 0` got us here, so
+          // the build HAS rows and the filter removed all of them. Common now
+          // that a chip no review has charted answers entirely from the prior.
+          // A grid that silently empties reads as a broken page rather than as
+          // an answered question, so it says which it is.
+          <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
+            Nothing here was measured. Every figure for this build is worked out from
+            the parts&rsquo; specifications rather than from a benchmark of them, so
+            the filter leaves nothing to show. Untick it to see the estimates and what
+            each one is based on.
+          </p>
         ) : (
           <FpsCardGrid rows={shownRows} />
         )}
@@ -123,7 +138,13 @@ export default function PerformanceScreen() {
         <p className="mt-1.5 text-[10px] text-muted">
           Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
           {hasCore && ` · ${answered} of ${report.coverage.gamesTotal} games answered`}
-          {hasCore && ` · ${report.coverage.rowsAnswered} results shown, ${report.coverage.rowsExact} measured directly`}
+          {/* Counted off the SHOWN rows, unlike BasisBar's mix line directly
+              above the grid. The two make opposite claims on purpose: the mix
+              line reports what the build has and must not be shrinkable by
+              hiding rows, while this one reports what is on screen and read
+              "60 results shown" above an empty grid until it followed the
+              filter. */}
+          {hasCore && ` · ${shownAnswered} result${shownAnswered === 1 ? '' : 's'} shown, ${report.coverage.rowsExact} measured directly`}
         </p>
       </Section>
 

@@ -48,14 +48,34 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
   // `cell.B > 0` is checked here rather than inside cellFor: B is the CPU-side
   // constant and only the split needs it, so a cell without one is still a
   // perfectly good source of A and lowBase.
-  const modelled = cell?.B > 0 && gpuIdx.value > 0 && cpuIdx.value > 0
+  //
+  // The two-way split needs B, and only 10 cells in this corpus have one against
+  // 121 with an A — a gpu-scaling review pins one CPU on purpose and so can never
+  // produce a B. Refusing an A-only cell threw away 92% of the fitted cells and
+  // left a typical build showing five games.
+  //
+  // So an A-only cell answers from the GPU term ALONE, and rowBasis reports the
+  // row as `ceiling` / `bound: 'upper'`. With the CPU term unknown the GPU term
+  // genuinely IS the ceiling, so "up to N" is the honest reading rather than a
+  // hedge — the real number can only be lower.
+  const twoWay = cell?.B > 0 && gpuIdx.value > 0 && cpuIdx.value > 0
+  const gpuOnly = !twoWay && cell?.A > 0 && gpuIdx.value > 0
+
+  const modelled = twoWay
     ? (() => {
         const tGpu = cell.A / gpuIdx.value
         const tCpu = (cell.B * (model.resCpuScale?.[resolution] ?? 1)) / cpuIdx.value
         const share = cpuShare(tGpu, tCpu, model.blendK)
         return { frameTimeMs: blendFrameTime(tGpu, tCpu, model.blendK), share, tGpu, tCpu }
       })()
-    : null
+    : gpuOnly
+      // No share and no tCpu: the split is unknown, and inventing one here is
+      // exactly what the "a measurement is a duration, not an attribution" rule
+      // above forbids. A share of 0.5 would render identically to a measured
+      // balanced build. FpsCard already says "Split not modelled" for this.
+      ? { frameTimeMs: cell.A / gpuIdx.value, share: null,
+          tGpu: cell.A / gpuIdx.value, tCpu: null }
+      : null
 
   // A real measurement of this exact combination beats a model of it.
   const source = measured
@@ -111,12 +131,15 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
     frameTimeMs: Number(capped.toFixed(2)),
     lowFrameTimeMs: lowCapped == null ? null : Number(lowCapped.toFixed(2)),
     lowBasis: low.basis,
-    cpuShare: modelled ? Number(modelled.share.toFixed(3)) : null,
-    limitedBy: modelled ? limitedBy(modelled.share) : null,
+    // `share == null` rather than `!modelled`: a gpu-only row IS modelled, it
+    // just has no attribution. Testing the object would report a share of 0 for
+    // it, which reads as "entirely GPU-limited" — a claim the row cannot make.
+    cpuShare: modelled?.share == null ? null : Number(modelled.share.toFixed(3)),
+    limitedBy: modelled?.share == null ? null : limitedBy(modelled.share),
     // What each side could deliver ALONE, if the other were infinitely fast.
     // The gap between them is the bottleneck, in the units people think in.
     gpuOnlyFps: modelled ? Math.round(msToFps(modelled.tGpu)) : null,
-    cpuOnlyFps: modelled ? Math.round(msToFps(modelled.tCpu)) : null,
+    cpuOnlyFps: modelled?.tCpu == null ? null : Math.round(msToFps(modelled.tCpu)),
     atEngineCap,
     basis: tier.basis,
     bound: tier.bound,
