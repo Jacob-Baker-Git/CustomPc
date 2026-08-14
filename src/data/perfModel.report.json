@@ -1,5 +1,5 @@
 {
-  "fittedAt": "2026-08-12T11:37:48.802Z",
+  "fittedAt": "2026-08-14T12:30:01.395Z",
   "warnings": [
     "Notebookcheck supplies 53.8% of the corpus (1536 of 2855 entries, from 49 reviews) — dilute when data allows",
     "ComputerBase supplies 44.7% of the corpus (1275 of 2855 entries, from 6 reviews) — dilute when data allows",
@@ -7,12 +7,12 @@
   ],
   "gpuFit": {
     "1080p": {
-      "iterations": 0,
+      "iterations": 18,
       "converged": true,
-      "parts": 0
+      "parts": 11
     },
     "1440p": {
-      "iterations": 135,
+      "iterations": 134,
       "converged": true,
       "parts": 40
     },
@@ -30,7 +30,7 @@
   "droppedGpuBound": [],
   "droppedDisconnected": [],
   "coverage": {
-    "gpusMeasured": 40,
+    "gpusMeasured": 41,
     "gpusTotal": 79,
     "cpusMeasured": 24,
     "cpusTotal": 80

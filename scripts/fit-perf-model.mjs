@@ -11,14 +11,35 @@ import { fileURLToPath } from 'node:url'
 import { fitTwoWay } from '../src/lib/perfEngine/fitTwoWay.js'
 import { concentration } from '../src/lib/perfEngine/concentration.js'
 import { fitArchEfficiency } from '../src/lib/perfEngine/archEfficiency.js'
+import { atDeclaredCap, peerRatioOutliers, residualOutlier }
+  from '../src/lib/perfEngine/gpuBound.js'
 
 const MODEL_VERSION = '1.0.0'
 const RESOLUTIONS = ['1080p', '1440p', '4k']
 
-// GPU-scaling reviews use a top-end CPU, so at these resolutions the CPU term is
-// small enough to ignore for the GPU fit. 1080p is deliberately excluded from
-// the GPU fit for the opposite reason — there the CPU is doing the limiting.
-const GPU_FIT_RESOLUTIONS = ['1440p', '4k']
+// GPU-scaling reviews use a top-end CPU, so the CPU term is small enough to
+// ignore for the GPU fit. 1080p was excluded outright, on the grounds that
+// "there the CPU is doing the limiting" — true of high-end cards and far too
+// broad for this corpus, where 1080p is the LARGEST bucket and mostly mid-range
+// cards. It is now included, with the rows the GPU did not limit rejected
+// individually. See gpuBound.js for why the cause is never guessed at.
+const GPU_FIT_RESOLUTIONS = ['1080p', '1440p', '4k']
+
+// The anchor is a GAUGE, not a measurement. fitTwoWay pins this card's index to
+// 100 and expresses every other index and every cell constant relative to it, so
+// changing it rescales the whole artefact while predicting identical frame times
+// (A and index move by the same factor, and A / index is what the engine reads).
+//
+// It is DECLARED rather than derived for exactly that reason. It used to be
+// `mostCommon(gpuEntries)`, and admitting 1080p moved that from the 4070 (100
+// rows over 1440p+4K) to the 2060 Super (221 rows over all three) — which would
+// have rewritten all 121 cell constants and all 40 indices in a diff where
+// nothing had actually changed, and left compare-perf-model.mjs unable to tell
+// that from a real regression.
+//
+// ⚠️ Must be a card measured at EVERY fitted resolution, or the resolutions stop
+// being comparable and "31.0 at 1080p, 27.4 at 4K" means nothing. Asserted below.
+const ANCHOR_GPU_ID = 'gpu-rtx-4070'
 
 // Illustrative starting value. Pass 4 (Phase 3) fits it against the crossover
 // measurements; until then it is declared, not discovered, and the artefact
@@ -61,6 +82,9 @@ const entries = read('../data/benchmarks/entries.json')
 const validation = read('../data/benchmarks/validation.json')
 const parts = read('../src/data/partsData.json')
 const gpuSpecs = read('../data/specs/gpuSpecs.json')
+// Read for `fpsCap` alone — a game that locks its own frame rate produces rows
+// that measured the lock rather than the card. See atDeclaredCap.
+const games = read('../src/data/perfGames.json')
 
 const sourceById = new Map(sources.map((s) => [s.id, s]))
 const live = entries.filter((e) => !e.supersededBy)
@@ -84,38 +108,132 @@ const gpuEntries = live.filter((e) =>
   sourceById.get(e.sourceId)?.kind === 'gpu-scaling' &&
   GPU_FIT_RESOLUTIONS.includes(e.resolution))
 
-const anchorGpuId = mostCommon(gpuEntries.map((e) => e.gpuId))
-const gpuFits = {}
-for (const res of RESOLUTIONS) {
-  const inRes = gpuEntries.filter((e) => e.resolution === res)
-  gpuFits[res] = fitTwoWay(
-    inRes.map((e) => ({
-      // Upscaling is part of the cell because it is part of the measurement.
-      // Without it an A fitted from DLSS-Quality rows pairs with a B fitted from
-      // native rows and the blend describes neither. indices.js builds the same
-      // key with cellKeyFor — a mismatch between the two is SILENT.
-      cellKey: `${e.gameId}|${e.presetId}|${e.upscaling}`,
-      partKey: e.gpuId,
-      logT: Math.log(1000 / e.avgFps),
-      weight: e.weight ?? 1,
-    })),
-    { anchorPartKey: anchorGpuId, anchorValue: 100 },
-  )
+const anchorGpuId = ANCHOR_GPU_ID
+for (const res of GPU_FIT_RESOLUTIONS) {
+  if (!gpuEntries.some((e) => e.gpuId === anchorGpuId && e.resolution === res)) {
+    throw new Error(
+      `anchor ${anchorGpuId} has no ${res} measurement — the three resolutions ` +
+      'would each be fitted in their own gauge and stop being comparable. Pick ' +
+      'an anchor measured everywhere, and expect every published constant to move.')
+  }
 }
+
+// --- reject the rows the GPU did not limit --------------------------------
+// Two rules, one claim. A DECLARED engine cap is exact and needs no peers;
+// everything else is caught by a card falling short of its peers between 1080p
+// and 1440p. Neither rule asks WHY the card was held back — a CPU wall, an
+// engine cap and a vsync are equally disqualifying and equally indistinguishable
+// in the data.
+//
+// ⚠️ The cap rule applies at EVERY resolution, not just 1080p, and that is
+// deliberate: a card pinned to a 60 fps engine lock at 4K measured the lock just
+// as surely as one pinned at 1080p. It costs three elden-ring rows at 1440p/4K,
+// which is the entire reason those constants shift in the 4th significant figure
+// when this lands. Pinned by gpuBoundCorpus.test.js.
+//
+// Grouped over `gpuEntries`, which already derives from `live`. Zero of the
+// current 2855 entries are superseded so this is inert today, but a superseded
+// row must never shape which of its neighbours get thrown out — it would be a
+// measurement the fit itself ignores, still voting on the fit.
+const gameById = new Map(games.map((g) => [g.id, g]))
+const fps1440 = new Map()
+for (const e of gpuEntries) {
+  if (e.resolution === '1440p') {
+    fps1440.set(`${e.cpuId}|${e.gameId}|${e.presetId}|${e.upscaling}|${e.gpuId}`, e.avgFps)
+  }
+}
+const cells1080 = new Map()
+for (const e of gpuEntries) {
+  if (e.resolution !== '1080p') continue
+  const k = `${e.cpuId}|${e.gameId}|${e.presetId}|${e.upscaling}`
+  cells1080.set(k, cells1080.get(k) ?? [])
+  cells1080.get(k).push({
+    gpuId: e.gpuId, fps1080: e.avgFps, fps1440: fps1440.get(`${k}|${e.gpuId}`) ?? 0,
+  })
+}
+const excluded = new Set()
+for (const [k, cell] of cells1080) {
+  for (const gpuId of peerRatioOutliers(cell)) excluded.add(`${k}|${gpuId}`)
+}
+const gpuFitEntries = gpuEntries.filter((e) => {
+  if (atDeclaredCap(e, gameById.get(e.gameId))) return false
+  if (e.resolution !== '1080p') return true
+  return !excluded.has(`${e.cpuId}|${e.gameId}|${e.presetId}|${e.upscaling}|${e.gpuId}`)
+})
+const rejectedNotGpuBound = gpuEntries.length - gpuFitEntries.length
+console.log(`fit: rejected ${rejectedNotGpuBound} rows the GPU did not limit`)
+
+const fitRes = (rows) => fitTwoWay(
+  rows.map((e) => ({
+    // Upscaling is part of the cell because it is part of the measurement.
+    // Without it an A fitted from DLSS-Quality rows pairs with a B fitted from
+    // native rows and the blend describes neither. indices.js builds the same
+    // key with cellKeyFor — a mismatch between the two is SILENT.
+    cellKey: `${e.gameId}|${e.presetId}|${e.upscaling}`,
+    partKey: e.gpuId,
+    logT: Math.log(1000 / e.avgFps),
+    weight: e.weight ?? 1,
+  })),
+  { anchorPartKey: anchorGpuId, anchorValue: 100 },
+)
+
+// The peer rule needs the same card measured at BOTH resolutions, which is true
+// of only 176 of the 1058 1080p rows. The rest are caught here instead: fit
+// once, drop the rows delivering far less than the fitted GPU term predicts,
+// then fit again without them.
+//
+// ONE PASS, NOT ITERATED TO CONVERGENCE. Repeated rejection walks the fit toward
+// whatever it already believed — each round removes the rows that disagree most,
+// and the next round's threshold is computed from a tamer set. One pass removes
+// the gross cases and stops.
+const gpuFits = {}
+// The rows that actually survived into each resolution's final fit. Kept so the
+// published `anchors` count says how many measurements back an index, rather
+// than how many were considered and partly thrown away.
+const fittedGpuEntries = []
+let rejectedByResidual = 0
+for (const res of RESOLUTIONS) {
+  const inRes = gpuFitEntries.filter((e) => e.resolution === res)
+  const first = fitRes(inRes)
+
+  // Only 1080p gets the second pass. 1440p and 4K were never suspect — the whole
+  // reason 1080p needed a rule is that it is where a limiter other than the card
+  // plausibly binds.
+  if (res !== '1080p') {
+    gpuFits[res] = first
+    fittedGpuEntries.push(...inRes)
+    continue
+  }
+
+  const kept = inRes.filter((e) => {
+    const A = first.cellConst.get(`${e.gameId}|${e.presetId}|${e.upscaling}`)
+    const index = first.index.get(e.gpuId)
+    if (!(A > 0) || !(index > 0)) return true          // nothing to predict with
+    return !residualOutlier(e.avgFps, 1000 / (A / index))
+  })
+  rejectedByResidual = inRes.length - kept.length
+  gpuFits[res] = kept.length === inRes.length ? first : fitRes(kept)
+  fittedGpuEntries.push(...kept)
+}
+console.log(`fit: rejected ${rejectedByResidual} further 1080p rows on residual`)
 
 // --- pass 2: CPU index ----------------------------------------------------
 // CPU-scaling reviews run a top-end GPU at 1080p. The GPU term is small but not
 // zero, so where pass 1 can price it the p-norm is inverted to subtract it.
 //
-// ⚠️ In the STANDARD workflow that subtraction does not fire. Pass 1 skips
-// 1080p (the CPU contaminates it), so there is no fitted cell constant at
-// 1080p to price the GPU term with, and `gpuFrameTime` returns null — the CPU
-// index simply absorbs the small GPU term instead. That is a known Phase 1
-// approximation, not an accident: within one review the absorbed term is a
-// constant that lands in B, so it does not distort CPU-to-CPU ratios; across
-// reviews using different test GPUs it introduces a few percent. The
-// subtraction path below is live only for the atypical case of a cpu-scaling
-// entry at a resolution pass 1 did fit. Phase 2 closes this properly.
+// ⚠️ In the STANDARD workflow that subtraction does not fire, and the reason
+// CHANGED when 1080p joined the GPU fit. It used to be that pass 1 skipped
+// 1080p, so there was no cell constant to price the GPU term with. That is no
+// longer true — but every cpu-scaling entry in this corpus is at 720p, which is
+// not in RESOLUTIONS and so is fitted at no resolution at all. `gpuFrameTime`
+// still returns null and the CPU index still absorbs the small GPU term.
+//
+// That remains a known Phase 1 approximation rather than an accident: within one
+// review the absorbed term is a constant that lands in B, so it does not distort
+// CPU-to-CPU ratios; across reviews using different test GPUs it introduces a
+// few percent. Phase 2 closes it properly. The subtraction path below is live
+// only for a cpu-scaling entry at a resolution pass 1 did fit — which now
+// includes 1080p, so the first such entry added to the corpus WILL take it.
 const cpuEntries = live.filter((e) => sourceById.get(e.sourceId)?.kind === 'cpu-scaling')
 const k = DEFAULT_BLEND_K
 const cpuObs = []
@@ -164,7 +282,9 @@ for (const res of RESOLUTIONS) {
   }
 }
 for (const gpuId of Object.keys(gpuIndex)) {
-  gpuIndex[gpuId].anchors = gpuEntries.filter((e) => e.gpuId === gpuId).length
+  // Counted over the rows that survived rejection, not every row considered —
+  // an index is backed by the measurements the fit actually used.
+  gpuIndex[gpuId].anchors = fittedGpuEntries.filter((e) => e.gpuId === gpuId).length
   // A resolution with no data of its own copies 1440p, and records that it did
   // so — the copy costs confidence later rather than passing as a measurement.
   const copied = []
@@ -278,6 +398,15 @@ const model = {
   fittedAt: new Date().toISOString(),
   entryCount: live.length,
   sourceCount: sources.length,
+  // How many GPU-scaling rows the fit refused because something other than the
+  // card set their frame rate. Published rather than logged: it is the number
+  // the case for fitting 1080p at all rests on, and a reader should be able to
+  // check it stayed small without re-running the fit.
+  rejectedNotGpuBound,
+  rejectedByResidual,
+  // The denominator for both, so a reader can see the rejection is a trim and
+  // not a purge without going back to the corpus to work out what it was of.
+  gpuRowsConsidered: gpuEntries.length,
   blendK: DEFAULT_BLEND_K,
   blendKBasis: 'default',        // becomes 'fitted' in Phase 3
   resCpuScale: DEFAULT_RES_CPU_SCALE,
@@ -351,9 +480,18 @@ function mostCommon(values) {
   return best
 }
 
+// ⚠️ The cell key MUST carry the upscaling tail. It did not: this built
+// `gameId|presetId` while fitRes keys cellConst by `gameId|presetId|upscaling`,
+// so the lookup could never hit and the subtraction silently never happened.
+// Invisible while every cpu-scaling entry sat at 720p — a resolution pass 1
+// fits at no scale — but admitting 1080p to the GPU fit puts a real cell behind
+// this call, and a miss would quietly fall back to absorbing the GPU term while
+// looking like it had subtracted it. Exactly the silent mismatch the comment on
+// fitRes's cellKey warns about, in the one place nothing was checking.
 function gpuFrameTime(entry) {
   const idx = gpuFits[entry.resolution]?.index.get(entry.gpuId)
-  const A = gpuFits[entry.resolution]?.cellConst.get(`${entry.gameId}|${entry.presetId}`)
+  const A = gpuFits[entry.resolution]?.cellConst
+    .get(`${entry.gameId}|${entry.presetId}|${entry.upscaling}`)
   return idx > 0 && A > 0 ? A / idx : null
 }
 
