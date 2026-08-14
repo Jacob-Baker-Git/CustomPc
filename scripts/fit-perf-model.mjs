@@ -41,6 +41,26 @@ const GPU_FIT_RESOLUTIONS = ['1080p', '1440p', '4k']
 // being comparable and "31.0 at 1080p, 27.4 at 4K" means nothing. Asserted below.
 const ANCHOR_GPU_ID = 'gpu-rtx-4070'
 
+// Band boundaries for the spec-derived prior's published error. FIXED
+// CONSTANTS, deliberately: the error inside each band is recomputed every run,
+// but fitting the boundaries themselves against n=24 would overfit the very tail
+// they exist to describe honestly. 25/40/60 were read off the error-vs-perfScore
+// curve; move them by hand or not at all.
+const PRIOR_BANDS = [25, 40, 60, null]
+
+// A band with fewer held-out parts than this cannot support a median, and the
+// number it produces is noise wearing a decimal point. Left alone, the 4K fit
+// told a perfScore-30 card "±3.2%" off two parts while the 1440p fit — the same
+// cards, more of them — said ±34%. Publishing the smaller of those would be the
+// exact failure this feature exists to prevent, and it would break the signed-off
+// call that a weak card gets a WIDE stated band rather than a refusal.
+//
+// A thin band therefore keeps its own figure for audit but PUBLISHES the worst
+// error any well-populated band of the same fit measured: with too few parts to
+// show this region is better than the roughest one we did measure, we do not get
+// to claim it is.
+const MIN_BAND_PARTS = 4
+
 // Illustrative starting value. Pass 4 (Phase 3) fits it against the crossover
 // measurements; until then it is declared, not discovered, and the artefact
 // records which.
@@ -392,6 +412,113 @@ if (archEfficiency.uncalibrated.length) {
                 `uncalibrated at 1.0: ${archEfficiency.uncalibrated.join(', ')}`)
 }
 
+// --- the spec-derived prior ------------------------------------------------
+// What we can say about a part no review has charted. Fitted here, applied in
+// src/lib/perfEngine/prior.js — the same split as the rest of this artefact,
+// because the corpus never reaches the browser and a second implementation of
+// the regression would be a second thing to drift.
+//
+// Scored on LEAVE-ONE-OUT error, never in-sample r². At n=24 an r² of 0.97 is
+// mostly the range flattering the fit; predicting each part from a fit that
+// EXCLUDED it is the only number that describes what the prior will actually do
+// to an unmeasured part. Publishing that number is what makes this an inference
+// rather than a guess.
+function fitPrior(pairs, { logY }) {
+  const t = (v) => (logY ? Math.log(v) : v)
+  const inv = (v) => (logY ? Math.exp(v) : v)
+  const tx = (v) => (logY ? Math.log(Math.max(v, 0.5)) : v)
+  const solve = (rows) => {
+    const n = rows.length
+    const mx = rows.reduce((a, r) => a + tx(r.x), 0) / n
+    const my = rows.reduce((a, r) => a + t(r.y), 0) / n
+    const sxx = rows.reduce((a, r) => a + (tx(r.x) - mx) ** 2, 0)
+    const slope = sxx > 0
+      ? rows.reduce((a, r) => a + (tx(r.x) - mx) * (t(r.y) - my), 0) / sxx
+      : 0
+    return { slope, intercept: my - slope * mx }
+  }
+  const { slope, intercept } = solve(pairs)
+  const errs = pairs.map((p, i) => {
+    const f = solve(pairs.filter((_, j) => j !== i))
+    return { x: p.x, err: Math.abs(inv(f.slope * tx(p.x) + f.intercept) - p.y) / p.y * 100 }
+  })
+  // Both edges are published. A band stating only its upper bound is ambiguous
+  // the moment an inner band comes back empty — the band below it is then not
+  // the one before it in the list, and nothing in the artefact would say so.
+  const band = (lo, hi) => {
+    const inBand = errs.filter((e) => e.x >= lo && (hi == null || e.x < hi))
+      .map((e) => e.err).sort((a, b) => a - b)
+    if (!inBand.length) return null
+    return {
+      minPerfScore: lo,
+      maxPerfScore: hi,
+      parts: inBand.length,
+      looMedianPct: round(inBand[Math.floor(inBand.length / 2)], 1),
+      looP90Pct: round(inBand[Math.floor(inBand.length * 0.9)], 1),
+    }
+  }
+  let lo = 0
+  const bands = []
+  for (const hi of PRIOR_BANDS) {
+    const b = band(lo, hi)
+    if (b) bands.push(b)
+    lo = hi ?? lo
+  }
+
+  // Widen the bands too thin to have measured anything. See MIN_BAND_PARTS.
+  // `measuredMedianPct` keeps what the band's own parts actually said, so the
+  // substitution is auditable rather than silent — and so a later corpus can be
+  // checked for having made the band solid.
+  const solid = bands.filter((b) => b.parts >= MIN_BAND_PARTS)
+  if (solid.length) {
+    const worstMedian = Math.max(...solid.map((b) => b.looMedianPct))
+    const worstP90 = Math.max(...solid.map((b) => b.looP90Pct))
+    for (const b of bands) {
+      if (b.parts >= MIN_BAND_PARTS) continue
+      b.thin = true
+      b.measuredMedianPct = b.looMedianPct
+      b.measuredP90Pct = b.looP90Pct
+      b.looMedianPct = Math.max(b.looMedianPct, worstMedian)
+      b.looP90Pct = Math.max(b.looP90Pct, worstP90)
+    }
+  } else {
+    // Nothing in this fit is well-populated. Flag every band rather than pick a
+    // substitute out of the same thin air the numbers came from.
+    for (const b of bands) b.thin = true
+  }
+
+  return {
+    form: logY ? 'loglog' : 'linear',
+    slope: round(slope, 5), intercept: round(intercept, 5), n: pairs.length,
+    domain: [Math.min(...pairs.map((p) => p.x)), Math.max(...pairs.map((p) => p.x))],
+    bands,
+  }
+}
+
+const partById = new Map(parts.map((p) => [p.id, p]))
+const cpuPairs = Object.entries(cpuIndex)
+  .map(([id, row]) => ({ x: partById.get(id)?.perfScore, y: row?.value }))
+  .filter((p) => p.x > 0 && p.y > 0)
+
+const prior = { cpu: fitPrior(cpuPairs, { logY: false }), gpu: {} }
+for (const res of RESOLUTIONS) {
+  // A copied index IS the 1440p one wearing another resolution's name. Fitting
+  // it as though it were measured at this resolution feeds the regression the
+  // same observation twice and tightens the published error by inventing
+  // agreement — the one number here that must not be flattered.
+  const g = Object.entries(gpuIndex)
+    .filter(([, row]) => !row.copiedResolutions?.includes(res))
+    .map(([id, row]) => ({ x: partById.get(id)?.perfScore, y: row?.[res] }))
+    .filter((p) => p.x > 0 && p.y > 0)
+  if (g.length >= 5) prior.gpu[res] = fitPrior(g, { logY: true })
+}
+for (const [what, fit] of [['cpu', prior.cpu], ...Object.entries(prior.gpu).map(
+  ([res, f]) => [`gpu ${res}`, f])]) {
+  console.log(`prior ${what}: n=${fit.n} ${fit.form}, ` +
+    `bands ${fit.bands.map((b) => `${b.minPerfScore}-${b.maxPerfScore ?? '∞'}:` +
+      `${b.looMedianPct}%(n=${b.parts}${b.thin ? ' THIN' : ''})`).join(' ')}`)
+}
+
 const model = {
   modelVersion: MODEL_VERSION,
   datasetVersion: new Date().toISOString().slice(0, 10),
@@ -415,6 +542,9 @@ const model = {
   cpuIndex,
   gameConst,
   exact,
+  // What to say about a part no review has charted, and how wrong that usually
+  // is. prior.js applies it; nothing in the browser refits it.
+  prior,
   // Per-architecture correction for the spec-derived capability index, with the
   // part count and spread behind each value. Shipped to the client because
   // capability.js needs it at render time; architectures below the minimum stay

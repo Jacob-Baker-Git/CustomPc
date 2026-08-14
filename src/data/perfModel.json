@@ -1,7 +1,7 @@
 {
   "modelVersion": "1.0.0",
   "datasetVersion": "2026-08-14",
-  "fittedAt": "2026-08-14T12:30:01.395Z",
+  "fittedAt": "2026-08-14T12:39:29.248Z",
   "entryCount": 2855,
   "sourceCount": 56,
   "rejectedNotGpuBound": 29,
@@ -17255,6 +17255,174 @@
       "frameTimeMs": 9.1241,
       "sources": 1,
       "entries": 1
+    }
+  },
+  "prior": {
+    "cpu": {
+      "form": "linear",
+      "slope": 0.52017,
+      "intercept": 34.03766,
+      "n": 24,
+      "domain": [
+        40,
+        106
+      ],
+      "bands": [
+        {
+          "minPerfScore": 40,
+          "maxPerfScore": 60,
+          "parts": 2,
+          "looMedianPct": 7.8,
+          "looP90Pct": 13.5,
+          "thin": true,
+          "measuredMedianPct": 5.5,
+          "measuredP90Pct": 5.5
+        },
+        {
+          "minPerfScore": 60,
+          "maxPerfScore": null,
+          "parts": 22,
+          "looMedianPct": 7.8,
+          "looP90Pct": 13.5
+        }
+      ]
+    },
+    "gpu": {
+      "1080p": {
+        "form": "loglog",
+        "slope": 1.0154,
+        "intercept": 0.35768,
+        "n": 11,
+        "domain": [
+          14,
+          68
+        ],
+        "bands": [
+          {
+            "minPerfScore": 0,
+            "maxPerfScore": 25,
+            "parts": 5,
+            "looMedianPct": 11.3,
+            "looP90Pct": 16.5
+          },
+          {
+            "minPerfScore": 25,
+            "maxPerfScore": 40,
+            "parts": 2,
+            "looMedianPct": 11.3,
+            "looP90Pct": 16.5,
+            "thin": true,
+            "measuredMedianPct": 10.2,
+            "measuredP90Pct": 10.2
+          },
+          {
+            "minPerfScore": 40,
+            "maxPerfScore": 60,
+            "parts": 1,
+            "looMedianPct": 11.3,
+            "looP90Pct": 16.5,
+            "thin": true,
+            "measuredMedianPct": 7.1,
+            "measuredP90Pct": 7.1
+          },
+          {
+            "minPerfScore": 60,
+            "maxPerfScore": null,
+            "parts": 3,
+            "looMedianPct": 11.3,
+            "looP90Pct": 16.5,
+            "thin": true,
+            "measuredMedianPct": 9.1,
+            "measuredP90Pct": 11.3
+          }
+        ]
+      },
+      "1440p": {
+        "form": "loglog",
+        "slope": 1.17999,
+        "intercept": -0.32832,
+        "n": 40,
+        "domain": [
+          15,
+          132
+        ],
+        "bands": [
+          {
+            "minPerfScore": 0,
+            "maxPerfScore": 25,
+            "parts": 4,
+            "looMedianPct": 20.8,
+            "looP90Pct": 29.2
+          },
+          {
+            "minPerfScore": 25,
+            "maxPerfScore": 40,
+            "parts": 4,
+            "looMedianPct": 34.1,
+            "looP90Pct": 89.5
+          },
+          {
+            "minPerfScore": 40,
+            "maxPerfScore": 60,
+            "parts": 14,
+            "looMedianPct": 4.4,
+            "looP90Pct": 26.1
+          },
+          {
+            "minPerfScore": 60,
+            "maxPerfScore": null,
+            "parts": 18,
+            "looMedianPct": 6.6,
+            "looP90Pct": 9.4
+          }
+        ]
+      },
+      "4k": {
+        "form": "loglog",
+        "slope": 1.15597,
+        "intercept": -0.16118,
+        "n": 25,
+        "domain": [
+          15,
+          132
+        ],
+        "bands": [
+          {
+            "minPerfScore": 0,
+            "maxPerfScore": 25,
+            "parts": 4,
+            "looMedianPct": 10.4,
+            "looP90Pct": 15.5
+          },
+          {
+            "minPerfScore": 25,
+            "maxPerfScore": 40,
+            "parts": 2,
+            "looMedianPct": 10.4,
+            "looP90Pct": 17.5,
+            "thin": true,
+            "measuredMedianPct": 3.2,
+            "measuredP90Pct": 3.2
+          },
+          {
+            "minPerfScore": 40,
+            "maxPerfScore": 60,
+            "parts": 1,
+            "looMedianPct": 10.4,
+            "looP90Pct": 17.5,
+            "thin": true,
+            "measuredMedianPct": 3.8,
+            "measuredP90Pct": 3.8
+          },
+          {
+            "minPerfScore": 60,
+            "maxPerfScore": null,
+            "parts": 18,
+            "looMedianPct": 4.7,
+            "looP90Pct": 17.5
+          }
+        ]
+      }
     }
   },
   "archEfficiency": {
