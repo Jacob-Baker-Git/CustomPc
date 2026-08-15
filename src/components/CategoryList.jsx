@@ -58,12 +58,16 @@ export default function CategoryList({
         // grey-on-grey made it read as unavailable, so it gets the same solid
         // surface and ink as any live row plus an explicit "Add" affordance; only
         // its border stays quiet, because it is not a hole in the build.
+        // Every branch needs a hover response. The two solid-tone branches use
+        // brightness rather than a colour swap, because their border already
+        // carries the meaning (bad / next) and changing it would change what the
+        // row says. Matches BTN_PRIMARY and the border-bad buttons elsewhere.
         const tone = flagged
-          ? 'border-bad bg-surface text-ink'
+          ? 'border-bad bg-surface text-ink hover:brightness-110'
           : explained
             ? 'border-line-strong bg-surface text-ink hover:border-accent hover:text-accent'
             : isNext
-              ? 'border-accent bg-accent-soft text-accent'
+              ? 'border-accent bg-accent-soft text-accent hover:brightness-110'
               : 'border-line bg-surface text-muted hover:border-line-strong hover:text-ink'
 
         return (
