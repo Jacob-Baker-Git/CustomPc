@@ -15,3 +15,37 @@ export const TELEMETRY = 'font-mono tabular-nums'
 
 // Flat primary action — one warm accent, dark ink on top, no gradients or glows.
 export const BTN_PRIMARY = 'bg-accent hover:brightness-110 text-accent-ink font-semibold'
+
+// ---------------------------------------------------------------------------
+// The elevation scale
+//
+// Three steps, and each one MEANS something rather than being picked by eye:
+//
+//   ELEV_PAGE    the page itself
+//   ELEV_GROUP   a group — a shut genre bar, a card, a hover hint
+//   ELEV_ACTIVE  the thing being attended to — an open group, the target column
+//
+// They were used ad hoc before this. Two days of de-bordering the Performance
+// tab left every surface at almost the same value, so nothing led the eye: with
+// the borders gone and the fills undifferentiated there was no hierarchy left to
+// read. Depth carries it now — NOT more borders, which is what was deliberately
+// removed.
+//
+// ⚠️ These are whole tokens on purpose. `bg-surface/85` and friends emit NO CSS
+// on this palette; tokenOpacity.test.js fails the build for it. If you want a
+// step between two of these, the answer is a new token in index.css, not an
+// alpha.
+export const ELEV_PAGE = 'bg-ground'
+export const ELEV_GROUP = 'bg-surface'
+export const ELEV_ACTIVE = 'bg-surface-2'
+
+// A 2px accent rail down the leading edge, marking the ACTIVE thing — the open
+// genre, the open row. Until now the accent appeared almost only on buttons, so
+// it signalled "you may click this" and never "this is the one you are looking
+// at".
+//
+// An inset box-shadow rather than `border-l-2`: a border changes the box and
+// shifts the row's contents 2px out of line with every row above it. This paints
+// inside the existing box and moves nothing. It also sidesteps the opacity trap
+// entirely, since it names the CSS var directly.
+export const RAIL_ACTIVE = 'shadow-[inset_2px_0_0_0_var(--accent)]'

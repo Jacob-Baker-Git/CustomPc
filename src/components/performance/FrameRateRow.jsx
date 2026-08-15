@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BASIS_LABEL, CAVEAT_TEXT } from './basisText'
 import { RESOLUTIONS, splitCell } from '../../lib/perfEngine/gameRows'
+import { ELEV_ACTIVE, RAIL_ACTIVE } from '../../lib/uiTokens'
 
 // One game: a summary row, and a detail row that opens beneath it.
 //
@@ -26,15 +27,25 @@ import { RESOLUTIONS, splitCell } from '../../lib/perfEngine/gameRows'
 // `var(--surface-2)`, which holds a hex, so Tailwind cannot compose an alpha
 // onto it and emits NO RULE AT ALL — `bg-surface-2/60` is a silently dead
 // class, not a fainter tint. Use a whole token from the three-step scale.
+// The build's target resolution is the figure the reader actually came for; the
+// other two are context. So the target is set LARGER and in `ink` while the
+// others drop to `muted` — the fill alone left all three reading at the same
+// weight, which meant scanning three numbers to find the one that applied.
+//
+// Size tracks `isTarget` on the dash branch too, or a row whose target cell has
+// no data would sit a little shorter than its neighbours.
 function Cell({ row, isTarget }) {
   const col = isTarget ? 'bg-surface-2' : 'hidden sm:table-cell'
+  const size = isTarget ? 'text-base' : 'text-sm'
   if (!row) {
     // A dash, never a zero. "0" reads as zero frames per second; this says
     // there is no data, which is a different statement. ~10% of the grid.
-    return <td className={`px-2 py-1.5 text-right font-mono text-sm text-faint ${col}`}>—</td>
+    return <td className={`px-2 py-1.5 text-right font-mono ${size} text-faint ${col}`}>—</td>
   }
   return (
-    <td className={`px-2 py-1.5 text-right font-mono text-sm tabular-nums text-ink ${col}`}>
+    <td className={`px-2 py-1.5 text-right font-mono tabular-nums ${size} ${
+      isTarget ? 'text-ink' : 'text-muted'} ${col}`}
+    >
       {row.bound === 'upper' && <span className="text-muted">≤</span>}
       {row.avgFps}
     </td>
@@ -80,7 +91,10 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
         onClick={toggle}
         className="cursor-pointer border-b border-line hover:bg-surface"
       >
-        <td className="py-1.5 pl-2">
+        {/* The rail marks the open row. Deliberately NOT a background step: the
+            summary row's target cell is already surface-2, so tinting the whole
+            row would swallow the column marker on exactly the row being read. */}
+        <td className={`py-1.5 pl-2 ${isOpen ? RAIL_ACTIVE : ''}`}>
           <button
             type="button"
             aria-expanded={isOpen}
@@ -103,8 +117,8 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
       </tr>
 
       {isOpen && (
-        <tr className="border-b border-line bg-surface">
-          <td colSpan={3 + RESOLUTIONS.length} className="px-2 pb-3 pt-1">
+        <tr className={`border-b border-line ${ELEV_ACTIVE}`}>
+          <td colSpan={3 + RESOLUTIONS.length} className={`px-2 pb-3 pt-1 ${RAIL_ACTIVE}`}>
             <div className="grid gap-x-8 gap-y-1 sm:grid-cols-2">
               <dl className="text-[11px] text-muted">
                 {/* Below `sm` the off-target columns are hidden, so their

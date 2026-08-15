@@ -3,6 +3,7 @@ import FrameRateRow from './FrameRateRow'
 import {
   RESOLUTIONS, groupByGenre, sortGameRows,
 } from '../../lib/perfEngine/gameRows'
+import { ELEV_ACTIVE, ELEV_GROUP, RAIL_ACTIVE } from '../../lib/uiTokens'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 
@@ -93,8 +94,15 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
             // One tbody per genre, so the bar and its games are one group to a
             // screen reader rather than a flat run of rows.
             <tbody key={group.genre}>
-              <tr className="border-b border-line bg-surface">
-                <td colSpan={COLUMNS.length} className="px-2 py-1.5">
+              {/* Elevation says which genre you are in: a shut bar is a GROUP
+                  (surface), an open one is ACTIVE (surface-2) and takes the
+                  accent rail. With six bars on screen and no borders left, the
+                  step is the only thing distinguishing the one you opened. */}
+              <tr className={`border-b border-line ${isOpen ? ELEV_ACTIVE : ELEV_GROUP}`}>
+                <td
+                  colSpan={COLUMNS.length}
+                  className={`px-2 py-1.5 ${isOpen ? RAIL_ACTIVE : ''}`}
+                >
                   <button
                     type="button"
                     onClick={() => toggleGenre(group.genre)}

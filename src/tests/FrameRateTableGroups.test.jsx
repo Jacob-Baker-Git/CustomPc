@@ -212,3 +212,92 @@ describe('FrameRateTable — column highlight', () => {
     expect(screen.getByRole('columnheader', { name: /1440p/i }).className).not.toMatch(/bg-surface-2/)
   })
 })
+
+// The "Instrument" depth pass. With the borders deliberately gone, elevation and
+// the accent rail are the ONLY things left carrying hierarchy — so if they break
+// the page does not look broken, it just goes flat and stops leading the eye.
+// Nothing else would fail. Hence these.
+describe('FrameRateTable — elevation and the accent rail', () => {
+  // The bar's own <td>, not the <button> inside it: the rail is painted on the
+  // cell so it spans the full row rather than the button's content box.
+  const barCell = (name) => genreBar(name).closest('td')
+
+  it('steps a genre bar from group to active when it opens', async () => {
+    const { user } = setup()
+    expect(barCell('Shooters').parentElement.className).toMatch(/bg-surface\b/)
+    await user.click(genreBar('Shooters'))
+    expect(barCell('Shooters').parentElement.className).toMatch(/bg-surface-2/)
+    // …and the genre still shut stays a group, so the step is what marks the
+    // open one rather than every bar being lifted at once.
+    expect(barCell('RPGs').parentElement.className).toMatch(/bg-surface\b/)
+    expect(barCell('RPGs').parentElement.className).not.toMatch(/bg-surface-2/)
+  })
+
+  it('rails the open genre and only the open genre', async () => {
+    const { user } = setup()
+    expect(barCell('Shooters').className).not.toMatch(/shadow-\[inset/)
+    await user.click(genreBar('Shooters'))
+    expect(barCell('Shooters').className).toMatch(/shadow-\[inset/)
+    expect(barCell('RPGs').className).not.toMatch(/shadow-\[inset/)
+  })
+
+  it('rails an open game row and its detail, and neither when shut', async () => {
+    const { container, user } = setup()
+    await user.click(genreBar('Shooters'))
+    const row = () => container.querySelector('tr[data-game="a"]')
+    expect(row().querySelector('td').className).not.toMatch(/shadow-\[inset/)
+
+    await user.click(within(row()).getByRole('button', { expanded: false }))
+    expect(row().querySelector('td').className).toMatch(/shadow-\[inset/)
+
+    // The detail row is the sibling WITHOUT data-game — expanding adds a second
+    // <tr>, and asserting on `tbody tr` would pick up the summary row again.
+    const detail = row().nextElementSibling
+    expect(detail.hasAttribute('data-game')).toBe(false)
+    expect(detail.className).toMatch(/bg-surface-2/)
+    expect(detail.querySelector('td').className).toMatch(/shadow-\[inset/)
+  })
+
+  it('leaves the target column readable ON the row being read', async () => {
+    // Why the open row takes a RAIL and not a background step: the summary row's
+    // target cell is already surface-2, so lifting the whole row would swallow
+    // the column marker on exactly the row the reader is looking at.
+    const { container, user } = setup()
+    await user.click(genreBar('Shooters'))
+    const row = container.querySelector('tr[data-game="a"]')
+    await user.click(within(row).getByRole('button', { expanded: false }))
+    expect(row.className).not.toMatch(/bg-surface-2/)
+    expect(row.querySelectorAll('td')[3].className).toMatch(/bg-surface-2/)
+  })
+})
+
+describe('FrameRateTable — the promoted figure', () => {
+  const cellsOf = (container) =>
+    [...container.querySelector('tr[data-game="a"]').querySelectorAll('td')]
+
+  it('sets the target figure larger and in ink, the others muted', async () => {
+    const { container, user } = setup()
+    await user.click(genreBar('Shooters'))
+    const [, , c1080, c1440, c4k] = cellsOf(container)
+
+    expect(c1440.className).toMatch(/text-base/)
+    expect(c1440.className).toMatch(/text-ink/)
+    for (const off of [c1080, c4k]) {
+      expect(off.className).toMatch(/text-sm/)
+      expect(off.className).toMatch(/text-muted/)
+      expect(off.className).not.toMatch(/text-base/)
+    }
+  })
+
+  it('promotes whichever column the build actually targets', async () => {
+    // Inverted deliberately: asserting only on 1440p would pass against a
+    // component that hardcoded the middle column, since 1440p IS the middle one
+    // in RESOLUTIONS order.
+    const { container, user } = setup({ target: '1080p' })
+    await user.click(genreBar('Shooters'))
+    const [, , c1080, c1440] = cellsOf(container)
+    expect(c1080.className).toMatch(/text-base/)
+    expect(c1440.className).not.toMatch(/text-base/)
+    expect(c1440.className).toMatch(/text-muted/)
+  })
+})
