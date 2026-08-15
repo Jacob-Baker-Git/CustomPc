@@ -52,9 +52,15 @@ export async function buildSitemap() {
     const { pagedParts, partPath } = await server.ssrLoadModule('/src/lib/partPages.js')
     const { default: parts } = await server.ssrLoadModule('/src/data/partsData.json')
 
+    // Content pages carry a TRAILING SLASH because the pre-render writes each one
+    // as dist/<page>/index.html (apply-prerender.mjs). The slashed form is the
+    // directory index and serves 200; the bare form gets Netlify's directory
+    // redirect, so listing it would point a crawler at a 301. Part pages are NOT
+    // pre-rendered as directories — they resolve through the SPA fallback either
+    // way — so partPath() is left alone.
     const urls = [
       { loc: `${SITE}/`, ...PAGE_PRIORITY[''] },
-      ...PAGES.map((p) => ({ loc: `${SITE}/${p}`, ...(PAGE_PRIORITY[p] ?? PART_ENTRY) })),
+      ...PAGES.map((p) => ({ loc: `${SITE}/${p}/`, ...(PAGE_PRIORITY[p] ?? PART_ENTRY) })),
       // Sorted by id so the file's diff shows what actually changed when the
       // catalogue grows, rather than reordering wholesale.
       ...pagedParts(parts)

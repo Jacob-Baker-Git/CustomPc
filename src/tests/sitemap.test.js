@@ -21,9 +21,15 @@ describe('the shipped sitemap matches what the site actually serves', () => {
     expect(new Set(locs).size).toBe(locs.length)
   })
 
-  it('lists the root and every content page', () => {
+  // The trailing slash is the point, not an accident: each content page ships as
+  // dist/<page>/index.html, so the slashed URL is the 200 and the bare one is a
+  // 301. A sitemap is meant to list canonical URLs.
+  it('lists the root and every content page, in its canonical slashed form', () => {
     expect(locs).toContain(`${SITE}/`)
-    for (const page of PAGES) expect(locs, page).toContain(`${SITE}/${page}`)
+    for (const page of PAGES) {
+      expect(locs, page).toContain(`${SITE}/${page}/`)
+      expect(locs, `${page} must not be listed unslashed — that URL 301s`).not.toContain(`${SITE}/${page}`)
+    }
   })
 
   it('lists every part that has a page', () => {
@@ -36,7 +42,7 @@ describe('the shipped sitemap matches what the site actually serves', () => {
   // The other direction, which is the one that rots: a part removed from the
   // catalogue leaves a URL behind that now 404s.
   it('lists nothing that is not served', () => {
-    const known = new Set([`${SITE}/`, ...PAGES.map((p) => `${SITE}/${p}`)])
+    const known = new Set([`${SITE}/`, ...PAGES.map((p) => `${SITE}/${p}/`)])
     for (const loc of locs) {
       if (known.has(loc)) continue
       const id = loc.slice(`${SITE}/parts/`.length)
