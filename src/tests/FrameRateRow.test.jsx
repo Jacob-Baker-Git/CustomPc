@@ -66,6 +66,31 @@ describe('FrameRateRow', () => {
     expect(screen.getByText(/±34%/)).toBeInTheDocument()
   })
 
+  it('names each tier the way a reader can act on', () => {
+    // Inherited from FpsCard.test.jsx, which pinned these three labels before
+    // the card was retired. `spec-derived` and `ceiling` share the word
+    // "estimate" deliberately — the difference between them is the ≤, which
+    // `bound` drives, not the tier name.
+    for (const [basis, label] of [
+      ['measured', 'benchmarked'],
+      ['modelled', 'backed by real data'],
+      ['spec-derived', 'estimate'],
+      ['ceiling', 'estimate'],
+    ]) {
+      const { unmount } = renderRow({ game: { basis } })
+      expect(screen.getByText(new RegExp(label, 'i')), basis).toBeInTheDocument()
+      unmount()
+    }
+  })
+
+  it('falls back to the raw basis string for an unrecognised tier, rather than blank', () => {
+    // Also inherited from FpsCard. A tier added to the engine without this file
+    // being touched must still print something — a blank cell where the basis
+    // goes reads as "no basis", which is the one claim it must never make.
+    renderRow({ game: { basis: 'totally-new-tier' } })
+    expect(screen.getByText('totally-new-tier')).toBeInTheDocument()
+  })
+
   it('omits the band entirely when there is none', () => {
     // Pairs with the test above. Without it, an implementation that always
     // printed "±" followed by nothing would pass.
