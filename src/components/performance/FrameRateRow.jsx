@@ -15,22 +15,19 @@ import { RESOLUTIONS, splitCell } from '../../lib/perfEngine/gameRows'
 // ceiling at 4K and a point estimate at 1080p, so a single marker for the whole
 // row would misdescribe one of them.
 //
-// Two different questions, deliberately kept apart:
+// The build's target column is tinted down the whole table and the other two
+// are dropped below `sm` — six columns do not fit 375px. FrameRateTable's
+// headers carry the same two classes, or the columns would misalign.
 //
-//   isTarget — the build's resolution, which decides which single column
-//              survives below `sm`. Six columns do not fit 375px.
-//   isLit    — the column the pointer is over, which is what gets tinted. With
-//              no pointer it falls back to the target, so on touch the visible
-//              column is simply always the lit one.
-//
-// FrameRateTable's headers carry the same two classes, or the columns misalign.
+// ⚠️ The tint does NOT follow the pointer. A hover highlight that slid between
+// columns was built and removed — the user's words were "just ugly".
 //
 // ⚠️ No `/NN` opacity modifiers on these tokens. The palette resolves through
 // `var(--surface-2)`, which holds a hex, so Tailwind cannot compose an alpha
 // onto it and emits NO RULE AT ALL — `bg-surface-2/60` is a silently dead
 // class, not a fainter tint. Use a whole token from the three-step scale.
-function Cell({ row, isTarget, isLit }) {
-  const col = `${isTarget ? '' : 'hidden sm:table-cell'} ${isLit ? 'bg-surface-2' : ''}`
+function Cell({ row, isTarget }) {
+  const col = isTarget ? 'bg-surface-2' : 'hidden sm:table-cell'
   if (!row) {
     // A dash, never a zero. "0" reads as zero frames per second; this says
     // there is no data, which is a different statement. ~10% of the grid.
@@ -44,7 +41,7 @@ function Cell({ row, isTarget, isLit }) {
   )
 }
 
-export default function FrameRateRow({ game, target, litRes, onSelect, expanded, onToggle }) {
+export default function FrameRateRow({ game, target, onSelect, expanded, onToggle }) {
   // Uncontrolled unless the parent passes both, so the component is usable in a
   // test without wiring selection state.
   const [ownOpen, setOwnOpen] = useState(false)
@@ -95,7 +92,7 @@ export default function FrameRateRow({ game, target, litRes, onSelect, expanded,
         </td>
         <td className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted">{game.preset}</td>
         {RESOLUTIONS.map((res) => (
-          <Cell key={res} row={game.cells[res]} isTarget={res === target} isLit={res === litRes} />
+          <Cell key={res} row={game.cells[res]} isTarget={res === target} />
         ))}
         <td className="px-2 py-1.5 text-right text-[10px] uppercase tracking-wider">
           <span className={game.basis === 'measured' ? 'text-good' : 'text-muted'}>

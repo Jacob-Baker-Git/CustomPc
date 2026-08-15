@@ -27,11 +27,6 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
   // as six bars and a reader digs into the kind of game they care about.
   const [openGenres, setOpenGenres] = useState(() => new Set())
   const [sort, setSort] = useState(null)
-  // Which column the pointer is over, or null. The highlight falls back to the
-  // build's target, so on touch — where there is no hover — the target column
-  // is simply always the lit one.
-  const [hoveredRes, setHoveredRes] = useState(null)
-  const litRes = hoveredRes ?? target
 
   const groups = groupByGenre(rows, { target })
 
@@ -52,21 +47,12 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
       : { key, dir: key === 'name' ? 'asc' : 'desc' }
   ))
 
-  // One delegated handler rather than a pair on each of ~170 cells. cellIndex
-  // is the DOM index, which is what COLUMNS is ordered by.
-  const trackHover = (e) => {
-    const cell = e.target.closest?.('td, th')
-    const col = cell && COLUMNS[cell.cellIndex]
-    setHoveredRes(col?.res ?? null)
-  }
-
+  // ⚠️ The column tint does NOT follow the pointer. A hover highlight that slid
+  // between columns was tried and removed — the user's words were "just ugly".
+  // The tint marks the build's target column and stays put.
   return (
     <>
-      <table
-        className="w-full border-collapse text-left"
-        onMouseOver={trackHover}
-        onMouseLeave={() => setHoveredRes(null)}
-      >
+      <table className="w-full border-collapse text-left">
         <thead>
           <tr className="border-b border-line text-[10px] uppercase tracking-wider text-muted">
             {COLUMNS.map(({ key, label, align, res }) => {
@@ -82,7 +68,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                   aria-sort={sorted ? (sort.dir === 'desc' ? 'descending' : 'ascending') : 'none'}
                   className={`px-2 py-1.5 font-normal ${align === 'right' ? 'text-right' : ''} ${
                     res && res !== target ? 'hidden sm:table-cell' : ''} ${
-                    res === litRes ? 'bg-surface-2 text-ink' : ''}`}
+                    res === target ? 'bg-surface-2 text-ink' : ''}`}
                 >
                   <button
                     type="button"
@@ -90,10 +76,6 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                     aria-label={`Sort by ${label}`}
                     className="uppercase tracking-wider hover:text-ink"
                   >
-                    {/* A dot, not a tint, for the build's own resolution. The
-                        tint moves with the pointer now, so it can no longer
-                        say which column the tiles below are computed from. */}
-                    {res === target && <span aria-hidden="true" className="mr-1 text-accent">•</span>}
                     {label}
                     <span aria-hidden="true" className={sorted ? 'ml-1 text-ink' : 'ml-1 text-faint'}>
                       {sorted ? (sort.dir === 'desc' ? '↓' : '↑') : '↕'}
@@ -140,7 +122,6 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                   key={g.gameId}
                   game={g}
                   target={target}
-                  litRes={litRes}
                   expanded={openGameId === g.gameId}
                   onToggle={(next) => setOpenGameId(next ? g.gameId : null)}
                   onSelect={onSelect}

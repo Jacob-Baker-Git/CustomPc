@@ -188,26 +188,27 @@ describe('FrameRateTable — opening a game', () => {
 })
 
 describe('FrameRateTable — column highlight', () => {
-  it('highlights the target column when nothing is hovered', () => {
+  it('tints the target column, header and cells alike', () => {
     const { container } = setup()
     const th = screen.getByRole('columnheader', { name: /1440p/i })
     expect(th.className).toMatch(/bg-surface-2/)
     expect(container.querySelector('thead th:nth-child(3)').className).not.toMatch(/bg-surface-2/)
   })
 
-  it('moves the highlight to whichever column the mouse is over', async () => {
+  it('leaves the tint where it is when the pointer moves over another column', async () => {
+    // ⚠️ A tint that followed the pointer was built and removed — "just ugly".
+    // This is the guard against reinstating it: the tint marks the build's
+    // resolution, which does not change because a mouse passed over.
     const { container, user } = setup()
     await user.click(genreBar('Shooters'))
     await user.hover(container.querySelector('tr[data-game="a"] td:nth-child(3)'))
-    // 1080p is column 3, and now lit instead of the target.
-    expect(container.querySelector('thead th:nth-child(3)').className).toMatch(/bg-surface-2/)
-    expect(screen.getByRole('columnheader', { name: /1440p/i }).className).not.toMatch(/bg-surface-2/)
+    expect(container.querySelector('thead th:nth-child(3)').className).not.toMatch(/bg-surface-2/)
+    expect(screen.getByRole('columnheader', { name: /1440p/i }).className).toMatch(/bg-surface-2/)
   })
 
-  it('returns the highlight to the target when the mouse leaves', async () => {
-    const { container, user } = setup()
-    await user.hover(container.querySelector('thead th:nth-child(3)'))
-    await user.unhover(container.querySelector('table') ?? container.firstChild)
-    expect(screen.getByRole('columnheader', { name: /1440p/i }).className).toMatch(/bg-surface-2/)
+  it('moves the tint only when the build’s resolution moves', () => {
+    setup({ target: '4k' })
+    expect(screen.getByRole('columnheader', { name: /4K/i }).className).toMatch(/bg-surface-2/)
+    expect(screen.getByRole('columnheader', { name: /1440p/i }).className).not.toMatch(/bg-surface-2/)
   })
 })
