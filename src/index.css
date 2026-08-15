@@ -14,27 +14,51 @@
    text-accent, border-line, text-muted, …).
    ============================================================ */
 :root {
-  --ground: #0F1114;       /* app background — neutral near-black, no blue/warm cast */
-  --surface: #181A1F;      /* cards / panels */
-  --surface-2: #22252C;    /* insets, tracks, hover, secondary chips */
-  --line: #2A2E36;         /* hairline borders */
-  --line-strong: #363B45;  /* emphasised borders / dividers */
+  /* ---- Board ------------------------------------------------------------
+     Matte-black board substrate. The previous ground was #0F1114 — a neutral
+     near-black with one bright accent, which is one of the three looks
+     AI-generated design defaults to. The palette below is deliberately not
+     that: state is carried by desaturated METALS, and only genuine
+     interruptions are saturated. */
+  --ground: #0E0F11;       /* app background — board substrate */
+  --surface: #17191D;      /* cards / panels — a group */
+  --surface-2: #22262D;    /* the ACTIVE thing — open group, target column */
+  --line: #2A2E35;         /* hairline borders */
+  --line-strong: #3A404B;  /* emphasised borders / dividers */
+
+  /* ---- Text -------------------------------------------------------------
+     UNCHANGED, and deliberately so. All three were re-measured against the new
+     surfaces and pass AA with the hierarchy intact (12.47 > 5.76 > 4.61 on
+     --surface-2). A dimmer muted (#8C929C) was tried and left only a +0.24 gap
+     over faint, collapsing three steps into two. */
   --ink: #EDEFF2;          /* primary text */
   --muted: #99A0AB;        /* secondary text / labels */
-  /* Tertiary text / disabled. Was #6B7280, which measured 3.91:1 on --ground,
-     3.60 on --surface and 3.17 on --surface-2 — all under the 4.5:1 WCAG AA
-     floor, and it is used at 10–11px so the large-text exemption cannot apply.
-     Raised until the WORST case (--surface-2, the lightest background) clears
-     AA at 4.66:1. Still visibly below --muted, so the three-step text hierarchy
-     survives. Pinned by paletteContrast.test.js — do not darken it back. */
+  /* Tertiary text / disabled. Was #6B7280, which measured 3.17–3.91:1 and is
+     used at 10–11px so the large-text exemption cannot apply. Pinned by
+     paletteContrast.test.js — do not darken it back. */
   --faint: #878E9C;        /* tertiary text / disabled */
-  --accent: #F26B3A;       /* warm signal accent — brand + primary action */
-  --accent-soft: rgba(242, 107, 58, 0.15); /* accent wash for active states */
-  --accent-ink: #1B1206;   /* text/icon on a solid accent fill */
+
+  /* ---- Brand ------------------------------------------------------------
+     The wordmark and NOTHING ELSE. This is the only fully saturated colour on
+     the site, which is what makes it read as identity rather than as one more
+     UI accent. A later task adds accentIsBrandOnly.test.js to guard it. */
+  --accent: #F26B3A;
+  --accent-ink: #0E0F11;   /* text/icon on a solid metal fill */
+
+  /* ---- Metals: desaturated, they carry STATE ---------------------------- */
+  --copper: #C4813C;       /* action — primary buttons, power */
+  --gold: #C9A86B;         /* seated / active — filled slots, the active rail */
+  --gold-soft: #2A2416;    /* the selected wash (replaces --accent-soft) */
+  --tech: #56C8D8;         /* technical — reference designators, data labels */
   --steel: #5E6672;        /* neutral secondary meter / muted bar */
-  --good: #3CCB82;         /* rating: strong */
-  --ok: #F2B84B;           /* rating: ok */
-  --bad: #F26A5A;          /* rating: weak */
+
+  /* ---- Signals: saturated, they INTERRUPT -------------------------------
+     Shifted clear of the metals and the brand. --ok used to be #F2B84B, which
+     sat almost on top of gold; --bad used to be #F26A5A, almost on top of the
+     wordmark orange. */
+  --good: #45C182;         /* rating: strong */
+  --ok: #F5B62E;           /* rating: ok */
+  --bad: #E8695C;          /* rating: weak */
 }
 
 html { background: var(--ground); }
