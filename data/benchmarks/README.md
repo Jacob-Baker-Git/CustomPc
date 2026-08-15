@@ -9,16 +9,30 @@ shipped to the browser** — `npm run perf:fit` turns this into
 1. **Enter by hand, through `npm run perf:add`.** Never scrape. Automated
    collection is what turns "recording facts" into "extracting a database", and
    it usually breaches the outlet's terms independently of copyright.
-2. **No source may exceed 20% of entries.** Spreading across outlets is the
-   whole licensing position: nobody's compilation is substantially taken.
-   `npm run perf:fit` enforces this — it fails above 20% and warns above 15%,
-   so you do not need to count by hand.
-   Two deliberate carve-outs, because the cap alone is unsatisfiable on a young
-   corpus (with N evenly-split outlets each holds 1/N, so nothing under five
-   sources could ever pass): the check is skipped entirely below **40 entries**,
-   and any source holding fewer than **15 entries** is exempt whatever its
-   share. What the law weighs is whether a substantial part of somebody's
-   compilation was taken, and twelve figures is not that.
+2. **Spread across outlets, so nobody's compilation is substantially taken.**
+   That is the whole licensing position, and it is still the goal — but it is
+   **advisory, not enforced.** `npm run perf:fit` prints `WARN: <outlet> supplies
+   N% of the corpus — dilute when data allows` for any outlet above **20%**, and
+   **never fails on it**. There is no second threshold, and no entry-count
+   carve-out. The only thing that makes `perf:fit` exit non-zero is the anchor
+   check — the anchor GPU missing a measurement at one of the fitted
+   resolutions, which would leave each resolution fitted in its own gauge.
+
+   It *was* a hard cap, removed deliberately on 2026-08-10 (the reasoning is in
+   `scripts/fit-perf-model.mjs`, above `OUTLET_SHARE_NOTE`). Three reasons: it
+   failed the build the moment real data arrived — one ComputerBase review
+   supplied 74% of 216 entries, so 216 genuine measurements sat unused while the
+   Performance tab answered a single game; it was applied per **review** while
+   appealing to not taking one **outlet's** compilation, so two articles from one
+   outlet read as independent and a real 80% presented itself as 74%; and a share
+   cap can be satisfied by taking *more* from everybody, which reduces nobody's
+   taking.
+
+   **Validity is still enforced everywhere it was** — a row missing an upscaling
+   mode, a part that cannot be mapped, or a low contradicting its own minimum is
+   still rejected. What is gone is only the refusal to run. The imbalance is
+   written into the artefact as `sourceConcentration`, so dilution is driven by a
+   number rather than by somebody remembering.
 3. **Every entry needs its source, and every source needs a URL, a date and a
    full test system.** An unattributed number cannot be normalised, audited or
    withdrawn.
