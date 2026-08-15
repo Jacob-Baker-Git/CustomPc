@@ -29,6 +29,8 @@ function estimateGame({ game, preset, requestedPresetId, model, cpu, gpu, gpuIdx
     rowId: `${game.id}|${preset.id}|${preset.upscaling}`,
     gameId: game.id,
     name: game.name,
+    // Editorial, from gameMeta — the Performance tab groups its rows by it.
+    genre: game.genre,
     preset: preset.label,
     presetId: preset.id,
     presetTier: preset.tier,

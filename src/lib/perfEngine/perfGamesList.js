@@ -13,6 +13,9 @@
 // back to the id and ship "black-myth-wukong" to a reader as a game title; a
 // missing preset tier would have to be guessed, and the tier is what
 // resolvePreset compares when a game lacks the preset the caller asked for.
+// A missing GENRE would silently drop the game into an "Other" bucket at the
+// bottom of the table, which reads as a data gap rather than the omission it
+// is — so it fails the same way a missing name does.
 // An upscaled frame rate is not a native one, so a preset measured at two render
 // scales is two listed presets. The suffix is what stops the page rendering two
 // rows both labelled "Ultra" that mean materially different things.
@@ -51,7 +54,13 @@ export function buildPerfGames({ meta, entries, legacy = [] }) {
     const gameMeta = meta.games[gameId]
     if (!gameMeta) {
       problems.push(`"${gameId}" is measured by the corpus but has no gameMeta entry — ` +
-                    'add a display name and slug rather than defaulting to the id')
+                    'add a display name, slug and genre rather than defaulting to the id')
+      continue
+    }
+    if (!gameMeta.genre) {
+      problems.push(`"${gameId}" has no genre in gameMeta — the Performance tab groups by ` +
+                    'genre, and an ungrouped game reads as missing data rather than as an ' +
+                    'unclassified one')
       continue
     }
 
@@ -94,6 +103,7 @@ export function buildPerfGames({ meta, entries, legacy = [] }) {
       id: gameId,
       name: gameMeta.name,
       slug: gameMeta.slug,
+      genre: gameMeta.genre,
       presets: presets.map(({ id, label, tier, upscaling }) => ({ id, label, tier, upscaling })),
     }
     // An engine cap floors the frame rate and the 1% low alike. It is a property

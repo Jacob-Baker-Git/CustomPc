@@ -92,7 +92,7 @@ export function buildGameRows(reports, { resolutions = RESOLUTIONS } = {}) {
   for (const res of resolutions) {
     for (const r of reports?.[res]?.games ?? []) {
       if (!(r.avgFps > 0)) continue
-      if (!games.has(r.gameId)) games.set(r.gameId, { name: r.name, presets: new Map() })
+      if (!games.has(r.gameId)) games.set(r.gameId, { name: r.name, genre: r.genre, presets: new Map() })
       const g = games.get(r.gameId)
       const key = presetKeyOf(r)
       if (!g.presets.has(key)) {
@@ -145,6 +145,7 @@ export function buildGameRows(reports, { resolutions = RESOLUTIONS } = {}) {
     out.push({
       gameId,
       name: g.name,
+      genre: g.genre,
       preset: chosen.preset,
       presetId: chosen.presetId,
       upscaling: chosen.upscaling,
@@ -168,6 +169,113 @@ export function buildGameRows(reports, { resolutions = RESOLUTIONS } = {}) {
   // grouping order must not change with the runtime's default locale.
   return out.sort((a, b) => {
     if (a.bestFps !== b.bestFps) return b.bestFps - a.bestFps
+    return a.gameId < b.gameId ? -1 : a.gameId > b.gameId ? 1 : 0
+  })
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Genre grouping and column sorting.
+//
+// Fifty-six rows in one list is a wall even once it is a table rather than 155
+// cards. Grouping by genre gives a reader somewhere to start — most people care
+// about one or two kinds of game — and the bars ship SHUT, so the tab opens as
+// six lines instead of fifty-six.
+
+// Display names, one per key used in data/games/gameMeta.json.
+export const GENRE_LABEL = {
+  shooter: 'Shooters',
+  rpg: 'RPGs',
+  'action-adventure': 'Action & adventure',
+  'strategy-sim': 'Strategy & simulation',
+  horror: 'Horror',
+  racing: 'Racing',
+  other: 'Other',
+}
+
+// A FIXED order, not one derived from how many games each genre holds. A
+// count-ordered list reshuffles itself every time the corpus grows, and a
+// reader who learned where "Racing" sits would have to find it again.
+// `other` is last and exists only as a safety net — see groupByGenre.
+export const GENRE_ORDER = [
+  'shooter', 'rpg', 'action-adventure', 'strategy-sim', 'horror', 'racing', 'other',
+]
+
+// Groups rows into genre bars, in GENRE_ORDER, dropping genres nothing is in.
+//
+// `target` decides which column the bar's fps range describes — the bar is
+// collapsed, so that range is the only figure standing in for the games inside
+// it, and it has to be the column the reader is actually looking at.
+export function groupByGenre(rows, { target = '1440p' } = {}) {
+  const byGenre = new Map()
+  for (const row of rows) {
+    // An unrecognised genre lands in `other` rather than being dropped.
+    // buildPerfGames refuses a game with no genre at all, so this can only
+    // fire when a genre is added to the data and not to GENRE_LABEL — and
+    // silently losing those rows would be far worse than a vague heading.
+    const key = GENRE_LABEL[row.genre] ? row.genre : 'other'
+    if (!byGenre.has(key)) byGenre.set(key, [])
+    byGenre.get(key).push(row)
+  }
+
+  return GENRE_ORDER.filter((key) => byGenre.has(key)).map((key) => {
+    const games = byGenre.get(key)
+    // Only cells the target column actually answered. A null cell is absence,
+    // and counting it as 0 would put "0–200 fps" on a genre whose slowest
+    // measured game runs at 60.
+    const fps = games.map((g) => g.cells?.[target]?.avgFps).filter((v) => v > 0)
+    return {
+      genre: key,
+      label: GENRE_LABEL[key],
+      games,
+      count: games.length,
+      fastest: fps.length ? Math.max(...fps) : null,
+      slowest: fps.length ? Math.min(...fps) : null,
+    }
+  })
+}
+
+// Every column the table renders, in the order it renders them.
+export const SORT_KEYS = ['name', 'preset', '1080p', '1440p', '4k', 'basis']
+
+// What each column sorts on. Returning null means "this row has no value here"
+// and sinks the row, which is why a resolution reads the CELL rather than
+// falling back to bestFps: Bravo can be slower overall and faster at 1440p, and
+// a fallback would sort by a number the reader is not looking at.
+const sortValue = (row, key) => {
+  if (key === 'name') return row.name ?? ''
+  if (key === 'preset') return row.presetTier ?? null
+  if (key === 'basis') return BASIS_RANK[row.basis] ?? null
+  return row.cells?.[key]?.avgFps ?? null
+}
+
+// Sorts a genre's games by one column. `sort` is `{ key, dir }` or null for the
+// engine's own order, fastest game first.
+//
+// Rows with nothing in the sorted column sink to the BOTTOM in both
+// directions. A dash is absence, not a very small number — ascending must not
+// promote every empty cell to the top of the table.
+export function sortGameRows(rows, sort) {
+  const list = [...rows]
+  if (!sort || !SORT_KEYS.includes(sort.key)) {
+    return list.sort((a, b) => (b.bestFps - a.bestFps)
+      || (a.gameId < b.gameId ? -1 : a.gameId > b.gameId ? 1 : 0))
+  }
+
+  const flip = sort.dir === 'asc' ? -1 : 1
+  return list.sort((a, b) => {
+    const va = sortValue(a, sort.key)
+    const vb = sortValue(b, sort.key)
+    const aEmpty = va == null || va === ''
+    const bEmpty = vb == null || vb === ''
+    if (aEmpty || bEmpty) return aEmpty && bEmpty ? 0 : aEmpty ? 1 : -1
+    // Byte comparison, not localeCompare: collation is locale-dependent and a
+    // sort order must not change with the runtime's default locale. Same
+    // reasoning as compareCandidates above.
+    if (typeof va === 'string') {
+      if (va !== vb) return (va < vb ? -1 : 1) * -flip
+    } else if (va !== vb) {
+      return (vb - va) * flip
+    }
     return a.gameId < b.gameId ? -1 : a.gameId > b.gameId ? 1 : 0
   })
 }

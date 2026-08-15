@@ -3,6 +3,7 @@
     "id": "a-plague-tale-requiem",
     "name": "A Plague Tale: Requiem",
     "slug": "a-plague-tale-requiem",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -34,6 +35,7 @@
     "id": "alan-wake-2",
     "name": "Alan Wake 2",
     "slug": "alan-wake-2",
+    "genre": "horror",
     "presets": [
       {
         "id": "low",
@@ -59,6 +61,7 @@
     "id": "anno-1800",
     "name": "Anno 1800",
     "slug": "anno-1800",
+    "genre": "strategy-sim",
     "presets": [
       {
         "id": "ultrahoch",
@@ -72,6 +75,7 @@
     "id": "apex",
     "name": "Apex Legends",
     "slug": "apex-legends",
+    "genre": "shooter",
     "presets": [
       {
         "id": "medium",
@@ -98,6 +102,7 @@
     "id": "armored-core-6",
     "name": "Armored Core VI: Fires of Rubicon",
     "slug": "armored-core-6",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -129,6 +134,7 @@
     "id": "atomic-heart",
     "name": "Atomic Heart",
     "slug": "atomic-heart",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -154,6 +160,7 @@
     "id": "avatar-frontiers-of-pandora",
     "name": "Avatar: Frontiers of Pandora",
     "slug": "avatar-frontiers-of-pandora",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "ultra",
@@ -167,6 +174,7 @@
     "id": "avowed",
     "name": "Avowed",
     "slug": "avowed",
+    "genre": "rpg",
     "presets": [
       {
         "id": "episch",
@@ -180,6 +188,7 @@
     "id": "bg3",
     "name": "Baldur's Gate 3",
     "slug": "baldurs-gate-3",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -211,6 +220,7 @@
     "id": "black-myth-wukong",
     "name": "Black Myth: Wukong",
     "slug": "black-myth-wukong",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -242,6 +252,7 @@
     "id": "cities-skylines-2",
     "name": "Cities: Skylines II",
     "slug": "cities-skylines-2",
+    "genre": "strategy-sim",
     "presets": [
       {
         "id": "hoch",
@@ -255,6 +266,7 @@
     "id": "cod-black-ops-6",
     "name": "Call of Duty: Black Ops 6",
     "slug": "call-of-duty-black-ops-6",
+    "genre": "shooter",
     "presets": [
       {
         "id": "extrem",
@@ -274,6 +286,7 @@
     "id": "cs2",
     "name": "Counter-Strike 2",
     "slug": "counter-strike-2",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -305,6 +318,7 @@
     "id": "cyberpunk",
     "name": "Cyberpunk 2077",
     "slug": "cyberpunk-2077",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -336,6 +350,7 @@
     "id": "dead-island-2",
     "name": "Dead Island 2",
     "slug": "dead-island-2",
+    "genre": "horror",
     "presets": [
       {
         "id": "low",
@@ -355,6 +370,7 @@
     "id": "dead-space-remake",
     "name": "Dead Space (2023)",
     "slug": "dead-space-remake",
+    "genre": "horror",
     "presets": [
       {
         "id": "low",
@@ -386,6 +402,7 @@
     "id": "diablo-4",
     "name": "Diablo IV",
     "slug": "diablo-iv",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -417,6 +434,7 @@
     "id": "doom-eternal",
     "name": "Doom Eternal",
     "slug": "doom-eternal",
+    "genre": "shooter",
     "presets": [
       {
         "id": "medium",
@@ -442,6 +460,7 @@
     "id": "doom-the-dark-ages",
     "name": "Doom: The Dark Ages",
     "slug": "doom-the-dark-ages",
+    "genre": "shooter",
     "presets": [
       {
         "id": "max-details",
@@ -455,6 +474,7 @@
     "id": "dota2",
     "name": "Dota 2",
     "slug": "dota-2",
+    "genre": "strategy-sim",
     "presets": [
       {
         "id": "high",
@@ -474,6 +494,7 @@
     "id": "dragon-age-veilguard",
     "name": "Dragon Age: The Veilguard",
     "slug": "dragon-age-the-veilguard",
+    "genre": "rpg",
     "presets": [
       {
         "id": "ultra",
@@ -487,6 +508,7 @@
     "id": "dragons-dogma-2",
     "name": "Dragon's Dogma 2",
     "slug": "dragons-dogma-2",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -518,6 +540,7 @@
     "id": "elden-ring",
     "name": "Elden Ring",
     "slug": "elden-ring",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -550,6 +573,7 @@
     "id": "empire-of-the-ants",
     "name": "Empire of the Ants",
     "slug": "empire-of-the-ants",
+    "genre": "strategy-sim",
     "presets": [
       {
         "id": "hoch",
@@ -563,6 +587,7 @@
     "id": "f1-24",
     "name": "F1 24",
     "slug": "f1-24",
+    "genre": "racing",
     "presets": [
       {
         "id": "ultrahoch",
@@ -582,6 +607,7 @@
     "id": "final-fantasy-16",
     "name": "Final Fantasy XVI",
     "slug": "final-fantasy-xvi",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -619,6 +645,7 @@
     "id": "fortnite",
     "name": "Fortnite",
     "slug": "fortnite",
+    "genre": "shooter",
     "presets": [
       {
         "id": "high",
@@ -638,6 +665,7 @@
     "id": "frostpunk-2",
     "name": "Frostpunk 2",
     "slug": "frostpunk-2",
+    "genre": "strategy-sim",
     "presets": [
       {
         "id": "ultra-high",
@@ -657,6 +685,7 @@
     "id": "ghost-of-tsushima",
     "name": "Ghost of Tsushima",
     "slug": "ghost-of-tsushima",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -694,6 +723,7 @@
     "id": "ghostwire-tokyo",
     "name": "Ghostwire: Tokyo",
     "slug": "ghostwire-tokyo",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -719,6 +749,7 @@
     "id": "god-of-war",
     "name": "God of War (2018)",
     "slug": "god-of-war-2018",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -744,6 +775,7 @@
     "id": "god-of-war-ragnarok",
     "name": "God of War Ragnarök",
     "slug": "god-of-war-ragnarok",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -775,6 +807,7 @@
     "id": "gta5",
     "name": "GTA V",
     "slug": "gta-v",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "high",
@@ -789,6 +822,7 @@
     "id": "hellblade-2",
     "name": "Senua's Saga: Hellblade II",
     "slug": "senuas-saga-hellblade-2",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -826,6 +860,7 @@
     "id": "helldivers2",
     "name": "Helldivers 2",
     "slug": "helldivers-2",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -857,6 +892,7 @@
     "id": "hogwarts",
     "name": "Hogwarts Legacy",
     "slug": "hogwarts-legacy",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -882,6 +918,7 @@
     "id": "horizon-forbidden-west",
     "name": "Horizon Forbidden West",
     "slug": "horizon-forbidden-west",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -919,6 +956,7 @@
     "id": "indiana-jones-great-circle",
     "name": "Indiana Jones and the Great Circle",
     "slug": "indiana-jones-and-the-great-circle",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -944,6 +982,7 @@
     "id": "kingdom-come-deliverance-2",
     "name": "Kingdom Come: Deliverance 2",
     "slug": "kingdom-come-deliverance-2",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -981,6 +1020,7 @@
     "id": "lies-of-p",
     "name": "Lies of P",
     "slug": "lies-of-p",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -1006,6 +1046,7 @@
     "id": "lords-of-the-fallen",
     "name": "Lords of the Fallen",
     "slug": "lords-of-the-fallen",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -1037,6 +1078,7 @@
     "id": "mechwarrior-5-clans",
     "name": "MechWarrior 5: Clans",
     "slug": "mechwarrior-5-clans",
+    "genre": "shooter",
     "presets": [
       {
         "id": "maximale-grafikdetails",
@@ -1050,6 +1092,7 @@
     "id": "outcast-2",
     "name": "Outcast: A New Beginning",
     "slug": "outcast-a-new-beginning",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "ultra",
@@ -1069,6 +1112,7 @@
     "id": "palworld",
     "name": "Palworld",
     "slug": "palworld",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -1100,6 +1144,7 @@
     "id": "ratchet-and-clank-rift-apart",
     "name": "Ratchet & Clank: Rift Apart",
     "slug": "ratchet-and-clank-rift-apart",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -1131,6 +1176,7 @@
     "id": "rdr2",
     "name": "Red Dead Redemption 2",
     "slug": "red-dead-redemption-2",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "medium",
@@ -1156,6 +1202,7 @@
     "id": "ready-or-not",
     "name": "Ready or Not",
     "slug": "ready-or-not",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -1187,6 +1234,7 @@
     "id": "satisfactory",
     "name": "Satisfactory",
     "slug": "satisfactory",
+    "genre": "strategy-sim",
     "presets": [
       {
         "id": "ultra",
@@ -1200,6 +1248,7 @@
     "id": "silent-hill-2",
     "name": "Silent Hill 2",
     "slug": "silent-hill-2",
+    "genre": "horror",
     "presets": [
       {
         "id": "episch",
@@ -1213,6 +1262,7 @@
     "id": "space-marine-2",
     "name": "Warhammer 40,000: Space Marine 2",
     "slug": "warhammer-40k-space-marine-2",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -1250,6 +1300,7 @@
     "id": "spider-man-2",
     "name": "Marvel's Spider-Man 2",
     "slug": "marvels-spider-man-2",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "sehr-hoch",
@@ -1269,6 +1320,7 @@
     "id": "spider-man-miles-morales",
     "name": "Marvel's Spider-Man: Miles Morales",
     "slug": "marvels-spider-man-miles-morales",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -1300,6 +1352,7 @@
     "id": "stalker-2",
     "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
     "slug": "stalker-2-heart-of-chornobyl",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -1331,6 +1384,7 @@
     "id": "star-wars-jedi-survivor",
     "name": "Star Wars Jedi: Survivor",
     "slug": "star-wars-jedi-survivor",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -1362,6 +1416,7 @@
     "id": "star-wars-outlaws",
     "name": "Star Wars Outlaws",
     "slug": "star-wars-outlaws",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -1399,6 +1454,7 @@
     "id": "starfield",
     "name": "Starfield",
     "slug": "starfield",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",
@@ -1430,6 +1486,7 @@
     "id": "the-finals",
     "name": "The Finals",
     "slug": "the-finals",
+    "genre": "shooter",
     "presets": [
       {
         "id": "low",
@@ -1461,6 +1518,7 @@
     "id": "the-last-of-us",
     "name": "The Last of Us Part I",
     "slug": "the-last-of-us-part-i",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "low",
@@ -1492,6 +1550,7 @@
     "id": "watch-dogs-legion",
     "name": "Watch Dogs: Legion",
     "slug": "watch-dogs-legion",
+    "genre": "action-adventure",
     "presets": [
       {
         "id": "medium",
@@ -1517,6 +1576,7 @@
     "id": "witcher-3",
     "name": "The Witcher 3: Wild Hunt",
     "slug": "the-witcher-3-wild-hunt",
+    "genre": "rpg",
     "presets": [
       {
         "id": "low",

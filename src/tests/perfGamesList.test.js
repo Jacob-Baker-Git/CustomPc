@@ -9,8 +9,9 @@ const META = {
     'sehr-hoch': { label: 'Sehr hoch', tier: 4 },
   },
   games: {
-    alpha: { name: 'Alpha', slug: 'alpha' },
-    beta: { name: 'Beta', slug: 'beta', presetLabels: { ultra: 'Ultra, all details' } },
+    alpha: { name: 'Alpha', slug: 'alpha', genre: 'shooter' },
+    beta: { name: 'Beta', slug: 'beta', genre: 'rpg',
+            presetLabels: { ultra: 'Ultra, all details' } },
   },
 }
 
@@ -77,6 +78,21 @@ describe('buildPerfGames', () => {
     })
     expect(games.map((g) => g.id)).toEqual([])
     expect(problems.join(' ')).toMatch(/gamma/)
+  })
+
+  it('carries the genre through, because the table groups by it', () => {
+    const { games } = buildPerfGames({ meta: META, entries: [entry()] })
+    expect(games[0].genre).toBe('shooter')
+  })
+
+  it('reports a game with no genre rather than bucketing it as "Other"', () => {
+    // Same stance as a missing name. An ungrouped game would land in a
+    // trailing "Other" group, which reads as a data gap in the corpus rather
+    // than as the one-line omission in gameMeta that it actually is.
+    const meta = { ...META, games: { ...META.games, alpha: { name: 'Alpha', slug: 'alpha' } } }
+    const { games, problems } = buildPerfGames({ meta, entries: [entry()] })
+    expect(games.map((g) => g.id)).toEqual([])
+    expect(problems.join(' ')).toMatch(/alpha.*genre/i)
   })
 
   it('reports a preset with no metadata rather than guessing its tier', () => {

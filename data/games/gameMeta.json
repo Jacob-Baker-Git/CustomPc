@@ -73,246 +73,306 @@
   "games": {
     "a-plague-tale-requiem": {
       "name": "A Plague Tale: Requiem",
-      "slug": "a-plague-tale-requiem"
+      "slug": "a-plague-tale-requiem",
+      "genre": "action-adventure"
     },
     "alan-wake-2": {
       "name": "Alan Wake 2",
-      "slug": "alan-wake-2"
+      "slug": "alan-wake-2",
+      "genre": "horror"
     },
     "anno-1800": {
       "name": "Anno 1800",
-      "slug": "anno-1800"
+      "slug": "anno-1800",
+      "genre": "strategy-sim"
     },
     "apex": {
       "name": "Apex Legends",
-      "slug": "apex-legends"
+      "slug": "apex-legends",
+      "genre": "shooter"
     },
     "armored-core-6": {
       "name": "Armored Core VI: Fires of Rubicon",
-      "slug": "armored-core-6"
+      "slug": "armored-core-6",
+      "genre": "action-adventure"
     },
     "atomic-heart": {
       "name": "Atomic Heart",
-      "slug": "atomic-heart"
+      "slug": "atomic-heart",
+      "genre": "shooter"
     },
     "avatar-frontiers-of-pandora": {
       "name": "Avatar: Frontiers of Pandora",
-      "slug": "avatar-frontiers-of-pandora"
+      "slug": "avatar-frontiers-of-pandora",
+      "genre": "action-adventure"
     },
     "avowed": {
       "name": "Avowed",
-      "slug": "avowed"
+      "slug": "avowed",
+      "genre": "rpg"
     },
     "bg3": {
       "name": "Baldur's Gate 3",
-      "slug": "baldurs-gate-3"
+      "slug": "baldurs-gate-3",
+      "genre": "rpg"
     },
     "black-myth-wukong": {
       "name": "Black Myth: Wukong",
-      "slug": "black-myth-wukong"
+      "slug": "black-myth-wukong",
+      "genre": "rpg"
     },
     "cities-skylines-2": {
       "name": "Cities: Skylines II",
-      "slug": "cities-skylines-2"
+      "slug": "cities-skylines-2",
+      "genre": "strategy-sim"
     },
     "cod-black-ops-6": {
       "name": "Call of Duty: Black Ops 6",
-      "slug": "call-of-duty-black-ops-6"
+      "slug": "call-of-duty-black-ops-6",
+      "genre": "shooter"
     },
     "cs2": {
       "name": "Counter-Strike 2",
-      "slug": "counter-strike-2"
+      "slug": "counter-strike-2",
+      "genre": "shooter"
     },
     "cyberpunk": {
       "name": "Cyberpunk 2077",
-      "slug": "cyberpunk-2077"
+      "slug": "cyberpunk-2077",
+      "genre": "rpg"
     },
     "dead-island-2": {
       "name": "Dead Island 2",
-      "slug": "dead-island-2"
+      "slug": "dead-island-2",
+      "genre": "horror"
     },
     "dead-space-remake": {
       "name": "Dead Space (2023)",
-      "slug": "dead-space-remake"
+      "slug": "dead-space-remake",
+      "genre": "horror"
     },
     "diablo-4": {
       "name": "Diablo IV",
-      "slug": "diablo-iv"
+      "slug": "diablo-iv",
+      "genre": "rpg"
     },
     "doom-eternal": {
       "name": "Doom Eternal",
-      "slug": "doom-eternal"
+      "slug": "doom-eternal",
+      "genre": "shooter"
     },
     "doom-the-dark-ages": {
       "name": "Doom: The Dark Ages",
       "slug": "doom-the-dark-ages",
+      "genre": "shooter",
       "presetLabels": {
         "max-details": "Max. Details, TAA nativ"
       }
     },
     "dota2": {
       "name": "Dota 2",
-      "slug": "dota-2"
+      "slug": "dota-2",
+      "genre": "strategy-sim"
     },
     "dragon-age-veilguard": {
       "name": "Dragon Age: The Veilguard",
-      "slug": "dragon-age-the-veilguard"
+      "slug": "dragon-age-the-veilguard",
+      "genre": "rpg"
     },
     "dragons-dogma-2": {
       "name": "Dragon's Dogma 2",
-      "slug": "dragons-dogma-2"
+      "slug": "dragons-dogma-2",
+      "genre": "rpg"
     },
     "elden-ring": {
       "name": "Elden Ring",
-      "slug": "elden-ring"
+      "slug": "elden-ring",
+      "genre": "rpg"
     },
     "empire-of-the-ants": {
       "name": "Empire of the Ants",
-      "slug": "empire-of-the-ants"
+      "slug": "empire-of-the-ants",
+      "genre": "strategy-sim"
     },
     "f1-24": {
       "name": "F1 24",
-      "slug": "f1-24"
+      "slug": "f1-24",
+      "genre": "racing"
     },
     "final-fantasy-16": {
       "name": "Final Fantasy XVI",
-      "slug": "final-fantasy-xvi"
+      "slug": "final-fantasy-xvi",
+      "genre": "rpg"
     },
     "fortnite": {
       "name": "Fortnite",
-      "slug": "fortnite"
+      "slug": "fortnite",
+      "genre": "shooter"
     },
     "frostpunk-2": {
       "name": "Frostpunk 2",
-      "slug": "frostpunk-2"
+      "slug": "frostpunk-2",
+      "genre": "strategy-sim"
     },
     "ghost-of-tsushima": {
       "name": "Ghost of Tsushima",
-      "slug": "ghost-of-tsushima"
+      "slug": "ghost-of-tsushima",
+      "genre": "action-adventure"
     },
     "ghostwire-tokyo": {
       "name": "Ghostwire: Tokyo",
-      "slug": "ghostwire-tokyo"
+      "slug": "ghostwire-tokyo",
+      "genre": "action-adventure"
     },
     "god-of-war": {
       "name": "God of War (2018)",
-      "slug": "god-of-war-2018"
+      "slug": "god-of-war-2018",
+      "genre": "action-adventure"
     },
     "god-of-war-ragnarok": {
       "name": "God of War Ragnarök",
-      "slug": "god-of-war-ragnarok"
+      "slug": "god-of-war-ragnarok",
+      "genre": "action-adventure"
     },
     "gta5": {
       "name": "GTA V",
-      "slug": "gta-v"
+      "slug": "gta-v",
+      "genre": "action-adventure"
     },
     "hellblade-2": {
       "name": "Senua's Saga: Hellblade II",
-      "slug": "senuas-saga-hellblade-2"
+      "slug": "senuas-saga-hellblade-2",
+      "genre": "action-adventure"
     },
     "helldivers2": {
       "name": "Helldivers 2",
-      "slug": "helldivers-2"
+      "slug": "helldivers-2",
+      "genre": "shooter"
     },
     "hogwarts": {
       "name": "Hogwarts Legacy",
-      "slug": "hogwarts-legacy"
+      "slug": "hogwarts-legacy",
+      "genre": "rpg"
     },
     "horizon-forbidden-west": {
       "name": "Horizon Forbidden West",
-      "slug": "horizon-forbidden-west"
+      "slug": "horizon-forbidden-west",
+      "genre": "action-adventure"
     },
     "indiana-jones-great-circle": {
       "name": "Indiana Jones and the Great Circle",
-      "slug": "indiana-jones-and-the-great-circle"
+      "slug": "indiana-jones-and-the-great-circle",
+      "genre": "action-adventure"
     },
     "kingdom-come-deliverance-2": {
       "name": "Kingdom Come: Deliverance 2",
-      "slug": "kingdom-come-deliverance-2"
+      "slug": "kingdom-come-deliverance-2",
+      "genre": "rpg"
     },
     "lies-of-p": {
       "name": "Lies of P",
-      "slug": "lies-of-p"
+      "slug": "lies-of-p",
+      "genre": "rpg"
     },
     "lords-of-the-fallen": {
       "name": "Lords of the Fallen",
-      "slug": "lords-of-the-fallen"
+      "slug": "lords-of-the-fallen",
+      "genre": "rpg"
     },
     "mechwarrior-5-clans": {
       "name": "MechWarrior 5: Clans",
-      "slug": "mechwarrior-5-clans"
+      "slug": "mechwarrior-5-clans",
+      "genre": "shooter"
     },
     "outcast-2": {
       "name": "Outcast: A New Beginning",
-      "slug": "outcast-a-new-beginning"
+      "slug": "outcast-a-new-beginning",
+      "genre": "action-adventure"
     },
     "palworld": {
       "name": "Palworld",
-      "slug": "palworld"
+      "slug": "palworld",
+      "genre": "action-adventure"
     },
     "ratchet-and-clank-rift-apart": {
       "name": "Ratchet & Clank: Rift Apart",
-      "slug": "ratchet-and-clank-rift-apart"
+      "slug": "ratchet-and-clank-rift-apart",
+      "genre": "action-adventure"
     },
     "rdr2": {
       "name": "Red Dead Redemption 2",
-      "slug": "red-dead-redemption-2"
+      "slug": "red-dead-redemption-2",
+      "genre": "action-adventure"
     },
     "ready-or-not": {
       "name": "Ready or Not",
-      "slug": "ready-or-not"
+      "slug": "ready-or-not",
+      "genre": "shooter"
     },
     "satisfactory": {
       "name": "Satisfactory",
-      "slug": "satisfactory"
+      "slug": "satisfactory",
+      "genre": "strategy-sim"
     },
     "silent-hill-2": {
       "name": "Silent Hill 2",
-      "slug": "silent-hill-2"
+      "slug": "silent-hill-2",
+      "genre": "horror"
     },
     "space-marine-2": {
       "name": "Warhammer 40,000: Space Marine 2",
-      "slug": "warhammer-40k-space-marine-2"
+      "slug": "warhammer-40k-space-marine-2",
+      "genre": "shooter"
     },
     "spider-man-2": {
       "name": "Marvel's Spider-Man 2",
-      "slug": "marvels-spider-man-2"
+      "slug": "marvels-spider-man-2",
+      "genre": "action-adventure"
     },
     "spider-man-miles-morales": {
       "name": "Marvel's Spider-Man: Miles Morales",
-      "slug": "marvels-spider-man-miles-morales"
+      "slug": "marvels-spider-man-miles-morales",
+      "genre": "action-adventure"
     },
     "stalker-2": {
       "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
-      "slug": "stalker-2-heart-of-chornobyl"
+      "slug": "stalker-2-heart-of-chornobyl",
+      "genre": "shooter"
     },
     "star-wars-jedi-survivor": {
       "name": "Star Wars Jedi: Survivor",
-      "slug": "star-wars-jedi-survivor"
+      "slug": "star-wars-jedi-survivor",
+      "genre": "action-adventure"
     },
     "star-wars-outlaws": {
       "name": "Star Wars Outlaws",
-      "slug": "star-wars-outlaws"
+      "slug": "star-wars-outlaws",
+      "genre": "action-adventure"
     },
     "starfield": {
       "name": "Starfield",
-      "slug": "starfield"
+      "slug": "starfield",
+      "genre": "rpg"
     },
     "the-finals": {
       "name": "The Finals",
-      "slug": "the-finals"
+      "slug": "the-finals",
+      "genre": "shooter"
     },
     "the-last-of-us": {
       "name": "The Last of Us Part I",
-      "slug": "the-last-of-us-part-i"
+      "slug": "the-last-of-us-part-i",
+      "genre": "action-adventure"
     },
     "watch-dogs-legion": {
       "name": "Watch Dogs: Legion",
-      "slug": "watch-dogs-legion"
+      "slug": "watch-dogs-legion",
+      "genre": "action-adventure"
     },
     "witcher-3": {
       "name": "The Witcher 3: Wild Hunt",
-      "slug": "the-witcher-3-wild-hunt"
+      "slug": "the-witcher-3-wild-hunt",
+      "genre": "rpg"
     }
   }
 }
