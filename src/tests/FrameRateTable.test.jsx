@@ -100,6 +100,32 @@ describe('FrameRateTable', () => {
     expect(screen.queryByText(/no benchmark data yet/i)).toBeNull()
   })
 
+  it('hides the non-target resolution columns on narrow screens', () => {
+    // Six columns do not fit 375px. The other two resolutions move into the
+    // expanded row rather than being dropped, and the table never scrolls
+    // sideways — the page body must never scroll horizontally.
+    render(<FrameRateTable rows={rows} target="1440p" uncovered={[]} />)
+    const off = screen.getByRole('columnheader', { name: /1080p/i })
+    expect(off.className).toMatch(/hidden/)
+    expect(off.className).toMatch(/sm:table-cell/)
+    const on = screen.getByRole('columnheader', { name: /1440p/i })
+    expect(on.className).not.toMatch(/hidden/)
+  })
+
+  it('hides the body cells of exactly the columns whose headers it hid', () => {
+    // A header and its column hidden at different breakpoints is a table that
+    // shifts its own figures one column sideways below `sm` — the worst kind of
+    // wrong, because every number is real and every one is under the wrong
+    // heading. Asserted as a pair for that reason.
+    const { container } = render(<FrameRateTable rows={rows} target="1440p" uncovered={[]} />)
+    const heads = [...container.querySelectorAll('thead th')].map((th) => th.className.includes('hidden'))
+    const cells = [...container.querySelectorAll('tbody tr[data-game]')[0].children]
+      .map((td) => td.className.includes('hidden'))
+    expect(cells).toEqual(heads)
+    // and the hiding is real, not vacuously false down both lists
+    expect(heads.filter(Boolean)).toHaveLength(2)
+  })
+
   it('renders a row per game, in the order given', () => {
     // The order is the engine's — fastest game first. Asserting the NAMES are
     // present would pass for any order at all, which is the whole risk here.
