@@ -14,15 +14,24 @@ import { RESOLUTIONS } from '../../lib/perfEngine/gameRows'
 // The ≤ marker is per CELL, driven by that cell's own `bound`. A game can be a
 // ceiling at 4K and a point estimate at 1080p, so a single marker for the whole
 // row would misdescribe one of them.
-function Cell({ row, hidden }) {
-  const hide = hidden ? 'hidden sm:table-cell' : ''
+//
+// The build's target column is tinted down the whole table and the other two
+// are dropped below `sm` — six columns do not fit 375px. FrameRateTable's
+// headers carry the same two classes, or the columns would misalign.
+//
+// ⚠️ No `/NN` opacity modifiers on these tokens. The palette resolves through
+// `var(--surface-2)`, which holds a hex, so Tailwind cannot compose an alpha
+// onto it and emits NO RULE AT ALL — `bg-surface-2/60` is a silently dead
+// class, not a fainter tint. Use a whole token from the three-step scale.
+function Cell({ row, isTarget }) {
+  const col = isTarget ? 'bg-surface-2' : 'hidden sm:table-cell'
   if (!row) {
     // A dash, never a zero. "0" reads as zero frames per second; this says
     // there is no data, which is a different statement. ~10% of the grid.
-    return <td className={`px-2 py-1.5 text-right font-mono text-sm text-faint ${hide}`}>—</td>
+    return <td className={`px-2 py-1.5 text-right font-mono text-sm text-faint ${col}`}>—</td>
   }
   return (
-    <td className={`px-2 py-1.5 text-right font-mono text-sm tabular-nums text-ink ${hide}`}>
+    <td className={`px-2 py-1.5 text-right font-mono text-sm tabular-nums text-ink ${col}`}>
       {row.bound === 'upper' && <span className="text-muted">≤</span>}
       {row.avgFps}
     </td>
@@ -54,7 +63,7 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
     <>
       {/* `data-game` marks SUMMARY rows only. Expanding adds a second <tr>, so
           anything counting `tbody tr` would count expansions as games. */}
-      <tr data-game={game.gameId} className="border-b border-line/60 hover:bg-surface-2/50">
+      <tr data-game={game.gameId} className="border-b border-line hover:bg-surface">
         <td className="py-1.5 pl-2">
           <button
             type="button"
@@ -68,7 +77,7 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
         </td>
         <td className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted">{game.preset}</td>
         {RESOLUTIONS.map((res) => (
-          <Cell key={res} row={game.cells[res]} hidden={res !== target} />
+          <Cell key={res} row={game.cells[res]} isTarget={res === target} />
         ))}
         <td className="px-2 py-1.5 text-right text-[10px] uppercase tracking-wider">
           <span className={game.basis === 'measured' ? 'text-good' : 'text-muted'}>
@@ -79,7 +88,7 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
       </tr>
 
       {isOpen && (
-        <tr className="border-b border-line/60 bg-surface-2/30">
+        <tr className="border-b border-line bg-surface">
           <td colSpan={3 + RESOLUTIONS.length} className="px-2 pb-3 pt-1">
             <div className="grid gap-x-8 gap-y-1 sm:grid-cols-2">
               <dl className="text-[11px] text-muted">
