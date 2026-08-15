@@ -105,14 +105,24 @@ export function buildGameRows(reports, { resolutions = RESOLUTIONS } = {}) {
     for (const res of resolutions) cells[res] = chosen.rowByRes[res] ?? null
     const shown = resolutions.map((res) => cells[res]).filter(Boolean)
 
-    // Weakest basis across the cells actually shown, and the worst error band.
-    // Neither can overstate what the row is worth. See rowBasis.js.
-    const basis = shown.reduce(
-      (worst, r) => ((BASIS_RANK[r.basis] ?? -1) < (BASIS_RANK[worst] ?? -1) ? r.basis : worst),
-      shown[0].basis,
-    )
+    // `chosen.basis` was already accumulated to the weakest basis across
+    // every resolution the candidate covers (see the accumulation above).
+    // `cells` is built from the same `resolutions` array the candidates were
+    // accumulated over, so the candidate's accumulated basis is by
+    // construction the weakest across exactly the cells shown here. If
+    // `cells` ever stops being exactly the candidate's covered resolutions,
+    // this has to go back to reducing over `shown`.
+    const basis = chosen.basis
+    // No candidate-level equivalent exists for errorPct, so this still has to
+    // reduce over `shown` directly — do not "simplify" it the way basis was.
     const bands = shown.map((r) => r.errorPct).filter((v) => v != null)
 
+    // `cells[res]` and `otherPresets[i]` are not copies — they alias row
+    // objects straight out of the caller's `reports`. Inert today since
+    // nothing mutates them, but the consumer landing in a later task will
+    // source `reports` from a memoised computation, and an in-place mutation
+    // here would corrupt that cache silently. Treat everything returned by
+    // this function as read-only.
     out.push({
       gameId,
       name: g.name,

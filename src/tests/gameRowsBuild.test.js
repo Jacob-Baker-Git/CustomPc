@@ -204,4 +204,20 @@ describe('buildGameRows', () => {
     }))
     expect(out.map((g) => g.gameId)).toEqual(['fast', 'slow'])
   })
+
+  it('falls back to gameId so a bestFps tie cannot be decided by array order', () => {
+    // Same shape as the otherPresets sort test above: 'zulu' is inserted
+    // BEFORE 'alpha', opposing byte order, so a stable sort with the
+    // tie-break gutted to a no-op would keep 'zulu' first — the exact
+    // "decided by array order" bug this file's own comment at :35-37 cites
+    // as a real shipped defect (F1 24, 2.3x difference decided by nothing).
+    const out = buildGameRows(reports({
+      '1080p': [
+        row({ gameId: 'zulu', name: 'Zulu', rowId: 'zulu|ultra|native', avgFps: 200 }),
+        row({ gameId: 'alpha', name: 'Alpha', rowId: 'alpha|ultra|native', avgFps: 200 }),
+      ],
+      '1440p': [], '4k': [],
+    }))
+    expect(out.map((g) => g.gameId)).toEqual(['alpha', 'zulu'])
+  })
 })
