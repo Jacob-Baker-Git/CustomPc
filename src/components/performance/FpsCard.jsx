@@ -1,28 +1,14 @@
 import { useState } from 'react'
+import { BASIS_LABEL, CAVEAT_TEXT } from './basisText'
 
 // One game's result.
 //
 // A row with no data shows that fact rather than being dropped: a game silently
 // missing from the list reads as a bug, and a game showing an invented number
 // is worse than either.
-
-// How each tier is named on the card. The wording draws the line a reader
-// actually cares about: did somebody measure this, or did we work it out?
-const BASIS_LABEL = {
-  measured: 'benchmarked',
-  modelled: 'backed by real data',
-  'spec-derived': 'estimate',
-  ceiling: 'estimate',
-}
-
-// Why, in words a reader can act on. Keys are the caveat ids from rowBasis.js.
-const CAVEAT_TEXT = {
-  'gpu-index-prior': 'The graphics card index came from its specs, not a benchmark of this card.',
-  'cpu-index-prior': 'The processor index came from its specs, not a benchmark of this chip.',
-  'no-cpu-constant': 'No review has measured processor performance in this game, so this is the graphics card’s ceiling.',
-  'resolution-copied': 'No data at this resolution for this card; the figure is carried across from 1440p.',
-  'index-extrapolated': 'This part sits outside the range the estimate was worked out over, so it is rougher than the ± figure suggests.',
-}
+//
+// BASIS_LABEL and CAVEAT_TEXT moved to ./basisText so the grouped frame-rate
+// table can render the same tiers without a second copy of the wording.
 
 export default function FpsCard({ row }) {
   // Declared before the early return below, not after: a Hook called only on
