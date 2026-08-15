@@ -86,8 +86,14 @@ export function composeBasis({
 export const onlyRealData = (rows) =>
   rows.filter((r) => r.basis === 'measured' || r.basis === 'modelled')
 
+// Takes engine rows OR the grouped game rows gameRows.js builds, which is why
+// the answered test reads two fields. An engine row carries one `avgFps`; a
+// game row carries three cells and reports its fastest as `bestFps`, and there
+// is no single average that would be honest to put on it. Both are "answered"
+// on the same terms — buildGameRows already drops a game nothing answered for,
+// so the fallback is a shape adapter, not a second rule.
 export function basisMix(rows) {
-  const answered = rows.filter((r) => r.avgFps > 0)
+  const answered = rows.filter((r) => (r.avgFps ?? r.bestFps) > 0)
   const measured = answered.filter((r) => r.basis === 'measured').length
   const modelled = answered.filter((r) => r.basis === 'modelled').length
   return {

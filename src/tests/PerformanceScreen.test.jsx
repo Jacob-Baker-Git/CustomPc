@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import PerformanceScreen from '../components/performance/PerformanceScreen'
 import useBuilderStore from '../store/useBuilderStore'
@@ -126,6 +126,61 @@ describe('PerformanceScreen', () => {
     expect(screen.getByText(PERF_CAVEAT)).toBeInTheDocument()
     expect(screen.queryByText(FPS_CAVEAT)).not.toBeInTheDocument()
   })
+
+  it('calls the engine once per resolution, not once', () => {
+    // Three columns need three reports. Getting this wrong either shows one
+    // resolution three times or re-runs the engine on every render.
+    estimateBuildPerformance.mockClear()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+    const resolutions = estimateBuildPerformance.mock.calls.map((c) => c[0].resolution)
+    expect(new Set(resolutions)).toEqual(new Set(['1080p', '1440p', '4k']))
+    // ⚠️ Assert the COUNT too. Without this the test passes just as happily
+    // when the memo is keyed wrongly and fires three calls per render — which
+    // is the more likely defect, and the expensive one.
+    expect(estimateBuildPerformance).toHaveBeenCalledTimes(3)
+  })
+
+  it('does not re-run the engine when only the filter changes', async () => {
+    // The memo must be keyed on parts, not on filter state. Three engine calls
+    // per checkbox tick is the regression this catches.
+    const user = userEvent.setup()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+    estimateBuildPerformance.mockClear()
+    await user.click(screen.getByRole('checkbox', { name: /only show real data/i }))
+    expect(estimateBuildPerformance).not.toHaveBeenCalled()
+  })
+
+  it('shows one row per game rather than one per preset', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+    const table = screen.getByRole('table')
+    // The old grid produced 60 cards for this build at 1440p; the games behind
+    // them number far fewer.
+    //
+    // `tr[data-game]` counts SUMMARY rows only. Plain `tbody tr` would also
+    // count expansion rows, so the assertion would drift the moment a row
+    // opened — and would pass for the wrong reason if grouping broke but
+    // something else added rows.
+    const bodyRows = table.querySelectorAll('tbody tr[data-game]')
+    expect(bodyRows.length).toBeGreaterThan(10)
+    expect(bodyRows.length).toBeLessThan(60)
+    // One row per DISTINCT game — the actual claim. Without this the bounds
+    // above pass for any row count in range, including duplicated games.
+    const ids = [...bodyRows].map((r) => r.dataset.game)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('changes the build’s resolution from a column header', () => {
+    // The complaint that started this: "you can't select that res is shown".
+    // setResolution had exactly one caller, in SetupFlow, with no UI after.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1440p' })
+    render(<PerformanceScreen />)
+    expect(useBuilderStore.getState().resolution).toBe('1440p')
+    screen.getByRole('button', { name: /^4K$/i }).click()
+    expect(useBuilderStore.getState().resolution).toBe('4k')
+  })
 })
 
 describe('PerformanceScreen — the real-data filter wiring', () => {
@@ -167,8 +222,18 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     },
   })
 
+  // ⚠️ mockImplementation, not mockReturnValueOnce. The screen now calls the
+  // engine THREE times, once per resolution column, so a `…Once` chain would
+  // cover the first call and hand the real engine's output back for the other
+  // two — the fixture would silently stop being the thing under test. Reset
+  // after each so the implementation cannot leak into the next test.
+  const alwaysReport = (rows) => estimateBuildPerformance.mockImplementation(
+    () => mixedReport(rows))
+
+  afterEach(() => { estimateBuildPerformance.mockReset() })
+
   it('the "Only show real data" checkbox actually filters the grid', async () => {
-    estimateBuildPerformance.mockReturnValueOnce(mixedReport([measuredRow, estimatedRow]))
+    alwaysReport([measuredRow, estimatedRow])
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
@@ -185,28 +250,81 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     expect(screen.queryByText('Guesswork Grand Prix')).not.toBeInTheDocument()
   })
 
-  it('counts the results it is SHOWING, not the ones it has', async () => {
-    // The footer says "N results shown". BasisBar's mix line deliberately does
+  it('counts the games it is SHOWING, not the ones it has', async () => {
+    // The footer says "N games shown". BasisBar's mix line deliberately does
     // NOT follow the filter — its totals must not be shrinkable by hiding rows.
     // This line makes the opposite claim, about the display itself, so it must
-    // follow it: with the filter on it read "2 results shown" above a grid
-    // holding one.
-    estimateBuildPerformance.mockReturnValueOnce(mixedReport([measuredRow, estimatedRow]))
+    // follow it: with the filter on it read "2 shown" above a table holding one.
+    //
+    // The unit changed from RESULTS to GAMES with the grouping. It used to be
+    // counted in rows because the grid drew one card per game AND preset; the
+    // table draws one row per game, so a row count would now contradict the
+    // table directly above it.
+    alwaysReport([measuredRow, estimatedRow])
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
 
-    expect(screen.getByText(/2 results shown/)).toBeInTheDocument()
+    expect(screen.getByText(/2 games shown/)).toBeInTheDocument()
     await user.click(screen.getByRole('checkbox', { name: /only show real data/i }))
-    expect(screen.getByText(/1 result shown/)).toBeInTheDocument()
-    expect(screen.queryByText(/2 results shown/)).toBeNull()
+    expect(screen.getByText(/1 game shown/)).toBeInTheDocument()
+    expect(screen.queryByText(/2 games shown/)).toBeNull()
+  })
+
+  it('applies the real-data filter BEFORE grouping, not after', async () => {
+    // ⚠️ This fixture is built so the two implementations disagree. `ultra`
+    // answers at three resolutions and would win preset selection on coverage,
+    // but it is a ceiling row the filter removes. `high` answers at one and is
+    // measured.
+    //
+    //   filter-then-group  -> `ultra` is gone before selection runs, `high` is
+    //                         chosen, and the game shows one row reading High.
+    //   group-then-filter  -> `ultra` was already chosen, the filter then drops
+    //                         the whole game, and the table is empty.
+    //
+    // A test that only asserted "some rows are shown" would pass against both.
+    // A row does NOT carry its own resolution — the report it sits in supplies
+    // that — so the mock is keyed on the ARGUMENT rather than on call order.
+    const wide = (avgFps) => ({
+      rowId: 'g|ultra|native', gameId: 'g', name: 'Split Test', preset: 'Ultra',
+      presetId: 'ultra', presetTier: 4, upscaling: 'native', avgFps, lowFps: avgFps - 10,
+      frameTimeMs: 5, basis: 'ceiling', bound: 'upper', caveats: [], errorPct: null,
+      cpuShare: null, limitedBy: null,
+    })
+    const narrow = {
+      rowId: 'g|high|native', gameId: 'g', name: 'Split Test', preset: 'High',
+      presetId: 'high', presetTier: 3, upscaling: 'native', avgFps: 111, lowFps: 90,
+      frameTimeMs: 9, basis: 'measured', bound: 'point', caveats: [], errorPct: null,
+      cpuShare: null, limitedBy: null,
+    }
+    const byRes = {
+      '1080p': [wide(300), narrow],   // `ultra` wide + `high` narrow
+      '1440p': [wide(200)],
+      '4k': [wide(100)],
+    }
+    estimateBuildPerformance.mockImplementation(
+      ({ resolution }) => mixedReport(byRes[resolution] ?? []))
+
+    const user = userEvent.setup()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+
+    // Unfiltered: coverage wins, so Ultra is the shown preset.
+    expect(screen.getByText('Ultra')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('checkbox', { name: /only show real data/i }))
+
+    // Filtered: Ultra is gone, High survives, and the game is STILL LISTED.
+    expect(screen.getByText('High')).toBeInTheDocument()
+    expect(screen.queryByText('Ultra')).toBeNull()
+    expect(screen.getByText('Split Test')).toBeInTheDocument()
   })
 
   it('explains an empty grid rather than just emptying it', async () => {
     // A build with nothing measured — the common case for the 54 catalogue CPUs
     // no review has charted. Ticking the box removes every card, and a list that
     // silently vanishes reads as a broken page rather than an answered question.
-    estimateBuildPerformance.mockReturnValueOnce(mixedReport([estimatedRow]))
+    alwaysReport([estimatedRow])
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
@@ -223,7 +341,7 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
   })
 
   it('leaves the checkbox unchecked on first mount', () => {
-    estimateBuildPerformance.mockReturnValueOnce(mixedReport([measuredRow, estimatedRow]))
+    alwaysReport([measuredRow, estimatedRow])
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
     expect(screen.getByRole('checkbox', { name: /only show real data/i })).not.toBeChecked()

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import useBuilderStore from '../../store/useBuilderStore'
 import { estimateBuildPerformance } from '../../lib/perfEngine'
 import { onlyRealData } from '../../lib/perfEngine/rowBasis'
+import { buildGameRows, RESOLUTIONS } from '../../lib/perfEngine/gameRows'
 import { estimatePower, estimateThermals } from '../../lib/perfEngine/power'
 import { memoryProfile } from '../../lib/perfEngine/memory'
 import { gpuCapability, cpuCapability } from '../../lib/perfEngine/capability'
@@ -12,7 +13,7 @@ import cpuSpecs from '../../../data/specs/cpuSpecs.json'
 import { PERF_CAVEAT } from '../../lib/siteContent'
 import StatPanel from './StatPanel'
 import StatRow from './StatRow'
-import FpsCardGrid from './FpsCardGrid'
+import FrameRateTable from './FrameRateTable'
 import Section from './Section'
 import SummaryStrip from './SummaryStrip'
 import BasisBar from './BasisBar'
@@ -26,6 +27,7 @@ const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${
 export default function PerformanceScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const resolution = useBuilderStore((s) => s.resolution)
+  const setResolution = useBuilderStore((s) => s.setResolution)
   // The engine's game list is the MEASURED one, not the catalogue's. The legacy
   // 22 exist to drive the CustomPC score and almost none of them appear in a
   // modern GPU roundup, so pointing the Performance tab at them guarantees 22
@@ -44,13 +46,27 @@ export default function PerformanceScreen() {
   // Two independent halves, and the split is deliberate. Everything below comes
   // from spec fields the catalogue already carries, so it works on day one with
   // an empty benchmark corpus. Only the frame rates need curated measurements.
-  const report = useMemo(
+  //
+  // THREE reports, one per resolution — the table shows all three at once.
+  // Everything that is not the table (tiles, bottleneck, power, thermals) reads
+  // the build's TARGET resolution, which the store still owns and which
+  // BuildSummary and the share code still follow.
+  //
+  // Keyed on parts + games only, deliberately NOT on resolution: retargeting
+  // changes which column is marked, not what the engine was asked. The engine
+  // is single-digit ms so 3x is still nothing, but this must not be allowed to
+  // re-run per render.
+  const reports = useMemo(
     () => (hasCore
-      ? estimateBuildPerformance({ parts: selectedParts, resolution, presetId: 'high',
-                                   model: perfModel, games })
+      ? Object.fromEntries(RESOLUTIONS.map((res) => [
+          res,
+          estimateBuildPerformance({ parts: selectedParts, resolution: res,
+                                     presetId: 'high', model: perfModel, games }),
+        ]))
       : null),
-    [hasCore, selectedParts, resolution, games],
+    [hasCore, selectedParts, games],
   )
+  const report = reports?.[resolution] ?? null
 
   const power = useMemo(
     () => estimatePower(selectedParts, report?.meanCpuShare ?? 0.5),
@@ -65,14 +81,41 @@ export default function PerformanceScreen() {
   const gpuCap = useMemo(() => gpuCapability(gpu, gpuSpecs, { archEfficiency: perfModel.archEfficiency }), [gpu])
   const cpuCap = useMemo(() => cpuCapability(cpu, cpuSpecs), [cpu])
 
-  const answered = report?.coverage?.gamesAnswered ?? 0
-  // realOnly filters what's DRAWN, never what's COUNTED — BasisBar takes
-  // allRows so its totals can't be made to look stronger by hiding the rest.
-  const allRows = report?.games ?? []
-  const shownRows = realOnly ? onlyRealData(allRows) : allRows
-  // Answered rows actually on screen. `answered` above is in GAMES and ignores
-  // the filter; this is in ROWS and follows it.
-  const shownAnswered = shownRows.filter((r) => r.basis !== 'none').length
+  // ⚠️ FILTER FIRST, THEN GROUP. Grouping first and filtering after would let a
+  // game keep a preset the filter removed — the row would show a number the
+  // filter existed to hide.
+  const filteredReports = useMemo(() => {
+    if (!reports) return null
+    if (!realOnly) return reports
+    return Object.fromEntries(Object.entries(reports).map(
+      ([res, r]) => [res, { ...r, games: onlyRealData(r.games) }]))
+  }, [reports, realOnly])
+
+  const gameRows = useMemo(
+    () => (filteredReports ? buildGameRows(filteredReports) : []),
+    [filteredReports],
+  )
+
+  // realOnly filters what's DRAWN, never what's COUNTED — BasisBar takes the
+  // unfiltered rows so its totals can't be made to look stronger by hiding the
+  // rest.
+  const allGameRows = useMemo(
+    () => (reports ? buildGameRows(reports) : []),
+    [reports],
+  )
+
+  // Games the corpus answers nothing for at ANY resolution, collapsed to one
+  // line each naming the presets that were tried.
+  const uncovered = useMemo(() => {
+    const answeredIds = new Set(allGameRows.map((g) => g.gameId))
+    const seen = new Map()
+    for (const r of report?.games ?? []) {
+      if (answeredIds.has(r.gameId)) continue
+      if (!seen.has(r.gameId)) seen.set(r.gameId, { gameId: r.gameId, name: r.name, presets: [] })
+      seen.get(r.gameId).presets.push(r.preset)
+    }
+    return [...seen.values()]
+  }, [allGameRows, report])
 
   return (
     <div className="w-full max-w-2xl lg:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-3 pb-12">
@@ -88,18 +131,18 @@ export default function PerformanceScreen() {
       <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
 
       <div className="mt-3">
-        <BasisBar rows={allRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
+        <BasisBar rows={allGameRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
       </div>
 
       <Section
         title="Frame rates"
-        blurb={`At ${resolution}, High preset. Games are listed in the engine's own order — covered first, fastest first — and anything without a published measurement behind it says so rather than showing a number.`}
+        blurb="Every game the corpus covers, at all three resolutions. One preset per game so the columns compare like with like — open a row for its other presets, its 1% lows and what each figure is based on."
       >
         {!hasCore ? (
           <p className="text-xs text-muted leading-relaxed">
             Pick a CPU and a graphics card to estimate frame rates.
           </p>
-        ) : answered === 0 ? (
+        ) : allGameRows.length === 0 ? (
           <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
             No benchmark data for these parts yet. The engine only reports figures it
             can trace to a published measurement, so rather than estimate around the
@@ -107,11 +150,11 @@ export default function PerformanceScreen() {
             section below is computed from the parts themselves and does not depend
             on it.
           </p>
-        ) : shownAnswered === 0 ? (
-          // Reachable only through the filter — `answered > 0` got us here, so
+        ) : gameRows.length === 0 ? (
+          // Reachable only through the filter — the branch above got us here, so
           // the build HAS rows and the filter removed all of them. Common now
           // that a chip no review has charted answers entirely from the prior.
-          // A grid that silently empties reads as a broken page rather than as
+          // A table that silently empties reads as a broken page rather than as
           // an answered question, so it says which it is.
           <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
             Nothing here was measured. Every figure for this build is worked out from
@@ -120,7 +163,12 @@ export default function PerformanceScreen() {
             each one is based on.
           </p>
         ) : (
-          <FpsCardGrid rows={shownRows} />
+          <FrameRateTable
+            rows={gameRows}
+            target={resolution}
+            uncovered={uncovered}
+            onTargetChange={setResolution}
+          />
         )}
 
         <p className="mt-3 max-w-[80ch] text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
@@ -130,21 +178,24 @@ export default function PerformanceScreen() {
             over from 1440p. Treat these as the shape of the result rather than the figure.
           </p>
         )}
-        {/* Two units, said separately on purpose. Coverage is counted in GAMES,
-            because "19 of 22 games" is what a reader wants to know. The cards
-            are one per game AND preset, so the result count is stated too —
-            without it the footer claims 19 while 43 cards sit above it, which
-            reads as a counting bug. */}
+        {/* Both clauses count GAMES, and they used to count different things.
+            Coverage was in games while the second clause was in ROWS, because
+            the grid drew one card per game AND preset — the footer would claim
+            "19 of 22 games" under 43 cards, which reads as a counting bug. The
+            table draws one row per game, so the row unit is gone entirely.
+
+            Coverage is answered at ANY of the three resolutions, matching what
+            the table actually lists rather than the target column alone. */}
         <p className="mt-1.5 text-[10px] text-muted">
           Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
-          {hasCore && ` · ${answered} of ${report.coverage.gamesTotal} games answered`}
+          {hasCore && ` · ${allGameRows.length} of ${report.coverage.gamesTotal} games answered`}
           {/* Counted off the SHOWN rows, unlike BasisBar's mix line directly
-              above the grid. The two make opposite claims on purpose: the mix
+              above the table. The two make opposite claims on purpose: the mix
               line reports what the build has and must not be shrinkable by
               hiding rows, while this one reports what is on screen and read
               "60 results shown" above an empty grid until it followed the
               filter. */}
-          {hasCore && ` · ${shownAnswered} result${shownAnswered === 1 ? '' : 's'} shown, ${report.coverage.rowsExact} measured directly`}
+          {hasCore && ` · ${gameRows.length} game${gameRows.length === 1 ? '' : 's'} shown`}
         </p>
       </Section>
 
