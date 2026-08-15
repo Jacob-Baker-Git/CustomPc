@@ -36,6 +36,17 @@ export default function SummaryStrip({ hasCore, report, power, resolution }) {
     : leaning === 'cpu' ? 'processor'
       : leaning === 'gpu' ? 'graphics' : 'balanced'
 
+  // The count behind the verdict, matching the verdict.
+  //
+  // ⚠️ gpuLedGames + cpuLedGames does NOT equal gamesConsidered — the rest are
+  // balanced. Always quoting gpuLedGames would print "processor / 0 of 5 games"
+  // for a processor-led build, the headline contradicting its own evidence.
+  const led = !report?.bottleneck ? 0
+    : leaning === 'cpu' ? report.bottleneck.cpuLedGames
+      : leaning === 'gpu' ? report.bottleneck.gpuLedGames
+        : report.bottleneck.gamesConsidered
+          - report.bottleneck.cpuLedGames - report.bottleneck.gpuLedGames
+
   return (
     // A grid, not flex-wrap: `divide-x` on a wrapping flex row draws a stray
     // left border on the first tile of every wrapped line. One column stacked
@@ -51,10 +62,14 @@ export default function SummaryStrip({ hasCore, report, power, resolution }) {
         tone={answered > 0 ? 'accent' : 'ink'}
       />
       <Tile
-        label="Held back by"
+        label="Bottleneck"
         value={hasCore ? leaningLabel : null}
+        // ⚠️ States its own base. The verdict is computed only from the games
+        // with a fitted CPU constant — 5 of 53 covered for a typical build — so
+        // a bare "4 graphics-limited" reads as a whole-build conclusion drawn
+        // from 9% of the rows. `gamesConsidered` is the honest denominator.
         sub={report?.bottleneck
-          ? `${report.bottleneck.gpuLedGames} graphics-limited, ${report.bottleneck.cpuLedGames} processor-limited`
+          ? `${led} of ${report.bottleneck.gamesConsidered} games where the split is known`
           : 'Needs benchmark data to say'}
         // A graphics-led frame is the healthy arrangement, so it is not "bad".
         tone={!report?.bottleneck ? 'ink' : leaning === 'cpu' ? 'bad' : 'good'}

@@ -6,6 +6,11 @@ import '@testing-library/jest-dom'
 if (typeof Element !== 'undefined' && !Element.prototype.scrollTo) {
   Element.prototype.scrollTo = () => {}
 }
+// Same gap, different method: PerformanceScreen scrolls the bottleneck section
+// into view when a game row is opened, which throws rather than no-ops here.
+if (typeof Element !== 'undefined' && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {}
+}
 if (typeof window !== 'undefined' && !window.scrollTo) {
   window.scrollTo = () => {}
 }

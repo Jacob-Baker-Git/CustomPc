@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BASIS_LABEL, CAVEAT_TEXT } from './basisText'
-import { RESOLUTIONS } from '../../lib/perfEngine/gameRows'
+import { RESOLUTIONS, splitCell } from '../../lib/perfEngine/gameRows'
 
 // One game: a summary row, and a detail row that opens beneath it.
 //
@@ -51,10 +51,11 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
     if (next) onSelect?.(game.gameId)
   }
 
-  const shown = RESOLUTIONS.map((r) => game.cells[r]).filter(Boolean)
   // The first cell that has an attribution. Most rows have none — a split needs
-  // a fitted CPU constant, and only a handful of cells carry one.
-  const split = shown.find((r) => r.cpuShare != null && r.limitedBy != null)
+  // a fitted CPU constant, and only 2 of 56 rows carry one. Shared with the
+  // bottleneck section below the table, which describes the same game and must
+  // not reach a different answer about it.
+  const split = splitCell(game)
   const splitLabel = !split ? null
     : split.limitedBy === 'cpu' ? 'processor-led'
       : split.limitedBy === 'gpu' ? 'graphics-led' : 'balanced'

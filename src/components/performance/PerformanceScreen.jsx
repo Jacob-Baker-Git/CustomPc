@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import useBuilderStore from '../../store/useBuilderStore'
 import { estimateBuildPerformance } from '../../lib/perfEngine'
 import { onlyRealData } from '../../lib/perfEngine/rowBasis'
-import { buildGameRows, RESOLUTIONS } from '../../lib/perfEngine/gameRows'
+import { buildGameRows, splitCell, RESOLUTIONS } from '../../lib/perfEngine/gameRows'
 import { estimatePower, estimateThermals } from '../../lib/perfEngine/power'
 import { memoryProfile } from '../../lib/perfEngine/memory'
 import { gpuCapability, cpuCapability } from '../../lib/perfEngine/capability'
@@ -42,6 +42,7 @@ export default function PerformanceScreen() {
   const { cpu, gpu } = selectedParts
   const hasCore = Boolean(cpu && gpu)
   const [realOnly, setRealOnly] = useState(false)
+  const [selectedGameId, setSelectedGameId] = useState(null)
 
   // Two independent halves, and the split is deliberate. Everything below comes
   // from spec fields the catalogue already carries, so it works on day one with
@@ -103,6 +104,33 @@ export default function PerformanceScreen() {
     () => (reports ? buildGameRows(reports) : []),
     [reports],
   )
+
+  // The bottleneck section reflects the SELECTED game when there is one, and
+  // the whole build otherwise. Per-game is far more accurate — the build-wide
+  // verdict averages over the handful of games that have a split at all.
+  //
+  // Read off the GROUPED row, via the same splitCell rule the row's own
+  // expansion uses. Searching report.games directly would find a split on a
+  // preset the table does not show, so the section and the row it describes
+  // would disagree about the same game on the same screen.
+  const selectedGame = useMemo(
+    () => gameRows.find((g) => g.gameId === selectedGameId) ?? null,
+    [gameRows, selectedGameId],
+  )
+  const selectedRow = selectedGame ? splitCell(selectedGame) : null
+
+  const bottleneckRef = useRef(null)
+  // Scrolls the section into view when a game is picked, because the section
+  // sits below a table that can be 56 rows long — updating it in place would be
+  // invisible. `block: 'nearest'` avoids yanking the page when it is already on
+  // screen, and reduced-motion users get an instant jump rather than a glide.
+  useEffect(() => {
+    if (!selectedGameId || !bottleneckRef.current) return
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+    bottleneckRef.current.scrollIntoView({
+      behavior: reduced ? 'auto' : 'smooth', block: 'nearest',
+    })
+  }, [selectedGameId])
 
   // Games the corpus answers nothing for at ANY resolution, collapsed to one
   // line each naming the presets that were tried.
@@ -168,6 +196,7 @@ export default function PerformanceScreen() {
             target={resolution}
             uncovered={uncovered}
             onTargetChange={setResolution}
+            onSelect={setSelectedGameId}
           />
         )}
 
@@ -200,18 +229,39 @@ export default function PerformanceScreen() {
       </Section>
 
       <Section
-        title="What's holding it back"
+        ref={bottleneckRef}
+        title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
         blurb="Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract."
       >
         <div className="grid gap-3 sm:grid-cols-2">
           <StatPanel
             title="Bottleneck"
-            subtitle={report?.bottleneck
-              ? report.bottleneck.verdict
-              : 'Needs benchmark data before it can say anything.'}
-            footnote={report?.bottleneck?.nextUpgrade?.reason}
+            subtitle={selectedGame
+              ? `${selectedGame.name} at ${selectedGame.preset}.`
+              : report?.bottleneck
+                ? report.bottleneck.verdict
+                : 'Needs benchmark data before it can say anything.'}
+            // The build-wide upgrade advice is drawn from every game with a
+            // split, so it does not belong under one game's heading.
+            footnote={selectedGame ? undefined : report?.bottleneck?.nextUpgrade?.reason}
           >
-            {report?.bottleneck ? (
+            {selectedRow ? (
+              <>
+                <StatRow label="Limited by"
+                         value={selectedRow.limitedBy === 'cpu' ? 'processor'
+                           : selectedRow.limitedBy === 'gpu' ? 'graphics' : 'balanced'}
+                         tone={selectedRow.limitedBy === 'cpu' ? 'bad' : 'good'} />
+                <StatRow label="Card could do" value={selectedRow.gpuOnlyFps} unit="fps" />
+                <StatRow label="Chip could feed" value={selectedRow.cpuOnlyFps} unit="fps" />
+              </>
+            ) : selectedGame ? (
+              // ⚠️ The normal case — 54 of 56 rows have no attribution, because
+              // a split needs a fitted CPU constant and almost no game has one.
+              // Falling through to the build-wide figure here would put another
+              // game's measurement under this game's name.
+              <StatRow label="Status" value="split not modelled for this game"
+                       hint="No review has measured processor performance in this game, so there is nothing to attribute the frame to." />
+            ) : report?.bottleneck ? (
               <>
                 <StatRow label="Leaning"
                          value={report.bottleneck.leaning === 'cpu' ? 'processor'

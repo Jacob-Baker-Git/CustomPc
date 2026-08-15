@@ -22,6 +22,25 @@ export const BASIS_RANK = Object.fromEntries(
   BASIS_ORDER.map((basis, i) => [basis, BASIS_ORDER.length - 1 - i]),
 )
 
+// The one cell of a grouped row that carries a CPU/GPU attribution, or null.
+//
+// Shared rather than reimplemented, because two places describe the same game's
+// split — the row's expansion and the bottleneck section below the table — and
+// two copies of "first cell with a share" would eventually disagree about one
+// game on one screen. Only 2 of 56 game rows have a split at all, so "none" is
+// the normal answer and the caller has to say so rather than draw an empty bar.
+//
+// ⚠️ Searched over the CHOSEN preset's cells only. The engine reports a split
+// for 5 games at 1440p, but three of those are on a preset the row does not
+// show; quoting one of them would attribute the row to a measurement of
+// different settings.
+export function splitCell(game, { resolutions = RESOLUTIONS } = {}) {
+  if (!game?.cells) return null
+  return resolutions
+    .map((res) => game.cells[res])
+    .find((c) => c && c.cpuShare != null && c.limitedBy != null) ?? null
+}
+
 // Which preset a game's collapsed row shows.
 //
 // COVERAGE OUTRANKS TIER, deliberately. A preset measured at one resolution

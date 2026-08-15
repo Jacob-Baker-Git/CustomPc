@@ -320,6 +320,55 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     expect(screen.getByText('Split Test')).toBeInTheDocument()
   })
 
+  it('describes the game that was opened, not the whole build', async () => {
+    // The build-wide verdict averages over the handful of games that have a
+    // split at all. Opening a row asks a narrower question, and the section
+    // below the table answers that one instead.
+    const split = {
+      rowId: 's1|high|native', gameId: 's1', name: 'Attributed Racer', preset: 'High',
+      presetId: 'high', presetTier: 3, upscaling: 'native', avgFps: 90, lowFps: 70,
+      frameTimeMs: 11, basis: 'measured', bound: 'point', caveats: [], errorPct: null,
+      cpuShare: 0.3, limitedBy: 'gpu', gpuOnlyFps: 96, cpuOnlyFps: 210,
+    }
+    alwaysReport([split, measuredRow])
+    const user = userEvent.setup()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+
+    expect(screen.getByText(/what's holding it back/i)).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /Attributed Racer/ }))
+
+    expect(screen.getByText(/what's holding back attributed racer/i)).toBeInTheDocument()
+    // The two figures the attribution is made of, which the build-wide panel
+    // only ever showed for its single worst case.
+    expect(screen.getByText('96')).toBeInTheDocument()
+    expect(screen.getByText('210')).toBeInTheDocument()
+  })
+
+  it('says a game has no split rather than falling back to the build figure', async () => {
+    // ⚠️ The normal case: only 2 of 56 rows carry an attribution. Quietly
+    // showing the build-wide verdict under a game's name would attribute
+    // somebody else's measurement to the game the reader just opened.
+    //
+    // A purpose-built row, because BOTH shared fixtures carry a cpuShare —
+    // using measuredRow here made the test fail for the right reason and look
+    // like a bug in the component.
+    const unattributed = {
+      ...measuredRow,
+      rowId: 'u1|high|native', gameId: 'u1', name: 'Unattributed United',
+      cpuShare: null, limitedBy: null,
+    }
+    alwaysReport([unattributed])
+    const user = userEvent.setup()
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+
+    await user.click(screen.getByRole('button', { name: /Unattributed United/ }))
+    expect(screen.getByText(/split not modelled for this game/i)).toBeInTheDocument()
+    // and NOT the build-wide panel it would have fallen through to
+    expect(screen.queryByText(/upgrade next/i)).toBeNull()
+  })
+
   it('explains an empty grid rather than just emptying it', async () => {
     // A build with nothing measured — the common case for the 54 catalogue CPUs
     // no review has charted. Ticking the box removes every card, and a list that

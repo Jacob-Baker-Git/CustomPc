@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildGameRows } from '../lib/perfEngine/gameRows'
+import { buildGameRows, splitCell } from '../lib/perfEngine/gameRows'
 
 const row = (over = {}) => ({
   rowId: 'g|ultra|native', gameId: 'g', name: 'Game', preset: 'Ultra',
@@ -219,5 +219,39 @@ describe('buildGameRows', () => {
       '1440p': [], '4k': [],
     }))
     expect(out.map((g) => g.gameId)).toEqual(['alpha', 'zulu'])
+  })
+})
+
+describe('splitCell', () => {
+  const withCells = (cells) => ({ cells })
+
+  it('finds the first cell carrying an attribution', () => {
+    const g = withCells({
+      '1080p': row({ cpuShare: null, limitedBy: null }),
+      '1440p': row({ cpuShare: 0.42, limitedBy: 'gpu', avgFps: 55 }),
+      '4k': row({ cpuShare: 0.1, limitedBy: 'gpu', avgFps: 30 }),
+    })
+    // 1440p, not 4K: the search runs in resolution order, so the answer cannot
+    // depend on which cells happen to exist.
+    expect(splitCell(g).avgFps).toBe(55)
+  })
+
+  it('returns null when no cell has one', () => {
+    // The NORMAL case — only 2 of 56 game rows carry a split. A caller that
+    // treated null as zero would draw `1 - null` = a full graphics bar.
+    const g = withCells({ '1080p': row(), '1440p': row(), '4k': null })
+    expect(splitCell(g)).toBeNull()
+  })
+
+  it('ignores a share with no side attached to it', () => {
+    // Both halves are needed to say anything. A cpuShare without a limitedBy
+    // gives a percentage with no claim about which part is the limit.
+    const g = withCells({ '1080p': row({ cpuShare: 0.42, limitedBy: null }) })
+    expect(splitCell(g)).toBeNull()
+  })
+
+  it('survives a game with no cells at all', () => {
+    expect(splitCell(null)).toBeNull()
+    expect(splitCell({})).toBeNull()
   })
 })

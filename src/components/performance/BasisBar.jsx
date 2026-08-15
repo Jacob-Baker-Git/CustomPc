@@ -12,6 +12,10 @@ export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
   // ⚠️ Counted from the UNFILTERED rows, always. If these totals moved when the
   // filter went on, the control could be used to make a thin evidence base look
   // solid — the exact failure this whole feature exists to prevent.
+  //
+  // One entry per GAME now the table groups by game. It counted one per game
+  // AND preset before, so it read 60 above a table showing 56 rows, which looks
+  // like a counting bug rather than two units.
   const mix = basisMix(rows)
   if (mix.measured + mix.modelled + mix.estimated === 0) return null
 
