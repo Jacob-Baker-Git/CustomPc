@@ -73,7 +73,7 @@ export default function BuilderScreen() {
                 <InfoDisclaimer />
                 {/* pointer-events-none so the hint never eats a drag aimed at
                     the model underneath it. */}
-                <div className="pointer-events-none absolute bottom-3 left-3 z-30 rounded-lg border border-line bg-surface/85 px-2.5 py-1 text-[11px] text-muted">
+                <div className="pointer-events-none absolute bottom-3 left-3 z-30 rounded-lg border border-line bg-surface px-2.5 py-1 text-[11px] text-muted">
                   Drag to rotate · scroll to zoom
                 </div>
                 <div className="absolute bottom-3 right-3"><CaseToggle /></div>

@@ -59,7 +59,7 @@ export default function CategoryList({
         // surface and ink as any live row plus an explicit "Add" affordance; only
         // its border stays quiet, because it is not a hole in the build.
         const tone = flagged
-          ? 'border-bad/60 bg-bad/[0.07] text-ink hover:border-bad'
+          ? 'border-bad bg-surface text-ink'
           : explained
             ? 'border-line-strong bg-surface text-ink hover:border-accent hover:text-accent'
             : isNext

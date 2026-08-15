@@ -15,7 +15,7 @@ function BetaDot() {
   return (
     <span
       aria-hidden="true"
-      className="absolute -top-1 -right-3 px-1 rounded bg-accent/15 text-accent
+      className="absolute -top-1 -right-3 px-1 rounded bg-accent-soft text-accent
                  text-[8px] font-bold uppercase tracking-wide leading-[1.4]"
     >
       beta
@@ -79,12 +79,16 @@ export default function ViewTabs({ view, onChange, variant = 'inline' }) {
           >
             <Icon size={14} aria-hidden="true" />
             {v}
+            {/* The active tab is already a solid accent fill, so the badge needs
+                no plate of its own — accent-ink on that fill reads as a badge by
+                itself. The inactive one sits on the dark well and does need the
+                accent wash to separate from it. */}
             {BETA_VIEWS.has(v) && (
               <>
                 <span
                   aria-hidden="true"
                   className={`px-1 rounded text-[9px] font-bold uppercase tracking-wide
-                    ${on ? 'bg-accent-ink/20 text-accent-ink' : 'bg-accent/15 text-accent'}`}
+                    ${on ? 'text-accent-ink' : 'bg-accent-soft text-accent'}`}
                 >
                   beta
                 </span>
