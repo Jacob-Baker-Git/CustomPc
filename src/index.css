@@ -7,11 +7,16 @@
 @tailwind utilities;
 
 /* ============================================================
-   Workbench design system — neutral dark base + one warm accent.
-   The generic cyan-on-slate look is retired here. Every surface,
-   line and accent colour resolves from these vars (mapped to
+   Board design system — a matte-black board substrate, replacing
+   the near-black ground and single bright accent that came before.
+   Desaturated METALS carry state (copper = action, gold = seated,
+   tech = technical); only genuine interruptions are saturated
+   (good / ok / bad); orange is the wordmark and nothing else.
+   Apply that rule before adding a colour — if it is neither a
+   state nor an interruption, it does not get one. Every surface,
+   line and text colour resolves from these vars (mapped to
    semantic Tailwind classes in tailwind.config.js: bg-surface,
-   text-accent, border-line, text-muted, …).
+   text-gold, border-line, text-muted, …).
    ============================================================ */
 :root {
   /* ---- Board ------------------------------------------------------------
