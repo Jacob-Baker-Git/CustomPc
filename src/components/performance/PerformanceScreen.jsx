@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import useBuilderStore from '../../store/useBuilderStore'
 import { estimateBuildPerformance } from '../../lib/perfEngine'
 import { onlyRealData } from '../../lib/perfEngine/rowBasis'
@@ -14,6 +14,7 @@ import { PERF_CAVEAT } from '../../lib/siteContent'
 import StatPanel from './StatPanel'
 import StatRow from './StatRow'
 import FrameRateTable from './FrameRateTable'
+import ResolutionPicker from './ResolutionPicker'
 import Section from './Section'
 import SummaryStrip from './SummaryStrip'
 import BasisBar from './BasisBar'
@@ -119,18 +120,11 @@ export default function PerformanceScreen() {
   )
   const selectedRow = selectedGame ? splitCell(selectedGame) : null
 
-  const bottleneckRef = useRef(null)
-  // Scrolls the section into view when a game is picked, because the section
-  // sits below a table that can be 56 rows long — updating it in place would be
-  // invisible. `block: 'nearest'` avoids yanking the page when it is already on
-  // screen, and reduced-motion users get an instant jump rather than a glide.
-  useEffect(() => {
-    if (!selectedGameId || !bottleneckRef.current) return
-    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
-    bottleneckRef.current.scrollIntoView({
-      behavior: reduced ? 'auto' : 'smooth', block: 'nearest',
-    })
-  }, [selectedGameId])
+  // ⚠️ Opening a row does NOT scroll the page. It used to pull the bottleneck
+  // section into view, on the reasoning that a section below 56 rows updating
+  // in place would go unnoticed. In use that reasoning was wrong: the row you
+  // just opened is what you want to read, and the page moving underneath you
+  // takes it away. Removed at the user's request — do not reinstate it.
 
   // Games the corpus answers nothing for at ANY resolution, collapsed to one
   // line each naming the presets that were tried.
@@ -164,7 +158,8 @@ export default function PerformanceScreen() {
 
       <Section
         title="Frame rates"
-        blurb="Every game the corpus covers, at all three resolutions. One preset per game so the columns compare like with like — open a row for its other presets, its 1% lows and what each figure is based on."
+        blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like — open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."
+        action={hasCore ? <ResolutionPicker value={resolution} onChange={setResolution} /> : null}
       >
         {!hasCore ? (
           <p className="text-xs text-muted leading-relaxed">
@@ -195,7 +190,6 @@ export default function PerformanceScreen() {
             rows={gameRows}
             target={resolution}
             uncovered={uncovered}
-            onTargetChange={setResolution}
             onSelect={setSelectedGameId}
           />
         )}
@@ -229,7 +223,6 @@ export default function PerformanceScreen() {
       </Section>
 
       <Section
-        ref={bottleneckRef}
         title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
         blurb="Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract."
       >

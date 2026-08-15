@@ -152,9 +152,14 @@ describe('PerformanceScreen', () => {
     expect(estimateBuildPerformance).not.toHaveBeenCalled()
   })
 
-  it('shows one row per game rather than one per preset', () => {
+  it('shows one row per game rather than one per preset', async () => {
+    const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    // Genre bars ship shut, so open every one before counting rows.
+    for (const bar of screen.getAllByRole('button', { name: /\d+ games?/ })) {
+      await user.click(bar)
+    }
     const table = screen.getByRole('table')
     // The old grid produced 60 cards for this build at 1440p; the games behind
     // them number far fewer.
@@ -172,28 +177,39 @@ describe('PerformanceScreen', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('changes the build’s resolution from a column header', () => {
+  it('changes the build’s resolution from the picker beside the heading', async () => {
     // The complaint that started this: "you can't select that res is shown".
     // setResolution had exactly one caller, in SetupFlow, with no UI after.
+    //
+    // The control moved off the column headers when they took up sorting — two
+    // jobs on one hit area meant neither could be discovered from the other.
+    const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1440p' })
     render(<PerformanceScreen />)
     expect(useBuilderStore.getState().resolution).toBe('1440p')
-    screen.getByRole('button', { name: /^4K$/i }).click()
+    await user.click(screen.getByRole('radio', { name: /^4K$/i }))
     expect(useBuilderStore.getState().resolution).toBe('4k')
+  })
+
+  it('marks the picker with the resolution the build is actually for', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1080p' })
+    render(<PerformanceScreen />)
+    expect(screen.getByRole('radio', { name: /1080p/i })).toBeChecked()
+    expect(screen.getByRole('radio', { name: /1440p/i })).not.toBeChecked()
   })
 })
 
 describe('PerformanceScreen — the real-data filter wiring', () => {
   const measuredRow = {
     rowId: 'm1|high|native', gameId: 'm1', name: 'Real Data Racer', preset: 'High',
-    presetId: 'high', presetTier: 3, upscaling: 'native', presetExact: true,
+    presetId: 'high', presetTier: 3, upscaling: 'native', presetExact: true, genre: 'shooter',
     avgFps: 120, lowFps: 95, frameTimeMs: 8.3, lowFrameTimeMs: 10.5,
     lowBasis: 'modelled', cpuShare: 0.4, limitedBy: 'gpu', atEngineCap: false,
     basis: 'measured', sources: 3, bound: 'point', caveats: [], errorPct: null,
   }
   const estimatedRow = {
     rowId: 'e1|high|native', gameId: 'e1', name: 'Guesswork Grand Prix', preset: 'High',
-    presetId: 'high', presetTier: 3, upscaling: 'native', presetExact: true,
+    presetId: 'high', presetTier: 3, upscaling: 'native', presetExact: true, genre: 'shooter',
     avgFps: 80, lowFps: 55, frameTimeMs: 12.5, lowFrameTimeMs: 18.2,
     lowBasis: 'modelled', cpuShare: 0.5, limitedBy: 'balanced', atEngineCap: false,
     basis: 'spec-derived', sources: 1, bound: 'point', caveats: ['gpu-index-prior'], errorPct: 35,
@@ -232,11 +248,20 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
 
   afterEach(() => { estimateBuildPerformance.mockReset() })
 
+  // Genre bars ship SHUT — the tab opens as bars, not rows — so anything
+  // asserting on a game has to open its genre first.
+  const openGenres = async (user) => {
+    for (const bar of screen.getAllByRole('button', { name: /\d+ games?/ })) {
+      await user.click(bar)
+    }
+  }
+
   it('the "Only show real data" checkbox actually filters the grid', async () => {
     alwaysReport([measuredRow, estimatedRow])
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    await openGenres(user)
 
     // Both visible before the filter is touched.
     expect(screen.getByText('Real Data Racer')).toBeInTheDocument()
@@ -264,6 +289,7 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    await openGenres(user)
 
     expect(screen.getByText(/2 games shown/)).toBeInTheDocument()
     await user.click(screen.getByRole('checkbox', { name: /only show real data/i }))
@@ -308,6 +334,7 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    await openGenres(user)
 
     // Unfiltered: coverage wins, so Ultra is the shown preset.
     expect(screen.getByText('Ultra')).toBeInTheDocument()
@@ -334,6 +361,7 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    await openGenres(user)
 
     expect(screen.getByText(/what's holding it back/i)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /Attributed Racer/ }))
@@ -362,6 +390,7 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    await openGenres(user)
 
     await user.click(screen.getByRole('button', { name: /Unattributed United/ }))
     expect(screen.getByText(/split not modelled for this game/i)).toBeInTheDocument()
@@ -377,6 +406,7 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     const user = userEvent.setup()
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
+    await openGenres(user)
 
     expect(screen.getByText('Guesswork Grand Prix')).toBeInTheDocument()
     expect(screen.queryByText(/nothing here was measured/i)).toBeNull()

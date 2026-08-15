@@ -1,68 +1,154 @@
 import { useState } from 'react'
 import FrameRateRow from './FrameRateRow'
-import { RESOLUTIONS } from '../../lib/perfEngine/gameRows'
+import {
+  RESOLUTIONS, groupByGenre, sortGameRows,
+} from '../../lib/perfEngine/gameRows'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
+
+// Every column, in render order. `key` is what sortGameRows sorts on; the two
+// leading columns and the trailing one are not resolutions, so they carry no
+// entry in RESOLUTIONS and are laid out here instead.
+const COLUMNS = [
+  { key: 'name', label: 'Game', align: 'left' },
+  { key: 'preset', label: 'Preset', align: 'left' },
+  ...RESOLUTIONS.map((res) => ({ key: res, label: RES_LABEL[res], align: 'right', res })),
+  { key: 'basis', label: 'Basis', align: 'right' },
+]
 
 // The results, as a table rather than 155 bordered cards.
 //
 // A real <table> on purpose: three numeric columns per row is precisely the
 // shape a screen reader needs <th scope="col"> for, and a grid of divs gives it
 // nothing to announce.
-export default function FrameRateTable({ rows, target, uncovered, onTargetChange, onSelect }) {
-  // The table owns which row is open, so opening one closes the last. Two
-  // expansions at once push the row a reader was comparing against off screen.
+export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
   const [openGameId, setOpenGameId] = useState(null)
+  // Genres start SHUT. Fifty-six rows is a wall even as a table; the tab opens
+  // as six bars and a reader digs into the kind of game they care about.
+  const [openGenres, setOpenGenres] = useState(() => new Set())
+  const [sort, setSort] = useState(null)
+  // Which column the pointer is over, or null. The highlight falls back to the
+  // build's target, so on touch — where there is no hover — the target column
+  // is simply always the lit one.
+  const [hoveredRes, setHoveredRes] = useState(null)
+  const litRes = hoveredRes ?? target
+
+  const groups = groupByGenre(rows, { target })
+
+  const toggleGenre = (genre) => setOpenGenres((open) => {
+    // Independent, not an accordion: comparing a shooter against an RPG is a
+    // normal thing to want, and closing one to open the other prevents it.
+    const next = new Set(open)
+    if (next.has(genre)) next.delete(genre)
+    else next.add(genre)
+    return next
+  })
+
+  const clickHeader = (key) => setSort((s) => (
+    // First click on a column sorts it the useful way round — fastest first
+    // for a frame rate, A to Z for a name. Clicking the same one again flips.
+    s?.key === key
+      ? { key, dir: s.dir === 'desc' ? 'asc' : 'desc' }
+      : { key, dir: key === 'name' ? 'asc' : 'desc' }
+  ))
+
+  // One delegated handler rather than a pair on each of ~170 cells. cellIndex
+  // is the DOM index, which is what COLUMNS is ordered by.
+  const trackHover = (e) => {
+    const cell = e.target.closest?.('td, th')
+    const col = cell && COLUMNS[cell.cellIndex]
+    setHoveredRes(col?.res ?? null)
+  }
 
   return (
     <>
-      <table className="w-full border-collapse text-left">
+      <table
+        className="w-full border-collapse text-left"
+        onMouseOver={trackHover}
+        onMouseLeave={() => setHoveredRes(null)}
+      >
         <thead>
           <tr className="border-b border-line text-[10px] uppercase tracking-wider text-muted">
-            <th scope="col" className="py-1.5 pl-2 font-normal">Game</th>
-            <th scope="col" className="px-2 py-1.5 font-normal">Preset</th>
-            {RESOLUTIONS.map((res) => (
-              <th
-                key={res}
-                scope="col"
-                aria-current={res === target ? 'true' : undefined}
-                className={`px-2 py-1.5 text-right font-normal ${
-                  res === target ? 'bg-surface-2 text-ink' : 'hidden sm:table-cell'}`}
-              >
-                {/* The header doubles as the resolution picker. The tab had no
-                    way to change resolution at all — setResolution was called
-                    in exactly one place, at setup — so this is the control,
-                    rather than adding a separate one beside three columns that
-                    already name the choices.
-
-                    aria-current carries the target as well as the colour does,
-                    because colour alone must not carry it. */}
-                <button
-                  type="button"
-                  onClick={() => onTargetChange?.(res)}
-                  title={res === target ? 'This build’s resolution' : `Build for ${RES_LABEL[res]}`}
-                  className={`uppercase tracking-wider underline decoration-dotted underline-offset-2 ${
-                    res === target ? 'text-ink' : 'hover:text-ink'}`}
+            {COLUMNS.map(({ key, label, align, res }) => {
+              const sorted = sort?.key === key
+              return (
+                <th
+                  key={key}
+                  scope="col"
+                  // aria-current marks the BUILD's resolution, aria-sort marks
+                  // what the table is ordered by. Two different claims, and
+                  // colour alone must not carry either.
+                  aria-current={res && res === target ? 'true' : undefined}
+                  aria-sort={sorted ? (sort.dir === 'desc' ? 'descending' : 'ascending') : 'none'}
+                  className={`px-2 py-1.5 font-normal ${align === 'right' ? 'text-right' : ''} ${
+                    res && res !== target ? 'hidden sm:table-cell' : ''} ${
+                    res === litRes ? 'bg-surface-2 text-ink' : ''}`}
                 >
-                  {RES_LABEL[res]}
-                </button>
-              </th>
-            ))}
-            <th scope="col" className="px-2 py-1.5 text-right font-normal">Basis</th>
+                  <button
+                    type="button"
+                    onClick={() => clickHeader(key)}
+                    aria-label={`Sort by ${label}`}
+                    className="uppercase tracking-wider hover:text-ink"
+                  >
+                    {/* A dot, not a tint, for the build's own resolution. The
+                        tint moves with the pointer now, so it can no longer
+                        say which column the tiles below are computed from. */}
+                    {res === target && <span aria-hidden="true" className="mr-1 text-accent">•</span>}
+                    {label}
+                    <span aria-hidden="true" className={sorted ? 'ml-1 text-ink' : 'ml-1 text-faint'}>
+                      {sorted ? (sort.dir === 'desc' ? '↓' : '↑') : '↕'}
+                    </span>
+                  </button>
+                </th>
+              )
+            })}
           </tr>
         </thead>
-        <tbody>
-          {rows.map((g) => (
-            <FrameRateRow
-              key={g.gameId}
-              game={g}
-              target={target}
-              expanded={openGameId === g.gameId}
-              onToggle={(next) => setOpenGameId(next ? g.gameId : null)}
-              onSelect={onSelect}
-            />
-          ))}
-        </tbody>
+
+        {groups.map((group) => {
+          const isOpen = openGenres.has(group.genre)
+          return (
+            // One tbody per genre, so the bar and its games are one group to a
+            // screen reader rather than a flat run of rows.
+            <tbody key={group.genre}>
+              <tr className="border-b border-line bg-surface">
+                <td colSpan={COLUMNS.length} className="px-2 py-1.5">
+                  <button
+                    type="button"
+                    onClick={() => toggleGenre(group.genre)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-baseline gap-2 text-left text-xs text-ink"
+                  >
+                    <span aria-hidden="true" className="text-[10px] text-muted">{isOpen ? '⌄' : '›'}</span>
+                    <span>{group.label}</span>
+                    {/* A shut bar is all a reader has to go on, so it carries
+                        enough to decide whether opening it is worth it. */}
+                    <span className="text-[11px] text-muted">
+                      {group.count} game{group.count === 1 ? '' : 's'}
+                      {group.fastest != null && (
+                        group.fastest === group.slowest
+                          ? ` · ${group.fastest} fps`
+                          : ` · ${group.slowest}–${group.fastest} fps`
+                      )}
+                    </span>
+                  </button>
+                </td>
+              </tr>
+
+              {isOpen && sortGameRows(group.games, sort).map((g) => (
+                <FrameRateRow
+                  key={g.gameId}
+                  game={g}
+                  target={target}
+                  litRes={litRes}
+                  expanded={openGameId === g.gameId}
+                  onToggle={(next) => setOpenGameId(next ? g.gameId : null)}
+                  onSelect={onSelect}
+                />
+              ))}
+            </tbody>
+          )
+        })}
       </table>
 
       {uncovered.length > 0 && (

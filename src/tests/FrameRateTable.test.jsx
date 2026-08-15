@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import FrameRateTable from '../components/performance/FrameRateTable'
@@ -10,7 +10,8 @@ const cell = (avgFps) => ({
 })
 
 const game = (id, name, best) => ({
-  gameId: id, name, preset: 'Ultra', presetId: 'ultra', upscaling: 'native', presetTier: 4,
+  gameId: id, name, genre: 'shooter',
+  preset: 'Ultra', presetId: 'ultra', upscaling: 'native', presetTier: 4,
   cells: { '1080p': cell(best), '1440p': cell(best - 100), '4k': cell(best - 200) },
   basis: 'ceiling', errorPct: null, caveats: [], otherPresets: [], bestFps: best,
 })
@@ -19,6 +20,10 @@ const rows = [game('a', 'Alpha', 400), game('b', 'Bravo', 300)]
 
 const gameIdsIn = (table) =>
   [...table.querySelectorAll('tbody tr[data-game]')].map((tr) => tr.dataset.game)
+
+// Genre bars ship SHUT, so anything asserting on game rows has to open one
+// first. See FrameRateTableGroups.test.jsx for the grouping itself.
+const openGenre = (user) => user.click(screen.getByRole('button', { name: /shooters/i }))
 
 describe('FrameRateTable', () => {
   it('is a real table with column headers', () => {
@@ -40,22 +45,16 @@ describe('FrameRateTable', () => {
     expect(screen.getByRole('columnheader', { name: /4K/i })).not.toHaveAttribute('aria-current', 'true')
   })
 
-  it('retargets the build when a column header is clicked', async () => {
-    const onTargetChange = vi.fn()
-    const user = userEvent.setup()
-    render(<FrameRateTable rows={rows} target="1440p" uncovered={[]} onTargetChange={onTargetChange} />)
-    await user.click(screen.getByRole('button', { name: /4K/i }))
-    expect(onTargetChange).toHaveBeenCalledWith('4k')
-  })
-
   it('does not expand a row when a column header is clicked', async () => {
-    // The header sits above 56 rows and writes the build's resolution. A click
-    // that also opened something would make the retarget look like an accident.
+    // The header sits above the rows and sorts them. A click that also opened
+    // something would make the sort look like an accident.
     const user = userEvent.setup()
     const { container } = render(
-      <FrameRateTable rows={rows} target="1440p" uncovered={[]} onTargetChange={() => {}} />)
-    await user.click(screen.getByRole('button', { name: /4K/i }))
-    expect(container.querySelectorAll('tbody tr')).toHaveLength(rows.length)
+      <FrameRateTable rows={rows} target="1440p" uncovered={[]} />)
+    await openGenre(user)
+    const before = container.querySelectorAll('tbody tr').length
+    await user.click(screen.getByRole('button', { name: /sort by 4K/i }))
+    expect(container.querySelectorAll('tbody tr')).toHaveLength(before)
   })
 
   it('opens one row at a time, closing the one before it', async () => {
@@ -63,10 +62,13 @@ describe('FrameRateTable', () => {
     // against off the screen. The table owns the open row for that reason.
     const user = userEvent.setup()
     const { container } = render(<FrameRateTable rows={rows} target="1440p" uncovered={[]} />)
+    await openGenre(user)
+    // The genre bar's own row, plus one per game.
+    const base = rows.length + 1
     await user.click(screen.getByRole('button', { name: /Alpha/ }))
-    expect(container.querySelectorAll('tbody tr')).toHaveLength(rows.length + 1)
+    expect(container.querySelectorAll('tbody tr')).toHaveLength(base + 1)
     await user.click(screen.getByRole('button', { name: /Bravo/ }))
-    expect(container.querySelectorAll('tbody tr')).toHaveLength(rows.length + 1)
+    expect(container.querySelectorAll('tbody tr')).toHaveLength(base + 1)
     expect(screen.getByRole('button', { name: /Alpha/ })).toHaveAttribute('aria-expanded', 'false')
     expect(screen.getByRole('button', { name: /Bravo/ })).toHaveAttribute('aria-expanded', 'true')
   })
@@ -112,12 +114,14 @@ describe('FrameRateTable', () => {
     expect(on.className).not.toMatch(/hidden/)
   })
 
-  it('hides the body cells of exactly the columns whose headers it hid', () => {
+  it('hides the body cells of exactly the columns whose headers it hid', async () => {
     // A header and its column hidden at different breakpoints is a table that
     // shifts its own figures one column sideways below `sm` — the worst kind of
     // wrong, because every number is real and every one is under the wrong
     // heading. Asserted as a pair for that reason.
+    const user = userEvent.setup()
     const { container } = render(<FrameRateTable rows={rows} target="1440p" uncovered={[]} />)
+    await openGenre(user)
     const heads = [...container.querySelectorAll('thead th')].map((th) => th.className.includes('hidden'))
     const cells = [...container.querySelectorAll('tbody tr[data-game]')[0].children]
       .map((td) => td.className.includes('hidden'))
@@ -126,10 +130,12 @@ describe('FrameRateTable', () => {
     expect(heads.filter(Boolean)).toHaveLength(2)
   })
 
-  it('renders a row per game, in the order given', () => {
+  it('renders a row per game, in the order given', async () => {
     // The order is the engine's — fastest game first. Asserting the NAMES are
     // present would pass for any order at all, which is the whole risk here.
+    const user = userEvent.setup()
     render(<FrameRateTable rows={rows} target="1440p" uncovered={[]} />)
+    await openGenre(user)
     expect(gameIdsIn(screen.getByRole('table'))).toEqual(['a', 'b'])
   })
 })

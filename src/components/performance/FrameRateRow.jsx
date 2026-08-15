@@ -15,16 +15,22 @@ import { RESOLUTIONS, splitCell } from '../../lib/perfEngine/gameRows'
 // ceiling at 4K and a point estimate at 1080p, so a single marker for the whole
 // row would misdescribe one of them.
 //
-// The build's target column is tinted down the whole table and the other two
-// are dropped below `sm` — six columns do not fit 375px. FrameRateTable's
-// headers carry the same two classes, or the columns would misalign.
+// Two different questions, deliberately kept apart:
+//
+//   isTarget — the build's resolution, which decides which single column
+//              survives below `sm`. Six columns do not fit 375px.
+//   isLit    — the column the pointer is over, which is what gets tinted. With
+//              no pointer it falls back to the target, so on touch the visible
+//              column is simply always the lit one.
+//
+// FrameRateTable's headers carry the same two classes, or the columns misalign.
 //
 // ⚠️ No `/NN` opacity modifiers on these tokens. The palette resolves through
 // `var(--surface-2)`, which holds a hex, so Tailwind cannot compose an alpha
 // onto it and emits NO RULE AT ALL — `bg-surface-2/60` is a silently dead
 // class, not a fainter tint. Use a whole token from the three-step scale.
-function Cell({ row, isTarget }) {
-  const col = isTarget ? 'bg-surface-2' : 'hidden sm:table-cell'
+function Cell({ row, isTarget, isLit }) {
+  const col = `${isTarget ? '' : 'hidden sm:table-cell'} ${isLit ? 'bg-surface-2' : ''}`
   if (!row) {
     // A dash, never a zero. "0" reads as zero frames per second; this says
     // there is no data, which is a different statement. ~10% of the grid.
@@ -38,7 +44,7 @@ function Cell({ row, isTarget }) {
   )
 }
 
-export default function FrameRateRow({ game, target, onSelect, expanded, onToggle }) {
+export default function FrameRateRow({ game, target, litRes, onSelect, expanded, onToggle }) {
   // Uncontrolled unless the parent passes both, so the component is usable in a
   // test without wiring selection state.
   const [ownOpen, setOwnOpen] = useState(false)
@@ -63,12 +69,23 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
   return (
     <>
       {/* `data-game` marks SUMMARY rows only. Expanding adds a second <tr>, so
-          anything counting `tbody tr` would count expansions as games. */}
-      <tr data-game={game.gameId} className="border-b border-line hover:bg-surface">
+          anything counting `tbody tr` would count expansions as games.
+
+          ⚠️ The whole ROW toggles, not just the expander. The button inside it
+          deliberately has NO onClick of its own — the click bubbles up to this
+          handler. Giving it one too would toggle twice and the row would never
+          open, which is invisible in review and pinned by a test. It stays a
+          real <button> so keyboard and screen-reader users get a control with
+          an accessible name and aria-expanded; Enter and Space there fire a
+          click that bubbles the same way. */}
+      <tr
+        data-game={game.gameId}
+        onClick={toggle}
+        className="cursor-pointer border-b border-line hover:bg-surface"
+      >
         <td className="py-1.5 pl-2">
           <button
             type="button"
-            onClick={toggle}
             aria-expanded={isOpen}
             className="flex items-center gap-1.5 text-left text-sm text-ink"
           >
@@ -78,7 +95,7 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
         </td>
         <td className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted">{game.preset}</td>
         {RESOLUTIONS.map((res) => (
-          <Cell key={res} row={game.cells[res]} isTarget={res === target} />
+          <Cell key={res} row={game.cells[res]} isTarget={res === target} isLit={res === litRes} />
         ))}
         <td className="px-2 py-1.5 text-right text-[10px] uppercase tracking-wider">
           <span className={game.basis === 'measured' ? 'text-good' : 'text-muted'}>
