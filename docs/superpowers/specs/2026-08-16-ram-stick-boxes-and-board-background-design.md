@@ -107,7 +107,7 @@ part's shape. An unpopulated slot is the same hardware, cold.
 
 Opening a box lifts it clear of its socket:
 
-1. The stick translates **up 9px**, opening a gap beneath it.
+1. The stick translates **up 8px** (`-translate-y-2`), opening a gap beneath it.
 2. **Retention clips rock outward** — 9×22px bars at the outer edges, from
    `rotate(0)` to `rotate(∓26deg)`, `transform-origin: bottom center`.
 3. **Contacts go cold.** The connection is genuinely broken.
