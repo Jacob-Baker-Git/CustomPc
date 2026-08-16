@@ -131,7 +131,7 @@ export default function SetupFlow({ onBack }) {
           {steps.map((label, i) => (
             <li key={label} className="flex items-center gap-2">
               {i > 0 && <span className="text-line-strong">→</span>}
-              <span className={`flex items-center gap-1.5 ${step === i + 1 ? 'text-accent' : 'text-faint'}`}>
+              <span className={`flex items-center gap-1.5 ${step === i + 1 ? 'text-gold' : 'text-faint'}`}>
                 <span className="font-mono">{i + 1}</span>
                 <span>{label}</span>
               </span>
@@ -146,11 +146,11 @@ export default function SetupFlow({ onBack }) {
               <button
                 key={id}
                 onClick={() => chooseStart(id)}
-                className="w-full px-5 py-4 rounded-xl border border-line bg-surface hover:border-accent hover:bg-accent-soft text-left transition-colors group flex items-center gap-4"
+                className="w-full px-5 py-4 rounded-xl border border-line bg-surface hover:border-copper hover:bg-gold-soft text-left transition-colors group flex items-center gap-4"
               >
-                <Icon size={22} className="text-accent shrink-0" aria-hidden="true" />
+                <Icon size={22} className="text-copper shrink-0" aria-hidden="true" />
                 <span className="flex-1">
-                  <span className="block text-base font-semibold text-ink group-hover:text-accent">{label}</span>
+                  <span className="block text-base font-semibold text-ink group-hover:text-copper">{label}</span>
                   <span className="block text-sm text-muted mt-0.5">{blurb}</span>
                 </span>
               </button>
@@ -167,7 +167,7 @@ export default function SetupFlow({ onBack }) {
               className="flex flex-col items-center gap-6"
             >
               <div className="flex items-center gap-2 text-3xl">
-                <span className="text-accent">£</span>
+                <span className="text-tech">£</span>
                 <input
                   autoFocus
                   type="number"
@@ -175,7 +175,7 @@ export default function SetupFlow({ onBack }) {
                   placeholder="Enter budget"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="bg-surface text-ink font-mono tabular-nums text-3xl w-72 px-4 py-3 rounded-xl border border-line focus:outline-none focus:border-accent text-center placeholder:text-2xl placeholder:text-faint transition-colors"
+                  className="bg-surface text-ink font-mono tabular-nums text-3xl w-72 px-4 py-3 rounded-xl border border-line focus:outline-none focus:border-copper text-center placeholder:text-2xl placeholder:text-faint transition-colors"
                 />
               </div>
               <button
@@ -192,7 +192,7 @@ export default function SetupFlow({ onBack }) {
                 <button
                   key={tier.id}
                   onClick={() => { setValue(String(tier.budget)); setStep(3) }}
-                  className="text-xs font-mono px-3 py-1.5 rounded-lg border border-line bg-surface text-ink hover:border-accent hover:text-accent transition-colors"
+                  className="text-xs font-mono px-3 py-1.5 rounded-lg border border-line bg-surface text-ink hover:border-copper hover:text-copper transition-colors"
                 >
                   {tier.label} · £{tier.budget}
                 </button>
@@ -204,8 +204,8 @@ export default function SetupFlow({ onBack }) {
         {step === 2 && existing && (
           <div className={`${PANEL} p-5 rise rise-2 w-full`}>
             <div className="inline-flex rounded-lg border border-line p-1 gap-0.5 mb-4">
-              <button onClick={() => setSourceTab('build')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'build' ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'}`}>Enter your parts</button>
-              <button onClick={() => setSourceTab('saved')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'saved' ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'}`}>Use a saved build</button>
+              <button onClick={() => setSourceTab('build')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'build' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Enter your parts</button>
+              <button onClick={() => setSourceTab('saved')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'saved' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Use a saved build</button>
             </div>
 
             {sourceTab === 'build' ? (
@@ -225,11 +225,11 @@ export default function SetupFlow({ onBack }) {
                       onClick={() => loadSaved(b)}
                       aria-pressed={on}
                       className={`w-full text-left border rounded-lg px-3 py-2.5 transition-colors
-                        ${on ? 'border-accent bg-accent-soft' : 'border-line bg-surface hover:border-line-strong'}`}
+                        ${on ? 'border-gold bg-gold-soft' : 'border-line bg-surface hover:border-line-strong'}`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-ink">{b.name}</span>
-                        <span className={`${TELEMETRY} text-xs ${on ? 'text-accent' : 'text-muted'}`}>£{total.toFixed(0)}</span>
+                        <span className={`${TELEMETRY} text-xs ${on ? 'text-tech' : 'text-muted'}`}>£{total.toFixed(0)}</span>
                       </div>
                       <div className="text-[11px] text-faint font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
                     </button>
@@ -240,7 +240,7 @@ export default function SetupFlow({ onBack }) {
 
             <div className="mt-4 pt-4 border-t border-line flex flex-wrap items-center gap-x-3 gap-y-2">
               <label htmlFor="setup-budget" className="text-xs text-muted">Your budget</label>
-              <span className="text-sm text-accent">£</span>
+              <span className="text-sm text-tech">£</span>
               <input
                 id="setup-budget"
                 type="number"
@@ -248,7 +248,7 @@ export default function SetupFlow({ onBack }) {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={partsTotal > 0 ? String(Math.round(partsTotal)) : '0'}
-                className="bg-surface-2 text-ink font-mono tabular-nums w-28 px-2 py-1 rounded-lg border border-line focus:outline-none focus:border-accent"
+                className="bg-surface-2 text-ink font-mono tabular-nums w-28 px-2 py-1 rounded-lg border border-line focus:outline-none focus:border-copper"
               />
               <span className="text-[11px] text-faint flex-1 min-w-[12rem]">
                 These parts cost <span className={TELEMETRY}>£{partsTotal.toFixed(0)}</span> — raise it to leave room for upgrades.
@@ -278,10 +278,10 @@ export default function SetupFlow({ onBack }) {
                     onClick={() => setUseCase(u.id)}
                     aria-pressed={selected}
                     className={`px-4 py-4 rounded-xl border text-left transition-colors group
-                      ${selected ? 'border-accent bg-accent-soft' : 'border-line bg-surface hover:border-accent'}`}
+                      ${selected ? 'border-gold bg-gold-soft' : 'border-line bg-surface hover:border-copper'}`}
                   >
-                    <div className={`text-lg font-bold ${selected ? 'text-accent' : 'text-ink group-hover:text-accent'}`}>{u.label}</div>
-                    <div className={`text-xs mt-1 ${selected ? 'text-accent' : 'text-muted'}`}>{u.blurb}</div>
+                    <div className={`text-lg font-bold ${selected ? 'text-gold' : 'text-ink group-hover:text-copper'}`}>{u.label}</div>
+                    <div className={`text-xs mt-1 ${selected ? 'text-gold' : 'text-muted'}`}>{u.blurb}</div>
                   </button>
                 )
               })}

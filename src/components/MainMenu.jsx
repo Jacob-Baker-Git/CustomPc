@@ -32,6 +32,8 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
             page and its metadata finally agree. Deliberately NOT an sr-only
             span: if it is worth telling a crawler it is worth showing a reader. */}
         <h1 className="rise font-display mb-3 text-ink tracking-tight text-center">
+          {/* wordmark — the brand orange lives here and in TopBar/ErrorBoundary
+              and nowhere else. Guarded by accentIsBrandOnly.test.js. */}
           <span className="block text-5xl font-extrabold">Custom PC <span className="text-accent">Builder</span></span>
           <span className="block mt-2 text-lg font-semibold text-muted">Build and price a gaming PC in 3D</span>
         </h1>
@@ -42,17 +44,17 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           {hasBuild && (
             <button
               onClick={onResume}
-              className="w-full px-6 py-5 rounded-xl border border-accent bg-accent-soft hover:brightness-110 text-left transition-all group"
+              className="w-full px-6 py-5 rounded-xl border border-copper bg-gold-soft hover:brightness-110 text-left transition-all group"
             >
               <div className="flex items-center gap-3">
                 <div className="flex-1">
-                  <div className="text-xl font-semibold text-accent">Carry on building</div>
+                  <div className="text-xl font-semibold text-copper">Carry on building</div>
                   <div className="text-sm text-muted mt-0.5">
                     <span className={TELEMETRY}>{partCount}</span> part{partCount === 1 ? '' : 's'} chosen
                     {budget > 0 && <> · <span className={TELEMETRY}>£{spent.toFixed(0)}</span> of <span className={TELEMETRY}>£{budget.toFixed(0)}</span></>}
                   </div>
                 </div>
-                <ArrowRight size={20} className="text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <ArrowRight size={20} className="text-copper transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </div>
             </button>
           )}
@@ -61,31 +63,31 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
             onClick={onStart}
             className={`w-full px-6 py-5 rounded-xl border text-left transition-colors group
               ${hasBuild
-                ? 'border-line bg-surface hover:border-accent hover:bg-accent-soft'
-                : 'border-accent bg-accent-soft hover:brightness-110'}`}
+                ? 'border-line bg-surface hover:border-copper hover:bg-gold-soft'
+                : 'border-copper bg-gold-soft hover:brightness-110'}`}
           >
             <div className="flex items-center gap-3">
-              <Cpu size={24} className="text-accent shrink-0" aria-hidden="true" />
+              <Cpu size={24} className="text-copper shrink-0" aria-hidden="true" />
               <div className="flex-1">
-                <div className={`text-xl font-semibold ${hasBuild ? 'text-ink group-hover:text-accent' : 'text-accent'}`}>
+                <div className={`text-xl font-semibold ${hasBuild ? 'text-ink group-hover:text-copper' : 'text-copper'}`}>
                   {hasBuild ? 'Start a different build' : 'Start a build'}
                 </div>
                 <div className="text-sm text-muted mt-0.5">
                   Set a budget, or enter the PC you already own to see what's worth upgrading.
                 </div>
               </div>
-              <ArrowRight size={20} className="text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <ArrowRight size={20} className="text-copper transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </div>
           </button>
 
           <button
             onClick={onSaved}
-            className="w-full px-6 py-4 rounded-xl border border-line bg-surface hover:border-accent text-left transition-colors group"
+            className="w-full px-6 py-4 rounded-xl border border-line bg-surface hover:border-copper text-left transition-colors group"
           >
             <div className="flex items-center gap-3">
-              <Bookmark size={20} className="text-accent shrink-0" aria-hidden="true" />
+              <Bookmark size={20} className="text-copper shrink-0" aria-hidden="true" />
               <div className="flex-1">
-                <div className="text-base font-semibold text-ink group-hover:text-accent">Saved builds</div>
+                <div className="text-base font-semibold text-ink group-hover:text-copper">Saved builds</div>
                 <div className="text-sm text-muted mt-0.5">
                   {savedCount === 0
                     ? 'Nothing saved yet'
