@@ -108,33 +108,35 @@ export default function RamBox({ designator, seated = false, open = false, class
 
   return (
     <div data-ram-box data-seated={String(seated)} data-open={String(open)} className={`relative ${className}`}>
-      <div className={`flex flex-col transition-transform duration-200 ${open ? '-translate-y-2' : ''}`}>
-        <Blades />
-        <div className="relative flex flex-1 px-3">
-          <span aria-hidden="true" className="absolute inset-y-0 left-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_L }} />
-          <span aria-hidden="true" className="absolute inset-y-0 right-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_R }} />
-          <div className="relative flex-1 border border-b-0 border-line-strong" style={{ backgroundImage: BODY }}>
-            <span aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ backgroundImage: GRAIN, opacity: 0.55 }} />
-            <span
-              aria-hidden="true"
-              data-bar={seated ? 'lit' : 'dead'}
-              className="absolute left-0 top-2 z-[4] h-[9px] w-2/5 rounded-r-sm"
-              style={{
-                background: seated ? BAR_LIT : BAR_DEAD,
-                boxShadow: seated ? '0 0 10px 1px rgba(201,168,107,.28)' : 'none',
-              }}
-            />
-            <div className="relative z-[2] px-4 pb-3 pt-8">
-              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
-              {children}
+      <div className="relative">
+        <div className={`flex flex-col transition-transform duration-200 ${open ? '-translate-y-2' : ''}`}>
+          <Blades />
+          <div className="relative flex flex-1 px-3">
+            <span aria-hidden="true" className="absolute inset-y-0 left-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_L }} />
+            <span aria-hidden="true" className="absolute inset-y-0 right-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_R }} />
+            <div className="relative flex-1 border border-b-0 border-line-strong" style={{ backgroundImage: BODY }}>
+              <span aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ backgroundImage: GRAIN, opacity: 0.55 }} />
+              <span
+                aria-hidden="true"
+                data-bar={seated ? 'lit' : 'dead'}
+                className="absolute left-0 top-2 z-[4] h-[9px] w-2/5 rounded-r-sm"
+                style={{
+                  background: seated ? BAR_LIT : BAR_DEAD,
+                  boxShadow: seated ? '0 0 10px 1px rgba(201,168,107,.28)' : 'none',
+                }}
+              />
+              <div className="relative z-[2] px-4 pb-3 pt-8">
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
+                {children}
+              </div>
             </div>
           </div>
+          <Contacts live={connected} />
         </div>
-        <Contacts live={connected} />
+        <Clip side="left" open={open} />
+        <Clip side="right" open={open} />
       </div>
       {open && <Socket />}
-      <Clip side="left" open={open} />
-      <Clip side="right" open={open} />
     </div>
   )
 }

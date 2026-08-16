@@ -74,6 +74,16 @@ describe('RamBox', () => {
 
   it('rocks both retention clips outward when open', () => {
     const { container } = render(<RamBox designator="DIMM_A2" seated open>x</RamBox>)
-    expect(container.querySelectorAll('[data-clip]')).toHaveLength(2)
+    const left = container.querySelector('[data-clip="left"]')
+    const right = container.querySelector('[data-clip="right"]')
+    expect(left.style.transform).toContain('-26deg')
+    expect(right.style.transform).toContain('26deg')
+  })
+
+  it('holds both clips upright while shut', () => {
+    const { container } = render(<RamBox designator="DIMM_A2" seated>x</RamBox>)
+    for (const clip of container.querySelectorAll('[data-clip]')) {
+      expect(clip.style.transform).toBe('rotate(0deg)')
+    }
   })
 })
