@@ -1,5 +1,12 @@
 <!doctype html>
-<html lang="en">
+<!-- The pre-CSS ground lives on <html>, not <body>, and that placement is
+     load-bearing. The root element's background is propagated to the canvas and
+     painted before everything, including negative-z-index layers. A background
+     on <body> is an ordinary in-flow block background instead, which in CSS
+     painting order comes AFTER negative-z-index stacking contexts — so it
+     covered BoardBackground (fixed, -z-10) completely and the board rendered as
+     plain black with every layer present and correctly sized. -->
+<html lang="en" style="background:#0E0F11">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -9,7 +16,7 @@
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <title>Custom PC Builder — Build & Price Your Gaming PC in 3D</title>
     <meta name="description" content="Plan a compatible custom gaming PC in 3D: auto-build to your budget, check real-game FPS, spot bottlenecks, and share your build." />
-    <meta name="theme-color" content="#0F1114" />
+    <meta name="theme-color" content="#0E0F11" />
     <meta name="google-site-verification" content="4l1jmNOPVTE9FrguZxnUVmpXPi2YM-lS7g0w_8a_3c4" />
     <link rel="canonical" href="https://custompcbuilder.netlify.app/" />
 
@@ -27,8 +34,8 @@
     <meta name="twitter:description" content="Plan a compatible custom gaming PC in 3D: auto-build to your budget, check real-game FPS, spot bottlenecks, and share your build." />
     <meta name="twitter:image" content="https://custompcbuilder.netlify.app/og-image.png" />
   </head>
-  <body style="margin:0;background:#0F1114">
-    <div id="root"><!--app--><div class="boot" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0F1114;color:#F26B3A;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.12em">Custom PC Builder…</div><!--/app--></div>
+  <body style="margin:0">
+    <div id="root"><!--app--><div class="boot" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0E0F11;color:#F26B3A;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.12em">Custom PC Builder…</div><!--/app--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -107,7 +107,7 @@ part's shape. An unpopulated slot is the same hardware, cold.
 
 Opening a box lifts it clear of its socket:
 
-1. The stick translates **up 9px**, opening a gap beneath it.
+1. The stick translates **up 8px** (`-translate-y-2`), opening a gap beneath it.
 2. **Retention clips rock outward** — 9×22px bars at the outer edges, from
    `rotate(0)` to `rotate(∓26deg)`, `transform-origin: bottom center`.
 3. **Contacts go cold.** The connection is genuinely broken.
@@ -181,6 +181,21 @@ be structure — the failure mode the designators exist to avoid.
 - `RamBox` owns chrome only: fins, caps, body, bar, contacts, socket. It takes
   `seated`, `open`, `designator`, `children` and knows nothing about builds,
   parts or prices.
+- **`designator` is OPTIONAL, and most panels do not get one.** Decided
+  2026-08-16 after the first migration shipped `CHK_1`, `BUILD_1`, `SETUP_1` and
+  `USB_1` — all invented. The rule this section already states is that a
+  designator names a real slot holding one swappable part, which is why
+  `PartSlot` has them; a warnings list, a wizard step and the aggregate
+  selected-parts list are none of those things. Inventing board silkscreen for
+  them is exactly the "decoration pretending to be structure" this design says
+  to avoid, so they now render with no label. **The silhouette carries the
+  identity — the label never did that work.** When absent, the content's top
+  padding drops from `pt-8` to `pt-3` so no gap is left behind.
+- **`seated` tracks whether the box has content**, not merely whether it stands
+  for a chosen part. A panel that renders only when populated is seated; one
+  that can be empty derives it from the state it already holds. Left unwired,
+  every static panel reads as an empty slot, which drains the meaning out of the
+  seated/empty distinction everywhere else.
 - Blade geometry lives in one exported constant, not scattered inline styles, so
   the percentage-vs-fixed decision has exactly one place to be revisited.
 - The socket renders as a sibling below the box, not inside it — a slot is not

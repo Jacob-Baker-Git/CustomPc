@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Wand2, Wrench, FileQuestion } from 'lucide-react'
-import Backdrop from './Backdrop'
+import BoardBackground from './BoardBackground'
+import SiteFooter from './SiteFooter'
+import { COLUMN_2XL } from '../lib/boardGeometry'
 import CategoryList from './CategoryList'
 import PartSelector from './PartSelector'
 import useBuilderStore from '../store/useBuilderStore'
@@ -11,7 +13,8 @@ import { TIERS } from '../lib/tiers'
 import { BUILD_PROFILES, USE_CASES } from '../lib/buildProfiles'
 import { buildForUseCase } from '../lib/useCaseBuilder'
 import { enterBuildTab } from '../lib/enterBuildTab'
-import { PANEL, BTN_PRIMARY, TELEMETRY } from '../lib/uiTokens'
+import { BTN_PRIMARY, TELEMETRY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 
 const totalOf = (parts) => Object.values(parts).reduce((s, p) => s + (p?.price ?? 0), 0)
 
@@ -123,8 +126,8 @@ export default function SetupFlow({ onBack }) {
   const back = () => (step === 1 ? onBack() : setStep(step - 1))
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center text-ink bg-ground py-12">
-      <Backdrop />
+    <div className="relative min-h-screen flex flex-col items-center text-ink py-12">
+      <BoardBackground column={COLUMN_2XL} />
       <div className="relative z-10 w-full max-w-2xl px-4 flex flex-col items-center">
         <h1 className="rise font-display text-4xl sm:text-5xl font-extrabold mb-6 text-ink tracking-tight text-center">Build Your PC</h1>
         <ol className="rise flex items-center gap-2 mb-8 text-[11px] uppercase tracking-wider">
@@ -202,7 +205,8 @@ export default function SetupFlow({ onBack }) {
         )}
 
         {step === 2 && existing && (
-          <div className={`${PANEL} p-5 rise rise-2 w-full`}>
+          // A wizard step always has content once it's on screen — always seated.
+          <RamBox seated className="rise rise-2 w-full">
             <div className="inline-flex rounded-lg border border-line p-1 gap-0.5 mb-4">
               <button onClick={() => setSourceTab('build')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'build' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Enter your parts</button>
               <button onClick={() => setSourceTab('saved')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'saved' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Use a saved build</button>
@@ -263,7 +267,7 @@ export default function SetupFlow({ onBack }) {
             >
               Next: use case →
             </button>
-          </div>
+          </RamBox>
         )}
 
         {step === 3 && (
@@ -295,6 +299,11 @@ export default function SetupFlow({ onBack }) {
         <button onClick={back} className="rise rise-4 mt-8 text-xs text-faint hover:text-ink transition-colors">
           {step === 1 ? '← Back to menu' : '← Back'}
         </button>
+
+        {/* The wizard is a real landing point — a shared link or a bookmark can
+            start here — so the policy links and the price caveat have to be
+            reachable from it like anywhere else. */}
+        <div className="w-full"><SiteFooter /></div>
       </div>
 
       {pickerCategory && (

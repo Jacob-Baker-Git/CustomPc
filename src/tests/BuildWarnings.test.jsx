@@ -22,4 +22,12 @@ describe('BuildWarnings', () => {
     render(<BuildWarnings />)
     expect(screen.getByText(/PSU/i)).toBeInTheDocument()
   })
+
+  // It only ever renders once there are warnings to show, so whenever it's on
+  // screen it has content — always seated.
+  it('renders as a seated RamBox rather than a plain panel', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    const { container } = render(<BuildWarnings />)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
+  })
 })

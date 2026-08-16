@@ -3,7 +3,8 @@ import CategoryList from './CategoryList'
 import ConfirmDialog from './ConfirmDialog'
 import useBuilderStore from '../store/useBuilderStore'
 import { countEssentials } from '../lib/recommendedOrder'
-import { PANEL, TELEMETRY } from '../lib/uiTokens'
+import { TELEMETRY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 
 // The Build tab's framing for CategoryList. It lives here rather than inside
 // CategoryList because SetupFlow renders that same list for "the PC I already
@@ -24,8 +25,15 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
     Object.values(selectedParts).filter(Boolean).length === 0 &&
     Object.values(selectedPeripherals).filter(Boolean).length === 0
 
+  // Seated is about THIS panel's own contents, so it counts parts only.
+  // `isEmpty` above deliberately counts peripherals as well, because Clear build
+  // empties both — reusing it here lit the parts panel gold when the only thing
+  // picked was a monitor on another tab, which is a different domain's state
+  // driving this box's metal.
+  const hasParts = Object.values(selectedParts).some(Boolean)
+
   return (
-    <section className={`${PANEL} p-4`}>
+    <RamBox seated={hasParts}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
         <h2 className="font-display text-base font-bold text-ink">Your parts</h2>
         <span className="text-xs text-muted">{chosen} of {total} essentials chosen</span>
@@ -67,6 +75,6 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
           onCancel={() => setClearOpen(false)}
         />
       )}
-    </section>
+    </RamBox>
   )
 }

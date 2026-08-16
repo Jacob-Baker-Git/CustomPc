@@ -1,9 +1,15 @@
 import { ArrowLeft } from 'lucide-react'
 import SiteFooter from './SiteFooter'
+import BoardBackground from './BoardBackground'
+import { COLUMN_3XL } from '../lib/boardGeometry'
 
 export default function SiteChrome({ onBack, children }) {
   return (
-    <div className="min-h-screen bg-ground text-ink">
+    <div className="relative min-h-screen text-ink">
+      {/* These are the pages the scrim exists for: /help, /glossary and the
+          legal pages carry the longest prose on the site, and gold under body
+          text reads fine on a 27" monitor and badly on a phone in daylight. */}
+      <BoardBackground column={COLUMN_3XL} />
       <header className="sticky top-0 z-40 bg-surface border-b border-line px-4 py-3 flex items-center gap-3">
         <button
           onClick={onBack}

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import TopBar from '../components/TopBar'
 const BuildCanvas = lazy(() => import('../components/BuildCanvas'))
-import Backdrop from '../components/Backdrop'
+import BoardBackground from '../components/BoardBackground'
+import SiteFooter from '../components/SiteFooter'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
 import InfoDisclaimer from '../components/InfoDisclaimer'
@@ -39,8 +40,11 @@ export default function BuilderScreen() {
   }
 
   return (
-    <div className="relative min-h-screen bg-ground">
-      <Backdrop />
+    <div className="relative min-h-screen">
+      {/* No column, so no scrim: this screen covers its viewport in opaque
+          panels and has no prose to protect. Dimming the board here would cost
+          the artwork and buy nothing. */}
+      <BoardBackground />
       <TopBar view={view} onViewChange={setView} />
       {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
           top padding below `xl` clears the header's second row of meters, which
@@ -103,6 +107,19 @@ export default function BuilderScreen() {
         ) : (
           <BuildSummary />
         )}
+
+        {/* Inside the scroller, not beside it: this screen's scroll container is
+            the h-screen div, so a footer outside it would sit off the bottom of
+            the viewport and never be reachable. The container's own pb-16
+            already clears the fixed tab bar below lg.
+
+            FULL WIDTH on purpose — this is the one screen with no scrim, so the
+            footer's own ground band is what protects its text from the board.
+            Cropping it to a text column would leave the edge-pinned hardware
+            layers, and their solid gold, showing on either side of it. */}
+        <div className="relative z-10">
+          <SiteFooter />
+        </div>
       </div>
       <ViewTabs view={view} onChange={setView} variant="bar" />
       {activeCategory && (

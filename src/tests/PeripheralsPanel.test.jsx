@@ -149,6 +149,18 @@ describe('PeripheralsPanel', () => {
     })
   })
 
+  it('renders the summary strip as an unseated RamBox when nothing is picked', () => {
+    const { container } = render(<PeripheralsPanel />)
+    expect(container.querySelector('[data-ram-box]')).not.toBeNull()
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'false')
+  })
+
+  it('seats the summary strip once a peripheral is picked', () => {
+    const { container } = render(<PeripheralsPanel />)
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(`^${monitor.name}`) }))
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
+  })
+
   it('reports how many are chosen and what they cost', () => {
     render(<PeripheralsPanel />)
     expect(screen.getByText('0 / 4')).toBeInTheDocument()

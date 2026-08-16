@@ -169,6 +169,12 @@ describe('SetupFlow — I already have a PC', () => {
     expect(screen.getByRole('button', { name: /next: use case/i })).toBeDisabled()
   })
 
+  it('renders the "your PC" step as a seated RamBox rather than a plain panel', () => {
+    const { container } = render(<SetupFlow onBack={() => {}} />)
+    startAt(/i already have a pc/i)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
+  })
+
   it('highlights a saved build when selected and unblocks the step', () => {
     render(<SetupFlow onBack={() => {}} />)
     startAt(/i already have a pc/i)
