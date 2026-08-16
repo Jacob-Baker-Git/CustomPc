@@ -49,7 +49,7 @@ export default function AutoBuildButton() {
             <div className="flex justify-end mt-4">
               <button
                 onClick={() => setNotice(null)}
-                className="text-xs px-3.5 py-2 rounded-lg bg-accent hover:brightness-110 text-accent-ink font-semibold transition-colors"
+                className="text-xs px-3.5 py-2 rounded-lg bg-copper hover:brightness-110 text-accent-ink font-semibold transition-colors"
               >
                 OK
               </button>

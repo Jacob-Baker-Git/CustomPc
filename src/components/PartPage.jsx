@@ -50,7 +50,7 @@ export default function PartPage({ partId, onNavigate }) {
           Nothing in the catalogue has the id <span className="font-mono text-ink">{partId}</span>.
           It may have been renamed or withdrawn.
         </p>
-        <a href="/parts" className="text-accent text-sm hover:underline">Browse every part →</a>
+        <a href="/parts" className="text-copper text-sm hover:underline">Browse every part →</a>
       </div>
     )
   }
@@ -71,7 +71,7 @@ export default function PartPage({ partId, onNavigate }) {
   return (
     <div>
       <nav aria-label="Breadcrumb" className="text-xs text-muted mb-3">
-        <a href="/parts" className="hover:text-accent">Parts browser</a>
+        <a href="/parts" className="hover:text-copper">Parts browser</a>
         <span className="mx-1.5" aria-hidden="true">/</span>
         <span className="capitalize">{CATEGORY_LABEL[part.category] ?? part.category}</span>
       </nav>
@@ -87,7 +87,7 @@ export default function PartPage({ partId, onNavigate }) {
       </p>
 
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mt-4">
-        <span className="font-mono text-2xl text-accent">£{part.price.toFixed(2)}</span>
+        <span className="font-mono text-2xl text-tech">£{part.price.toFixed(2)}</span>
         {/* Never "price". These are curated estimates and the terms page says so;
             a page generated 540 times over is the last place to blur that. */}
         <span className="text-xs text-muted">curated estimate, {PRICE_SNAPSHOT}</span>
@@ -96,7 +96,7 @@ export default function PartPage({ partId, onNavigate }) {
       <div className="flex flex-wrap gap-2 mt-5">
         <button
           onClick={buildWithIt}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-accent bg-accent-soft text-accent text-sm font-semibold hover:brightness-110 transition-all"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-copper bg-gold-soft text-copper text-sm font-semibold hover:brightness-110 transition-all"
         >
           Build a PC with this
           <ArrowRight size={15} aria-hidden="true" />
@@ -146,7 +146,7 @@ export default function PartPage({ partId, onNavigate }) {
             {derived.map(({ label, value, unit, hint }) => (
               <div key={label} className="contents">
                 <dt className="text-muted" title={hint || undefined}>{label}</dt>
-                <dd className="text-accent text-right font-mono tabular-nums">{value}{unit}</dd>
+                <dd className="text-tech text-right font-mono tabular-nums">{value}{unit}</dd>
               </div>
             ))}
           </dl>
@@ -174,13 +174,13 @@ export default function PartPage({ partId, onNavigate }) {
                     makes 540 pages worth having rather than 540 orphans. */}
                 <a
                   href={partPath(p)}
-                  className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2 hover:border-accent transition-colors group"
+                  className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2 hover:border-copper transition-colors group"
                 >
                   <span className="min-w-0">
-                    <span className="block text-sm text-ink truncate group-hover:text-accent">{p.name}</span>
+                    <span className="block text-sm text-ink truncate group-hover:text-copper">{p.name}</span>
                     <span className="block text-xs text-muted">{why}</span>
                   </span>
-                  <span className="font-mono text-sm text-accent shrink-0">£{p.price.toFixed(2)}</span>
+                  <span className="font-mono text-sm text-tech shrink-0">£{p.price.toFixed(2)}</span>
                 </a>
               </li>
             ))}

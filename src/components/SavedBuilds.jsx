@@ -33,8 +33,8 @@ function CompareTable({ a, b }) {
         <thead>
           <tr className="text-left">
             <th className="py-1.5 pr-2 font-normal text-muted w-24" />
-            <th className="py-1.5 pr-2 text-accent">{a.name}</th>
-            <th className="py-1.5 text-accent">{b.name}</th>
+            <th className="py-1.5 pr-2 text-tech">{a.name}</th>
+            <th className="py-1.5 text-tech">{b.name}</th>
           </tr>
         </thead>
         <tbody>
@@ -130,7 +130,7 @@ export default function SavedBuilds({ onLoaded }) {
                       <div className="text-sm text-ink truncate">{b.name}</div>
                       <div className="text-[11px] text-muted font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
                     </div>
-                    <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-lg bg-accent hover:brightness-110 text-accent-ink transition-colors">Load</button>
+                    <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-lg bg-copper hover:brightness-110 text-accent-ink transition-colors">Load</button>
                     <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-lg border border-line text-ink hover:border-line-strong transition-colors">Copy link</button>
                     <button onClick={() => setPendingDelete({ id: b.id, name: b.name })} aria-label={`Delete ${b.name}`} className="w-7 h-7 flex items-center justify-center rounded-lg text-muted hover:text-ink hover:bg-bad text-sm">&times;</button>
                   </div>

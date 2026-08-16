@@ -15,7 +15,7 @@ export default function ScoreInfo() {
         aria-expanded={open}
         aria-label="How the CustomPC score is calculated"
         title="How the CustomPC score is calculated"
-        className="w-5 h-5 flex items-center justify-center rounded-full border border-line text-muted hover:text-accent hover:border-accent transition-colors"
+        className="w-5 h-5 flex items-center justify-center rounded-full border border-line text-muted hover:text-copper hover:border-copper transition-colors"
       >
         <Info size={11} aria-hidden="true" />
       </button>

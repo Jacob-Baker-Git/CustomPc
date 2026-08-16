@@ -15,7 +15,7 @@ function BetaDot() {
   return (
     <span
       aria-hidden="true"
-      className="absolute -top-1 -right-3 px-1 rounded bg-accent-soft text-accent
+      className="absolute -top-1 -right-3 px-1 rounded bg-surface-2 text-tech
                  text-[8px] font-bold uppercase tracking-wide leading-[1.4]"
     >
       beta
@@ -46,7 +46,7 @@ export default function ViewTabs({ view, onChange, variant = 'inline' }) {
               onClick={() => onChange(v)}
               aria-current={on ? 'page' : undefined}
               className={`flex-1 flex flex-col items-center gap-0.5 py-2 text-[10px] font-semibold capitalize transition-colors
-                ${on ? 'text-accent' : 'text-muted hover:text-ink'}`}
+                ${on ? 'text-gold' : 'text-muted hover:text-ink'}`}
             >
               <span className="relative">
                 <Icon size={18} aria-hidden="true" />
@@ -75,20 +75,20 @@ export default function ViewTabs({ view, onChange, variant = 'inline' }) {
             onClick={() => onChange(v)}
             aria-current={on ? 'page' : undefined}
             className={`flex items-center justify-center gap-1.5 min-w-[104px] xl:min-w-[118px] px-3 py-1.5 text-xs font-semibold rounded-lg capitalize transition-colors
-              ${on ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink hover:bg-surface-2'}`}
+              ${on ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink hover:bg-surface-2'}`}
           >
             <Icon size={14} aria-hidden="true" />
             {v}
-            {/* The active tab is already a solid accent fill, so the badge needs
+            {/* The active tab is already a solid gold fill, so the badge needs
                 no plate of its own — accent-ink on that fill reads as a badge by
-                itself. The inactive one sits on the dark well and does need the
-                accent wash to separate from it. */}
+                itself. The inactive one sits on the dark well and does need a
+                plate to separate from it. */}
             {BETA_VIEWS.has(v) && (
               <>
                 <span
                   aria-hidden="true"
                   className={`px-1 rounded text-[9px] font-bold uppercase tracking-wide
-                    ${on ? 'text-accent-ink' : 'bg-accent-soft text-accent'}`}
+                    ${on ? 'text-accent-ink' : 'bg-surface-2 text-tech'}`}
                 >
                   beta
                 </span>

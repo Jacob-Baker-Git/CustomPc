@@ -12,6 +12,7 @@ export default function SiteChrome({ onBack, children }) {
         >
           <ArrowLeft size={14} aria-hidden="true" />
         </button>
+        {/* @wordmark — see accentIsBrandOnly.test.js */}
         <span className="font-display font-extrabold text-lg tracking-tight">PC <span className="text-accent">Builder</span></span>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-8">{children}</main>

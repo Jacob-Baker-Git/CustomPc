@@ -107,8 +107,8 @@ describe('opacity modifiers on semantic tokens (tailwind.config.js)', () => {
   })
 
   it('does not flag whole tokens or unrelated palettes', () => {
-    // bg-accent-soft is the supported way to get the wash bg-accent/15 wanted.
-    expect(violationsIn('bg-accent-soft bg-surface-2 text-muted border-line')).toHaveLength(0)
+    // bg-gold-soft is the supported way to get the wash bg-gold/15 wanted.
+    expect(violationsIn('bg-gold-soft bg-surface-2 text-muted border-line')).toHaveLength(0)
     // Tailwind's own palette is real hex and composes alpha perfectly well.
     expect(violationsIn('bg-black/50 text-white/70')).toHaveLength(0)
   })

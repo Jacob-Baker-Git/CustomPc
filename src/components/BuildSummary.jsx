@@ -31,7 +31,7 @@ function Row({ label, name, brand, price }) {
         href={searchUrl(name, brand)}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-28 text-right text-xs text-accent hover:text-accent whitespace-nowrap"
+        className="w-28 text-right text-xs text-copper hover:brightness-110 whitespace-nowrap"
       >
         Find Best Price ↗
       </a>
@@ -132,7 +132,7 @@ export default function BuildSummary() {
         <div className={`${PANEL} p-5`}>
           <div className="flex items-baseline justify-between mb-1">
             <h2 className="text-lg text-ink">Your build</h2>
-            <span className="font-mono text-base text-accent">
+            <span className="font-mono text-base text-tech">
               £{buildTotal.toFixed(0)}
               {budget > 0 && (
                 <span className={`text-sm ${overBudget ? 'text-bad' : 'text-muted'}`}> / £{budget.toFixed(0)}</span>
@@ -206,7 +206,7 @@ export default function BuildSummary() {
                   <button
                     onClick={() => setShowFps((v) => !v)}
                     aria-expanded={showFps}
-                    className="text-[11px] uppercase tracking-wider text-muted hover:text-accent transition-colors"
+                    className="text-[11px] uppercase tracking-wider text-muted hover:text-copper transition-colors"
                   >
                     Frame rates @ {RES_LABEL[resolution] ?? resolution} {showFps ? '−' : '+'}
                   </button>
@@ -230,14 +230,14 @@ export default function BuildSummary() {
             <button
               onClick={handleSave}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-accent text-accent hover:border-accent disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="text-xs px-3.5 py-2 rounded-lg border border-copper text-copper hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Save PC
             </button>
             <button
               onClick={copyShareLink}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg bg-accent hover:brightness-110 text-accent-ink disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="text-xs px-3.5 py-2 rounded-lg bg-copper hover:brightness-110 text-accent-ink disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               {copied ? 'Copied!' : 'Copy share link'}
             </button>
@@ -268,7 +268,7 @@ export default function BuildSummary() {
               the place where saving actually happens. */}
           <button
             onClick={() => setFlow('saved')}
-            className="mt-4 text-xs text-muted hover:text-accent transition-colors"
+            className="mt-4 text-xs text-muted hover:text-copper transition-colors"
           >
             View your saved builds →
           </button>
@@ -289,11 +289,11 @@ export default function BuildSummary() {
                 if (e.key === 'Enter') confirmSave()
                 if (e.key === 'Escape') setSaveOpen(false)
               }}
-              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-accent"
+              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-copper"
             />
             <div className="flex justify-end gap-2 mt-4">
               <button onClick={() => setSaveOpen(false)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-lg bg-accent hover:brightness-110 text-accent-ink transition-colors">Save</button>
+              <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-lg bg-copper hover:brightness-110 text-accent-ink transition-colors">Save</button>
             </div>
           </div>
         </div>

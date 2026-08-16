@@ -1,10 +1,13 @@
 export default function DynamicBars({ value, max, label, unit, compact = false }) {
   const hasMax = typeof max === 'number' && max > 0
   const pct = hasMax ? Math.min((value / max) * 100, 100) : 0
+  // Steel below 80%, because a meter at half capacity is not news. Signals are
+  // saturated so they INTERRUPT; spending one on the normal state means the bar
+  // is always shouting and the 80% step stops registering as a change.
   const barColor =
     pct >= 100 ? 'bg-bad'
     : pct >= 80 ? 'bg-ok'
-    : 'bg-accent'
+    : 'bg-steel'
 
   // Until a capacity is known (e.g. no PSU selected yet) show only the live draw,
   // not a misleading "0 / 750" against a default that isn't really there.

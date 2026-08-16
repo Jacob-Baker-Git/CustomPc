@@ -16,7 +16,7 @@ export default class CanvasErrorBoundary extends Component {
           <p className="text-sm text-muted">3D view unavailable on this device right now.</p>
           <button
             onClick={() => this.setState({ failed: false })}
-            className="text-xs px-4 py-2 rounded-lg border border-line text-ink hover:border-accent hover:text-accent transition-colors"
+            className="text-xs px-4 py-2 rounded-lg border border-line text-ink hover:border-copper hover:text-copper transition-colors"
           >
             Retry 3D view
           </button>

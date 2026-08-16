@@ -97,7 +97,9 @@ it('no longer shows the math challenge', () => {
 it('previews the rating on hover and focus, then reverts on leave/blur', () => {
   render(<FeedbackPage />)
   const star = (n) => screen.getByRole('button', { name: `Rate ${n}` })
-  const isFilled = (n) => star(n).querySelector('svg').classList.contains('fill-accent')
+  // Gold, not the brand orange: a chosen star is a SEATED state, and orange is
+  // reserved for the wordmark. See accentIsBrandOnly.test.js.
+  const isFilled = (n) => star(n).querySelector('svg').classList.contains('fill-gold')
   const isUnfilled = (n) => star(n).querySelector('svg').classList.contains('text-faint')
   const row = star(1).parentElement
 

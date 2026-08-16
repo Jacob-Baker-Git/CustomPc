@@ -24,7 +24,7 @@ export default function UseCaseChips() {
               onClick={() => setUseCase(u.id)}
               className={`rounded-lg border px-3 py-2 text-xs font-semibold transition-colors active:scale-95
                 ${on
-                  ? 'chip-pick border-accent bg-accent text-accent-ink'
+                  ? 'chip-pick border-gold bg-gold text-accent-ink'
                   : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
             >
               {u.label}

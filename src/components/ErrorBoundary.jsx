@@ -41,6 +41,7 @@ export default class ErrorBoundary extends Component {
     return (
       <div className="min-h-screen bg-ground text-ink flex items-center justify-center p-6">
         <div className="w-full max-w-lg bg-surface border border-line rounded-xl p-6 sm:p-8">
+          {/* @wordmark */}
           <span className="font-display font-extrabold text-lg tracking-tight">
             PC <span className="text-accent">Builder</span>
           </span>
@@ -54,7 +55,7 @@ export default class ErrorBoundary extends Component {
           <div className="flex flex-wrap gap-2 mt-6">
             <button
               onClick={this.reload}
-              className="bg-accent hover:brightness-110 text-accent-ink font-semibold px-5 py-2.5 rounded-lg transition-colors"
+              className="bg-copper hover:brightness-110 text-accent-ink font-semibold px-5 py-2.5 rounded-lg transition-colors"
             >
               Reload the page
             </button>
@@ -112,7 +113,7 @@ export default class ErrorBoundary extends Component {
 
           <p className="text-xs text-faint mt-5">
             Seeing this a lot?{' '}
-            <a href="/feedback" className="text-accent hover:underline">Tell us what you were doing</a>.
+            <a href="/feedback" className="text-copper hover:underline">Tell us what you were doing</a>.
           </p>
         </div>
       </div>

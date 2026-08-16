@@ -15,7 +15,7 @@ export default function InfoDisclaimer() {
         onClick={() => setOpen((o) => !o)}
         title={TEXT}
         aria-label={TEXT}
-        className="w-7 h-7 flex items-center justify-center rounded-full bg-surface border border-line text-accent hover:border-accent transition-colors"
+        className="w-7 h-7 flex items-center justify-center rounded-full bg-surface border border-line text-copper hover:border-copper transition-colors"
       >
         <Info size={14} aria-hidden="true" />
       </button>
@@ -24,7 +24,7 @@ export default function InfoDisclaimer() {
           {TEXT}
           <p className="mt-2">
             {/* CC BY 4.0 attribution for the part models lives on the Help page. */}
-            <a href="/help" className="text-accent hover:underline">3D model credits</a>
+            <a href="/help" className="text-copper hover:underline">3D model credits</a>
           </p>
         </div>
       )}
