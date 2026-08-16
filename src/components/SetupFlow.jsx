@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Wand2, Wrench, FileQuestion } from 'lucide-react'
-import Backdrop from './Backdrop'
+import BoardBackground from './BoardBackground'
+import { COLUMN_2XL } from '../lib/boardGeometry'
 import CategoryList from './CategoryList'
 import PartSelector from './PartSelector'
 import useBuilderStore from '../store/useBuilderStore'
@@ -124,8 +125,8 @@ export default function SetupFlow({ onBack }) {
   const back = () => (step === 1 ? onBack() : setStep(step - 1))
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center text-ink bg-ground py-12">
-      <Backdrop />
+    <div className="relative min-h-screen flex flex-col items-center text-ink py-12">
+      <BoardBackground column={COLUMN_2XL} />
       <div className="relative z-10 w-full max-w-2xl px-4 flex flex-col items-center">
         <h1 className="rise font-display text-4xl sm:text-5xl font-extrabold mb-6 text-ink tracking-tight text-center">Build Your PC</h1>
         <ol className="rise flex items-center gap-2 mb-8 text-[11px] uppercase tracking-wider">

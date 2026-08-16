@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import TopBar from '../components/TopBar'
 const BuildCanvas = lazy(() => import('../components/BuildCanvas'))
-import Backdrop from '../components/Backdrop'
+import BoardBackground from '../components/BoardBackground'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
 import InfoDisclaimer from '../components/InfoDisclaimer'
@@ -39,8 +39,11 @@ export default function BuilderScreen() {
   }
 
   return (
-    <div className="relative min-h-screen bg-ground">
-      <Backdrop />
+    <div className="relative min-h-screen">
+      {/* No column, so no scrim: this screen covers its viewport in opaque
+          panels and has no prose to protect. Dimming the board here would cost
+          the artwork and buy nothing. */}
+      <BoardBackground />
       <TopBar view={view} onViewChange={setView} />
       {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
           top padding below `xl` clears the header's second row of meters, which
