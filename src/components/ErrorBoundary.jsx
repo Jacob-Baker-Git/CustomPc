@@ -41,6 +41,7 @@ export default class ErrorBoundary extends Component {
     return (
       <div className="min-h-screen bg-ground text-ink flex items-center justify-center p-6">
         <div className="w-full max-w-lg bg-surface border border-line rounded-xl p-6 sm:p-8">
+          {/* @wordmark */}
           <span className="font-display font-extrabold text-lg tracking-tight">
             PC <span className="text-accent">Builder</span>
           </span>

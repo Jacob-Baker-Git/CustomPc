@@ -32,8 +32,9 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
             page and its metadata finally agree. Deliberately NOT an sr-only
             span: if it is worth telling a crawler it is worth showing a reader. */}
         <h1 className="rise font-display mb-3 text-ink tracking-tight text-center">
-          {/* wordmark — the brand orange lives here and in TopBar/ErrorBoundary
-              and nowhere else. Guarded by accentIsBrandOnly.test.js. */}
+          {/* The brand orange lives here, in TopBar, SiteChrome and
+              ErrorBoundary, and nowhere else — accentIsBrandOnly.test.js.
+              @wordmark */}
           <span className="block text-5xl font-extrabold">Custom PC <span className="text-accent">Builder</span></span>
           <span className="block mt-2 text-lg font-semibold text-muted">Build and price a gaming PC in 3D</span>
         </h1>

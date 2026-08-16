@@ -79,10 +79,10 @@ export default function ViewTabs({ view, onChange, variant = 'inline' }) {
           >
             <Icon size={14} aria-hidden="true" />
             {v}
-            {/* The active tab is already a solid accent fill, so the badge needs
+            {/* The active tab is already a solid gold fill, so the badge needs
                 no plate of its own — accent-ink on that fill reads as a badge by
-                itself. The inactive one sits on the dark well and does need the
-                accent wash to separate from it. */}
+                itself. The inactive one sits on the dark well and does need a
+                plate to separate from it. */}
             {BETA_VIEWS.has(v) && (
               <>
                 <span
