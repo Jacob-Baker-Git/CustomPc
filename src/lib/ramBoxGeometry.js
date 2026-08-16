@@ -1,4 +1,3 @@
-//
 // Every tuned number for the RamBox silhouette, in one file on purpose.
 //
 // ⚠️ Positions are PERCENTAGES, and that is a decision rather than an
@@ -29,11 +28,16 @@ export const CONTACT_HEIGHT = 13
 // transform-origin keeps the blade's foot planted on the body while the top
 // leans; without it the skew pivots about the centre and lifts the blade off.
 export function bladeStyle({ left, width, height, rake }) {
+  let sign
+  if (rake === 'left') sign = ''
+  else if (rake === 'right') sign = '-'
+  else throw new Error(`bladeStyle: unknown rake "${rake}"`)
+
   return {
     left: `${left}%`,
     width: `${width}%`,
     height: `${height}px`,
-    transform: `skewX(${rake === 'left' ? '' : '-'}${RAKE_DEG}deg)`,
+    transform: `skewX(${sign}${RAKE_DEG}deg)`,
     transformOrigin: 'bottom left',
   }
 }
