@@ -12,8 +12,8 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         ${locked
           ? 'border-line bg-surface-2 opacity-60'
           : selected
-            ? 'border-accent bg-accent-soft ring-1 ring-accent'
-            : 'border-line bg-surface hover:border-accent hover:-translate-y-0.5'
+            ? 'border-gold bg-gold-soft ring-1 ring-gold'
+            : 'border-line bg-surface hover:border-copper hover:-translate-y-0.5'
         }`}
     >
       <button
@@ -21,10 +21,10 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         title={locked ? lockReason : undefined}
         aria-disabled={locked || undefined}
         onClick={() => !locked && onSelect(part)}
-        className={`text-left flex flex-col gap-2 focus-visible:outline-accent ${locked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        className={`text-left flex flex-col gap-2 focus-visible:outline-copper ${locked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       >
         <div className="text-sm font-semibold text-ink leading-tight pr-6">{part.name}</div>
-        <div className="font-mono tabular-nums font-bold text-accent">£{part.price.toFixed(2)}</div>
+        <div className="font-mono tabular-nums font-bold text-tech">£{part.price.toFixed(2)}</div>
         <div className="text-xs text-muted space-y-0.5">
           {part.tdp > 0 && <div>{part.tdp}W TDP</div>}
           {part.socket && <div>Socket: {part.socket}</div>}
@@ -34,7 +34,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
             <div>{part.capacityGb >= 1000 ? `${part.capacityGb / 1000}TB` : `${part.capacityGb}GB`}</div>
           )}
           {part.perfScore > 0 && (
-            <div className="text-accent">{valuePerPound(part).toFixed(1)} perf/£100</div>
+            <div className="text-tech">{valuePerPound(part).toFixed(1)} perf/£100</div>
           )}
         </div>
       </button>
@@ -46,7 +46,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         aria-label={`More info about ${part.name}`}
         aria-expanded={showInfo}
         onClick={() => setShowInfo((v) => !v)}
-        className="self-start text-[11px] text-muted hover:text-accent border border-line hover:border-accent rounded-lg px-2 py-0.5 transition-colors"
+        className="self-start text-[11px] text-muted hover:text-copper border border-line hover:border-copper rounded-lg px-2 py-0.5 transition-colors"
       >
         {showInfo ? 'Hide info' : 'Info'}
       </button>
@@ -57,7 +57,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         </div>
       )}
       {selected && !locked && (
-        <div className="absolute top-2 right-2 text-[10px] uppercase tracking-wider text-accent border border-accent rounded-md px-1.5 py-0.5">
+        <div className="absolute top-2 right-2 text-[10px] uppercase tracking-wider text-gold border border-gold rounded-md px-1.5 py-0.5">
           Selected
         </div>
       )}

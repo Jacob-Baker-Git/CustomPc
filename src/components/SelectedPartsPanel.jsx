@@ -36,7 +36,7 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
         ) : (
           <span className="text-xs font-semibold text-good">All essentials covered</span>
         )}
-        <span className={`ml-auto ${TELEMETRY} text-sm font-semibold text-accent`}>£{spend.toFixed(0)}</span>
+        <span className={`ml-auto ${TELEMETRY} text-sm font-semibold text-tech`}>£{spend.toFixed(0)}</span>
         {/* Lifted off the panel with its own surface and carrying the warning
             colour, matching "Clear build" on the Summary tab — a destructive
             action that blends into the card behind it is one people miss. */}

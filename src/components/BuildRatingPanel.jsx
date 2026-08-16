@@ -82,10 +82,10 @@ export default function BuildRatingPanel() {
           </div>
 
           {tip && (
-            <div className="mb-4 rounded-lg border border-accent bg-accent-soft px-3 py-2.5">
+            <div className="mb-4 rounded-lg border border-copper bg-gold-soft px-3 py-2.5">
               <div className="flex items-center gap-1.5 mb-1">
-                <Zap size={13} className="text-accent shrink-0" aria-hidden="true" />
-                <span className="text-xs font-semibold text-accent">Best next move</span>
+                <Zap size={13} className="text-copper shrink-0" aria-hidden="true" />
+                <span className="text-xs font-semibold text-copper">Best next move</span>
               </div>
               <p className="text-[11px] text-muted leading-relaxed">
                 Your weakest part is the <span className="uppercase">{CAT_LABEL[tip.category] ?? tip.category}</span>.
@@ -129,7 +129,7 @@ export default function BuildRatingPanel() {
                       value=""
                       disabled={opts.length === 0}
                       onChange={(e) => chooseUpgrade(cat, e.target.value)}
-                      className="bg-surface-2 border border-line rounded-lg text-[11px] text-muted px-1.5 py-1 min-w-0 flex-1 max-w-[10rem] focus:outline-none focus:border-accent disabled:opacity-40"
+                      className="bg-surface-2 border border-line rounded-lg text-[11px] text-muted px-1.5 py-1 min-w-0 flex-1 max-w-[10rem] focus:outline-none focus:border-copper disabled:opacity-40"
                     >
                       {opts.length === 0 ? (
                         <option value="">Best available</option>

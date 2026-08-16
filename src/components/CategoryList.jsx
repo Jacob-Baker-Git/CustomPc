@@ -35,7 +35,7 @@ export default function CategoryList({
         if (part) {
           return (
             <div key={cat.id} className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
               <button onClick={() => onSelectCategory(cat.id)} className="flex items-center gap-2 flex-1 min-w-0 text-left">
                 <CategoryIcon id={cat.id} className="text-muted" />
                 <span className="min-w-0">
@@ -43,14 +43,16 @@ export default function CategoryList({
                   <span className="block text-sm text-ink truncate leading-tight mt-0.5">{part.name}</span>
                 </span>
               </button>
-              <span className="font-mono tabular-nums text-sm text-accent shrink-0">£{part.price.toFixed(0)}</span>
+              <span className="font-mono tabular-nums text-sm text-tech shrink-0">£{part.price.toFixed(0)}</span>
               <button onClick={() => onDeselect(cat.id)} aria-label={`Remove ${cat.label}`} className="w-7 h-7 flex items-center justify-center rounded-lg text-muted hover:text-ink hover:bg-bad text-sm shrink-0 transition-colors">&times;</button>
             </div>
           )
         }
 
-        // Three empty shapes: a real hole (red), the one to do next (red + accent
-        // pill), and a deliberately empty optional slot (neutral, explained).
+        // Three empty shapes: a real hole (red), the one to do next (copper —
+        // it is a prompt to ACT, not a selection, so it takes the action metal
+        // rather than gold), and a deliberately empty optional slot (neutral,
+        // explained).
         const flagged = emphasiseMissing && !optional
         const explained = emphasiseMissing && optional
 
@@ -65,9 +67,9 @@ export default function CategoryList({
         const tone = flagged
           ? 'border-bad bg-surface text-ink hover:brightness-110'
           : explained
-            ? 'border-line-strong bg-surface text-ink hover:border-accent hover:text-accent'
+            ? 'border-line-strong bg-surface text-ink hover:border-copper hover:text-copper'
             : isNext
-              ? 'border-accent bg-accent-soft text-accent hover:brightness-110'
+              ? 'border-copper bg-gold-soft text-copper hover:brightness-110'
               : 'border-line bg-surface text-muted hover:border-line-strong hover:text-ink'
 
         return (
@@ -78,7 +80,7 @@ export default function CategoryList({
               ${emphasiseMissing ? 'border-dashed' : ''} ${tone}`}
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-md bg-surface-2 text-[10px] font-mono text-muted shrink-0">{i + 1}</span>
-            <CategoryIcon id={cat.id} className={flagged ? 'text-bad' : explained ? 'text-muted' : isNext ? 'text-accent' : 'text-muted'} />
+            <CategoryIcon id={cat.id} className={flagged ? 'text-bad' : explained ? 'text-muted' : isNext ? 'text-copper' : 'text-muted'} />
             <span className="flex-1 text-left truncate">{cat.label}</span>
             {explained && (
               <>
@@ -90,7 +92,7 @@ export default function CategoryList({
             )}
             {flagged && <span className="text-[11px] font-semibold text-bad shrink-0">Missing</span>}
             {isNext && (
-              <span className="text-[10px] font-semibold bg-accent text-accent-ink rounded-full px-2 py-0.5 shrink-0">
+              <span className="text-[10px] font-semibold bg-copper text-accent-ink rounded-full px-2 py-0.5 shrink-0">
                 Pick one
               </span>
             )}
