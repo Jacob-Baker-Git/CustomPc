@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import MainMenu from '../components/MainMenu'
 import useBuilderStore from '../store/useBuilderStore'
 import useSavedStore from '../store/useSavedStore'
+import { BLADES } from '../lib/ramBoxGeometry'
 
 const noop = () => {}
 
@@ -116,7 +117,13 @@ describe('the entry cards are seated RAM that unseats on hover', () => {
     useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
     const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
     expect(boxes(container)).toHaveLength(3)
-    expect(container.querySelectorAll('[data-blade]')).toHaveLength(15)
+    // Derived from BLADES rather than hardcoded at 15: the blade count is a
+    // tuned decision that lives in ramBoxGeometry, and pinning it here a second
+    // time would fail this test for a change that has nothing to do with the
+    // entry screen.
+    for (const box of boxes(container)) {
+      expect(box.querySelectorAll('[data-blade]')).toHaveLength(BLADES.length)
+    }
   })
 
   it('seats every slot, even for a first-time visitor', () => {
@@ -179,8 +186,41 @@ describe('the entry cards are seated RAM that unseats on hover', () => {
     // than a mechanism. It sits behind the stick instead.
     const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
     const sockets = container.querySelectorAll('[data-socket]')
-    expect(sockets).toHaveLength(2)
+    // One per box, counted off the boxes rather than fixed at 2 — otherwise
+    // adding a fourth card silently leaves it socketless and green.
+    expect(sockets).toHaveLength(boxes(container).length)
     for (const s of sockets) expect(s.className).toMatch(/\babsolute\b/)
+  })
+
+  it('lifts only the slot under the pointer', () => {
+    // The state belongs to each box. If it were ever hoisted into MainMenu, or
+    // driven by a CSS group on a shared ancestor, hovering one card would lift
+    // the whole bank — and every other test here would still pass, because they
+    // all look at one box at a time.
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    const [first, ...rest] = boxes(container)
+
+    fireEvent.mouseEnter(first)
+    expect(first).toHaveAttribute('data-lifted', 'true')
+    for (const other of rest) expect(other).toHaveAttribute('data-lifted', 'false')
+  })
+
+  it('stays lifted while focused even after the pointer leaves', () => {
+    // Pointer and focus are tracked separately for exactly this case. With one
+    // shared flag, tabbing to a card and then sweeping the mouse across it and
+    // away drops it back into its slot with the focus ring still on it.
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    const box = container.querySelector('[data-ram-box]')
+    const button = box.closest('button')
+
+    fireEvent.focus(button)
+    fireEvent.mouseEnter(box)
+    fireEvent.mouseLeave(box)
+    expect(box).toHaveAttribute('data-lifted', 'true')
+
+    fireEvent.blur(button)
+    expect(box).toHaveAttribute('data-lifted', 'false')
   })
 
   it('carries no designators', () => {

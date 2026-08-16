@@ -125,11 +125,16 @@ export default function RamBox({
   className = '',
   children,
 }) {
-  // Pointer OR keyboard: a lift that only answers a mouse is a decoration for
-  // some users and nothing at all for the rest, and every caller of this is a
-  // button that can be tabbed to.
+  // Pointer and keyboard tracked SEPARATELY, not as one `lifted` flag.
+  //
+  // One flag looks equivalent and is not: tab to a card, then sweep the mouse
+  // across it and away, and mouseleave clears the flag while the card is still
+  // focused — it drops back into its slot with a focus ring floating over it.
+  // Either input holding is enough to keep it out.
   const rootRef = useRef(null)
-  const [lifted, setLifted] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const lifted = hovered || focused
 
   // Driven through the same path as `open` rather than a parallel one, so the
   // whole mechanism — clips rocking out, contacts going cold, the stick rising
@@ -152,8 +157,8 @@ export default function RamBox({
     const target = rootRef.current?.closest('button, a, [tabindex]') ?? rootRef.current
     if (!target) return undefined
 
-    const on = () => setLifted(true)
-    const off = () => setLifted(false)
+    const on = () => setFocused(true)
+    const off = () => setFocused(false)
     target.addEventListener('focus', on)
     target.addEventListener('blur', off)
     return () => {
@@ -164,7 +169,7 @@ export default function RamBox({
 
   // The pointer, by contrast, is genuinely over this element, so these stay put.
   const lift = liftOnHover
-    ? { onMouseEnter: () => setLifted(true), onMouseLeave: () => setLifted(false) }
+    ? { onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false) }
     : null
 
   return (
