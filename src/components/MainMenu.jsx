@@ -44,7 +44,12 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           <span className="block mt-2 text-lg font-semibold text-muted">Build and price a gaming PC in 3D</span>
         </h1>
         <p className="rise text-muted mb-1">Pick parts that actually work together.</p>
-        <p className="rise text-faint text-xs mb-10">Free · no sign-up · everything runs in your browser</p>
+        {/* "Free · no sign-up" is the footer's line, and the footer is on this
+            screen too — saying it twice within one viewport spends the only
+            line here that could carry something new. This says the other half
+            of the same promise, in the same words HelpPage and the Privacy
+            page already use for it. */}
+        <p className="rise text-faint text-xs mb-10">Nothing to install · your builds stay in your own browser</p>
 
         {/* A bank of RAM, all of it seated, and hovering lifts a stick out of
             its slot: clips rock outward, the contacts lose the gold, and the

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Wand2, Wrench, FileQuestion } from 'lucide-react'
 import BoardBackground from './BoardBackground'
+import SiteFooter from './SiteFooter'
 import { COLUMN_2XL } from '../lib/boardGeometry'
 import CategoryList from './CategoryList'
 import PartSelector from './PartSelector'
@@ -298,6 +299,11 @@ export default function SetupFlow({ onBack }) {
         <button onClick={back} className="rise rise-4 mt-8 text-xs text-faint hover:text-ink transition-colors">
           {step === 1 ? '← Back to menu' : '← Back'}
         </button>
+
+        {/* The wizard is a real landing point — a shared link or a bookmark can
+            start here — so the policy links and the price caveat have to be
+            reachable from it like anywhere else. */}
+        <div className="w-full"><SiteFooter /></div>
       </div>
 
       {pickerCategory && (
