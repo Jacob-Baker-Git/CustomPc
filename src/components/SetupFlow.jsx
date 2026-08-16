@@ -203,7 +203,8 @@ export default function SetupFlow({ onBack }) {
         )}
 
         {step === 2 && existing && (
-          <RamBox designator="SETUP_1" className="rise rise-2 w-full">
+          // A wizard step always has content once it's on screen — always seated.
+          <RamBox seated className="rise rise-2 w-full">
             <div className="inline-flex rounded-lg border border-line p-1 gap-0.5 mb-4">
               <button onClick={() => setSourceTab('build')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'build' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Enter your parts</button>
               <button onClick={() => setSourceTab('saved')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'saved' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Use a saved build</button>

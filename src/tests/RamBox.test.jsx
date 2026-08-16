@@ -20,6 +20,12 @@ describe('RamBox', () => {
     expect(blades(container)).toHaveLength(5)
   })
 
+  it('omits the designator label when none is supplied, but still draws as a RamBox', () => {
+    const { container } = render(<RamBox>x</RamBox>)
+    expect(container.querySelector('.font-mono')).toBeNull()
+    expect(blades(container)).toHaveLength(5)
+  })
+
   it('marks itself seated and lights the contacts', () => {
     const { container } = render(<RamBox designator="CPU_1" seated>x</RamBox>)
     expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')

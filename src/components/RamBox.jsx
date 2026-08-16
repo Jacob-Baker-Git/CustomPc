@@ -125,8 +125,10 @@ export default function RamBox({ designator, seated = false, open = false, class
                   boxShadow: seated ? '0 0 10px 1px rgba(201,168,107,.28)' : 'none',
                 }}
               />
-              <div className="relative z-[2] px-4 pb-3 pt-8">
-                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
+              <div className={`relative z-[2] px-4 pb-3 ${designator ? 'pt-8' : 'pt-3'}`}>
+                {designator && (
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
+                )}
                 {children}
               </div>
             </div>

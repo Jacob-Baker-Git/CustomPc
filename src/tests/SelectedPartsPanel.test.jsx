@@ -46,10 +46,17 @@ describe('SelectedPartsPanel', () => {
     expect(screen.getAllByText('Missing').length).toBeGreaterThan(0)
   })
 
-  it('renders as a RamBox rather than a plain panel', () => {
-    const { container } = render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} />)
+  it('renders as an unseated RamBox when nothing is selected', () => {
+    useBuilderStore.setState({ selectedPeripherals: {} })
+    const { container } = render(<SelectedPartsPanel selectedParts={{}} onSelectCategory={noop} onDeselect={noop} />)
     expect(container.querySelector('[data-ram-box]')).not.toBeNull()
-    expect(container.querySelectorAll('[data-blade]')).toHaveLength(5)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'false')
+  })
+
+  it('seats the RamBox once parts are selected', () => {
+    useBuilderStore.setState({ selectedPeripherals: {} })
+    const { container } = render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} />)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
   })
 })
 

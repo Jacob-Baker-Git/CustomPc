@@ -8,7 +8,9 @@ export default function BuildWarnings() {
   if (warnings.length === 0) return null
 
   return (
-    <RamBox designator="CHK_1">
+    // Never renders without warnings (see the early return above), so whenever
+    // this is on screen it has content — always seated.
+    <RamBox seated>
       <div className="text-[11px] uppercase tracking-wider text-muted mb-2">Build checks</div>
       <ul className="space-y-1.5">
         {warnings.map((w, i) => (

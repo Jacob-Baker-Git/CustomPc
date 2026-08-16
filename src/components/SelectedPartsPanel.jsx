@@ -26,7 +26,7 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
     Object.values(selectedPeripherals).filter(Boolean).length === 0
 
   return (
-    <RamBox designator="BUILD_1">
+    <RamBox seated={!isEmpty}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
         <h2 className="font-display text-base font-bold text-ink">Your parts</h2>
         <span className="text-xs text-muted">{chosen} of {total} essentials chosen</span>
