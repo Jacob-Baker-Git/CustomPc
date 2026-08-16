@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { BLADES, FIN_ROW_HEIGHT, CONTACT_HEIGHT, bladeStyle } from '../lib/ramBoxGeometry'
 
 // A panel drawn as the DIMM it stands for.
@@ -33,15 +34,30 @@ const CONTACT_BASE = '#13161b'
 const LIVE = `repeating-linear-gradient(90deg,#D9BE8A 0 1.7px,#8a6f3f 1.7px 2.1px,${CONTACT_BASE} 2.1px 3.2px)`
 const COLD = `repeating-linear-gradient(90deg,#5c5340 0 1.7px,#3b3527 1.7px 2.1px,${CONTACT_BASE} 2.1px 3.2px)`
 
-// The socket the part came out of. It renders as a SIBLING below the box, not
-// inside it — a slot is not part of the part. Its gold is the same gold that
-// left the contacts: the eye follows the part out of its seat.
-function Socket() {
+// The socket the part came out of. Its gold is the same gold that left the
+// contacts: the eye follows the part out of its seat.
+//
+// Two placements, and the difference is layout, not looks:
+//
+// `floating` sits BEHIND the stick, absolutely positioned, so it costs no
+// height. That is what hover needs — a socket that adds 15px to the flow would
+// shove the page around every time the pointer crossed a card, which reads as a
+// glitch rather than as a mechanism. At rest the stick's own opaque contacts
+// cover it completely; lifting uncovers it.
+//
+// In flow (the `open` case) it is a SIBLING below the box rather than a child —
+// a slot is not part of the part — and the height it adds is wanted, because
+// the panel it belongs to is expanding anyway.
+function Socket({ floating = false, revealed = false }) {
   return (
     <div
       aria-hidden="true"
       data-socket
-      className="relative mx-1 h-[15px] rounded-b-sm border border-t-0 border-[#4a4335] bg-[linear-gradient(180deg,#1a1d23,#101318)] shadow-[inset_0_3px_7px_-2px_rgba(201,168,107,.5)]"
+      className={`h-[15px] rounded-b-sm border border-t-0 border-[#4a4335] bg-[linear-gradient(180deg,#1a1d23,#101318)] shadow-[inset_0_3px_7px_-2px_rgba(201,168,107,.5)] ${
+        floating
+          ? `absolute inset-x-1 bottom-0 transition-opacity duration-200 ${revealed ? 'opacity-100' : 'opacity-0'}`
+          : 'relative mx-1'
+      }`}
     >
       <i className="absolute inset-y-0.5 left-[34%] w-[5px] rounded-sm bg-ground shadow-[inset_1px_0_0_var(--line),inset_-1px_0_0_var(--line)]" />
     </div>
@@ -101,15 +117,71 @@ function Contacts({ live }) {
   )
 }
 
-export default function RamBox({ designator, seated = false, open = false, className = '', children }) {
+export default function RamBox({
+  designator,
+  seated = false,
+  open = false,
+  liftOnHover = false,
+  className = '',
+  children,
+}) {
+  // Pointer OR keyboard: a lift that only answers a mouse is a decoration for
+  // some users and nothing at all for the rest, and every caller of this is a
+  // button that can be tabbed to.
+  const rootRef = useRef(null)
+  const [lifted, setLifted] = useState(false)
+
+  // Driven through the same path as `open` rather than a parallel one, so the
+  // whole mechanism — clips rocking out, contacts going cold, the stick rising
+  // — stays defined in exactly one place.
+  const unseated = open || (liftOnHover && lifted)
+
   // Contacts are cold whenever the part is not electrically home — either
-  // because nothing is seated, or because opening lifted it clear.
-  const connected = seated && !open
+  // because nothing is seated, or because it has been lifted clear.
+  const connected = seated && !unseated
+
+  // ⚠️ Focus is bound to an ANCESTOR, not to this component, and it has to be.
+  //
+  // The interactive element belongs to the caller and WRAPS this one —
+  // MainMenu renders <button><RamBox/></button>. Focus therefore lands above
+  // us, and focus events do not travel downward, so an onFocus prop on our own
+  // root can never fire. It looked correct and did nothing: the box lifted for
+  // a mouse and stayed dead for the keyboard.
+  useEffect(() => {
+    if (!liftOnHover) return undefined
+    const target = rootRef.current?.closest('button, a, [tabindex]') ?? rootRef.current
+    if (!target) return undefined
+
+    const on = () => setLifted(true)
+    const off = () => setLifted(false)
+    target.addEventListener('focus', on)
+    target.addEventListener('blur', off)
+    return () => {
+      target.removeEventListener('focus', on)
+      target.removeEventListener('blur', off)
+    }
+  }, [liftOnHover])
+
+  // The pointer, by contrast, is genuinely over this element, so these stay put.
+  const lift = liftOnHover
+    ? { onMouseEnter: () => setLifted(true), onMouseLeave: () => setLifted(false) }
+    : null
 
   return (
-    <div data-ram-box data-seated={String(seated)} data-open={String(open)} className={`relative ${className}`}>
+    <div
+      ref={rootRef}
+      data-ram-box
+      data-seated={String(seated)}
+      data-open={String(open)}
+      data-lifted={String(unseated)}
+      className={`relative ${className}`}
+      {...lift}
+    >
       <div className="relative">
-        <div className={`flex flex-col transition-transform duration-200 ${open ? '-translate-y-2' : ''}`}>
+        {/* Behind the stick, so lifting uncovers it. Skipped when `open` already
+            renders one in the flow — two sockets for one slot. */}
+        {liftOnHover && !open && <Socket floating revealed={unseated} />}
+        <div className={`relative flex flex-col transition-transform duration-200 ${unseated ? '-translate-y-2' : ''}`}>
           <Blades />
           <div className="relative flex flex-1 px-3">
             <span aria-hidden="true" className="absolute inset-y-0 left-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_L }} />
@@ -142,8 +214,8 @@ export default function RamBox({ designator, seated = false, open = false, class
           </div>
           <Contacts live={connected} />
         </div>
-        <Clip side="left" open={open} />
-        <Clip side="right" open={open} />
+        <Clip side="left" open={unseated} />
+        <Clip side="right" open={unseated} />
       </div>
       {open && <Socket />}
     </div>

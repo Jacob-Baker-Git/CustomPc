@@ -46,15 +46,20 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
         <p className="rise text-muted mb-1">Pick parts that actually work together.</p>
         <p className="rise text-faint text-xs mb-10">Free · no sign-up · everything runs in your browser</p>
 
-        {/* The entry screen is a bank of slots, and how many are lit says where
-            you stand: carry-on is seated by definition, saved-builds only once
-            something is in it, and starting a build is an empty slot — which is
-            literally true and is the honest thing to draw.
+        {/* A bank of RAM, all of it seated, and hovering lifts a stick out of
+            its slot: clips rock outward, the contacts lose the gold, and the
+            socket underneath comes into view.
 
-            An empty primary action is not a contradiction here, because the two
-            things are on different channels: copper carries ACTION and gold
-            carries STATE. A first-time visitor gets a cold slot with a copper
-            title, which reads as "do this" and "nothing here yet" at once.
+            ⚠️ These are seated UNCONDITIONALLY, and that is a reversal. They
+            briefly tracked content instead — carry-on seated, saved-builds only
+            once something was in it, start-a-build a permanently empty slot —
+            which encoded real state but left a first-time visitor looking at a
+            screen of dead hardware. A box that is RAM is seated; the hover is
+            what the state language does here now.
+
+            So the empty/seated distinction still means something everywhere
+            else, but it is NOT what this screen is for. If you are about to
+            wire `seated` back to savedCount, that was tried.
 
             No designators. The rule is that a designator names a real slot
             holding one swappable part — these are navigation, and the first
@@ -63,7 +68,7 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
         <div className="rise rise-2 w-full flex flex-col gap-3">
           {hasBuild && (
             <button onClick={onResume} className="w-full text-left transition group hover:brightness-110">
-              <RamBox seated>
+              <RamBox seated liftOnHover>
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
                     <div className="text-xl font-semibold text-copper">Carry on building</div>
@@ -79,7 +84,7 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           )}
 
           <button onClick={onStart} className="w-full text-left transition group hover:brightness-110">
-            <RamBox>
+            <RamBox seated liftOnHover>
               <div className="flex items-center gap-3">
                 <Cpu size={24} className="text-copper shrink-0" aria-hidden="true" />
                 <div className="flex-1">
@@ -96,7 +101,7 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           </button>
 
           <button onClick={onSaved} className="w-full text-left transition group hover:brightness-110">
-            <RamBox seated={savedCount > 0}>
+            <RamBox seated liftOnHover>
               <div className="flex items-center gap-3">
                 <Bookmark size={20} className="text-copper shrink-0" aria-hidden="true" />
                 <div className="flex-1">
