@@ -45,6 +45,12 @@ describe('SelectedPartsPanel', () => {
     render(<SelectedPartsPanel selectedParts={{ cpu }} onSelectCategory={noop} onDeselect={noop} />)
     expect(screen.getAllByText('Missing').length).toBeGreaterThan(0)
   })
+
+  it('renders as a RamBox rather than a plain panel', () => {
+    const { container } = render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} />)
+    expect(container.querySelector('[data-ram-box]')).not.toBeNull()
+    expect(container.querySelectorAll('[data-blade]')).toHaveLength(5)
+  })
 })
 
 // Clearing is duplicated from the Summary tab on purpose — this is where people

@@ -3,7 +3,8 @@ import CategoryList from './CategoryList'
 import ConfirmDialog from './ConfirmDialog'
 import useBuilderStore from '../store/useBuilderStore'
 import { countEssentials } from '../lib/recommendedOrder'
-import { PANEL, TELEMETRY } from '../lib/uiTokens'
+import { TELEMETRY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 
 // The Build tab's framing for CategoryList. It lives here rather than inside
 // CategoryList because SetupFlow renders that same list for "the PC I already
@@ -25,7 +26,7 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
     Object.values(selectedPeripherals).filter(Boolean).length === 0
 
   return (
-    <section className={`${PANEL} p-4`}>
+    <RamBox designator="BUILD_1">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
         <h2 className="font-display text-base font-bold text-ink">Your parts</h2>
         <span className="text-xs text-muted">{chosen} of {total} essentials chosen</span>
@@ -67,6 +68,6 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
           onCancel={() => setClearOpen(false)}
         />
       )}
-    </section>
+    </RamBox>
   )
 }

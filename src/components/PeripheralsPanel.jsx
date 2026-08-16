@@ -4,7 +4,8 @@ import useBuilderStore, { selPeripheralsTotal } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import SpecSheet from './SpecSheet'
 import PeripheralFilterPanel from './PeripheralFilterPanel'
-import { PANEL, TELEMETRY } from '../lib/uiTokens'
+import { TELEMETRY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 import {
   filterPeripherals, specValues, SORTS, DEFAULT_SORT,
   brandValues, refreshBandsFor, toFilterOptions,
@@ -110,22 +111,24 @@ export default function PeripheralsPanel() {
       <div className="max-w-5xl mx-auto">
         {/* A running total and a progress line, so the tab says how far along you
             are rather than just listing four unrelated grids. */}
-        <div className={`${PANEL} p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-2`}>
-          <div>
-            <h2 className="font-display text-xl font-bold text-ink">Peripherals</h2>
-            <p className="text-xs text-muted mt-0.5">Optional — they are counted separately from the build budget.</p>
-          </div>
-          <div className="ml-auto flex items-center gap-6">
-            <div className="text-right">
-              <div className="text-[10px] uppercase tracking-wide text-faint">Chosen</div>
-              <div className={`${TELEMETRY} text-sm text-ink`}>{pickedCount} / {CATEGORIES.length}</div>
+        <RamBox designator="USB_1" className="mb-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <div>
+              <h2 className="font-display text-xl font-bold text-ink">Peripherals</h2>
+              <p className="text-xs text-muted mt-0.5">Optional — they are counted separately from the build budget.</p>
             </div>
-            <div className="text-right">
-              <div className="text-[10px] uppercase tracking-wide text-faint">Subtotal</div>
-              <div className={`${TELEMETRY} text-sm font-semibold text-tech`}>£{total.toFixed(2)}</div>
+            <div className="ml-auto flex items-center gap-6">
+              <div className="text-right">
+                <div className="text-[10px] uppercase tracking-wide text-faint">Chosen</div>
+                <div className={`${TELEMETRY} text-sm text-ink`}>{pickedCount} / {CATEGORIES.length}</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] uppercase tracking-wide text-faint">Subtotal</div>
+                <div className={`${TELEMETRY} text-sm font-semibold text-tech`}>£{total.toFixed(2)}</div>
+              </div>
             </div>
           </div>
-        </div>
+        </RamBox>
 
         {/* Search and sort apply across all four groups — with ~120 items and no
             way to look one up, price bands alone were doing too much work. */}

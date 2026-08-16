@@ -1,6 +1,6 @@
 import useBuilderStore from '../store/useBuilderStore'
 import { getBuildWarnings } from '../lib/buildWarnings'
-import { PANEL } from '../lib/uiTokens'
+import RamBox from './RamBox'
 
 export default function BuildWarnings() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
@@ -8,7 +8,7 @@ export default function BuildWarnings() {
   if (warnings.length === 0) return null
 
   return (
-    <div className={`${PANEL} p-4`}>
+    <RamBox designator="CHK_1">
       <div className="text-[11px] uppercase tracking-wider text-muted mb-2">Build checks</div>
       <ul className="space-y-1.5">
         {warnings.map((w, i) => (
@@ -18,6 +18,6 @@ export default function BuildWarnings() {
           </li>
         ))}
       </ul>
-    </div>
+    </RamBox>
   )
 }

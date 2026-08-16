@@ -149,6 +149,12 @@ describe('PeripheralsPanel', () => {
     })
   })
 
+  it('renders the summary strip as a RamBox rather than a plain panel', () => {
+    const { container } = render(<PeripheralsPanel />)
+    expect(container.querySelector('[data-ram-box]')).not.toBeNull()
+    expect(container.querySelectorAll('[data-blade]')).toHaveLength(5)
+  })
+
   it('reports how many are chosen and what they cost', () => {
     render(<PeripheralsPanel />)
     expect(screen.getByText('0 / 4')).toBeInTheDocument()

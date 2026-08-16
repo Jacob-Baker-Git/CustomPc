@@ -22,4 +22,11 @@ describe('BuildWarnings', () => {
     render(<BuildWarnings />)
     expect(screen.getByText(/PSU/i)).toBeInTheDocument()
   })
+
+  it('renders as a RamBox rather than a plain panel', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    const { container } = render(<BuildWarnings />)
+    expect(container.querySelector('[data-ram-box]')).not.toBeNull()
+    expect(container.querySelectorAll('[data-blade]')).toHaveLength(5)
+  })
 })

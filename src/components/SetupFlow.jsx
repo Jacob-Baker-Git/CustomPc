@@ -11,7 +11,8 @@ import { TIERS } from '../lib/tiers'
 import { BUILD_PROFILES, USE_CASES } from '../lib/buildProfiles'
 import { buildForUseCase } from '../lib/useCaseBuilder'
 import { enterBuildTab } from '../lib/enterBuildTab'
-import { PANEL, BTN_PRIMARY, TELEMETRY } from '../lib/uiTokens'
+import { BTN_PRIMARY, TELEMETRY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 
 const totalOf = (parts) => Object.values(parts).reduce((s, p) => s + (p?.price ?? 0), 0)
 
@@ -202,7 +203,7 @@ export default function SetupFlow({ onBack }) {
         )}
 
         {step === 2 && existing && (
-          <div className={`${PANEL} p-5 rise rise-2 w-full`}>
+          <RamBox designator="SETUP_1" className="rise rise-2 w-full">
             <div className="inline-flex rounded-lg border border-line p-1 gap-0.5 mb-4">
               <button onClick={() => setSourceTab('build')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'build' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Enter your parts</button>
               <button onClick={() => setSourceTab('saved')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${sourceTab === 'saved' ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink'}`}>Use a saved build</button>
@@ -263,7 +264,7 @@ export default function SetupFlow({ onBack }) {
             >
               Next: use case →
             </button>
-          </div>
+          </RamBox>
         )}
 
         {step === 3 && (
