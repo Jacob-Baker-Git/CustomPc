@@ -15,7 +15,7 @@ function Policy({ title, subtitle, doc }) {
       <div className="space-y-8">
         {doc.sections.map((s) => (
           <section key={s.heading}>
-            <h2 className="text-lg font-semibold text-accent mb-2">{s.heading}</h2>
+            <h2 className="text-lg font-semibold text-copper mb-2">{s.heading}</h2>
             {s.body.map((p, i) => (
               <p key={i} className="text-sm text-muted leading-relaxed mb-2">{p}</p>
             ))}
@@ -23,11 +23,11 @@ function Policy({ title, subtitle, doc }) {
         ))}
 
         <section>
-          <h2 className="text-lg font-semibold text-accent mb-2">Contact</h2>
+          <h2 className="text-lg font-semibold text-copper mb-2">Contact</h2>
           <p className="text-sm text-muted leading-relaxed">
             This site is operated by {OPERATOR.name}, based in {OPERATOR.location}.
             {' '}Reach us at <span className="text-ink">{OPERATOR.contactEmail}</span>, or through the{' '}
-            <a href="/feedback" className="text-accent hover:underline">feedback form</a>.
+            <a href="/feedback" className="text-copper hover:underline">feedback form</a>.
           </p>
         </section>
       </div>

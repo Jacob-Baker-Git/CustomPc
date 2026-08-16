@@ -76,7 +76,7 @@ export default function FeedbackPage() {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setType(id)}
-                className={`flex flex-col items-center gap-1 px-1 py-2 rounded-[9px] border text-xs transition-colors ${on ? 'border-accent text-accent bg-accent-soft' : 'border-line-strong text-muted hover:border-accent'}`}
+                className={`flex flex-col items-center gap-1 px-1 py-2 rounded-[9px] border text-xs transition-colors ${on ? 'border-gold text-gold bg-gold-soft' : 'border-line-strong text-muted hover:border-copper'}`}
               >
                 <Icon size={16} />
                 {label}
@@ -95,7 +95,7 @@ export default function FeedbackPage() {
             maxLength={2000}
             onChange={(e) => setMessage(e.target.value)}
             rows={5}
-            className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-accent"
+            className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-copper"
           />
           {/* Counter floats below-right: it must never add a row or the even
               spacing between groups breaks (see the spec's spacing rules). */}
@@ -118,7 +118,7 @@ export default function FeedbackPage() {
               onBlur={() => setHoveredRating(0)}
               className="p-1"
             >
-              <Star size={30} className={n <= previewRating ? 'fill-accent text-accent' : 'text-faint'} />
+              <Star size={30} className={n <= previewRating ? 'fill-gold text-gold' : 'text-faint'} />
             </button>
           ))}
         </div>
@@ -142,7 +142,7 @@ export default function FeedbackPage() {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="self-start bg-accent hover:brightness-110 disabled:opacity-60 text-ink font-semibold px-8 py-3 rounded-lg transition-colors"
+        className="self-start bg-copper hover:brightness-110 disabled:opacity-60 text-accent-ink font-semibold px-8 py-3 rounded-lg transition-colors"
       >
         {status === 'sending' ? 'Sending…' : 'Send feedback'}
       </button>

@@ -25,7 +25,7 @@ export default function SpecSheet({ part }) {
           {derived.map(({ label, value, unit, hint }) => (
             <div key={label} className="contents">
               <dt className="text-muted" title={hint || undefined}>{label}</dt>
-              <dd className="text-accent text-right font-mono tabular-nums">{value}{unit}</dd>
+              <dd className="text-tech text-right font-mono tabular-nums">{value}{unit}</dd>
             </div>
           ))}
         </dl>

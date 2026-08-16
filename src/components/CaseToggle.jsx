@@ -11,7 +11,7 @@ export default function CaseToggle() {
   return (
     <button
       onClick={toggle}
-      className="bg-surface hover:border-accent text-ink text-sm px-4 py-2 rounded-lg border border-line transition-colors flex items-center gap-2"
+      className="bg-surface hover:border-copper text-ink text-sm px-4 py-2 rounded-lg border border-line transition-colors flex items-center gap-2"
     >
       {transparent
         ? <><Box size={14} aria-hidden="true" /> Solid case</>

@@ -13,7 +13,7 @@ function Tile({ label, value, sub, tone = 'ink' }) {
   const toneClass = tone === 'good' ? 'text-good'
     : tone === 'ok' ? 'text-ok'
       : tone === 'bad' ? 'text-bad'
-        : tone === 'accent' ? 'text-accent' : 'text-ink'
+        : tone === 'tech' ? 'text-tech' : 'text-ink'
 
   return (
     <div className="px-3.5 py-3">
@@ -59,7 +59,7 @@ export default function SummaryStrip({ hasCore, report, power, resolution }) {
         // section below already carries it, and saying it twice on one screen
         // reads as a rendering fault rather than emphasis.
         sub={hasCore ? `${measured} from a direct measurement` : 'No parts selected yet'}
-        tone={answered > 0 ? 'accent' : 'ink'}
+        tone={answered > 0 ? 'tech' : 'ink'}
       />
       <Tile
         label="Bottleneck"

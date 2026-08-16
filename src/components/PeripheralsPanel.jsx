@@ -32,10 +32,10 @@ function PeripheralCard({ p, isSelected, onToggle }) {
   return (
     <div
       className={`relative rounded-xl border p-4 flex flex-col gap-2 transition-colors
-        ${isSelected ? 'border-accent bg-accent-soft' : 'border-line bg-surface hover:border-line-strong'}`}
+        ${isSelected ? 'border-gold bg-gold-soft' : 'border-line bg-surface hover:border-line-strong'}`}
     >
       {isSelected && (
-        <span className="absolute top-2 right-2 flex items-center gap-1 text-accent text-[10px] font-semibold">
+        <span className="absolute top-2 right-2 flex items-center gap-1 text-gold text-[10px] font-semibold">
           <Check size={11} aria-hidden="true" /> Picked
         </span>
       )}
@@ -43,10 +43,10 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         type="button"
         onClick={onToggle}
         title={isSelected ? 'Click to deselect' : 'Click to select'}
-        className="text-left flex flex-col cursor-pointer focus-visible:outline-accent"
+        className="text-left flex flex-col cursor-pointer focus-visible:outline-copper"
       >
         <div className="text-sm font-semibold text-ink leading-tight pr-14">{p.name}</div>
-        <div className={`${TELEMETRY} font-bold text-accent mt-1`}>£{p.price.toFixed(2)}</div>
+        <div className={`${TELEMETRY} font-bold text-tech mt-1`}>£{p.price.toFixed(2)}</div>
         <div className="text-xs text-muted mt-1">{specLine(p)}</div>
       </button>
       <button
@@ -54,7 +54,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         aria-label={`More info about ${p.name}`}
         aria-expanded={showInfo}
         onClick={() => setShowInfo((v) => !v)}
-        className="self-start text-[11px] text-muted hover:text-accent border border-line hover:border-accent rounded-lg px-2 py-0.5 transition-colors"
+        className="self-start text-[11px] text-muted hover:text-copper border border-line hover:border-copper rounded-lg px-2 py-0.5 transition-colors"
       >
         {showInfo ? 'Hide info' : 'Info'}
       </button>
@@ -122,7 +122,7 @@ export default function PeripheralsPanel() {
             </div>
             <div className="text-right">
               <div className="text-[10px] uppercase tracking-wide text-faint">Subtotal</div>
-              <div className={`${TELEMETRY} text-sm font-semibold text-accent`}>£{total.toFixed(2)}</div>
+              <div className={`${TELEMETRY} text-sm font-semibold text-tech`}>£{total.toFixed(2)}</div>
             </div>
           </div>
         </div>
@@ -136,13 +136,13 @@ export default function PeripheralsPanel() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search peripherals…"
             aria-label="Search peripherals by name or brand"
-            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-accent"
+            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-copper"
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
             aria-label="Sort peripherals"
-            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-accent"
+            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-copper"
           >
             {Object.entries(SORTS).map(([id, s]) => <option key={id} value={id}>{s.label}</option>)}
           </select>
@@ -152,13 +152,13 @@ export default function PeripheralsPanel() {
             aria-haspopup="dialog"
             className={`flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg border transition-colors
               ${filterCount > 0
-                ? 'border-accent text-accent bg-accent-soft'
+                ? 'border-gold text-gold bg-gold-soft'
                 : 'border-line text-muted hover:text-ink hover:border-line-strong'}`}
           >
             <SlidersHorizontal size={13} aria-hidden="true" />
             Filters
             {filterCount > 0 && (
-              <span className={`${TELEMETRY} rounded-full bg-accent text-accent-ink px-1.5 text-[10px] font-bold`}>
+              <span className={`${TELEMETRY} rounded-full bg-gold text-accent-ink px-1.5 text-[10px] font-bold`}>
                 {filterCount}
               </span>
             )}
@@ -185,7 +185,7 @@ export default function PeripheralsPanel() {
             return (
               <section key={id}>
                 <div className="flex items-baseline gap-2 mb-3">
-                  <Icon size={15} className="text-accent shrink-0 self-center" aria-hidden="true" />
+                  <Icon size={15} className="text-copper shrink-0 self-center" aria-hidden="true" />
                   <h3 className="text-sm font-semibold text-ink">{label}</h3>
                   <span className="text-[11px] text-faint hidden sm:inline">{blurb}</span>
                   <span className="ml-auto text-[11px] text-muted">
@@ -196,7 +196,7 @@ export default function PeripheralsPanel() {
                 </div>
                 {shown.length === 0 ? (
                   <p className="text-xs text-muted">
-                    Nothing matches here. <button onClick={clearAll} className="text-accent hover:underline">Clear filters</button>
+                    Nothing matches here. <button onClick={clearAll} className="text-copper hover:underline">Clear filters</button>
                   </p>
                 ) : (
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
