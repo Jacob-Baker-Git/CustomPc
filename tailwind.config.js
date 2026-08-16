@@ -4,7 +4,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Hanken Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Bricolage Grotesque', 'Hanken Grotesk', 'ui-sans-serif', 'sans-serif'],
+        display: ['Archivo', 'Hanken Grotesk', 'ui-sans-serif', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       colors: {
