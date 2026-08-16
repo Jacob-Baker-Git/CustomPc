@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import PartSlot from '../components/PartSlot'
 
 describe('PartSlot', () => {
@@ -26,6 +26,31 @@ describe('PartSlot', () => {
     expect(seated.firstChild.className).toMatch(/shadow-\[inset/)
     const { container: empty } = render(<PartSlot category="ram" />)
     expect(empty.firstChild.className).not.toMatch(/shadow-\[inset/)
+  })
+
+  it('draws a flagged slot differently from a merely optional one', () => {
+    // These two were a single grey row once, and the missing part read as
+    // "unavailable" rather than as "you still need this".
+    const { container: bad } = render(<PartSlot category="gpu" tone="flagged" />)
+    const { container: opt } = render(<PartSlot category="cooler" tone="optional" />)
+    expect(bad.querySelector('button').className).toMatch(/border-bad/)
+    expect(opt.querySelector('button').className).not.toMatch(/border-bad/)
+  })
+
+  it('shows a remove control only on a seated slot, and only when asked', () => {
+    // A remove button on an empty slot has nothing to remove; one on a seated
+    // slot must name what it removes, since "×" alone tells a screen reader
+    // nothing.
+    // Scoped with `within`, not the bound queries: render() binds to
+    // document.body, so a second render in the same test still sees the first
+    // one's button and the negative assertion passes for the wrong reason.
+    const { container: seated } = render(
+      <PartSlot category="ram" label="RAM" part={{ name: 'X' }} onRemove={() => {}} />,
+    )
+    expect(within(seated).getByRole('button', { name: /remove ram/i })).toBeInTheDocument()
+
+    const { container: empty } = render(<PartSlot category="ram" label="RAM" onRemove={() => {}} />)
+    expect(within(empty).queryByRole('button', { name: /remove ram/i })).toBeNull()
   })
 
   it('falls back to the category when a connector is unknown', () => {
