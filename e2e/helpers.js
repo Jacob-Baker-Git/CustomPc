@@ -19,5 +19,15 @@ export async function generateBuild(page, { budget = '1600', useCase = /gaming/i
   await expect(page.getByText('/100')).toBeVisible()
 }
 
+// ⚠️ The tail is not optional decoration. A beta tab's accessible name is the
+// visible badge AND an sr-only span run together — "performancebeta (beta)" —
+// so the original `^${name}$` stopped matching the Performance tab the moment
+// BetaDot landed in ViewTabs, and four performance specs had been timing out
+// ever since. Nothing failed loudly because the e2e suite is not part of the
+// unit run. Keep the anchors: unanchored, `^build` would also catch "Build
+// checks" and the tests would pass against the wrong control.
 export const openTab = (page, name) =>
-  page.getByRole('button', { name: new RegExp(`^${name}$`, 'i') }).first().click()
+  page
+    .getByRole('button', { name: new RegExp(`^${name}(beta)?(\\s*\\(beta\\))?$`, 'i') })
+    .first()
+    .click()
