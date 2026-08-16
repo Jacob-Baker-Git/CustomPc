@@ -134,7 +134,7 @@ export default function RamBox({ designator, seated = false, open = false, class
                   computes no layout and every unit test stayed green. */}
               <div className={`relative z-[2] px-4 pb-3 ${designator ? 'pt-8' : 'pt-5'}`}>
                 {designator && (
-                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
+                  <span data-designator className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
                 )}
                 {children}
               </div>

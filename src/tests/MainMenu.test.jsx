@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import MainMenu from '../components/MainMenu'
 import useBuilderStore from '../store/useBuilderStore'
+import useSavedStore from '../store/useSavedStore'
 
 const noop = () => {}
 
@@ -92,5 +93,63 @@ describe('MainMenu', () => {
     expect(onResume).toHaveBeenCalledTimes(1)
     expect(onStart).toHaveBeenCalledTimes(1)
     expect(onSaved).toHaveBeenCalledTimes(1)
+  })
+})
+
+// The entry screen is a bank of slots, and which ones are lit is the whole
+// point of drawing them as slots at all. `seated` means HAS CONTENT — not
+// "is the primary action" — so starting a build is permanently an empty slot
+// while still being the thing the page most wants you to do. Copper carries
+// action, gold carries state; crossing them collapses the distinction.
+describe('the entry cards are slots, and seating tracks what is in them', () => {
+  const boxes = (c) => [...c.querySelectorAll('[data-ram-box]')]
+  const seatedOf = (c) => boxes(c).map((b) => b.getAttribute('data-seated'))
+
+  beforeEach(() => {
+    useSavedStore.setState({ saved: [] })
+  })
+
+  it('draws every option as a slot', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    expect(boxes(container)).toHaveLength(3)
+    expect(container.querySelectorAll('[data-blade]')).toHaveLength(15)
+  })
+
+  it('leaves both slots cold for a first-time visitor', () => {
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    expect(seatedOf(container)).toEqual(['false', 'false'])
+  })
+
+  it('seats carry-on but never seats start-a-build', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    // Order is carry-on, start, saved.
+    expect(seatedOf(container)).toEqual(['true', 'false', 'false'])
+  })
+
+  it('seats saved builds only once something is saved', () => {
+    useSavedStore.setState({ saved: [{ id: 's1', name: 'A', parts: {} }] })
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    expect(seatedOf(container)).toEqual(['false', 'true'])
+  })
+
+  it('carries no designators', () => {
+    // A designator names a real slot holding one swappable part. These are
+    // navigation, and the first migration's invented ones were rejected for
+    // exactly this reason — the silhouette carries the identity.
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    // Not `.font-mono`: TELEMETRY wears that too, so the part count would fail
+    // this for the wrong reason.
+    expect(container.querySelector('[data-designator]')).toBeNull()
+  })
+
+  it('never lights the contacts on a cold slot', () => {
+    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    const states = [...container.querySelectorAll('[data-contacts]')].map((el) =>
+      el.getAttribute('data-contacts'),
+    )
+    expect(states).toEqual(['cold', 'cold'])
   })
 })
