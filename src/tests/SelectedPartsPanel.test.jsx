@@ -58,6 +58,17 @@ describe('SelectedPartsPanel', () => {
     const { container } = render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} />)
     expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
   })
+
+  it('stays unseated when only a peripheral is picked', () => {
+    // The fork that made this worth pinning: `isEmpty` counts peripherals too,
+    // because Clear build empties both. Wiring `seated` to it lit the parts
+    // panel gold for a monitor chosen on another tab, while every slot this
+    // panel actually draws was still an empty placeholder. Seated is about
+    // THIS box's contents.
+    useBuilderStore.setState({ selectedPeripherals: { monitor: { id: 'm1', name: 'Monitor', price: 200 } } })
+    const { container } = render(<SelectedPartsPanel selectedParts={{}} onSelectCategory={noop} onDeselect={noop} />)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'false')
+  })
 })
 
 // Clearing is duplicated from the Summary tab on purpose — this is where people

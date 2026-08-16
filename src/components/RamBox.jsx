@@ -125,7 +125,14 @@ export default function RamBox({ designator, seated = false, open = false, class
                   boxShadow: seated ? '0 0 10px 1px rgba(201,168,107,.28)' : 'none',
                 }}
               />
-              <div className={`relative z-[2] px-4 pb-3 ${designator ? 'pt-8' : 'pt-3'}`}>
+              {/* The lit bar is absolutely positioned at top-2 and is 9px tall,
+                  so it occupies 8–17px down the body. Content has to clear 17px
+                  or the bar paints straight through it — it sits at z-[4] and
+                  this at z-[2]. pt-3 did exactly that: measured 5px of overlap
+                  across the "Your parts" heading. pt-5 (20px) clears it.
+                  Do not reduce this without measuring in a browser; jsdom
+                  computes no layout and every unit test stayed green. */}
+              <div className={`relative z-[2] px-4 pb-3 ${designator ? 'pt-8' : 'pt-5'}`}>
                 {designator && (
                   <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tech">{designator}</span>
                 )}
