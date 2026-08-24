@@ -22,11 +22,17 @@ export const BTN_PRIMARY = 'bg-copper hover:brightness-110 text-accent-ink font-
 // ---------------------------------------------------------------------------
 // The elevation scale
 //
-// Three steps, and each one MEANS something rather than being picked by eye:
+// Two steps above the page, and each one MEANS something rather than being
+// picked by eye:
 //
-//   ELEV_PAGE    the page itself
 //   ELEV_GROUP   a group — a shut genre bar, a card, a hover hint
 //   ELEV_ACTIVE  the thing being attended to — an open group, the target column
+//
+// The page itself is the third step and has no token, because nothing composes
+// it: `html { background: var(--ground) }` in index.css paints it once. An
+// `ELEV_PAGE = 'bg-ground'` sat here unimported by anything — the live
+// `bg-ground` classes are wells, notches and the board substrate, none of which
+// is "the page".
 //
 // They were used ad hoc before this. Two days of de-bordering the Performance
 // tab left every surface at almost the same value, so nothing led the eye: with
@@ -38,7 +44,6 @@ export const BTN_PRIMARY = 'bg-copper hover:brightness-110 text-accent-ink font-
 // on this palette; tokenOpacity.test.js fails the build for it. If you want a
 // step between two of these, the answer is a new token in index.css, not an
 // alpha.
-export const ELEV_PAGE = 'bg-ground'
 export const ELEV_GROUP = 'bg-surface'
 export const ELEV_ACTIVE = 'bg-surface-2'
 

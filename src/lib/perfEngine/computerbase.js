@@ -119,12 +119,11 @@ export const CB_CPU_IDS = {
   // 235. Their rows are refused rather than filed against an approximate part.
 }
 
-// The memory each review declares as its FLAGSHIP platform's configuration.
-// Not a filter any more — a row on different memory is grouped into its own
-// bench, one TSV per configuration, each declaring the memory it actually ran.
-// See CPU_ROW_QUALIFIER for what genuinely is refused.
-export const CB_9800X3D_MEMORY = 'DDR5-5600CL32'
-export const CB_BUDGET_MEMORY = 'DDR5-5600CL26'
+// Memory used to be a filter here: a row measured on anything other than the
+// review's flagship configuration was refused. It is grouped instead now — one
+// TSV per configuration, each declaring the memory it actually ran — so the two
+// declared-memory constants that drove the filter are gone with it. See
+// CPU_ROW_QUALIFIER for what genuinely is refused.
 
 // Aggregate charts. They are a rating across the whole parcours, not a game.
 const RATING = /rating|percentil-rating|frametimes$/i
