@@ -1,0 +1,14 @@
+# The working tree is CRLF throughout (core.autocrlf=true) and that is left
+# alone. This file exists for one directory.
+#
+# scripts/prerender.mjs writes each fragment as a single LF-terminated line, so
+# after `npm run prerender` git reported all seven as modified even when the
+# output was byte-identical to what was committed — `git diff --exit-code` said
+# clean while `git status` said ` M`. That is a false signal on exactly the
+# files where a true one matters: the fragments go stale SILENTLY when shared UI
+# changes and nobody re-runs the capture, and a directory that always looks
+# dirty is a directory whose dirtiness nobody reads.
+#
+# Pinning them to LF makes the checked-out form match what the script writes, so
+# a modified fragment now means the render actually changed.
+prerendered/*.html text eol=lf

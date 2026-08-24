@@ -10,7 +10,14 @@ import UseCaseChips from '../components/UseCaseChips'
 import BuildRatingPanel from '../components/BuildRatingPanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
-import PerformanceScreen from '../components/performance/PerformanceScreen'
+// Lazy for the same reason BuildCanvas is, and the payload is comparable:
+// PerformanceScreen is the only importer of perfModel.json, which is 506 kB of
+// fitted model — more than half of what the main bundle used to weigh. It was
+// downloaded by everyone who opened the hub, /help or /parts and never went
+// near the Performance tab. Splitting it took the entry bundle from 949 kB to
+// 502 kB — 192 kB to 137 kB gzipped — with the model landing in its own 448 kB
+// chunk that is fetched when the tab is opened.
+const PerformanceScreen = lazy(() => import('../components/performance/PerformanceScreen'))
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
@@ -47,9 +54,23 @@ export default function BuilderScreen() {
       <BoardBackground />
       <TopBar view={view} onViewChange={setView} />
       {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
-          top padding below `xl` clears the header's second row of meters, which
-          is taller from `md` up because the header's own padding grows there. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 xl:pt-16 pb-16 lg:pb-0">
+          top padding below `wide` clears the header's second row of meters,
+          which is taller from `md` up because the header's own padding grows
+          there. Measured against the real header: 76px below md, 84px at md–lg,
+          90px at lg–wide, 63px above it — so 84 / 96 / 64 of padding clears
+          each band. e2e/topBar.spec.js fails if they ever drift apart. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 wide:pt-16 pb-16 lg:pb-0">
+        {/* The one screen that had no h1. Every panel here opens at h2 — "Your
+            parts", "Build checks", each Section on the Performance tab — so
+            without this the outline a screen reader builds starts inside a
+            subsection with no parent. sr-only because the screen has no room
+            for a title and does not want one: the tabs say where you are, and
+            the header carries the wordmark.
+
+            It stays constant across the four tabs on purpose. The tab control
+            is what changes, and it is already announced; a heading that
+            renamed itself under the reader would be the noisier choice. */}
+        <h1 className="sr-only">Your PC build</h1>
         {view === 'build' ? (
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which
@@ -103,7 +124,9 @@ export default function BuilderScreen() {
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
         ) : view === 'performance' ? (
-          <PerformanceScreen />
+          <Suspense fallback={<div className="p-6 text-sm text-muted motion-safe:animate-pulse">Working out frame rates…</div>}>
+            <PerformanceScreen />
+          </Suspense>
         ) : (
           <BuildSummary />
         )}
