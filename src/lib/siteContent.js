@@ -18,8 +18,13 @@ export const FPS_CAVEAT =
 //
 // What still needs saying: even a measured figure came off somebody else's
 // test bench, not this build.
+//
+// The quoted word has to be the one the table prints, or the caveat sends the
+// reader hunting for a label that is not on the page. BASIS_LABEL renders the
+// `measured` tier as "benchmarked" (and BasisBar's mix line says "N
+// benchmarked"), so this quotes that — not the internal tier name.
 export const PERF_CAVEAT =
-  'Estimated from published benchmark measurements. Figures marked "measured" come from a review of that exact combination; the rest are derived from the same data. Either way your frame rates will vary with settings, drivers, the game version and the specific scene.'
+  'Estimated from published benchmark measurements. Figures marked "benchmarked" come from a review of that exact combination; the rest are derived from the same data. Either way your frame rates will vary with settings, drivers, the game version and the specific scene.'
 
 // CC BY 4.0 requires crediting the author, naming the work, linking the source
 // where practicable, and stating that changes were made. Every model is scaled
