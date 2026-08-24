@@ -18,3 +18,9 @@ prerendered/*.html text eol=lf
 # thing on ubuntu-latest as it does in the Windows tree they are authored in.
 # The sitemap already happens to be LF on both; this stops that being luck.
 public/sitemap.xml text eol=lf
+
+# Binary, and stated rather than left to git's heuristics — these are the one
+# set of files in the repo where a line-ending "fix" would silently corrupt the
+# asset rather than just noise up a diff.
+*.glb binary
+*.hdr binary
