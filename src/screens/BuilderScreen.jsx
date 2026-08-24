@@ -60,6 +60,17 @@ export default function BuilderScreen() {
           90px at lg–wide, 63px above it — so 84 / 96 / 64 of padding clears
           each band. e2e/topBar.spec.js fails if they ever drift apart. */}
       <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 wide:pt-16 pb-16 lg:pb-0">
+        {/* The one screen that had no h1. Every panel here opens at h2 — "Your
+            parts", "Build checks", each Section on the Performance tab — so
+            without this the outline a screen reader builds starts inside a
+            subsection with no parent. sr-only because the screen has no room
+            for a title and does not want one: the tabs say where you are, and
+            the header carries the wordmark.
+
+            It stays constant across the four tabs on purpose. The tab control
+            is what changes, and it is already announced; a heading that
+            renamed itself under the reader would be the noisier choice. */}
+        <h1 className="sr-only">Your PC build</h1>
         {view === 'build' ? (
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which
