@@ -4,12 +4,21 @@ export default {
     extend: {
       screens: {
         // The width the top bar's full readout actually needs, measured rather
-        // than guessed: back arrow + wordmark + budget/remaining/power text +
-        // the four tabs + the two meter chips come to 1403px of content, so
-        // revealing them at `xl` (1280) clipped the POWER figure off the right
-        // edge with no scrollbar to signal it. 1420 is that measurement plus a
-        // subpixel margin. See TopBar.jsx and e2e/topBar.spec.js.
-        wide: '1420px',
+        // than guessed. It was 1403px while the header stated the budget twice
+        // and the wattage twice — revealing that at `xl` (1280) clipped the
+        // POWER figure off the right edge with no scrollbar to signal it.
+        // Removing the duplication took the requirement to 1249px.
+        //
+        // ⚠️ 1249 is the figure for a FOUR-DIGIT budget. These are live
+        // numbers, so the header's width is a function of what the user typed:
+        // at £10000 the same header needs 1281px. Sizing this to the typical
+        // case would have put a 1280px laptop back exactly where the whole
+        // exercise started — clipping, silently, for the one user with a big
+        // budget. So the threshold comes off the worst case, not the common one.
+        //
+        // 1300 clears a five-digit budget. See TopBar.jsx, and
+        // e2e/topBar.spec.js, which measures both.
+        wide: '1300px',
       },
       fontFamily: {
         sans: ['Hanken Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],

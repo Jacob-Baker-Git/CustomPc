@@ -73,14 +73,22 @@ export default function TopBar({ view, onViewChange }) {
             £{budget.toFixed(0)}
           </button>
         )}
-        <span className="text-faint hidden wide:inline">budget</span>
+        {/* REMAINING only. This line used to read
+            "£1600 budget | £52 remaining | 512W" beside two chips already
+            showing "BUDGET £1548 / £1600" and "POWER 512W / 750W" — the budget
+            twice and the wattage twice, in a header that then needed 1403px and
+            so showed none of it on a 1280 or 1366 laptop.
+            What went: the word "budget" (the chip is captioned BUDGET), the
+            wattage (the POWER chip states it against its capacity, which is the
+            more useful form), and the two separators they needed. What stayed
+            is the one figure NO chip states — money left, which is the number
+            the page is actually about — and the editable budget itself, which
+            is a control rather than a readout and shows at every width. */}
         <span className="text-line-strong mx-0.5 sm:mx-1 hidden wide:inline">|</span>
         <span className={`hidden wide:inline font-mono tabular-nums font-semibold ${remaining < 0 ? 'text-bad' : 'text-good'}`}>
           £{remaining.toFixed(0)}
         </span>
-        <span className="text-faint hidden wide:inline">remaining</span>
-        <span className="text-line-strong mx-0.5 sm:mx-1 hidden wide:inline">|</span>
-        <span className="hidden wide:inline text-ok font-mono tabular-nums font-semibold">{totalPower}W</span>
+        <span className="text-faint hidden wide:inline">left</span>
       </div>
       {/* Three zones: the budget readout above ends the left one. `flex-1` on
           the flanks centres the tabs — but only at `wide`, where both flanks
@@ -95,12 +103,13 @@ export default function TopBar({ view, onViewChange }) {
       </div>
       <div className="flex items-center gap-3 md:gap-4 lg:flex-1 lg:justify-end">
         <a href="/feedback" className="text-xs text-muted hover:text-copper transition-colors">Feedback</a>
-        {/* `wide` (1420px), not xl (1280px), and the difference is measured
-            rather than taste: back arrow + wordmark + the budget/remaining/
-            power text + four tabs + these two chips come to 1403px of content.
-            Revealed at xl they ran to 1403px inside a 1280px window and the
-            POWER figure was cut off — silently, because
-            `scrollWidth === clientWidth` there and no scrollbar ever appeared.
+        {/* `wide` (1300px), not xl (1280px), and the difference is measured
+            rather than taste. With the duplicated budget and wattage still in the
+            header this needed 1403px of content; without them it needs 1249, or
+            1281 on a five-digit budget. Revealed at xl the old layout ran to
+            1403px inside a 1280px window and the POWER figure was cut off —
+            silently, because `scrollWidth === clientWidth` there, so no
+            scrollbar ever appeared to signal the loss.
             Guarded by e2e/topBar.spec.js, which measures every box in the
             header rather than trusting a class name. */}
         <div className="hidden wide:flex gap-3">

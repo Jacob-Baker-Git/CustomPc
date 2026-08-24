@@ -40,6 +40,39 @@ test.describe('the top bar', () => {
     await generateBuild(page)
   })
 
+  // The overflow guard below is satisfied by a header that shows nothing at
+  // all, so it cannot on its own tell "it fits" from "it was hidden". This is
+  // the other half: above the `wide` threshold the full single-row readout has
+  // to actually be there. 1366 is the width this is really for — before the
+  // duplicated budget and wattage came out, the threshold was 1420 and a 1366
+  // laptop got none of it.
+  for (const width of [1366, 1440]) {
+    test(`shows the full readout on one row at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.waitForTimeout(700)
+
+      const { rows, meters } = await page.evaluate(() => {
+        const header = document.querySelector('header')
+        // Cluster the header's direct children by vertical CENTRE, not by top:
+        // under `align-items: center` children legitimately differ in top.
+        const centres = [...header.children]
+          .map((el) => el.getBoundingClientRect())
+          .filter((r) => r.width > 0 && r.height > 0)
+          .map((r) => Math.round((r.top + r.bottom) / 2))
+        // The full-size meter chip is the bordered one; the phone row's is not.
+        const meters = [...header.querySelectorAll('div')]
+          .filter((d) => getComputedStyle(d).minWidth === '136px' && d.getBoundingClientRect().width > 0)
+          .map((d) => d.textContent.trim())
+        return { rows: new Set(centres).size, meters }
+      })
+
+      expect(rows, `the header should be one row at ${width}px`).toBe(1)
+      expect(meters, `both meter chips should be on screen at ${width}px`).toHaveLength(2)
+      expect(meters.join(' ')).toMatch(/Budget/i)
+      expect(meters.join(' ')).toMatch(/Power/i)
+    })
+  }
+
   for (const width of WIDTHS) {
     test(`clears the content it is fixed on top of at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
@@ -65,11 +98,30 @@ test.describe('the top bar', () => {
 
     test(`keeps every readout inside the viewport at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
-      // The budget/power group only mounts at xl, and the meters animate their
-      // width over 500ms — measure after both have settled.
+      // The budget/power group only mounts at `wide`, and the meters animate
+      // their width over 500ms — measure after both have settled.
       await page.waitForTimeout(700)
 
       expect(await overflowingHeaderBoxes(page), `header content is clipped at ${width}px`).toEqual([])
     })
   }
+
+  // ⚠️ Every width above is measured against the default £1600 build, and the
+  // header's readouts are LIVE NUMBERS — its width is a function of what the
+  // user typed. A five-digit budget adds 32px to the row, which is the
+  // difference between fitting a 1280px laptop and clipping it. Sizing the
+  // breakpoint to a typical budget would have rebuilt the original bug for the
+  // one user with an unusual one.
+  test('still fits with a five-digit budget', async ({ page }) => {
+    await page.getByTitle('Click to edit your budget').click()
+    const input = page.locator('header input[type="number"]')
+    await input.fill('10000')
+    await input.press('Enter')
+
+    for (const width of WIDTHS) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.waitForTimeout(700)
+      expect(await overflowingHeaderBoxes(page), `header is clipped at ${width}px on a £10000 budget`).toEqual([])
+    }
+  })
 })

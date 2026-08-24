@@ -74,7 +74,7 @@ export default function ViewTabs({ view, onChange, variant = 'inline' }) {
             key={v}
             onClick={() => onChange(v)}
             aria-current={on ? 'page' : undefined}
-            className={`flex items-center justify-center gap-1.5 min-w-[104px] wide:min-w-[118px] px-3 py-1.5 text-xs font-semibold rounded-lg capitalize transition-colors
+            className={`flex items-center justify-center gap-1.5 min-w-[104px] px-3 py-1.5 text-xs font-semibold rounded-lg capitalize transition-colors
               ${on ? 'bg-gold text-accent-ink' : 'text-muted hover:text-ink hover:bg-surface-2'}`}
           >
             <Icon size={14} aria-hidden="true" />
