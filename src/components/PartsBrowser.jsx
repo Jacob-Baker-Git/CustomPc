@@ -23,13 +23,19 @@ const SORTS = [
 function PartName({ part }) {
   const body = (
     <>
-      <span className="block text-sm text-ink truncate group-hover:text-copper">
-        {part.name}
+      {/* The badge is a SIBLING of the truncating name, not a child of it.
+          Inside it, a long name pushed the badge out under `overflow: hidden`
+          and it simply vanished — measured, every one of the 50 legacy rows
+          lost its badge at 320px, 43 at 375px and 24 at 414px. Silent: no
+          scrollbar, no error, and the row reads as a perfectly normal part.
+          `shrink-0` is what makes the name give way instead. */}
+      <span className="flex items-center gap-2 text-sm text-ink">
+        <span className="truncate group-hover:text-copper">{part.name}</span>
         {/* Say so plainly. These are listed so you can tell us what you already
             own; the retailer link will mostly find used or third-party stock at
             whatever price it likes. */}
         {part.legacy && (
-          <span className="ml-2 align-middle text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
+          <span className="shrink-0 text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
             Discontinued
           </span>
         )}
