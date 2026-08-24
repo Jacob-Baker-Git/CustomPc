@@ -12,3 +12,9 @@
 # Pinning them to LF makes the checked-out form match what the script writes, so
 # a modified fragment now means the render actually changed.
 prerendered/*.html text eol=lf
+
+# Pinned for the same reason, one step further on: CI checks both artefacts for
+# drift with `git diff --exit-code`, and that comparison has to mean the same
+# thing on ubuntu-latest as it does in the Windows tree they are authored in.
+# The sitemap already happens to be LF on both; this stops that being luck.
+public/sitemap.xml text eol=lf
