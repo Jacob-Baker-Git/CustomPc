@@ -47,9 +47,12 @@ export default function BuilderScreen() {
       <BoardBackground />
       <TopBar view={view} onViewChange={setView} />
       {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
-          top padding below `xl` clears the header's second row of meters, which
-          is taller from `md` up because the header's own padding grows there. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 xl:pt-16 pb-16 lg:pb-0">
+          top padding below `wide` clears the header's second row of meters,
+          which is taller from `md` up because the header's own padding grows
+          there. Measured against the real header: 76px below md, 84px at md–lg,
+          90px at lg–wide, 63px above it — so 84 / 96 / 64 of padding clears
+          each band. e2e/topBar.spec.js fails if they ever drift apart. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 wide:pt-16 pb-16 lg:pb-0">
         {view === 'build' ? (
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which

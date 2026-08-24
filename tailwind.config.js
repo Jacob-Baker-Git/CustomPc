@@ -2,6 +2,15 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      screens: {
+        // The width the top bar's full readout actually needs, measured rather
+        // than guessed: back arrow + wordmark + budget/remaining/power text +
+        // the four tabs + the two meter chips come to 1403px of content, so
+        // revealing them at `xl` (1280) clipped the POWER figure off the right
+        // edge with no scrollbar to signal it. 1420 is that measurement plus a
+        // subpixel margin. See TopBar.jsx and e2e/topBar.spec.js.
+        wide: '1420px',
+      },
       fontFamily: {
         sans: ['Hanken Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['Archivo', 'Hanken Grotesk', 'ui-sans-serif', 'sans-serif'],
