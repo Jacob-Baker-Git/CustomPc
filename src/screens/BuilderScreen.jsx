@@ -10,7 +10,14 @@ import UseCaseChips from '../components/UseCaseChips'
 import BuildRatingPanel from '../components/BuildRatingPanel'
 import PeripheralsPanel from '../components/PeripheralsPanel'
 import BuildSummary from '../components/BuildSummary'
-import PerformanceScreen from '../components/performance/PerformanceScreen'
+// Lazy for the same reason BuildCanvas is, and the payload is comparable:
+// PerformanceScreen is the only importer of perfModel.json, which is 506 kB of
+// fitted model — more than half of what the main bundle used to weigh. It was
+// downloaded by everyone who opened the hub, /help or /parts and never went
+// near the Performance tab. Splitting it took the entry bundle from 949 kB to
+// 502 kB — 192 kB to 137 kB gzipped — with the model landing in its own 448 kB
+// chunk that is fetched when the tab is opened.
+const PerformanceScreen = lazy(() => import('../components/performance/PerformanceScreen'))
 import BuildWarnings from '../components/BuildWarnings'
 import AutoBuildButton from '../components/AutoBuildButton'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
@@ -106,7 +113,9 @@ export default function BuilderScreen() {
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
         ) : view === 'performance' ? (
-          <PerformanceScreen />
+          <Suspense fallback={<div className="p-6 text-sm text-muted motion-safe:animate-pulse">Working out frame rates…</div>}>
+            <PerformanceScreen />
+          </Suspense>
         ) : (
           <BuildSummary />
         )}
