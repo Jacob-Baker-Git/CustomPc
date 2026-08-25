@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test'
+import { generateBuild } from './helpers.js'
+// Imported rather than retyped as literals: the invariant these prove is
+// "whatever the module declares, the browser honours it", so a tuning change
+// should move the test with the source instead of failing it.
+import { BLADES, FIN_ROW_HEIGHT, CONTACT_HEIGHT } from '../src/lib/ramBoxGeometry.js'
 
 // jsdom computes no layout and applies no transform, so the unit tests can
 // prove the STATE flips and nothing more. Whether the stick actually rises,
@@ -119,5 +124,154 @@ test.describe('a seated box unseats on hover', () => {
     )
     expect(seated.length).toBeGreaterThan(0)
     expect(seated.every((s) => s === 'true')).toBe(true)
+  })
+})
+
+// ⚠️ These two guard OPPOSING decisions, and that opposition is the design.
+//
+// Blades are positioned in PERCENTAGES so that a narrow box keeps all five —
+// fixed pixels were prototyped and a 150px box kept two. Fins and contacts are
+// FIXED PIXELS so that a tall box is the same physical part with a longer body
+// rather than a scaled-up drawing. A change that "unifies" the two units
+// breaks one or the other, and jsdom computes no layout, so this is the only
+// place either can be measured.
+//
+// ⚠️ Counting [data-blade] elements proves NOTHING: BLADES.map() renders five
+// spans at every width, so the count is five even under a pixel implementation
+// that has pushed three of them off the box. Position is the falsifiable part.
+test.describe('the silhouette holds its geometry at any size', () => {
+  // ⚠️ offsetLeft/offsetWidth, not getBoundingClientRect. Blades carry
+  // skewX(±20deg), which widens the client rect by up to height*tan(20°) ≈ 6px
+  // and would drown the very thing being measured. The offset pair reports the
+  // untransformed layout box.
+  const geometry = (page) =>
+    page.locator(BOX).evaluateAll((boxes) =>
+      boxes.map((box) => {
+        const blades = [...box.querySelectorAll('[data-blade]')]
+        const row = blades[0]?.offsetParent
+        return {
+          rowWidth: row?.offsetWidth ?? 0,
+          blades: blades.map((b) => ({ left: b.offsetLeft, width: b.offsetWidth })),
+        }
+      }),
+    )
+
+  test('holds every blade at its proportional place however narrow the box gets', async ({ page }) => {
+    // The entry screen rather than a generated build: it carries RamBoxes at
+    // mount, so a width sweep costs nothing extra. One test doing generateBuild
+    // AND eight viewport changes is what ran topBar.spec.js past the 30s
+    // default and read as a layout bug — keep the two apart.
+    await page.goto('/')
+    await page.waitForSelector(BOX)
+
+    const widths = [1440, 1024, 768, 480, 320]
+    const seen = []
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 })
+      seen.push({ width, boxes: await geometry(page) })
+    }
+
+    const boxCount = seen[0].boxes.length
+    expect(boxCount).toBeGreaterThan(0)
+
+    // ⚠️ The sweep's OWN premise. The column caps at 640px, so 1440/1024/768 all
+    // produce an identical box and only the last two viewports actually narrow
+    // it — measured 640, 640, 640, 448, 288. Without this, a layout change that
+    // pinned the column would leave the test measuring one width five times and
+    // still reporting green.
+    const rowWidths = new Set(seen.flatMap((s) => s.boxes.map((b) => b.rowWidth)))
+    expect(rowWidths.size, `distinct box widths exercised (saw ${[...rowWidths].join(', ')})`).toBeGreaterThanOrEqual(3)
+
+    for (const { width, boxes } of seen) {
+      expect(boxes.length, `boxes rendered at ${width}px`).toBe(boxCount)
+
+      for (const [i, box] of boxes.entries()) {
+        expect(box.blades.length, `blades on box ${i} at ${width}px`).toBe(BLADES.length)
+        expect(box.rowWidth, `fin row width on box ${i} at ${width}px`).toBeGreaterThan(0)
+
+        for (const [j, blade] of box.blades.entries()) {
+          // offsetLeft/offsetWidth are integers, so allow a rounding pixel
+          // either way and nothing more. A pixel implementation misses by
+          // hundreds at 320px, not by ones.
+          const expectedLeft = (box.rowWidth * BLADES[j].left) / 100
+          const expectedWidth = (box.rowWidth * BLADES[j].width) / 100
+          expect(Math.abs(blade.left - expectedLeft), `blade ${j} left on box ${i} at ${width}px`).toBeLessThanOrEqual(1.5)
+          expect(Math.abs(blade.width - expectedWidth), `blade ${j} width on box ${i} at ${width}px`).toBeLessThanOrEqual(1.5)
+        }
+      }
+    }
+  })
+
+  test('holds fins and contacts at a fixed height while the bodies stretch', async ({ page }) => {
+    await generateBuild(page)
+
+    const parts = await page.locator(BOX).evaluateAll((boxes) =>
+      boxes.map((box) => ({
+        boxHeight: Math.round(box.getBoundingClientRect().height),
+        finRow: box.querySelector('[data-blade]')?.offsetParent?.offsetHeight ?? null,
+        contacts: box.querySelector('[data-contacts]')?.offsetHeight ?? null,
+      })),
+    )
+
+    expect(parts.length).toBeGreaterThan(0)
+
+    // ⚠️ The PREMISE, asserted rather than assumed. "Every contact strip is the
+    // same height" is trivially true if every box is also the same height, and
+    // the whole claim is about what happens when they are not.
+    expect(new Set(parts.map((p) => p.boxHeight)).size).toBeGreaterThan(1)
+
+    expect(parts.map((p) => p.finRow)).toEqual(parts.map(() => FIN_ROW_HEIGHT))
+    expect(parts.map((p) => p.contacts)).toEqual(parts.map(() => CONTACT_HEIGHT))
+  })
+})
+
+// ⚠️ Regression: a DIMM whose BODY is wider than its own fins and contact edge.
+//
+// Found by walking the build page, not by any test. The body sits in a flex row
+// and so inherits `min-width: auto`, the flex default, which refuses to shrink
+// it below its content's min-content width. That width is set by the upgrade
+// <select>s: a select is sized by its widest <option>, and options neither wrap
+// nor truncate, so "Corsair Vengeance LPX DDR4-3200 64GB" alone demands 395px.
+//
+// The build grid asks for `minmax(0, 1fr)`, which lets the left column shrink
+// below all of that — so from ~1413px down the body kept its 434px while the
+// column narrowed around it. At 1280px the body rendered 69px wider than the
+// stick it belongs to and lapped 40px over the 3D viewport.
+//
+// jsdom cannot see this: it computes no layout, and every unit test was green.
+test.describe('the body never outgrows the stick', () => {
+  test('keeps body, fins and contacts the same width at desktop widths', async ({ page }) => {
+    // generateBuild plus a viewport sweep is exactly the combination that ran
+    // topBar.spec.js past the 30s default and read as a layout bug.
+    test.setTimeout(90_000)
+    await generateBuild(page)
+
+    // At and above 1024px the grid is live and the left column is 1fr of three.
+    for (const width of [1440, 1366, 1280, 1024]) {
+      await page.setViewportSize({ width, height: 900 })
+
+      const measured = await page.locator(BOX).evaluateAll((boxes) =>
+        boxes.map((box) => {
+          const finRow = box.querySelector('[data-blade]')?.offsetParent
+          const contacts = box.querySelector('[data-contacts]')
+          // The body is the bordered panel the content sits in — the flex item
+          // that carries `min-width: auto` and is the thing that blew out.
+          const body = contacts?.previousElementSibling?.querySelector('.flex-1')
+          const w = (el) => (el ? Math.round(el.getBoundingClientRect().width) : null)
+          return {
+            label: (box.textContent || '').trim().slice(0, 18),
+            fins: w(finRow),
+            contacts: w(contacts),
+            body: w(body),
+          }
+        }),
+      )
+
+      expect(measured.length, `boxes at ${width}px`).toBeGreaterThan(0)
+      for (const m of measured) {
+        expect(m.body, `body vs contacts on "${m.label}" at ${width}px`).toBe(m.contacts)
+        expect(m.body, `body vs fins on "${m.label}" at ${width}px`).toBe(m.fins)
+      }
+    }
   })
 })
