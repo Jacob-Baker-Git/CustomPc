@@ -83,3 +83,37 @@ describe('SavedBuilds', () => {
     expect(screen.getByRole('checkbox', { name: /compare three/i })).toBeDisabled()
   })
 })
+
+// Task 5 of the RAM-box plan. The comparison table is this screen's expansion,
+// so it is what lifts the stick out of its socket.
+describe('as a RAM stick', () => {
+  it('reads empty with nothing saved', () => {
+    const { container } = render(<SavedBuilds />)
+    const box = container.querySelector('[data-ram-box]')
+    expect(box).not.toBeNull()
+    expect(box).toHaveAttribute('data-seated', 'false')
+    expect(container.querySelector('[data-designator]')).toBeNull()
+  })
+
+  it('seats once a build is saved', () => {
+    useSavedStore.setState({ saved: [{ id: 'a', name: 'One', code: encodeBuild({ parts: { cpu } }), savedAt: 1 }] })
+    const { container } = render(<SavedBuilds />)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-open', 'false')
+  })
+
+  it('unseats while two builds are being compared', () => {
+    useSavedStore.setState({ saved: [
+      { id: 'a', name: 'One', code: encodeBuild({ parts: { cpu, gpu } }), savedAt: 1 },
+      { id: 'b', name: 'Two', code: encodeBuild({ parts: { cpu: cpu2, gpu: gpu2 } }), savedAt: 2 },
+    ] })
+    const { container } = render(<SavedBuilds />)
+    const ticks = screen.getAllByRole('checkbox')
+    fireEvent.click(ticks[0])
+    fireEvent.click(ticks[1])
+
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-open', 'true')
+    expect(container.querySelector('[data-socket]')).not.toBeNull()
+    expect(container.querySelector('[data-contacts]')).toHaveAttribute('data-contacts', 'cold')
+  })
+})

@@ -9,7 +9,8 @@ import { encodeBuild } from '../lib/buildCodec'
 import { rateBuild } from '../lib/partRatings'
 import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
 import useSavedStore from '../store/useSavedStore'
-import { PANEL, PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
+import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 import GamePerformanceList from './GamePerformanceList'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
@@ -129,7 +130,7 @@ export default function BuildSummary() {
   return (
     <div>
       <div className="max-w-2xl mx-auto px-4 pt-2 pb-12">
-        <div className={`${PANEL} p-5`}>
+        <RamBox seated={!isEmpty} open={showFps}>
           <div className="flex items-baseline justify-between mb-1">
             <h2 className="text-lg text-ink">Your build</h2>
             <span className="font-mono text-base text-tech">
@@ -272,7 +273,7 @@ export default function BuildSummary() {
           >
             View your saved builds →
           </button>
-        </div>
+        </RamBox>
       </div>
 
       {saveOpen && (
