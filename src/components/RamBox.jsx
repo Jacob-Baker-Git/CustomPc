@@ -191,7 +191,18 @@ export default function RamBox({
           <div className="relative flex flex-1 px-3">
             <span aria-hidden="true" className="absolute inset-y-0 left-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_L }} />
             <span aria-hidden="true" className="absolute inset-y-0 right-0 z-10 w-2.5 rounded-t-sm" style={{ backgroundImage: CAP_R }} />
-            <div className="relative flex-1 border border-b-0 border-line-strong" style={{ backgroundImage: BODY }}>
+            {/* ⚠️ min-w-0 is load-bearing, not tidying. As a flex item this
+                inherits `min-width: auto`, which refuses to shrink below the
+                content's min-content width — and that width is set by the
+                upgrade <select>s, since a select is sized by its widest
+                <option> and options neither wrap nor truncate. One 395px part
+                name was therefore holding the whole body open. The build grid
+                asks for minmax(0, 1fr), so the column narrowed while the body
+                did not: at 1280px it rendered 69px wider than its own fins and
+                contact edge and lapped over the 3D viewport. Guarded by
+                "the body never outgrows the stick" in e2e/ramBox.spec.js;
+                jsdom computes no layout and cannot see this. */}
+            <div className="relative min-w-0 flex-1 border border-b-0 border-line-strong" style={{ backgroundImage: BODY }}>
               <span aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ backgroundImage: GRAIN, opacity: 0.55 }} />
               <span
                 aria-hidden="true"

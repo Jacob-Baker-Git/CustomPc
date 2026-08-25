@@ -224,3 +224,54 @@ test.describe('the silhouette holds its geometry at any size', () => {
     expect(parts.map((p) => p.contacts)).toEqual(parts.map(() => CONTACT_HEIGHT))
   })
 })
+
+// ⚠️ Regression: a DIMM whose BODY is wider than its own fins and contact edge.
+//
+// Found by walking the build page, not by any test. The body sits in a flex row
+// and so inherits `min-width: auto`, the flex default, which refuses to shrink
+// it below its content's min-content width. That width is set by the upgrade
+// <select>s: a select is sized by its widest <option>, and options neither wrap
+// nor truncate, so "Corsair Vengeance LPX DDR4-3200 64GB" alone demands 395px.
+//
+// The build grid asks for `minmax(0, 1fr)`, which lets the left column shrink
+// below all of that — so from ~1413px down the body kept its 434px while the
+// column narrowed around it. At 1280px the body rendered 69px wider than the
+// stick it belongs to and lapped 40px over the 3D viewport.
+//
+// jsdom cannot see this: it computes no layout, and every unit test was green.
+test.describe('the body never outgrows the stick', () => {
+  test('keeps body, fins and contacts the same width at desktop widths', async ({ page }) => {
+    // generateBuild plus a viewport sweep is exactly the combination that ran
+    // topBar.spec.js past the 30s default and read as a layout bug.
+    test.setTimeout(90_000)
+    await generateBuild(page)
+
+    // At and above 1024px the grid is live and the left column is 1fr of three.
+    for (const width of [1440, 1366, 1280, 1024]) {
+      await page.setViewportSize({ width, height: 900 })
+
+      const measured = await page.locator(BOX).evaluateAll((boxes) =>
+        boxes.map((box) => {
+          const finRow = box.querySelector('[data-blade]')?.offsetParent
+          const contacts = box.querySelector('[data-contacts]')
+          // The body is the bordered panel the content sits in — the flex item
+          // that carries `min-width: auto` and is the thing that blew out.
+          const body = contacts?.previousElementSibling?.querySelector('.flex-1')
+          const w = (el) => (el ? Math.round(el.getBoundingClientRect().width) : null)
+          return {
+            label: (box.textContent || '').trim().slice(0, 18),
+            fins: w(finRow),
+            contacts: w(contacts),
+            body: w(body),
+          }
+        }),
+      )
+
+      expect(measured.length, `boxes at ${width}px`).toBeGreaterThan(0)
+      for (const m of measured) {
+        expect(m.body, `body vs contacts on "${m.label}" at ${width}px`).toBe(m.contacts)
+        expect(m.body, `body vs fins on "${m.label}" at ${width}px`).toBe(m.fins)
+      }
+    }
+  })
+})
