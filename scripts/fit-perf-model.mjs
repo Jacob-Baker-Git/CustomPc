@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { fitTwoWay } from '../src/lib/perfEngine/fitTwoWay.js'
-import { concentration } from '../src/lib/perfEngine/concentration.js'
+import { concentration, entriesToDilute } from '../src/lib/perfEngine/concentration.js'
 import { fitArchEfficiency } from '../src/lib/perfEngine/archEfficiency.js'
 import { atDeclaredCap, peerRatioOutliers, residualOutlier }
   from '../src/lib/perfEngine/gpuBound.js'
@@ -114,9 +114,15 @@ const spread = concentration(entries, sources)
 const warnings = []
 for (const o of spread.byOutlet) {
   if (o.share > OUTLET_SHARE_NOTE) {
+    // Say what dilution would COST, not just that the line has been crossed.
+    // "Dilute when data allows" is unactionable on its own — nobody can tell
+    // from a percentage whether it means one more review or four thousand rows.
+    const need = entriesToDilute({ total: spread.total, topEntries: o.entries }, OUTLET_SHARE_NOTE)
     warnings.push(`${o.outlet} supplies ${(o.share * 100).toFixed(1)}% of the corpus ` +
                   `(${o.entries} of ${spread.total} entries, from ${o.sources.length} ` +
-                  `review${o.sources.length === 1 ? '' : 's'}) — dilute when data allows`)
+                  `review${o.sources.length === 1 ? '' : 's'}) — ` +
+                  `${need.toLocaleString('en-GB')} more entries from OTHER outlets would ` +
+                  `bring it under ${(OUTLET_SHARE_NOTE * 100).toFixed(0)}%; dilute when data allows`)
   }
 }
 
@@ -521,7 +527,22 @@ for (const [what, fit] of [['cpu', prior.cpu], ...Object.entries(prior.gpu).map(
 
 const model = {
   modelVersion: MODEL_VERSION,
-  datasetVersion: new Date().toISOString().slice(0, 10),
+  // ⚠️ From the CORPUS, not from the clock. The Performance tab renders this as
+  // "data as of {datasetVersion}", which is a claim about the measurements — and
+  // as `new Date()` it was a claim about whenever the fit last happened. Any
+  // re-run advanced it: rewording a warning moved the reader-facing date from
+  // 2026-08-14 to 2026-08-25 without a single new measurement. Pinned by
+  // perfModelIntegrity.test.js.
+  //
+  // `recordedAt` and not the source's `published`: the question "how current is
+  // this data" is answered by when the corpus last took something in, which is
+  // at or after the newest review's publication date.
+  datasetVersion: live
+    .map((e) => e.recordedAt)
+    .filter(Boolean)
+    .sort()
+    .at(-1)
+    ?.slice(0, 10) ?? new Date().toISOString().slice(0, 10),
   fittedAt: new Date().toISOString(),
   entryCount: live.length,
   sourceCount: sources.length,
