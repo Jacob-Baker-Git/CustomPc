@@ -113,13 +113,30 @@ test.describe('the top bar', () => {
   // breakpoint to a typical budget would have rebuilt the original bug for the
   // one user with an unusual one.
   test('still fits with a five-digit budget', async ({ page }) => {
+    // ⚠️ This one test does what eight of the tests above do, in one body:
+    // generateBuild, then eight viewport changes each with a settle wait. That
+    // is comfortably past the config's 30s default, and it fails as
+    // "page.setViewportSize: Test timeout" — a stack trace pointing at the
+    // measurement rather than at the budget, which reads like a layout failure
+    // and is not one. The page snapshot on the failing run showed the header
+    // rendering £10000 / £8452 left with nothing clipped at all.
+    test.setTimeout(120000)
+
     await page.getByTitle('Click to edit your budget').click()
     const input = page.locator('header input[type="number"]')
     await input.fill('10000')
     await input.press('Enter')
 
+    // Wait for the new figure to be ON SCREEN rather than for a duration.
+    // Pressing Enter commits to the store; the header re-renders from it a tick
+    // later, and the meter chips resize from that. Not the cause of the
+    // timeout above, but the right way to wait for a number regardless.
+    await expect(page.getByTitle('Click to edit your budget')).toHaveText('£10000')
+
     for (const width of WIDTHS) {
       await page.setViewportSize({ width, height: 900 })
+      // The meters animate width over 500ms; this clears that with margin, and
+      // by here the numbers themselves are already settled.
       await page.waitForTimeout(700)
       expect(await overflowingHeaderBoxes(page), `header is clipped at ${width}px on a £10000 budget`).toEqual([])
     }
