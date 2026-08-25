@@ -66,3 +66,24 @@ export function concentration(entries = [], sources = []) {
     topOutletShare: byOutlet[0]?.share ?? null,
   }
 }
+
+// What dilution would actually COST, in entries from anybody else.
+//
+// "Dilute when data allows" is the standing instruction and it is unactionable
+// on its own: nobody can tell from a share whether that means one more review
+// or a hundred. This turns it into a number.
+//
+// The top outlet's entries are fixed — the corpus never edits an entry in place
+// — so the only lever is the denominator. Adding `x` entries from other outlets
+// gives `topEntries / (total + x)`, so reaching share `t` needs
+// `x >= topEntries / t - total`.
+//
+// ⚠️ The answer is often much bigger than it feels. At the corpus as it stands
+// the 20% note would need roughly 4,800 further entries, which is why that
+// threshold warns and does not fail: it is a direction of travel, not a gate
+// anybody is about to walk through. Spread the additions across SEVERAL new
+// outlets — pile them all into one and that outlet simply becomes the new top.
+export function entriesToDilute({ total = 0, topEntries = 0 } = {}, share) {
+  if (!(total > 0) || !(share > 0)) return 0
+  return Math.max(0, Math.ceil(topEntries / share - total))
+}

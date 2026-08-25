@@ -1,0 +1,98 @@
+# Netlify deploys from `main` with no gate in front of it, so until now the only
+# thing standing between a broken commit and production was someone remembering
+# to run the right command. That failed in a measurable way: `e2e/performance.spec.js`
+# sat RED on `main` for eight days because `npm test` runs Vitest and nothing
+# else — a green unit run says nothing at all about the Playwright suite.
+#
+# So the point of this file is not "run the tests". It is to run the checks that
+# nobody runs by hand:
+#
+#   - the e2e suite, which is the ONLY place in this repo where CSS applies and
+#     therefore the only place a layout bug can be caught at all (jsdom computes
+#     no layout)
+#   - the two generated artefacts that rot SILENTLY — the pre-rendered fragments
+#     and the sitemap. Both are committed, both are produced by a script, and
+#     neither has anything to notice when the source moves on without them.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A second push to the same branch makes the first run pointless.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Matches the Node the project is developed on. Pinned rather than `lts/*`
+      # so a new LTS cannot change what CI means without a commit saying so.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npx vitest run
+
+      - name: Build
+        run: npm run build
+
+      # Chromium only: playwright.config.js declares no projects, so the suite
+      # runs on the default chromium and installing the other two would be a
+      # minute of download for nothing.
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      # Starts its own dev server via playwright.config.js's `webServer`.
+      - name: End-to-end tests
+        run: npx playwright test
+
+      # ---------------------------------------------------------------------
+      # Drift checks. These are the reason this workflow exists.
+      #
+      # Both scripts are idempotent: re-running them over unchanged source
+      # rewrites the same bytes. So a non-empty diff means the committed
+      # artefact no longer matches what the source produces — someone changed
+      # shared UI (or the catalogue) and did not re-capture.
+      #
+      # `git diff --exit-code` and not `git status`: status reports these files
+      # modified for line-ending bookkeeping alone. .gitattributes pins both
+      # paths to eol=lf so the comparison is the same on Linux and on the
+      # Windows working tree they are authored in.
+      - name: Sitemap is current
+        run: |
+          npm run sitemap
+          git diff --exit-code -- public/sitemap.xml \
+            || { echo "::error::public/sitemap.xml is stale — run 'npm run sitemap' and commit the result."; exit 1; }
+
+      - name: Pre-rendered fragments are current
+        run: |
+          npm run prerender
+          git diff --exit-code -- prerendered/ \
+            || { echo "::error::prerendered/ is stale — run 'npm run prerender' and commit the result. Shared UI changed without a re-capture."; exit 1; }
+
+      # Only on a failure, and only the artefacts that explain one.
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

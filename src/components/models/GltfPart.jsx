@@ -17,7 +17,16 @@ import { useGLTF } from '@react-three/drei'
 // hover highlight too. Accepting a rotation here once meant every GLB got its
 // spec rotation applied twice — see gltfModels.js and assemblyRenderRotation.test.js.
 export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0], hideNodes }) {
-  const { scene } = useGLTF(url)
+  // `false` is the useDraco argument, and it is not a micro-optimisation.
+  // drei defaults it to TRUE, which attaches a DRACOLoader pointed at
+  // https://www.gstatic.com/draco/… — a host our CSP does not allow in
+  // script-src or connect-src. No model here is Draco-compressed, so today the
+  // loader is built and never used; the moment somebody Draco-compresses one it
+  // would fail in PRODUCTION ONLY, because dev serves no CSP at all.
+  //
+  // Meshopt stays on (drei's default), and is load-bearing: every model in
+  // public/models is EXT_meshopt_compression now.
+  const { scene } = useGLTF(url, false)
 
   const { object, scale } = useMemo(() => {
     const obj = scene.clone(true)

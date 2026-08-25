@@ -4,7 +4,8 @@ import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRatings'
 import ScoreInfo from './ScoreInfo'
-import { PANEL, TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
+import { TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
+import RamBox from './RamBox'
 import { FPS_CAVEAT } from '../lib/siteContent'
 
 const CAT_LABEL = {
@@ -65,7 +66,7 @@ export default function BuildRatingPanel() {
   }
 
   return (
-    <div className={`${PANEL} p-5`}>
+    <RamBox seated={hasCore} open={openWhy !== null}>
       <span className="flex items-center gap-2 text-ink text-sm font-semibold mb-3">
         Your CustomPC score
         <ScoreInfo />
@@ -169,6 +170,6 @@ export default function BuildRatingPanel() {
           <p className="mt-3 text-[11px] text-muted leading-relaxed">{FPS_CAVEAT}</p>
         </>
       )}
-    </div>
+    </RamBox>
   )
 }

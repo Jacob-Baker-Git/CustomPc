@@ -1,7 +1,7 @@
 {
   "modelVersion": "1.0.0",
-  "datasetVersion": "2026-08-14",
-  "fittedAt": "2026-08-14T12:39:29.248Z",
+  "datasetVersion": "2026-08-12",
+  "fittedAt": "2026-08-25T00:07:39.871Z",
   "entryCount": 2855,
   "sourceCount": 56,
   "rejectedNotGpuBound": 29,

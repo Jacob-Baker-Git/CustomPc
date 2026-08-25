@@ -3,6 +3,7 @@ import { auditCorpus, validateSource, validateEntry, RESOLUTIONS, UPSCALING } fr
 import partsData from '../data/partsData.json'
 import legacyGames from '../data/gamesData.json'
 import gameMeta from '../../data/games/gameMeta.json'
+import perfModel from '../data/perfModel.json'
 
 // The corpus may cite any PERMITTED game id, so the audit resolves against
 // gameMeta plus the legacy catalogue — the same union the curation scripts use.
@@ -134,5 +135,39 @@ describe('benchmark corpus integrity', () => {
       entries: [dupe, { ...dupe }], parts: partsData, games: gamesData,
     })
     expect(problems.join(' ')).toMatch(/duplicate/i)
+  })
+})
+
+// "data as of" is a claim about the DATA, and it was a claim about the clock.
+//
+// `datasetVersion` was `new Date()` at fit time, so re-running `npm run perf:fit`
+// for any reason at all — a warning reworded, a coefficient retuned — advanced
+// the date the Performance tab shows the reader by however long it had been.
+// It moved 2026-08-14 -> 2026-08-25 on a run that added no measurements. The
+// whole point of the basis machinery is that the page never claims more
+// currency than it has.
+describe('datasetVersion describes the corpus, not the clock', () => {
+  it('is the newest recordedAt in the corpus', () => {
+    const newest = entries
+      .map((e) => e.recordedAt)
+      .filter(Boolean)
+      .sort()
+      .at(-1)
+      .slice(0, 10)
+    expect(perfModel.datasetVersion).toBe(newest)
+  })
+
+  it('never claims data newer than the newest review it cites', () => {
+    const published = sources.map((s) => s.published).filter(Boolean).sort().at(-1)
+    expect(perfModel.datasetVersion >= published).toBe(true)
+  })
+
+  it('is not simply today', () => {
+    // Not a style rule — this is the assertion that fails the moment somebody
+    // reinstates `new Date()`. It only bites when the corpus is not being
+    // updated on the same day, which is every day the corpus is not touched.
+    const today = new Date().toISOString().slice(0, 10)
+    const newest = entries.map((e) => e.recordedAt).filter(Boolean).sort().at(-1).slice(0, 10)
+    if (newest !== today) expect(perfModel.datasetVersion).not.toBe(today)
   })
 })

@@ -74,3 +74,38 @@ describe('BuildRatingPanel', () => {
     expect(useBuilderStore.getState().selectedParts.cpu.id).toBe('cpu-hi')
   })
 })
+
+// Task 5 of the RAM-box plan. `seated` tracks whether the box HAS CONTENT, not
+// whether it stands for a chosen part — leave it unwired and every panel reads
+// as an empty slot, which kills the distinction everywhere else.
+describe('as a RAM stick', () => {
+  it('reads empty until there is a build to rate', () => {
+    const { container } = render(<BuildRatingPanel />)
+    const box = container.querySelector('[data-ram-box]')
+    expect(box).not.toBeNull()
+    expect(box).toHaveAttribute('data-seated', 'false')
+    // No designator: it names a real slot holding one swappable part, and a
+    // score is not a slot.
+    expect(container.querySelector('[data-designator]')).toBeNull()
+  })
+
+  it('seats once a cpu and gpu are picked', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: cpuLo, gpu: gpuHi } })
+    const { container } = render(<BuildRatingPanel />)
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-open', 'false')
+  })
+
+  it('unseats while a row explains itself', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: cpuLo, gpu: gpuHi } })
+    const { container } = render(<BuildRatingPanel />)
+    const why = screen.getAllByRole('button', { name: /^why is the /i })[0]
+
+    fireEvent.click(why)
+
+    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-open', 'true')
+    expect(container.querySelector('[data-socket]')).not.toBeNull()
+    expect(container.querySelector('[data-contacts]')).toHaveAttribute('data-contacts', 'cold')
+    expect(container.querySelector('[data-bar]')).toHaveAttribute('data-bar', 'lit')
+  })
+})

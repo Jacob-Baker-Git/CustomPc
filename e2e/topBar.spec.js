@@ -40,6 +40,39 @@ test.describe('the top bar', () => {
     await generateBuild(page)
   })
 
+  // The overflow guard below is satisfied by a header that shows nothing at
+  // all, so it cannot on its own tell "it fits" from "it was hidden". This is
+  // the other half: above the `wide` threshold the full single-row readout has
+  // to actually be there. 1366 is the width this is really for — before the
+  // duplicated budget and wattage came out, the threshold was 1420 and a 1366
+  // laptop got none of it.
+  for (const width of [1366, 1440]) {
+    test(`shows the full readout on one row at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.waitForTimeout(700)
+
+      const { rows, meters } = await page.evaluate(() => {
+        const header = document.querySelector('header')
+        // Cluster the header's direct children by vertical CENTRE, not by top:
+        // under `align-items: center` children legitimately differ in top.
+        const centres = [...header.children]
+          .map((el) => el.getBoundingClientRect())
+          .filter((r) => r.width > 0 && r.height > 0)
+          .map((r) => Math.round((r.top + r.bottom) / 2))
+        // The full-size meter chip is the bordered one; the phone row's is not.
+        const meters = [...header.querySelectorAll('div')]
+          .filter((d) => getComputedStyle(d).minWidth === '136px' && d.getBoundingClientRect().width > 0)
+          .map((d) => d.textContent.trim())
+        return { rows: new Set(centres).size, meters }
+      })
+
+      expect(rows, `the header should be one row at ${width}px`).toBe(1)
+      expect(meters, `both meter chips should be on screen at ${width}px`).toHaveLength(2)
+      expect(meters.join(' ')).toMatch(/Budget/i)
+      expect(meters.join(' ')).toMatch(/Power/i)
+    })
+  }
+
   for (const width of WIDTHS) {
     test(`clears the content it is fixed on top of at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
@@ -65,11 +98,47 @@ test.describe('the top bar', () => {
 
     test(`keeps every readout inside the viewport at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
-      // The budget/power group only mounts at xl, and the meters animate their
-      // width over 500ms — measure after both have settled.
+      // The budget/power group only mounts at `wide`, and the meters animate
+      // their width over 500ms — measure after both have settled.
       await page.waitForTimeout(700)
 
       expect(await overflowingHeaderBoxes(page), `header content is clipped at ${width}px`).toEqual([])
     })
   }
+
+  // ⚠️ Every width above is measured against the default £1600 build, and the
+  // header's readouts are LIVE NUMBERS — its width is a function of what the
+  // user typed. A five-digit budget adds 32px to the row, which is the
+  // difference between fitting a 1280px laptop and clipping it. Sizing the
+  // breakpoint to a typical budget would have rebuilt the original bug for the
+  // one user with an unusual one.
+  test('still fits with a five-digit budget', async ({ page }) => {
+    // ⚠️ This one test does what eight of the tests above do, in one body:
+    // generateBuild, then eight viewport changes each with a settle wait. That
+    // is comfortably past the config's 30s default, and it fails as
+    // "page.setViewportSize: Test timeout" — a stack trace pointing at the
+    // measurement rather than at the budget, which reads like a layout failure
+    // and is not one. The page snapshot on the failing run showed the header
+    // rendering £10000 / £8452 left with nothing clipped at all.
+    test.setTimeout(120000)
+
+    await page.getByTitle('Click to edit your budget').click()
+    const input = page.locator('header input[type="number"]')
+    await input.fill('10000')
+    await input.press('Enter')
+
+    // Wait for the new figure to be ON SCREEN rather than for a duration.
+    // Pressing Enter commits to the store; the header re-renders from it a tick
+    // later, and the meter chips resize from that. Not the cause of the
+    // timeout above, but the right way to wait for a number regardless.
+    await expect(page.getByTitle('Click to edit your budget')).toHaveText('£10000')
+
+    for (const width of WIDTHS) {
+      await page.setViewportSize({ width, height: 900 })
+      // The meters animate width over 500ms; this clears that with margin, and
+      // by here the numbers themselves are already settled.
+      await page.waitForTimeout(700)
+      expect(await overflowingHeaderBoxes(page), `header is clipped at ${width}px on a £10000 budget`).toEqual([])
+    }
+  })
 })
