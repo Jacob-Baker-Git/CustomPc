@@ -1,5 +1,22 @@
 # RAM-stick boxes and zoned board background — Implementation Plan
 
+> ## ✅ COMPLETE — 11 of 11 tasks, closed 2026-08-25 (merge `c1b77f9`)
+>
+> The boxes were only ticked at the end, so treat them as a completion record
+> rather than a live trace of the work. Two tasks did not land as written:
+>
+> - **Task 6 shipped REDESIGNED.** The zoned background (gutters only, flat
+>   `--ground` behind the column) was reversed on 2026-08-17 for a full-bleed
+>   motherboard plus a soft scrim. The goal line above and Task 6's body still
+>   describe the dead design.
+> - **Task 7's drafted assertions were vacuous and were rewritten.** Counting
+>   `[data-blade]` is five at every width even under the pixel implementation it
+>   was meant to catch, and "all contact strips are equal" is trivially true when
+>   the boxes are equal too. The shipped spec measures blade *position* and
+>   asserts its own premises.
+>
+> Tasks 8 and 9 were completed outside this plan, in the 2026-08-25 defect pass.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the generic `PANEL` container with a `RamBox` that draws itself as a DIMM, give it seated/empty and closed/open (unseating) states, and put a zoned motherboard background behind the page.
@@ -49,7 +66,7 @@ Read these before writing a line. Each has already caused a real bug in this rep
 - Create: `src/lib/ramBoxGeometry.js`
 - Test: `src/tests/ramBoxGeometry.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // src/tests/ramBoxGeometry.test.js
@@ -101,12 +118,12 @@ describe('ramBoxGeometry', () => {
 })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx vitest run src/tests/ramBoxGeometry.test.js`
 Expected: FAIL — `Failed to resolve import "../lib/ramBoxGeometry"`
 
-- [ ] **Step 3: Write the module**
+- [x] **Step 3: Write the module**
 
 ```js
 // src/lib/ramBoxGeometry.js
@@ -151,12 +168,12 @@ export function bladeStyle({ left, width, height, rake }) {
 }
 ```
 
-- [ ] **Step 4: Run it and watch it pass**
+- [x] **Step 4: Run it and watch it pass**
 
 Run: `npx vitest run src/tests/ramBoxGeometry.test.js`
 Expected: PASS — 7 tests
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/lib/ramBoxGeometry.js src/tests/ramBoxGeometry.test.js
@@ -171,7 +188,7 @@ git commit -m "feat: pin the RamBox blade geometry in one module"
 - Create: `src/components/RamBox.jsx`
 - Test: `src/tests/RamBox.test.jsx`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```jsx
 // src/tests/RamBox.test.jsx
@@ -225,12 +242,12 @@ describe('RamBox', () => {
 })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx vitest run src/tests/RamBox.test.jsx`
 Expected: FAIL — `Failed to resolve import "../components/RamBox"`
 
-- [ ] **Step 3: Write the component**
+- [x] **Step 3: Write the component**
 
 ```jsx
 // src/components/RamBox.jsx
@@ -334,12 +351,12 @@ export default function RamBox({ designator, seated = false, open = false, class
 }
 ```
 
-- [ ] **Step 4: Run it and watch it pass**
+- [x] **Step 4: Run it and watch it pass**
 
 Run: `npx vitest run src/tests/RamBox.test.jsx`
 Expected: PASS — 7 tests
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/RamBox.jsx src/tests/RamBox.test.jsx
@@ -354,7 +371,7 @@ git commit -m "feat: draw a panel as the DIMM it stands for"
 - Modify: `src/components/RamBox.jsx`
 - Test: `src/tests/RamBox.test.jsx`
 
-- [ ] **Step 1: Write the failing test** (append to the existing `describe`)
+- [x] **Step 1: Write the failing test** (append to the existing `describe`)
 
 ```jsx
   it('lifts clear of its socket when open', () => {
@@ -389,12 +406,12 @@ git commit -m "feat: draw a panel as the DIMM it stands for"
   })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx vitest run src/tests/RamBox.test.jsx`
 Expected: FAIL — `expected null not to be null` on `[data-socket]`
 
-- [ ] **Step 3: Implement unseating**
+- [x] **Step 3: Implement unseating**
 
 Add above the default export in `src/components/RamBox.jsx`:
 
@@ -471,12 +488,12 @@ export default function RamBox({ designator, seated = false, open = false, class
 }
 ```
 
-- [ ] **Step 4: Run it and watch it pass**
+- [x] **Step 4: Run it and watch it pass**
 
 Run: `npx vitest run src/tests/RamBox.test.jsx`
 Expected: PASS — 12 tests
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/RamBox.jsx src/tests/RamBox.test.jsx
@@ -493,7 +510,7 @@ git commit -m "feat: unseat a box when it opens"
 
 These four never expand, so they take `RamBox` with `open` left alone.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `src/tests/BuildWarnings.test.jsx`:
 
@@ -507,12 +524,12 @@ Append to `src/tests/BuildWarnings.test.jsx`:
   })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx vitest run src/tests/BuildWarnings.test.jsx`
 Expected: FAIL — `expected null not to be null`
 
-- [ ] **Step 3: Migrate the four call sites**
+- [x] **Step 3: Migrate the four call sites**
 
 `src/components/BuildWarnings.jsx` — replace the import and the wrapper:
 
@@ -544,12 +561,12 @@ export default function BuildWarnings() {
 
 Apply the same shape to the other three: drop `PANEL` from the import, wrap in `RamBox`, and remove the now-duplicated padding class (`p-4` / `p-5`) since `RamBox` supplies its own. Designators: `SelectedPartsPanel` → `BUILD_1`, `PeripheralsPanel` → `USB_1`, `SetupFlow` → `SETUP_1`.
 
-- [ ] **Step 4: Run the four suites**
+- [x] **Step 4: Run the four suites**
 
 Run: `npx vitest run src/tests/BuildWarnings.test.jsx src/tests/SelectedPartsPanel.test.jsx src/tests/PeripheralsPanel.test.jsx src/tests/SetupFlow.test.jsx`
 Expected: PASS. If a test asserted on a `PANEL` class string, update it to assert `[data-ram-box]` — that is the contract now.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/BuildWarnings.jsx src/components/SelectedPartsPanel.jsx src/components/PeripheralsPanel.jsx src/components/SetupFlow.jsx src/tests
@@ -564,7 +581,7 @@ git commit -m "feat: seat the four static panels in their slots"
 - Modify: `src/components/BuildRatingPanel.jsx:68`, `BuildSummary.jsx:132`, `SavedBuilds.jsx:106`
 - Test: `src/tests/BuildRatingPanel.test.jsx`, `BuildSummary.test.jsx`, `SavedBuilds.test.jsx`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `src/tests/BuildSummary.test.jsx`:
 
@@ -583,12 +600,12 @@ Append to `src/tests/BuildSummary.test.jsx`:
   })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx vitest run src/tests/BuildSummary.test.jsx`
 Expected: FAIL — `expected null not to be null` on `[data-ram-box]`
 
-- [ ] **Step 3: Wire each panel's existing open state into `RamBox`**
+- [x] **Step 3: Wire each panel's existing open state into `RamBox`**
 
 Each of these three already tracks an expanded boolean. Pass it straight through — do **not** add a second source of truth:
 
@@ -605,12 +622,12 @@ return (
 
 `BuildRatingPanel` → designator `RATE_1`, `seated` when a build exists. `SavedBuilds` → `SAVE_1`, `seated` when at least one build is saved.
 
-- [ ] **Step 4: Run the three suites**
+- [x] **Step 4: Run the three suites**
 
 Run: `npx vitest run src/tests/BuildRatingPanel.test.jsx src/tests/BuildSummary.test.jsx src/tests/SavedBuilds.test.jsx`
 Expected: PASS
 
-- [ ] **Step 5: Record what `PANEL` is now for**
+- [x] **Step 5: Record what `PANEL` is now for**
 
 All seven part-shaped call sites have moved. `PANEL` still has legitimate users, so it stays — but the next person needs to know which surfaces get a DIMM and which do not. In `src/lib/uiTokens.js`, replace the `PANEL` comment:
 
@@ -626,12 +643,12 @@ All seven part-shaped call sites have moved. `PANEL` still has legitimate users,
 export const PANEL = 'bg-surface border border-line rounded-xl'
 ```
 
-- [ ] **Step 6: Run the whole suite for collateral damage**
+- [x] **Step 6: Run the whole suite for collateral damage**
 
 Run: `npm run test:run`
 Expected: PASS. Baseline before this work is **128 files / 1293 tests**; the count should only grow.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components src/lib/uiTokens.js src/tests
@@ -647,7 +664,7 @@ git commit -m "feat: unseat the three expandable panels on open"
 - Test: `src/tests/BoardBackground.test.jsx`
 - Modify: `src/components/SiteChrome.jsx`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```jsx
 // src/tests/BoardBackground.test.jsx
@@ -682,12 +699,12 @@ describe('BoardBackground', () => {
 })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx vitest run src/tests/BoardBackground.test.jsx`
 Expected: FAIL — `Failed to resolve import "../components/BoardBackground"`
 
-- [ ] **Step 3: Write the component**
+- [x] **Step 3: Write the component**
 
 ```jsx
 // src/components/BoardBackground.jsx
@@ -739,7 +756,7 @@ export default function BoardBackground() {
 }
 ```
 
-- [ ] **Step 4: Mount it**
+- [x] **Step 4: Mount it**
 
 In `src/components/SiteChrome.jsx`, import it and render it as the first child of the outer `div`:
 
@@ -755,12 +772,12 @@ export default function SiteChrome({ onBack, children }) {
       {/* …the rest of the file unchanged… */}
 ```
 
-- [ ] **Step 5: Run it and watch it pass**
+- [x] **Step 5: Run it and watch it pass**
 
 Run: `npx vitest run src/tests/BoardBackground.test.jsx`
 Expected: PASS — 4 tests
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/BoardBackground.jsx src/components/SiteChrome.jsx src/tests/BoardBackground.test.jsx
@@ -776,7 +793,7 @@ git commit -m "feat: put a board in the gutters and keep the column clean"
 
 jsdom computes no layout, so this is the only place any of this can be checked.
 
-- [ ] **Step 1: Write the spec**
+- [x] **Step 1: Write the spec**
 
 ```js
 // e2e/ramBox.spec.js
@@ -837,12 +854,12 @@ test.describe('RamBox in a real browser', () => {
 })
 ```
 
-- [ ] **Step 2: Run it**
+- [x] **Step 2: Run it**
 
 Run: `npx playwright test e2e/ramBox.spec.js`
 Expected: PASS. If the contrast test fails, **darken the trace opacity in `BoardBackground.jsx`** — do not touch `--faint`. It protects 31 call sites and is guarded separately.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add e2e/ramBox.spec.js
@@ -859,7 +876,7 @@ git commit -m "test: prove the box geometry and trace contrast in a browser"
 
 At exactly `xl`, the `hidden xl:flex` budget/power group extends to 1415px inside a 1280px viewport and the POWER figure is cut off. It fails **silently**: `scrollWidth === clientWidth`, so no scrollbar appears and a page-level overflow check reports clean. The probe has to be **per-element**.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 test('nothing overflows the viewport at exactly 1280', async ({ page }) => {
@@ -877,12 +894,12 @@ test('nothing overflows the viewport at exactly 1280', async ({ page }) => {
 })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Run: `npx playwright test e2e/ramBox.spec.js -g "1280"`
 Expected: FAIL — a non-empty array naming the budget/power group
 
-- [ ] **Step 3: Fix the top bar**
+- [x] **Step 3: Fix the top bar**
 
 In `src/components/TopBar.jsx:100`, raise the breakpoint at which the group appears so it only shows once there is genuinely room, and stop it forcing the row wider than the viewport:
 
@@ -894,17 +911,17 @@ In `src/components/TopBar.jsx:100`, raise the breakpoint at which the group appe
 <div className="hidden min-w-0 min-[1440px]:flex gap-3">
 ```
 
-- [ ] **Step 4: Run it and watch it pass**
+- [x] **Step 4: Run it and watch it pass**
 
 Run: `npx playwright test e2e/ramBox.spec.js -g "1280"`
 Expected: PASS
 
-- [ ] **Step 5: Check the breakpoint above and below**
+- [x] **Step 5: Check the breakpoint above and below**
 
 Run: `npx playwright test e2e/ramBox.spec.js`
 Expected: PASS. Also confirm by hand at 1439 (group hidden) and 1441 (group visible, nothing clipped).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/TopBar.jsx e2e/ramBox.spec.js
@@ -920,7 +937,7 @@ git commit -m "fix: stop the top bar clipping POWER at exactly 1280"
 
 `tokenOpacity.test.js` builds its regex **from the Tailwind config**, so a class whose token has been *removed* is invisible to it: `bg-accent-soft/40` returns zero violations once `accent.soft` is gone. It proves "no live token carries a dead modifier"; it cannot prove "every class in `src` resolves to a live token".
 
-- [ ] **Step 1: Write the test**
+- [x] **Step 1: Write the test**
 
 ```js
 // src/tests/tokenResolves.test.js
@@ -1000,16 +1017,16 @@ describe('every class in src resolves to a live token', () => {
 })
 ```
 
-- [ ] **Step 2: Run it**
+- [x] **Step 2: Run it**
 
 Run: `npx vitest run src/tests/tokenResolves.test.js`
 Expected: PASS — 3 tests. The compile step is slow; the 60s timeout is deliberate.
 
-- [ ] **Step 3: Prove it catches the real bug**
+- [x] **Step 3: Prove it catches the real bug**
 
 Temporarily add `<div className="bg-accent-soft" />` to `src/components/BuildWarnings.jsx`, then run the suite. The second assertion documents that the class emits nothing — confirming the class is dead in the build even though `tokenOpacity.test.js` stays green. Revert the edit.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/tests/tokenResolves.test.js
@@ -1022,27 +1039,27 @@ git commit -m "test: close the tokenOpacity blind spot for deleted tokens"
 
 **Files:** none
 
-- [ ] **Step 1: Unit suite**
+- [x] **Step 1: Unit suite**
 
 Run: `npm run test:run`
 Expected: PASS, **more** than the 1293 baseline.
 
-- [ ] **Step 2: Lint**
+- [x] **Step 2: Lint**
 
 Run: `npm run lint`
 Expected: clean
 
-- [ ] **Step 3: Build**
+- [x] **Step 3: Build**
 
 Run: `npm run build`
 Expected: exit 0
 
-- [ ] **Step 4: E2E**
+- [x] **Step 4: E2E**
 
 Run: `npm run test:e2e`
 Expected: PASS across all specs, not just the new one.
 
-- [ ] **Step 5: Look at it**
+- [x] **Step 5: Look at it**
 
 Start the dev server and walk Build / Performance / Peripherals / Summary, plus `/help` and `/parts`. Judge colour by `getComputedStyle`, **never by screenshot** — compression has twice made copper `#C4813C` read as brand orange `#F26B3A` in this repo and sent someone chasing a bug that did not exist. Also check `el.matches(':hover')` before believing a hover state; the pointer sits wherever it was last left.
 
@@ -1054,12 +1071,12 @@ Start the dev server and walk Build / Performance / Peripherals / Summary, plus 
 
 This changed every shared panel. `prerendered/*.html` is committed source injected into `dist/` at build time, so it is what every content page paints **before React hydrates** — and **no test knows when it was last captured**. The full suite passed green through the last staleness incident while the fragments held classes that had been deleted from the config and emitted no CSS, which would have rendered those elements invisible until hydration.
 
-- [ ] **Step 1: Re-capture**
+- [x] **Step 1: Re-capture**
 
 Run: `npm run prerender`
 Expected: ~1 min, own port 4183, seven fragments rewritten.
 
-- [ ] **Step 2: Prove it actually changed**
+- [x] **Step 2: Prove it actually changed**
 
 ```bash
 git diff --stat prerendered/
@@ -1067,7 +1084,7 @@ grep -c "data-ram-box" prerendered/help.html
 ```
 Expected: a non-empty diff, and a non-zero count if `/help` renders any migrated panel. An empty diff means the capture did not pick up the change — investigate rather than proceeding.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add prerendered/
