@@ -96,12 +96,59 @@ export default function BuilderScreen() {
                   </Suspense>
                 </CanvasErrorBoundary>
                 <InfoDisclaimer />
-                {/* pointer-events-none so the hint never eats a drag aimed at
-                    the model underneath it. */}
-                <div className="pointer-events-none absolute bottom-3 left-3 z-30 rounded-lg border border-line bg-surface px-2.5 py-1 text-[11px] text-muted">
-                  Drag to rotate · scroll to zoom
+                {/* ⚠️ ONE row, not two independently-pinned corners.
+
+                    The hint and the toggle used to be separate absolutely-
+                    positioned children — bottom-3 left-3 and bottom-3 right-3 —
+                    which gave them no layout relationship at all, so nothing
+                    stopped them sliding into each other as the panel narrowed.
+                    Together they want ~359px; the panel is the viewport minus
+                    47, so every phone was short. Measured overlap: 72.8px at
+                    320, 32.8px at 375, 2.8px at 390 — the hint's opaque
+                    bg-surface sliced straight through the button.
+
+                    A flex row cannot overlap: when the two no longer fit they
+                    wrap instead, and because the row is anchored at the bottom
+                    it grows UPWARD, so the toggle keeps its corner and the hint
+                    stacks above it. That is a guarantee at every width rather
+                    than a breakpoint that has to be re-guessed for the next
+                    phone. Guarded by e2e/mobileLayout.spec.js; jsdom computes
+                    no layout and cannot see any of it.
+
+                    pointer-events-none stays on the ROW so it never eats a drag
+                    aimed at the model underneath; the toggle re-enables them for
+                    itself alone. */}
+                <div className="pointer-events-none absolute inset-x-3 bottom-3 z-30 flex flex-wrap items-end justify-between gap-2">
+                  {/* ⚠️ The VERB is per-input, and the whole reason this hint
+                      exists is a mouse problem: the canvas swallows the scroll
+                      wheel, so without a frame and a label people scroll, the
+                      build spins, and it reads as a bug. A finger has no scroll
+                      wheel — on touch the same confusion is real but the gesture
+                      is a pinch, so "scroll to zoom" was instructing phone users
+                      to do something impossible. It got worse with the row fix
+                      above: the hint now takes a line of its own on a phone, so
+                      it was spending real estate to be wrong.
+
+                      Swapped in CSS, not JS, deliberately. This screen is
+                      pre-rendered; a matchMedia read at render time would bake
+                      one verb into the fragment and flip it on hydration.
+                      (pointer: coarse) is an arbitrary variant rather than a
+                      tailwind.config.js screen, which matters — a new `screens`
+                      entry needs a dev-server restart or it emits nothing at
+                      all, and a variant that emits nothing fails open, showing
+                      BOTH verbs. Guarded by e2e/mobileLayout.spec.js, which
+                      drives a real touch device and asserts exactly one. */}
+                  <div data-viewport-hint className="rounded-lg border border-line bg-surface px-2.5 py-1 text-[11px] text-muted">
+                    Drag to rotate ·{' '}
+                    <span data-zoom-verb="scroll" className="[@media(pointer:coarse)]:hidden">scroll</span>
+                    <span data-zoom-verb="pinch" className="hidden [@media(pointer:coarse)]:inline">pinch</span>
+                    {' '}to zoom
+                  </div>
+                  {/* ml-auto so that when the row wraps, the toggle alone on its
+                      line still sits right rather than jumping left —
+                      justify-between does nothing for a single item on a line. */}
+                  <div className="pointer-events-auto ml-auto"><CaseToggle /></div>
                 </div>
-                <div className="absolute bottom-3 right-3"><CaseToggle /></div>
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}
