@@ -125,3 +125,40 @@ export function serpentine({ fromX, fromY, ends, pitch, amplitude }) {
   })
   return { paths, vias }
 }
+
+// The board viewBox. The full-bleed layer renders at this and is cropped by
+// preserveAspectRatio="slice", so these are proportions, not millimetres.
+export const BOARD = { w: 640, h: 420 }
+
+// ATX landmarks, rear I/O top-left, which is how an ATX board is conventionally
+// drawn in landscape. `weight` selects the stroke group in BoardBackground:
+// 'signal' | 'outline' | 'power', matching the three tuned weights.
+//
+// ⚠️ These are OUTLINES ONLY. Solid gold pads live in the edge-pinned hardware
+// layers and are not planned here — nothing readable can sit on solid gold
+// (measured 1.95:1 for --ink), so the full-bleed layer carries no fills.
+//
+// ⚠️ The DIMM bank starts at 364, not hard against the socket. The 54 units
+// between them are a routing channel, and they are load-bearing rather than
+// aesthetic: the memory fan-out is length-matched, length-matching cannot
+// stretch a trace past sqrt(2) times its run, and a narrower channel forces the
+// near conductors into stubs too short to match or to read as traces at all.
+export const LANDMARKS = [
+  { id: 'rear-io',      x: 20,  y: 18,  w: 100, h: 52,  weight: 'outline' },
+  { id: 'vrm',          x: 132, y: 18,  w: 68,  h: 40,  weight: 'outline' },
+  { id: 'eps-8pin',     x: 214, y: 18,  w: 36,  h: 16,  weight: 'power' },
+  { id: 'socket',       x: 210, y: 88,  w: 100, h: 100, weight: 'outline' },
+  { id: 'dimm-0',       x: 364, y: 70,  w: 8,   h: 140, weight: 'outline' },
+  { id: 'dimm-1',       x: 380, y: 70,  w: 8,   h: 140, weight: 'outline' },
+  { id: 'dimm-2',       x: 396, y: 70,  w: 8,   h: 140, weight: 'outline' },
+  { id: 'dimm-3',       x: 412, y: 70,  w: 8,   h: 140, weight: 'outline' },
+  { id: 'atx-24pin',    x: 440, y: 78,  w: 30,  h: 72,  weight: 'power' },
+  { id: 'm2-1',         x: 150, y: 224, w: 180, h: 8,   weight: 'outline' },
+  { id: 'pcie-x16-1',   x: 150, y: 250, w: 270, h: 12,  weight: 'outline' },
+  { id: 'm2-2',         x: 150, y: 274, w: 180, h: 8,   weight: 'outline' },
+  { id: 'pcie-x1',      x: 150, y: 286, w: 110, h: 8,   weight: 'outline' },
+  { id: 'pcie-x16-2',   x: 150, y: 310, w: 230, h: 12,  weight: 'outline' },
+  { id: 'chipset',      x: 400, y: 280, w: 70,  h: 70,  weight: 'outline' },
+  { id: 'sata',         x: 480, y: 228, w: 40,  h: 64,  weight: 'outline' },
+  { id: 'front-panel',  x: 300, y: 388, w: 62,  h: 12,  weight: 'outline' },
+]

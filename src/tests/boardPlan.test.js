@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { segmentsOf, pathLength, isOrthoOr45, bus, serpentine } from '../lib/boardPlan'
+import { segmentsOf, pathLength, isOrthoOr45, bus, serpentine, LANDMARKS, BOARD } from '../lib/boardPlan'
 
 describe('path inspection', () => {
   it('splits a path into absolute segments', () => {
@@ -154,5 +154,61 @@ describe('serpentine', () => {
     for (const [x1, , x2] of segmentsOf(paths[1])) {
       expect(Math.max(x1, x2)).toBeLessThanOrEqual(140)
     }
+  })
+})
+
+describe('the ATX plan', () => {
+  const byId = Object.fromEntries(LANDMARKS.map((l) => [l.id, l]))
+
+  it('places every landmark inside the board viewBox', () => {
+    for (const l of LANDMARKS) {
+      expect(l.x, l.id).toBeGreaterThanOrEqual(0)
+      expect(l.y, l.id).toBeGreaterThanOrEqual(0)
+      expect(l.x + l.w, l.id).toBeLessThanOrEqual(BOARD.w)
+      expect(l.y + l.h, l.id).toBeLessThanOrEqual(BOARD.h)
+    }
+  })
+
+  it('does not overlap any two landmarks', () => {
+    for (const a of LANDMARKS) {
+      for (const b of LANDMARKS) {
+        if (a.id >= b.id) continue
+        const clear = a.x + a.w <= b.x || b.x + b.w <= a.x
+          || a.y + a.h <= b.y || b.y + b.h <= a.y
+        expect(clear, `${a.id} overlaps ${b.id}`).toBe(true)
+      }
+    }
+  })
+
+  // The adjacencies are the whole point: this is what makes it read as an ATX
+  // board rather than as rectangles. Positions are relative truth, not
+  // millimetre-accurate, so the assertions are about ORDER, not coordinates.
+  it('puts the DIMM bank to the right of the socket', () => {
+    expect(byId['dimm-0'].x).toBeGreaterThan(byId.socket.x + byId.socket.w)
+  })
+
+  it('leaves a routing channel between the socket and the DIMM bank', () => {
+    // Length-matching has a sqrt(2) ceiling, so a fan-out whose traces land at
+    // staggered depths needs its shortest run to be at least 1/sqrt(2) of its
+    // longest. A bank butted up against the socket cannot give it that: the
+    // first draft left 30 units here and the near traces came out 10 and 2
+    // units long — unmatchable, and reading as stubs ending in mid-air.
+    const channel = byId['dimm-0'].x - (byId.socket.x + byId.socket.w)
+    expect(channel).toBeGreaterThanOrEqual(40)
+  })
+
+  it('puts the PCIe stack below the socket', () => {
+    expect(byId['pcie-x16-1'].y).toBeGreaterThan(byId.socket.y + byId.socket.h)
+  })
+
+  it('puts the rear I/O in the top-left corner', () => {
+    expect(byId['rear-io'].x).toBeLessThan(64)
+    expect(byId['rear-io'].y).toBeLessThan(42)
+  })
+
+  it('keeps the four DIMM slots on one pitch', () => {
+    const xs = [0, 1, 2, 3].map((i) => byId[`dimm-${i}`].x)
+    const gaps = xs.slice(1).map((x, i) => x - xs[i])
+    for (const g of gaps) expect(g).toBe(gaps[0])
   })
 })
