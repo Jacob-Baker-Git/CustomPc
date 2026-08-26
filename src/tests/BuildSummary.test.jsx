@@ -19,6 +19,25 @@ describe('BuildSummary', () => {
     expect(screen.getByText(/no parts selected yet/i)).toBeInTheDocument()
   })
 
+  it('names the connector each part seats in', () => {
+    // The designator teaches WHERE the part goes, the same thing PartSlot does
+    // on the Build tab. A summary that says GPU twice tells you less than one
+    // that says PCIEX16_1.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    expect(screen.getByText('PCIEX16_1')).toBeInTheDocument()
+    expect(screen.getByText('CPU_1')).toBeInTheDocument()
+  })
+
+  it('keeps the retailer link reachable without a pointer', () => {
+    // Revealed on hover AND focus. Hover-only would put ten links behind a
+    // gesture a keyboard cannot make.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    const link = screen.getAllByRole('link', { name: /find best price/i })[0]
+    expect(link.closest('[data-row]').className).toMatch(/group/)
+    expect(link.className).toMatch(/group-focus-within:opacity-100/)
+  })
   it('lists selected parts with prices and buy links', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)
