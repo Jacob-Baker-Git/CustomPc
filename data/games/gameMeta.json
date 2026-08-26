@@ -6,15 +6,15 @@
       "tier": 4
     },
     "episch": {
-      "label": "Episch",
+      "label": "Epic",
       "tier": 4
     },
     "extrem": {
-      "label": "Extrem",
+      "label": "Extreme",
       "tier": 4
     },
     "grafik-priorisieren": {
-      "label": "Grafik priorisieren",
+      "label": "Graphics priority",
       "tier": 4
     },
     "high": {
@@ -22,11 +22,11 @@
       "tier": 3
     },
     "hoch": {
-      "label": "Hoch",
+      "label": "High",
       "tier": 3
     },
     "kino": {
-      "label": "Kino",
+      "label": "Cinematic",
       "tier": 4
     },
     "low": {
@@ -42,7 +42,7 @@
       "tier": 4
     },
     "maximale-grafikdetails": {
-      "label": "Maximale Grafikdetails",
+      "label": "Maximum graphics detail",
       "tier": 4
     },
     "medium": {
@@ -50,7 +50,7 @@
       "tier": 2
     },
     "sehr-hoch": {
-      "label": "Sehr hoch",
+      "label": "Very high",
       "tier": 4
     },
     "ultra": {
@@ -62,7 +62,7 @@
       "tier": 4
     },
     "ultrahoch": {
-      "label": "Ultrahoch",
+      "label": "Ultra-high",
       "tier": 4
     },
     "very-high": {
@@ -166,7 +166,7 @@
       "slug": "doom-the-dark-ages",
       "genre": "shooter",
       "presetLabels": {
-        "max-details": "Max. Details, TAA nativ"
+        "max-details": "Max. Details, TAA native"
       }
     },
     "dota2": {

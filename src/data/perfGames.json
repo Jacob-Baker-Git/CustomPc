@@ -65,7 +65,7 @@
     "presets": [
       {
         "id": "ultrahoch",
-        "label": "Ultrahoch",
+        "label": "Ultra-high",
         "tier": 4,
         "upscaling": "native"
       }
@@ -178,7 +178,7 @@
     "presets": [
       {
         "id": "episch",
-        "label": "Episch (DLSS/FSR Performance)",
+        "label": "Epic (DLSS/FSR Performance)",
         "tier": 4,
         "upscaling": "performance"
       }
@@ -242,7 +242,7 @@
       },
       {
         "id": "kino",
-        "label": "Kino (DLSS/FSR Quality)",
+        "label": "Cinematic (DLSS/FSR Quality)",
         "tier": 4,
         "upscaling": "quality"
       }
@@ -256,7 +256,7 @@
     "presets": [
       {
         "id": "hoch",
-        "label": "Hoch (DLSS/FSR Ultra Performance)",
+        "label": "High (DLSS/FSR Ultra Performance)",
         "tier": 3,
         "upscaling": "ultra-performance"
       }
@@ -270,7 +270,7 @@
     "presets": [
       {
         "id": "extrem",
-        "label": "Extrem",
+        "label": "Extreme",
         "tier": 4,
         "upscaling": "native"
       },
@@ -464,7 +464,7 @@
     "presets": [
       {
         "id": "max-details",
-        "label": "Max. Details, TAA nativ",
+        "label": "Max. Details, TAA native",
         "tier": 4,
         "upscaling": "native"
       }
@@ -518,7 +518,7 @@
       },
       {
         "id": "hoch",
-        "label": "Hoch",
+        "label": "High",
         "tier": 3,
         "upscaling": "native"
       },
@@ -530,7 +530,7 @@
       },
       {
         "id": "grafik-priorisieren",
-        "label": "Grafik priorisieren",
+        "label": "Graphics priority",
         "tier": 4,
         "upscaling": "native"
       }
@@ -577,7 +577,7 @@
     "presets": [
       {
         "id": "hoch",
-        "label": "Hoch (DLSS/FSR Ultra Quality)",
+        "label": "High (DLSS/FSR Ultra Quality)",
         "tier": 3,
         "upscaling": "ultra-quality"
       }
@@ -591,7 +591,7 @@
     "presets": [
       {
         "id": "ultrahoch",
-        "label": "Ultrahoch",
+        "label": "Ultra-high",
         "tier": 4,
         "upscaling": "native"
       },
@@ -707,7 +707,7 @@
       },
       {
         "id": "sehr-hoch",
-        "label": "Sehr hoch",
+        "label": "Very high",
         "tier": 4,
         "upscaling": "native"
       },
@@ -838,13 +838,13 @@
       },
       {
         "id": "hoch",
-        "label": "Hoch (DLSS/FSR Quality)",
+        "label": "High (DLSS/FSR Quality)",
         "tier": 3,
         "upscaling": "quality"
       },
       {
         "id": "hoch",
-        "label": "Hoch (DLSS/FSR Ultra Performance)",
+        "label": "High (DLSS/FSR Ultra Performance)",
         "tier": 3,
         "upscaling": "ultra-performance"
       },
@@ -940,7 +940,7 @@
       },
       {
         "id": "sehr-hoch",
-        "label": "Sehr hoch",
+        "label": "Very high",
         "tier": 4,
         "upscaling": "native"
       },
@@ -1082,7 +1082,7 @@
     "presets": [
       {
         "id": "maximale-grafikdetails",
-        "label": "Maximale Grafikdetails",
+        "label": "Maximum graphics detail",
         "tier": 4,
         "upscaling": "native"
       }
@@ -1252,7 +1252,7 @@
     "presets": [
       {
         "id": "episch",
-        "label": "Episch (DLSS/FSR Quality)",
+        "label": "Epic (DLSS/FSR Quality)",
         "tier": 4,
         "upscaling": "quality"
       }
@@ -1304,13 +1304,13 @@
     "presets": [
       {
         "id": "sehr-hoch",
-        "label": "Sehr hoch",
+        "label": "Very high",
         "tier": 4,
         "upscaling": "native"
       },
       {
         "id": "sehr-hoch",
-        "label": "Sehr hoch (DLSS/FSR Performance)",
+        "label": "Very high (DLSS/FSR Performance)",
         "tier": 4,
         "upscaling": "performance"
       }
