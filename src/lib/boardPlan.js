@@ -85,3 +85,43 @@ export function bus({ fromX, fromY, toX, count, pitch, lead = 8, rise = 0 }) {
   }
   return { paths, vias }
 }
+
+// A 45 degree triangular detour advances 2a horizontally while covering
+// 2a*sqrt(2) of copper, so each cycle buys this much extra length per unit of
+// amplitude. This constant is why the wiggle is triangular rather than square:
+// a square detour would break the 45 degree rule.
+const CYCLE_GAIN = 2 * (Math.SQRT2 - 1)
+
+// Length-matching. Every trace in a bundle is padded with detours until it is
+// as long as the longest, which is what keeps a parallel bus in time. Applied
+// only where a real board has one — a serpentine on a power trace would be
+// decoration imitating structure.
+//
+// ⚠️ There is a hard ceiling on what this can do, and callers have to respect
+// it: a fully-serpentined trace is exactly sqrt(2) times its straight run, so a
+// bundle whose longest run exceeds ~1.41x its shortest cannot be matched at ANY
+// amplitude. Asked for more, the generator fills its run and stops short rather
+// than wandering outside the space it was given.
+export function serpentine({ fromX, fromY, ends, pitch, amplitude }) {
+  const target = Math.max(...ends) - fromX
+  const paths = []
+  const vias = []
+  ends.forEach((endX, i) => {
+    const y = fromY + i * pitch
+    const run = endX - fromX
+    const wanted = Math.round((target - run) / (amplitude * CYCLE_GAIN))
+    // A detour consumes 2a of run, so a trace can never carry more cycles than
+    // its own run affords, however much length it is short by.
+    const cycles = Math.max(0, Math.min(wanted, Math.floor(run / (2 * amplitude))))
+    let d = `M${fromX} ${y}`
+    let x = fromX
+    for (let c = 0; c < cycles; c += 1) {
+      d += ` L${x + amplitude} ${y - amplitude} L${x + 2 * amplitude} ${y}`
+      x += 2 * amplitude
+    }
+    d += ` H${endX}`
+    paths.push(d)
+    vias.push({ x: endX, y })
+  })
+  return { paths, vias }
+}

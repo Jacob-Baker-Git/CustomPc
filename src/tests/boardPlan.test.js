@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { segmentsOf, pathLength, isOrthoOr45, bus } from '../lib/boardPlan'
+import { segmentsOf, pathLength, isOrthoOr45, bus, serpentine } from '../lib/boardPlan'
 
 describe('path inspection', () => {
   it('splits a path into absolute segments', () => {
@@ -99,5 +99,60 @@ describe('bus', () => {
   it('routes straight through when there is no rise', () => {
     const { paths } = bus({ ...spec, rise: 0 })
     expect(paths[0]).toBe('M100 50 H200')
+  })
+})
+
+describe('serpentine', () => {
+  // Four traces reaching pins at different depths — the situation a real DDR
+  // fan-out is in, and the reason length-matching exists.
+  //
+  // ⚠️ The spread here is deliberate and bounded. A 45 degree detour buys at
+  // most sqrt(2) times the straight run (see the ceiling test below), so a
+  // bundle whose longest run is more than ~1.41x its shortest CANNOT be
+  // matched by this technique at any amplitude. 80/60 = 1.33 is inside that.
+  const spec = { fromX: 100, fromY: 40, ends: [180, 172, 165, 160], pitch: 5, amplitude: 3 }
+
+  it('brings every trace in the bundle to the same length', () => {
+    const lengths = serpentine(spec).paths.map(pathLength)
+    const longest = Math.max(...lengths)
+    for (const l of lengths) {
+      // Tolerance is half a cycle's gain: cycles are whole, so exact equality
+      // is not achievable and claiming it would be a lie about the model.
+      expect(Math.abs(l - longest)).toBeLessThan(2)
+    }
+  })
+
+  it('leaves the already-longest trace straight', () => {
+    expect(serpentine(spec).paths[0]).toBe('M100 40 H180')
+  })
+
+  it('turns only at right angles or 45 degrees', () => {
+    for (const d of serpentine(spec).paths) {
+      for (const seg of segmentsOf(d)) {
+        expect(isOrthoOr45(seg), `${d} -> ${seg}`).toBe(true)
+      }
+    }
+  })
+
+  it('never wiggles further than the run it has to play with', () => {
+    for (const [i, d] of serpentine(spec).paths.entries()) {
+      for (const [x1, , x2] of segmentsOf(d)) {
+        expect(Math.max(x1, x2)).toBeLessThanOrEqual(spec.ends[i])
+      }
+    }
+  })
+
+  it('gives up rather than overrunning when the match is not physically possible', () => {
+    // A 45 degree detour advances 2a of run for 2a*sqrt(2) of copper, so a
+    // fully-serpentined trace is exactly sqrt(2) times its straight run. That
+    // is a hard ceiling: asked to stretch a run of 40 to 80 — a factor of two —
+    // the generator must stop at the fence rather than wander off it.
+    const { paths } = serpentine({ ...spec, ends: [180, 140] })
+    const stretched = pathLength(paths[1])
+    expect(stretched).toBeLessThanOrEqual(40 * Math.SQRT2)
+    expect(stretched).toBeGreaterThan(40)
+    for (const [x1, , x2] of segmentsOf(paths[1])) {
+      expect(Math.max(x1, x2)).toBeLessThanOrEqual(140)
+    }
   })
 })
