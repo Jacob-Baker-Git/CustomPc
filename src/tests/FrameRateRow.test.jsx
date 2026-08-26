@@ -163,4 +163,42 @@ describe('FrameRateRow', () => {
     expect(screen.getByRole('button', { name: /test game/i }))
       .toHaveAttribute('aria-expanded', 'false')
   })
+
+  // ---- what a phone can still see -----------------------------------------
+  //
+  // The Preset column is hidden below `sm` so the table fits a 375px screen.
+  // Hiding a column is only acceptable because the expanded row restates it;
+  // without this the frame rate on a phone has nothing saying what setting it
+  // was measured at, which is what makes the number mean anything at all.
+  it('restates the preset inside the expanded row, for the phone layout', () => {
+    const { container } = renderRow({ expanded: true })
+    const restated = [...container.querySelectorAll('dt')]
+      .find((dt) => dt.textContent.trim() === 'Preset')
+    expect(restated, 'no "Preset" term in the expanded row').toBeTruthy()
+    expect(restated.parentElement.className).toContain('sm:hidden')
+    expect(restated.parentElement.textContent).toContain('Ultra')
+  })
+
+  // The cell and its header must hide at the SAME breakpoint. Drifting apart
+  // slides every figure one column sideways, and each one is still a real
+  // number sitting under the wrong heading.
+  it('hides the preset cell below sm, matching its column header', () => {
+    const { container } = renderRow()
+    const preset = [...container.querySelectorAll('td')]
+      .find((td) => td.textContent.trim() === 'Ultra')
+    expect(preset.className).toContain('hidden')
+    expect(preset.className).toContain('sm:table-cell')
+  })
+
+  // ⚠️ max-w-0 looks like a mistake and is the reason the table fits a phone:
+  // a table column is sized to its content, so the game name held the column
+  // open at its longest word. Guarded because it is the kind of "tidy-up" a
+  // later reader deletes on sight.
+  it('lets the game column shrink below its content width', () => {
+    const { container } = renderRow()
+    const nameCell = container.querySelector('td')
+    expect(nameCell.className).toContain('max-w-0')
+    expect(nameCell.className).toContain('w-full')
+    expect(container.querySelector('td .truncate')).not.toBeNull()
+  })
 })

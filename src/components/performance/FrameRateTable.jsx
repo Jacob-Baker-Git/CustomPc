@@ -10,9 +10,18 @@ const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 // Every column, in render order. `key` is what sortGameRows sorts on; the two
 // leading columns and the trailing one are not resolutions, so they carry no
 // entry in RESOLUTIONS and are laid out here instead.
+// `phoneHidden` drops a column below `sm` the same way the off-target
+// resolutions already are, and for the same reason: six columns do not fit a
+// phone. Preset is the one to go after them — it is the only column that is
+// neither the thing being named nor a number, and the corpus carries labels as
+// long as "MAXIMALE GRAFIKDETAILS", which is a lot of width for a detail almost
+// nobody is scanning for.
+//
+// ⚠️ Anything hidden here MUST reappear in the expanded row, or the figure is
+// simply gone on a phone. See the `sm:hidden` block in FrameRateRow.
 const COLUMNS = [
   { key: 'name', label: 'Game', align: 'left' },
-  { key: 'preset', label: 'Preset', align: 'left' },
+  { key: 'preset', label: 'Preset', align: 'left', phoneHidden: true },
   ...RESOLUTIONS.map((res) => ({ key: res, label: RES_LABEL[res], align: 'right', res })),
   { key: 'basis', label: 'Basis', align: 'right' },
 ]
@@ -56,7 +65,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
       <table className="w-full border-collapse text-left">
         <thead>
           <tr className="border-b border-line text-[10px] uppercase tracking-wider text-muted">
-            {COLUMNS.map(({ key, label, align, res }) => {
+            {COLUMNS.map(({ key, label, align, res, phoneHidden }) => {
               const sorted = sort?.key === key
               return (
                 <th
@@ -68,7 +77,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                   aria-current={res && res === target ? 'true' : undefined}
                   aria-sort={sorted ? (sort.dir === 'desc' ? 'descending' : 'ascending') : 'none'}
                   className={`px-2 py-1.5 font-normal ${align === 'right' ? 'text-right' : ''} ${
-                    res && res !== target ? 'hidden sm:table-cell' : ''} ${
+                    (res && res !== target) || phoneHidden ? 'hidden sm:table-cell' : ''} ${
                     res === target ? 'bg-surface-2 text-ink' : ''}`}
                 >
                   <button
