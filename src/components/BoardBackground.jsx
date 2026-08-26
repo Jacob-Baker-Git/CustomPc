@@ -6,6 +6,7 @@ import {
   CRISP,
   hardwareWidth,
 } from '../lib/boardGeometry'
+import { LANDMARKS, BOARD, routes } from '../lib/boardPlan'
 
 // The page ground drawn as a motherboard.
 //
@@ -53,73 +54,71 @@ function grid({ x, y, cols, rows, pitch, r, key }) {
 // is thick and bright, component outlines sit in the middle, and the signal
 // fan-out is thin and dim. Collapse them to one weight and the board goes back
 // to reading as a wireframe, which is what the outline-only prototype did.
+//
+// The weights below are NOT free parameters — they were measured against the
+// scrim, which is sized for them. See boardGeometry.js.
+const WEIGHTS = {
+  signal: { strokeOpacity: '0.2', strokeWidth: '0.6' },
+  outline: { strokeOpacity: '0.4', strokeWidth: '1' },
+  power: { strokeOpacity: '0.68', strokeWidth: '2' },
+}
+
+const ORDER = ['signal', 'outline', 'power']
+
 function Lines() {
+  // Both the components and the copper come from the plan. Nothing in this
+  // file draws a coordinate of its own — the previous version hand-wrote every
+  // path, which is how its bundles drifted out of parallel with each other and
+  // ended up reading as decorative squiggles rather than as routing.
+  const bundles = routes()
+  const socket = LANDMARKS.find((l) => l.id === 'socket')
+
   return (
     <svg
       aria-hidden="true"
       data-board-layer="lines"
       className="absolute inset-0 h-full w-full"
-      viewBox="0 0 640 420"
+      viewBox={`0 0 ${BOARD.w} ${BOARD.h}`}
       preserveAspectRatio="xMidYMid slice"
     >
-      <g data-trace="signal" fill="none" stroke={GOLD} strokeOpacity="0.2" strokeWidth="0.6" style={CRISP}>
-        <path d="M310 60h14l8-8h18M310 72h20l8-8h12M310 84h10l10-10h20M310 96h24l6-6" />
-        <path d="M310 108h16l10 10h14M310 120h22l8 8M310 132h12l12 12h16M310 144h26l6 6" />
-        <path d="M190 66h-18l-10-10h-22M190 78h-24l-8-8M190 92h-14l-12 12h-24" />
-        <path d="M190 106h-20l-10 10M190 120h-16l-14 14v40M190 134h-28l-8 8v44" />
-        <path d="M204 172v18l-12 12v40M222 172v10l-14 14v46M240 172v22l-10 10v38" />
-        <path d="M258 172v14l-12 12v44M276 172v20l-14 14v36M294 172v12l-10 10v48" />
-        <path d="M418 120h30l14 14v50M418 136h22l16 16v40M418 152h34l12 12v34" />
-        <path d="M570 240h40M570 258h40M570 276h40M570 294h40" />
-        <path d="M262 320h60l14 14h48M262 340h44l16 16h60M136 20h50M136 34h40l8-8h6" />
-        <path d="M60 340h50l12 12h40M60 360h80l10 10h30M470 96h40l10-10h30" />
-      </g>
+      {ORDER.map((weight) => (
+        <g
+          key={weight}
+          data-trace={weight}
+          fill="none"
+          stroke={GOLD}
+          style={CRISP}
+          {...WEIGHTS[weight]}
+        >
+          {LANDMARKS.filter((l) => l.weight === weight).map((l) => (
+            <rect
+              key={l.id}
+              data-landmark={l.id}
+              x={l.x}
+              y={l.y}
+              width={l.w}
+              height={l.h}
+              rx="1"
+            />
+          ))}
+          {bundles
+            .filter((b) => b.weight === weight)
+            .flatMap((b) =>
+              b.paths.map((d, i) => <path key={`${b.key}${i}`} data-conductor={b.key} d={d} />),
+            )}
+        </g>
+      ))}
 
-      <g data-trace="outline" fill="none" stroke={GOLD} strokeOpacity="0.4" strokeWidth="1" style={CRISP}>
-        <rect x="40" y="24" width="126" height="58" rx="3" />
-        <rect x="48" y="32" width="42" height="18" rx="1" />
-        <rect x="48" y="56" width="42" height="18" rx="1" />
-        <rect x="100" y="32" width="58" height="42" rx="1" />
-        <rect x="470" y="222" width="104" height="84" rx="3" />
-        <rect x="482" y="234" width="80" height="60" />
-        <rect x="60" y="188" width="180" height="11" rx="1" />
-        <rect x="600" y="222" width="14" height="96" rx="1" />
-        <rect x="330" y="352" width="120" height="14" rx="1" />
-        <rect x="470" y="340" width="80" height="12" rx="1" />
-        <rect x="510" y="40" width="90" height="16" rx="1" />
-        <rect x="510" y="66" width="90" height="16" rx="1" />
-        <rect x="510" y="92" width="90" height="16" rx="1" />
-        <rect x="40" y="352" width="70" height="16" rx="1" />
-        <circle cx="200" cy="22" r="9" />
-        <circle cx="224" cy="22" r="9" />
-        <circle cx="248" cy="22" r="9" />
-        <circle cx="272" cy="22" r="9" />
-        <circle cx="296" cy="22" r="9" />
-        <circle cx="452" cy="46" r="10" />
-        <circle cx="452" cy="72" r="10" />
-        <circle cx="478" cy="46" r="10" />
-        <circle cx="478" cy="72" r="10" />
-        <circle cx="596" cy="150" r="17" />
-      </g>
-
-      <g data-trace="power" fill="none" stroke={GOLD} strokeOpacity="0.68" strokeWidth="2" style={CRISP}>
-        <path d="M248 32v-14M224 32v-14M272 32v-14" />
-        <path d="M166 54h24M310 100h40" />
-        <path d="M228 160v28l-18 18v60l-16 16v72" />
-        <path d="M470 264h-70l-32-32v-52" />
-        <path d="M574 264h34l16 16v70" />
-        <path d="M40 110v46l26 26h40" />
-      </g>
-
+      {/* The socket pin field, and the vias. Capped at LINE_FILL_CEILING like
+          everything filled in this layer: a 4px dot is small enough to lose to
+          the scrim, and nothing brighter than that may sit under text. */}
       <g fill={GOLD} fillOpacity={LINE_FILL_CEILING} stroke="none">
-        <circle cx="210" cy="206" r="1.4" />
-        <circle cx="194" cy="282" r="1.4" />
-        <circle cx="368" cy="232" r="1.4" />
-        <circle cx="608" cy="264" r="1.4" />
-        <circle cx="66" cy="182" r="1.4" />
-        <circle cx="350" cy="100" r="1.4" />
-        <circle cx="122" cy="352" r="1.4" />
-        <circle cx="510" cy="86" r="1.4" />
+        {grid({ x: socket.x + 12, y: socket.y + 12, cols: 9, rows: 9, pitch: 9, r: 1.1, key: 'sock' })}
+        {bundles.flatMap((b) =>
+          b.vias.map((v, i) => (
+            <circle key={`${b.key}v${i}`} data-via={b.key} cx={v.x} cy={v.y} r="1.4" />
+          )),
+        )}
       </g>
     </svg>
   )

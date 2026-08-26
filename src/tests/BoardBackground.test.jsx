@@ -2,6 +2,7 @@ import { render } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import BoardBackground from '../components/BoardBackground'
 import { SCRIM_ALPHA, LINE_FILL_CEILING, hardwareWidth } from '../lib/boardGeometry'
+import { routes } from '../lib/boardPlan'
 
 const lines = (c) => c.querySelector('[data-board-layer="lines"]')
 const hardware = (c) => [...c.querySelectorAll('[data-board-layer="hardware"]')]
@@ -152,5 +153,41 @@ describe('BoardBackground', () => {
     // Backdrop carried #F26B3A for months without failing anything.
     const { container } = render(<BoardBackground column={672} />)
     expect(container.innerHTML).not.toMatch(/--accent\b|#F26B3A|242,\s*107,\s*58/i)
+  })
+
+  it('gives every stroked group non-scaling-stroke', () => {
+    const { container } = render(<BoardBackground />)
+    // Groups that only fill are excluded deliberately: stroke="none" is a
+    // truthy attribute, and requiring a vector-effect on a group that strokes
+    // nothing would assert noise.
+    const groups = [...lines(container).querySelectorAll('g')].filter(
+      (g) => g.getAttribute('stroke') && g.getAttribute('stroke') !== 'none',
+    )
+    expect(groups.length).toBeGreaterThan(0)
+    for (const g of groups) {
+      // slice runs this layer at up to 2.28x; without this the tuned widths
+      // scale with it and put more bright pixels under text than the scrim is
+      // sized for.
+      expect(g.getAttribute('style') ?? '').toMatch(/non-scaling-stroke/)
+    }
+  })
+
+  it('draws the ATX landmarks it plans', () => {
+    const { container } = render(<BoardBackground />)
+    for (const id of ['socket', 'dimm-0', 'pcie-x16-1', 'chipset', 'rear-io']) {
+      expect(lines(container).querySelector(`[data-landmark="${id}"]`), id).toBeTruthy()
+    }
+  })
+
+  it('draws every conductor the plan routes, and a via on the end of each', () => {
+    // The component is a consumer: if it silently drops a bundle the board
+    // still looks like a board, and only a count can tell.
+    const { container } = render(<BoardBackground />)
+    const planned = routes()
+    const drawn = lines(container).querySelectorAll('path[data-conductor]')
+    expect(drawn).toHaveLength(planned.reduce((sum, b) => sum + b.paths.length, 0))
+    expect(lines(container).querySelectorAll('circle[data-via]')).toHaveLength(
+      planned.reduce((sum, b) => sum + b.vias.length, 0),
+    )
   })
 })
