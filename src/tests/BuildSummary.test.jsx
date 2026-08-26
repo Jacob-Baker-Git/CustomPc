@@ -19,6 +19,24 @@ describe('BuildSummary', () => {
     expect(screen.getByText(/no parts selected yet/i)).toBeInTheDocument()
   })
 
+  it('demotes Clear build out of the button row', () => {
+    // Five equal-weight buttons, one of which wipes the build. It stays a
+    // <button> because it performs an action rather than navigating -- only
+    // its weight changes, so BuildSummaryDialogs can still find it by role.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<BuildSummary />)
+    const clear = screen.getByRole('button', { name: /clear build/i })
+    expect(clear.className).not.toMatch(/border-bad/)
+    expect(clear.className).toMatch(/text-muted/)
+  })
+
+  it('rails the score block in the colour of the score itself', () => {
+    // The rail and the figure must agree about the same build, so the
+    // thresholds mirror scoreText rather than being picked again.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    const { container } = render(<BuildSummary />)
+    expect(container.innerHTML).toMatch(/inset_2px_0_0_0_var\(--(good|ok|bad)\)/)
+  })
   it('names the connector each part seats in', () => {
     // The designator teaches WHERE the part goes, the same thing PartSlot does
     // on the Build tab. A summary that says GPU twice tells you less than one

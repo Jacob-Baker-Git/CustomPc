@@ -187,7 +187,7 @@ export default function BuildSummary() {
           ) : (
             <>
               {rating.overall > 0 && (
-                <div className="mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3">
+                <div className={`mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3 ${scoreRail(rating.overall)}`}>
                   <div className="flex items-baseline gap-2">
                     <span className={`font-display text-3xl font-extrabold tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
                     <span className="text-xs text-faint">/100</span>
@@ -297,23 +297,30 @@ export default function BuildSummary() {
             >
               Copy as Markdown
             </button>
+          </div>
+
+          {/* Two text links rather than two more buttons.
+              Saved builds moved to the hub — this is the way back to them from
+              the place where saving actually happens.
+              Clear build sat in the row above as a fifth equal-weight control,
+              which gave the one action that wipes the build the same weight as
+              Print. It stays a <button> because it performs an action rather
+              than navigating; only its weight changes. */}
+          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <button
+              onClick={() => setFlow('saved')}
+              className="text-xs text-muted hover:text-copper transition-colors"
+            >
+              View your saved builds →
+            </button>
             <button
               onClick={handleClear}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-bad text-bad hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="text-xs text-muted hover:text-bad disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Clear build
             </button>
           </div>
-
-          {/* Saved builds moved to the hub — this is the way back to them from
-              the place where saving actually happens. */}
-          <button
-            onClick={() => setFlow('saved')}
-            className="mt-4 text-xs text-muted hover:text-copper transition-colors"
-          >
-            View your saved builds →
-          </button>
         </RamBox>
       </div>
 
