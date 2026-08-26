@@ -10,7 +10,9 @@ export default function UseCaseChips() {
   const setUseCase = useBuilderStore((s) => s.setUseCase)
 
   return (
-    <div>
+    // On its own surface: this label sits outside every panel on the Build tab
+    // and was the one glyph run there over bare board.
+    <div className="rounded-lg bg-surface p-3">
       <span className="block text-[11px] uppercase tracking-wide text-faint mb-2">Building this PC for</span>
       <div role="radiogroup" aria-label="Rate this build for" className="flex flex-wrap gap-1.5">
         {USE_CASES.map((u) => {
