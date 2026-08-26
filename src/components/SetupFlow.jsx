@@ -255,11 +255,11 @@ export default function SetupFlow({ onBack }) {
                 className="bg-surface-2 text-ink font-mono tabular-nums w-28 px-2 py-1 rounded-lg border border-line focus:outline-none focus:border-brass"
               />
               <span className="text-[11px] text-faint flex-1 min-w-[12rem]">
-                These parts cost <span className={TELEMETRY}>£{partsTotal.toFixed(0)}</span> — raise it to leave room for upgrades.
+                These parts cost <span className={TELEMETRY}>£{partsTotal.toFixed(0)}</span>. Raise it to leave room for upgrades.
               </span>
             </div>
 
-            <p className="text-[11px] text-faint mt-3">CPU and GPU are required — they drive the rating.</p>
+            <p className="text-[11px] text-faint mt-3">CPU and GPU are required: they drive the rating.</p>
             <button
               onClick={() => setStep(3)}
               disabled={!canAdvance}

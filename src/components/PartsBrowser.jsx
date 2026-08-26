@@ -64,7 +64,7 @@ export default function PartsBrowser() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-1">Parts browser</h1>
-      <p className="text-muted text-sm mb-6">Explore every component in the catalog.</p>
+      <p className="text-muted text-sm mb-6">Explore every component in the catalogue.</p>
 
       <div className="flex flex-wrap gap-2 mb-3">
         {CATEGORIES.map((c) => (

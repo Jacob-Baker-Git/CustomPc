@@ -7,7 +7,7 @@ const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
   .filter(Boolean)
 
-const OPTIONAL_NOTE = 'Optional — most coolers ship with paste applied'
+const OPTIONAL_NOTE = 'Optional: most coolers ship with paste applied'
 
 // Hovering a row used to highlight the matching part in the 3D view. That
 // highlight was removed, and these handlers went with it rather than being left

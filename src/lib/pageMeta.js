@@ -15,27 +15,27 @@ export const SITE = 'https://custompcbuilder.netlify.app'
 // for one document, which is the problem hash routes had.
 export const PAGE_META = {
   help: {
-    title: 'Help & FAQ — Custom PC Builder',
+    title: 'Help & FAQ | Custom PC Builder',
     description: 'How to plan a build, read the CustomPC score, check compatibility and share what you have chosen.',
   },
   parts: {
-    title: 'PC Parts Browser — Prices & Specifications',
+    title: 'PC Parts Browser | Prices & Specifications',
     description: 'Browse processors, graphics cards, memory, storage and cases with specifications and curated UK price estimates.',
   },
   glossary: {
-    title: 'PC Hardware Glossary — Custom PC Builder',
-    description: 'Plain-English definitions of the PC building terms — sockets, chipsets, TDP, form factors, VRAM and the rest.',
+    title: 'PC Hardware Glossary | Custom PC Builder',
+    description: 'Plain-English definitions of the PC building terms: sockets, chipsets, TDP, form factors, VRAM and the rest.',
   },
   feedback: {
-    title: 'Feedback — Custom PC Builder',
-    description: 'Tell us what worked, what did not, and what is missing.',
+    title: 'Feedback | Custom PC Builder',
+    description: 'Tell us what worked, what did not and what is missing.',
   },
   privacy: {
-    title: 'Privacy Policy — Custom PC Builder',
+    title: 'Privacy Policy | Custom PC Builder',
     description: 'What this site stores about you, which is nothing personal, and why.',
   },
   terms: {
-    title: 'Terms of Use — Custom PC Builder',
+    title: 'Terms of Use | Custom PC Builder',
     description: 'The terms covering price estimates, compatibility checks and performance figures on this site.',
   },
 }

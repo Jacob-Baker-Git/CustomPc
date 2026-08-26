@@ -17,7 +17,7 @@ export function dimensionsCheck(selectedParts = {}) {
     const pass = coolerH <= caseMax
     rows.push({ id: 'cooler-height', label: 'CPU cooler height vs case', status: pass ? 'pass' : 'fail', detail: `${coolerH}mm cooler / ${caseMax}mm max` })
   } else if (isAio) {
-    rows.push({ id: 'cooler-height', label: 'CPU cooler height vs case', status: 'na', detail: 'AIO cooler — no height limit' })
+    rows.push({ id: 'cooler-height', label: 'CPU cooler height vs case', status: 'na', detail: 'AIO cooler, no height limit' })
   } else {
     rows.push({ id: 'cooler-height', label: 'CPU cooler height vs case', status: 'na', detail: 'Select an air cooler and a case' })
   }

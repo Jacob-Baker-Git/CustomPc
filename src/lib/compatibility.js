@@ -26,33 +26,33 @@ export function checkCompatibility(selectedParts, candidate) {
 
   if (candidate.category === 'cpu' && motherboard) {
     if (candidate.socket !== motherboard.socket)
-      return { compatible: false, reason: `Requires ${candidate.socket} socket — motherboard uses ${motherboard.socket}` }
+      return { compatible: false, reason: `Requires ${candidate.socket} socket; motherboard uses ${motherboard.socket}` }
   }
 
   if (candidate.category === 'motherboard' && cpu) {
     if (candidate.socket !== cpu.socket)
-      return { compatible: false, reason: `Requires ${candidate.socket} socket — CPU uses ${cpu.socket}` }
+      return { compatible: false, reason: `Requires ${candidate.socket} socket; CPU uses ${cpu.socket}` }
   }
 
   if (candidate.category === 'ram' && motherboard) {
     if (candidate.ramType !== motherboard.ramType)
-      return { compatible: false, reason: `Requires ${candidate.ramType} — motherboard supports ${motherboard.ramType} only` }
+      return { compatible: false, reason: `Requires ${candidate.ramType}; motherboard supports ${motherboard.ramType} only` }
   }
 
   if (candidate.category === 'motherboard' && ram) {
     if (candidate.ramType !== ram.ramType)
-      return { compatible: false, reason: `Requires ${candidate.ramType} — your RAM is ${ram.ramType}` }
+      return { compatible: false, reason: `Requires ${candidate.ramType}; your RAM is ${ram.ramType}` }
   }
 
   // Platform RAM-type check that works even before a motherboard is chosen.
   if (candidate.category === 'ram' && cpu && !motherboard) {
     if (DDR5_ONLY_SOCKETS.includes(cpu.socket) && candidate.ramType === 'DDR4')
-      return { compatible: false, reason: `${cpu.socket} platform is DDR5-only — DDR4 won't work with this CPU` }
+      return { compatible: false, reason: `${cpu.socket} platform is DDR5-only; DDR4 won't work with this CPU` }
   }
 
   if (candidate.category === 'cpu' && ram && !motherboard) {
     if (DDR5_ONLY_SOCKETS.includes(candidate.socket) && ram.ramType === 'DDR4')
-      return { compatible: false, reason: `${candidate.socket} platform is DDR5-only — your RAM is DDR4` }
+      return { compatible: false, reason: `${candidate.socket} platform is DDR5-only; your RAM is DDR4` }
   }
 
   if (candidate.category === 'case' && motherboard) {
@@ -78,7 +78,7 @@ export function checkCompatibility(selectedParts, candidate) {
   if (candidate.category === 'cooler' && selectedCase) {
     const h = airHeight(candidate)
     if (h != null && typeof selectedCase.maxCoolerHeight === 'number' && h > selectedCase.maxCoolerHeight)
-      return { compatible: false, reason: `Cooler is ${h}mm tall — case fits up to ${selectedCase.maxCoolerHeight}mm` }
+      return { compatible: false, reason: `Cooler is ${h}mm tall; case fits up to ${selectedCase.maxCoolerHeight}mm` }
   }
 
   if (candidate.category === 'case' && cooler) {
@@ -120,7 +120,7 @@ export function checkCompatibility(selectedParts, candidate) {
     const current = selectedParts[candidate.category]
     const draw = drawOf(selectedParts) - (current?.tdp ?? 0) + candidate.tdp
     if (psuTooSmall(draw, psu.wattage))
-      return { compatible: false, reason: `Would draw ${draw}W — your PSU supplies ${psu.wattage}W` }
+      return { compatible: false, reason: `Would draw ${draw}W; your PSU supplies ${psu.wattage}W` }
   }
 
   return { compatible: true, reason: '' }

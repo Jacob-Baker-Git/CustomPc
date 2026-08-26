@@ -115,7 +115,7 @@ export default function PeripheralsPanel() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div>
               <h2 className="font-display text-xl font-bold text-ink">Peripherals</h2>
-              <p className="text-xs text-muted mt-0.5">Optional — they are counted separately from the build budget.</p>
+              <p className="text-xs text-muted mt-0.5">Optional: they are counted separately from the build budget.</p>
             </div>
             <div className="ml-auto flex items-center gap-6">
               <div className="text-right">

@@ -117,7 +117,7 @@ export default function SavedBuilds({ onLoaded }) {
             )}
           </div>
           {saved.length === 0 ? (
-            <p className="text-sm text-muted py-6 text-center">No saved builds yet — build something and hit "Save PC" in Summary.</p>
+            <p className="text-sm text-muted py-6 text-center">No saved builds yet. Build something and hit "Save PC" in Summary.</p>
           ) : (
             <div className="space-y-1">
               {saved.map((b) => {

@@ -183,7 +183,7 @@ export default function BuildSummary() {
           </div>
 
           {isEmpty ? (
-            <p className="text-sm text-muted py-6 text-center">No parts selected yet — head to the Build tab.</p>
+            <p className="text-sm text-muted py-6 text-center">No parts selected yet. Head to the Build tab.</p>
           ) : (
             <>
               {rating.overall > 0 && (
@@ -265,7 +265,7 @@ export default function BuildSummary() {
           )}
 
           <p className="mt-4 text-[11px] text-muted leading-relaxed">
-            Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data — use Find Best Price for current prices.
+            Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data. Use Find Best Price for current prices.
           </p>
 
           <div className="flex flex-wrap gap-2 mt-5">

@@ -45,15 +45,15 @@ const HIGH_DPI = 8000
 // board's buyer is the one most likely to be new to this. Pinned by
 // specSheetCopy.test.js.
 const SWITCH_FEEL = {
-  Brown: 'tactile bump without the click — a quiet all-rounder',
-  Red: 'linear and light — fast for gaming, no tactile feedback',
-  Blue: 'clicky and loud — satisfying to type on, unpopular on voice chat',
+  Brown: 'tactile bump without the click, a quiet all-rounder',
+  Red: 'linear and light, fast for gaming with no tactile feedback',
+  Blue: 'clicky and loud, satisfying to type on but unpopular on voice chat',
   Tactile: 'a noticeable bump at the actuation point',
-  Optical: 'light-based actuation — faster response, no contact wear',
-  'Optical Linear': 'light-based actuation with no tactile bump — the fastest common combination, and quiet with it',
+  Optical: 'light-based actuation, so faster response and no contact wear',
+  'Optical Linear': 'light-based actuation with no tactile bump: the fastest common combination, and quiet with it',
   Adjustable: 'per-key actuation depth you can tune in software',
   'Hall effect': 'magnetic actuation with adjustable depth and rapid-trigger',
-  Membrane: 'a rubber dome under each key rather than a mechanical switch — quieter and much cheaper, but mushier to type on and not repairable key by key',
+  Membrane: 'a rubber dome under each key rather than a mechanical switch: quieter and much cheaper, but mushier to type on and not repairable key by key',
 }
 
 const tier = (score) =>
@@ -71,7 +71,7 @@ export function insight(part) {
       return `A ${tier(part.perfScore)} card with ${s.vram}GB of ${s.memType}. ` +
         `At ${part.length}mm check your case clearance, and budget ~${part.tdp}W of PSU headroom for it.`
     case 'motherboard':
-      return `${s.chipset} board for ${part.socket} CPUs — takes ${part.ramType} memory only, ` +
+      return `${s.chipset} board for ${part.socket} CPUs, taking ${part.ramType} memory only, ` +
         `${part.formFactor} cases or larger.`
     case 'ram':
       return `${part.capacityGb}GB across ${s.sticks ?? 2} sticks of ${part.ramType}-${part.speed}. ` +
@@ -80,33 +80,33 @@ export function insight(part) {
         // directly below it said MT/s, on the same card.
         (part.ramType === 'DDR5'
           ? '32GB at 5600–6000 MT/s is the current sweet spot for gaming.'
-          : 'DDR4 only fits older boards — check the motherboard RAM type.')
+          : 'DDR4 only fits older boards, so check the motherboard RAM type.')
     case 'storage': {
       const speed = s.readMbps ?? 0
-      const klass = speed >= 10000 ? 'PCIe 5.0 speeds — overkill for gaming, superb for big file work'
-        : speed >= 5000 ? 'fast PCIe 4.0 NVMe — instant level loads'
-        : speed >= 2000 ? 'mainstream NVMe — plenty for a game library'
-        : speed >= 400 ? 'SATA speeds — fine for games, slower to copy to'
-        : 'spinning disk — cheap bulk storage; keep your OS and games on an SSD'
+      const klass = speed >= 10000 ? 'PCIe 5.0 speeds: overkill for gaming, superb for big file work'
+        : speed >= 5000 ? 'fast PCIe 4.0 NVMe, so instant level loads'
+        : speed >= 2000 ? 'mainstream NVMe, plenty for a game library'
+        : speed >= 400 ? 'SATA speeds: fine for games, slower to copy to'
+        : 'spinning disk, cheap bulk storage; keep your OS and games on an SSD'
       return `${klass}. ${part.capacityGb >= 2000 ? 'Room for a large library.' : 'Consider 2TB if you install more than a handful of big games.'}`
     }
     case 'psu':
       return `${part.wattage}W, ${s.rating ?? 'unrated'} efficiency. ` +
-        `Comfortable for builds drawing up to ~${Math.round(part.wattage * 0.7)}W — aim to leave ~30% headroom.`
+        `Comfortable for builds drawing up to ~${Math.round(part.wattage * 0.7)}W. Aim to leave ~30% headroom.`
     case 'case':
       return `Fits ${(part.supportedFormFactors ?? []).join('/')} boards, GPUs to ${part.maxGpuLength}mm ` +
         `and air coolers to ${part.maxCoolerHeight}mm.`
     case 'cooler':
       return s.type === 'AIO'
-        ? `${s.radiator} liquid cooler — needs a matching radiator mount in the case, but no height limit. Fits ${(part.sockets ?? []).join(', ')}.`
-        : `${s.height}mm tall air cooler — check case clearance. Fits ${(part.sockets ?? []).join(', ')}.`
+        ? `${s.radiator} liquid cooler, so it needs a matching radiator mount in the case, but no height limit. Fits ${(part.sockets ?? []).join(', ')}.`
+        : `${s.height}mm tall air cooler, so check case clearance. Fits ${(part.sockets ?? []).join(', ')}.`
     case 'fans':
       return `${s.count > 1 ? `${s.count}-pack of ` : ''}${s.size} fans${s.rgb ? ' with RGB' : ''}. ` +
-        'Front/bottom intake, rear/top exhaust — slight positive pressure keeps dust down.'
+        'Front/bottom intake, rear/top exhaust. Slight positive pressure keeps dust down.'
     case 'paste':
-      return 'Sits between the CPU and the cooler plate. Any quality paste performs within a degree or two — a pea-sized dot is enough.'
+      return 'Sits between the CPU and the cooler plate. Any quality paste performs within a degree or two, and a pea-sized dot is enough.'
     case 'monitor':
-      return `To make full use of ${part.refresh}Hz you need ~${part.refresh} fps at ${part.resolution} — ` +
+      return `To make full use of ${part.refresh}Hz you need ~${part.refresh} fps at ${part.resolution}, ` +
         'the Summary tab shows whether your build keeps up.'
     case 'keyboard':
       return SWITCH_FEEL[part.switch]
@@ -118,12 +118,12 @@ export function insight(part) {
       // range people actually play at. Stated unconditionally it told the
       // cheapest mouse's buyer the opposite of the truth.
       return part.dpi >= HIGH_DPI
-        ? `${part.dpi.toLocaleString()} max DPI — far beyond what anyone plays at; weight, shape and sensor consistency matter more.`
+        ? `${part.dpi.toLocaleString()} max DPI, far beyond what anyone plays at; weight, shape and sensor consistency matter more.`
         : `${part.dpi.toLocaleString()} max DPI, which is inside the 400–1600 most people actually play at; weight, shape and sensor consistency matter more than the number.`
     case 'headset':
       return part.type === 'Wireless'
-        ? 'Wireless — no cable snag, but one more battery to charge.'
-        : 'Wired — zero latency and nothing to charge, at the cost of a cable.'
+        ? 'Wireless: no cable snag, but one more battery to charge.'
+        : 'Wired: zero latency and nothing to charge, at the cost of a cable.'
     default:
       return null
   }

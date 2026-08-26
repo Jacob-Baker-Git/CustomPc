@@ -7,7 +7,7 @@ export const PRICE_SNAPSHOT = 'July 2026'
 // Shown as bare integers they read as a promise we can't stand behind, so this
 // travels with them — the same reason prices carry a caveat in BuildSummary.
 export const FPS_CAVEAT =
-  'Modelled estimates, not measured benchmarks — real frame rates vary with settings, drivers and the game version.'
+  'Modelled estimates, not measured benchmarks. Real frame rates vary with settings, drivers and the game version.'
 
 // The performance engine needs its OWN caveat, because FPS_CAVEAT is a claim
 // the engine contradicts. That text says nothing here is measured, which is
@@ -58,15 +58,15 @@ export const MODEL_CREDITS = [
 ]
 
 export const GLOSSARY = [
-  { term: 'CPU', def: 'The processor — runs the operating system, games logic, compilers. More cores help multitasking, rendering and compiling; high clock speed helps single-threaded work and game frame rates.' },
-  { term: 'GPU', def: 'The graphics card — renders games and accelerates video/AI work. The single biggest factor in gaming frame rates.' },
+  { term: 'CPU', def: 'The processor. Runs the operating system, games logic, compilers. More cores help multitasking, rendering and compiling; high clock speed helps single-threaded work and game frame rates.' },
+  { term: 'GPU', def: 'The graphics card. Renders games and accelerates video/AI work. The single biggest factor in gaming frame rates.' },
   { term: 'VRAM', def: 'Memory on the GPU. Higher resolutions, texture detail and creative workloads need more; 8GB is fine for 1080p, 16GB+ suits 4K and content creation.' },
-  { term: 'TDP', def: 'Thermal Design Power (watts) — roughly how much heat a part makes and power it draws. Used to size the cooler and PSU.' },
+  { term: 'TDP', def: 'Thermal Design Power (watts): roughly how much heat a part makes and power it draws. Used to size the cooler and PSU.' },
   { term: 'Socket', def: 'The physical CPU-to-motherboard connector (e.g. AM5, LGA1700). The CPU and motherboard sockets must match.' },
-  { term: 'Form factor', def: 'Board/case size class — ATX (large), mATX (medium), ITX (small). The case must support the motherboard\'s form factor.' },
-  { term: 'DDR4 / DDR5', def: 'RAM generations. A motherboard supports one or the other, not both — match your RAM to the board.' },
+  { term: 'Form factor', def: 'Board/case size class: ATX (large), mATX (medium), ITX (small). The case must support the motherboard\'s form factor.' },
+  { term: 'DDR4 / DDR5', def: 'RAM generations. A motherboard supports one or the other, not both, so match your RAM to the board.' },
   { term: 'NVMe SSD', def: 'The fastest common storage, plugged straight into the motherboard. Much quicker than SATA SSDs and far quicker than hard drives (HDDs).' },
-  { term: 'PSU', def: 'Power supply. Should comfortably exceed the system\'s total draw — aim for ~30% headroom. 80+ Gold/Platinum ratings mean better efficiency.' },
+  { term: 'PSU', def: 'Power supply. Should comfortably exceed the system\'s total draw. Aim for ~30% headroom. 80+ Gold/Platinum ratings mean better efficiency.' },
   { term: 'AIO', def: 'All-in-one liquid cooler. Larger radiators (240/360mm) dissipate more heat and suit high-TDP CPUs; big air coolers are a quieter, simpler alternative.' },
 ]
 

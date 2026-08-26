@@ -70,7 +70,7 @@ export default function PartSlot({
       {connector && (
         <span className="block px-3 pt-2 font-mono text-[9px] uppercase tracking-[0.12em] text-tech">
           <span>{connector.designator}</span>
-          {!seated && <span className="text-faint"> — empty</span>}
+          {!seated && <span className="text-faint"> empty</span>}
         </span>
       )}
       <div className="flex items-center">

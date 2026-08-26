@@ -48,7 +48,7 @@ export const USE_CASE_LABEL = {
 
 export const USE_CASES = [
   { id: 'gaming',      label: 'Gaming',            blurb: 'High frame rates in the latest games.' },
-  { id: 'office',      label: 'Everyday & Office', blurb: 'Browsing, docs, email and media — fast and quiet.' },
+  { id: 'office',      label: 'Everyday & Office', blurb: 'Browsing, docs, email and media. Fast and quiet.' },
   { id: 'creation',    label: 'Content Creation',  blurb: 'Video/photo editing and rendering.' },
   { id: 'programming', label: 'Programming',       blurb: 'Compiling, VMs and dozens of tabs.' },
   { id: 'streaming',   label: 'Streaming',         blurb: 'Play and broadcast at the same time.' },

@@ -145,7 +145,7 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
                       claims, neither of them measured. */}
                   <dd className="text-ink">
                     {split
-                      ? `${Math.round((1 - split.cpuShare) * 100)}% graphics — ${splitLabel}`
+                      ? `${Math.round((1 - split.cpuShare) * 100)}% graphics, ${splitLabel}`
                       : 'Split not modelled'}
                   </dd>
                 </div>
