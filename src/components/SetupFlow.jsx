@@ -149,11 +149,11 @@ export default function SetupFlow({ onBack }) {
               <button
                 key={id}
                 onClick={() => chooseStart(id)}
-                className="w-full px-5 py-4 rounded-xl border border-line bg-surface hover:border-copper hover:bg-gold-soft text-left transition-colors group flex items-center gap-4"
+                className="w-full px-5 py-4 rounded-xl border border-line bg-surface hover:border-brass hover:bg-gold-soft text-left transition-colors group flex items-center gap-4"
               >
-                <Icon size={22} className="text-copper shrink-0" aria-hidden="true" />
+                <Icon size={22} className="text-brass shrink-0" aria-hidden="true" />
                 <span className="flex-1">
-                  <span className="block text-base font-semibold text-ink group-hover:text-copper">{label}</span>
+                  <span className="block text-base font-semibold text-ink group-hover:text-brass">{label}</span>
                   <span className="block text-sm text-muted mt-0.5">{blurb}</span>
                 </span>
               </button>
@@ -178,7 +178,7 @@ export default function SetupFlow({ onBack }) {
                   placeholder="Enter budget"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="bg-surface text-ink font-mono tabular-nums text-3xl w-72 px-4 py-3 rounded-xl border border-line focus:outline-none focus:border-copper text-center placeholder:text-2xl placeholder:text-faint transition-colors"
+                  className="bg-surface text-ink font-mono tabular-nums text-3xl w-72 px-4 py-3 rounded-xl border border-line focus:outline-none focus:border-brass text-center placeholder:text-2xl placeholder:text-faint transition-colors"
                 />
               </div>
               <button
@@ -195,7 +195,7 @@ export default function SetupFlow({ onBack }) {
                 <button
                   key={tier.id}
                   onClick={() => { setValue(String(tier.budget)); setStep(3) }}
-                  className="text-xs font-mono px-3 py-1.5 rounded-lg border border-line bg-surface text-ink hover:border-copper hover:text-copper transition-colors"
+                  className="text-xs font-mono px-3 py-1.5 rounded-lg border border-line bg-surface text-ink hover:border-brass hover:text-brass transition-colors"
                 >
                   {tier.label} · £{tier.budget}
                 </button>
@@ -252,7 +252,7 @@ export default function SetupFlow({ onBack }) {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={partsTotal > 0 ? String(Math.round(partsTotal)) : '0'}
-                className="bg-surface-2 text-ink font-mono tabular-nums w-28 px-2 py-1 rounded-lg border border-line focus:outline-none focus:border-copper"
+                className="bg-surface-2 text-ink font-mono tabular-nums w-28 px-2 py-1 rounded-lg border border-line focus:outline-none focus:border-brass"
               />
               <span className="text-[11px] text-faint flex-1 min-w-[12rem]">
                 These parts cost <span className={TELEMETRY}>£{partsTotal.toFixed(0)}</span> — raise it to leave room for upgrades.
@@ -282,9 +282,9 @@ export default function SetupFlow({ onBack }) {
                     onClick={() => setUseCase(u.id)}
                     aria-pressed={selected}
                     className={`px-4 py-4 rounded-xl border text-left transition-colors group
-                      ${selected ? 'border-gold bg-gold-soft' : 'border-line bg-surface hover:border-copper'}`}
+                      ${selected ? 'border-gold bg-gold-soft' : 'border-line bg-surface hover:border-brass'}`}
                   >
-                    <div className={`text-lg font-bold ${selected ? 'text-gold' : 'text-ink group-hover:text-copper'}`}>{u.label}</div>
+                    <div className={`text-lg font-bold ${selected ? 'text-gold' : 'text-ink group-hover:text-brass'}`}>{u.label}</div>
                     <div className={`text-xs mt-1 ${selected ? 'text-gold' : 'text-muted'}`}>{u.blurb}</div>
                   </button>
                 )

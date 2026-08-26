@@ -9,9 +9,9 @@
 /* ============================================================
    Board design system — a matte-black board substrate, replacing
    the near-black ground and single bright accent that came before.
-   Desaturated METALS carry state (copper = action, gold = seated,
-   tech = technical); only genuine interruptions are saturated
-   (good / ok / bad); orange is the wordmark and nothing else.
+   METALS carry state (brass = action, gold = seated, straw = data);
+   only genuine interruptions are saturated (good / ok / bad);
+   orange is the wordmark and nothing else.
    Apply that rule before adding a colour — if it is neither a
    state nor an interruption, it does not get one. Every surface,
    line and text colour resolves from these vars (mapped to
@@ -50,11 +50,26 @@
   --accent: #F26B3A;
   --accent-ink: #0E0F11;   /* text/icon on a solid metal fill */
 
-  /* ---- Metals: desaturated, they carry STATE ---------------------------- */
-  --copper: #C4813C;       /* action — primary buttons, power */
+  /* ---- Metals: they carry STATE -----------------------------------------
+     ONE HUE FAMILY, three jobs. Everything here is a yellow metal, and the
+     three are told apart by saturation and lightness rather than by hue:
+
+       brass   most saturated  — the thing you can DO
+       gold    most muted      — the thing that is ON
+       straw   lightest        — the thing that is a NUMBER
+
+     That is a deliberate narrowing. --copper (#C4813C, an orange-leaning
+     action metal) and --tech (#56C8D8, a cyan for data) both left the palette
+     here: two hues away from the wordmark orange is one hue too many, and the
+     cyan in particular fought the brand every time a price sat near the logo.
+
+     ⚠️ The wordmark orange below is now the ONLY non-yellow accent on the
+     site, which is exactly what makes it read as identity. Adding a second
+     hue back undoes the whole point of this pass. */
+  --brass: #E0A93B;        /* action — primary buttons, the live tab */
   --gold: #C9A86B;         /* seated / active — filled slots, the active rail */
-  --gold-soft: #2A2416;    /* the selected wash (replaces --accent-soft) */
-  --tech: #56C8D8;         /* technical — reference designators, data labels */
+  --gold-soft: #2A2416;    /* the selected wash */
+  --tech: #E8D49A;         /* straw: data — prices, designators, telemetry */
   --steel: #5E6672;        /* neutral secondary meter / muted bar */
 
   /* ---- Signals: saturated, they INTERRUPT -------------------------------

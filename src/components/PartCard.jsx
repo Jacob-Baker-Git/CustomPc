@@ -13,7 +13,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
           ? 'border-line bg-surface-2 opacity-60'
           : selected
             ? 'border-gold bg-gold-soft ring-1 ring-gold'
-            : 'border-line bg-surface hover:border-copper hover:-translate-y-0.5'
+            : 'border-line bg-surface hover:border-brass hover:-translate-y-0.5'
         }`}
     >
       <button
@@ -21,7 +21,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         title={locked ? lockReason : undefined}
         aria-disabled={locked || undefined}
         onClick={() => !locked && onSelect(part)}
-        className={`text-left flex flex-col gap-2 focus-visible:outline-copper ${locked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        className={`text-left flex flex-col gap-2 focus-visible:outline-brass ${locked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       >
         <div className="text-sm font-semibold text-ink leading-tight pr-6">{part.name}</div>
         <div className="font-mono tabular-nums font-bold text-tech">£{part.price.toFixed(2)}</div>
@@ -46,7 +46,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         aria-label={`More info about ${part.name}`}
         aria-expanded={showInfo}
         onClick={() => setShowInfo((v) => !v)}
-        className="self-start text-[11px] text-muted hover:text-copper border border-line hover:border-copper rounded-lg px-2 py-0.5 transition-colors"
+        className="self-start text-[11px] text-muted hover:text-brass border border-line hover:border-brass rounded-lg px-2 py-0.5 transition-colors"
       >
         {showInfo ? 'Hide info' : 'Info'}
       </button>

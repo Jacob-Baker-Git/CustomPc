@@ -22,7 +22,7 @@ import { MODEL_PAYLOAD_MB } from '../lib/modelPayload'
 export default function Deferred3D({ onLoad }) {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
-      <Box size={28} className="text-copper" aria-hidden="true" />
+      <Box size={28} className="text-brass" aria-hidden="true" />
       <div>
         <div className="text-ink font-semibold">See this build in 3D</div>
         <p className="text-muted text-sm mt-1 max-w-xs">

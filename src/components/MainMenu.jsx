@@ -76,13 +76,13 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
               <RamBox seated liftOnHover>
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
-                    <div className="text-xl font-semibold text-copper">Carry on building</div>
+                    <div className="text-xl font-semibold text-brass">Carry on building</div>
                     <div className="text-sm text-muted mt-0.5">
                       <span className={TELEMETRY}>{partCount}</span> part{partCount === 1 ? '' : 's'} chosen
                       {budget > 0 && <> · <span className={TELEMETRY}>£{spent.toFixed(0)}</span> of <span className={TELEMETRY}>£{budget.toFixed(0)}</span></>}
                     </div>
                   </div>
-                  <ArrowRight size={20} className="text-copper transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                  <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </div>
               </RamBox>
             </button>
@@ -91,16 +91,16 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           <button onClick={onStart} className="w-full text-left transition group hover:brightness-110">
             <RamBox seated liftOnHover>
               <div className="flex items-center gap-3">
-                <Cpu size={24} className="text-copper shrink-0" aria-hidden="true" />
+                <Cpu size={24} className="text-brass shrink-0" aria-hidden="true" />
                 <div className="flex-1">
-                  <div className={`text-xl font-semibold ${hasBuild ? 'text-ink group-hover:text-copper' : 'text-copper'}`}>
+                  <div className={`text-xl font-semibold ${hasBuild ? 'text-ink group-hover:text-brass' : 'text-brass'}`}>
                     {hasBuild ? 'Start a different build' : 'Start a build'}
                   </div>
                   <div className="text-sm text-muted mt-0.5">
                     Set a budget, or enter the PC you already own to see what's worth upgrading.
                   </div>
                 </div>
-                <ArrowRight size={20} className="text-copper transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </div>
             </RamBox>
           </button>
@@ -108,9 +108,9 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
           <button onClick={onSaved} className="w-full text-left transition group hover:brightness-110">
             <RamBox seated liftOnHover>
               <div className="flex items-center gap-3">
-                <Bookmark size={20} className="text-copper shrink-0" aria-hidden="true" />
+                <Bookmark size={20} className="text-brass shrink-0" aria-hidden="true" />
                 <div className="flex-1">
-                  <div className="text-base font-semibold text-ink group-hover:text-copper">Saved builds</div>
+                  <div className="text-base font-semibold text-ink group-hover:text-brass">Saved builds</div>
                   <div className="text-sm text-muted mt-0.5">
                     {savedCount === 0
                       ? 'Nothing saved yet'

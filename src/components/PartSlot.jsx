@@ -27,9 +27,9 @@ const CONNECTOR = {
 const TONE = {
   seated: 'text-ink hover:brightness-110',
   flagged: 'border border-dashed border-bad text-ink hover:brightness-110',
-  next: 'border border-dashed border-copper text-copper hover:brightness-110',
-  optional: 'border border-dashed border-line-strong text-muted hover:border-copper hover:text-copper',
-  empty: 'border border-dashed border-line-strong text-muted hover:border-copper hover:text-copper',
+  next: 'border border-dashed border-brass text-brass hover:brightness-110',
+  optional: 'border border-dashed border-line-strong text-muted hover:border-brass hover:text-brass',
+  empty: 'border border-dashed border-line-strong text-muted hover:border-brass hover:text-brass',
 }
 
 // The contact pad. `edge` cuts the keying notch that stops a DIMM or a PCIe card

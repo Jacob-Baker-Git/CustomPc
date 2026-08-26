@@ -60,7 +60,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value)}
             aria-label="Sort parts"
-            className="bg-surface-2 border border-line rounded-lg text-xs text-ink px-2 py-2 focus:outline-none focus:border-copper"
+            className="bg-surface-2 border border-line rounded-lg text-xs text-ink px-2 py-2 focus:outline-none focus:border-brass"
           >
             {SORT_OPTIONS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
           </select>
@@ -90,7 +90,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
           {hiddenCount > 0 && (
             <button
               onClick={() => setShowAll(true)}
-              className="col-span-full text-xs text-muted hover:text-copper border border-dashed border-line hover:border-copper rounded-lg py-2.5 transition-colors"
+              className="col-span-full text-xs text-muted hover:text-brass border border-dashed border-line hover:border-brass rounded-lg py-2.5 transition-colors"
             >
               Show {hiddenCount} pricier part{hiddenCount === 1 ? '' : 's'} above the budget-fit cutoff
             </button>
@@ -98,7 +98,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
           {showAll && !query && (
             <button
               onClick={() => setShowAll(false)}
-              className="col-span-full text-xs text-muted hover:text-copper border border-dashed border-line hover:border-copper rounded-lg py-2.5 transition-colors"
+              className="col-span-full text-xs text-muted hover:text-brass border border-dashed border-line hover:border-brass rounded-lg py-2.5 transition-colors"
             >
               Hide pricier parts
             </button>

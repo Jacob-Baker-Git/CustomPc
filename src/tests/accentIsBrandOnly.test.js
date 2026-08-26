@@ -8,7 +8,7 @@ import { describe, it, expect } from 'vitest'
 // buttons again, that distinction is gone and the palette is back to
 // near-black-plus-one-accent — the exact generic look this redesign replaced.
 //
-// State belongs to the metals: copper for action, gold for seated, tech for
+// State belongs to the metals: brass for action, gold for seated, straw for
 // technical. See the mapping table in the plan.
 //
 // ⚠️ The allowance is per-SITE, not per-file. The plan proposed whitelisting

@@ -49,7 +49,7 @@ export default function CategoryList({
           )
         }
 
-        // Three empty shapes: a real hole (red), the one to do next (copper —
+        // Three empty shapes: a real hole (red), the one to do next (brass —
         // it is a prompt to ACT, not a selection, so it takes the action metal
         // rather than gold), and a deliberately empty optional slot (neutral,
         // explained).
@@ -74,7 +74,7 @@ export default function CategoryList({
             icon={
               <CategoryIcon
                 id={cat.id}
-                className={flagged ? 'text-bad' : isNext && !explained ? 'text-copper' : 'text-muted'}
+                className={flagged ? 'text-bad' : isNext && !explained ? 'text-brass' : 'text-muted'}
               />
             }
             // Shrinkable, and NOT shrink-0: the note is the least important
@@ -94,7 +94,7 @@ export default function CategoryList({
                 )}
                 {flagged && <span className="shrink-0 text-[11px] font-semibold text-bad">Missing</span>}
                 {isNext && (
-                  <span className="shrink-0 rounded-full bg-copper px-2 py-0.5 text-[10px] font-semibold text-accent-ink">
+                  <span className="shrink-0 rounded-full bg-brass px-2 py-0.5 text-[10px] font-semibold text-accent-ink">
                     Pick one
                   </span>
                 )}

@@ -43,7 +43,7 @@ export default function HelpPage() {
             href="https://creativecommons.org/licenses/by/4.0/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-copper hover:underline"
+            className="text-brass hover:underline"
           >
             CC BY 4.0
           </a>
@@ -58,7 +58,7 @@ export default function HelpPage() {
               {c.source && (
                 <>
                   {' — '}
-                  <a href={c.source} target="_blank" rel="noopener noreferrer" className="text-copper hover:underline">
+                  <a href={c.source} target="_blank" rel="noopener noreferrer" className="text-brass hover:underline">
                     source
                   </a>
                 </>

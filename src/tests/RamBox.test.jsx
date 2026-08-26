@@ -61,7 +61,7 @@ describe('RamBox', () => {
     const { container } = render(<RamBox designator="CPU_1" seated>x</RamBox>)
     const classes = [...container.querySelectorAll('*')]
       .flatMap((el) => (typeof el.className === 'string' ? el.className.split(/\s+/) : []))
-    expect(classes.filter((c) => /-(gold|copper|surface|ground|line|ink|tech)(-\w+)?\/\d/.test(c))).toEqual([])
+    expect(classes.filter((c) => /-(gold|brass|surface|ground|line|ink|tech)(-\w+)?\/\d/.test(c))).toEqual([])
   })
 
   it('lifts clear of its socket when open', () => {

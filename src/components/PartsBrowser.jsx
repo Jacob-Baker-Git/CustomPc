@@ -30,7 +30,7 @@ function PartName({ part }) {
           scrollbar, no error, and the row reads as a perfectly normal part.
           `shrink-0` is what makes the name give way instead. */}
       <span className="flex items-center gap-2 text-sm text-ink">
-        <span className="truncate group-hover:text-copper">{part.name}</span>
+        <span className="truncate group-hover:text-brass">{part.name}</span>
         {/* Say so plainly. These are listed so you can tell us what you already
             own; the retailer link will mostly find used or third-party stock at
             whatever price it likes. */}
@@ -72,7 +72,7 @@ export default function PartsBrowser() {
             key={c}
             onClick={() => setCategory(c)}
             aria-pressed={category === c}
-            className={`px-3 py-1 rounded-lg border text-xs capitalize transition-colors ${category === c ? 'border-gold text-gold bg-gold-soft' : 'border-line text-muted hover:border-copper'}`}
+            className={`px-3 py-1 rounded-lg border text-xs capitalize transition-colors ${category === c ? 'border-gold text-gold bg-gold-soft' : 'border-line text-muted hover:border-brass'}`}
           >
             {c}
           </button>
@@ -85,13 +85,13 @@ export default function PartsBrowser() {
           placeholder="Search name or brand…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-copper"
+          className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
         />
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           aria-label="Sort by"
-          className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-copper"
+          className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
         >
           {SORTS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
         </select>
@@ -104,7 +104,7 @@ export default function PartsBrowser() {
             <PartName part={p} />
             <div className="flex items-center gap-3 shrink-0">
               <span className="font-mono text-sm text-tech">£{p.price.toFixed(2)}</span>
-              <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="text-muted hover:text-copper" aria-label={`Search ${p.name} on Amazon`}>
+              <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="text-muted hover:text-brass" aria-label={`Search ${p.name} on Amazon`}>
                 <ExternalLink size={15} />
               </a>
             </div>
