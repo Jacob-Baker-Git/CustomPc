@@ -313,6 +313,7 @@ export default function PerformanceScreen() {
 
         <StatPanel
           title="Power supply"
+          designator="ATX_PWR"
           subtitle={power.psuWattage
             ? 'Headroom matters less for average draw than for the split-second spikes a graphics card pulls — those are what trip a supply into shutting down.'
             : 'No power supply selected yet.'}
@@ -333,6 +334,7 @@ export default function PerformanceScreen() {
 
         <StatPanel
           title="Cooling"
+          designator="CPU_FAN"
           subtitle={thermals.headroomPct == null
             ? 'Needs a CPU and a cooler with a known size.'
             : 'Nothing gets damaged when a cooler is undersized — the CPU drops its clocks to stay in range, so you lose boost speed during long loads and gain fan noise.'}
@@ -358,6 +360,7 @@ export default function PerformanceScreen() {
       <div className={GRID}>
         <StatPanel
           title="Memory"
+          designator="DIMM_A2"
           subtitle={memory
             ? 'Memory speed and channel count act on the CPU side of a frame — they show up in the 1% lows more than the average.'
             : 'No memory selected yet.'}
@@ -380,6 +383,7 @@ export default function PerformanceScreen() {
 
         <StatPanel
           title="Graphics capability"
+          designator="PCIEX16_1"
           subtitle={gpuCap.basis === 'spec-derived'
             ? `Computed from published specifications, indexed against an RTX 4090 at 100.`
             : 'No published specifications transcribed for this card yet.'}
@@ -406,6 +410,7 @@ export default function PerformanceScreen() {
 
         <StatPanel
           title="Processor capability"
+          designator="CPU_1"
           subtitle={cpuCap.basis === 'spec-derived'
             ? 'Clock leads, cores saturate at eight because games cannot use more, and cache counts for more than its size suggests.'
             : 'No published specifications transcribed for this processor yet.'}
