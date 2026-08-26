@@ -464,7 +464,7 @@
     "presets": [
       {
         "id": "max-details",
-        "label": "Max. Details, TAA native",
+        "label": "Max. details, TAA native",
         "tier": 4,
         "upscaling": "native"
       }
@@ -669,13 +669,13 @@
     "presets": [
       {
         "id": "ultra-high",
-        "label": "Ultra-High",
+        "label": "Ultra-high",
         "tier": 4,
         "upscaling": "native"
       },
       {
         "id": "ultra-high",
-        "label": "Ultra-High (DLSS/FSR Ultra Performance)",
+        "label": "Ultra-high (DLSS/FSR Ultra Performance)",
         "tier": 4,
         "upscaling": "ultra-performance"
       }

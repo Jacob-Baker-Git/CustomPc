@@ -38,7 +38,7 @@
       "tier": 4
     },
     "max-details": {
-      "label": "Max. Details",
+      "label": "Max. details",
       "tier": 4
     },
     "maximale-grafikdetails": {
@@ -58,7 +58,7 @@
       "tier": 4
     },
     "ultra-high": {
-      "label": "Ultra-High",
+      "label": "Ultra-high",
       "tier": 4
     },
     "ultrahoch": {
@@ -166,7 +166,7 @@
       "slug": "doom-the-dark-ages",
       "genre": "shooter",
       "presetLabels": {
-        "max-details": "Max. Details, TAA native"
+        "max-details": "Max. details, TAA native"
       }
     },
     "dota2": {
