@@ -1,4 +1,5 @@
 import { checkCompatibility, getLockedReasons } from '../lib/compatibility'
+import { getBuildWarnings } from '../lib/buildWarnings'
 import partsData from '../data/partsData.json'
 
 const mbAM5   = partsData.find(p => p.id === 'mb-asus-x670e')
@@ -153,6 +154,43 @@ describe('checkCompatibility', () => {
     const build = { psu: psuSmall, cpu: { ...cpuAM5, tdp: 105 }, gpu: gpuMid }
     // 105 + 200 = 305W < 500W — fine once the old GPU's 115W is credited back.
     expect(checkCompatibility(build, gpuNext).compatible).toBe(true)
+  })
+})
+
+// A supply is not viable at exactly 100% of its rating, and the codebase said
+// so in two of three places. Picking the PSU used `wattage < draw` (equality
+// ALLOWED); re-picking any other part used `draw >= wattage` (equality
+// BLOCKED); getBuildWarnings agreed with the second. The result was a build you
+// could assemble and then be told was critically underpowered — and whose
+// graphics card you could no longer reselect.
+describe('the PSU headroom boundary', () => {
+  // 105W CPU + 295W GPU = 400W exactly.
+  const cpu = { ...cpuAM5, tdp: 105 }
+  const gpu = { ...gpuLong, tdp: 295 }
+  const psu400 = { id: 'psu-test-400', category: 'psu', name: 'Test 400W', price: 40, wattage: 400, tdp: 0 }
+
+  it('will not let you pick a supply rated exactly at the build draw', () => {
+    expect(checkCompatibility({ cpu, gpu }, psu400).compatible).toBe(false)
+  })
+
+  it('agrees with itself about the same build from the other direction', () => {
+    // Re-selecting the graphics card already in the build must give the same
+    // verdict as selecting the supply did.
+    const fromPsuSide = checkCompatibility({ cpu, gpu }, psu400).compatible
+    const fromPartSide = checkCompatibility({ cpu, gpu, psu: psu400 }, gpu).compatible
+    expect(fromPsuSide).toBe(fromPartSide)
+  })
+
+  it('agrees with the build warnings about the same build', () => {
+    const blocked = !checkCompatibility({ cpu, gpu }, psu400).compatible
+    const critical = getBuildWarnings({ cpu, gpu, psu: psu400 })
+      .some((w) => w.level === 'critical' && /PSU too small/i.test(w.message))
+    expect(blocked).toBe(critical)
+  })
+
+  it('still allows a supply with genuine headroom over the same draw', () => {
+    const psu650 = { ...psu400, id: 'psu-test-650', wattage: 650 }
+    expect(checkCompatibility({ cpu, gpu }, psu650).compatible).toBe(true)
   })
 })
 
