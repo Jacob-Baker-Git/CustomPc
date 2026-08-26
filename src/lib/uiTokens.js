@@ -22,7 +22,21 @@ export const PANEL = 'bg-surface border border-line rounded-xl'
 export const PANEL_STRONG = 'bg-surface-2 border border-line-strong rounded-xl'
 
 // Monospace telemetry — apply to live-updating numbers only (labels stay sans).
-export const TELEMETRY = 'font-mono tabular-nums'
+//
+// ⚠️ whitespace-nowrap is load-bearing, not tidying. A number is an atom, and
+// the browser does not agree by default: "+£10" rendered as "+" at the end of
+// one line and "£10" at the start of the next inside the "Best next move"
+// sentence at 390px. Nothing in the markup asked for that break — UAX#14 simply
+// permits one between PLUS SIGN and POUND SIGN (both line-break class PR, and
+// only PR × NU is protected), and a narrow column takes every opportunity it is
+// offered. Desktop never wraps there, so this was invisible until a phone.
+//
+// This is safe for the multi-word strings that also wear TELEMETRY — "no extra
+// cost", "+5 fps", "9 / 9", "112 @ 1440p" — because each is far narrower than
+// the column it sits in; they simply stop being able to break, which for a
+// value and its unit is what you want anyway. Guarded at phone widths by
+// e2e/mobileLayout.spec.js.
+export const TELEMETRY = 'font-mono tabular-nums whitespace-nowrap'
 
 // Flat primary action — one metal, dark ink on top, no gradients or glows.
 // Copper is the ACTION metal. Not the brand orange: that is the wordmark's

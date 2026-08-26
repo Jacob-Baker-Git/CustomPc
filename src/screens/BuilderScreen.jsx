@@ -23,10 +23,27 @@ import AutoBuildButton from '../components/AutoBuildButton'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
+import Deferred3D from '../components/Deferred3D'
 import ViewTabs from '../components/ViewTabs'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
 import { PANEL } from '../lib/uiTokens'
+
+// A finger means mobile data, and the 3D view is 11 MB of it. Read once at
+// mount rather than as a media query, because this decides whether a component
+// MOUNTS — BuildCanvas is lazy(), so not rendering it is what actually keeps
+// the chunk and every model off the wire. A CSS rule could only hide them
+// after they had already been downloaded.
+//
+// ⚠️ A mount-time read is acceptable HERE, where the same trick would be wrong
+// for the zoom-verb copy below. This decides a download, so it only has to be
+// right once, at the moment the panel first renders; the verb has to stay right
+// if the pointer type changes under a live page, which only CSS does.
+//
+// jsdom implements no matchMedia at all, so `?.` resolves this to false there
+// and every existing test goes on rendering the canvas exactly as before.
+const wantsDeferred3D = () =>
+  typeof window !== 'undefined' && Boolean(window.matchMedia?.('(pointer: coarse)').matches)
 
 export default function BuilderScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
@@ -34,6 +51,10 @@ export default function BuilderScreen() {
   const removePart    = useBuilderStore((s) => s.removePart)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useHashView('build')
+  // Opt-in survives tab switches because BuilderScreen itself stays mounted —
+  // only its view children swap — and deliberately does NOT survive a reload:
+  // a fresh visit on mobile data should be asked again, not charged again.
+  const [show3D, setShow3D] = useState(() => !wantsDeferred3D())
   const scrollRef = useRef(null)
 
   // Fresh views (and the first landing after setup) start at the top.
@@ -90,18 +111,81 @@ export default function BuilderScreen() {
                   below say "this rectangle is the 3D toy, everything outside
                   it is the page". */}
               <div className={`area-viz ${PANEL} relative h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px] hover:border-line-strong transition-colors overflow-hidden`}>
-                <CanvasErrorBoundary>
-                  <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
-                    <BuildCanvas selectedParts={selectedParts} />
-                  </Suspense>
-                </CanvasErrorBoundary>
-                <InfoDisclaimer />
-                {/* pointer-events-none so the hint never eats a drag aimed at
-                    the model underneath it. */}
-                <div className="pointer-events-none absolute bottom-3 left-3 z-30 rounded-lg border border-line bg-surface px-2.5 py-1 text-[11px] text-muted">
-                  Drag to rotate · scroll to zoom
-                </div>
-                <div className="absolute bottom-3 right-3"><CaseToggle /></div>
+                {show3D ? (
+                  <>
+                    <CanvasErrorBoundary>
+                      <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
+                        <BuildCanvas selectedParts={selectedParts} />
+                      </Suspense>
+                    </CanvasErrorBoundary>
+                    <InfoDisclaimer />
+                  </>
+                ) : (
+                  <Deferred3D onLoad={() => setShow3D(true)} />
+                )}
+                {/* ⚠️ ONE row, not two independently-pinned corners.
+
+                    The hint and the toggle used to be separate absolutely-
+                    positioned children — bottom-3 left-3 and bottom-3 right-3 —
+                    which gave them no layout relationship at all, so nothing
+                    stopped them sliding into each other as the panel narrowed.
+                    Together they want ~359px; the panel is the viewport minus
+                    47, so every phone was short. Measured overlap: 72.8px at
+                    320, 32.8px at 375, 2.8px at 390 — the hint's opaque
+                    bg-surface sliced straight through the button.
+
+                    A flex row cannot overlap: when the two no longer fit they
+                    wrap instead, and because the row is anchored at the bottom
+                    it grows UPWARD, so the toggle keeps its corner and the hint
+                    stacks above it. That is a guarantee at every width rather
+                    than a breakpoint that has to be re-guessed for the next
+                    phone. Guarded by e2e/mobileLayout.spec.js; jsdom computes
+                    no layout and cannot see any of it.
+
+                    pointer-events-none stays on the ROW so it never eats a drag
+                    aimed at the model underneath; the toggle re-enables them for
+                    itself alone. */}
+                {/* The controls are gated with the canvas: a drag hint and a
+                    see-through-case toggle floating over an empty panel are
+                    chrome for something that is not there yet. */}
+                {show3D && (
+                  <div className="pointer-events-none absolute inset-x-3 bottom-3 z-30 flex flex-wrap items-end justify-between gap-2">
+                    {/* ⚠️ The VERB is per-input, and the whole reason this hint
+                        exists is a mouse problem: the canvas swallows the scroll
+                        wheel, so without a frame and a label people scroll, the
+                        build spins, and it reads as a bug. A finger has no scroll
+                        wheel — on touch the same confusion is real but the gesture
+                        is a pinch, so "scroll to zoom" was instructing phone users
+                        to do something impossible. It got worse with the row fix
+                        above: the hint now takes a line of its own on a phone, so
+                        it was spending real estate to be wrong.
+
+                        Swapped in CSS, not JS, deliberately. (An earlier version
+                        of this comment justified that with pre-rendering, which
+                        is wrong: prerendered/index.html holds the HUB, and no
+                        builder markup is ever in a fragment.) The real reasons
+                        are that pointer type can CHANGE under a live page — a
+                        tablet gaining a mouse, a laptop folding into a tablet —
+                        and CSS re-evaluates while a mount-time matchMedia read
+                        would be stuck with whatever was true on first paint.
+                        (pointer: coarse) is an arbitrary variant rather than a
+                        tailwind.config.js screen, which matters — a new `screens`
+                        entry needs a dev-server restart or it emits nothing at
+                        all, and a variant that emits nothing fails open, showing
+                        BOTH verbs. Guarded by e2e/mobileLayout.spec.js, which
+                        drives a real touch device and asserts exactly one. */}
+                    <div data-viewport-hint className="rounded-lg border border-line bg-surface px-2.5 py-1 text-[11px] text-muted">
+                      Drag to rotate ·{' '}
+                      <span data-zoom-verb="scroll" className="[@media(pointer:coarse)]:hidden">scroll</span>
+                      <span data-zoom-verb="pinch" className="hidden [@media(pointer:coarse)]:inline">pinch</span>
+                      {' '}to zoom
+                    </div>
+                    {/* ml-auto so that when the row wraps, the toggle alone on its
+                        line still sits right rather than jumping left —
+                        justify-between does nothing for a single item on a line. */}
+                    <div className="pointer-events-auto ml-auto"><CaseToggle /></div>
+                  </div>
+                )}
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}
