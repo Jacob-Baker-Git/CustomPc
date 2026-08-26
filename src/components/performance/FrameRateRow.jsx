@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { BASIS_LABEL, CAVEAT_TEXT } from './basisText'
 import { RESOLUTIONS, splitCell } from '../../lib/perfEngine/gameRows'
 import { ELEV_ACTIVE, RAIL_ACTIVE } from '../../lib/uiTokens'
+import GameArt from '../art/GameArt'
+import { genreFor } from '../../lib/gameGenres'
 
 // One game: a summary row, and a detail row that opens beneath it.
 //
@@ -101,6 +103,10 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
             className="flex items-center gap-1.5 text-left text-sm text-ink"
           >
             <span aria-hidden="true" className="text-[10px] text-muted">{isOpen ? '⌄' : '›'}</span>
+            {/* Sixty rows of plain text is the table people scroll past. The
+                plate gives each row something the eye can recognise on the way
+                back up, which is what a cover does in any games list. */}
+            <GameArt name={game.name} genre={genreFor(game)} seed={game.gameId} className="w-6 h-6 shrink-0" />
             {game.name}
           </button>
         </td>

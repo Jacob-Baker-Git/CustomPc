@@ -4,6 +4,8 @@ import useCatalogStore from '../store/useCatalogStore'
 import { browseParts } from '../lib/browseParts'
 import { searchUrl } from '../lib/retailerLinks'
 import { hasPartPage, partPath } from '../lib/partPages'
+import PartThumb from './art/PartThumb'
+import { categoryLabel } from '../lib/categories'
 
 const CATEGORIES = ['all', 'cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans', 'paste']
 const SORTS = [
@@ -40,16 +42,19 @@ function PartName({ part }) {
           </span>
         )}
       </span>
-      <span className="block text-xs text-muted capitalize">
-        {part.category} · {part.brand}{part.perfScore ? ` · perf ${part.perfScore}` : ''}
+      <span className="block text-xs text-muted">
+        {categoryLabel(part.category)} · {part.brand}{part.perfScore ? ` · perf ${part.perfScore}` : ''}
       </span>
     </>
   )
 
-  if (!hasPartPage(part)) return <div className="min-w-0">{body}</div>
+  // flex-1 so the NAME absorbs the row's spare width. With a thumbnail now
+  // sitting to its left, a bare min-w-0 left the name at its content width and
+  // justify-between opened a gap in the middle of every row.
+  if (!hasPartPage(part)) return <div className="min-w-0 flex-1">{body}</div>
 
   return (
-    <a href={partPath(part)} className="min-w-0 group">{body}</a>
+    <a href={partPath(part)} className="min-w-0 flex-1 group">{body}</a>
   )
 }
 
@@ -72,9 +77,9 @@ export default function PartsBrowser() {
             key={c}
             onClick={() => setCategory(c)}
             aria-pressed={category === c}
-            className={`px-3 py-1 rounded-lg border text-xs capitalize transition-colors ${category === c ? 'border-gold text-gold bg-gold-soft' : 'border-line text-muted hover:border-brass'}`}
+            className={`px-3 py-1 rounded-lg border text-xs transition-colors ${category === c ? 'border-gold text-gold bg-gold-soft' : 'border-line text-muted hover:border-brass'}`}
           >
-            {c}
+            {categoryLabel(c)}
           </button>
         ))}
       </div>
@@ -101,6 +106,11 @@ export default function PartsBrowser() {
       <ul className="space-y-2">
         {results.map((p) => (
           <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2">
+            {/* The picture sits OUTSIDE PartName, not inside its anchor. A
+                crawler following this list should see the part's name as the
+                link text; wrapping a decorative drawing into the same anchor
+                adds nothing for a reader and dilutes it for a crawler. */}
+            <PartThumb category={p.category} seed={p.id} size="md" />
             <PartName part={p} />
             <div className="flex items-center gap-3 shrink-0">
               <span className="font-mono text-sm text-tech">£{p.price.toFixed(2)}</span>

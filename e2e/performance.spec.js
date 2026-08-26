@@ -134,7 +134,7 @@ test.describe('the performance tab', () => {
     const rest = total - answered
     if (rest > 0) {
       await expect(page.getByText(
-        new RegExp(`no benchmark data yet\\s*[—–-]\\s*${rest} games?`, 'i'),
+        new RegExp(`no benchmark data yet\\s*:\\s*${rest} games?`, 'i'),
       )).toBeVisible()
     }
   })

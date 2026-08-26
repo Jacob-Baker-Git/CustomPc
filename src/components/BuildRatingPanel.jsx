@@ -6,6 +6,7 @@ import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRa
 import ScoreInfo from './ScoreInfo'
 import { TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
 import RamBox from './RamBox'
+import PartThumb from './art/PartThumb'
 import { FPS_CAVEAT } from '../lib/siteContent'
 
 const CAT_LABEL = {
@@ -110,27 +111,42 @@ export default function BuildRatingPanel() {
               const label = CAT_LABEL[cat] ?? cat
               const open = openWhy === cat
               return (
-                <div key={cat} className="flex flex-col gap-1 border border-line rounded-lg px-3 py-2.5">
-                  {/* The name gets its own line. Sharing one with the meter, the
-                      score and the upgrade select left it nothing at all in this
-                      column on a phone — every row read "FANS — 58". */}
-                  <div className="flex items-baseline gap-3">
-                    {/* w-20, because "MOTHERBOARD" overflowed a w-14 column and
-                        ran into the name beside it. */}
-                    <span className="uppercase text-[10px] tracking-wide text-muted w-20 shrink-0">{label}</span>
-                    <span className="text-sm text-ink flex-1 min-w-0 truncate">{info.part.name}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="w-14 h-1.5 rounded-full bg-surface-2 overflow-hidden shrink-0">
-                      <span className={`block h-full ${scoreBar(info.score)}`} style={{ width: `${info.score}%` }} />
+                <div key={cat} className="flex gap-3 border border-line rounded-lg px-3 py-2.5">
+                  {/* The picture anchors the row. Without it every row opened
+                      with a 10px grey word, so nine rows read as nine
+                      identical paragraphs and the eye had nothing to catch on. */}
+                  <PartThumb category={cat} seed={info.part.id} size="sm" className="mt-0.5" />
+
+                  <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                    {/* The score moves up here, beside the category, where it is
+                        the row's headline. It used to sit in the middle of the
+                        second line between a stub of a bar and a dropdown,
+                        which is the one place on the row nothing looks. */}
+                    <div className="flex items-baseline gap-2">
+                      <span className="uppercase text-[10px] tracking-wide text-muted">{label}</span>
+                      <span className={`${TELEMETRY} ml-auto text-base font-bold leading-none ${scoreText(info.score)}`}>{info.score}</span>
+                    </div>
+
+                    <span className="text-sm text-ink truncate leading-tight">{info.part.name}</span>
+
+                    {/* Full width, not the 56px stub it was. A bar that short
+                        cannot show the difference between 71 and 88, which is
+                        the only comparison this row exists to make. */}
+                    <span className="block h-1.5 rounded-full bg-surface-2 overflow-hidden">
+                      <span className={`block h-full rounded-full ${scoreBar(info.score)}`} style={{ width: `${info.score}%` }} />
                     </span>
-                    <span className={`${TELEMETRY} text-sm font-semibold w-7 text-right shrink-0 ${scoreText(info.score)}`}>{info.score}</span>
+
+                    {/* w-full now the select owns its own line. It kept a
+                        max-w-[10rem] while it shared a row with the bar and the
+                        score; on its own that just leaves dead space, and a
+                        <select> is sized by its widest <option>, so the cap was
+                        truncating long part names in the list for nothing. */}
                     <select
                       aria-label={`Improve ${label}`}
                       value=""
                       disabled={opts.length === 0}
                       onChange={(e) => chooseUpgrade(cat, e.target.value)}
-                      className="bg-surface-2 border border-line rounded-lg text-[11px] text-muted px-1.5 py-1 min-w-0 flex-1 max-w-[10rem] focus:outline-none focus:border-brass disabled:opacity-40"
+                      className="bg-surface-2 border border-line rounded-lg text-[11px] text-muted px-1.5 py-1 w-full min-w-0 focus:outline-none focus:border-brass disabled:opacity-40"
                     >
                       {opts.length === 0 ? (
                         <option value="">Best available</option>
@@ -145,23 +161,23 @@ export default function BuildRatingPanel() {
                         </>
                       )}
                     </select>
+                    {info.reason && (
+                      <>
+                        <button
+                          onClick={() => setOpenWhy(open ? null : cat)}
+                          aria-expanded={open}
+                          aria-label={`Why is the ${label} rated ${info.score}?`}
+                          className="flex items-start gap-1 text-left text-[11px] text-ok hover:text-ink transition-colors"
+                        >
+                          <span>{info.reason}</span>
+                          <ChevronDown size={13} aria-hidden="true" className={`shrink-0 mt-px transition-transform ${open ? 'rotate-180' : ''}`} />
+                        </button>
+                        {open && info.detail && (
+                          <p className="pr-1 pb-0.5 text-[11px] leading-relaxed text-muted">{info.detail}</p>
+                        )}
+                      </>
+                    )}
                   </div>
-                  {info.reason && (
-                    <>
-                      <button
-                        onClick={() => setOpenWhy(open ? null : cat)}
-                        aria-expanded={open}
-                        aria-label={`Why is the ${label} rated ${info.score}?`}
-                        className="flex items-start gap-1 text-left text-[11px] text-ok hover:text-ink transition-colors"
-                      >
-                        <span>{info.reason}</span>
-                        <ChevronDown size={13} aria-hidden="true" className={`shrink-0 mt-px transition-transform ${open ? 'rotate-180' : ''}`} />
-                      </button>
-                      {open && info.detail && (
-                        <p className="pr-1 pb-0.5 text-[11px] leading-relaxed text-muted">{info.detail}</p>
-                      )}
-                    </>
-                  )}
                 </div>
               )
             })}
