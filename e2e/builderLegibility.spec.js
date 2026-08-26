@@ -77,6 +77,20 @@ async function offenders(page) {
 test.describe('the builder never puts text on bare board', () => {
   for (const width of WIDTHS) {
     test(`every tab at ${width}px`, async ({ page }) => {
+      // ⚠️ NOT decoration, and not covering up a hang.
+      //
+      // This test builds a PC, opens four tabs and walks a DOM range over every
+      // text node on each, with a live WebGL scene running the whole time. On a
+      // GitHub runner that scene falls back to software rendering, and the 1920
+      // case — the widest canvas, so the most pixels to rasterise — went past
+      // the default 30s budget and failed CI on `main` (run 33011336343).
+      //
+      // Established as FLAKY rather than broken: the same commit was re-run
+      // with no code change and passed, and locally the 1920 case runs five
+      // times out of five in 5.7–7.7s. So the budget is the problem, not the
+      // app. Its heavy siblings in mobileLayout.spec.js already set 90–120s;
+      // this one was the outlier that never got one.
+      test.setTimeout(120_000)
       await page.setViewportSize({ width, height: 900 })
       await generateBuild(page)
 
