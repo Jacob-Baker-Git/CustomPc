@@ -126,8 +126,15 @@ describe('FrameRateTable', () => {
     const cells = [...container.querySelectorAll('tbody tr[data-game]')[0].children]
       .map((td) => td.className.includes('hidden'))
     expect(cells).toEqual(heads)
-    // and the hiding is real, not vacuously false down both lists
-    expect(heads.filter(Boolean)).toHaveLength(2)
+    // and the hiding is real, not vacuously false down both lists.
+    //
+    // THREE, not two: the two off-target resolutions, plus Preset. Preset
+    // joined them when the cover plates went into the Game column and pushed
+    // the table past a 375px screen — measured at 345px of table in 343px of
+    // space. Preset is the only column that is neither the name nor a number,
+    // and the corpus carries labels as long as "MAXIMALE GRAFIKDETAILS".
+    // It reappears in the expanded row; see the `sm:hidden` block there.
+    expect(heads.filter(Boolean)).toHaveLength(3)
   })
 
   it('renders a row per game, in the order given', async () => {

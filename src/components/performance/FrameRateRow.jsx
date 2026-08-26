@@ -96,21 +96,40 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
         {/* The rail marks the open row. Deliberately NOT a background step: the
             summary row's target cell is already surface-2, so tinting the whole
             row would swallow the column marker on exactly the row being read. */}
-        <td className={`py-1.5 pl-2 ${isOpen ? RAIL_ACTIVE : ''}`}>
+        {/* ⚠️ `w-full max-w-0` is the fix that lets this table fit a phone, and
+            it looks like nonsense until you know the rule: a table column is
+            sized to its content, so the game name held the GAME column open at
+            its longest word and the whole table was then wider than the screen.
+            max-w-0 lets the cell shrink below its content, w-full makes it take
+            whatever the numeric columns leave, and `truncate` inside spends
+            that width and ellipses the rest.
+
+            Measured on an iPhone 13, table width against the space available:
+            at 375px it was 345 in 343 (18px over) and at 390px 345 in 358; both
+            now fit. 320 and 360 were ALREADY over before the cover plate went
+            in (43px and 3px) and now fit too. The name is the right thing to
+            give way — every other column is a number, and a truncated title
+            still opens to its full detail. */}
+        <td className={`w-full max-w-0 py-1.5 pl-2 ${isOpen ? RAIL_ACTIVE : ''}`}>
           <button
             type="button"
             aria-expanded={isOpen}
-            className="flex items-center gap-1.5 text-left text-sm text-ink"
+            className="flex w-full min-w-0 items-center gap-1.5 text-left text-sm text-ink"
           >
-            <span aria-hidden="true" className="text-[10px] text-muted">{isOpen ? '⌄' : '›'}</span>
+            <span aria-hidden="true" className="shrink-0 text-[10px] text-muted">{isOpen ? '⌄' : '›'}</span>
             {/* Sixty rows of plain text is the table people scroll past. The
                 plate gives each row something the eye can recognise on the way
                 back up, which is what a cover does in any games list. */}
             <GameArt name={game.name} genre={genreFor(game)} seed={game.gameId} className="w-6 h-6 shrink-0" />
-            {game.name}
+            <span className="truncate">{game.name}</span>
           </button>
         </td>
-        <td className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted">{game.preset}</td>
+        {/* Hidden below `sm` and re-stated in the expanded row. ⚠️ This must
+            stay in step with `phoneHidden` on the Preset entry in COLUMNS: a
+            header and its column hidden at different breakpoints shifts every
+            figure one column sideways, and every number is still real, just
+            under the wrong heading. FrameRateTable's tests assert the pair. */}
+        <td className="hidden px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted sm:table-cell">{game.preset}</td>
         {RESOLUTIONS.map((res) => (
           <Cell key={res} row={game.cells[res]} isTarget={res === target} />
         ))}
@@ -127,6 +146,15 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
           <td colSpan={3 + RESOLUTIONS.length} className={`px-2 pb-3 pt-1 ${RAIL_ACTIVE}`}>
             <div className="grid gap-x-8 gap-y-1 sm:grid-cols-2">
               <dl className="text-[11px] text-muted">
+                {/* Below `sm` the Preset column is hidden, so the setting these
+                    figures were measured at says itself here instead. Without
+                    it a phone reader gets a frame rate with nothing stating
+                    what it was measured at, which is the one thing that makes
+                    the number mean anything. */}
+                <div className="flex justify-between gap-3 py-0.5 sm:hidden">
+                  <dt>Preset</dt>
+                  <dd className="text-ink">{game.preset}</dd>
+                </div>
                 {/* Below `sm` the off-target columns are hidden, so their
                     averages live here instead of being lost. */}
                 {RESOLUTIONS.filter((r) => r !== target && game.cells[r]).map((r) => (

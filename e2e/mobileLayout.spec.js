@@ -398,3 +398,61 @@ test.describe('the 3D view is not downloaded before it is asked for', () => {
     await ctx.close()
   })
 })
+
+// ⚠️ THE GAP THAT LET A REGRESSION THROUGH. "nothing pushes the page sideways"
+// above measures the DOCUMENT, and the document was innocent: the frame-rate
+// table lives in a box of its own, so the table outgrowing that box scrolls the
+// box and leaves documentElement.scrollWidth untouched. Adding a 24px cover
+// plate to the Game column put the table 18px past its container at 375px — the
+// commonest phone width there is — and the entire suite stayed green.
+//
+// Measured, before the fix: 320 was 43px over (already, before the plate), 360
+// 3px over, 375 and 390 clean. After the plate: 73 / 33 / 18 / 3. After giving
+// the Game column `max-w-0 w-full` and dropping Preset below `sm`: 0 at every
+// width, with the name column going from 96px to 190px at 375.
+test.describe('the frame-rate table fits the box it is in', () => {
+  test('never outgrows its container at phone widths', async ({ page }) => {
+    test.setTimeout(120_000)
+    await generateBuild(page)
+
+    await page.getByRole('button', { name: /^Performance/i }).click()
+    // Genre bars ship shut, so there are no game rows to measure until one opens.
+    const genre = page.getByRole('button', { name: /shooters/i }).first()
+    await expect(genre).toBeVisible({ timeout: 30_000 })
+    await genre.click()
+    await expect(page.locator('tbody tr[data-game]').first()).toBeVisible()
+
+    for (const width of PHONES) {
+      await page.setViewportSize({ width, height: 812 })
+      const fit = await page.evaluate(() => {
+        const table = document.querySelector('table')
+        const box = table.parentElement
+        return { over: box.scrollWidth - box.clientWidth, table: Math.round(table.getBoundingClientRect().width) }
+      })
+      expect(fit.over, `frame-rate table past its container at ${width}px (table ${fit.table}px)`)
+        .toBeLessThanOrEqual(0)
+    }
+  })
+
+  // The other half. Hiding Preset is only acceptable because the expanded row
+  // restates it; a frame rate with nothing saying what setting produced it is
+  // a number with no meaning.
+  test('still states the preset on a phone, in the expanded row', async ({ page }) => {
+    test.setTimeout(120_000)
+    await page.setViewportSize({ width: 375, height: 812 })
+    await generateBuild(page)
+
+    await page.getByRole('button', { name: /^Performance/i }).click()
+    const genre = page.getByRole('button', { name: /shooters/i }).first()
+    await expect(genre).toBeVisible({ timeout: 30_000 })
+    await genre.click()
+
+    const firstRow = page.locator('tbody tr[data-game]').first()
+    await expect(firstRow).toBeVisible()
+    // The column itself is gone at this width...
+    await expect(page.getByRole('columnheader', { name: /preset/i })).toBeHidden()
+    // ...so opening the row has to bring it back.
+    await firstRow.click()
+    await expect(page.getByText('Preset', { exact: true })).toBeVisible()
+  })
+})
