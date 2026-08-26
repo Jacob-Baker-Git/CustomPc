@@ -239,10 +239,51 @@ export function routes() {
     rise: 0,
   })
 
+  // The CPU's own lanes to the primary x16 slot — the busiest link on a real
+  // board, and the one the eye looks for. It leaves the socket's south edge and
+  // has to thread the one clear corridor there is: right of the M.2 slot, below
+  // the DIMM bank, and above the x16 slot it is heading for. The vias stop in
+  // that gap rather than on the slot outline.
+  const gpu = bus({
+    fromX: socket.x + 90,
+    fromY: socket.y + socket.h,
+    toX: 410,
+    count: 3,
+    pitch: 5,
+    rise: 44,
+  })
+
+  // VRM out to the DIMM bank. Thick, because it is power, and running under the
+  // EPS connector rather than through it — the lane between the connector's
+  // bottom edge and the VRM's is the only clear one.
+  const dimmPower = bus({
+    fromX: vrm.x + vrm.w,
+    fromY: vrm.y + vrm.h - 18,
+    toX: dimm0.x - 4,
+    count: 2,
+    pitch: 8,
+    rise: 0,
+  })
+
+  // Front panel back up to the chipset, along the bottom edge where a real
+  // board runs its header wiring.
+  const frontPanel = at('front-panel')
+  const panel = bus({
+    fromX: frontPanel.x + frontPanel.w,
+    fromY: frontPanel.y + 4,
+    toX: chipset.x + 30,
+    count: 3,
+    pitch: 4,
+    rise: -40,
+  })
+
   return [
     { key: 'memory', weight: 'signal', ...memory },
     { key: 'io', weight: 'signal', ...io },
     { key: 'uplink', weight: 'signal', ...uplink },
+    { key: 'gpu', weight: 'signal', ...gpu },
+    { key: 'panel', weight: 'signal', ...panel },
     { key: 'eps', weight: 'power', ...power },
+    { key: 'dimm-power', weight: 'power', ...dimmPower },
   ]
 }
