@@ -156,7 +156,7 @@ export default function PeripheralsPanel() {
             className={`flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg border transition-colors
               ${filterCount > 0
                 ? 'border-gold text-gold bg-gold-soft'
-                : 'border-line text-muted hover:text-ink hover:border-line-strong'}`}
+                : 'border-line text-muted bg-surface hover:text-ink hover:border-line-strong'}`}
           >
             <SlidersHorizontal size={13} aria-hidden="true" />
             Filters
@@ -187,7 +187,10 @@ export default function PeripheralsPanel() {
             const picked = selected[id]
             return (
               <section key={id}>
-                <div className="flex items-baseline gap-2 mb-3">
+                {/* On a surface: this header sits outside the product cards, so
+                    without one its label, blurb and count sit on bare board.
+                    e2e/builderLegibility.spec.js counted three of them here. */}
+                <div className="flex items-baseline gap-2 mb-3 rounded-lg bg-surface px-3 py-2">
                   <Icon size={15} className="text-copper shrink-0 self-center" aria-hidden="true" />
                   <h3 className="text-sm font-semibold text-ink">{label}</h3>
                   <span className="text-[11px] text-faint hidden sm:inline">{blurb}</span>

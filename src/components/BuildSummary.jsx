@@ -22,17 +22,56 @@ const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const CAT_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
 const scoreText = (s) => (s >= 80 ? 'text-good' : s >= 50 ? 'text-ok' : 'text-bad')
 
+// The score's rail, in the score's own colour, so the block says what the
+// number says before the number is read.
+//
+// ⚠️ Thresholds MIRROR scoreText above. If they drift, the rail and the figure
+// beside it disagree about the same build, which is worse than no rail.
+//
+// An inset shadow rather than border-l: a border changes the box and shifts its
+// contents 2px out of line. It also sidesteps the opacity trap, since it names
+// the CSS var directly rather than reaching for an alpha modifier.
+const scoreRail = (s) =>
+  s >= 80 ? 'shadow-[inset_2px_0_0_0_var(--good)]'
+    : s >= 50 ? 'shadow-[inset_2px_0_0_0_var(--ok)]'
+      : 'shadow-[inset_2px_0_0_0_var(--bad)]'
+
+// The same vocabulary PartSlot uses, so a part is named the same way on the
+// Build tab and here.
+//
+// Keyed by the `label` values in src/lib/categories.js, which is what Row
+// receives. Case, Case Fans and Thermal Paste are absent on purpose: they do
+// not seat in a board connector, and PartSlot's CONNECTOR map has no entry for
+// them either. Peripherals plug into a port rather than the board, so they fall
+// through to their label too.
+const DESIGNATOR = {
+  CPU: 'CPU_1',
+  'CPU Cooler': 'CPU_FAN',
+  RAM: 'DIMM_A2',
+  GPU: 'PCIEX16_1',
+  Storage: 'M2_1',
+  PSU: 'ATX_PWR',
+  Motherboard: 'BOARD',
+}
+
 function Row({ label, name, brand, price }) {
   return (
-    <div className="flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">{label}</span>
+    <div data-row className="group flex items-center py-1.5 border-t border-line">
+      <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
+        {DESIGNATOR[label] ?? label}
+      </span>
       <span className="flex-1 text-sm text-ink truncate">{name}</span>
       <span className="font-mono text-sm text-muted w-20 text-right">£{price.toFixed(2)}</span>
+      {/* Revealed on hover or keyboard focus. Ten always-visible links down the
+          right-hand edge were the loudest thing on a page whose job is to be
+          read; group-focus-within is what keeps them reachable without a
+          pointer, rather than hiding them behind a gesture a keyboard cannot
+          make. */}
       <a
         href={searchUrl(name, brand)}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-28 text-right text-xs text-copper hover:brightness-110 whitespace-nowrap"
+        className="w-28 text-right text-xs text-copper hover:brightness-110 whitespace-nowrap opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
       >
         Find Best Price ↗
       </a>
@@ -43,7 +82,9 @@ function Row({ label, name, brand, price }) {
 function MissingRow({ label }) {
   return (
     <div className="flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">{label}</span>
+      <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
+        {DESIGNATOR[label] ?? label}
+      </span>
       <span className="flex-1 text-sm text-ok">
         <span aria-hidden="true" className="mr-1.5">⚠</span>Not selected
       </span>
@@ -146,7 +187,7 @@ export default function BuildSummary() {
           ) : (
             <>
               {rating.overall > 0 && (
-                <div className="mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3">
+                <div className={`mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3 ${scoreRail(rating.overall)}`}>
                   <div className="flex items-baseline gap-2">
                     <span className={`font-display text-3xl font-extrabold tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
                     <span className="text-xs text-faint">/100</span>
@@ -256,23 +297,30 @@ export default function BuildSummary() {
             >
               Copy as Markdown
             </button>
+          </div>
+
+          {/* Two text links rather than two more buttons.
+              Saved builds moved to the hub — this is the way back to them from
+              the place where saving actually happens.
+              Clear build sat in the row above as a fifth equal-weight control,
+              which gave the one action that wipes the build the same weight as
+              Print. It stays a <button> because it performs an action rather
+              than navigating; only its weight changes. */}
+          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <button
+              onClick={() => setFlow('saved')}
+              className="text-xs text-muted hover:text-copper transition-colors"
+            >
+              View your saved builds →
+            </button>
             <button
               onClick={handleClear}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-bad text-bad hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="text-xs text-muted hover:text-bad disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Clear build
             </button>
           </div>
-
-          {/* Saved builds moved to the hub — this is the way back to them from
-              the place where saving actually happens. */}
-          <button
-            onClick={() => setFlow('saved')}
-            className="mt-4 text-xs text-muted hover:text-copper transition-colors"
-          >
-            View your saved builds →
-          </button>
         </RamBox>
       </div>
 
