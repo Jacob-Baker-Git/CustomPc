@@ -16,10 +16,23 @@ function radiatorMm(radiator) {
 const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${gb}GB`)
 
 // Rough heat-dissipation rating in watts. 0 = unknown (no penalty upstream).
+//
+// ⚠️ THE ONLY cooler-capacity figure on the site. partStats.coolerCapacity()
+// used to compute its own — radiator x 1.15, height x 1.35 — and both reached
+// the screen: a 420mm AIO read 483 W under "Cooling capacity" on its info sheet
+// and 320 W under "Cooler capacity" on the Performance tab. The stepped ladder
+// won the merge because it is the more conservative of the two and because
+// under-promising is the safer direction for a number somebody is about to
+// spend money on, which is the same rule gamePresets.js resolves ties by.
+// partStats now delegates here; pinned by partStats.test.js.
 export function coolerCapacityW(cooler) {
   const s = cooler?.specs ?? {}
   if (s.type === 'AIO') {
     const mm = radiatorMm(s.radiator)
+    // 420 is a real rung, not a rounding of 360. Without it the largest
+    // radiator in the catalogue claimed exactly as much cooling as a 360 —
+    // which made the biggest AIO on the list look like money for nothing.
+    if (mm >= 420) return 360
     if (mm >= 360) return 320
     if (mm >= 280) return 260
     if (mm >= 240) return 220

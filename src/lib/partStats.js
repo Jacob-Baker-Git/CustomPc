@@ -1,4 +1,5 @@
 import { RES_GPU } from './fpsEstimate'
+import { coolerCapacityW } from './partSynergy'
 
 // Derived headline stats, computed from fields the catalogue already holds.
 //
@@ -69,13 +70,20 @@ export function fanArea(part) {
   return Math.round((count * Math.PI * (size / 2) ** 2) / 100)
 }
 
-// What a cooler can actually dissipate, in watts. AIOs scale with radiator
-// length; towers with height. Mirrors partSynergy's coolerCapacityW ordering.
+// What a cooler can actually dissipate, in watts.
+//
+// ⚠️ This used to be a SECOND formula (radiator x 1.15, height x 1.35) that only
+// claimed to "mirror partSynergy's ordering" — and mirroring the ordering is not
+// agreeing on the number. It did not: a 420mm AIO printed 483 here and 320 on
+// the Performance tab, for the same cooler on the same build. There is now one
+// implementation and this defers to it.
+//
+// The `|| null` is the one real difference and it is deliberate: coolerCapacityW
+// returns 0 for "specs unknown", which estimateThermals reads as absent, but
+// partStats' add() would happily print a literal "0 W". Null makes the row
+// disappear instead, which is what an unknown spec should do.
 export function coolerCapacity(part) {
-  const s = part?.specs ?? {}
-  if (s.type === 'AIO') return Math.round(mmOf(s.radiator) * 1.15)
-  const h = s.height ?? 0
-  return h ? Math.round(h * 1.35) : null
+  return coolerCapacityW(part) || null
 }
 
 const fmt = (v, digits = 1) => (v == null ? null : Number(v.toFixed(digits)))
