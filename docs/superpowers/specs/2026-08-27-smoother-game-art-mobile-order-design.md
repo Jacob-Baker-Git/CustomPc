@@ -64,15 +64,43 @@ thing: the chips are a build **input** ("what do you use it for"), the rating is
 the **score**. The request names only the score, so mobile must order them
 separately.
 
-- New: `.area-usecase` and `.area-rating`, two grid children.
-- Desktop keeps both in the `left` column by assigning **both** to
-  `grid-area: left` — two items in one named area stack in source order, which
-  reproduces today's flex column exactly.
+#### ⚠️ Two items in one `grid-area` OVERLAP. Measured, not assumed.
 
-⚠️ This is **not** the split the comment at `index.css:171` forbids. That warning
-is about `.area-viz` spanning two rows, where Grid distributes a spanning item's
-excess height across the rows and leaves dead space. `.area-left` spans nothing;
-it is one item in one row, becoming two items in one row.
+The obvious implementation — keep `.area-left` and give both children
+`grid-area: left` — **is wrong and was caught by probing a real browser**:
+
+```
+grid-template-areas: "left viz" / two items both at grid-area:left
+  → a.top = 8,  b.top = 8,  OVERLAP = true
+```
+
+Grid stacks same-area items on top of each other; it does not flow them. That
+would have printed the chips over the score on every desktop screen.
+
+Splitting the left column into two grid rows is also out — that makes `.area-viz`
+span two rows again, which is exactly the dead-space bug the comment at
+`index.css:171` forbids.
+
+#### The approach that works: `display: contents`
+
+`.area-left` **stays in the DOM as the desktop wrapper**, and its two children
+get the `.area-usecase` / `.area-rating` classes:
+
+- **Mobile:** `.area-left { display: contents }`. It generates no box, so its
+  children become flex items of `.build-grid` itself and take `order` directly.
+  Probed: `order` 1 / 3 / 4 produced tops 186 → 224 → 262, correctly sequenced.
+- **Desktop:** `.area-left` returns to `display: flex; flex-direction: column`
+  with `grid-area: left`. Byte-identical to today.
+
+⚠️ **`display: contents` breaks the `.build-grid > *` selector for these two.**
+That rule (`index.css:126`) sets `position: relative; z-index: 1`, and selectors
+match the DOM tree, not the box tree — so `.area-usecase` and `.area-rating` are
+still *grandchildren* and will not match it. They must be given those two
+properties explicitly via a descendant selector, or they drop behind the WebGL
+canvas — the exact compositing gotcha the comment at `index.css:120` warns about.
+
+Gap is unaffected: `.build-grid` already uses `gap: 0.75rem`, the same value as
+the wrapper's `gap-3`.
 
 ### Final mobile order
 
@@ -190,7 +218,7 @@ exact file once.
 | A | The 3D scene redraws **~60×/sec forever**, idle or not | `BuildCanvas.jsx:27` sets no `frameloop`; r3f's default is `"always"` |
 | B | `city.hdr` is **1.5 MB**, for reflections only | `ls public/hdri` |
 | C | `antialias: true` at `dpr={[1,2]}` on phones | `BuildCanvas.jsx:28-29` |
-| D | `partsData.json` is **163 KB** of JS object literal in the entry chunk | `ls src/data`; statically imported |
+| D | ~~`partsData.json` is 163 KB of JS object literal in the entry chunk~~ **WRONG — already handled** | See correction below |
 | E | Entry chunk is **518 KB** | `dist/assets/index-*.js` |
 
 (A) is the headline. A static build still burns a full frame budget every 16ms —
@@ -232,15 +260,27 @@ Cap DPR and reconsider MSAA where `pointer: coarse`. This mirrors the mount-time
 applies: this is a *renderer* setting, so unlike the zoom-verb copy it does not
 have to survive a pointer-type change under a live page.
 
-### D — parsing 163 KB
+### D — 🛑 WITHDRAWN. This was already done, and the finding was wrong.
 
-A large JS object literal is parsed by the JS engine as source. `JSON.parse()`
-on an equivalent string literal is materially faster, and is a standard build
-transform. Applied to `partsData.json`, and to `perfModel.json` if it lands in a
-chunk parsed on load.
+The original claim was that `partsData.json` ships as a JS object literal and
+should be converted to `JSON.parse()` on a string. **Checked while planning, and
+it is already a `JSON.parse` call** — Vite 8 does this by default:
 
-**Acceptance:** the JSON is still valid, `partsData` deep-equals its former
-value, and the catalogue tests pass untouched.
+```
+vite/dist/node/index.d.ts:3128
+  /** When set to 'auto', the data will be stringified only if the data is
+      bigger than 10kB.  @default 'auto' */
+  stringify?: boolean | "auto";
+```
+
+```
+$ grep -o "JSON.parse(.\{0,40\}" dist/assets/index-*.js
+JSON.parse(`[{"id":"mb-asus-x670e","category":"mother
+```
+
+At 163 kB `partsData.json` is far over the 10 kB threshold, so the transform has
+been applying the whole time. **No work here.** Recorded rather than deleted so
+the same wrong finding is not made a third time.
 
 ### E — the entry chunk
 
@@ -275,4 +315,5 @@ speculative re-render fix ships without a measurement showing it was needed.
 | The shadow bakes once and never updates | Re-key on the selected-part ids; e2e adds a part and screenshots |
 | A downsampled HDRI dulls the metal | Before/after screenshot at a fixed camera; revert the resolution if it shows |
 | `order` leaks into the desktop grid | Desktop e2e asserts parts below viz at 1440px |
+| `display: contents` drops the two panels behind the canvas | They get `position: relative; z-index: 1` explicitly; desktop e2e asserts chips above rating |
 | A genre mark is mush at 24px | Screenshot the tab at 390px; it is a test, not a review note |
