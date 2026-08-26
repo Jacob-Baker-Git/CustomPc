@@ -158,7 +158,91 @@ export const LANDMARKS = [
   { id: 'm2-2',         x: 150, y: 274, w: 180, h: 8,   weight: 'outline' },
   { id: 'pcie-x1',      x: 150, y: 286, w: 110, h: 8,   weight: 'outline' },
   { id: 'pcie-x16-2',   x: 150, y: 310, w: 230, h: 12,  weight: 'outline' },
-  { id: 'chipset',      x: 400, y: 280, w: 70,  h: 70,  weight: 'outline' },
-  { id: 'sata',         x: 480, y: 228, w: 40,  h: 64,  weight: 'outline' },
+  // Same reasoning as the DIMM channel: the chipset sits 50 units clear of the
+  // bottom x16 slot so its uplink has somewhere to go. Drafted at 400 it had
+  // 20 units to spend on a bundle needing 26, and every conductor doubled back
+  // on itself — a diagonal that overshoots its destination has to come back.
+  { id: 'chipset',      x: 430, y: 280, w: 70,  h: 70,  weight: 'outline' },
+  { id: 'sata',         x: 500, y: 200, w: 40,  h: 64,  weight: 'outline' },
   { id: 'front-panel',  x: 300, y: 388, w: 62,  h: 12,  weight: 'outline' },
 ]
+
+const at = (id) => LANDMARKS.find((l) => l.id === id)
+
+// Every bundle on the board, generated rather than drawn. Each one leaves a
+// component edge and ends on a via, so no conductor finishes in open copper.
+//
+// ⚠️ THE PRECONDITION, and the reason three earlier drafts of this table were
+// unroutable: a dogleg spends |rise| of horizontal run making its 45 degrees,
+// so a bus needs run > lead + stagger + |rise|. Given less, the diagonal
+// overshoots its destination and the final leg has to come back for it — one
+// draft asked for an 18-unit drop across 10 units of run and every conductor
+// in it pointed the wrong way.
+//
+// This lives here rather than in the component because the generators being
+// correct says nothing about whether the ROUTES are, and the routes are what
+// went wrong. boardPlan.test.js asserts against this function directly.
+export function routes() {
+  const socket = at('socket')
+  const dimm0 = at('dimm-0')
+  const chipset = at('chipset')
+  const rearIo = at('rear-io')
+  const eps = at('eps-8pin')
+  const vrm = at('vrm')
+  const slot2 = at('pcie-x16-2')
+
+  // Memory: socket east edge into the DIMM channel, length-matched. The pins
+  // sit at staggered depths, which is the case serpentines exist for. The
+  // spread is inside the sqrt(2) ceiling — see the channel-width assertion.
+  const memory = serpentine({
+    fromX: socket.x + socket.w + 4,
+    fromY: socket.y + 8,
+    ends: [dimm0.x - 4, dimm0.x - 8, dimm0.x - 12, dimm0.x - 16],
+    pitch: 6,
+    amplitude: 3,
+  })
+
+  // Rear I/O across to the socket, dropping under the VRM. The traces leave
+  // below the VRM's bottom edge rather than beside it: the 12 units between
+  // that edge and the rear I/O block's own is the only clear lane, which is
+  // what sets the tight pitch here.
+  const io = bus({
+    fromX: rearIo.x + rearIo.w,
+    fromY: vrm.y + vrm.h + 1,
+    toX: socket.x - 4,
+    count: 4,
+    pitch: 3,
+    rise: 40,
+  })
+
+  // Chipset uplink: west edge across and down to the bottom x16 slot, ending
+  // just clear of it rather than crossing its outline.
+  const uplink = bus({
+    fromX: chipset.x,
+    fromY: chipset.y + 16,
+    toX: slot2.x + slot2.w + 4,
+    count: 3,
+    pitch: 5,
+    rise: 14,
+  })
+
+  // The one power run that is short enough to be honest: EPS 12V into the VRM,
+  // which is exactly where it goes on a real board. Thick, and deliberately
+  // alone — power delivery reads as power delivery because there is little of
+  // it, not because there is a lot.
+  const power = bus({
+    fromX: eps.x,
+    fromY: eps.y + 4,
+    toX: vrm.x + vrm.w,
+    count: 2,
+    pitch: 8,
+    rise: 0,
+  })
+
+  return [
+    { key: 'memory', weight: 'signal', ...memory },
+    { key: 'io', weight: 'signal', ...io },
+    { key: 'uplink', weight: 'signal', ...uplink },
+    { key: 'eps', weight: 'power', ...power },
+  ]
+}

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { segmentsOf, pathLength, isOrthoOr45, bus, serpentine, LANDMARKS, BOARD } from '../lib/boardPlan'
+import { segmentsOf, pathLength, isOrthoOr45, bus, serpentine, LANDMARKS, BOARD, routes } from '../lib/boardPlan'
 
 describe('path inspection', () => {
   it('splits a path into absolute segments', () => {
@@ -210,5 +210,104 @@ describe('the ATX plan', () => {
     const xs = [0, 1, 2, 3].map((i) => byId[`dimm-${i}`].x)
     const gaps = xs.slice(1).map((x, i) => x - xs[i])
     for (const g of gaps) expect(g).toBe(gaps[0])
+  })
+})
+
+describe('the routes the board actually draws', () => {
+  const bundles = routes()
+  const EPS = 0.001
+
+  // Sampled points along a segment, used for the containment checks below.
+  const walk = ([x1, y1, x2, y2]) => {
+    const steps = Math.max(2, Math.ceil(Math.hypot(x2 - x1, y2 - y1) * 2))
+    return Array.from({ length: steps + 1 }, (_, i) => [
+      x1 + ((x2 - x1) * i) / steps,
+      y1 + ((y2 - y1) * i) / steps,
+    ])
+  }
+
+  it('routes something', () => {
+    expect(bundles.length).toBeGreaterThan(0)
+    for (const b of bundles) {
+      expect(b.paths.length, b.key).toBeGreaterThan(0)
+      expect(b.vias, b.key).toHaveLength(b.paths.length)
+    }
+  })
+
+  it('turns only at right angles or 45 degrees', () => {
+    for (const b of bundles) {
+      for (const d of b.paths) {
+        for (const seg of segmentsOf(d)) expect(isOrthoOr45(seg), `${b.key}: ${d}`).toBe(true)
+      }
+    }
+  })
+
+  it('never doubles back on itself', () => {
+    // ⚠️ THE ASSERTION THAT WOULD HAVE CAUGHT THE FIRST DRAFT. A dogleg spends
+    // |rise| of horizontal run turning, so a bus given less run than
+    // lead + stagger + |rise| overshoots its destination and the final leg has
+    // to come back for it. One drafted bundle asked for an 18-unit drop across
+    // 10 units of run: all five conductors pointed the wrong way, and nothing
+    // in the generator tests could see it, because the generator was fine.
+    for (const b of bundles) {
+      for (const d of b.paths) {
+        const segs = segmentsOf(d)
+        const dir = Math.sign(segs.at(-1)[2] - segs[0][0])
+        for (const [x1, , x2] of segs) {
+          if (x2 === x1) continue
+          expect(Math.sign(x2 - x1), `${b.key}: ${d}`).toBe(dir)
+        }
+      }
+    }
+  })
+
+  it('keeps every conductor out of the components it does not connect to', () => {
+    // Touching an edge is how a trace leaves a component; passing THROUGH one
+    // is a trace drawn over a chip. A draft that routed the rear I/O bundle
+    // straight across the VRM block looked plausible in the source and absurd
+    // on screen.
+    for (const b of bundles) {
+      for (const d of b.paths) {
+        for (const seg of segmentsOf(d)) {
+          for (const [px, py] of walk(seg)) {
+            for (const l of LANDMARKS) {
+              const inside = px > l.x + EPS && px < l.x + l.w - EPS
+                && py > l.y + EPS && py < l.y + l.h - EPS
+              expect(inside, `${b.key} runs through ${l.id} at ${px},${py}`).toBe(false)
+            }
+          }
+        }
+      }
+    }
+  })
+
+  it('stays inside the board', () => {
+    for (const b of bundles) {
+      for (const d of b.paths) {
+        for (const [x1, y1, x2, y2] of segmentsOf(d)) {
+          for (const [x, y] of [[x1, y1], [x2, y2]]) {
+            expect(x, b.key).toBeGreaterThanOrEqual(0)
+            expect(y, b.key).toBeGreaterThanOrEqual(0)
+            expect(x, b.key).toBeLessThanOrEqual(BOARD.w)
+            expect(y, b.key).toBeLessThanOrEqual(BOARD.h)
+          }
+        }
+      }
+    }
+  })
+
+  it('never lets two conductors in a bundle touch', () => {
+    for (const b of bundles) {
+      const traces = b.paths.map(segmentsOf)
+      for (let i = 0; i < traces.length; i += 1) {
+        for (let j = i + 1; j < traces.length; j += 1) {
+          for (const a of traces[i]) {
+            for (const c of traces[j]) {
+              expect(minGap(a, c), `${b.key}: trace ${i} vs ${j}`).toBeGreaterThan(0.5)
+            }
+          }
+        }
+      }
+    }
   })
 })
