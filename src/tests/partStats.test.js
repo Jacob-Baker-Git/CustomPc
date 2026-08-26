@@ -4,6 +4,7 @@ import {
   partStats, gpuFpsCeiling, fpsPerPound, perfPerPound, perfPerWatt,
   pricePerGb, pricePer100W, psuEfficiency, fanArea, coolerCapacity,
 } from '../lib/partStats'
+import { coolerCapacityW } from '../lib/partSynergy'
 import { estimateFps } from '../lib/fpsEstimate'
 
 const byId = (id) => partsData.find((p) => p.id === id)
@@ -74,6 +75,30 @@ describe('derived part stats', () => {
     const aio360 = { category: 'cooler', price: 90, specs: { type: 'AIO', radiator: '360mm' } }
     const lowTower = { category: 'cooler', price: 20, specs: { type: 'Air', height: 120 } }
     expect(coolerCapacity(aio360)).toBeGreaterThan(coolerCapacity(lowTower))
+  })
+
+  // The number under "Cooling capacity" on a cooler's info sheet and the number
+  // the Performance tab prints as "Cooler capacity" are the same claim about the
+  // same object, so they have to be the same number. They were not: two
+  // independent formulas had grown up, a continuous one here and a stepped
+  // ladder in partSynergy, and a 420mm AIO read 483 W on one screen and 320 W
+  // on the other. Comparing them across the real catalogue is what makes this a
+  // check rather than a restatement of one of them.
+  it('reports one cooling capacity per cooler, whichever screen asks', () => {
+    const coolers = ofCat('cooler')
+    expect(coolers.length).toBeGreaterThan(0)
+    for (const c of coolers) {
+      expect(coolerCapacity(c), `${c.id} (${c.specs.type} ${c.specs.radiator ?? c.specs.height})`)
+        .toBe(coolerCapacityW(c))
+    }
+  })
+
+  // The ladder used to flatten everything at or above 360mm into one rung, so
+  // the largest radiator in the catalogue claimed no more cooling than a 360.
+  it('does not flatten a 420mm radiator into the 360mm rung', () => {
+    const aio420 = { category: 'cooler', price: 150, specs: { type: 'AIO', radiator: '420mm' } }
+    const aio360 = { category: 'cooler', price: 90, specs: { type: 'AIO', radiator: '360mm' } }
+    expect(coolerCapacity(aio420)).toBeGreaterThan(coolerCapacity(aio360))
   })
 
   it('produces printable stats for every part in the catalogue', () => {

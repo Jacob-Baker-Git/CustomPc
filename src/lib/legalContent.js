@@ -1,14 +1,21 @@
 // Copy for the privacy policy and terms pages.
 //
 // IMPORTANT: the specifics here describe what the site actually does today —
-// no accounts, no cookies, no analytics, builds held in localStorage, and one
-// write path (the feedback form) into Supabase. If any of that changes, this
-// file has to change with it, or the notice becomes inaccurate, which is worse
-// than not having one.
+// no accounts, no cookies, no analytics, builds held in localStorage, one write
+// path (the feedback form) into Supabase, and one READ path that fires on every
+// page: App.jsx calls loadCatalog() from an unconditional mount effect. If any
+// of that changes, this file has to change with it, or the notice becomes
+// inaccurate, which is worse than not having one.
 //
-// The retention periods are the ones enforced by the
-// `purge-feedback-personal-data` pg_cron job in Supabase. Changing one without
-// the other makes this page a false statement.
+// There is no retention schedule to keep in step any more. The `email` and
+// `ip_hash` columns were dropped and the `purge_feedback_personal_data` pg_cron
+// job was unscheduled and dropped with them, so a row holds nothing that could
+// expire. Ignore any older comment describing a 30/90-day purge.
+//
+// ⚠️ The "Who else sees a request" section is pinned to `public/_headers` by
+// legalContent.test.js: any remote host in connect-src is a company that
+// receives the visitor's IP, so adding one fails the suite until this page
+// accounts for it.
 
 // The two things a privacy notice cannot omit: an identifiable controller and a
 // route to reach them. Both are now real, and legalContent.test.js asserts
@@ -68,16 +75,18 @@ export const PRIVACY = {
       ],
     },
     {
-      heading: 'No third parties are embedded',
+      heading: 'Who else sees a request',
       body: [
-        'Fonts, 3D models and every other asset are served from this site’s own domain. Nothing is loaded from a third-party CDN, so no other company receives your IP address just because you opened the page.',
+        'Fonts, 3D models and every other asset are served from this site’s own domain. There is no third-party CDN, no analytics and no advertising tracker, so nothing here follows you between sites.',
+        'Two companies do see a request, because they are what serves the site. Netlify hosts the pages. Supabase holds the parts catalogue, and every page fetches it on load — so opening anything here, this page included, sends your IP address to both. That is true of any hosted website; we say it because “no third parties” would be too strong a claim.',
+        'Neither request stores anything that identifies you in our own data. Both companies keep operational logs of their own, as every host does, under their own policies.',
         'Links out to retailers are ordinary links. Nothing is sent to them until you choose to click, and once you do you are on their site under their privacy policy, not ours.',
       ],
     },
     {
       heading: 'Lawful basis',
       body: [
-        'We hold no personal data, so for the most part UK GDPR has nothing to attach to. There are no accounts, no cookies, no analytics, no IP logging and no contact details.',
+        'We hold no personal data, so for the most part UK GDPR has nothing to attach to. There are no accounts, no cookies, no analytics and no contact details, and we keep no logs of our own. What our host and our database provider record in serving the page is covered above.',
         'The one exception is anything you choose to type into a feedback message. Where that happens we rely on legitimate interests — reading feedback in order to improve the site — and you can ask us to erase it.',
       ],
     },

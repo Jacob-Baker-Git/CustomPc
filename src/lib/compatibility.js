@@ -9,6 +9,18 @@ const drawOf = (parts) =>
 const airHeight = (cooler) =>
   cooler?.specs?.type === 'AIO' ? null : cooler?.specs?.height ?? null
 
+// ⚠️ ONE definition of "this supply cannot run this build", because three
+// call sites used to carry their own and they disagreed at exactly equality.
+// Picking the supply tested `wattage < draw`, so a 400W unit on a 400W build
+// was ALLOWED; re-picking any other part tested `draw >= wattage`, so the same
+// build was BLOCKED; getBuildWarnings called it critical. You could therefore
+// assemble a build the site immediately declared underpowered, and then find
+// the graphics card already in it locked.
+//
+// `>=` is the side that wins: a supply run at 100% of its rating is a failure,
+// not a pass. Exported so buildWarnings.js shares it rather than restating it.
+export const psuTooSmall = (draw, wattage) => draw > 0 && draw >= wattage
+
 export function checkCompatibility(selectedParts, candidate) {
   const { motherboard, case: selectedCase, cpu, ram, cooler, gpu, psu } = selectedParts
 
@@ -100,15 +112,15 @@ export function checkCompatibility(selectedParts, candidate) {
   // stays a soft warning in buildWarnings — this only blocks hard failures.)
   if (candidate.category === 'psu') {
     const draw = drawOf(selectedParts)
-    if (draw > 0 && candidate.wattage < draw)
-      return { compatible: false, reason: `${candidate.wattage}W is below the build's ${draw}W draw` }
+    if (psuTooSmall(draw, candidate.wattage))
+      return { compatible: false, reason: `${candidate.wattage}W cannot run the build's ${draw}W draw` }
   }
 
   if (candidate.category !== 'psu' && psu && (candidate.tdp ?? 0) > 0) {
     const current = selectedParts[candidate.category]
     const draw = drawOf(selectedParts) - (current?.tdp ?? 0) + candidate.tdp
-    if (draw >= psu.wattage)
-      return { compatible: false, reason: `Would draw ${draw}W — over your ${psu.wattage}W PSU` }
+    if (psuTooSmall(draw, psu.wattage))
+      return { compatible: false, reason: `Would draw ${draw}W — your PSU supplies ${psu.wattage}W` }
   }
 
   return { compatible: true, reason: '' }
