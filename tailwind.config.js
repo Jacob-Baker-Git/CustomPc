@@ -41,8 +41,11 @@ export default {
         faint: 'var(--faint)',
         // Brand — wordmark only.
         accent: { DEFAULT: 'var(--accent)', ink: 'var(--accent-ink)' },
-        // Metals — state.
-        copper: 'var(--copper)',
+        // Metals — state. One yellow family: brass acts, gold is on, tech
+        // (straw) is data. Named `brass` rather than `amber`/`yellow` on
+        // purpose — extending either of those names with a bare string would
+        // replace Tailwind's whole built-in scale for it.
+        brass: 'var(--brass)',
         gold: { DEFAULT: 'var(--gold)', soft: 'var(--gold-soft)' },
         tech: 'var(--tech)',
         steel: 'var(--steel)',

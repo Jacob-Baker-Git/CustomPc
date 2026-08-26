@@ -108,8 +108,8 @@ export function partStats(part, { resolution = '1440p' } = {}) {
       // Deliberately no "FPS ceiling" row: the spec sheet already prints a chip
       // per resolution above this table (gpuResChips), and repeating the same
       // number in two places invites them to disagree later.
-      addDerived('FPS per £100', fmt(fpsPerPound(part, resolution)), ` @ ${resolution}`, 'Frames per £100 spent — higher is better value')
-      addDerived('Efficiency', fmt(perfPerWatt(part), 2), ' pts/W', 'Performance per watt — higher runs cooler and quieter')
+      addDerived('FPS per £100', fmt(fpsPerPound(part, resolution)), ` @ ${resolution}`, 'Frames per £100 spent: higher is better value')
+      addDerived('Efficiency', fmt(perfPerWatt(part), 2), ' pts/W', 'Performance per watt: higher runs cooler and quieter')
       add('VRAM', num(s.vram), ' GB', 'Video memory; more suits higher resolutions and textures')
       add('Memory type', s.memType)
       add('Power draw', num(part.tdp), ' W')
@@ -118,7 +118,7 @@ export function partStats(part, { resolution = '1440p' } = {}) {
 
     case 'cpu':
       addDerived('Perf per £100', fmt(perfPerPound(part)), '', 'Performance points per £100 spent')
-      addDerived('Efficiency', fmt(perfPerWatt(part), 2), ' pts/W', 'Performance per watt — drives cooler choice')
+      addDerived('Efficiency', fmt(perfPerWatt(part), 2), ' pts/W', 'Performance per watt: drives cooler choice')
       add('Cores', num(s.cores))
       add('Boost clock', num(s.boostClock), ' GHz', 'Peak single-core speed')
       add('Power draw', num(part.tdp), ' W')
@@ -168,7 +168,7 @@ export function partStats(part, { resolution = '1440p' } = {}) {
       break
 
     case 'fans':
-      addDerived('Total airflow area', fanArea(part), ' cm²', 'Combined swept area — more area moves more air per turn')
+      addDerived('Total airflow area', fanArea(part), ' cm²', 'Combined swept area: more area moves more air per turn')
       add('Fans', num(s.count))
       add('Size', s.size)
       break

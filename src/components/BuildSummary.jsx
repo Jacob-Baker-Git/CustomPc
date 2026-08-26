@@ -71,7 +71,7 @@ function Row({ label, name, brand, price }) {
         href={searchUrl(name, brand)}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-28 text-right text-xs text-copper hover:brightness-110 whitespace-nowrap opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
+        className="w-28 text-right text-xs text-brass hover:brightness-110 whitespace-nowrap opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
       >
         Find Best Price ↗
       </a>
@@ -183,7 +183,7 @@ export default function BuildSummary() {
           </div>
 
           {isEmpty ? (
-            <p className="text-sm text-muted py-6 text-center">No parts selected yet — head to the Build tab.</p>
+            <p className="text-sm text-muted py-6 text-center">No parts selected yet. Head to the Build tab.</p>
           ) : (
             <>
               {rating.overall > 0 && (
@@ -248,7 +248,7 @@ export default function BuildSummary() {
                   <button
                     onClick={() => setShowFps((v) => !v)}
                     aria-expanded={showFps}
-                    className="text-[11px] uppercase tracking-wider text-muted hover:text-copper transition-colors"
+                    className="text-[11px] uppercase tracking-wider text-muted hover:text-brass transition-colors"
                   >
                     Frame rates @ {RES_LABEL[resolution] ?? resolution} {showFps ? '−' : '+'}
                   </button>
@@ -265,21 +265,21 @@ export default function BuildSummary() {
           )}
 
           <p className="mt-4 text-[11px] text-muted leading-relaxed">
-            Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data — use Find Best Price for current prices.
+            Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data. Use Find Best Price for current prices.
           </p>
 
           <div className="flex flex-wrap gap-2 mt-5">
             <button
               onClick={handleSave}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-copper text-copper hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="text-xs px-3.5 py-2 rounded-lg border border-brass text-brass hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Save PC
             </button>
             <button
               onClick={copyShareLink}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg bg-copper hover:brightness-110 text-accent-ink disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               {copied ? 'Copied!' : 'Copy share link'}
             </button>
@@ -309,7 +309,7 @@ export default function BuildSummary() {
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <button
               onClick={() => setFlow('saved')}
-              className="text-xs text-muted hover:text-copper transition-colors"
+              className="text-xs text-muted hover:text-brass transition-colors"
             >
               View your saved builds →
             </button>
@@ -338,11 +338,11 @@ export default function BuildSummary() {
                 if (e.key === 'Enter') confirmSave()
                 if (e.key === 'Escape') setSaveOpen(false)
               }}
-              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-copper"
+              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-brass"
             />
             <div className="flex justify-end gap-2 mt-4">
               <button onClick={() => setSaveOpen(false)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-lg bg-copper hover:brightness-110 text-accent-ink transition-colors">Save</button>
+              <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
             </div>
           </div>
         </div>

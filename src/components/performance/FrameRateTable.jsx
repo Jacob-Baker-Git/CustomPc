@@ -146,7 +146,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
               honest statement of what the corpus does not cover is the point.
               The count comes off the list it heads so the two cannot drift. */}
           <h4 className="text-[11px] uppercase tracking-wider text-muted">
-            No benchmark data yet — {uncovered.length} game{uncovered.length === 1 ? '' : 's'}
+            No benchmark data yet: {uncovered.length} game{uncovered.length === 1 ? '' : 's'}
           </h4>
           <ul className="mt-1.5 grid gap-x-5 gap-y-1 sm:grid-cols-2 xl:grid-cols-3">
             {uncovered.map((u) => (

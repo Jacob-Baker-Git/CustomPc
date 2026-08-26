@@ -147,7 +147,7 @@ export default function PerformanceScreen() {
       <header className={`mb-4 rounded-xl ${ELEV_GROUP} p-4 sm:p-5`}>
         <h2 className="text-lg text-ink">Performance</h2>
         <p className="mt-1 max-w-[80ch] text-xs text-muted leading-relaxed">
-          How this build behaves under load — what it draws, what it can shed, and
+          How this build behaves under load: what it draws, what it can shed, and
           what it renders. Everything except the frame rates is computed from the
           parts themselves.
         </p>
@@ -161,7 +161,7 @@ export default function PerformanceScreen() {
 
       <Section
         title="Frame rates"
-        blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like — open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."
+        blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like. Open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."
         action={hasCore ? <ResolutionPicker value={resolution} onChange={setResolution} /> : null}
       >
         {!hasCore ? (
@@ -299,7 +299,7 @@ export default function PerformanceScreen() {
         <StatPanel
           title="Power"
           subtitle={hasCore
-            ? 'Gaming draw is weighted by which part is setting the pace — a CPU-limited frame leaves the graphics card waiting, and a waiting card draws less.'
+            ? 'Gaming draw is weighted by which part is setting the pace: a CPU-limited frame leaves the graphics card waiting, and a waiting card draws less.'
             : 'Add a CPU and graphics card for a load-weighted figure.'}
           footnote="Estimated from each part's rated draw. Real consumption varies with the game, the settings and the silicon."
         >
@@ -315,7 +315,7 @@ export default function PerformanceScreen() {
           title="Power supply"
           designator="ATX_PWR"
           subtitle={power.psuWattage
-            ? 'Headroom matters less for average draw than for the split-second spikes a graphics card pulls — those are what trip a supply into shutting down.'
+            ? 'Headroom matters less for average draw than for the split-second spikes a graphics card pulls, and those are what trip a supply into shutting down.'
             : 'No power supply selected yet.'}
         >
           <StatRow label="Fitted" value={power.psuWattage} unit="W" />
@@ -337,7 +337,7 @@ export default function PerformanceScreen() {
           designator="CPU_FAN"
           subtitle={thermals.headroomPct == null
             ? 'Needs a CPU and a cooler with a known size.'
-            : 'Nothing gets damaged when a cooler is undersized — the CPU drops its clocks to stay in range, so you lose boost speed during long loads and gain fan noise.'}
+            : 'Nothing gets damaged when a cooler is undersized: the CPU drops its clocks to stay in range, so you lose boost speed during long loads and gain fan noise.'}
         >
           <StatRow label="CPU heat output" value={thermals.cpuTdp} unit="W" />
           <StatRow label="Cooler capacity" value={thermals.capacityW} unit="W" />
@@ -362,7 +362,7 @@ export default function PerformanceScreen() {
           title="Memory"
           designator="DIMM_A2"
           subtitle={memory
-            ? 'Memory speed and channel count act on the CPU side of a frame — they show up in the 1% lows more than the average.'
+            ? 'Memory speed and channel count act on the CPU side of a frame, so they show up in the 1% lows more than the average.'
             : 'No memory selected yet.'}
         >
           <StatRow label="Capacity" value={memory?.capacityGb ? capacity(memory.capacityGb) : null} />
@@ -395,8 +395,8 @@ export default function PerformanceScreen() {
               // than merely caveated. The spread is quoted because the correction
               // is an average over cards that do not all agree — on some
               // architectures it is wide enough to matter.
-              ? `Calibrated across architectures from ${gpuCap.archParts} measured ${gpuCap.architecture} cards, so this is comparable with a rival brand. The correction (x${gpuCap.archEfficiency}) is a fitted average and those cards spread ${gpuCap.archSpreadPct}% around it — read a gap narrower than that as noise, not a ranking.`
-              : `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures — ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things. Fewer than three ${gpuCap.architecture} cards have been measured, so comparing this figure with a rival brand still needs data we do not have.`}
+              ? `Calibrated across architectures from ${gpuCap.archParts} measured ${gpuCap.architecture} cards, so this is comparable with a rival brand. The correction (x${gpuCap.archEfficiency}) is a fitted average and those cards spread ${gpuCap.archSpreadPct}% around it, so read a gap narrower than that as noise, not a ranking.`
+              : `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures: ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things. Fewer than three ${gpuCap.architecture} cards have been measured, so comparing this figure with a rival brand still needs data we do not have.`}
         >
           <StatRow label="Capability index" value={gpuCap.index}
                    hint={gpuCap.archCalibrated ? 'comparable across brands' : gpuCap.architecture ? `vs other ${gpuCap.architecture} cards` : undefined} />
@@ -415,7 +415,7 @@ export default function PerformanceScreen() {
             ? 'Clock leads, cores saturate at eight because games cannot use more, and cache counts for more than its size suggests.'
             : 'No published specifications transcribed for this processor yet.'}
           footnote={cpuCap.cacheBasis === 'single-sourced'
-            ? 'The cache figure comes from a single source with nothing to corroborate it — unlike the boost clock, which matches the catalogue independently.'
+            ? 'The cache figure comes from a single source with nothing to corroborate it, unlike the boost clock, which matches the catalogue independently.'
             : undefined}
         >
           <StatRow label="Capability index" value={cpuCap.index} />
@@ -427,7 +427,7 @@ export default function PerformanceScreen() {
               say which this is rather than look like a typo. */}
           <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB"
                    hint={cpuCap.l3PackageMb > cpuCap.l3Mb
-                     ? `per chiplet, of ${cpuCap.l3PackageMb} MB total — L3 is not shared between chiplets`
+                     ? `per chiplet, of ${cpuCap.l3PackageMb} MB total, and L3 is not shared between chiplets`
                      : undefined} />
         </StatPanel>
       </div>

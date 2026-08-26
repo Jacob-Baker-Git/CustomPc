@@ -82,7 +82,7 @@ export function partSynergy(parts, category, useCase) {
         ? `Sets the pace for the ${parts.gpu?.name ?? 'GPU'}`
         : `Waiting on the ${parts.cpu?.name ?? 'CPU'}`
       detail = category === 'cpu'
-        ? `At ${res} the ${parts.gpu?.name ?? 'graphics card'} can draw frames faster than this CPU can prepare them, so in busy scenes you lose frames the card could otherwise deliver. Nothing is broken — a quicker CPU is simply where the next gain is.`
+        ? `At ${res} the ${parts.gpu?.name ?? 'graphics card'} can draw frames faster than this CPU can prepare them, so in busy scenes you lose frames the card could otherwise deliver. Nothing is broken: a quicker CPU is simply where the next gain is.`
         : `At ${res} this card has capacity to spare and the ${parts.cpu?.name ?? 'CPU'} decides the frame rate. The card is not the part to change here; a stronger CPU is what unlocks it.`
     }
     if (category === 'gpu' && typeof part.specs?.vram === 'number' && needs.vram) {
@@ -102,7 +102,7 @@ export function partSynergy(parts, category, useCase) {
     if (b >= 100) return { balance: b, reason: null, detail: null }
     return {
       balance: b,
-      reason: `${part.capacityGb}GB — ${label} is happier with ${needs.ramGb}GB+`,
+      reason: `${part.capacityGb}GB, and ${label} is happier with ${needs.ramGb}GB+`,
       detail: `${part.capacityGb}GB is enough to run things, but ${label} tends to fill it. Once memory is full the machine falls back on the drive, and that swap is what makes a fast PC feel like it is pausing. Adding a second kit is usually the cheapest fix in the build.`,
     }
   }
@@ -119,10 +119,10 @@ export function partSynergy(parts, category, useCase) {
       reason = 'A slower drive than the rest of the build deserves'
       detail = /HDD/i.test(type)
         ? `This is a spinning hard disk. Capacity per pound is unbeatable, but loading, booting and scrubbing through files wait on the drive rather than the CPU or GPU. Pairing it with even a small NVMe SSD for the system and current projects is the single most noticeable upgrade most builds can make.`
-        : `This is a SATA SSD — quick, but roughly a quarter the throughput of an NVMe drive on the same motherboard. The difference shows up in large file copies and load times rather than day-to-day use.`
+        : `This is a SATA SSD: quick, but roughly a quarter the throughput of an NVMe drive on the same motherboard. The difference shows up in large file copies and load times rather than day-to-day use.`
     } else if (capB < 100) {
       reason = `${capacity(part.capacityGb)} fills up quickly for ${label}`
-      detail = `${label} wants room for ${capacity(needs.storageGb)}+ of installs and files. At ${capacity(part.capacityGb)} you will be uninstalling one thing to make room for the next — a chore rather than a fault, and one a second drive fixes later without replacing anything.`
+      detail = `${label} wants room for ${capacity(needs.storageGb)}+ of installs and files. At ${capacity(part.capacityGb)} you will be uninstalling one thing to make room for the next: a chore rather than a fault, and one a second drive fixes later without replacing anything.`
     }
     return { balance, reason, detail }
   }
@@ -149,7 +149,7 @@ export function partSynergy(parts, category, useCase) {
     return {
       balance: b,
       reason: `Working hard against a ${tdp}W CPU`,
-      detail: `The ${parts.cpu?.name ?? 'CPU'} sheds around ${tdp}W under load and this cooler is good for roughly ${cap}W. Nothing gets damaged — the CPU simply drops its clocks to stay in range — but you lose some of the boost speed you paid for during long renders or compiles, and the fans get louder getting there.`,
+      detail: `The ${parts.cpu?.name ?? 'CPU'} sheds around ${tdp}W under load and this cooler is good for roughly ${cap}W. Nothing gets damaged: the CPU simply drops its clocks to stay in range, but you lose some of the boost speed you paid for during long renders or compiles, and the fans get louder getting there.`,
     }
   }
 

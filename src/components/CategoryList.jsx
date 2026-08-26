@@ -2,12 +2,13 @@ import { CATEGORIES } from '../lib/categories'
 import CategoryIcon from '../lib/categoryIcons'
 import { RECOMMENDED_ORDER, nextRecommended, isOptional } from '../lib/recommendedOrder'
 import PartSlot from './PartSlot'
+import PartThumb from './art/PartThumb'
 
 const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
   .filter(Boolean)
 
-const OPTIONAL_NOTE = 'Optional — most coolers ship with paste applied'
+const OPTIONAL_NOTE = 'Optional: most coolers ship with paste applied'
 
 // Hovering a row used to highlight the matching part in the 3D view. That
 // highlight was removed, and these handlers went with it rather than being left
@@ -42,14 +43,18 @@ export default function CategoryList({
               category={cat.id}
               label={cat.label}
               part={part}
-              icon={<CategoryIcon id={cat.id} className="text-muted" />}
+              // A seated slot shows the PART, so it gets the drawing. An empty
+              // one below keeps the category icon, because there is nothing yet
+              // to draw and a picture of a generic GPU in an empty GPU slot
+              // would read as though something were already in it.
+              icon={<PartThumb category={cat.id} seed={part.id} size="sm" />}
               onClick={() => onSelectCategory(cat.id)}
               onRemove={() => onDeselect(cat.id)}
             />
           )
         }
 
-        // Three empty shapes: a real hole (red), the one to do next (copper —
+        // Three empty shapes: a real hole (red), the one to do next (brass —
         // it is a prompt to ACT, not a selection, so it takes the action metal
         // rather than gold), and a deliberately empty optional slot (neutral,
         // explained).
@@ -74,7 +79,7 @@ export default function CategoryList({
             icon={
               <CategoryIcon
                 id={cat.id}
-                className={flagged ? 'text-bad' : isNext && !explained ? 'text-copper' : 'text-muted'}
+                className={flagged ? 'text-bad' : isNext && !explained ? 'text-brass' : 'text-muted'}
               />
             }
             // Shrinkable, and NOT shrink-0: the note is the least important
@@ -94,7 +99,7 @@ export default function CategoryList({
                 )}
                 {flagged && <span className="shrink-0 text-[11px] font-semibold text-bad">Missing</span>}
                 {isNext && (
-                  <span className="shrink-0 rounded-full bg-copper px-2 py-0.5 text-[10px] font-semibold text-accent-ink">
+                  <span className="shrink-0 rounded-full bg-brass px-2 py-0.5 text-[10px] font-semibold text-accent-ink">
                     Pick one
                   </span>
                 )}

@@ -58,7 +58,7 @@ export function memoryProfile(parts) {
   if (sticks === 1) {
     notes.push({
       severity: 'bad',
-      text: 'Single stick — running in single-channel mode',
+      text: 'Single stick, running in single-channel mode',
       detail: 'One stick gives the CPU about half the memory bandwidth two do. '
         + 'A second matching stick is usually the cheapest meaningful upgrade in a build, '
         + 'and it costs frames now rather than later.',
@@ -79,7 +79,7 @@ export function memoryProfile(parts) {
       severity: 'ok',
       text: `Above ${cap} the ${socket} memory controller decouples`,
       detail: `Rated ${speed}, but this platform stops gaining past roughly ${cap} and can `
-        + 'lose performance beyond it. Nothing is wrong — you simply paid for headroom the board will not use.',
+        + 'lose performance beyond it. Nothing is wrong: you simply paid for headroom the board will not use.',
     })
   }
 

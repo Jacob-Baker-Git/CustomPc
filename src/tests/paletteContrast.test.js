@@ -36,7 +36,7 @@ const BACKGROUNDS = ['ground', 'surface', 'surface-2', 'gold-soft']
 // signal trio are all used as text — none of them were covered before, and two
 // candidate values (true copper #B87333 at 4.00, and a redder error #D9453C at
 // 3.52) FAILED here and were changed because of it. That is what this is for.
-const TEXT = ['ink', 'muted', 'faint', 'accent', 'copper', 'gold', 'tech', 'good', 'ok', 'bad']
+const TEXT = ['ink', 'muted', 'faint', 'accent', 'brass', 'gold', 'tech', 'good', 'ok', 'bad']
 
 const AA_BODY = 4.5
 

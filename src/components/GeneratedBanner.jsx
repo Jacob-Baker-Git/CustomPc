@@ -37,7 +37,7 @@ export default function GeneratedBanner() {
       {leftover > 20 && (
         <button
           onClick={spendLeftover}
-          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-copper hover:brightness-110 text-accent-ink font-semibold transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-brass hover:brightness-110 text-accent-ink font-semibold transition-colors"
         >
           <Zap size={12} aria-hidden="true" /> Spend the leftover
         </button>

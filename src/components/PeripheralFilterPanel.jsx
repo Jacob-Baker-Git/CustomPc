@@ -76,7 +76,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
                 aria-label="Minimum price"
                 value={draft.priceMin}
                 onChange={(e) => set('priceMin', e.target.value)}
-                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-none focus:border-copper"
+                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-none focus:border-brass"
               />
               <span className="text-xs text-faint">to</span>
               <input
@@ -84,7 +84,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
                 aria-label="Maximum price"
                 value={draft.priceMax}
                 onChange={(e) => set('priceMax', e.target.value)}
-                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-none focus:border-copper"
+                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-none focus:border-brass"
               />
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
           <button
             type="button"
             onClick={() => onApply(draft)}
-            className="text-xs px-4 py-2 rounded-lg bg-copper hover:brightness-110 text-accent-ink font-semibold transition-colors"
+            className="text-xs px-4 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink font-semibold transition-colors"
           >
             Apply
           </button>

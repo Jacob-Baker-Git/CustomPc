@@ -39,10 +39,10 @@ export const PANEL_STRONG = 'bg-surface-2 border border-line-strong rounded-xl'
 export const TELEMETRY = 'font-mono tabular-nums whitespace-nowrap'
 
 // Flat primary action — one metal, dark ink on top, no gradients or glows.
-// Copper is the ACTION metal. Not the brand orange: that is the wordmark's
+// Brass is the ACTION metal. Not the brand orange: that is the wordmark's
 // alone, which is what keeps it reading as identity rather than as one more UI
 // accent. See accentIsBrandOnly.test.js.
-export const BTN_PRIMARY = 'bg-copper hover:brightness-110 text-accent-ink font-semibold'
+export const BTN_PRIMARY = 'bg-brass hover:brightness-110 text-accent-ink font-semibold'
 
 // ---------------------------------------------------------------------------
 // The elevation scale
@@ -74,7 +74,7 @@ export const ELEV_ACTIVE = 'bg-surface-2'
 
 // A 2px gold rail down the leading edge, marking the ACTIVE thing — the open
 // genre, the open row. Gold is the SEATED metal, so the rail says "this is the
-// one you are looking at" rather than "you may click this"; copper would say the
+// one you are looking at" rather than "you may click this"; brass would say the
 // latter, which is the confusion this rail was added to fix.
 //
 // An inset box-shadow rather than `border-l-2`: a border changes the box and

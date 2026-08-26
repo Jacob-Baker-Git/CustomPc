@@ -94,7 +94,7 @@ describe('FrameRateTable', () => {
       { gameId: 'y', name: 'Yankee', presets: ['Ultra'] },
       { gameId: 'z', name: 'Zulu', presets: ['Ultra', 'High'] },
     ]} />)
-    expect(screen.getByText(/no benchmark data yet — 3 games/i)).toBeInTheDocument()
+    expect(screen.getByText(/no benchmark data yet: 3 games/i)).toBeInTheDocument()
   })
 
   it('renders no uncovered section when everything is covered', () => {

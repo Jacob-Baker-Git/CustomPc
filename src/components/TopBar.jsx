@@ -61,14 +61,14 @@ export default function TopBar({ view, onViewChange }) {
               onChange={(e) => setDraft(e.target.value)}
               onBlur={commit}
               onKeyDown={(e) => { if (e.key === 'Enter') commit() }}
-              className="w-24 bg-surface-2 text-ink font-mono tabular-nums px-2 py-0.5 rounded-lg border border-copper focus:outline-none"
+              className="w-24 bg-surface-2 text-ink font-mono tabular-nums px-2 py-0.5 rounded-lg border border-brass focus:outline-none"
             />
           </span>
         ) : (
           <button
             onClick={startEdit}
             title="Click to edit your budget"
-            className="text-ink font-mono tabular-nums font-semibold hover:text-copper border-b border-dashed border-line-strong hover:border-copper transition-colors"
+            className="text-ink font-mono tabular-nums font-semibold hover:text-brass border-b border-dashed border-line-strong hover:border-brass transition-colors"
           >
             £{budget.toFixed(0)}
           </button>
@@ -102,7 +102,7 @@ export default function TopBar({ view, onViewChange }) {
         <ViewTabs view={view} onChange={onViewChange} />
       </div>
       <div className="flex items-center gap-3 md:gap-4 lg:flex-1 lg:justify-end">
-        <a href="/feedback" className="text-xs text-muted hover:text-copper transition-colors">Feedback</a>
+        <a href="/feedback" className="text-xs text-muted hover:text-brass transition-colors">Feedback</a>
         {/* `wide` (1300px), not xl (1280px), and the difference is measured
             rather than taste. With the duplicated budget and wattage still in the
             header this needed 1403px of content; without them it needs 1249, or

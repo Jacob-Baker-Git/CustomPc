@@ -118,7 +118,7 @@ function adequacyNote(category, level, expected, label) {
     reason: have === want
       ? `A little under what ${label} asks for here`
       : `${have.charAt(0).toUpperCase()}${have.slice(1)} where ${label} leans ${want}`,
-    detail: `${label} builds usually sit around ${want} for this part; this one is ${have}. That is a difference of degree rather than a fault — everything works, there is just less room before this is the part asking you to turn something down. On a fixed budget it is often the right thing to leave alone until the parts above it are settled.`,
+    detail: `${label} builds usually sit around ${want} for this part; this one is ${have}. That is a difference of degree rather than a fault: everything works, there is just less room before this is the part asking you to turn something down. On a fixed budget it is often the right thing to leave alone until the parts above it are settled.`,
   }
 }
 
@@ -130,7 +130,7 @@ function tierBalance(level, buildLevel) {
   return {
     balance,
     reason: 'Modest next to the rest of this build',
-    detail: `Most of this build sits around ${tierWord(buildLevel)}; this part is ${tierWord(level)}. Nothing stops working over it — in this category the gap is usually airflow, features and finish rather than raw speed — but it is where the build will start to feel uneven, and it is normally the cheapest thing on the list to put right.`,
+    detail: `Most of this build sits around ${tierWord(buildLevel)}; this part is ${tierWord(level)}. Nothing stops working over it. In this category the gap is usually airflow, features and finish rather than raw speed, but it is where the build will start to feel uneven, and it is normally the cheapest thing on the list to put right.`,
   }
 }
 

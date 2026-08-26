@@ -44,7 +44,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         type="button"
         onClick={onToggle}
         title={isSelected ? 'Click to deselect' : 'Click to select'}
-        className="text-left flex flex-col cursor-pointer focus-visible:outline-copper"
+        className="text-left flex flex-col cursor-pointer focus-visible:outline-brass"
       >
         <div className="text-sm font-semibold text-ink leading-tight pr-14">{p.name}</div>
         <div className={`${TELEMETRY} font-bold text-tech mt-1`}>£{p.price.toFixed(2)}</div>
@@ -55,7 +55,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         aria-label={`More info about ${p.name}`}
         aria-expanded={showInfo}
         onClick={() => setShowInfo((v) => !v)}
-        className="self-start text-[11px] text-muted hover:text-copper border border-line hover:border-copper rounded-lg px-2 py-0.5 transition-colors"
+        className="self-start text-[11px] text-muted hover:text-brass border border-line hover:border-brass rounded-lg px-2 py-0.5 transition-colors"
       >
         {showInfo ? 'Hide info' : 'Info'}
       </button>
@@ -115,7 +115,7 @@ export default function PeripheralsPanel() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div>
               <h2 className="font-display text-xl font-bold text-ink">Peripherals</h2>
-              <p className="text-xs text-muted mt-0.5">Optional — they are counted separately from the build budget.</p>
+              <p className="text-xs text-muted mt-0.5">Optional: they are counted separately from the build budget.</p>
             </div>
             <div className="ml-auto flex items-center gap-6">
               <div className="text-right">
@@ -139,13 +139,13 @@ export default function PeripheralsPanel() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search peripherals…"
             aria-label="Search peripherals by name or brand"
-            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-copper"
+            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
             aria-label="Sort peripherals"
-            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-copper"
+            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
           >
             {Object.entries(SORTS).map(([id, s]) => <option key={id} value={id}>{s.label}</option>)}
           </select>
@@ -191,7 +191,7 @@ export default function PeripheralsPanel() {
                     without one its label, blurb and count sit on bare board.
                     e2e/builderLegibility.spec.js counted three of them here. */}
                 <div className="flex items-baseline gap-2 mb-3 rounded-lg bg-surface px-3 py-2">
-                  <Icon size={15} className="text-copper shrink-0 self-center" aria-hidden="true" />
+                  <Icon size={15} className="text-brass shrink-0 self-center" aria-hidden="true" />
                   <h3 className="text-sm font-semibold text-ink">{label}</h3>
                   <span className="text-[11px] text-faint hidden sm:inline">{blurb}</span>
                   <span className="ml-auto text-[11px] text-muted">
@@ -202,7 +202,7 @@ export default function PeripheralsPanel() {
                 </div>
                 {shown.length === 0 ? (
                   <p className="text-xs text-muted">
-                    Nothing matches here. <button onClick={clearAll} className="text-copper hover:underline">Clear filters</button>
+                    Nothing matches here. <button onClick={clearAll} className="text-brass hover:underline">Clear filters</button>
                   </p>
                 ) : (
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">

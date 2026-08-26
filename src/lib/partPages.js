@@ -72,7 +72,7 @@ function specPhrase(part) {
 // catalogueCompatibility.test.js), so building from it guarantees uniqueness.
 export function partPageMeta(part) {
   const noun = CATEGORY_NOUN[part.category] ?? 'part'
-  const title = `${part.name} — Specs, Price & Compatibility | Custom PC Builder`
+  const title = `${part.name} | Specs, Price & Compatibility | Custom PC Builder`
   const specs = specPhrase(part)
   // "estimate", always. Prices here are curated estimates, and the terms page
   // says so — a generated page repeated 544 times is the last place to imply a
@@ -108,7 +108,7 @@ export function compatibilityNotes(part, parts = []) {
       const boards = of(parts, 'motherboard').filter((b) => b.socket === part.socket)
       const memory = [...new Set(boards.map((b) => b.ramType))].filter(Boolean)
       const coolers = of(parts, 'cooler').filter((c) => (c.sockets ?? []).includes(part.socket))
-      add('Motherboard', `Needs the ${part.socket} socket — ${count(boards.length, 'board')} in the catalogue have it.`)
+      add('Motherboard', `Needs the ${part.socket} socket, and ${count(boards.length, 'board')} in the catalogue have it.`)
       if (memory.length) add('Memory', `Those boards take ${memory.join(' or ')}.`)
       add('Cooling', `Draws ${part.tdp} W. ${count(coolers.length, 'cooler')} list ${part.socket} support.`)
       break
@@ -117,7 +117,7 @@ export function compatibilityNotes(part, parts = []) {
     case 'gpu': {
       const cases = of(parts, 'case')
       const fits = cases.filter((c) => (c.maxGpuLength ?? 0) >= part.length)
-      add('Case clearance', `${part.length} mm long — fits ${fits.length} of ${cases.length} cases.`)
+      add('Case clearance', `${part.length} mm long, so it fits ${fits.length} of ${cases.length} cases.`)
       add('Power supply', `Draws ${part.tdp} W; allow about ${psuFor(part.tdp)} W for the whole build.`)
       if (s.vram) add('Memory', `${s.vram} GB of ${s.memType ?? 'video memory'}.`)
       break
@@ -127,15 +127,15 @@ export function compatibilityNotes(part, parts = []) {
       const cpus = of(parts, 'cpu').filter((c) => c.socket === part.socket)
       const memory = of(parts, 'ram').filter((r) => r.ramType === part.ramType)
       const cases = of(parts, 'case').filter((c) => (c.supportedFormFactors ?? []).includes(part.formFactor))
-      add('Processors', `${part.socket} socket — ${count(cpus.length, 'processor')} in the catalogue fit.`)
+      add('Processors', `${part.socket} socket, and ${count(cpus.length, 'processor')} in the catalogue fit.`)
       add('Memory', `Takes ${part.ramType}; ${count(memory.length, 'kit')} match.`)
-      add('Case', `${part.formFactor} board — ${count(cases.length, 'case')} take that size.`)
+      add('Case', `${part.formFactor} board, and ${count(cases.length, 'case')} take that size.`)
       break
     }
 
     case 'ram': {
       const boards = of(parts, 'motherboard').filter((b) => b.ramType === part.ramType)
-      add('Motherboard', `${part.ramType} — ${count(boards.length, 'board')} accept it.`)
+      add('Motherboard', `${part.ramType}, and ${count(boards.length, 'board')} accept it.`)
       add('Capacity', `${part.capacityGb} GB${s.sticks ? ` across ${count(s.sticks, 'stick')}` : ''} at ${part.speed} MT/s.`)
       break
     }
@@ -143,7 +143,7 @@ export function compatibilityNotes(part, parts = []) {
     case 'storage': {
       const boards = of(parts, 'motherboard').length
       add('Motherboard', part.storageType === 'NVMe'
-        ? `An M.2 NVMe drive — every one of the ${boards} boards here has a slot for it.`
+        ? `An M.2 NVMe drive, and every one of the ${boards} boards here has a slot for it.`
         : `A ${part.storageType} drive, connected by cable rather than an M.2 slot.`)
       add('Capacity', `${part.capacityGb} GB${s.readMbps ? `, reading up to ${s.readMbps} MB/s` : ''}.`)
       break
@@ -173,7 +173,7 @@ export function compatibilityNotes(part, parts = []) {
         }
         covered += lo
       }
-      add('Capacity', `${part.wattage} W — enough for ${covered} of the ${cpus.length * gpus.length} processor and graphics pairings here.`)
+      add('Capacity', `${part.wattage} W, enough for ${covered} of the ${cpus.length * gpus.length} processor and graphics pairings here.`)
       if (s.rating) add('Efficiency', `${s.rating}, so less of what it draws is wasted as heat.`)
       break
     }
@@ -184,8 +184,8 @@ export function compatibilityNotes(part, parts = []) {
       const cardFits = gpus.filter((g) => g.length <= (part.maxGpuLength ?? 0)).length
       const coolerFits = coolers.filter((c) => (c.specs?.height ?? 0) <= (part.maxCoolerHeight ?? 0)).length
       add('Motherboards', `Takes ${(part.supportedFormFactors ?? []).join(', ')} boards.`)
-      add('Graphics cards', `Up to ${part.maxGpuLength} mm — ${cardFits} of ${gpus.length} cards fit.`)
-      add('Cooling', `Air coolers up to ${part.maxCoolerHeight} mm — ${coolerFits} of ${coolers.length} fit.`)
+      add('Graphics cards', `Up to ${part.maxGpuLength} mm, so ${cardFits} of ${gpus.length} cards fit.`)
+      add('Cooling', `Air coolers up to ${part.maxCoolerHeight} mm, so ${coolerFits} of ${coolers.length} fit.`)
       break
     }
 
@@ -198,18 +198,18 @@ export function compatibilityNotes(part, parts = []) {
       if (capacity) {
         const cpus = of(parts, 'cpu')
         const handled = cpus.filter((c) => c.tdp <= capacity).length
-        add('Capacity', `Around ${capacity} W of heat — comfortable with ${handled} of the ${cpus.length} processors here.`)
+        add('Capacity', `Around ${capacity} W of heat, comfortable with ${handled} of the ${cpus.length} processors here.`)
       }
       add('Case clearance', s.type === 'AIO'
         ? `A ${s.radiator ?? ''} radiator needs a case with matching mounts.`.replace('  ', ' ')
-        : `${height} mm tall — ${caseFits} of ${cases.length} cases have the clearance.`)
+        : `${height} mm tall, so ${caseFits} of ${cases.length} cases have the clearance.`)
       break
     }
 
     case 'fans': {
       const area = partStats(part).find((x) => x.label === 'Total airflow area')?.value
       add('Fitment', `${count(s.count ?? 1, 'fan')} at ${s.size ?? 'standard size'}.`)
-      if (area) add('Airflow', `${area} cm² of swept area in total — area, not diameter, is what moves air.`)
+      if (area) add('Airflow', `${area} cm² of swept area in total. Area, not diameter, is what moves air.`)
       break
     }
 
@@ -218,7 +218,7 @@ export function compatibilityNotes(part, parts = []) {
   }
 
   if (part.legacy) {
-    add('Availability', 'Discontinued — still worth knowing if you own one, but it is not recommended for a new build.')
+    add('Availability', 'Discontinued, but still worth knowing if you own one, but it is not recommended for a new build.')
   }
 
   return notes

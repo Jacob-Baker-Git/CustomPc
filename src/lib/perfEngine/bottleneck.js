@@ -65,7 +65,7 @@ function nextUpgrade(leaning, usable) {
     category: 'gpu',
     reason: wasted.length >= usable.length / 2
       ? 'The graphics card is the limit almost everywhere and the processor has plenty '
-        + 'left over. That is the normal, healthy arrangement — and it means a card '
+        + 'left over. That is the normal, healthy arrangement, and it means a card '
         + 'upgrade would translate almost directly into frames.'
       : 'The graphics card leads, which is what you want. A card upgrade is where extra '
         + 'money buys the most, though the processor will start to catch up.',
@@ -74,10 +74,10 @@ function nextUpgrade(leaning, usable) {
 
 function verdictFor(leaning, cpuLed, gpuLed, total) {
   if (leaning === 'cpu') {
-    return `Processor-limited in ${cpuLed} of ${total} games — the graphics card has capacity going unused.`
+    return `Processor-limited in ${cpuLed} of ${total} games, so the graphics card has capacity going unused.`
   }
   if (leaning === 'gpu') {
     return `Graphics-limited in ${gpuLed} of ${total} games, which is the healthy arrangement: the card is the part doing the work.`
   }
-  return `Well matched — neither part dominates across ${total} games.`
+  return `Well matched: neither part dominates across ${total} games.`
 }

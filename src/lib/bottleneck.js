@@ -32,9 +32,9 @@ export function computeBottleneck(cpu, gpu, resolution) {
   if (limitedBy === 'none') {
     verdict = `Well matched for ${label}`
   } else if (limitedBy === 'cpu') {
-    verdict = `CPU bottleneck at ${label} — the GPU could render ~${gpuFps} fps but the CPU caps it near ~${cpuFps}`
+    verdict = `CPU bottleneck at ${label}: the GPU could render ~${gpuFps} fps but the CPU caps it near ~${cpuFps}`
   } else {
-    verdict = `GPU-bound at ${label} — ~${gpuFps} fps with ~${cpuFps} of CPU headroom. Normal at higher resolutions; drop settings or resolution for more frames`
+    verdict = `GPU-bound at ${label}: ~${gpuFps} fps with ~${cpuFps} of CPU headroom. Normal at higher resolutions; drop settings or resolution for more frames`
   }
 
   return { balancePct, limitedBy, verdict, cpuFps, gpuFps }

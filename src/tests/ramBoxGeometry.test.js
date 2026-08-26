@@ -1,5 +1,14 @@
 import { describe, it, expect } from 'vitest'
-import { BLADES, RAKE_DEG, FIN_ROW_HEIGHT, CONTACT_HEIGHT, bladeStyle } from '../lib/ramBoxGeometry'
+import {
+  BLADES,
+  RAKE_DEG,
+  FIN_ROW_HEIGHT,
+  CONTACT_HEIGHT,
+  BODY_LIP_END,
+  CONTENT_TOP,
+  CONTENT_TOP_DESIGNATOR,
+  bladeStyle,
+} from '../lib/ramBoxGeometry'
 
 describe('ramBoxGeometry', () => {
   it('carries five blades in two opposed banks', () => {
@@ -39,5 +48,21 @@ describe('ramBoxGeometry', () => {
   it('holds fins and contacts at a fixed height', () => {
     expect(FIN_ROW_HEIGHT).toBe(18)
     expect(CONTACT_HEIGHT).toBe(13)
+  })
+
+  // The straddle guard. A heading sitting half on the lip and half on the field
+  // is exactly what these two numbers exist to prevent, and the RELATIONSHIP
+  // between them is the whole mechanism — neither figure means anything alone.
+  // Measured in a browser before the fix: the score heading ran 21px–41px down
+  // the face against a lip that stopped at 26px.
+  it('ends the heatspreader lip above where content starts', () => {
+    expect(BODY_LIP_END).toBeLessThan(CONTENT_TOP)
+    expect(BODY_LIP_END).toBeLessThan(CONTENT_TOP_DESIGNATOR)
+  })
+
+  // The lit bar occupies 8px–17px down the face at z-[4], above content at
+  // z-[2]. Content starting any higher is painted straight through.
+  it('starts content clear of the lit bar', () => {
+    expect(CONTENT_TOP).toBeGreaterThanOrEqual(17)
   })
 })

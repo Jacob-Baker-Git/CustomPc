@@ -47,7 +47,7 @@ export const PRIVACY = {
     {
       heading: 'Building a PC collects nothing',
       body: [
-        'Your build — the parts you pick, your budget, your saved builds — is stored in your own browser using local storage. It is never transmitted to us and we cannot see it.',
+        'Your build, meaning the parts you pick, your budget and your saved builds, is stored in your own browser using local storage. It is never transmitted to us and we cannot see it.',
         'Clearing your browser data deletes it permanently. We hold no copy, so we cannot restore it for you.',
         'A share link encodes the build into the URL itself. Anyone you send it to can read that build, so treat a share link as public.',
       ],
@@ -64,21 +64,21 @@ export const PRIVACY = {
       heading: 'How long we keep it',
       body: [
         'Indefinitely, because there is nothing personal in it to expire. A stored row is a rating, a category, a message and the time it arrived.',
-        'There is no deletion schedule any more and no longer anything for one to delete. If that changes — if we ever start collecting something that identifies you — this page changes first.',
+        'There is no deletion schedule any more and no longer anything for one to delete. If that changes, and we ever start collecting something that identifies you, this page changes first.',
       ],
     },
     {
       heading: 'Where it is stored',
       body: [
         'Feedback is stored in a Supabase (PostgreSQL) database hosted in the European Union (Ireland).',
-        'It is not sold, shared, or used for marketing. We could not send you a newsletter if we wanted to — we do not have your address.',
+        'It is not sold, shared or used for marketing. We could not send you a newsletter if we wanted to, because we do not have your address.',
       ],
     },
     {
       heading: 'Who else sees a request',
       body: [
         'Fonts, 3D models and every other asset are served from this site’s own domain. There is no third-party CDN, no analytics and no advertising tracker, so nothing here follows you between sites.',
-        'Two companies do see a request, because they are what serves the site. Netlify hosts the pages. Supabase holds the parts catalogue, and every page fetches it on load — so opening anything here, this page included, sends your IP address to both. That is true of any hosted website; we say it because “no third parties” would be too strong a claim.',
+        'Two companies do see a request, because they are what serves the site. Netlify hosts the pages. Supabase holds the parts catalogue, and every page fetches it on load, so opening anything here, this page included, sends your IP address to both. That is true of any hosted website; we say it because “no third parties” would be too strong a claim.',
         'Neither request stores anything that identifies you in our own data. Both companies keep operational logs of their own, as every host does, under their own policies.',
         'Links out to retailers are ordinary links. Nothing is sent to them until you choose to click, and once you do you are on their site under their privacy policy, not ours.',
       ],
@@ -87,7 +87,7 @@ export const PRIVACY = {
       heading: 'Lawful basis',
       body: [
         'We hold no personal data, so for the most part UK GDPR has nothing to attach to. There are no accounts, no cookies, no analytics and no contact details, and we keep no logs of our own. What our host and our database provider record in serving the page is covered above.',
-        'The one exception is anything you choose to type into a feedback message. Where that happens we rely on legitimate interests — reading feedback in order to improve the site — and you can ask us to erase it.',
+        'The one exception is anything you choose to type into a feedback message. Where that happens we rely on legitimate interests, reading feedback in order to improve the site, and you can ask us to erase it.',
       ],
     },
     {
@@ -116,7 +116,7 @@ export const TERMS = {
     {
       heading: 'Compatibility checks are a help, not a guarantee',
       body: [
-        'The compatibility and physical-fit checks catch common mistakes — a mismatched socket, RAM of the wrong generation, a cooler too tall for the case, a power supply with too little headroom.',
+        'The compatibility and physical-fit checks catch common mistakes: a mismatched socket, RAM of the wrong generation, a cooler too tall for the case, a power supply with too little headroom.',
         'They cannot catch everything. Manufacturers revise products, specifications vary between regional models, and some incompatibilities only appear in specific combinations.',
         'Always confirm against the manufacturers’ own specifications before you buy. Do not treat a green tick here as the final word.',
       ],
@@ -130,7 +130,7 @@ export const TERMS = {
     {
       heading: 'Links to retailers',
       body: [
-        'The links to retailers are ordinary links. We are not an affiliate of any shop, we earn no commission, and nothing we recommend is influenced by what anyone pays us — because nobody does.',
+        'The links to retailers are ordinary links. We are not an affiliate of any shop, we earn no commission and nothing we recommend is influenced by what anyone pays us, because nobody does.',
         'We are not a retailer either. You cannot buy anything here, we hold no stock, and we are not party to any purchase you make elsewhere. Your contract, your consumer rights, your warranty and your returns are all with whoever you buy from.',
       ],
     },
@@ -140,6 +140,24 @@ export const TERMS = {
         'The site is provided without warranties of any kind, express or implied, including fitness for a particular purpose.',
         'To the extent the law allows, we are not liable for money spent on parts, for hardware that turns out to be incompatible or underperforming, or for any other loss arising from relying on this site. Nothing here excludes liability that cannot legally be excluded.',
         'This is general information, not professional advice.',
+      ],
+    },
+    // No UK or EU rule requires a site to declare that its code was written
+    // with AI assistance, so this section is not here to satisfy a statute.
+    //
+    // It is here because the site already promises to be honest about how
+    // confident its numbers are, and the answer to "who worked out that
+    // number" is part of that. The EU AI Act's transparency duties are about
+    // systems that interact with people or pass synthetic content off as
+    // genuine, neither of which describes this; saying so plainly is better
+    // than either staying quiet or implying a compliance obligation that does
+    // not exist.
+    {
+      heading: 'How this site was built',
+      body: [
+        'This site was built with substantial help from AI coding assistants. They wrote a large share of the code, and the wording on these pages was drafted with them too.',
+        'The parts catalogue, the scoring rules and the performance model were assembled and checked by a person. Where a figure is an estimate rather than a measurement, the page it appears on says so.',
+        'Nothing on this site is generated live by an AI model. There is no chatbot here, no text is written for you on the fly, and nothing you type is sent to an AI service. The estimates come from fixed rules and stored data that ship with the page.',
       ],
     },
     {
