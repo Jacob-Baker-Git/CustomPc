@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { BLADES, FIN_ROW_HEIGHT, CONTACT_HEIGHT, bladeStyle } from '../lib/ramBoxGeometry'
+import { BLADES, FIN_ROW_HEIGHT, CONTACT_HEIGHT, BODY_LIP_END, bladeStyle } from '../lib/ramBoxGeometry'
 
 // A panel drawn as the DIMM it stands for.
 //
@@ -13,8 +13,21 @@ import { BLADES, FIN_ROW_HEIGHT, CONTACT_HEIGHT, bladeStyle } from '../lib/ramBo
 // compose an opacity modifier onto one — `bg-gold/60` emits no CSS at all and
 // tokenOpacity.test.js fails the build for it. Naming the var inside a gradient
 // sidesteps the whole trap.
-const BODY = 'linear-gradient(180deg,#2c323b 0 2px,#252a33 2px 26px,#1d2128 26px,#191c22)'
-const GRAIN = 'repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)'
+//
+// The face is a SOLID field under a thin top lip, and both halves of that are
+// deliberate.
+//
+// The lip stops at BODY_LIP_END (18px) rather than the 26px it used to, because
+// content starts at 20px and text must sit on one colour — see the note in
+// ramBoxGeometry.js for the measurement that forced it.
+//
+// Below the lip is one flat colour where a #1d2128→#191c22 ramp used to be, and
+// the brushed GRAIN that ran over the whole face is gone. That grain was a
+// repeating-linear-gradient painting a hairline every 3px, which at real size
+// stopped reading as anodising and started reading as a box drawn out of
+// stripes. The fine-line texture on this component now appears in exactly one
+// place, the contact fingers below, where the lines ARE the thing being drawn.
+const BODY = `linear-gradient(180deg,#2c323b 0 2px,#252a33 2px ${BODY_LIP_END}px,#1b1f26 ${BODY_LIP_END}px)`
 const BLADE = 'linear-gradient(180deg,#333a44 0 1px,#272d36 1px 40%,#1f242b)'
 const BLADE_EDGE = 'linear-gradient(90deg,#6d7683,#8992a0 40%,#4d545f)'
 const CAP_L = 'linear-gradient(90deg,#4a515c,#2b3038 40%,#22262D)'
@@ -203,7 +216,6 @@ export default function RamBox({
                 "the body never outgrows the stick" in e2e/ramBox.spec.js;
                 jsdom computes no layout and cannot see this. */}
             <div className="relative min-w-0 flex-1 border border-b-0 border-line-strong" style={{ backgroundImage: BODY }}>
-              <span aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ backgroundImage: GRAIN, opacity: 0.55 }} />
               <span
                 aria-hidden="true"
                 data-bar={seated ? 'lit' : 'dead'}
@@ -213,11 +225,18 @@ export default function RamBox({
                   boxShadow: seated ? '0 0 10px 1px rgba(201,168,107,.28)' : 'none',
                 }}
               />
-              {/* The lit bar is absolutely positioned at top-2 and is 9px tall,
+              {/* pt-5 = CONTENT_TOP (20px), pt-8 = CONTENT_TOP_DESIGNATOR (32px),
+                  and both figures are pinned in ramBoxGeometry.js because two
+                  separate things depend on them.
+
+                  The lit bar is absolutely positioned at top-2 and is 9px tall,
                   so it occupies 8–17px down the body. Content has to clear 17px
                   or the bar paints straight through it — it sits at z-[4] and
                   this at z-[2]. pt-3 did exactly that: measured 5px of overlap
-                  across the "Your parts" heading. pt-5 (20px) clears it.
+                  across the "Your parts" heading. pt-5 clears it.
+
+                  Content must ALSO start below BODY_LIP_END (18px), or headings
+                  straddle the lip boundary and sit on two colours at once.
                   Do not reduce this without measuring in a browser; jsdom
                   computes no layout and every unit test stayed green. */}
               <div className={`relative z-[2] px-4 pb-3 ${designator ? 'pt-8' : 'pt-5'}`}>

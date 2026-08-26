@@ -41,3 +41,27 @@ export function bladeStyle({ left, width, height, rake }) {
     transformOrigin: 'bottom left',
   }
 }
+
+// ---------------------------------------------------------------------------
+// The heatspreader face
+//
+// The body used to paint a lighter band from 2px down to 26px and then ramp
+// darker, with content starting at pt-5 (20px). That put every heading in a
+// designator-less box — "Your CustomPC score", "Your parts", "Build summary" —
+// astride the boundary: measured in the browser, the score heading occupied
+// 21px–41px against a 26px stop, so the top quarter of the glyphs sat on the
+// light band and the rest on the dark field. Text has to sit on ONE colour.
+//
+// So the lip now ends ABOVE where content begins, and the gap between the two
+// numbers is the whole point of naming them together.
+//
+// ⚠️ BODY_LIP_END must stay strictly below CONTENT_TOP. Raising one without the
+// other puts the straddle straight back, and jsdom computes no layout so no
+// component test can see it. ramBoxGeometry.test.js asserts the ordering, and
+// RamBox.test.jsx asserts the padding classes still map to these figures.
+export const BODY_LIP_END = 18
+
+// pt-5 and pt-8 in pixels. The plain figure also has to clear the lit bar,
+// which occupies 8px–17px down the face.
+export const CONTENT_TOP = 20
+export const CONTENT_TOP_DESIGNATOR = 32
