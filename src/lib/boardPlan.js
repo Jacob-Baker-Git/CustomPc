@@ -38,3 +38,50 @@ export function isOrthoOr45([x1, y1, x2, y2]) {
   const dy = Math.abs(y2 - y1)
   return dx < TOL || dy < TOL || Math.abs(dx - dy) < TOL
 }
+
+// Trim float noise out of emitted path data. The stagger below is irrational,
+// so without this every dogleg carries seventeen digits.
+const n = (v) => Number(v.toFixed(3))
+
+// How far apart, along the run, two adjacent conductors turn.
+//
+// ⚠️ NOT the pitch, which is the obvious answer and is provably wrong: two
+// parallel 45 degree lines whose start points differ by (pitch, pitch) are the
+// SAME LINE. With pitch 6 and a rise of 12 both doglegs sit on y = x - 58, so
+// adjacent traces overlap and the bundle reads as one thick smear at every
+// corner — the exact "loose squiggle" defect this rewrite exists to remove.
+//
+// Two parallel 45 degree lines are `pitch` apart when their start points differ
+// by (pitch*(1-sqrt2), pitch), which is this factor. The SIGN matters as much
+// as the magnitude: the conductor already furthest along in the direction of
+// the rise has to turn FIRST, or its neighbour's straight runs through its
+// diagonal. Both are asserted in boardPlan.test.js.
+const TURN_STAGGER = Math.SQRT2 - 1
+
+// `count` parallel traces leaving a component edge at `fromX`, stepping
+// vertically by `rise` and terminating at `toX`.
+export function bus({ fromX, fromY, toX, count, pitch, lead = 8, rise = 0 }) {
+  const dir = Math.sign(toX - fromX) || 1
+  const paths = []
+  const vias = []
+  // Turn offsets measured along `dir`, then shifted so the earliest turn sits
+  // exactly `lead` past the component edge whichever way the stagger runs.
+  const step = -Math.sign(rise) * pitch * TURN_STAGGER
+  const offsets = Array.from({ length: count }, (_, i) => i * step)
+  const base = lead - Math.min(...offsets)
+  for (let i = 0; i < count; i += 1) {
+    const y0 = fromY + i * pitch
+    const y1 = y0 + rise
+    if (rise === 0) {
+      paths.push(`M${fromX} ${y0} H${toX}`)
+    } else {
+      const dogX = n(fromX + dir * (base + offsets[i]))
+      // Derived from the ROUNDED dogleg, so the diagonal stays exactly 45
+      // degrees rather than 45 degrees plus a rounding error.
+      const turnX = n(dogX + dir * Math.abs(rise))
+      paths.push(`M${fromX} ${y0} H${dogX} L${turnX} ${y1} H${toX}`)
+    }
+    vias.push({ x: toX, y: y1 })
+  }
+  return { paths, vias }
+}
