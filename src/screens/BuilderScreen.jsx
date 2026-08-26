@@ -208,7 +208,16 @@ export default function BuilderScreen() {
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
         ) : view === 'performance' ? (
-          <Suspense fallback={<div className="p-6 text-sm text-muted motion-safe:animate-pulse">Working out frame rates…</div>}>
+          /* The fallback needs its own surface for the same reason every panel
+             on this screen does — there is no scrim here, so bare text sits on
+             the board. Easy to miss because it is only on screen while the
+             chunk loads: e2e/builderLegibility.spec.js caught it under
+             full-suite load, having never seen it when run alone. */
+          <Suspense fallback={
+            <div className="mx-4 my-3 rounded-xl bg-surface p-6 text-sm text-muted motion-safe:animate-pulse sm:mx-6 lg:mx-10">
+              Working out frame rates…
+            </div>
+          }>
             <PerformanceScreen />
           </Suspense>
         ) : (
