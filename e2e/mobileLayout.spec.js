@@ -18,6 +18,17 @@ const PHONES = [320, 360, 375, 390, 414]
 // large phone in landscape — had no structural guard on the build page at all.
 const TABLETS = [768, 834, 1024]
 
+// ⚠️ On a coarse pointer the 3D panel does not load until it is asked to —
+// it is 11 MB of models and a phone should not spend that unbidden. So every
+// touch test that needs the canvas, or the chrome that floats over it, has to
+// opt in first. Fine-pointer contexts still get it immediately and must not
+// call this.
+const optIntoThe3D = async (page) => {
+  const button = page.getByRole('button', { name: /view in 3d/i })
+  await expect(button, 'the 3D opt-in button on a touch device').toBeVisible()
+  await button.click()
+}
+
 // ⚠️ Bounding rects lie about inline elements. A wrapped <span> reports the
 // UNION of its line boxes — left edge of the last line to right edge of the
 // first — so an inline that wraps appears to overlap every sibling on both
@@ -143,6 +154,10 @@ test.describe('the zoom hint names the gesture the device actually has', () => {
   const readVerbs = async (context) => {
     const page = await context.newPage()
     await generateBuild(page)
+    // The hint lives over the canvas, so on touch it only exists once loaded.
+    if (await page.getByRole('button', { name: /view in 3d/i }).count()) {
+      await optIntoThe3D(page)
+    }
     const shown = await page.locator('[data-viewport-hint]').evaluate((el) => ({
       // innerText, not textContent: both verbs are always in the DOM and only
       // one is displayed, which is the entire thing being asserted.
@@ -268,6 +283,7 @@ test.describe('the 3D panel is not a scroll trap on a phone', () => {
     const ctx = await browser.newContext({ ...devices['iPhone 13'] })
     const page = await ctx.newPage()
     await generateBuild(page)
+    await optIntoThe3D(page)
     // The canvas itself is not needed here — the assertion below reads the
     // whole subtree, which is how the browser evaluates this.
     await orbitControlsAttached(page)
@@ -319,6 +335,66 @@ test.describe('the 3D panel is not a scroll trap on a phone', () => {
       ),
     )
     expect(anyPanY, 'the coarse-pointer rule leaked to a fine pointer').toBe(false)
+    await ctx.close()
+  })
+})
+
+test.describe('the 3D view is not downloaded before it is asked for', () => {
+  // Opening the builder pulls the lazy BuildCanvas chunk plus every model for
+  // the selected parts: 11 MB of GLB, 7.7 of it the motherboard. On a phone that
+  // is the largest thing the site does, and it happened before anyone asked.
+  //
+  // Shrinking it was investigated and declined — motherboard.glb is a triangle
+  // soup that floors at 57% of its triangles under decimation and its textures
+  // are only 7% of the file. So the lever is WHEN it loads.
+  const watchModels = (page) => {
+    const seen = []
+    page.on('request', (r) => {
+      if (r.url().endsWith('.glb')) seen.push(r.url().split('/').pop())
+    })
+    return seen
+  }
+
+  test('fetches nothing on a phone until the button is tapped', async ({ browser }) => {
+    test.setTimeout(120_000)
+    const ctx = await browser.newContext({ ...devices['iPhone 13'] })
+    const page = await ctx.newPage()
+    const models = watchModels(page)
+
+    await generateBuild(page)
+    await page.waitForTimeout(3000)
+
+    // The whole point: the build is on screen and its 3D payload is untouched.
+    expect(models, 'GLB models fetched before the user asked').toEqual([])
+
+    const button = page.getByRole('button', { name: /view in 3d/i })
+    await expect(button, 'the opt-in button').toBeVisible()
+    await button.click()
+
+    // And it is a deferral, not a removal — one tap still gets the real thing.
+    await expect
+      .poll(() => models.length, { timeout: 60_000, message: 'GLB models fetched after tapping' })
+      .toBeGreaterThan(0)
+    await ctx.close()
+  })
+
+  test('CONTROL: still fetches them without asking on desktop', async ({ browser }) => {
+    // ⚠️ Without this the test above is unfalsifiable. "No .glb requests" would
+    // read as success if models simply never load in headless at all, or if the
+    // URL filter stopped matching — and the feature would look implemented while
+    // doing nothing. This proves the probe can see a model being fetched, and
+    // that the deferral is scoped to coarse pointers rather than global.
+    test.setTimeout(120_000)
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+    const page = await ctx.newPage()
+    const models = watchModels(page)
+
+    await generateBuild(page)
+    await expect
+      .poll(() => models.length, { timeout: 60_000, message: 'GLB models fetched on desktop' })
+      .toBeGreaterThan(0)
+
+    await expect(page.getByRole('button', { name: /view in 3d/i })).toHaveCount(0)
     await ctx.close()
   })
 })
