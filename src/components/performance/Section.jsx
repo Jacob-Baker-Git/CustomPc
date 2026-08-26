@@ -1,4 +1,6 @@
-// A titled band of related panels.
+import { ELEV_GROUP } from '../../lib/uiTokens'
+
+// A titled band of related panels, drawn as an opaque module.
 //
 // The page used to be nine identical bordered boxes in one flat grid, which
 // gave every figure the same weight and buried the frame rates — the thing the
@@ -6,11 +8,17 @@
 // heading carries the hierarchy so the panels inside can stay quiet, and the
 // eye gets three or four landmarks to navigate by instead of nine.
 //
-// Spacing separated these groups while the page was full of bordered cards —
-// adding rules on top of all those boxes would have been noise. That premise
-// has now expired rather than been reversed: StatPanel lost its border when the
-// 155 frame-rate cards went, so a hairline rule is the only thing left marking
-// where one band ends and the next begins, and the headings carry the rest.
+// ⚠️ THE SURFACE IS LOAD-BEARING, not decoration. BuilderScreen renders
+// <BoardBackground /> with no `column`, so this screen has NO SCRIM and the
+// board is drawn at full strength behind it. Opaque modules are the only thing
+// keeping text off it: 28 glyph runs on this tab were sitting on bare board
+// while this section was transparent, including its own heading and blurb.
+// e2e/builderLegibility.spec.js fails if it goes back.
+//
+// A hairline rule separated these bands while they were transparent. The gap
+// between two opaque cards does that job now, and uiTokens.js is explicit that
+// depth rather than borders carries hierarchy here — the border is gone rather
+// than merely moved.
 //
 // `action` is an optional control belonging to the band as a whole — the Frame
 // rates section puts its resolution picker there. It sits on the heading's own
@@ -22,7 +30,7 @@ export default function Section({ title, blurb, children, className = '', action
   return (
     <section
       ref={ref}
-      className={`mt-7 border-t border-line pt-5 first:mt-0 first:border-t-0 first:pt-0 ${className}`}
+      className={`mt-4 rounded-xl ${ELEV_GROUP} p-4 sm:p-5 first:mt-0 ${className}`}
     >
       <div className="mb-2.5 flex flex-wrap items-start justify-between gap-x-4 gap-y-1.5">
         <div>
