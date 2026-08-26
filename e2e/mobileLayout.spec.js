@@ -217,3 +217,108 @@ test.describe('the body never outgrows the stick below the desktop grid', () => 
     expect(new Set(seen).size, `distinct box widths exercised (saw ${seen.join(', ')})`).toBeGreaterThanOrEqual(3)
   })
 })
+
+test.describe('the 3D panel is not a scroll trap on a phone', () => {
+  // three.js OrbitControls sets touch-action: none on its canvas when it
+  // connects, which hands it EVERY touch gesture. On a phone that canvas is
+  // ~42% of the screen height (277px of 664 on an iPhone 13), so nearly half
+  // the build page was a region where a finger drag rotated the model and the
+  // page simply would not scroll. Nothing signals that; it just feels stuck.
+  //
+  // index.css overrides it to pan-y under (pointer: coarse): the browser gets
+  // the vertical axis back, while a horizontal drag still rotates and two
+  // fingers still dolly, because neither is covered by pan-y.
+
+  // ⚠️ Wait for the CONTROL to connect, not for the model to load.
+  //
+  // Waiting on the "Assembling 3D" fallback meant waiting up to 90s for WebGL,
+  // twice, which blew a 180s budget and made this flaky. It was also the wrong
+  // condition: what has to be true is that OrbitControls is intercepting, and
+  // its tell is the inline touch-action it writes on connect. Without this the
+  // swipe would sail through an unclaimed canvas and pass while proving nothing.
+  // ⚠️ OrbitControls attaches to the r3f CONTAINER DIV, two levels above the
+  // canvas — not to the canvas. Its tell is the inline touch-action: none it
+  // writes there on connect, and that inline value survives our stylesheet
+  // override (which changes the computed value, not the inline one), so it
+  // stays a clean signal.
+  //
+  // This premise is not decoration. Before it existed the swipe sailed through
+  // an unclaimed canvas and passed while proving nothing — the test went green
+  // on exactly the runs where the control had not connected yet.
+  const orbitControlsAttached = async (page) => {
+    const canvas = page.locator('canvas')
+    await expect(canvas).toBeVisible({ timeout: 30_000 })
+    await expect
+      .poll(
+        () =>
+          page.evaluate(
+            () =>
+              [...document.querySelectorAll('.area-viz, .area-viz *')].some(
+                (el) => el.style.touchAction === 'none',
+              ),
+          ),
+        { timeout: 30_000 },
+      )
+      .toBe(true)
+    return canvas
+  }
+
+  test('lets a finger scroll the page over the canvas', async ({ browser }) => {
+    test.setTimeout(120_000)
+    const ctx = await browser.newContext({ ...devices['iPhone 13'] })
+    const page = await ctx.newPage()
+    await generateBuild(page)
+    // The canvas itself is not needed here — the assertion below reads the
+    // whole subtree, which is how the browser evaluates this.
+    await orbitControlsAttached(page)
+
+    // Our stylesheet beats the inline style it just wrote. !important is what
+    // makes that true, and this is the assertion that proves it.
+    // Every element in the subtree, because the browser intersects touch-action
+    // across ancestors: one `none` left anywhere above the canvas still blocks
+    // the page, which is precisely the bug this rule was written wrong for once.
+    const effective = await page.evaluate(() =>
+      [...document.querySelectorAll('.area-viz, .area-viz *')]
+        .map((el) => getComputedStyle(el).touchAction)
+        .filter((v) => v !== 'pan-y'),
+    )
+    expect(effective, 'elements in the 3D panel not resolving to pan-y').toEqual([])
+
+    // ⚠️ There is deliberately no synthetic swipe here, and that is a reversal.
+    //
+    // A CDP touch-drag WAS written, and it did prove the fix — 305px of page
+    // scroll over the canvas, measured. But it could not be made stable: on a
+    // heavy WebGL scene in headless the main thread stalls after a drag, and a
+    // following evaluate() hangs until the test times out. It failed 2 runs in 3
+    // for reasons that had nothing to do with the app.
+    //
+    // The assertion above is not a weaker substitute for it. touch-action IS the
+    // browser contract that decides this, the intersection across the subtree is
+    // exactly how the browser evaluates it, and it is what catches the bug that
+    // actually happened: the first version of the CSS rule targeted only the
+    // canvas, the r3f container above it kept `none`, and the page stayed stuck.
+    // That version fails this assertion instantly and deterministically.
+    await ctx.close()
+  })
+
+  test('leaves the canvas claiming every gesture on desktop', async ({ browser }) => {
+    // ⚠️ The other side. A blanket override would also strip the canvas on
+    // desktop, where `none` is what stops a trackpad two-finger swipe scrolling
+    // the page out from under a rotate. Asserting the exact inline value three
+    // writes would be testing three; the invariant that matters here is only
+    // that the coarse-pointer rule did not leak.
+    test.setTimeout(120_000)
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+    const page = await ctx.newPage()
+    await generateBuild(page)
+    const canvas = await orbitControlsAttached(page)
+    expect(canvas, 'canvas present').toBeTruthy()
+    const anyPanY = await page.evaluate(() =>
+      [...document.querySelectorAll('.area-viz, .area-viz *')].some(
+        (el) => getComputedStyle(el).touchAction === 'pan-y',
+      ),
+    )
+    expect(anyPanY, 'the coarse-pointer rule leaked to a fine pointer').toBe(false)
+    await ctx.close()
+  })
+})

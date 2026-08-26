@@ -111,6 +111,42 @@ body {
 .build-grid > * { position: relative; z-index: 1; }
 .build-grid > .area-viz { z-index: 0; }
 
+/* Give the vertical axis back to the page on touch devices.
+
+   three.js OrbitControls sets `touch-action: none` on its canvas when it
+   connects, which hands it EVERY touch gesture. On a phone that canvas is about
+   42% of the screen height (277px of 664 on an iPhone 13), so nearly half the
+   build page was a region where a finger drag rotated the model and the page
+   would not scroll at all. Nothing signals that; it just feels stuck.
+
+   pan-y hands vertical panning back to the browser and leaves everything else
+   with the control, because neither of the other two gestures is covered by it:
+   a HORIZONTAL drag still rotates — the turntable axis people actually reach
+   for — and two fingers still dolly. So the model keeps its controls and the
+   page keeps its scroll.
+
+   ⚠️ !important is load-bearing. OrbitControls writes `none` as an INLINE style
+   on connect, and only an important declaration in a stylesheet beats that. It
+   also means the rule wins whenever the control connects, which is timing we do
+   not control: the inline value has been observed as both `auto` and `none`
+   depending on how far the model had loaded.
+
+   Scoped to (pointer: coarse) so desktop is untouched — there `none` is what
+   stops a trackpad two-finger swipe scrolling the page out from under a
+   rotate. Guarded by e2e/mobileLayout.spec.js, which drives a real touch
+   device and asserts the page actually moves.
+
+   ⚠️ The selector must cover the SUBTREE, not just the canvas. OrbitControls
+   attaches to the r3f container div two levels ABOVE the canvas, and the
+   browser computes the allowed gesture by intersecting touch-action across the
+   ancestor chain — so `pan-y` on the canvas alone is still `none` in effect,
+   and the page stays stuck. That mistake also passed intermittently: whether a
+   swipe scrolled depended purely on whether the control had connected yet. */
+@media (pointer: coarse) {
+  .area-viz,
+  .area-viz * { touch-action: pan-y !important; }
+}
+
 @media (min-width: 1024px) {
   .build-grid {
     display: grid;
