@@ -19,10 +19,16 @@ const EFFICIENCY = {
   titanium: 0.94, platinum: 0.92, gold: 0.90, silver: 0.88, bronze: 0.85, white: 0.82,
 }
 
+// The keys are lowercase so the match can be case-insensitive; the tier that
+// comes back is not, because it is rendered directly — PerformanceScreen prints
+// "at 80+ {tier}" and was showing "at 80+ gold" beside a catalogue that writes
+// "80+ Gold" everywhere else.
+const display = (tier) => tier.charAt(0).toUpperCase() + tier.slice(1)
+
 export function psuEfficiency(psu) {
   const rating = String(psu?.specs?.rating ?? '').toLowerCase()
   for (const [tier, value] of Object.entries(EFFICIENCY)) {
-    if (rating.includes(tier)) return { value, tier }
+    if (rating.includes(tier)) return { value, tier: display(tier) }
   }
   return { value: 0.85, tier: null }   // unrated: assume the bronze-ish middle
 }

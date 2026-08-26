@@ -13,7 +13,7 @@ const SPEC_LABELS = {
   vram: 'VRAM (GB)',
   vramGb: 'VRAM (GB)',
   memType: 'Memory type',
-  speedMhz: 'Speed (MHz)',
+  speedMhz: 'Speed (MT/s)',   // field name is legacy; the unit is a transfer rate
   sticks: 'Sticks',
   readMbps: 'Read speed (MB/s)',
   writeMbps: 'Write speed (MB/s)',
@@ -35,14 +35,25 @@ const SPEC_LABELS = {
 
 export const RES_LABEL = { '1080p': '1080p (FHD)', '1440p': '1440p (QHD)', '4k': '4K (UHD)' }
 
+// Above this the "far beyond what anyone plays at" line is fair comment. Most
+// people play between 400 and 1600 DPI; 8000 is already several times that.
+const HIGH_DPI = 8000
+
+// ⚠️ Must cover every `switch` value in peripheralsData, or insight() falls
+// through to restating the field it exists to explain. Membrane and Optical
+// Linear were both missing — six of the twenty-eight keyboards — and a membrane
+// board's buyer is the one most likely to be new to this. Pinned by
+// specSheetCopy.test.js.
 const SWITCH_FEEL = {
   Brown: 'tactile bump without the click — a quiet all-rounder',
   Red: 'linear and light — fast for gaming, no tactile feedback',
   Blue: 'clicky and loud — satisfying to type on, unpopular on voice chat',
   Tactile: 'a noticeable bump at the actuation point',
   Optical: 'light-based actuation — faster response, no contact wear',
+  'Optical Linear': 'light-based actuation with no tactile bump — the fastest common combination, and quiet with it',
   Adjustable: 'per-key actuation depth you can tune in software',
   'Hall effect': 'magnetic actuation with adjustable depth and rapid-trigger',
+  Membrane: 'a rubber dome under each key rather than a mechanical switch — quieter and much cheaper, but mushier to type on and not repairable key by key',
 }
 
 const tier = (score) =>
@@ -64,8 +75,11 @@ export function insight(part) {
         `${part.formFactor} cases or larger.`
     case 'ram':
       return `${part.capacityGb}GB across ${s.sticks ?? 2} sticks of ${part.ramType}-${part.speed}. ` +
+        // MT/s, not MHz: DDR5-6000 runs a 3000 MHz clock and transfers 6000
+        // mega-transfers a second. This line said MHz while the spec table
+        // directly below it said MT/s, on the same card.
         (part.ramType === 'DDR5'
-          ? '32GB at 5600–6000MHz is the current sweet spot for gaming.'
+          ? '32GB at 5600–6000 MT/s is the current sweet spot for gaming.'
           : 'DDR4 only fits older boards — check the motherboard RAM type.')
     case 'storage': {
       const speed = s.readMbps ?? 0
@@ -99,7 +113,13 @@ export function insight(part) {
         ? `${part.switch} switches: ${SWITCH_FEEL[part.switch]}.`
         : `${part.switch} switches.`
     case 'mouse':
-      return `${part.dpi.toLocaleString()} max DPI — far beyond what anyone plays at; weight, shape and sensor consistency matter more.`
+      // The "far beyond" line is true of a 26,000 DPI gaming sensor and false of
+      // the 800 DPI office mouse in the catalogue, which is squarely inside the
+      // range people actually play at. Stated unconditionally it told the
+      // cheapest mouse's buyer the opposite of the truth.
+      return part.dpi >= HIGH_DPI
+        ? `${part.dpi.toLocaleString()} max DPI — far beyond what anyone plays at; weight, shape and sensor consistency matter more.`
+        : `${part.dpi.toLocaleString()} max DPI, which is inside the 400–1600 most people actually play at; weight, shape and sensor consistency matter more than the number.`
     case 'headset':
       return part.type === 'Wireless'
         ? 'Wireless — no cable snag, but one more battery to charge.'
