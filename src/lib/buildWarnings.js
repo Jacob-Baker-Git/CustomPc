@@ -1,6 +1,8 @@
 import { psuTooSmall } from './compatibility'
 
-const RANK = { critical: 0, warning: 1 }
+// 'note' is informational only — a thing that is true and worth knowing, and
+// which is NOT a problem. It sorts last so it never crowds out a real warning.
+const RANK = { critical: 0, warning: 1, note: 2 }
 
 export function getBuildWarnings(selectedParts) {
   const warnings = []
@@ -31,6 +33,25 @@ export function getBuildWarnings(selectedParts) {
     warnings.push({
       level: 'warning',
       message: `Cooler is rated for ${rated}W; the ${cpu.name ?? 'CPU'} draws ${cpu.tdp}W.`,
+    })
+  }
+
+  // ⚠️ Both of these are BACKWARD COMPATIBLE. A Gen5 card in a Gen4 slot runs at
+  // Gen4 and is completely fine; saying otherwise would be inventing a fault.
+  const boardGen = motherboard?.specs?.pcieGen
+  const gpuGen = gpu?.specs?.pcieGen
+  if (typeof boardGen === 'number' && typeof gpuGen === 'number' && gpuGen > boardGen) {
+    warnings.push({
+      level: 'note',
+      message: `GPU supports PCIe ${gpuGen}; this board runs it at PCIe ${boardGen}. It works, with a little less bandwidth.`,
+    })
+  }
+
+  const maxSpeed = motherboard?.specs?.maxRamSpeed
+  if (typeof maxSpeed === 'number' && typeof ram?.speed === 'number' && ram.speed > maxSpeed) {
+    warnings.push({
+      level: 'note',
+      message: `RAM is rated ${ram.speed} MT/s; this board is rated to ${maxSpeed}. It will run slower unless the board's own profile supports it.`,
     })
   }
 

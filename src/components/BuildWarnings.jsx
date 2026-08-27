@@ -15,7 +15,7 @@ export default function BuildWarnings() {
       <ul className="space-y-1.5">
         {warnings.map((w, i) => (
           <li key={i} className="flex items-start gap-2 text-xs text-muted">
-            <span className={`mt-1 w-1.5 h-1.5 rounded-full shrink-0 ${w.level === 'critical' ? 'bg-bad' : 'bg-ok'}`} />
+            <span className={`mt-1 w-1.5 h-1.5 rounded-full shrink-0 ${w.level === 'critical' ? 'bg-bad' : w.level === 'note' ? 'bg-steel' : 'bg-ok'}`} />
             <span>{w.message}</span>
           </li>
         ))}
