@@ -227,3 +227,16 @@ describe('three-state verdict', () => {
     }
   })
 })
+
+describe('getLockedReasons', () => {
+  // ⚠️ If this ever fails, the catalogue has become unusable: no part carries
+  // the researched specs yet, so locking on unverified would lock everything.
+  it('locks on blocked but never on unverified', () => {
+    const boardNoSlots = { ...mbAM5, specs: { ...mbAM5.specs } }
+    const locked = getLockedReasons({ motherboard: boardNoSlots }, partsData)
+    for (const part of partsData) {
+      const { status } = checkCompatibility({ motherboard: boardNoSlots }, part)
+      if (status === 'unverified') expect(locked[part.id]).toBeUndefined()
+    }
+  })
+})

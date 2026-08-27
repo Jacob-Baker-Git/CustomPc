@@ -142,8 +142,10 @@ export function checkCompatibility(selectedParts, candidate) {
 export function getLockedReasons(selectedParts, allParts) {
   const reasons = {}
   for (const part of allParts) {
-    const { compatible, reason } = checkCompatibility(selectedParts, part)
-    if (!compatible) reasons[part.id] = reason
+    const { status, reason } = checkCompatibility(selectedParts, part)
+    // ⚠️ 'blocked' ONLY. An unverified rule means we could not check, which is
+    // not grounds for taking the part away from someone.
+    if (status === 'blocked') reasons[part.id] = reason
   }
   return reasons
 }
