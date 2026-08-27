@@ -39,3 +39,27 @@ describe('getBuildWarnings', () => {
     expect(w.some((x) => /headroom/i.test(x.message))).toBe(false)
   })
 })
+
+describe('cooler thermal headroom', () => {
+  it('warns when the cooler is rated below the CPU TDP', () => {
+    const cpu = { id: 'c', category: 'cpu', socket: 'AM5', tdp: 170, specs: {} }
+    const cooler = { id: 'k', category: 'cooler', sockets: ['AM5'], tdp: 5, specs: { type: 'Air', height: 150, ratedTdpW: 95 } }
+    const w = getBuildWarnings({ cpu, cooler })
+    expect(w.some((x) => x.level === 'warning' && /cooler/i.test(x.message))).toBe(true)
+  })
+
+  it('says nothing when the cooler is rated above the CPU TDP', () => {
+    const cpu = { id: 'c', category: 'cpu', socket: 'AM5', tdp: 105, specs: {} }
+    const cooler = { id: 'k', category: 'cooler', sockets: ['AM5'], tdp: 5, specs: { type: 'Air', height: 150, ratedTdpW: 250 } }
+    const w = getBuildWarnings({ cpu, cooler })
+    expect(w.some((x) => /rated for/i.test(x.message))).toBe(false)
+  })
+
+  // ⚠️ Most coolers publish no rating at all. Silence, not a warning.
+  it('says nothing when the cooler publishes no rating', () => {
+    const cpu = { id: 'c', category: 'cpu', socket: 'AM5', tdp: 170, specs: {} }
+    const cooler = { id: 'k', category: 'cooler', sockets: ['AM5'], tdp: 5, specs: { type: 'Air', height: 150 } }
+    const w = getBuildWarnings({ cpu, cooler })
+    expect(w.some((x) => /rated for/i.test(x.message))).toBe(false)
+  })
+})

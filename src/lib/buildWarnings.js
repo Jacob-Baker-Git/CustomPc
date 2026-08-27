@@ -22,5 +22,17 @@ export function getBuildWarnings(selectedParts) {
   if (hasCore && !pcCase) warnings.push({ level: 'warning', message: 'Add a case.' })
   if (hasCore && !storage) warnings.push({ level: 'warning', message: 'Add storage.' })
 
+  // Thermal, not physical, so this warns rather than blocking selection.
+  // ⚠️ Only fires on a PUBLISHED rating. partSynergy.coolerCapacityW derives an
+  // estimate from a ladder for the parts that have none; that estimate is not
+  // firm enough to tell somebody their build is wrong.
+  const rated = cooler?.specs?.ratedTdpW
+  if (cpu && typeof rated === 'number' && typeof cpu.tdp === 'number' && rated < cpu.tdp) {
+    warnings.push({
+      level: 'warning',
+      message: `Cooler is rated for ${rated}W; the ${cpu.name ?? 'CPU'} draws ${cpu.tdp}W.`,
+    })
+  }
+
   return warnings.sort((a, b) => RANK[a.level] - RANK[b.level])
 }
