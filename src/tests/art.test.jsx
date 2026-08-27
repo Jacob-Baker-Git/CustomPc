@@ -7,6 +7,7 @@ import { initialsFor } from '../lib/gameInitials'
 import { artVariant } from '../lib/artVariant'
 import { genreFor } from '../lib/gameGenres'
 import { CATEGORIES } from '../lib/categories'
+import { GENRE_MARKS } from '../lib/gameGenreMarks'
 
 const PERIPHERALS = ['monitor', 'keyboard', 'mouse', 'headset']
 
@@ -138,6 +139,58 @@ describe('GameArt', () => {
     const idOf = (c) => c.querySelector('linearGradient').getAttribute('id')
     expect(idOf(a.container)).not.toBe(idOf(b.container))
   })
+
+  // ⚠️ BOTH, not either — and this is the assertion that stops the regression
+  // coming back. A genre-mark-only plate was built and shipped to a screenshot
+  // first: on the real Performance tab all thirteen shooters became the same
+  // reticle on the same gold and the rows stopped being tellable apart. The
+  // mark says what KIND of game; only the initials say WHICH one.
+  it('draws the genre mark AND keeps the initials that identify the row', () => {
+    const { container } = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
+    expect(container.querySelector('[data-genre-mark]'), 'the mark').not.toBeNull()
+    expect(container.querySelector('text').textContent, 'the initials').toBe('CS')
+  })
+
+  // Two games of one genre share a mark, so the initials are the only thing
+  // left that differs. If they ever stop rendering, every row in a genre
+  // becomes the same tile.
+  it('tells two games of the same genre apart by their initials', () => {
+    const a = render(<GameArt name="Doom Eternal" genre="shooter" seed="doom-eternal" />)
+    const b = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
+    expect(a.container.querySelector('text').textContent).toBe('DE')
+    expect(b.container.querySelector('text').textContent).toBe('CS')
+  })
+
+  it('still draws initials when the genre is unknown', () => {
+    const { container } = render(<GameArt name="Some Game" genre="other" seed="sg" />)
+    expect(container.querySelector('[data-genre-mark]')).toBeNull()
+    expect(container.querySelector('text').textContent).toBe('SG')
+  })
+
+  // The watermark must stay well behind the initials. At full strength it
+  // competes with the two characters that are doing the identifying.
+  it('keeps the mark faint enough to sit behind the initials', () => {
+    const { container } = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
+    const op = Number(container.querySelector('[data-genre-mark]').getAttribute('opacity'))
+    expect(op).toBeGreaterThan(0)
+    expect(op).toBeLessThanOrEqual(0.3)
+  })
+
+  // The plate is what tells two same-genre rows apart, so it must keep varying
+  // even though thirteen shooters now share one mark.
+  //
+  // ⚠️ Seeds matter here: artVariant('alpha') and artVariant('bravo') collide
+  // on BOTH `% 8` (the gradient angle) and `% 20` (the sweep offset), so that
+  // pair would fail this assertion no matter what GameArt draws — a property
+  // of the hash and those two strings, verified independently of any genre-mark
+  // change. 'cs2'/'valorant' differ on both moduli.
+  it('still varies the plate between two games of the same genre', () => {
+    const a = render(<GameArt name="Counter-Strike 2" genre="shooter" seed="cs2" />)
+    const b = render(<GameArt name="Valorant" genre="shooter" seed="valorant" />)
+    const gradOf = (c) => c.querySelector('linearGradient').getAttribute('gradientTransform')
+    const sweepOf = (c) => c.querySelector('path[opacity]').getAttribute('d')
+    expect(gradOf(a.container) !== gradOf(b.container) || sweepOf(a.container) !== sweepOf(b.container)).toBe(true)
+  })
 })
 
 describe('genreFor', () => {
@@ -155,5 +208,55 @@ describe('genreFor', () => {
   it('returns a neutral genre for anything unknown', () => {
     expect(genreFor({ id: 'not-a-game' })).toBe('other')
     expect(genreFor(undefined)).toBe('other')
+  })
+})
+
+describe('gameGenreMarks', () => {
+  // Every genre the app can actually produce must draw something. `other` is
+  // deliberately absent: a game with no genre has nothing to say, so GameArt
+  // falls back to its initials rather than inventing a symbol for it.
+  const DRAWN = [
+    'action-adventure', 'rpg', 'shooter',
+    'strategy-sim', 'horror', 'racing', 'moba', 'sports',
+  ]
+
+  it('has a mark for every genre that is not the neutral fallback', () => {
+    for (const g of DRAWN) {
+      expect(GENRE_MARKS[g], `a mark for ${g}`).toBeTypeOf('function')
+    }
+  })
+
+  it('has no mark for the neutral genre', () => {
+    expect(GENRE_MARKS.other).toBeUndefined()
+  })
+
+  // ⚠️ The whole point of these is that they survive being 24px wide. A hairline
+  // at 48 units is a third of a device pixel at 24 and disappears. Nothing here
+  // may be thinner than 2 units.
+  it('draws no stroke too thin to survive 24px', () => {
+    for (const g of DRAWN) {
+      const Mark = GENRE_MARKS[g]
+      const { container } = render(<svg viewBox="0 0 48 48"><Mark /></svg>)
+      const widths = [...container.querySelectorAll('[stroke-width]')]
+        .map((el) => Number(el.getAttribute('stroke-width')))
+      for (const w of widths) {
+        expect(w, `${g} stroke-width`).toBeGreaterThanOrEqual(2)
+      }
+    }
+  })
+
+  it('paints with currentColor so the plate decides the ink', () => {
+    for (const g of DRAWN) {
+      const Mark = GENRE_MARKS[g]
+      const { container } = render(<svg viewBox="0 0 48 48"><Mark /></svg>)
+      const painted = [...container.querySelectorAll('[fill], [stroke]')]
+      expect(painted.length, `${g} paints something`).toBeGreaterThan(0)
+      for (const el of painted) {
+        for (const attr of ['fill', 'stroke']) {
+          const v = el.getAttribute(attr)
+          if (v && v !== 'none') expect(v, `${g} ${attr}`).toBe('currentColor')
+        }
+      }
+    }
   })
 })

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
@@ -19,14 +20,47 @@ const CENTRE_X = (interior.min[0] + interior.max[0]) / 2
 const CENTRE_Z = (interior.min[2] + interior.max[2]) / 2
 const FLOOR_Y = interior.min[1]
 
+// ⚠️ A RENDERER setting, so a mount-time read is right here — unlike the
+// zoom-verb copy in BuilderScreen, which has to keep up with a pointer type
+// that changes under a live page and is therefore done in CSS. A tablet that
+// gains a mouse mid-session keeping the phone's DPR cap is not a defect worth
+// a resize listener for.
+//
+// jsdom implements no matchMedia at all, so `?.` makes this false in tests and
+// every existing case renders exactly as it did before.
+const isCoarse = () =>
+  typeof window !== 'undefined' && Boolean(window.matchMedia?.('(pointer: coarse)').matches)
+
 export default function BuildCanvas({ selectedParts }) {
   const parts = Object.values(selectedParts).filter(Boolean)
+  // Read once per mount, not once per render.
+  const [coarse] = useState(isCoarse)
 
   return (
     <div className="w-full h-full">
       <Canvas
-        dpr={[1, 2]}
-        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15 }}
+        // ⚠️ "demand", not r3f's default of "always". Measured before this
+        // change: 964 draw calls during five seconds of ABSOLUTE IDLE — 193 a
+        // second — on a build nobody was touching. That is a warm phone, a flat
+        // battery, and a frame budget spent competing with the page's own
+        // scroll and paint.
+        //
+        // Under demand the scene draws only when something invalidates it.
+        // drei's OrbitControls calls invalidate() on its change event, which
+        // covers the damping tail after a drag — verified in a browser, because
+        // a camera that sticks mid-glide would be a worse bug than the cost
+        // this saves.
+        frameloop="demand"
+        // ⚠️ Both of these are per-pixel costs and a phone pays them on a
+        // smaller battery. Capping DPR at 1.5 rather than 2 shades 44% fewer
+        // pixels; dropping MSAA saves a resolve pass on hardware where it is
+        // comparatively expensive. On a fine pointer nothing changes at all.
+        dpr={coarse ? [1, 1.5] : [1, 2]}
+        gl={{
+          antialias: !coarse,
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.15,
+        }}
         // Distance from the orbit target is ~7.2 world units. At fov 46 the
         // visible frame height is 0.849·d, so the 482mm case (3.95 wu at
         // 1 wu = 122 mm) fills ~65% of the frame — it used to be ~78%, which
@@ -80,7 +114,16 @@ export default function BuildCanvas({ selectedParts }) {
             Scale hugs the 380 x 210 mm footprint: at 11 the catcher was 1342 mm
             across, so a blur-2.8 smear reached far out behind the tower and read
             as a stray shadow rather than as contact with the ground. */}
+        {/* ⚠️ `frames={1}` bakes the shadow ONCE instead of re-rendering a 512²
+            depth pass every frame, which was a large share of what "always" was
+            paying for. The `key` is what stops that becoming a stale-shadow
+            bug: a changed build remounts this and re-bakes. Without the key the
+            shadow would be correct only for whatever parts happened to be
+            selected on first paint — a quieter and nastier defect than the cost
+            it saves. */}
         <ContactShadows
+          key={parts.map((p) => p.id).join('|')}
+          frames={1}
           position={[CENTRE_X, FLOOR_Y - 0.005, CENTRE_Z]}
           scale={[4.4, 2.8]}
           far={4.2}

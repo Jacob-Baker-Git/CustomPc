@@ -231,3 +231,41 @@ test.describe('the performance tab', () => {
     await expect(page.getByText(/fewer than three .* cards have been measured/i)).toBeVisible()
   })
 })
+
+// ⚠️ This is a TEST, not a review note. These marks live at 24px and the whole
+// design brief was "survives 24px" — a mark that renders and dissolves has
+// failed. Four of the eight originally did: the sword collapsed into a plus
+// sign, the hex cluster into fuzzy rings, horror's branches vanished, and
+// moba's diamond fused into its lanes. The screenshot is the artifact a human
+// checks; the assertions below are what fails the build on their own.
+test('every game row draws a genre mark at phone width', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await generateBuild(page)
+  await openTab(page, 'performance')
+
+  // ⚠️ The table groups games by genre and every group starts COLLAPSED, so the
+  // rows that carry the artwork are not mounted until one is opened. A version
+  // of this test that skipped this step failed with zero marks on a tab that
+  // was rendering perfectly well.
+  await page.getByRole('button', { name: /^Shooters/ }).click()
+
+  const marks = page.locator('[data-genre-mark]')
+  await expect(marks.first(), 'at least one genre mark on the tab').toBeVisible()
+
+  // Rendered size must actually be the 24px the marks were drawn for. A mark
+  // squeezed smaller by a flex sibling is the failure this catches.
+  const box = await marks.first().boundingBox()
+  expect(box.width, 'the mark is not squashed below its design size').toBeGreaterThanOrEqual(20)
+
+  // ⚠️ Scroll the rows into frame before the shot, or the artifact is useless:
+  // the table sits well below the fold and the first version of this
+  // screenshot captured only the summary panels, proving nothing about the
+  // marks it was taken to show.
+  //
+  // scrollIntoView rather than mouse.wheel or window.scrollTo — this screen
+  // scrolls an INNER div, so window.scrollY is always 0 here and page-level
+  // scrolling moves nothing.
+  await marks.first().evaluate((el) => el.closest('tr').scrollIntoView({ block: 'center' }))
+  await page.waitForTimeout(300)
+  await page.screenshot({ path: 'test-results/genre-marks-390.png', fullPage: false })
+})

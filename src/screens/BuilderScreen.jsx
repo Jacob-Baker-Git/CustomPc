@@ -189,9 +189,20 @@ export default function BuilderScreen() {
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}
+              {/* ⚠️ `display: contents` on mobile (index.css) dissolves this
+                  wrapper so the two panels become flex items of .build-grid
+                  itself and can be ordered independently — the phone wants the
+                  SCORE directly under the 3D view, with the use-case chips
+                  after it. On desktop the wrapper returns to a flex column in
+                  grid-area `left`, exactly as before.
+
+                  Do NOT "simplify" this by giving both children
+                  `grid-area: left`. Two items in one named grid area OVERLAP —
+                  measured: both reported top=8 — so the chips print on top of
+                  the score. */}
               <div className="area-left flex flex-col gap-3">
-                <UseCaseChips />
-                <BuildRatingPanel />
+                <div className="area-usecase"><UseCaseChips /></div>
+                <div className="area-rating"><BuildRatingPanel /></div>
               </div>
               <div className="area-banner"><GeneratedBanner /></div>
               <div className="area-parts">
