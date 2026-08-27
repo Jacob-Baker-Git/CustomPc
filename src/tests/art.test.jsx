@@ -139,6 +139,34 @@ describe('GameArt', () => {
     const idOf = (c) => c.querySelector('linearGradient').getAttribute('id')
     expect(idOf(a.container)).not.toBe(idOf(b.container))
   })
+
+  it('draws the genre mark instead of initials when the genre is known', () => {
+    const { container } = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
+    expect(container.querySelector('[data-genre-mark]'), 'the mark').not.toBeNull()
+    expect(container.querySelector('text'), 'no initials alongside it').toBeNull()
+  })
+
+  it('falls back to initials when the genre is unknown', () => {
+    const { container } = render(<GameArt name="Some Game" genre="other" seed="sg" />)
+    expect(container.querySelector('[data-genre-mark]')).toBeNull()
+    expect(container.querySelector('text').textContent).toBe('SG')
+  })
+
+  // The plate is what tells two same-genre rows apart, so it must keep varying
+  // even though thirteen shooters now share one mark.
+  //
+  // ⚠️ Seeds matter here: artVariant('alpha') and artVariant('bravo') collide
+  // on BOTH `% 8` (the gradient angle) and `% 20` (the sweep offset), so that
+  // pair would fail this assertion no matter what GameArt draws — a property
+  // of the hash and those two strings, verified independently of any genre-mark
+  // change. 'cs2'/'valorant' differ on both moduli.
+  it('still varies the plate between two games of the same genre', () => {
+    const a = render(<GameArt name="Counter-Strike 2" genre="shooter" seed="cs2" />)
+    const b = render(<GameArt name="Valorant" genre="shooter" seed="valorant" />)
+    const gradOf = (c) => c.querySelector('linearGradient').getAttribute('gradientTransform')
+    const sweepOf = (c) => c.querySelector('path[opacity]').getAttribute('d')
+    expect(gradOf(a.container) !== gradOf(b.container) || sweepOf(a.container) !== sweepOf(b.container)).toBe(true)
+  })
 })
 
 describe('genreFor', () => {

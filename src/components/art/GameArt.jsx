@@ -1,14 +1,23 @@
 import { artVariant } from '../../lib/artVariant'
 import { initialsFor } from '../../lib/gameInitials'
+import { GENRE_MARKS } from '../../lib/gameGenreMarks'
 
 // Cover artwork for a game, keyed by genre and initialled by title.
 //
 // Real cover art is the one asset class on this site that could not be used
 // safely: every cover is the publisher's copyright, none is freely licensed,
 // and serving 60 of them would need the CSP opened to a third-party host.
-// So a game gets a genre-tinted plate carrying its own initials, which is
-// enough for the eye to find a row it has seen before without pretending to
-// be something it is not.
+// So a game gets a genre-tinted plate carrying a drawn genre mark — a reticle,
+// a sword, a steering wheel — which is enough for the eye to find a row it has
+// seen before without pretending to be something it is not. A game whose genre
+// is unknown keeps its initials instead: see gameGenreMarks.jsx.
+//
+// ⚠️ The route to real covers is CLOSED, and not for want of effort. RAWG's
+// terms forbid "further distribution in any way"; neither RAWG nor IGDB owns
+// the covers, so neither can license one; and hotlinking would break both
+// legalContent.js's promise that every asset is same-origin and the assertion
+// in cspHeaders.test.js. Researched 2026-08-27 — do not reopen it by wiring an
+// image URL.
 //
 // The plate is a gradient of two hues per genre, and the angle comes from a
 // hash of the game id so that two shooters side by side are not the same
@@ -40,6 +49,10 @@ export default function GameArt({ name, genre, seed, className = '', rounded = '
   const angle = 25 + (v % 8) * 15
   const id = `ga-${(v % 100000).toString(36)}`
 
+  // A known genre draws its mark; anything else keeps the initials. See the
+  // note in gameGenreMarks.jsx for why `other` has no symbol of its own.
+  const Mark = GENRE_MARKS[genre]
+
   return (
     <svg
       viewBox="0 0 48 48"
@@ -63,18 +76,24 @@ export default function GameArt({ name, genre, seed, className = '', rounded = '
         fill="#FFFFFF"
         opacity="0.08"
       />
-      <text
-        x="24" y="24"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fill={g.ink}
-        fontSize="19"
-        fontWeight="800"
-        fontFamily="Archivo, ui-sans-serif, sans-serif"
-        letterSpacing="-0.5"
-      >
-        {initialsFor(name)}
-      </text>
+      {Mark ? (
+        <g data-genre-mark={genre} color={g.ink} opacity="0.92">
+          <Mark />
+        </g>
+      ) : (
+        <text
+          x="24" y="24"
+          textAnchor="middle"
+          dominantBaseline="central"
+          fill={g.ink}
+          fontSize="19"
+          fontWeight="800"
+          fontFamily="Archivo, ui-sans-serif, sans-serif"
+          letterSpacing="-0.5"
+        >
+          {initialsFor(name)}
+        </text>
+      )}
     </svg>
   )
 }
