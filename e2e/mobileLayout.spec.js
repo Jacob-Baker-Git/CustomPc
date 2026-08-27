@@ -456,3 +456,67 @@ test.describe('the frame-rate table fits the box it is in', () => {
     await expect(page.getByText('Preset', { exact: true })).toBeVisible()
   })
 })
+
+// The build tab's reading order, which is pure CSS `order` and therefore
+// invisible to the unit suite — jsdom computes no layout at all.
+//
+// ⚠️ Two separate risks, so two separate tests. The phone test proves the order
+// landed; the DESKTOP test proves it did not leak. `order` is ignored for grid
+// items only while every .area-* keeps an explicit `grid-area` — but
+// .area-usecase and .area-rating are flex items of .area-left, NOT of
+// .build-grid, so their order is NOT inert above lg and is reset explicitly.
+// That reset is what the desktop test defends. Measured before it existed:
+// rating top=76, usecase top=1437, i.e. the chips flipped below the score.
+test.describe('the build tab reads in the right order', () => {
+  const topsOf = (page, selectors) =>
+    page.evaluate(
+      (sels) => sels.map((s) => document.querySelector(s)?.getBoundingClientRect().top ?? null),
+      selectors,
+    )
+
+  test('on a phone: parts, then the 3D view, then the score', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await generateBuild(page)
+
+    const order = ['.area-parts', '.area-viz', '.area-rating', '.area-usecase']
+    const tops = await topsOf(page, order)
+
+    expect(tops, 'every ordered panel is on the page').not.toContain(null)
+    for (let i = 1; i < tops.length; i++) {
+      expect(tops[i], `${order[i]} sits below ${order[i - 1]}`).toBeGreaterThan(tops[i - 1])
+    }
+  })
+
+  test('on a desktop the grid ignores those order values', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await generateBuild(page)
+
+    const [parts, viz, rating, usecase] = await topsOf(page, [
+      '.area-parts', '.area-viz', '.area-rating', '.area-usecase',
+    ])
+
+    // The desktop left column keeps chips ABOVE the rating: there they read as
+    // the control that drives the panel beneath them. This is the assertion
+    // that fails if the desktop `order` reset is ever removed.
+    expect(usecase, 'the chips stay above the rating on desktop').toBeLessThan(rating)
+    // Both left-column panels sit in the top row, above the full-width parts.
+    expect(parts, 'parts stay below the left column').toBeGreaterThan(rating)
+    expect(parts, 'parts stay below the 3D view').toBeGreaterThan(viz)
+  })
+
+  // The `display: contents` wrapper drops these two out of `.build-grid > *`,
+  // which is where `z-index: 1` comes from. Without it they paint under the
+  // WebGL canvas and vanish.
+  test('the split panels keep the z-index that lifts them off the canvas', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await generateBuild(page)
+
+    for (const sel of ['.area-usecase', '.area-rating']) {
+      const z = await page.evaluate(
+        (s) => getComputedStyle(document.querySelector(s)).zIndex,
+        sel,
+      )
+      expect(z, `${sel} is lifted above the canvas`).toBe('1')
+    }
+  })
+})
