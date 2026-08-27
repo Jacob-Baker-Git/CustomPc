@@ -21,90 +21,95 @@ const airHeight = (cooler) =>
 // not a pass. Exported so buildWarnings.js shares it rather than restating it.
 export const psuTooSmall = (draw, wattage) => draw > 0 && draw >= wattage
 
+// ⚠️ `compatible` is DERIVED, never stored independently. Two fields that can
+// disagree is how the PSU equality bug survived in three places at once.
+const blocked = (reason) => ({ status: 'blocked', compatible: false, reason })
+const ok = () => ({ status: 'ok', compatible: true, reason: '' })
+
 export function checkCompatibility(selectedParts, candidate) {
   const { motherboard, case: selectedCase, cpu, ram, cooler, gpu, psu } = selectedParts
 
   if (candidate.category === 'cpu' && motherboard) {
     if (candidate.socket !== motherboard.socket)
-      return { compatible: false, reason: `Requires ${candidate.socket} socket; motherboard uses ${motherboard.socket}` }
+      return blocked(`Requires ${candidate.socket} socket; motherboard uses ${motherboard.socket}`)
   }
 
   if (candidate.category === 'motherboard' && cpu) {
     if (candidate.socket !== cpu.socket)
-      return { compatible: false, reason: `Requires ${candidate.socket} socket; CPU uses ${cpu.socket}` }
+      return blocked(`Requires ${candidate.socket} socket; CPU uses ${cpu.socket}`)
   }
 
   if (candidate.category === 'ram' && motherboard) {
     if (candidate.ramType !== motherboard.ramType)
-      return { compatible: false, reason: `Requires ${candidate.ramType}; motherboard supports ${motherboard.ramType} only` }
+      return blocked(`Requires ${candidate.ramType}; motherboard supports ${motherboard.ramType} only`)
   }
 
   if (candidate.category === 'motherboard' && ram) {
     if (candidate.ramType !== ram.ramType)
-      return { compatible: false, reason: `Requires ${candidate.ramType}; your RAM is ${ram.ramType}` }
+      return blocked(`Requires ${candidate.ramType}; your RAM is ${ram.ramType}`)
   }
 
   // Platform RAM-type check that works even before a motherboard is chosen.
   if (candidate.category === 'ram' && cpu && !motherboard) {
     if (DDR5_ONLY_SOCKETS.includes(cpu.socket) && candidate.ramType === 'DDR4')
-      return { compatible: false, reason: `${cpu.socket} platform is DDR5-only; DDR4 won't work with this CPU` }
+      return blocked(`${cpu.socket} platform is DDR5-only; DDR4 won't work with this CPU`)
   }
 
   if (candidate.category === 'cpu' && ram && !motherboard) {
     if (DDR5_ONLY_SOCKETS.includes(candidate.socket) && ram.ramType === 'DDR4')
-      return { compatible: false, reason: `${candidate.socket} platform is DDR5-only; your RAM is DDR4` }
+      return blocked(`${candidate.socket} platform is DDR5-only; your RAM is DDR4`)
   }
 
   if (candidate.category === 'case' && motherboard) {
     if (Array.isArray(candidate.supportedFormFactors) && !candidate.supportedFormFactors.includes(motherboard.formFactor))
-      return { compatible: false, reason: `Does not support ${motherboard.formFactor} form factor` }
+      return blocked(`Does not support ${motherboard.formFactor} form factor`)
   }
 
   if (candidate.category === 'motherboard' && selectedCase) {
     if (Array.isArray(selectedCase.supportedFormFactors) && !selectedCase.supportedFormFactors.includes(candidate.formFactor))
-      return { compatible: false, reason: `Case does not support ${candidate.formFactor} form factor` }
+      return blocked(`Case does not support ${candidate.formFactor} form factor`)
   }
 
   if (candidate.category === 'gpu' && selectedCase) {
     if (candidate.length > selectedCase.maxGpuLength)
-      return { compatible: false, reason: `GPU length ${candidate.length}mm exceeds case clearance of ${selectedCase.maxGpuLength}mm` }
+      return blocked(`GPU length ${candidate.length}mm exceeds case clearance of ${selectedCase.maxGpuLength}mm`)
   }
 
   if (candidate.category === 'case' && gpu) {
     if (gpu.length > candidate.maxGpuLength)
-      return { compatible: false, reason: `Your ${gpu.length}mm GPU exceeds this case's ${candidate.maxGpuLength}mm clearance` }
+      return blocked(`Your ${gpu.length}mm GPU exceeds this case's ${candidate.maxGpuLength}mm clearance`)
   }
 
   if (candidate.category === 'cooler' && selectedCase) {
     const h = airHeight(candidate)
     if (h != null && typeof selectedCase.maxCoolerHeight === 'number' && h > selectedCase.maxCoolerHeight)
-      return { compatible: false, reason: `Cooler is ${h}mm tall; case fits up to ${selectedCase.maxCoolerHeight}mm` }
+      return blocked(`Cooler is ${h}mm tall; case fits up to ${selectedCase.maxCoolerHeight}mm`)
   }
 
   if (candidate.category === 'case' && cooler) {
     const h = airHeight(cooler)
     if (h != null && typeof candidate.maxCoolerHeight === 'number' && h > candidate.maxCoolerHeight)
-      return { compatible: false, reason: `Your ${h}mm cooler exceeds this case's ${candidate.maxCoolerHeight}mm limit` }
+      return blocked(`Your ${h}mm cooler exceeds this case's ${candidate.maxCoolerHeight}mm limit`)
   }
 
   if (candidate.category === 'cooler' && motherboard) {
     if (Array.isArray(candidate.sockets) && !candidate.sockets.includes(motherboard.socket))
-      return { compatible: false, reason: `Cooler does not support ${motherboard.socket} socket` }
+      return blocked(`Cooler does not support ${motherboard.socket} socket`)
   }
 
   if (candidate.category === 'cooler' && cpu) {
     if (Array.isArray(candidate.sockets) && !candidate.sockets.includes(cpu.socket))
-      return { compatible: false, reason: `Cooler does not support ${cpu.socket} socket` }
+      return blocked(`Cooler does not support ${cpu.socket} socket`)
   }
 
   if (candidate.category === 'cpu' && cooler) {
     if (Array.isArray(cooler.sockets) && !cooler.sockets.includes(candidate.socket))
-      return { compatible: false, reason: `Selected cooler does not support ${candidate.socket} socket` }
+      return blocked(`Selected cooler does not support ${candidate.socket} socket`)
   }
 
   if (candidate.category === 'motherboard' && cooler) {
     if (Array.isArray(cooler.sockets) && !cooler.sockets.includes(candidate.socket))
-      return { compatible: false, reason: `Selected cooler does not support ${candidate.socket} socket` }
+      return blocked(`Selected cooler does not support ${candidate.socket} socket`)
   }
 
   // Power fit: a PSU must at least cover what the build already draws, and a
@@ -113,17 +118,17 @@ export function checkCompatibility(selectedParts, candidate) {
   if (candidate.category === 'psu') {
     const draw = drawOf(selectedParts)
     if (psuTooSmall(draw, candidate.wattage))
-      return { compatible: false, reason: `${candidate.wattage}W cannot run the build's ${draw}W draw` }
+      return blocked(`${candidate.wattage}W cannot run the build's ${draw}W draw`)
   }
 
   if (candidate.category !== 'psu' && psu && (candidate.tdp ?? 0) > 0) {
     const current = selectedParts[candidate.category]
     const draw = drawOf(selectedParts) - (current?.tdp ?? 0) + candidate.tdp
     if (psuTooSmall(draw, psu.wattage))
-      return { compatible: false, reason: `Would draw ${draw}W; your PSU supplies ${psu.wattage}W` }
+      return blocked(`Would draw ${draw}W; your PSU supplies ${psu.wattage}W`)
   }
 
-  return { compatible: true, reason: '' }
+  return ok()
 }
 
 export function getLockedReasons(selectedParts, allParts) {

@@ -204,3 +204,26 @@ describe('getLockedReasons', () => {
     expect(reasons['cpu-i7-13700k']).toMatch(/socket/i)
   })
 })
+
+describe('three-state verdict', () => {
+  it('reports status ok when nothing blocks', () => {
+    const r = checkCompatibility({ motherboard: mbAM5 }, cpuAM5)
+    expect(r.status).toBe('ok')
+    expect(r.compatible).toBe(true)
+  })
+
+  it('reports status blocked when a check fails, and keeps compatible false', () => {
+    const r = checkCompatibility({ motherboard: mbAM5 }, cpuIntel)
+    expect(r.status).toBe('blocked')
+    expect(r.compatible).toBe(false)
+  })
+
+  it('derives compatible from status rather than carrying an independent flag', () => {
+    // compatible must never disagree with status, for every part in the
+    // catalogue against a realistic build.
+    for (const part of partsData) {
+      const r = checkCompatibility({ motherboard: mbAM5, cpu: cpuAM5 }, part)
+      expect(r.compatible).toBe(r.status !== 'blocked')
+    }
+  })
+})
