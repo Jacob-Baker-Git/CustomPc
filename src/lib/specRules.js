@@ -119,7 +119,32 @@ function m2Interface(selectedParts, candidate) {
   }
 }
 
-const RULES = [powerConnectors, epsConnectors, gpuThickness, m2Interface]
+// Rule 4. AIOs only — an air cooler is already governed by maxCoolerHeight in
+// compatibility.js.
+//
+// ⚠️ Reads `radiatorMm` (a number), NOT the existing `specs.radiator` string
+// ("240mm") that all 22 catalogue AIOs carry. Those strings predate the research
+// standard and have not been verified against a manufacturer page, so this rule
+// deliberately reports `unverified` for them until the follow-on task does that
+// work. Treating an unverified string as verified is the exact error the
+// standard exists to prevent.
+function radiatorFit(selectedParts, candidate) {
+  const pcCase = candidate.category === 'case' ? candidate : selectedParts.case
+  const cooler = candidate.category === 'cooler' ? candidate : selectedParts.cooler
+  if (!pcCase || !cooler) return null
+  if (cooler.specs?.type !== 'AIO') return null
+
+  const size = cooler.specs?.radiatorMm
+  const support = pcCase.specs?.radiatorSupport
+  if (typeof size !== 'number') return { status: 'unverified', reason: `Radiator size for ${cooler.name ?? 'this cooler'} is not verified` }
+  if (!support) return { status: 'unverified', reason: `Radiator support in ${pcCase.name ?? 'this case'} is not verified` }
+
+  const fitsSomewhere = Object.values(support).some((sizes) => Array.isArray(sizes) && sizes.includes(size))
+  if (fitsSomewhere) return null
+  return { status: 'blocked', reason: `No mount in this case takes a ${size}mm radiator` }
+}
+
+const RULES = [powerConnectors, epsConnectors, gpuThickness, m2Interface, radiatorFit]
 
 export function evaluateSpecRules(selectedParts, candidate) {
   return aggregate(RULES.map((rule) => rule(selectedParts, candidate)))

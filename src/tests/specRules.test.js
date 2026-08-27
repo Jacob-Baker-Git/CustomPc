@@ -151,3 +151,33 @@ describe('rule 3: M.2 interface', () => {
     expect(evaluateSpecRules({ motherboard: b }, sata).status).toBe('unverified')
   })
 })
+
+const aio = (radiatorMm) => ({ id: 'k', category: 'cooler', sockets: ['AM5'], specs: { type: 'AIO', radiatorMm } })
+
+describe('rule 4: radiator fit', () => {
+  it('blocks a 420mm radiator in a case that tops out at 360', () => {
+    const c = box({ radiatorSupport: { top: [240, 360], front: [240, 280] } })
+    const r = evaluateSpecRules({ case: c }, aio(420))
+    expect(r.status).toBe('blocked')
+    expect(r.reason).toMatch(/420/)
+  })
+
+  it('passes a 360mm radiator when a mount supports it', () => {
+    const c = box({ radiatorSupport: { top: [240, 360], front: [240] } })
+    expect(evaluateSpecRules({ case: c }, aio(360)).status).toBe('ok')
+  })
+
+  it('is unverified when the case does not state radiator support', () => {
+    expect(evaluateSpecRules({ case: box({}) }, aio(360)).status).toBe('unverified')
+  })
+
+  it('is unverified when the AIO does not state its radiator size', () => {
+    const c = box({ radiatorSupport: { top: [360] } })
+    expect(evaluateSpecRules({ case: c }, aio(undefined)).status).toBe('unverified')
+  })
+
+  it('does not apply to an air cooler', () => {
+    const air = { id: 'a', category: 'cooler', sockets: ['AM5'], specs: { type: 'Air', height: 165 } }
+    expect(evaluateSpecRules({ case: box({ radiatorSupport: { top: [240] } }) }, air).status).toBe('ok')
+  })
+})
