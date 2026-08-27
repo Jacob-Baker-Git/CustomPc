@@ -88,7 +88,12 @@ Replace those four lines with exactly this:
 
 Run: `grep -rn "area-left\|area-usecase\|area-rating" src/ e2e/`
 
-Expected: hits only in `BuilderScreen.jsx` (the block above) and `src/index.css`. If `e2e/` matches, that test must be updated in Task 3 — note it now.
+Expected: `BuilderScreen.jsx`, `src/index.css`, **and `e2e/wizard.spec.js`**.
+
+⚠️ That third hit is **expected and load-bearing**. `wizard.spec.js:72-92` already
+measures the chips→score gap and already falls back to `.area-usecase` /
+`.area-rating` by name. It is the test that catches the desktop `order` leak
+described in Task 2. Do not modify or weaken it.
 
 - [ ] **Step 4: Commit**
 
@@ -162,10 +167,33 @@ Replace with:
 ```css
   /* Back from `display: contents` — above lg this is a real flex column in the
      left cell again, and the two panels inside it are laid out by IT, not by
-     the grid. `order` on them is inert here because they are no longer flex
-     items of .build-grid. */
+     the grid. Their mobile `order` is NOT inert here and is reset just below —
+     see the note on that rule. */
   .build-grid > .area-left      { display: flex; flex-direction: column; gap: 0.75rem; grid-area: left; }
+  /* ⚠️ The mobile `order` rules MUST be reset here, and the reason is subtle
+     enough that it shipped as a bug once: `.area-left` is a real flex container
+     again above lg, so .area-usecase / .area-rating are flex items OF IT — a
+     descendant `order` still applies and silently flips the chips below the
+     score. They are not items of .build-grid, which is what made "inert above
+     lg" look true. Measured before this reset: rating top=76, usecase top=1437,
+     i.e. reversed, which fails e2e/wizard.spec.js:91.
+
+     The selectors must stay DESCENDANT rather than `>`: `display: contents`
+     does not change the DOM, so .area-rating's parent is always .area-left and
+     a child combinator from .build-grid would never match at any width. */
+  .build-grid .area-usecase,
+  .build-grid .area-rating { order: 0; }
 ```
+
+🛑 **This reset was NOT in the first draft of this plan, and its absence was a
+real bug caught at Step 3.** The original comment claimed `order` was "inert"
+above `lg` because the panels are no longer flex items of `.build-grid`. That is
+true and irrelevant — they are flex items of `.area-left`. Do not remove this
+reset on the reasoning that the panels sit outside the grid.
+
+⚠️ **`e2e/wizard.spec.js:72-92` already guards this**, and it reads
+`.area-usecase` / `.area-rating` by name as a fallback. It is the test that
+caught the bug; do not weaken it.
 
 - [ ] **Step 3: Start the dev server and confirm both breakpoints by measurement**
 
