@@ -25,6 +25,18 @@ export default function BuildCanvas({ selectedParts }) {
   return (
     <div className="w-full h-full">
       <Canvas
+        // ⚠️ "demand", not r3f's default of "always". Measured before this
+        // change: 964 draw calls during five seconds of ABSOLUTE IDLE — 193 a
+        // second — on a build nobody was touching. That is a warm phone, a flat
+        // battery, and a frame budget spent competing with the page's own
+        // scroll and paint.
+        //
+        // Under demand the scene draws only when something invalidates it.
+        // drei's OrbitControls calls invalidate() on its change event, which
+        // covers the damping tail after a drag — verified in a browser, because
+        // a camera that sticks mid-glide would be a worse bug than the cost
+        // this saves.
+        frameloop="demand"
         dpr={[1, 2]}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15 }}
         // Distance from the orbit target is ~7.2 world units. At fov 46 the
@@ -80,7 +92,16 @@ export default function BuildCanvas({ selectedParts }) {
             Scale hugs the 380 x 210 mm footprint: at 11 the catcher was 1342 mm
             across, so a blur-2.8 smear reached far out behind the tower and read
             as a stray shadow rather than as contact with the ground. */}
+        {/* ⚠️ `frames={1}` bakes the shadow ONCE instead of re-rendering a 512²
+            depth pass every frame, which was a large share of what "always" was
+            paying for. The `key` is what stops that becoming a stale-shadow
+            bug: a changed build remounts this and re-bakes. Without the key the
+            shadow would be correct only for whatever parts happened to be
+            selected on first paint — a quieter and nastier defect than the cost
+            it saves. */}
         <ContactShadows
+          key={parts.map((p) => p.id).join('|')}
+          frames={1}
           position={[CENTRE_X, FLOOR_Y - 0.005, CENTRE_Z]}
           scale={[4.4, 2.8]}
           far={4.2}
