@@ -144,7 +144,30 @@ function radiatorFit(selectedParts, candidate) {
   return { status: 'blocked', reason: `No mount in this case takes a ${size}mm radiator` }
 }
 
-const RULES = [powerConnectors, epsConnectors, gpuThickness, m2Interface, radiatorFit]
+// Rule 5. Speed is deliberately NOT here — a kit faster than the board's rated
+// maximum still runs, at a lower speed or via XMP/EXPO. That is an advisory in
+// buildWarnings, not a block.
+function ramFit(selectedParts, candidate) {
+  const board = candidate.category === 'motherboard' ? candidate : selectedParts.motherboard
+  const ram = candidate.category === 'ram' ? candidate : selectedParts.ram
+  if (!board || !ram) return null
+
+  const slots = board.specs?.ramSlots
+  const maxGb = board.specs?.maxRamGb
+  if (typeof slots !== 'number') return { status: 'unverified', reason: `Memory slots on ${board.name ?? 'this motherboard'} are not verified` }
+
+  const sticks = ram.specs?.sticks
+  if (typeof sticks !== 'number') return { status: 'unverified', reason: `Stick count for ${ram.name ?? 'this kit'} is not verified` }
+
+  if (sticks > slots) return { status: 'blocked', reason: `Kit has ${sticks} sticks; board has ${slots} slots` }
+
+  if (typeof maxGb !== 'number') return { status: 'unverified', reason: `Maximum memory for ${board.name ?? 'this motherboard'} is not verified` }
+  if (ram.capacityGb > maxGb) return { status: 'blocked', reason: `${ram.capacityGb}GB exceeds this board's ${maxGb}GB maximum` }
+
+  return null
+}
+
+const RULES = [powerConnectors, epsConnectors, gpuThickness, m2Interface, radiatorFit, ramFit]
 
 export function evaluateSpecRules(selectedParts, candidate) {
   return aggregate(RULES.map((rule) => rule(selectedParts, candidate)))

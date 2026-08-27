@@ -181,3 +181,32 @@ describe('rule 4: radiator fit', () => {
     expect(evaluateSpecRules({ case: box({ radiatorSupport: { top: [240] } }) }, air).status).toBe('ok')
   })
 })
+
+const kit = (capacityGb, sticks, speed) => ({
+  id: 'r', category: 'ram', ramType: 'DDR5', capacityGb, speed, specs: { sticks },
+})
+
+describe('rule 5: RAM slots and capacity', () => {
+  it('blocks a 4-stick kit on a 2-slot board', () => {
+    const b = board({ ramSlots: 2, maxRamGb: 96 })
+    const r = evaluateSpecRules({ motherboard: b }, kit(64, 4, 6000))
+    expect(r.status).toBe('blocked')
+    expect(r.reason).toMatch(/slot/i)
+  })
+
+  it('blocks a kit larger than the board takes', () => {
+    const b = board({ ramSlots: 4, maxRamGb: 64 })
+    const r = evaluateSpecRules({ motherboard: b }, kit(128, 4, 6000))
+    expect(r.status).toBe('blocked')
+    expect(r.reason).toMatch(/128|capacity/i)
+  })
+
+  it('passes a kit that fits both', () => {
+    const b = board({ ramSlots: 4, maxRamGb: 192 })
+    expect(evaluateSpecRules({ motherboard: b }, kit(64, 2, 6000)).status).toBe('ok')
+  })
+
+  it('is unverified when the board does not state its slots', () => {
+    expect(evaluateSpecRules({ motherboard: board({}) }, kit(32, 2, 6000)).status).toBe('unverified')
+  })
+})
