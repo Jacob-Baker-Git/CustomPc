@@ -83,3 +83,25 @@ describe('rule 1: power connectors', () => {
     expect(evaluateSpecRules({ motherboard: b }, psu({ eps8: 2 })).status).toBe('unverified')
   })
 })
+
+const box = (specs) => ({ id: 'c', category: 'case', specs })
+
+describe('rule 2: GPU thickness', () => {
+  it('blocks a 4-slot card in a case with 2 expansion slots', () => {
+    const r = evaluateSpecRules({ case: box({ expansionSlots: 2 }) }, gpu({ slotsThick: 4 }))
+    expect(r.status).toBe('blocked')
+    expect(r.reason).toMatch(/slot/i)
+  })
+
+  it('passes a 3-slot card in a 7-slot case', () => {
+    expect(evaluateSpecRules({ case: box({ expansionSlots: 7 }) }, gpu({ slotsThick: 3 })).status).toBe('ok')
+  })
+
+  it('is unverified when the case does not state its slot count', () => {
+    expect(evaluateSpecRules({ case: box({}) }, gpu({ slotsThick: 3 })).status).toBe('unverified')
+  })
+
+  it('is unverified when the GPU does not state its thickness', () => {
+    expect(evaluateSpecRules({ case: box({ expansionSlots: 7 }) }, gpu({})).status).toBe('unverified')
+  })
+})

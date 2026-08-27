@@ -70,7 +70,24 @@ function epsConnectors(selectedParts, candidate) {
   return { status: 'blocked', reason: `Board needs ${need}x 8-pin EPS; PSU has ${supply.eps8 ?? 0}` }
 }
 
-const RULES = [powerConnectors, epsConnectors]
+// Rule 2. Card thickness against the case's expansion-slot budget. This is the
+// clearance that `maxGpuLength` does not cover: a 4-slot card can be short
+// enough to fit lengthwise and still foul the bottom of the case.
+function gpuThickness(selectedParts, candidate) {
+  const pcCase = candidate.category === 'case' ? candidate : selectedParts.case
+  const gpu = candidate.category === 'gpu' ? candidate : selectedParts.gpu
+  if (!pcCase || !gpu) return null
+
+  const thick = gpu.specs?.slotsThick
+  const budget = pcCase.specs?.expansionSlots
+  if (typeof thick !== 'number') return { status: 'unverified', reason: `Slot thickness for ${gpu.name ?? 'this GPU'} is not verified` }
+  if (typeof budget !== 'number') return { status: 'unverified', reason: `Expansion slots on ${pcCase.name ?? 'this case'} are not verified` }
+
+  if (thick <= budget) return null
+  return { status: 'blocked', reason: `GPU needs ${thick} slots; case has ${budget}` }
+}
+
+const RULES = [powerConnectors, epsConnectors, gpuThickness]
 
 export function evaluateSpecRules(selectedParts, candidate) {
   return aggregate(RULES.map((rule) => rule(selectedParts, candidate)))
