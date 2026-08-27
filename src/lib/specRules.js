@@ -87,7 +87,39 @@ function gpuThickness(selectedParts, candidate) {
   return { status: 'blocked', reason: `GPU needs ${thick} slots; case has ${budget}` }
 }
 
-const RULES = [powerConnectors, epsConnectors, gpuThickness]
+// Rule 3. ⚠️ "Does ANY slot on this board accept this drive", NOT slot
+// allocation. A build holds exactly one part per category, so there is never a
+// second drive competing for a slot.
+function m2Interface(selectedParts, candidate) {
+  const board = candidate.category === 'motherboard' ? candidate : selectedParts.motherboard
+  const storage = candidate.category === 'storage' ? candidate : selectedParts.storage
+  if (!board || !storage) return null
+
+  // A 2.5in SATA drive needs a SATA port, not an M.2 slot. Different question,
+  // same rule, because both answer "can this board physically attach it".
+  if (!/nvme|m\.2/i.test(storage.storageType ?? '')) {
+    const ports = board.specs?.sataPorts
+    if (typeof ports !== 'number') return { status: 'unverified', reason: `SATA ports on ${board.name ?? 'this motherboard'} are not verified` }
+    if (ports > 0) return null
+    return { status: 'blocked', reason: 'This board has no SATA ports' }
+  }
+
+  const slots = board.specs?.m2Slots
+  if (!Array.isArray(slots)) return { status: 'unverified', reason: `M.2 slots on ${board.name ?? 'this motherboard'} are not verified` }
+
+  const needsSata = storage.specs?.m2Sata === true
+  const usable = slots.filter((s) => (needsSata ? s.sata === true : true))
+  if (usable.length > 0) return null
+
+  return {
+    status: 'blocked',
+    reason: needsSata
+      ? 'This is a SATA M.2 drive; no M.2 slot on this board accepts SATA'
+      : 'This board has no M.2 slot',
+  }
+}
+
+const RULES = [powerConnectors, epsConnectors, gpuThickness, m2Interface]
 
 export function evaluateSpecRules(selectedParts, candidate) {
   return aggregate(RULES.map((rule) => rule(selectedParts, candidate)))

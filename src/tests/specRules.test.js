@@ -105,3 +105,49 @@ describe('rule 2: GPU thickness', () => {
     expect(evaluateSpecRules({ case: box({ expansionSlots: 7 }) }, gpu({})).status).toBe('unverified')
   })
 })
+
+const board = (specs) => ({ id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs })
+const drive = (specs) => ({ id: 's', category: 'storage', storageType: 'NVMe SSD', specs })
+
+describe('rule 3: M.2 interface', () => {
+  it('blocks a SATA M.2 drive when every slot is PCIe-only', () => {
+    const b = board({ m2Slots: [{ pcieGen: 5, sata: false }, { pcieGen: 4, sata: false }] })
+    const r = evaluateSpecRules({ motherboard: b }, drive({ m2FormFactor: '2280', m2Sata: true }))
+    expect(r.status).toBe('blocked')
+    expect(r.reason).toMatch(/SATA/i)
+  })
+
+  it('passes a SATA M.2 drive when one slot accepts SATA', () => {
+    const b = board({ m2Slots: [{ pcieGen: 5, sata: false }, { pcieGen: 4, sata: true }] })
+    expect(evaluateSpecRules({ motherboard: b }, drive({ m2FormFactor: '2280', m2Sata: true })).status).toBe('ok')
+  })
+
+  it('blocks any M.2 drive on a board with no M.2 slots at all', () => {
+    const r = evaluateSpecRules({ motherboard: board({ m2Slots: [] }) }, drive({ m2FormFactor: '2280', m2Sata: false }))
+    expect(r.status).toBe('blocked')
+  })
+
+  it('is unverified when the board does not list its M.2 slots', () => {
+    expect(evaluateSpecRules({ motherboard: board({}) }, drive({ m2FormFactor: '2280' })).status).toBe('unverified')
+  })
+
+  it('checks a 2.5in SATA drive against SATA ports, not M.2 slots', () => {
+    const b = board({ m2Slots: [], sataPorts: 4 })
+    const sata = { id: 's2', category: 'storage', storageType: 'SATA SSD', specs: {} }
+    expect(evaluateSpecRules({ motherboard: b }, sata).status).toBe('ok')
+  })
+
+  it('blocks a 2.5in SATA drive on a board with no SATA ports', () => {
+    const b = board({ m2Slots: [{ pcieGen: 5, sata: false }], sataPorts: 0 })
+    const sata = { id: 's2', category: 'storage', storageType: 'SATA SSD', specs: {} }
+    const r = evaluateSpecRules({ motherboard: b }, sata)
+    expect(r.status).toBe('blocked')
+    expect(r.reason).toMatch(/SATA port/i)
+  })
+
+  it('is unverified when the board does not state its SATA ports', () => {
+    const b = board({ m2Slots: [] })
+    const sata = { id: 's2', category: 'storage', storageType: 'SATA SSD', specs: {} }
+    expect(evaluateSpecRules({ motherboard: b }, sata).status).toBe('unverified')
+  })
+})
