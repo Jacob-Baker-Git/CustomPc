@@ -56,3 +56,33 @@ describe('partSources.json', () => {
     expect(offenders).toEqual([])
   })
 })
+
+// The inverse of the guard above, and together they make it a bijection: every
+// researched spec needs a source, AND every source must describe a spec that is
+// actually there. Without this second half the file drifts into claiming
+// provenance for data nobody ever added — which is exactly the state it shipped
+// in, with four entries for the RTX 4090 naming specs the part did not carry.
+//
+// ⚠️ Checks top-level fields too (`length`, `tdp`, `socket`), not just
+// `specs.*`. Those predate the research standard and are NOT yet required to
+// have sources — but once one is recorded, it has to be true.
+describe('every recorded source describes a spec that exists', () => {
+  it('has no provenance entry for an absent field', () => {
+    const byId = new Map(partsData.map((p) => [p.id, p]))
+    const orphans = []
+    for (const [partId, specs] of Object.entries(sources)) {
+      if (partId.startsWith('_')) continue
+      const part = byId.get(partId)
+      if (!part) {
+        orphans.push(`${partId} (no such part)`)
+        continue
+      }
+      for (const key of Object.keys(specs)) {
+        if (part.specs?.[key] === undefined && part[key] === undefined) {
+          orphans.push(`${partId}.${key}`)
+        }
+      }
+    }
+    expect(orphans, `sources describing nothing:\n${orphans.join('\n')}`).toEqual([])
+  })
+})
