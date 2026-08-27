@@ -7,6 +7,7 @@ import { initialsFor } from '../lib/gameInitials'
 import { artVariant } from '../lib/artVariant'
 import { genreFor } from '../lib/gameGenres'
 import { CATEGORIES } from '../lib/categories'
+import { GENRE_MARKS } from '../lib/gameGenreMarks'
 
 const PERIPHERALS = ['monitor', 'keyboard', 'mouse', 'headset']
 
@@ -155,5 +156,55 @@ describe('genreFor', () => {
   it('returns a neutral genre for anything unknown', () => {
     expect(genreFor({ id: 'not-a-game' })).toBe('other')
     expect(genreFor(undefined)).toBe('other')
+  })
+})
+
+describe('gameGenreMarks', () => {
+  // Every genre the app can actually produce must draw something. `other` is
+  // deliberately absent: a game with no genre has nothing to say, so GameArt
+  // falls back to its initials rather than inventing a symbol for it.
+  const DRAWN = [
+    'action-adventure', 'rpg', 'shooter',
+    'strategy-sim', 'horror', 'racing', 'moba', 'sports',
+  ]
+
+  it('has a mark for every genre that is not the neutral fallback', () => {
+    for (const g of DRAWN) {
+      expect(GENRE_MARKS[g], `a mark for ${g}`).toBeTypeOf('function')
+    }
+  })
+
+  it('has no mark for the neutral genre', () => {
+    expect(GENRE_MARKS.other).toBeUndefined()
+  })
+
+  // ⚠️ The whole point of these is that they survive being 24px wide. A hairline
+  // at 48 units is a third of a device pixel at 24 and disappears. Nothing here
+  // may be thinner than 2 units.
+  it('draws no stroke too thin to survive 24px', () => {
+    for (const g of DRAWN) {
+      const Mark = GENRE_MARKS[g]
+      const { container } = render(<svg viewBox="0 0 48 48"><Mark /></svg>)
+      const widths = [...container.querySelectorAll('[stroke-width]')]
+        .map((el) => Number(el.getAttribute('stroke-width')))
+      for (const w of widths) {
+        expect(w, `${g} stroke-width`).toBeGreaterThanOrEqual(2)
+      }
+    }
+  })
+
+  it('paints with currentColor so the plate decides the ink', () => {
+    for (const g of DRAWN) {
+      const Mark = GENRE_MARKS[g]
+      const { container } = render(<svg viewBox="0 0 48 48"><Mark /></svg>)
+      const painted = [...container.querySelectorAll('[fill], [stroke]')]
+      expect(painted.length, `${g} paints something`).toBeGreaterThan(0)
+      for (const el of painted) {
+        for (const attr of ['fill', 'stroke']) {
+          const v = el.getAttribute(attr)
+          if (v && v !== 'none') expect(v, `${g} ${attr}`).toBe('currentColor')
+        }
+      }
+    }
   })
 })
