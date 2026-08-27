@@ -32,13 +32,21 @@ const shooter = () => (
   </g>
 )
 
-// Upright sword: blade, notched crossguard, pommel.
+// A shield.
+//
+// ⚠️ This replaced an upright sword, and the sword was a genuine failure rather
+// than a matter of taste. Rasterised at a true 24px its blade, crossguard and
+// pommel collapsed into a plain PLUS SIGN — in a list of games that reads as
+// "add", or as a medical cross, which is worse than an unrecognisable mark
+// because it confidently says the wrong thing. The tell was that it looked
+// perfectly good at 96px.
+//
+// One filled silhouette with no internal detail cannot collapse that way, and a
+// shield stays distinct from the other marks: nothing else here is a rounded
+// solid.
 const rpg = () => (
   <g fill="currentColor">
-    <path d="M22 7h4v20h-4z" />
-    <path d="M13 27h22v4H13z" />
-    <path d="M22 31h4v7h-4z" />
-    <circle cx="24" cy="40" r="3" />
+    <path d="M24 7l14 5v12c0 9-6 15-14 18-8-3-14-9-14-18V12z" />
   </g>
 )
 
@@ -50,20 +58,24 @@ const actionAdventure = () => (
   </g>
 )
 
-// Three-cell hex cluster: a map, a grid, a colony.
+// Three rising bars — production, economy, a city growing. Filled rather than
+// outlined and 3 units apart, because the outlined hex cluster this replaces
+// was measured as the weakest mark in the set at 24px: anti-aliasing rounded
+// its vertices away and it read as three fuzzy rings.
 const strategySim = () => (
-  <g fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round">
-    <path d="M24 8l7 4v8l-7 4-7-4v-8z" />
-    <path d="M15 24l7 4v8l-7 4-7-4v-8z" />
-    <path d="M33 24l7 4v8l-7 4-7-4v-8z" />
+  <g fill="currentColor">
+    <rect x="9"  y="28" width="8" height="12" rx="1.5" />
+    <rect x="20" y="20" width="8" height="20" rx="1.5" />
+    <rect x="31" y="11" width="8" height="29" rx="1.5" />
   </g>
 )
 
-// Crescent moon with two bare branches.
+// A crescent, and nothing else. The bare branches that used to sit beside it
+// measured invisible at 24px, so they were spending contrast on detail nobody
+// could resolve; the crescent alone is the whole mark and can be larger for it.
 const horror = () => (
-  <g fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round">
-    <path d="M30 10a12 12 0 100 20 14 14 0 010-20z" fill="currentColor" stroke="none" />
-    <path d="M12 40V24M12 30l-5-5M12 32l5-5" />
+  <g fill="currentColor">
+    <path d="M31 9a15 15 0 100 30 18 18 0 010-30z" />
   </g>
 )
 
@@ -75,11 +87,13 @@ const racing = () => (
   </g>
 )
 
-// Two lanes crossing behind a nexus diamond.
+// A nexus above its lane. The previous version crossed two diagonals THROUGH
+// the diamond, and at 24px the three fused into one blob — the shapes need
+// clear air between them, not just different geometry.
 const moba = () => (
-  <g fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round">
-    <path d="M10 38L38 10M10 10l28 28" />
-    <path d="M24 16l6 8-6 8-6-8z" fill="currentColor" stroke="none" />
+  <g fill="currentColor">
+    <path d="M24 10l9 11-9 11-9-11z" />
+    <rect x="6" y="36" width="36" height="4" rx="2" />
   </g>
 )
 
