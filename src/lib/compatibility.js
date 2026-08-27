@@ -1,3 +1,5 @@
+import { evaluateSpecRules } from './specRules'
+
 // DDR5-only platforms: no DDR4 memory controller exists for these sockets,
 // so the RAM check can fire even before a motherboard is picked.
 const DDR5_ONLY_SOCKETS = ['AM5', 'LGA1851']
@@ -128,6 +130,12 @@ export function checkCompatibility(selectedParts, candidate) {
       return blocked(`Would draw ${draw}W; your PSU supplies ${psu.wattage}W`)
   }
 
+  // ⚠️ Reached only when every existing check passed, so a block here cannot be
+  // masking one above it. New rules may still block, or report unverified.
+  const spec = evaluateSpecRules(selectedParts, candidate)
+  if (spec.status === 'blocked') return blocked(spec.reason)
+  if (spec.status === 'unverified')
+    return { status: 'unverified', compatible: true, reason: spec.reason }
   return ok()
 }
 
