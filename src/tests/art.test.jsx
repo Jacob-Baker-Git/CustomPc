@@ -140,16 +140,40 @@ describe('GameArt', () => {
     expect(idOf(a.container)).not.toBe(idOf(b.container))
   })
 
-  it('draws the genre mark instead of initials when the genre is known', () => {
+  // ⚠️ BOTH, not either — and this is the assertion that stops the regression
+  // coming back. A genre-mark-only plate was built and shipped to a screenshot
+  // first: on the real Performance tab all thirteen shooters became the same
+  // reticle on the same gold and the rows stopped being tellable apart. The
+  // mark says what KIND of game; only the initials say WHICH one.
+  it('draws the genre mark AND keeps the initials that identify the row', () => {
     const { container } = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
     expect(container.querySelector('[data-genre-mark]'), 'the mark').not.toBeNull()
-    expect(container.querySelector('text'), 'no initials alongside it').toBeNull()
+    expect(container.querySelector('text').textContent, 'the initials').toBe('CS')
   })
 
-  it('falls back to initials when the genre is unknown', () => {
+  // Two games of one genre share a mark, so the initials are the only thing
+  // left that differs. If they ever stop rendering, every row in a genre
+  // becomes the same tile.
+  it('tells two games of the same genre apart by their initials', () => {
+    const a = render(<GameArt name="Doom Eternal" genre="shooter" seed="doom-eternal" />)
+    const b = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
+    expect(a.container.querySelector('text').textContent).toBe('DE')
+    expect(b.container.querySelector('text').textContent).toBe('CS')
+  })
+
+  it('still draws initials when the genre is unknown', () => {
     const { container } = render(<GameArt name="Some Game" genre="other" seed="sg" />)
     expect(container.querySelector('[data-genre-mark]')).toBeNull()
     expect(container.querySelector('text').textContent).toBe('SG')
+  })
+
+  // The watermark must stay well behind the initials. At full strength it
+  // competes with the two characters that are doing the identifying.
+  it('keeps the mark faint enough to sit behind the initials', () => {
+    const { container } = render(<GameArt name="Counter Strike" genre="shooter" seed="cs2" />)
+    const op = Number(container.querySelector('[data-genre-mark]').getAttribute('opacity'))
+    expect(op).toBeGreaterThan(0)
+    expect(op).toBeLessThanOrEqual(0.3)
   })
 
   // The plate is what tells two same-genre rows apart, so it must keep varying

@@ -76,24 +76,42 @@ export default function GameArt({ name, genre, seed, className = '', rounded = '
         fill="#FFFFFF"
         opacity="0.08"
       />
-      {Mark ? (
-        <g data-genre-mark={genre} color={g.ink} opacity="0.92">
+      {/* ⚠️ The mark is a WATERMARK, and the initials stay on top of it. Both,
+          not either.
+
+          The genre mark alone was tried and looked better in isolation than it
+          worked in place: on the real Performance tab all thirteen shooters
+          became the same reticle on the same gold, and the rows stopped being
+          tellable apart. That defeats the only thing this artwork is for —
+          letting the eye find a row it has already looked at — and the initials
+          it replaced did that job better.
+
+          So the mark answers "what kind of game" and the initials answer "which
+          one". At 24px the watermark reads as texture and colour rather than as
+          a symbol, which is the right amount of presence for the thing that is
+          NOT the identifier. Scaled about the centre so it fills the plate. */}
+      {Mark && (
+        <g
+          data-genre-mark={genre}
+          color={g.ink}
+          opacity="0.22"
+          transform="translate(24 24) scale(1.5) translate(-24 -24)"
+        >
           <Mark />
         </g>
-      ) : (
-        <text
-          x="24" y="24"
-          textAnchor="middle"
-          dominantBaseline="central"
-          fill={g.ink}
-          fontSize="19"
-          fontWeight="800"
-          fontFamily="Archivo, ui-sans-serif, sans-serif"
-          letterSpacing="-0.5"
-        >
-          {initialsFor(name)}
-        </text>
       )}
+      <text
+        x="24" y="24"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill={g.ink}
+        fontSize="19"
+        fontWeight="800"
+        fontFamily="Archivo, ui-sans-serif, sans-serif"
+        letterSpacing="-0.5"
+      >
+        {initialsFor(name)}
+      </text>
     </svg>
   )
 }
