@@ -126,6 +126,33 @@ body {
 .build-grid > * { position: relative; z-index: 1; }
 .build-grid > .area-viz { z-index: 0; }
 
+/* ⚠️ `display: contents` generates NO BOX, so the rule above does not reach
+   these two — selectors match the DOM tree, not the box tree, and they are
+   still grandchildren. Without this they lose `z-index: 1` and paint UNDER the
+   WebGL canvas, which is the compositing gotcha described at the top of this
+   block. Give them the same two properties explicitly. */
+.build-grid > .area-left { display: contents; }
+.build-grid .area-usecase,
+.build-grid .area-rating { position: relative; z-index: 1; }
+
+/* The phone's reading order: what you picked, what it looks like, what it
+   scores — then the inputs and the checks. The user's words: "pick your parts
+   3d view then score".
+
+   `order` and not a JSX reshuffle, so the source keeps resembling the desktop
+   grid-template-areas that a reader checks. Safe above lg because every
+   .area-* is EXPLICITLY placed by grid-area there, and explicit placement
+   ignores order (only AUTO-placement consumes it). Paint order does still
+   follow `order`, which is why the z-index rules above are load-bearing rather
+   than decorative. */
+.build-grid > .area-parts     { order: 1; }
+.build-grid > .area-viz       { order: 2; }
+.build-grid .area-rating      { order: 3; }
+.build-grid .area-usecase     { order: 4; }
+.build-grid > .area-banner    { order: 5; }
+.build-grid > .area-warnings  { order: 6; }
+.build-grid > .area-autobuild { order: 7; }
+
 /* Give the vertical axis back to the page on touch devices.
 
    three.js OrbitControls sets `touch-action: none` on its canvas when it
@@ -190,7 +217,24 @@ body {
      `auto` and let the 3D panel hang below the column beside it. align-self
      pins the two to the same bottom edge by definition. */
   .build-grid > .area-viz       { grid-area: viz; align-self: stretch; }
-  .build-grid > .area-left      { grid-area: left; }
+  /* Back from `display: contents` — above lg this is a real flex column in the
+     left cell again, and the two panels inside it are laid out by IT, not by
+     the grid. Their mobile `order` is NOT inert here and is reset just below —
+     see the note on that rule. */
+  .build-grid > .area-left      { display: flex; flex-direction: column; gap: 0.75rem; grid-area: left; }
+  /* ⚠️ The mobile `order` rules MUST be reset here, and the reason is subtle
+     enough that it shipped as a bug once: `.area-left` is a real flex container
+     again above lg, so .area-usecase / .area-rating are flex items OF IT — a
+     descendant `order` still applies and silently flips the chips below the
+     score. They are not items of .build-grid, which is what made "inert above
+     lg" look true. Measured before this reset: rating top=76, usecase top=1437,
+     i.e. reversed, which fails e2e/wizard.spec.js:91.
+
+     The selectors must stay DESCENDANT rather than `>`: `display: contents`
+     does not change the DOM, so .area-rating's parent is always .area-left and
+     a child combinator from .build-grid would never match at any width. */
+  .build-grid .area-usecase,
+  .build-grid .area-rating { order: 0; }
   .build-grid > .area-banner    { grid-area: banner; }
   .build-grid > .area-parts     { grid-area: parts; }
   .build-grid > .area-warnings  { grid-area: warnings; }
