@@ -1,0 +1,9 @@
+{
+  "_README": "Provenance for researched hardware specs. Build/authoring input ONLY - never imported by src/, so it never reaches the browser. Same rule as data/benchmarks/. Keyed part id -> spec key -> {url, checkedOn}.",
+  "gpu-rtx-4090": {
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-27" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-27" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-27" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-27" }
+  }
+}

@@ -204,3 +204,39 @@ describe('getLockedReasons', () => {
     expect(reasons['cpu-i7-13700k']).toMatch(/socket/i)
   })
 })
+
+describe('three-state verdict', () => {
+  it('reports status ok when nothing blocks', () => {
+    const r = checkCompatibility({ motherboard: mbAM5 }, cpuAM5)
+    expect(r.status).toBe('ok')
+    expect(r.compatible).toBe(true)
+  })
+
+  it('reports status blocked when a check fails, and keeps compatible false', () => {
+    const r = checkCompatibility({ motherboard: mbAM5 }, cpuIntel)
+    expect(r.status).toBe('blocked')
+    expect(r.compatible).toBe(false)
+  })
+
+  it('derives compatible from status rather than carrying an independent flag', () => {
+    // compatible must never disagree with status, for every part in the
+    // catalogue against a realistic build.
+    for (const part of partsData) {
+      const r = checkCompatibility({ motherboard: mbAM5, cpu: cpuAM5 }, part)
+      expect(r.compatible).toBe(r.status !== 'blocked')
+    }
+  })
+})
+
+describe('getLockedReasons', () => {
+  // ⚠️ If this ever fails, the catalogue has become unusable: no part carries
+  // the researched specs yet, so locking on unverified would lock everything.
+  it('locks on blocked but never on unverified', () => {
+    const boardNoSlots = { ...mbAM5, specs: { ...mbAM5.specs } }
+    const locked = getLockedReasons({ motherboard: boardNoSlots }, partsData)
+    for (const part of partsData) {
+      const { status } = checkCompatibility({ motherboard: boardNoSlots }, part)
+      if (status === 'unverified') expect(locked[part.id]).toBeUndefined()
+    }
+  })
+})

@@ -39,3 +39,55 @@ describe('getBuildWarnings', () => {
     expect(w.some((x) => /headroom/i.test(x.message))).toBe(false)
   })
 })
+
+describe('cooler thermal headroom', () => {
+  it('warns when the cooler is rated below the CPU TDP', () => {
+    const cpu = { id: 'c', category: 'cpu', socket: 'AM5', tdp: 170, specs: {} }
+    const cooler = { id: 'k', category: 'cooler', sockets: ['AM5'], tdp: 5, specs: { type: 'Air', height: 150, ratedTdpW: 95 } }
+    const w = getBuildWarnings({ cpu, cooler })
+    expect(w.some((x) => x.level === 'warning' && /cooler/i.test(x.message))).toBe(true)
+  })
+
+  it('says nothing when the cooler is rated above the CPU TDP', () => {
+    const cpu = { id: 'c', category: 'cpu', socket: 'AM5', tdp: 105, specs: {} }
+    const cooler = { id: 'k', category: 'cooler', sockets: ['AM5'], tdp: 5, specs: { type: 'Air', height: 150, ratedTdpW: 250 } }
+    const w = getBuildWarnings({ cpu, cooler })
+    expect(w.some((x) => /rated for/i.test(x.message))).toBe(false)
+  })
+
+  // ⚠️ Most coolers publish no rating at all. Silence, not a warning.
+  it('says nothing when the cooler publishes no rating', () => {
+    const cpu = { id: 'c', category: 'cpu', socket: 'AM5', tdp: 170, specs: {} }
+    const cooler = { id: 'k', category: 'cooler', sockets: ['AM5'], tdp: 5, specs: { type: 'Air', height: 150 } }
+    const w = getBuildWarnings({ cpu, cooler })
+    expect(w.some((x) => /rated for/i.test(x.message))).toBe(false)
+  })
+})
+
+describe('advisories', () => {
+  // ⚠️ PCIe is backward compatible. Blocking here would invent an
+  // incompatibility that does not exist.
+  it('notes a Gen5 GPU in a Gen4 board without warning or blocking', () => {
+    const mb = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: { pcieGen: 4 } }
+    const gpu = { id: 'g', category: 'gpu', tdp: 300, specs: { pcieGen: 5 } }
+    const w = getBuildWarnings({ motherboard: mb, gpu })
+    const note = w.find((x) => /PCIe/i.test(x.message))
+    expect(note).toBeDefined()
+    expect(note.level).toBe('note')
+  })
+
+  it('notes RAM faster than the board is rated for', () => {
+    const mb = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: { maxRamSpeed: 5600 } }
+    const ram = { id: 'r', category: 'ram', ramType: 'DDR5', speed: 8000, capacityGb: 32, specs: { sticks: 2 } }
+    const w = getBuildWarnings({ motherboard: mb, ram })
+    expect(w.find((x) => /8000/.test(x.message))?.level).toBe('note')
+  })
+
+  it('sorts notes below warnings and criticals', () => {
+    const mb = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: { pcieGen: 4 } }
+    const gpu = { id: 'g', category: 'gpu', tdp: 300, specs: { pcieGen: 5 } }
+    const w = getBuildWarnings({ motherboard: mb, gpu })
+    const levels = w.map((x) => x.level)
+    expect(levels.indexOf('note')).toBe(levels.length - 1)
+  })
+})
