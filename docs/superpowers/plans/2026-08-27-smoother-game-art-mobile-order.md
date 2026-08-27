@@ -18,6 +18,23 @@
 2. **jsdom computes no layout.** `getBoundingClientRect()` returns all zeroes in Vitest. Every geometric assertion belongs in `e2e/`, run with `npm run test:e2e`.
 3. **Run `npm run lint` before every commit.** `react-refresh/only-export-components` fires on a `.jsx` file that exports both a component and a plain function, and it has already bitten `GameArt.jsx` once.
 4. **A screenshot of the 3D canvas is worthless.** Pixel-diffing it captures a blank rectangle. Verify 3D by instrumenting frames or reading GL state, never by image comparison.
+5. 🛑 **NEVER set `PORT` when running Playwright.** This cost an agent ~20 minutes and looked exactly like broken infrastructure.
+
+   `playwright.config.js:33` declares `webServer` as an **array**, and Playwright
+   starts *every* entry regardless of `--project`. The second entry runs
+   `npm run build && npm run preview:csp` and waits on `http://localhost:4184`.
+   But `scripts/preview-csp.mjs:28` reads `Number(process.env.PORT ?? 4184)` — so
+   a `PORT=5180` set to dodge a busy dev-server port makes the CSP server bind to
+   **5180 while Playwright waits on 4184**, until the 120s timeout.
+
+   The symptom is `Error: Timed out waiting 120000ms from config.webServer` with
+   a *successful* build in the log directly above it, which reads as "the build
+   is too slow". It is not: the build takes **2.4s**, and a clean
+   `npx playwright test e2e/wizard.spec.js` completes in **8.4s**.
+
+   The first `webServer` entry has `reuseExistingServer: true` on port 5173, so
+   an already-running dev server is reused automatically. There is no reason to
+   set `PORT` at all.
 
 ---
 
