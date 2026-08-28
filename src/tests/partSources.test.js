@@ -123,3 +123,24 @@ describe('unverifiable records', () => {
     expect(contradictions, `marked unverifiable but still carrying a value:\n${contradictions.join('\n')}`).toEqual([])
   })
 })
+
+// The guard above covers `specs.*` only, which is exactly how a wrong top-level
+// `length` sat in the catalogue unnoticed for months. Requiring sources for
+// length and tdp across all 559 parts today would fail instantly, so it is
+// switched on ONE CATEGORY AT A TIME, as each is brought up to standard.
+const VERIFIED_CATEGORIES = new Set([])
+const RATCHETED_KEYS = ['length', 'tdp']
+
+describe('verified categories', () => {
+  it('requires a source for top-level length and tdp once a category is verified', () => {
+    const missing = []
+    for (const part of partsData) {
+      if (!VERIFIED_CATEGORIES.has(part.category)) continue
+      for (const key of RATCHETED_KEYS) {
+        if (part[key] === undefined) continue
+        if (!sources[part.id]?.[key]) missing.push(`${part.id}.${key}`)
+      }
+    }
+    expect(missing, `verified-category fields with no source:\n${missing.join('\n')}`).toEqual([])
+  })
+})
