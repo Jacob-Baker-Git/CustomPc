@@ -2906,11 +2906,15 @@
     "brand": "NVIDIA",
     "price": 1899.99,
     "tdp": 575,
-    "length": 357,
+    "length": 304,
     "perfScore": 132,
     "specs": {
       "vram": 32,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 4 }
     }
   },
   {
@@ -2920,11 +2924,15 @@
     "brand": "NVIDIA",
     "price": 999.99,
     "tdp": 360,
-    "length": 340,
+    "length": 304,
     "perfScore": 93,
     "specs": {
       "vram": 16,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
@@ -2948,11 +2956,15 @@
     "brand": "NVIDIA",
     "price": 539.99,
     "tdp": 250,
-    "length": 250,
+    "length": 242,
     "perfScore": 70,
     "specs": {
       "vram": 12,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {

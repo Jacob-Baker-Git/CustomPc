@@ -155,5 +155,35 @@
     "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
     "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "1x PCIe 8-pin (adapter to 1x 12-pin included)" },
     "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-5090": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "Founders Edition 304 mm x 137 mm, 2-slot. The catalogue's 357 mm was 53 mm too long - the largest single error found in this catalogue so far, on the flagship." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 575 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "Gen 5" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "4x PCIe 8-pin cables (adapter in box) OR 1x 600 W PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-5080": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "Founders Edition 304 mm x 137 mm, 2-slot. The catalogue's 340 mm was 36 mm too long." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 360 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "Gen 5" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "3x PCIe 8-pin cables (adapter in box) OR 1x 450 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-5070": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Founders Edition 242 mm x 112 mm, 2-slot. Only the 5070 carries published FE dimensions on this page; the 5070 Ti says 'Varies by manufacturer'." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 250 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Gen 5" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" }
   }
 }
