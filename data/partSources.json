@@ -2,9 +2,58 @@
   "_README": "Provenance for researched hardware specs. Build/authoring input ONLY - never imported by src/, so it never reaches the browser. Same rule as data/benchmarks/. Keyed part id -> spec key -> {url, checkedOn} for a verified figure, or {checkedOn, result: 'unverifiable', note} when the figure is not published anywhere and the field has been DELETED from partsData.json.",
   "gpu-rtx-4090": {
     "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 450 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4070ti": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070ti-o12g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA made no Founders Edition 4070 Ti, so the part models one named partner card. ASUS lists 305 x 138 x 65 mm." },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070ti-o12g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 3.25 Slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "SKU-level TGP 285 W; ASUS does not publish a board power for the card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box; ASUS lists 1 x Adapter Cable (1 to 2)" }
+  },
+  "gpu-rtx-2060": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28", "note": "NVIDIA retired the RTX 2060 product page - it now redirects to a 20-series stub carrying no dimensions or power figures. Reference-design figures taken from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28", "note": "PCIe 3.0 x16 - Turing, not 4.0" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-7900xtx": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions section: Length 287 mm. KitGuru's 276 mm is an outlier against AMD, The FPS Review and XFX." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 355 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions section: Slots 2.5" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 2x8-Pin" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-7900-xtx.c3941", "checkedOn": "2026-08-28", "note": "AMD does not publish a PCIe generation on the product page" }
+  },
+  "gpu-rx-7600": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "AMD publishes reference dimensions for this card, so no rename to a partner card was needed. Length 204 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 165 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions section: Slots 2" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin" },
+    "pcieGen": { "url": "https://www.techpowerup.com/309079/amd-launches-radeon-rx-7600-graphics-card", "checkedOn": "2026-08-28", "note": "PCIe 4.0 x8 - AMD does not publish a PCIe generation on the product page. Only the generation is modelled, not the lane count." }
+  },
+  "gpu-intel-arc-a770": {
+    "length": { "url": "https://www.intel.com/content/www/us/en/support/articles/000092554/graphics.html", "checkedOn": "2026-08-28", "note": "Intel publishes 268.6 mm without I/O bracket and 279.9 mm with it. Case GPU clearance is measured against the card body, so the without-bracket figure is the one modelled." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 225 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28", "note": "Up to PCI Express 4.0 x16" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/arc-a770.c3914", "checkedOn": "2026-08-28", "note": "Intel publishes a shroud height of 40.81 mm but no slot count" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/arc-a770.c3914", "checkedOn": "2026-08-28", "note": "1x 6-pin + 1x 8-pin; Intel does not publish connectors on the SKU page" }
   }
 }

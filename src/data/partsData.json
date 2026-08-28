@@ -622,15 +622,19 @@
   {
     "id": "gpu-rtx-4070ti",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4070 Ti",
+    "name": "ASUS TUF Gaming GeForce RTX 4070 Ti OC",
     "brand": "NVIDIA",
     "price": 799.99,
     "tdp": 285,
-    "length": 336,
+    "length": 305,
     "perfScore": 72,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3.25,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -658,7 +662,10 @@
     "perfScore": 88,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -668,11 +675,14 @@
     "brand": "AMD",
     "price": 259.99,
     "tdp": 165,
-    "length": 210,
+    "length": 204,
     "perfScore": 42,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -875,15 +885,18 @@
   {
     "id": "gpu-intel-arc-a770",
     "category": "gpu",
-    "name": "Intel Arc A770 16GB",
+    "name": "Intel Arc A770 Limited Edition 16GB",
     "brand": "Intel",
     "price": 279.99,
     "tdp": 225,
-    "length": 280,
+    "length": 268.6,
     "perfScore": 44,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7333,7 +7346,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
