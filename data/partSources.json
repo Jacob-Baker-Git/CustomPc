@@ -322,7 +322,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx7900xt-o20g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "AMD publishes no PCIe generation for any card, so this comes from a named partner board carrying the same GPU: ASUS TUF Gaming RX 7900 XT states PCI Express 4.0. The part still models AMD's reference card." }
   },
   "gpu-rx-7800xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5. The 267 mm the catalogue held for this card is genuinely AMD's reference length, not a guess." },
@@ -339,7 +340,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7700xt-o12g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 7700 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-7600xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 241 mm, Slots 2. The catalogue's 267 mm was the AMD bucket value and is 26 mm too long for this card." },
@@ -347,7 +349,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7600xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 7600 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-6900-xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
@@ -355,7 +358,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6900xt-t16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS TUF Gaming RX 6900 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-6800-xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
@@ -363,7 +367,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6800xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS TUF Gaming RX 6800 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-6800": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2 - same length as the 6800 XT but one slot thinner." },
@@ -371,7 +376,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6800-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS TUF Gaming RX 6800 states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-6750xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2" },
@@ -379,7 +385,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6750xt-o12g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 6750 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-6700-xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2" },
@@ -387,7 +394,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6700xt-o12g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 6700 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
   },
   "gpu-rx-7900-gre": {
     "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD's 7900 GRE page carries no Dimensions section, so the part models one named partner card. ASUS lists 279.9 x 133.9 x 49.3 mm." },

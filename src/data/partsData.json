@@ -755,6 +755,7 @@
       "vram": 20,
       "memType": "GDDR6",
       "slotsThick": 2.5,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 2 }
     }
   },
@@ -788,6 +789,7 @@
       "vram": 12,
       "memType": "GDDR6",
       "slotsThick": 2.5,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 2 }
     }
   },
@@ -906,6 +908,7 @@
       "vram": 16,
       "memType": "GDDR6",
       "slotsThick": 2,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 2 }
     }
   },
@@ -922,6 +925,7 @@
       "vram": 12,
       "memType": "GDDR6",
       "slotsThick": 2,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
@@ -4050,6 +4054,7 @@
       "vram": 12,
       "memType": "GDDR6",
       "slotsThick": 2,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
@@ -5679,6 +5684,7 @@
       "vram": 16,
       "memType": "GDDR6",
       "slotsThick": 2,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 2 }
     }
   },
@@ -5695,6 +5701,7 @@
       "vram": 16,
       "memType": "GDDR6",
       "slotsThick": 2.5,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 2 }
     }
   },
@@ -5711,6 +5718,7 @@
       "vram": 16,
       "memType": "GDDR6",
       "slotsThick": 2.5,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 2 }
     }
   },
