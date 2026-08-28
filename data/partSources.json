@@ -330,7 +330,8 @@
     "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7800xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD publishes no PCIe generation for any card, so this comes from a named partner board carrying the same GPU: ASUS states PCI Express 4.0. The part itself still models AMD's reference card." }
   },
   "gpu-rx-7700xt": {
     "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
@@ -387,5 +388,103 @@
     "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
     "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" }
+  },
+  "gpu-rx-7900-gre": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD's 7900 GRE page carries no Dimensions section, so the part models one named partner card. ASUS lists 279.9 x 133.9 x 49.3 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-gre.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 260 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-gre.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-gre.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.47 slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states PCI Express 4.0; AMD publishes no PCIe generation anywhere." },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9070xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD shipped no reference RDNA 4 card - no 9000-series page has a Dimensions section - so the part models one named partner card. ASUS lists 312 x 130 x 50 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 304 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 3 x 8-pin. NOTE this differs from AMD's reference figure of 2x8-Pin: the ASUS OC card really does take a third. Recorded for the card actually modelled." }
+  },
+  "gpu-rx-9070": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 312 x 130 x 50 mm. The catalogue's 267 mm was the AMD bucket value and 45 mm too short." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 220 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9060xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 304 x 126 x 50 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 160 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9060-xt-8gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 304 x 126 x 50 mm - the same board as the 16GB card." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt-8gb.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 150 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt-8gb.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt-8gb.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9070-gre": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 312 x 130 x 50 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070-gre.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 220 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070-gre.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070-gre.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6950-xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "AMD's 6950 XT page carries no Dimensions section, so the part models one named partner card. ASUS lists 320 x 140.2 x 57.8 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6950-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 335 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6950-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6950-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.9 Slot - the thickest card in the catalogue." },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6650xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28", "note": "AMD publishes no Dimensions for this card, so the part models one named partner card. ASUS lists 243 x 134 x 49 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6650-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 180 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6650-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6650-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6600-xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 243 x 134 x 49 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 160 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6600": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 243 x 134 x 49 mm. The catalogue's 190 mm was 53 mm too short." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 132 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6500xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 201 x 128 x 40 mm. ⚠️ tdp is deliberately NOT sourced here: AMD's reachable 6500 XT page describes the 8GB variant (113 W, Max Memory 8 GB) while the catalogue models the 4GB card at 107 W, and AMD's separate '(4GB)' page 404s. Left unresearched rather than attributing the wrong variant's figure." },
+    "vram": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 4GB GDDR6, matching the 4GB variant the catalogue models." },
+    "memType": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 6-pin" }
   }
 }
