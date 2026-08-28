@@ -839,7 +839,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -4726,7 +4729,10 @@
     "legacy": true,
     "specs": {
       "vram": 4,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": {  }
     }
   },
   {
@@ -5537,7 +5543,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7533,7 +7542,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7548,7 +7560,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7563,7 +7578,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7578,7 +7596,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7593,7 +7614,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7608,7 +7632,10 @@
     "legacy": true,
     "specs": {
       "vram": 11,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -7623,7 +7650,10 @@
     "legacy": true,
     "specs": {
       "vram": 4,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": {  }
     }
   },
   {
@@ -7638,7 +7668,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie6": 1 }
     }
   },
   {
@@ -7653,7 +7686,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7668,7 +7704,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7683,7 +7722,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR5X"
+      "memType": "GDDR5X",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7698,7 +7740,10 @@
     "legacy": true,
     "specs": {
       "vram": 11,
-      "memType": "GDDR5X"
+      "memType": "GDDR5X",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7708,12 +7753,15 @@
     "brand": "AMD",
     "price": 119.99,
     "tdp": 130,
-    "length": 200,
+    "length": 180,
     "perfScore": 18,
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7723,12 +7771,15 @@
     "brand": "AMD",
     "price": 149.99,
     "tdp": 150,
-    "length": 230,
+    "length": 267,
     "perfScore": 26,
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7743,7 +7794,8 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7758,7 +7810,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -8178,7 +8233,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
