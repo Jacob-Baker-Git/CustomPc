@@ -643,12 +643,16 @@
     "name": "NVIDIA GeForce RTX 4060 Ti",
     "brand": "NVIDIA",
     "price": 399.99,
-    "tdp": 165,
-    "length": 240,
+    "tdp": 160,
+    "length": 244,
     "perfScore": 50,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 1 }
     }
   },
   {
@@ -724,15 +728,18 @@
   {
     "id": "gpu-rtx-4060",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4060",
+    "name": "ASUS Dual GeForce RTX 4060 OC 8GB",
     "brand": "NVIDIA",
     "price": 289.99,
     "tdp": 115,
-    "length": 200,
+    "length": 227.2,
     "perfScore": 40,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -851,15 +858,18 @@
   {
     "id": "gpu-rtx-4060ti-16gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4060 Ti 16GB",
+    "name": "ASUS Dual GeForce RTX 4060 Ti OC 16GB",
     "brand": "NVIDIA",
     "price": 449.99,
     "tdp": 165,
-    "length": 240,
+    "length": 227.2,
     "perfScore": 52,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -2938,15 +2948,19 @@
   {
     "id": "gpu-rtx-5070ti",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5070 Ti",
+    "name": "ASUS Prime GeForce RTX 5070 Ti OC 16GB",
     "brand": "NVIDIA",
     "price": 729.99,
     "tdp": 300,
-    "length": 300,
+    "length": 304,
     "perfScore": 86,
     "specs": {
       "vram": 16,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -2970,29 +2984,35 @@
   {
     "id": "gpu-rtx-5060ti",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5060 Ti 16GB",
+    "name": "ASUS Prime GeForce RTX 5060 Ti OC 16GB",
     "brand": "NVIDIA",
     "price": 399.99,
     "tdp": 180,
-    "length": 245,
+    "length": 304,
     "perfScore": 55,
     "specs": {
       "vram": 16,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-5060",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5060",
+    "name": "ASUS Prime GeForce RTX 5060 OC 8GB",
     "brand": "NVIDIA",
     "price": 289.99,
     "tdp": 145,
-    "length": 200,
+    "length": 268.3,
     "perfScore": 46,
     "specs": {
       "vram": 8,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -5544,29 +5564,35 @@
   {
     "id": "gpu-rtx-5050",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5050",
+    "name": "ASUS Prime GeForce RTX 5050 OC 8GB",
     "brand": "NVIDIA",
     "price": 229.99,
     "tdp": 130,
-    "length": 244,
+    "length": 268.3,
     "perfScore": 38,
     "specs": {
       "vram": 8,
-      "memType": "GDDR7"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-5060-ti-8gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5060 Ti 8GB",
+    "name": "ASUS Prime GeForce RTX 5060 Ti OC 8GB",
     "brand": "NVIDIA",
     "price": 349.99,
     "tdp": 180,
-    "length": 244,
+    "length": 304,
     "perfScore": 52,
     "specs": {
       "vram": 8,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {

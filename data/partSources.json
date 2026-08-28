@@ -185,5 +185,79 @@
     "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Gen 5" },
     "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
     "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4060ti": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 244 mm x 112 mm, 2-slot. NVIDIA publishes FE dimensions for the 8GB 4060 Ti; the 16GB was partner-only." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-4060-ti-8-gb.c3890", "checkedOn": "2026-08-28", "note": "NVIDIA publishes an ambiguous '165 or 160' covering both capacities. TechPowerUp separates them: the 8GB is 160 W, the 16GB is 165 W. The catalogue had both at 165." },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28", "note": "1x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4060ti-16gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA made no Founders Edition 4060 Ti 16GB, so the part models one named partner card. ASUS lists 227.2 x 123.24 x 49.6 mm." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-4060-ti-16-gb.c4155", "checkedOn": "2026-08-28", "note": "165 W for the 16GB card; NVIDIA's page gives an ambiguous '165 or 160' for both capacities." },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin. This partner card uses a native 8-pin, not the FE's 12VHPWR, so no adapter is involved." }
+  },
+  "gpu-rtx-4060": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 4060, so the part models one named partner card. ASUS lists 227.2 x 123.24 x 49.6 mm. The catalogue's 200 mm was a shared bucket value." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 115 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists one 8-pin" }
+  },
+  "gpu-rtx-5070ti": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5070ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 5070 Ti, so the part models one named partner card. ASUS lists 304 x 126 x 50 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 300 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5070ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5070ti-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "ASUS does not list the connector; NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box, from 2x PCIe 8-pin" }
+  },
+  "gpu-rtx-5060ti": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 5060 Ti, so the part models one named partner card. ASUS lists 304 x 120 x 50 mm; the catalogue's 245 mm was a guess." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 180 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists a single 8-pin" }
+  },
+  "gpu-rtx-5060-ti-8gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 304 x 120 x 50 mm. The catalogue's 244 mm was a guess." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 180 W, the same as the 16GB card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-5060": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer', so the part models one named partner card. ASUS lists 268.3 x 120 x 50 mm. The catalogue's 200 mm was a shared bucket value it held alongside an Arc A380." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 145 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists a single 8-pin" }
+  },
+  "gpu-rtx-5050": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer', so the part models one named partner card. ASUS lists 268.3 x 120 x 50 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5050/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 130 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5050/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5050/", "checkedOn": "2026-08-28", "note": "GDDR6, NOT GDDR7. The catalogue said GDDR7; both NVIDIA and ASUS say GDDR6." },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
   }
 }

@@ -23,9 +23,9 @@ exports[`verdict spread > matches the committed snapshot (cramped) 1`] = `
     "unverified": 46,
   },
   "gpu": {
-    "blocked": 20,
+    "blocked": 22,
     "ok": 0,
-    "unverified": 59,
+    "unverified": 57,
   },
   "motherboard": {
     "blocked": 57,
