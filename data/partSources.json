@@ -493,7 +493,8 @@
     "memType": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
     "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 6-pin" }
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 6-pin" },
+    "tdp": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "AMD lists the 4GB card as its own product. Filter the Name column to exactly 'AMD Radeon RX 6500 XT (4GB)': Typical Board Power 107 W, Max Memory 4 GB, 1x6-Pin. This settles the ambiguity noted earlier - the catalogue's 107 W was right for the 4GB board we model, and the 113 W on AMD's main 6500 XT page belongs to the 8GB one." }
   },
   "gpu-intel-arc-b580": {
     "length": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "Intel publishes an 'Intel Reference Card Attributes' block for this card: Dimensions 272 x 115 mm, Slots 2. The B580 is the only Arc SKU in the catalogue with such a block." },
@@ -710,6 +711,17 @@
     "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" }
   },
   "gpu-rx-5700": {
-    "powerConnectors": { "url": "https://www.techpowerup.com/review/amd-radeon-rx-5700/4.html", "checkedOn": "2026-08-28", "note": "TechPowerUp's review of the AMD reference card: \"The board uses an 8-pin and a 6-pin power connector.\" AMD retired the RX 5000-series pages and the card has no reachable GPU-database entry, so its length and slot width remain unresearched." }
+    "powerConnectors": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "Same table: Additional Power Connector '1x8-Pin + 1x6-Pin'. This replaces the TechPowerUp review previously cited - AMD's own figure is available after all, and it agrees." },
+    "tdp": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "AMD retired the RX 5000-series product pages, but its Graphics Specifications table still carries the card. Filter the Name column to exactly 'AMD Radeon RX 5700': Typical Board Power (Desktop) 180 W." },
+    "vram": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "⚠️ length and slotsThick are deliberately NOT sourced for this card. On that same AMD table the Length and Slots columns are EMPTY for the RX 5700 - AMD publishes neither - and TechPowerUp has no reachable database entry for it. The field keeps its existing 254 mm rather than being deleted: an absent length makes the public part page render 'undefined mm long, so it fits 0 of 59 cases'." }
+  },
+  "gpu-rx-7650-gre": {
+    "length": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "The RX 7650 GRE is a China-exclusive SKU with no page on AMD's global site, but AMD's Chinese site carries the full specification: 尺寸 长度 204 mm, 插槽 2. The catalogue's 232 mm was 28 mm too long. Secondary aggregators disagreed with each other on this card, which is why the manufacturer page was worth finding." },
+    "tdp": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "典型板载功耗（台式机）170 W. The catalogue said 165 W - the figure several aggregators quote - but AMD's own page says 170 W." },
+    "vram": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "⚠️ pcieGen is deliberately NOT sourced: AMD publishes no PCIe generation for any card, and this China-only SKU has no partner page reachable from here to take it from." },
+    "slotsThick": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "额外电源连接器 1x8-Pin" }
   }
 }
