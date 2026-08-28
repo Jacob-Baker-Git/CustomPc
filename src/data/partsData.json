@@ -5763,12 +5763,14 @@
     "name": "AMD Radeon RX 7650 GRE",
     "brand": "AMD",
     "price": 239.99,
-    "tdp": 165,
-    "length": 232,
+    "tdp": 170,
+    "length": 204,
     "perfScore": 40,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
