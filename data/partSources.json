@@ -259,5 +259,61 @@
     "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
     "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28" },
     "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-4070-super": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070s-o12g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 4070 SUPER, so the part models one named partner card. ASUS lists 267.01 x 133.94 x 51.13 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 220 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070s-o12g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.56 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070s-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "ASUS does not list the connector; NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box, from 2x PCIe 8-pin" }
+  },
+  "gpu-rtx-4070ti-super": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070tis-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 4070 Ti SUPER, so the part models one named partner card. ASUS lists 267.01 x 133.94 x 51.13 mm - the same board as its 4070 SUPER Dual." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 285 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070tis-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.56 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070tis-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "ASUS does not list the connector; NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box, from 2x PCIe 8-pin" }
+  },
+  "gpu-rtx-3060-12gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA published no Founders Edition 3060, so the part models one named partner card. ASUS lists 20 x 12.3 x 3.8 cm. The catalogue's 242 mm was the 30-series bucket value, and is 42 mm too long for this card." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 170 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-3060-8gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 200 x 123 x 38 mm. The catalogue's 242 mm was the 30-series bucket value." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 170 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-3050": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA published no Founders Edition 3050, so the part models one named partner card. ASUS lists 200 x 123 x 38 mm - which happens to match the bucket value the catalogue already held." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28", "note": "Graphics power 130 W for the 8GB card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-3050-6gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 201 x 120 x 37 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28", "note": "Graphics power 70 W for the 6GB card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "EMPTY ON PURPOSE. ASUS says 'None required' and NVIDIA lists no supplementary connector: at 70 W this card runs entirely off the PCIe slot. An empty map is the honest record - covers() treats it as satisfied by any PSU, and the info sheet omits the row rather than printing nothing." }
   }
 }

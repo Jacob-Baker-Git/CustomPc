@@ -801,7 +801,7 @@
   {
     "id": "gpu-rtx-3050",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3050",
+    "name": "ASUS Dual GeForce RTX 3050 OC 8GB",
     "brand": "NVIDIA",
     "price": 199.99,
     "tdp": 130,
@@ -809,7 +809,10 @@
     "perfScore": 28,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -830,29 +833,37 @@
   {
     "id": "gpu-rtx-4070ti-super",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4070 Ti Super",
+    "name": "ASUS Dual GeForce RTX 4070 Ti SUPER OC 16GB",
     "brand": "NVIDIA",
     "price": 849.99,
     "tdp": 285,
-    "length": 304,
+    "length": 267.01,
     "perfScore": 76,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2.56,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rtx-4070-super",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4070 Super",
+    "name": "ASUS Dual GeForce RTX 4070 SUPER OC 12GB",
     "brand": "NVIDIA",
     "price": 599.99,
     "tdp": 220,
-    "length": 304,
+    "length": 267.01,
     "perfScore": 68,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2.56,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -3653,15 +3664,18 @@
   {
     "id": "gpu-rtx-3060-12gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3060 12GB",
+    "name": "ASUS Dual GeForce RTX 3060 OC 12GB",
     "brand": "NVIDIA",
     "price": 249.99,
     "tdp": 170,
-    "length": 242,
+    "length": 200,
     "perfScore": 34,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -4670,15 +4684,18 @@
   {
     "id": "gpu-rtx-3050-6gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3050 6GB",
+    "name": "ASUS Dual GeForce RTX 3050 OC 6GB",
     "brand": "NVIDIA",
     "price": 149.99,
     "tdp": 70,
-    "length": 200,
+    "length": 201,
     "perfScore": 20,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": {  }
     }
   },
   {
@@ -5478,15 +5495,18 @@
   {
     "id": "gpu-rtx-3060-8gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3060 8GB",
+    "name": "ASUS Dual GeForce RTX 3060 OC 8GB",
     "brand": "NVIDIA",
     "price": 219.99,
     "tdp": 170,
-    "length": 242,
+    "length": 200,
     "perfScore": 30,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
