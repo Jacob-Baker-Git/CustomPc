@@ -3102,11 +3102,14 @@
     "brand": "Intel",
     "price": 249.99,
     "tdp": 190,
-    "length": 270,
+    "length": 272,
     "perfScore": 43,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -4078,15 +4081,18 @@
   {
     "id": "gpu-arc-b570",
     "category": "gpu",
-    "name": "Intel Arc B570",
+    "name": "ASRock Intel Arc B570 Challenger 10GB OC",
     "brand": "Intel",
     "price": 219.99,
     "tdp": 150,
-    "length": 244,
+    "length": 249,
     "perfScore": 38,
     "specs": {
       "vram": 10,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -4677,15 +4683,18 @@
   {
     "id": "gpu-arc-a380",
     "category": "gpu",
-    "name": "Intel Arc A380",
+    "name": "ASRock Intel Arc A380 Challenger ITX 6GB OC",
     "brand": "Intel",
     "price": 109.99,
     "tdp": 75,
-    "length": 200,
+    "length": 190,
     "perfScore": 14,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -5790,29 +5799,35 @@
   {
     "id": "gpu-arc-a580",
     "category": "gpu",
-    "name": "Intel Arc A580",
+    "name": "ASRock Intel Arc A580 Challenger 8GB OC",
     "brand": "Intel",
     "price": 149.99,
     "tdp": 185,
-    "length": 267,
+    "length": 271,
     "perfScore": 30,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.4,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-arc-a750",
     "category": "gpu",
-    "name": "Intel Arc A750",
+    "name": "Intel Arc A750 Limited Edition 8GB",
     "brand": "Intel",
     "price": 179.99,
     "tdp": 225,
-    "length": 268,
+    "length": 268.6,
     "perfScore": 36,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
