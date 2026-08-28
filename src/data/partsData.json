@@ -753,7 +753,9 @@
     "perfScore": 78,
     "specs": {
       "vram": 20,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -767,7 +769,9 @@
     "perfScore": 64,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -781,7 +785,9 @@
     "perfScore": 56,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -890,11 +896,13 @@
     "brand": "AMD",
     "price": 319.99,
     "tdp": 190,
-    "length": 267,
+    "length": 241,
     "perfScore": 46,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -908,7 +916,9 @@
     "perfScore": 48,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -4022,7 +4032,9 @@
     "perfScore": 45,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -5640,7 +5652,9 @@
     "perfScore": 55,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -5654,7 +5668,9 @@
     "perfScore": 62,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -5668,7 +5684,9 @@
     "perfScore": 68,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {

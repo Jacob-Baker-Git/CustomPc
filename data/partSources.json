@@ -315,5 +315,77 @@
     "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
     "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28" },
     "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "EMPTY ON PURPOSE. ASUS says 'None required' and NVIDIA lists no supplementary connector: at 70 W this card runs entirely off the PCIe slot. An empty map is the honest record - covers() treats it as satisfied by any PSU, and the info sheet omits the row rather than printing nothing." }
+  },
+  "gpu-rx-7900xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 276 mm, Slots 2.5 - the catalogue value was already correct." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 315 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-7800xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5. The 267 mm the catalogue held for this card is genuinely AMD's reference length, not a guess." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 263 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-7700xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 245 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-7600xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 241 mm, Slots 2. The catalogue's 267 mm was the AMD bucket value and is 26 mm too long for this card." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 190 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6900-xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 300 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6800-xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 300 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6800": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2 - same length as the 6800 XT but one slot thinner." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 250 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6750xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 250 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" }
+  },
+  "gpu-rx-6700-xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 230 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" }
   }
 }
