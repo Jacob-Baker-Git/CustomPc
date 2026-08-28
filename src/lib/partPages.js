@@ -116,8 +116,14 @@ export function compatibilityNotes(part, parts = []) {
 
     case 'gpu': {
       const cases = of(parts, 'case')
-      const fits = cases.filter((c) => (c.maxGpuLength ?? 0) >= part.length)
-      add('Case clearance', `${part.length} mm long, so it fits ${fits.length} of ${cases.length} cases.`)
+      // ⚠️ Only when the length is a number. A card whose length nobody
+      // publishes used to render "undefined mm long, so it fits 0 of 59
+      // cases" — which is not caution about missing data, it is a false
+      // statement about the hardware. Omitting the row beats asserting that.
+      if (typeof part.length === 'number') {
+        const fits = cases.filter((c) => (c.maxGpuLength ?? 0) >= part.length)
+        add('Case clearance', `${part.length} mm long, so it fits ${fits.length} of ${cases.length} cases.`)
+      }
       add('Power supply', `Draws ${part.tdp} W; allow about ${psuFor(part.tdp)} W for the whole build.`)
       if (s.vram) add('Memory', `${s.vram} GB of ${s.memType ?? 'video memory'}.`)
       break

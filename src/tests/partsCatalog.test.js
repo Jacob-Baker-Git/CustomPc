@@ -1,4 +1,5 @@
 import partsData from '../data/partsData.json'
+import { accountedFor } from './support/provenance'
 
 const byCat = (c) => partsData.filter((p) => p.category === c)
 
@@ -25,7 +26,8 @@ describe('parts catalog integrity', () => {
     }
     for (const p of byCat('gpu')) {
       expect(p.perfScore, p.id).toBeGreaterThan(0)
-      expect(p.length, p.id).toBeGreaterThan(0)
+      // Or provenance says why it never will be - see support/provenance.js
+      expect(accountedFor(p, 'length', p.length > 0), p.id).toBe(true)
     }
     for (const p of byCat('motherboard')) {
       expect(p.socket, p.id).toBeTruthy()

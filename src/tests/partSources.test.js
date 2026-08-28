@@ -52,7 +52,10 @@ describe('partSources.json', () => {
       })
     const offenders = walk(resolve(process.cwd(), 'src'))
       .filter((f) => /\.(js|jsx)$/.test(f))
-      .filter((f) => !f.endsWith('partSources.test.js'))
+      // ⚠️ Tests and their helpers are exempt, and ONLY they: vitest collects
+      // from src/tests/ but Vite never bundles it, so nothing here reaches a
+      // visitor. The guard is about payload, not about tidiness.
+      .filter((f) => !f.replace(/\\/g, '/').includes('/src/tests/'))
       .filter((f) => readFileSync(f, 'utf8').includes('partSources.json'))
     expect(offenders).toEqual([])
   })
@@ -128,7 +131,7 @@ describe('unverifiable records', () => {
 // `length` sat in the catalogue unnoticed for months. Requiring sources for
 // length and tdp across all 559 parts today would fail instantly, so it is
 // switched on ONE CATEGORY AT A TIME, as each is brought up to standard.
-const VERIFIED_CATEGORIES = new Set([])
+const VERIFIED_CATEGORIES = new Set(['gpu'])
 const RATCHETED_KEYS = ['length', 'tdp']
 
 describe('verified categories', () => {

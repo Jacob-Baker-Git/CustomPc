@@ -83,9 +83,15 @@ export function insight(part) {
     case 'cpu':
       return `A ${tier(part.perfScore)} ${s.cores}-core chip boosting to ${s.boostClock}GHz. ` +
         `Drops into ${part.socket} boards and draws ~${part.tdp}W under load, so pick a cooler rated for that.`
-    case 'gpu':
+    case 'gpu': {
+      // ⚠️ Not every card has a published length — see gpuLengthUnknown.test.js.
+      // This sentence used to read "At undefinedmm check your case clearance".
+      const fit = typeof part.length === 'number'
+        ? `At ${part.length}mm check your case clearance`
+        : 'Its length is not published, so measure your case first'
       return `A ${tier(part.perfScore)} card with ${s.vram}GB of ${s.memType}. ` +
-        `At ${part.length}mm check your case clearance, and budget ~${part.tdp}W of PSU headroom for it.`
+        `${fit}, and budget ~${part.tdp}W of PSU headroom for it.`
+    }
     case 'motherboard':
       return `${s.chipset} board for ${part.socket} CPUs, taking ${part.ramType} memory only, ` +
         `${part.formFactor} cases or larger.`

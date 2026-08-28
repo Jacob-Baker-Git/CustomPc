@@ -181,7 +181,10 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     let candidates = ofCategory(partsData, category).filter((p) => checkCompatibility(result, p).compatible)
     // compatibility.js only checks GPU-length when selecting a GPU, not a case —
     // so enforce it here when a GPU is already chosen.
-    if (category === 'case' && result.gpu) {
+    // ⚠️ Only when the length is a NUMBER. `undefined <= 400` is false, so a
+    // card with no published length used to filter out every case in the
+    // catalogue and leave the build with none at all.
+    if (category === 'case' && typeof result.gpu?.length === 'number') {
       candidates = candidates.filter((p) => result.gpu.length <= p.maxGpuLength)
     }
     const reserve = emptyCats.slice(i + 1).reduce((s, c) => s + (floorPrice[c] ?? 0), 0)
@@ -216,8 +219,9 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
       .filter((p) => checkCompatibility(without, p).compatible)
       .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining - psuReserve)
     // Same gap as the fill pass: compatibility.js checks GPU length when picking
-    // a GPU, never when picking the case it has to fit inside.
-    if (category === 'case' && result.gpu) {
+    // a GPU, never when picking the case it has to fit inside. And the same
+    // guard — an unknown length must not empty the pool.
+    if (category === 'case' && typeof result.gpu?.length === 'number') {
       pool = pool.filter((p) => result.gpu.length <= p.maxGpuLength)
     }
     return pool.sort((a, b) => a.price - b.price)
