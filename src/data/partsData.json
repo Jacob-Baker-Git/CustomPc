@@ -692,11 +692,15 @@
     "brand": "NVIDIA",
     "price": 1199.99,
     "tdp": 320,
-    "length": 336,
+    "length": 304,
     "perfScore": 85,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
@@ -706,11 +710,15 @@
     "brand": "NVIDIA",
     "price": 549.99,
     "tdp": 200,
-    "length": 285,
+    "length": 244,
     "perfScore": 62,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -3599,11 +3607,15 @@
     "brand": "NVIDIA",
     "price": 949.99,
     "tdp": 320,
-    "length": 336,
+    "length": 304,
     "perfScore": 87,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
@@ -3928,7 +3940,11 @@
     "perfScore": 46,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 1 }
     }
   },
   {
@@ -3942,7 +3958,11 @@
     "perfScore": 60,
     "specs": {
       "vram": 10,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -5448,7 +5468,11 @@
     "perfScore": 42,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 1 }
     }
   },
   {
@@ -5462,7 +5486,11 @@
     "perfScore": 50,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -5476,7 +5504,11 @@
     "perfScore": 66,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -5490,7 +5522,11 @@
     "perfScore": 70,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -8023,7 +8059,11 @@
     "perfScore": 76,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {

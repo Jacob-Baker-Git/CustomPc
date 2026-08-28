@@ -24,7 +24,7 @@ export function aggregate(results) {
 // Exported so the spec sheet names a connector the same way a block message
 // does — one definition, for the same reason psuTooSmall is shared rather than
 // restated.
-export const CONNECTOR_LABELS = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
+export const CONNECTOR_LABELS = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12pin': '12-pin', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
 
 // Can `supply` satisfy every entry in `need`?
 const covers = (supply, need) =>
