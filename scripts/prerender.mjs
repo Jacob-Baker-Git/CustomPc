@@ -35,8 +35,31 @@ try {
     // PC instead of the landing page. A first-time visitor is the only correct
     // subject for a pre-render.
     const context = await browser.newContext()
+
+    // ⚠️ BLOCK THE LIVE CATALOG. App.jsx calls loadCatalog() on mount, which
+    // fetches parts/peripherals/games from Supabase and swaps them in over the
+    // bundled snapshot. Two things go wrong if that is allowed to race here:
+    //
+    // 1. The capture becomes NON-DETERMINISTIC. Whether the swap lands before
+    //    the HTML is read decides what gets committed, so the same command can
+    //    produce two different fragments from one commit.
+    // 2. It used to hang the run outright. `waitUntil: 'networkidle'` waits for
+    //    those three requests to settle, and under load they do not inside the
+    //    30s default — this script failed four runs in a row that way, each
+    //    dying on a different route, while curl fetched the same endpoint in
+    //    0.9s. The page itself had finished loading in ~360ms.
+    //
+    // Blocking them is also the CORRECT subject: a pre-render is the instant
+    // first paint, and a first-time visitor sees the bundled snapshot before any
+    // fetch resolves. Capturing that is what makes the fragment match what React
+    // renders on hydration.
+    await context.route('**://*.supabase.co/**', (r) => r.abort())
+
     const page = await context.newPage()
-    await page.goto(`${base}${route}`, { waitUntil: 'networkidle' })
+    // 'load' rather than 'networkidle': the real gate is the content check
+    // below, which waits for React to have replaced the boot placeholder.
+    // Network quiet was only ever a proxy for it, and a bad one.
+    await page.goto(`${base}${route}`, { waitUntil: 'load' })
 
     // Network idle alone happily captures the boot message on a fast local
     // server, so wait for the placeholder to actually be gone.

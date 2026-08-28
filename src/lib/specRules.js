@@ -21,7 +21,10 @@ export function aggregate(results) {
 }
 
 // Rules are appended here as they are implemented.
-const LABEL = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
+// Exported so the spec sheet names a connector the same way a block message
+// does — one definition, for the same reason psuTooSmall is shared rather than
+// restated.
+export const CONNECTOR_LABELS = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
 
 // Can `supply` satisfy every entry in `need`?
 const covers = (supply, need) =>
@@ -30,7 +33,7 @@ const covers = (supply, need) =>
 const missingFrom = (supply, need) =>
   Object.entries(need)
     .filter(([type, count]) => (supply[type] ?? 0) < count)
-    .map(([type, count]) => `${count}x ${LABEL[type] ?? type}`)
+    .map(([type, count]) => `${count}x ${CONNECTOR_LABELS[type] ?? type}`)
     .join(', ')
 
 // Rule 1. The PSU side and the GPU side are the same question asked from two

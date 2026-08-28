@@ -4,8 +4,24 @@
 // mattering. Kept out of the component so the .jsx exports only a component
 // (react-refresh) and so this logic stays directly testable.
 import { RES_GPU } from './fpsEstimate'
+import { CONNECTOR_LABELS } from './specRules'
 
 const SPEC_LABELS = {
+  slotsThick: 'Slot width (slots)',
+  pcieGen: 'PCIe generation',
+  powerConnectors: 'Power connectors',
+  adapterFrom: 'Adapter in box',
+  connectors: 'Connectors',
+  ramSlots: 'Memory slots',
+  maxRamGb: 'Max memory (GB)',
+  maxRamSpeed: 'Max memory speed (MT/s)',
+  epsConnectors: 'EPS headers',
+  sataPorts: 'SATA ports',
+  expansionSlots: 'Expansion slots',
+  ratedTdpW: 'Rated for (W)',
+  radiatorMm: 'Radiator size (mm)',
+  m2FormFactor: 'M.2 form factor',
+  m2Sata: 'M.2 SATA support',
   cores: 'Cores',
   threads: 'Threads',
   boostClock: 'Boost clock (GHz)',
@@ -138,6 +154,25 @@ export function gpuResChips(part) {
   }))
 }
 
+// A connector map — { pcie8: 3 } — is the one non-scalar spec with a
+// shopper-readable form. Everything else non-scalar (m2Slots is an array of
+// objects, radiatorSupport an object of arrays) is machine-readable
+// compatibility data with no honest one-line rendering.
+const CONNECTOR_SPECS = new Set(['powerConnectors', 'adapterFrom', 'connectors'])
+
+// ⚠️ Returns null to mean "do not print this row". String(v) on an object gives
+// "[object Object]", which shipped on the RTX 4090's info sheet the moment its
+// researched connectors landed. Omitting beats asserting something false — the
+// same call as coolerCapacity 0 hiding its row instead of printing a zero.
+function formatSpecValue(key, v) {
+  if (v === null || v === undefined) return null
+  if (typeof v === 'boolean') return v ? 'Yes' : 'No'
+  if (typeof v !== 'object') return String(v)
+  if (Array.isArray(v) || !CONNECTOR_SPECS.has(key)) return null
+  const parts = Object.entries(v).map(([type, n]) => `${n}× ${CONNECTOR_LABELS[type] ?? type}`)
+  return parts.length > 0 ? parts.join(', ') : null
+}
+
 export function specRows(part) {
   const rows = []
   if (part.brand) rows.push(['Brand', part.brand])
@@ -161,8 +196,9 @@ export function specRows(part) {
   if (part.dpi) rows.push(['Max DPI', part.dpi.toLocaleString()])
   if (part.type) rows.push(['Connection', part.type])
   for (const [k, v] of Object.entries(part.specs ?? {})) {
-    rows.push([SPEC_LABELS[k] ?? k.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()),
-      typeof v === 'boolean' ? (v ? 'Yes' : 'No') : String(v)])
+    const value = formatSpecValue(k, v)
+    if (value === null) continue
+    rows.push([SPEC_LABELS[k] ?? k.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()), value])
   }
   if (part.perfScore > 0) rows.push(['Performance score', String(part.perfScore)])
   return rows

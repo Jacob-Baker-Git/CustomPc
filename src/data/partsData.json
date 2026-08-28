@@ -608,11 +608,15 @@
     "brand": "NVIDIA",
     "price": 1699.99,
     "tdp": 450,
-    "length": 336,
+    "length": 304,
     "perfScore": 100,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
