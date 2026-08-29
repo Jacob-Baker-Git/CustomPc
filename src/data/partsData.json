@@ -7791,11 +7791,14 @@
     "brand": "AMD",
     "price": 169.99,
     "tdp": 180,
+    "length": 270,
     "perfScore": 30,
     "legacy": true,
     "specs": {
       "vram": 8,
       "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
