@@ -690,7 +690,8 @@
     "memType": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28", "note": "⚠️ vram is deliberately NOT sourced: this TechPowerUp entry is the 4GB card and the catalogue models the 8GB one. The board length and power are shared between them; the capacity is not." },
     "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
     "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
-    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" }
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "AMD retired the RX 5000-series product pages, but its Graphics Specifications table still carries the card. Filter the Name column to exactly 'AMD Radeon RX 5500 XT': Max Memory Size 8 GB, GDDR6, 130 W, 1x8-Pin. This supersedes the earlier gap - TechPowerUp's database entry is the 4GB card, and the catalogue models the 8GB one, which is what AMD lists." }
   },
   "gpu-rx-5600-xt": {
     "length": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp. 267 mm - the catalogue's 230 mm was 37 mm short." },
