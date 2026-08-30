@@ -19,8 +19,9 @@ describe('upsert payload', () => {
   })
 
   it('mirrors only name for games, which has no category or price column', () => {
-    const [row] = upsertPayload('games', [{ id: 'lol', name: 'League of Legends', slug: 'league-of-legends' }])
-    expect(row).toEqual({ id: 'lol', name: 'League of Legends', data: { id: 'lol', name: 'League of Legends', slug: 'league-of-legends' } })
+    const game = { id: 'lol', name: 'League of Legends', slug: 'league-of-legends' }
+    const [row] = upsertPayload('games', [game], new Date('2026-08-30T12:00:00Z'))
+    expect(row).toEqual({ id: 'lol', name: 'League of Legends', data: game, updated_at: '2026-08-30T12:00:00.000Z' })
   })
 
   it('mirrors category, name and price for peripherals', () => {
@@ -48,6 +49,20 @@ describe('upsert payload', () => {
 
   it('refuses a table it has no mapping for, rather than sending a bare payload', () => {
     expect(() => upsertPayload('feedback', [{ id: 'x' }])).toThrow(/feedback/)
+  })
+
+  // The column defaults to now(), but a default fires on INSERT only and an
+  // upsert that conflicts takes the UPDATE path — so without this the column
+  // stays stale while the row changes, and a successful push reads as one that
+  // never ran. That happened, and it was believed.
+  it('stamps updated_at, which no default will set on the update path', () => {
+    const [row] = upsertPayload('parts', [part()], new Date('2026-08-30T12:00:00Z'))
+    expect(row.updated_at).toBe('2026-08-30T12:00:00.000Z')
+  })
+
+  it('gives every row in a batch the same stamp, so a push reads as one event', () => {
+    const rows = upsertPayload('parts', [part({ id: 'a' }), part({ id: 'b' }), part({ id: 'c' })])
+    expect(new Set(rows.map((r) => r.updated_at)).size).toBe(1)
   })
 
   it('states the mirrored columns per table', () => {
