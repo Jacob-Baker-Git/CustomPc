@@ -4729,7 +4729,7 @@
     "legacy": true,
     "specs": {
       "vram": 4,
-      "memType": "GDDR6",
+      "memType": "GDDR5",
       "slotsThick": 2,
       "pcieGen": 3,
       "powerConnectors": {  }
@@ -5770,6 +5770,7 @@
       "vram": 8,
       "memType": "GDDR6",
       "slotsThick": 2,
+      "pcieGen": 4,
       "powerConnectors": { "pcie8": 1 }
     }
   },
