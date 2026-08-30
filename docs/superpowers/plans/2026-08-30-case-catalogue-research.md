@@ -631,7 +631,7 @@ git commit -m "data: research the six Phanteks cases"
 | `case-aerocool-cylon` | 371 / 155 / ATX, mATX, ITX |
 | `case-antec-c8` | 450 / 175 / ATX, mATX, ITX |
 
-- [ ] **Step 1: Run protocol R for all twelve rows**
+- [x] **Step 1: Run protocol R for all twelve rows**
 
 Makers: `https://www.montechpc.com/`, `https://www.bequiet.com/en/case`, `https://www.thermaltake.com/`, `https://kolink.eu/`, `https://aerocool.io/`, `https://www.antec.com/`.
 
@@ -639,7 +639,7 @@ Makers: `https://www.montechpc.com/`, `https://www.bequiet.com/en/case`, `https:
 
 ⚠️ This tranche holds the budget and regional brands most likely to have thin or retired spec pages (Kolink and Aerocool especially). Expect the first `unverifiable` records of the project here. That is a result, not a failure — record it per protocol R step 5 with a note saying what was checked.
 
-- [ ] **Step 2: Verify every remaining case is accounted for**
+- [x] **Step 2: Verify every remaining case is accounted for**
 
 ```bash
 node -e "const a=require('./src/data/partsData.json');const s=require('./data/partSources.json');const need=['maxGpuLength','maxCoolerHeight','supportedFormFactors','expansionSlots','radiatorSupport'];let bad=0;for(const p of a.filter(x=>x.category==='case')){const e=s[p.id]||{};const gaps=need.filter(k=>!e[k]);if(gaps.length){bad++;console.log('GAP '+p.id+' '+gaps.join(','))}}console.log(bad===0?'all 59 cases have an entry for every field':bad+' case(s) incomplete')"
@@ -647,7 +647,7 @@ node -e "const a=require('./src/data/partsData.json');const s=require('./data/pa
 
 Expected: `all 59 cases have an entry for every field`.
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -655,7 +655,7 @@ npm run test:run
 
 Expected: PASS.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
