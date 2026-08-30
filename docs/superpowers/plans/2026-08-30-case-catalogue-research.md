@@ -669,7 +669,7 @@ git commit -m "data: research the last twelve cases - the catalogue is now 59/59
 **Files:**
 - Modify: `src/tests/partSources.test.js`
 
-- [ ] **Step 1: Confirm coverage is complete first**
+- [x] **Step 1: Confirm coverage is complete first**
 
 ```bash
 npm run catalog:coverage
@@ -677,7 +677,7 @@ npm run catalog:coverage
 
 Expected: `case: 59/59 parts fully researched (100%)`. If it is not 59/59, stop — the ratchet must not be switched on over a gap.
 
-- [ ] **Step 2: Add the category**
+- [x] **Step 2: Add the category**
 
 In `src/tests/partSources.test.js`:
 
@@ -685,7 +685,7 @@ In `src/tests/partSources.test.js`:
 const VERIFIED_CATEGORIES = new Set(['gpu', 'case'])
 ```
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -693,7 +693,7 @@ npm run test:run
 
 Expected: PASS. If it fails, the named `<id>.<field>` in the output has a value with no source — fix the data, never the ratchet.
 
-- [ ] **Step 4: Prove the ratchet is not vacuous**
+- [x] **Step 4: Prove the ratchet is not vacuous**
 
 Temporarily delete one source entry — say `case-fractal-north.maxGpuLength` — and re-run:
 
@@ -703,7 +703,7 @@ npm run test:run
 
 Expected: FAIL, naming `case-fractal-north.maxGpuLength`. **Restore the entry** and re-run to confirm PASS. A guard nobody has seen fail is not known to work.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/tests/partSources.test.js
