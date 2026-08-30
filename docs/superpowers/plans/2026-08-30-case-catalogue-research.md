@@ -717,7 +717,7 @@ git commit -m "feat: switch the case ratchet on - a case now owes a source for i
 **Files:**
 - Modify: `prerendered/` (generated)
 
-- [ ] **Step 1: Rebuild the pre-rendered fragments**
+- [x] **Step 1: Rebuild the pre-rendered fragments**
 
 ```bash
 npm run prerender
@@ -725,7 +725,7 @@ npm run prerender
 
 ⚠️ Part-page copy quotes these numbers ("Up to 400 mm, so N of 79 cards fit"), and fragments go stale **silently**. ⚠️ A failed run leaves the folder untouched, so `git diff` showing nothing is not proof it ran — read the command's own output.
 
-- [ ] **Step 2: Lint and build**
+- [x] **Step 2: Lint and build**
 
 ```bash
 npm run lint && npm run build
@@ -733,7 +733,7 @@ npm run lint && npm run build
 
 Expected: both clean.
 
-- [ ] **Step 3: Commit any fragment changes**
+- [x] **Step 3: Commit any fragment changes**
 
 ```bash
 git add prerendered
@@ -742,7 +742,7 @@ git commit -m "chore: re-render part pages against the researched case data"
 
 If `git diff --cached` is empty, skip the commit — no case copy changed.
 
-- [ ] **Step 4: Report to the user, and stop**
+- [x] **Step 4: Report to the user, and stop**
 
 Report:
 - how many of the 177 re-verified values were wrong, with the largest correction named;
