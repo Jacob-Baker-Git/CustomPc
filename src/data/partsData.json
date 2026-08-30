@@ -4720,7 +4720,7 @@
   {
     "id": "gpu-gtx-1650",
     "category": "gpu",
-    "name": "NVIDIA GeForce GTX 1650",
+    "name": "NVIDIA GeForce GTX 1650 GDDR5",
     "brand": "NVIDIA",
     "price": 129.99,
     "tdp": 75,
