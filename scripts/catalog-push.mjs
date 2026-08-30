@@ -18,6 +18,7 @@
 import { readFileSync } from 'node:fs'
 import process from 'node:process'
 import { diffTable, summarise } from './catalog-diff-core.mjs'
+import { upsertPayload } from './catalog-columns.mjs'
 
 const URL_ = process.env.VITE_SUPABASE_URL ?? 'https://igeggndtnmdpauxovnwv.supabase.co'
 const READ_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? 'sb_publishable_Iu7O2Gu9K693IjISZb7GMw_CHtE5tvs'
@@ -49,7 +50,9 @@ async function upsert(table, rows) {
       'Content-Type': 'application/json',
       Prefer: 'resolution=merge-duplicates,return=minimal',
     },
-    body: JSON.stringify(rows.map((r) => ({ id: r.id, data: r }))),
+    // ⚠️ NOT { id, data }. The mirrored NOT NULL columns have to be here or the
+    // whole batch is rejected with 23502 — see catalog-columns.mjs.
+    body: JSON.stringify(upsertPayload(table, rows)),
   })
   if (!res.ok) throw new Error(`${table}: HTTP ${res.status} — ${await res.text()}`)
 }
