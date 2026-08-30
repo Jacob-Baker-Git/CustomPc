@@ -1016,5 +1016,47 @@
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
     "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" }
+  },
+  "case-phanteks-g360a": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/phanteks-eclipse-g360a", "checkedOn": "2026-08-30", "note": "Phanteks has delisted this case; Noctua's Compatibility Centre gives the manufacturer-specified clearance" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-phanteks-p400a": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/phanteks-eclipse-p400a", "checkedOn": "2026-08-30", "note": "Phanteks has delisted this case; Noctua's Compatibility Centre gives 160 mm where the row held 161 mm" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-phanteks-nv5": {
+    "maxGpuLength": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" }
+  },
+  "case-phanteks-xt-pro-ultra": {
+    "maxGpuLength": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" }
+  },
+  "case-phanteks-g500a": {
+    "maxGpuLength": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" }
+  },
+  "case-phanteks-shift-2": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/phanteks-evolv-shift-2", "checkedOn": "2026-08-30", "note": "Phanteks has delisted this case; Noctua's Compatibility Centre gives 85 mm where the row held 82 mm" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker states 2 full-height slots; the row had none recorded" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
   }
 }
