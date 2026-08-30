@@ -15,13 +15,21 @@ import partsData from '../data/partsData.json'
 // READ THE DIFF before committing it.
 const byId = (id) => partsData.find((p) => p.id === id)
 
-// ⚠️ TWO builds, and the second one is load-bearing. GPU length is only ever
-// decisive against a case that is actually tight: the Fractal Torrent clears
-// 467 mm and therefore fits all 79 catalogue GPUs, so in `roomy` NO length
-// correction can ever move a verdict. A snapshot of that build alone would be
-// blind to the whole point of this project. The Cooler Master Q300L is the
-// tightest case in the catalogue at 270 mm and rejects 22 of 79 GPUs today,
-// which is what makes a corrected length visible here.
+// ⚠️ TWO builds, and the second one is the tight one. The Fractal Torrent
+// clears 461 mm and fits every catalogue GPU, so `roomy` can never show a
+// length correction; `cramped` is the small-case counterpart.
+//
+// 🛑 GPU LENGTH NOW BLOCKS NOTHING, and that is a finding rather than a fault.
+// This comment used to say the Q300L was "the tightest case in the catalogue at
+// 270 mm and rejects 22 of 79 GPUs". Cooler Master states 360 mm; the 270 mm
+// was wrong by 90 mm, and it was refusing 25 of 79 cards. With the case
+// catalogue researched, the longest card is 320 mm and the tightest case clears
+// 320 mm, so ZERO of the 4,661 GPU/case pairs are length-blocked.
+//
+// So this snapshot is no longer sensitive to GPU length at all. It is kept for
+// the dimensions that DO still decide verdicts here — cooler height, board form
+// factor, slot thickness — and the length rule itself is covered by a synthetic
+// fixture in compatibility.test.js, which the catalogue cannot invalidate.
 const REFERENCE_BUILDS = {
   roomy: {
     motherboard: byId('mb-asus-x670e'),

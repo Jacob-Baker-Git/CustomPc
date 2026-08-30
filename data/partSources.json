@@ -974,5 +974,47 @@
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"4 horizontal (4 vertical with accessory)\"" },
     "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" }
+  },
+  "case-cm-q300l": {
+    "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30", "note": "Cooler Master states \"Clearance - GFX 360mm\". The catalogue held 270 mm; 360 mm is confirmed by several independent listings" },
+    "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" }
+  },
+  "case-cm-nr200": {
+    "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30", "note": "Cooler Master states \"L: 330mm (incl. power connector)\"" },
+    "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30", "note": "Chassis maximum with the vented steel side panel; 153 mm with the tempered glass panel, and 76 mm with the GPU mounted vertically" },
+    "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" }
+  },
+  "case-cm-nr200-max": {
+    "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30", "note": "The NR200P MAX ships with a built-in 280 mm AIO, so air-cooler clearance is only 67 mm. The catalogue held 155 mm, which is the plain NR200P figure" },
+    "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" }
+  },
+  "case-cm-td500-mesh": {
+    "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" }
+  },
+  "case-cm-td300-mesh": {
+    "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" }
+  },
+  "case-cm-haf-500": {
+    "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" }
   }
 }

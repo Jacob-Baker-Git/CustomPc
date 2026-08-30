@@ -12,6 +12,14 @@ const caseSmall = partsData.find(p => p.id === 'case-cm-q300l')
 const caseLarge = partsData.find(p => p.id === 'case-fractal-torrent')
 const cooler  = partsData.find(p => p.id === 'cooler-noctua-d15')
 
+// ⚠️ SYNTHETIC, and it has to be. Since the case research corrected the Q300L
+// from a bogus 270 mm to Cooler Master's stated 360 mm, NO catalogue case
+// rejects any catalogue GPU on length: the longest card is 320 mm and the
+// tightest case clears 320 mm. Pinning this rule to real rows made the test
+// pass only because the data was wrong. The rule still has to work, so it is
+// tested against a fixture the catalogue cannot invalidate.
+const caseTight = { ...caseSmall, id: 'case-test-tight', name: 'Test Tight Case', maxGpuLength: 200 }
+
 describe('checkCompatibility', () => {
   it('returns compatible when no parts selected', () => {
     expect(checkCompatibility({}, cpuAM5).compatible).toBe(true)
@@ -38,7 +46,7 @@ describe('checkCompatibility', () => {
   })
 
   it('GPU incompatible when longer than case clearance', () => {
-    const r = checkCompatibility({ case: caseSmall }, gpuLong)
+    const r = checkCompatibility({ case: caseTight }, gpuLong)
     expect(r.compatible).toBe(false)
     expect(r.reason).toMatch(/length|clearance/i)
   })
@@ -89,7 +97,7 @@ describe('checkCompatibility', () => {
   })
 
   it('case incompatible when the selected GPU does not fit it', () => {
-    const r = checkCompatibility({ gpu: gpuLong }, caseSmall)
+    const r = checkCompatibility({ gpu: gpuLong }, caseTight)
     expect(r.compatible).toBe(false)
     expect(r.reason).toMatch(/clearance/i)
     expect(checkCompatibility({ gpu: gpuLong }, caseLarge).compatible).toBe(true)
