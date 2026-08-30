@@ -1058,5 +1058,89 @@
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker states 2 full-height slots; the row had none recorded" },
     "radiatorSupport": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-montech-air-903": {
+    "maxGpuLength": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" }
+  },
+  "case-montech-sky-two": {
+    "maxGpuLength": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" }
+  },
+  "case-montech-king-95-pro": {
+    "maxGpuLength": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30", "note": "Montech states 420 mm. The row held 400 mm, one of the four Montech rows the plan flagged as a suspicious cluster" },
+    "maxCoolerHeight": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" }
+  },
+  "case-montech-xr": {
+    "maxGpuLength": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30", "note": "Montech states 420 mm; the row held 400 mm" },
+    "maxCoolerHeight": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" }
+  },
+  "case-bequiet-pb500": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-pure-base-500", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 190 mm the row already held" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-bequiet-silentbase-802": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-silent-base-802", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. ⚠️ UNRESOLVED: Noctua gives 180.5 mm while be quiet! marketing copy quoted by retailers says 185 mm, which is what the row held. be quiet! renders its own spec table client-side and it could not be read here, so the lower figure is taken and the disagreement recorded rather than hidden" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-thermaltake-versa-h18": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/thermaltake-versa-h18", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 155 mm the row already held" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-thermaltake-view-270": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30", "note": "⚠️ PCPartPicker only carries the View 270 PLUS TG ARGB, not the plain TG ARGB this row models. Thermaltake's own product copy gives BOTH as 420 mm GPU and 180 mm cooler, so the figures transfer - but the linked page is the Plus" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/thermaltake-view-270-tg-argb", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer, for the plain TG ARGB. The row held 165 mm" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30", "note": "From the View 270 Plus TG ARGB entry; see the maxGpuLength note" }
+  },
+  "case-kolink-observatory-lite": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/kolink-observatory-lite", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 160 mm the row already held" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-aerocool-cylon": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/aerocool-cylon", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 155 mm the row already held" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-antec-c8": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30", "note": "Antec's own compatibility copy states \"GPU max length <= 440mm\"; the row held 450 mm" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/antec-constellation-c8", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. The C8 is published as the Constellation C8. Agrees with the 175 mm the row already held" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+  },
+  "case-bequiet-pure-base-501": {
+    "maxGpuLength": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30", "note": "PCPartPicker states 368 mm, corroborated by a second listing. The row held 430 mm, which is far out" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-pure-base-501-airflow", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Its slug is the Airflow variant, matching the PCPartPicker entry the other four fields come from. The row held 190 mm" }
   }
 }
