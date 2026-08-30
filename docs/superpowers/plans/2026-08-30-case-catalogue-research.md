@@ -100,7 +100,7 @@ In `data/partSources.json`:
 - Modify: `src/tests/catalogCoverage.test.js`
 - Modify: `src/tests/partSources.test.js:134-147`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `src/tests/catalogCoverage.test.js`:
 
@@ -169,7 +169,7 @@ describe('the ratchet', () => {
 
 ⚠️ `src` and `describe`/`it`/`expect` are already imported at the top of this file; merge the import line rather than adding a duplicate.
 
-- [ ] **Step 2: Run the tests to verify they fail**
+- [x] **Step 2: Run the tests to verify they fail**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -177,7 +177,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: FAIL — `RATCHETED_KEYS` and `missingRatchetSources` are not exported, plus `EXPECTED.case` is undefined.
 
-- [ ] **Step 3: Implement in the pure core**
+- [x] **Step 3: Implement in the pure core**
 
 In `scripts/catalog-coverage-core.mjs`, add to `EXPECTED` after the `gpu` entry:
 
@@ -218,7 +218,7 @@ export function missingRatchetSources(parts, sources, verifiedCategories) {
 }
 ```
 
-- [ ] **Step 4: Run the tests to verify they pass**
+- [x] **Step 4: Run the tests to verify they pass**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -226,7 +226,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS, all cases green.
 
-- [ ] **Step 5: Point the real-data ratchet at the helper**
+- [x] **Step 5: Point the real-data ratchet at the helper**
 
 Replace the `VERIFIED_CATEGORIES` / `RATCHETED_KEYS` block and the `verified categories` describe in `src/tests/partSources.test.js` with:
 
@@ -249,7 +249,7 @@ Add to the imports at the top of that file:
 import { missingRatchetSources } from '../../scripts/catalog-coverage-core.mjs'
 ```
 
-- [ ] **Step 6: Run the full suite**
+- [x] **Step 6: Run the full suite**
 
 ```bash
 npm run test:run
@@ -257,7 +257,7 @@ npm run test:run
 
 Expected: PASS. The GPU ratchet must still be enforced — this step is the regression guard on the refactor.
 
-- [ ] **Step 7: Confirm coverage now reports cases**
+- [x] **Step 7: Confirm coverage now reports cases**
 
 ```bash
 npm run catalog:coverage
@@ -265,7 +265,7 @@ npm run catalog:coverage
 
 Expected: a `case: 0/59 parts fully researched (0%)` section appears, with `expansionSlots` and `radiatorSupport` at `present 0/59` and the three top-level fields at `present 59/59  researched 0/59`.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add scripts/catalog-coverage-core.mjs src/tests/catalogCoverage.test.js src/tests/partSources.test.js
