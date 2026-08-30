@@ -799,5 +799,75 @@
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
     "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" }
+  },
+  "case-lian-li-o11": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" }
+  },
+  "case-lian-li-a4-h2o": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30", "note": "Lian Li states \"Max 55mm\". The case is built around a 240 mm AIO in the top; two independent sources give the same 55 mm" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" }
+  },
+  "case-lian-li-o11-mini": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30", "note": "Lian Li publishes \"7 or 5 (depends on the back panel)\"; the 7-slot panel is the maximum" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-lancool-216": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30", "note": "Lian Li states 180.5 mm (max); the catalogue had it rounded to 180" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-lancool-207": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-o11-evo-xl": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-o11-vision": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30", "note": "Lian Li states 430 mm (Max.) for O11VX/O11VW/O11VC. Retailer copy widely repeats 455 mm and a 167 mm cooler, which are the O11 Dynamic EVO XL and EVO figures; the maker's own table is taken as authoritative" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30", "note": "Lian Li states 174 mm (Max.). See the maxGpuLength note on the 455/167 figures circulating in retailer copy" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30", "note": "Lian Li publishes \"6+1\"" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-lancool-217": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30", "note": "Lian Li states 380 mm (Max.), confirmed by four independent listings. The catalogue held 392 mm, which is the Lancool 216 figure" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-lancool-3": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" }
+  },
+  "case-lianli-q58": {
+    "maxGpuLength": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30", "note": "Depends on PSU mode: SFX mode takes a 240/280 top radiator, ATX mode only 120 mm top. Bottom is 120 mm in both" }
   }
 }
