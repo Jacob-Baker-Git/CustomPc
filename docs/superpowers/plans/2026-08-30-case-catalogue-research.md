@@ -295,13 +295,13 @@ Rows, with the values currently in the catalogue for comparison:
 | `case-fractal-pop-mini-air` | 365 / 160 / mATX, ITX |
 | `case-fractal-ridge` | 325 / 70 / ITX |
 
-- [ ] **Step 1: Run protocol R for all ten rows**
+- [x] **Step 1: Run protocol R for all ten rows**
 
 Start at `https://www.fractal-design.com/products/cases/` and navigate to each model's Specifications tab. Fractal publishes a full clearance table per product, including radiator support per mount and rear slot count.
 
 ⚠️ `case-meshify-2-compact` is the odd id out — it has no `fractal` in the id but is a Fractal product. Do not skip it when grepping by id prefix.
 
-- [ ] **Step 2: Verify the data shape before testing**
+- [x] **Step 2: Verify the data shape before testing**
 
 ```bash
 node -e "const a=require('./src/data/partsData.json');const s=require('./data/partSources.json');const ids=a.filter(p=>p.brand==='Fractal Design').map(p=>p.id);for(const id of ids){const p=a.find(x=>x.id===id);const e=s[id]||{};const need=['maxGpuLength','maxCoolerHeight','supportedFormFactors','expansionSlots','radiatorSupport'];const gaps=need.filter(k=>!e[k]);console.log((gaps.length?'GAP ':'ok  ')+id+(gaps.length?' missing source: '+gaps.join(','):''))}"
@@ -309,7 +309,7 @@ node -e "const a=require('./src/data/partsData.json');const s=require('./data/pa
 
 Expected: ten `ok` lines and no `GAP`.
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -317,7 +317,7 @@ npm run test:run
 
 Expected: PASS. A spec field added without a source fails `partSources.json > has a source for every researched spec on every part` by name.
 
-- [ ] **Step 4: Check coverage moved**
+- [x] **Step 4: Check coverage moved**
 
 ```bash
 npm run catalog:coverage
@@ -325,7 +325,7 @@ npm run catalog:coverage
 
 Expected: `case: 10/59 parts fully researched (17%)`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -334,7 +334,7 @@ git commit -m "data: research the ten Fractal Design cases"
 
 ⚠️ Name any corrected value in the commit body, in the form `case-fractal-north maxGpuLength 355 -> 373 (Fractal spec tab)`.
 
-- [ ] **Step 6: STOP for user review**
+- [x] **Step 6: STOP for user review**
 
 Report to the user: how many of the 50 re-verified values were wrong, any unverifiable records and why, and any case whose corrected clearance changes which GPUs fit. Do not start Task 3 until they respond.
 
