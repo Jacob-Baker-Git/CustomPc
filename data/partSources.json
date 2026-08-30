@@ -869,5 +869,61 @@
     "supportedFormFactors": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
     "radiatorSupport": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30", "note": "Depends on PSU mode: SFX mode takes a 240/280 top radiator, ATX mode only 120 mm top. Bottom is 120 mm in both" }
+  },
+  "case-nzxt-h510": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30", "note": "NZXT states \"Up to 381 mm (w/o front fans or radiator)\" - already the unobstructed figure" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" }
+  },
+  "case-nzxt-h7-flow": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "H7 Flow (2024), the revision NZXT currently sells. The catalogue held 400 mm, which is the 2022/2023 model" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" }
+  },
+  "case-nzxt-h9-flow": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30", "note": "H9 Flow (2025), the revision NZXT currently sells; 410 mm with a 56 mm-thick 420 mm AIO and fans at the front. The catalogue held 435 mm, which is the 2023 model" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" }
+  },
+  "case-nzxt-h5-flow-2024": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "H5 Flow (2024), matching this row's name. The catalogue held 365 mm, which is the H5 (2022) figure" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "Top 280 mm is 240 mm-base and needs low-profile memory" }
+  },
+  "case-nzxt-h6-flow": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://nzxt.com/products/h6-flow", "checkedOn": "2026-08-30", "note": "NZXT lists ATX, Micro-ATX, Mini-ITX - no E-ATX on this model" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" }
+  },
+  "case-nzxt-h5-elite": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30", "note": "H5 Elite (2022), CC-H51EB-01. NZXT states \"Up to 365 mm (w/o front fans or radiator)\"" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" }
+  },
+  "case-nzxt-h210": {
+    "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30", "note": "NZXT states \"Up to 325 mm (w/o front fans or radiator)\"" },
+    "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" }
+  },
+  "case-hyte-y60": {
+    "maxGpuLength": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30", "note": "HYTE states \"375mm length, 75mm width (60mm or less recommended for best cooling)\"" },
+    "maxCoolerHeight": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30", "note": "HYTE publishes \"3 + 7 half-height\"; 3 is the full-height count the GPU occupies. The Y60 mounts the card vertically on an included PCIe 4.0 x16 riser" },
+    "radiatorSupport": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" }
   }
 }
