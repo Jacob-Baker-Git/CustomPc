@@ -10,6 +10,8 @@
 #   - the e2e suite, which is the ONLY place in this repo where CSS applies and
 #     therefore the only place a layout bug can be caught at all (jsdom computes
 #     no layout)
+#   - the production Content-Security-Policy, which no dev server sends and which
+#     therefore cannot break anywhere but a deploy (the `csp` project below)
 #   - the two generated artefacts that rot SILENTLY — the pre-rendered fragments
 #     and the sitemap. Both are committed, both are produced by a script, and
 #     neither has anything to notice when the source moves on without them.
@@ -52,13 +54,33 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Chromium only: playwright.config.js declares no projects, so the suite
-      # runs on the default chromium and installing the other two would be a
+      # Chromium only. The suite declares two projects now, but they differ by
+      # baseURL and by which specs they match — neither sets `browserName`, so
+      # both still run on the default chromium. Firefox and webkit would be a
       # minute of download for nothing.
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      # Starts its own dev server via playwright.config.js's `webServer`.
+      # Bare `playwright test`, so BOTH projects run. Deliberate, and checked on
+      # the runner rather than assumed — the 2026-08-26 run reported "Running 95
+      # tests", which is 94 app + 1 csp:
+      #
+      #   app — everything except e2e/csp.spec.js, against `npm run dev` on :5173
+      #   csp — e2e/csp.spec.js alone, against the built bundle served on :4184
+      #         with public/_headers actually applied (scripts/preview-csp.mjs)
+      #
+      # The csp project is the reason this is not `--project=app`. It is exactly
+      # the kind of check this file exists for: `npm run dev` sends no CSP and
+      # `vite preview` sends none either, so a policy that breaks the app looks
+      # fine on every localhost and fails only once deployed. It CAN be run by
+      # hand — `npm run preview:csp` — which is precisely why it never is.
+      #
+      # Both webServer entries start here, not just the dev server. The csp one
+      # sets reuseExistingServer: false and its command begins with `npm run
+      # build`, so the bundle is built a second time; the Build step above does
+      # not spare it. Nor would filtering: Playwright registers every webServer
+      # entry before it filters projects, so `--project=app` pays for the
+      # rebuild too. The cost lives in playwright.config.js, not in this step.
       - name: End-to-end tests
         run: npx playwright test
 
