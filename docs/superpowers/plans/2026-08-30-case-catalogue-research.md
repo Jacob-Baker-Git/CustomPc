@@ -483,7 +483,7 @@ git commit -m "data: research the NZXT and HYTE cases"
 | `case-corsair-4000d-rs` | 360 / 170 / ATX, mATX, ITX |
 | `case-corsair-icue-2500x` | 400 / 165 / mATX, ITX |
 
-- [ ] **Step 1: Run protocol R for all seven rows**
+- [x] **Step 1: Run protocol R for all seven rows**
 
 Start at `https://www.corsair.com/us/en/c/pc-cases`.
 
@@ -491,7 +491,7 @@ Start at `https://www.corsair.com/us/en/c/pc-cases`.
 
 ⚠️ `case-corsair-2500x` and `case-corsair-icue-2500x` are genuinely different SKUs (the iCUE LINK variant ships different hardware). Research both pages separately even if the clearances turn out identical — an identical figure with two sources is a finding, a copied figure is not.
 
-- [ ] **Step 2: Verify the data shape before testing**
+- [x] **Step 2: Verify the data shape before testing**
 
 ```bash
 node -e "const a=require('./src/data/partsData.json');const s=require('./data/partSources.json');const ids=a.filter(p=>p.brand==='Corsair'&&p.category==='case').map(p=>p.id);for(const id of ids){const e=s[id]||{};const need=['maxGpuLength','maxCoolerHeight','supportedFormFactors','expansionSlots','radiatorSupport'];const gaps=need.filter(k=>!e[k]);console.log((gaps.length?'GAP ':'ok  ')+id+(gaps.length?' missing source: '+gaps.join(','):''))}"
@@ -499,7 +499,7 @@ node -e "const a=require('./src/data/partsData.json');const s=require('./data/pa
 
 Expected: seven `ok` lines and no `GAP`. ⚠️ The `category==='case'` filter matters here — Corsair also makes PSUs and peripherals in this catalogue.
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -507,7 +507,7 @@ npm run test:run
 
 Expected: PASS.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
