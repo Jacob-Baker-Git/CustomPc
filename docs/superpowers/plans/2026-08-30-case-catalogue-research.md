@@ -36,15 +36,42 @@
 
 For each case id:
 
-1. **Open the maker's own product or spec page** for that exact model. Use the in-app Browser: `preview_start {url: "<page>"}` then `javascript_tool` to read the DOM, or `get_page_text`. ⚠️ `WebFetch` fails on several vendor sites — do not conclude a spec is unpublished because `WebFetch` returned nothing.
+1. **Open the maker's own product or spec page** for that exact model. Use the in-app Browser: `preview_start {url: "<page>"}` then `javascript_tool` to read the DOM, or `get_page_text`. ⚠️ `WebFetch` fails on several vendor sites — do not conclude a spec is unpublished because `WebFetch` returned nothing. ⚠️ `navigate` may be swallowed by a vendor SPA; pass `force: true` and assert `location.pathname` afterwards.
+
+   🛑 **ANCHOR THE EXTRACTION TO THE PRODUCT'S OWN SKU BLOCK.** A first-match
+   regex over `document.body.innerText` returns whichever spec block appears
+   first, which on a series page is a DIFFERENT product. This shipped a silent
+   error in the pilot: the North XL read as 355 mm / 145 mm — the plain North's
+   figures — instead of 413 mm / 185 mm. Take the window ending at the LAST
+   `SKU` row and parse inside it, then check the SKU belongs to the product you
+   opened.
 2. **Read five values off the page:**
    - `maxGpuLength` — the maker's stated maximum GPU/VGA clearance, **unobstructed**. If the page gives a second, smaller figure for "with front radiator/fans", the field takes the **larger, unobstructed** number and the smaller one goes in that entry's `note`.
-   - `maxCoolerHeight` — maximum CPU cooler height.
+   - `maxCoolerHeight` — the **chassis maximum**, same convention as above. See the trap in step 3: the spec table may publish a constrained figure without saying so.
    - `supportedFormFactors` — the board sizes the maker lists, mapped to the catalogue's vocabulary: `"ATX"`, `"mATX"`, `"ITX"`. ⚠️ Drop anything outside that set (E-ATX, SSI-EEB); no catalogue board uses them, and adding a fourth token would change nothing but risk a mismatch in `compatibility.js`.
    - `expansionSlots` — the number of rear expansion slots (integer).
    - `radiatorSupport` — an object keyed by the maker's own mount names, each an array of radiator sizes in mm.
-3. **Cross-check the two clearance numbers** against one reliable secondary source (a review with measurements, or PCPartPicker). PCPartPicker is **never** the source of truth.
+3. **Cross-check both clearance numbers** against one reliable secondary source (a review with measurements, or PCPartPicker). PCPartPicker is **never** the source of truth.
+
+   🛑 **THE MAKER'S SUPPORT / FAQ KB OUTRANKS ITS PRODUCT SPEC TABLE.** A spec
+   table can publish the *constrained* figure with no label on it, while the
+   same vendor's KB gives the chassis maximum. Fractal does exactly this: the
+   North's table says 145 mm (the side-fan-bracket figure) and the Terra's says
+   48 mm (spine position 7 of 7), where the KB gives 170 mm and 77 mm. Taking
+   the table at face value would have cut the North from 53 fitting coolers to
+   24. **A cooler height that looks low for the case's width is the tell** —
+   go and find the KB article before believing it.
+
+   ⚠️ Record the URL of a page you actually opened. A search-result snippet is
+   a lead, not a citation.
 4. **Write the values** into `src/data/partsData.json` and a source entry per field into `data/partSources.json`.
+
+   ⚠️ **Do NOT write these files with `JSON.stringify(obj, null, 2)`.** The repo
+   inlines flat objects below a per-file depth (3 for `partsData.json`, 2 for
+   `partSources.json`) and writes CRLF, and an empty object is `{  }` with two
+   spaces. Plain stringify reformats all 8310 lines and buries a ten-row change
+   in a 3236-line diff. Use a serializer proved to round-trip both files
+   byte-for-byte before it writes, and keep the proof as its guard.
 5. **If the maker does not publish a figure**, record it as unverifiable and **remove the field** if present:
    ```json
    { "checkedOn": "2026-08-30", "result": "unverifiable", "note": "Fractal publishes no rear slot count for this model; not stated on the spec tab or in the manual" }
