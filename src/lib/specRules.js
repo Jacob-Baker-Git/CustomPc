@@ -24,7 +24,7 @@ export function aggregate(results) {
 // Exported so the spec sheet names a connector the same way a block message
 // does — one definition, for the same reason psuTooSmall is shared rather than
 // restated.
-export const CONNECTOR_LABELS = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
+export const CONNECTOR_LABELS = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12pin': '12-pin', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
 
 // Can `supply` satisfy every entry in `need`?
 const covers = (supply, need) =>
@@ -88,6 +88,23 @@ function gpuThickness(selectedParts, candidate) {
 
   if (thick <= budget) return null
   return { status: 'blocked', reason: `GPU needs ${thick} slots; case has ${budget}` }
+}
+
+// Rule 2b. Card LENGTH against the case, and it exists only to report the gap.
+// compatibility.js already blocks when both numbers are there, but a card whose
+// length nobody publishes used to sail through that check in silence — and a
+// field that silently passes every check it governs is how an incompatible part
+// becomes selectable. So say we could not check, rather than nothing.
+function gpuLength(selectedParts, candidate) {
+  const pcCase = candidate.category === 'case' ? candidate : selectedParts.case
+  const gpu = candidate.category === 'gpu' ? candidate : selectedParts.gpu
+  if (!pcCase || !gpu) return null
+
+  if (typeof gpu.length !== 'number')
+    return { status: 'unverified', reason: `Length of ${gpu.name ?? 'this GPU'} is not published; measure before buying` }
+  if (typeof pcCase.maxGpuLength !== 'number')
+    return { status: 'unverified', reason: `GPU clearance of ${pcCase.name ?? 'this case'} is not verified` }
+  return null
 }
 
 // Rule 3. ⚠️ "Does ANY slot on this board accept this drive", NOT slot
@@ -170,7 +187,7 @@ function ramFit(selectedParts, candidate) {
   return null
 }
 
-const RULES = [powerConnectors, epsConnectors, gpuThickness, m2Interface, radiatorFit, ramFit]
+const RULES = [powerConnectors, epsConnectors, gpuThickness, gpuLength, m2Interface, radiatorFit, ramFit]
 
 export function evaluateSpecRules(selectedParts, candidate) {
   return aggregate(RULES.map((rule) => rule(selectedParts, candidate)))

@@ -33,6 +33,7 @@ describe('partSources.json', () => {
     for (const [partId, specs] of Object.entries(sources)) {
       if (partId.startsWith('_')) continue
       for (const [key, entry] of Object.entries(specs)) {
+        if (entry.result === 'unverifiable') continue
         expect(entry.url, `${partId}.${key}`).toMatch(/^https:\/\//)
         expect(entry.checkedOn, `${partId}.${key}`).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       }
@@ -51,38 +52,98 @@ describe('partSources.json', () => {
       })
     const offenders = walk(resolve(process.cwd(), 'src'))
       .filter((f) => /\.(js|jsx)$/.test(f))
-      .filter((f) => !f.endsWith('partSources.test.js'))
+      // ⚠️ Tests and their helpers are exempt, and ONLY they: vitest collects
+      // from src/tests/ but Vite never bundles it, so nothing here reaches a
+      // visitor. The guard is about payload, not about tidiness.
+      .filter((f) => !f.replace(/\\/g, '/').includes('/src/tests/'))
       .filter((f) => readFileSync(f, 'utf8').includes('partSources.json'))
     expect(offenders).toEqual([])
   })
 })
 
-// The inverse of the guard above, and together they make it a bijection: every
+// Together with the guard above this makes provenance a bijection: every
 // researched spec needs a source, AND every source must describe a spec that is
-// actually there. Without this second half the file drifts into claiming
-// provenance for data nobody ever added — which is exactly the state it shipped
-// in, with four entries for the RTX 4090 naming specs the part did not carry.
+// actually there — or explicitly record that it does not exist. Without the
+// second half the file drifts into claiming provenance for data nobody ever
+// added, which is exactly the state it shipped in, with four entries for RTX
+// 4090 specs the part did not carry.
 //
-// ⚠️ Checks top-level fields too (`length`, `tdp`, `socket`), not just
+// ⚠️ Covers top-level fields too (`length`, `tdp`, `socket`), not just
 // `specs.*`. Those predate the research standard and are NOT yet required to
 // have sources — but once one is recorded, it has to be true.
-describe('every recorded source describes a spec that exists', () => {
-  it('has no provenance entry for an absent field', () => {
+//
+// A researched figure that turns out not to be published anywhere is a RESULT,
+// not an absence of work. Recording it is what lets the coverage report tell
+// "we looked and there is nothing" apart from "nobody has looked yet", and it
+// is the only way a legacy card whose page is gone can ever be counted as done.
+describe('unverifiable records', () => {
+  const unverifiable = (entry) => entry?.result === 'unverifiable'
+
+  it('lets a source describe an absent field when the result is unverifiable', () => {
     const byId = new Map(partsData.map((p) => [p.id, p]))
     const orphans = []
     for (const [partId, specs] of Object.entries(sources)) {
       if (partId.startsWith('_')) continue
       const part = byId.get(partId)
-      if (!part) {
-        orphans.push(`${partId} (no such part)`)
-        continue
-      }
-      for (const key of Object.keys(specs)) {
-        if (part.specs?.[key] === undefined && part[key] === undefined) {
-          orphans.push(`${partId}.${key}`)
-        }
+      if (!part) continue
+      for (const [key, entry] of Object.entries(specs)) {
+        const present = part.specs?.[key] !== undefined || part[key] !== undefined
+        if (!present && !unverifiable(entry)) orphans.push(`${partId}.${key}`)
       }
     }
     expect(orphans, `sources describing nothing:\n${orphans.join('\n')}`).toEqual([])
+  })
+
+  // ⚠️ An unverifiable record must carry a reason. "We could not find it" with
+  // no explanation is indistinguishable from not having tried.
+  it('requires a checkedOn date and a note, and forbids a bare url claim', () => {
+    for (const [partId, specs] of Object.entries(sources)) {
+      if (partId.startsWith('_')) continue
+      for (const [key, entry] of Object.entries(specs)) {
+        if (!unverifiable(entry)) continue
+        expect(entry.checkedOn, `${partId}.${key}`).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+        expect(String(entry.note ?? ''), `${partId}.${key} needs a note`).not.toBe('')
+        expect(entry.url, `${partId}.${key} must not claim a url`).toBeUndefined()
+      }
+    }
+  })
+
+  // The field must actually be gone. Recording "unverifiable" while leaving the
+  // old guessed number in place is the worst of both worlds.
+  it('refuses an unverifiable record for a field that is still present', () => {
+    const byId = new Map(partsData.map((p) => [p.id, p]))
+    const contradictions = []
+    for (const [partId, specs] of Object.entries(sources)) {
+      if (partId.startsWith('_')) continue
+      const part = byId.get(partId)
+      if (!part) continue
+      for (const [key, entry] of Object.entries(specs)) {
+        if (!unverifiable(entry)) continue
+        const present = part.specs?.[key] !== undefined || part[key] !== undefined
+        if (present) contradictions.push(`${partId}.${key}`)
+      }
+    }
+    expect(contradictions, `marked unverifiable but still carrying a value:\n${contradictions.join('\n')}`).toEqual([])
+  })
+})
+
+// The guard above covers `specs.*` only, which is exactly how a wrong top-level
+// `length` sat in the catalogue unnoticed for months. Requiring sources for
+// length and tdp across all 559 parts today would fail instantly, so it is
+// switched on ONE CATEGORY AT A TIME, as each is brought up to standard.
+const VERIFIED_CATEGORIES = new Set(['gpu'])
+const RATCHETED_KEYS = ['length', 'tdp']
+
+describe('verified categories', () => {
+  it('requires a source for top-level length and tdp once a category is verified', () => {
+    const missing = []
+    for (const part of partsData) {
+      if (!VERIFIED_CATEGORIES.has(part.category)) continue
+      for (const key of RATCHETED_KEYS) {
+        if (part[key] === undefined) continue
+        if (!sources[part.id]?.[key]) missing.push(`${part.id}.${key}`)
+      }
+    }
+    expect(missing, `verified-category fields with no source:\n${missing.join('\n')}`).toEqual([])
   })
 })

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import partsData from '../data/partsData.json'
 import { checkCompatibility } from '../lib/compatibility'
+import { accountedFor } from './support/provenance'
 
 // Catalogue-wide compatibility audit.
 //
@@ -56,6 +57,9 @@ describe('catalogue coverage', () => {
 
   it('gives every GPU a case long enough for it', () => {
     for (const g of gpus) {
+      // A card with no published length cannot be measured against anything.
+      // Asserting it fits would be as false as asserting it does not.
+      if (typeof g.length !== 'number') continue
       const fits = cases.some((c) => typeof c.maxGpuLength !== 'number' || g.length <= c.maxGpuLength)
       expect(fits, `${g.id} is ${g.length}mm, longest case clearance is ${Math.max(...cases.map((c) => c.maxGpuLength ?? 0))}mm`).toBe(true)
     }
@@ -105,7 +109,8 @@ describe('catalogue field hygiene', () => {
       expect(b.formFactor, `${b.id} has no formFactor`).toBeTruthy()
     }
     for (const r of rams) expect(r.ramType, `${r.id} has no ramType`).toBeTruthy()
-    for (const g of gpus) expect(typeof g.length, `${g.id} has no length`).toBe('number')
+    // Or provenance records why it never will — see support/provenance.js.
+    for (const g of gpus) expect(accountedFor(g, 'length'), `${g.id} has no length and no recorded reason`).toBe(true)
     for (const p of psus) expect(typeof p.wattage, `${p.id} has no wattage`).toBe('number')
     for (const c of cases) {
       expect(Array.isArray(c.supportedFormFactors), `${c.id} has no supportedFormFactors`).toBe(true)

@@ -6,6 +6,11 @@ export function dimensionsCheck(selectedParts = {}) {
   if (gpu && pcCase && typeof gpu.length === 'number' && typeof pcCase.maxGpuLength === 'number') {
     const pass = gpu.length <= pcCase.maxGpuLength
     rows.push({ id: 'gpu-length', label: 'GPU length vs case clearance', status: pass ? 'pass' : 'fail', detail: `${gpu.length}mm GPU / ${pcCase.maxGpuLength}mm max` })
+  } else if (gpu && pcCase) {
+    // Both parts are chosen, so telling them to choose is just wrong. The
+    // figure itself is missing — say which one.
+    const missing = typeof gpu.length !== 'number' ? `${gpu.name ?? 'This GPU'} has no published length` : `${pcCase.name ?? 'This case'} has no published GPU clearance`
+    rows.push({ id: 'gpu-length', label: 'GPU length vs case clearance', status: 'na', detail: `${missing} — measure before buying` })
   } else {
     rows.push({ id: 'gpu-length', label: 'GPU length vs case clearance', status: 'na', detail: 'Select a GPU and a case' })
   }

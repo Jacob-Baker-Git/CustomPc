@@ -1,0 +1,111 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`verdict spread > matches the committed snapshot (cramped) 1`] = `
+{
+  "case": {
+    "blocked": 8,
+    "ok": 0,
+    "unverified": 51,
+  },
+  "cooler": {
+    "blocked": 10,
+    "ok": 0,
+    "unverified": 43,
+  },
+  "cpu": {
+    "blocked": 54,
+    "ok": 0,
+    "unverified": 26,
+  },
+  "fans": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 46,
+  },
+  "gpu": {
+    "blocked": 25,
+    "ok": 0,
+    "unverified": 54,
+  },
+  "motherboard": {
+    "blocked": 57,
+    "ok": 0,
+    "unverified": 13,
+  },
+  "paste": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 15,
+  },
+  "psu": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 53,
+  },
+  "ram": {
+    "blocked": 17,
+    "ok": 0,
+    "unverified": 35,
+  },
+  "storage": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 52,
+  },
+}
+`;
+
+exports[`verdict spread > matches the committed snapshot (roomy) 1`] = `
+{
+  "case": {
+    "blocked": 14,
+    "ok": 0,
+    "unverified": 45,
+  },
+  "cooler": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 53,
+  },
+  "cpu": {
+    "blocked": 54,
+    "ok": 0,
+    "unverified": 26,
+  },
+  "fans": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 46,
+  },
+  "gpu": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 79,
+  },
+  "motherboard": {
+    "blocked": 37,
+    "ok": 0,
+    "unverified": 33,
+  },
+  "paste": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 15,
+  },
+  "psu": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 53,
+  },
+  "ram": {
+    "blocked": 17,
+    "ok": 0,
+    "unverified": 35,
+  },
+  "storage": {
+    "blocked": 0,
+    "ok": 0,
+    "unverified": 52,
+  },
+}
+`;

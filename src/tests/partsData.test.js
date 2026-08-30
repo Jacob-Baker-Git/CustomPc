@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import partsData from '../data/partsData.json'
+import { accountedFor } from './support/provenance'
 
 describe('partsData integrity', () => {
   it('gives every part a non-empty string brand', () => {
@@ -35,7 +36,8 @@ describe('partsData integrity', () => {
         expect(typeof p.perfScore, p.id).toBe('number')
       }
       if (p.category === 'gpu') {
-        expect(typeof p.length, p.id).toBe('number')
+        // Or provenance says why it never will be - see support/provenance.js
+        expect(accountedFor(p, 'length'), p.id).toBe(true)
         expect(typeof p.perfScore, p.id).toBe('number')
       }
       if (p.category === 'motherboard') {

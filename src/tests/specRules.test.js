@@ -29,7 +29,10 @@ describe('specRules aggregation', () => {
 })
 
 const psu = (connectors) => ({ id: 'p', category: 'psu', specs: connectors ? { connectors } : {} })
-const gpu = (specs) => ({ id: 'g', category: 'gpu', specs })
+// ⚠️ Carries a length by default. Rule 2b reports 'unverified' for a card with
+// no published length, so a fixture without one would make every GPU+case test
+// below unverified for a reason it is not trying to test.
+const gpu = (specs, extra = {}) => ({ id: 'g', category: 'gpu', length: 300, specs, ...extra })
 
 describe('rule 1: power connectors', () => {
   it('blocks a PSU that cannot feed the GPU', () => {
@@ -84,7 +87,7 @@ describe('rule 1: power connectors', () => {
   })
 })
 
-const box = (specs) => ({ id: 'c', category: 'case', specs })
+const box = (specs, extra = {}) => ({ id: 'c', category: 'case', maxGpuLength: 400, specs, ...extra })
 
 describe('rule 2: GPU thickness', () => {
   it('blocks a 4-slot card in a case with 2 expansion slots', () => {
@@ -103,6 +106,37 @@ describe('rule 2: GPU thickness', () => {
 
   it('is unverified when the GPU does not state its thickness', () => {
     expect(evaluateSpecRules({ case: box({ expansionSlots: 7 }) }, gpu({})).status).toBe('unverified')
+  })
+})
+
+// Rule 2b exists because compatibility.js blocks on length only when BOTH
+// numbers are present. A card with no published length sailed through in
+// silence, and a field that silently passes every check it governs is how an
+// incompatible part becomes selectable.
+describe('rule 2b: GPU length', () => {
+  const fits = { expansionSlots: 7 }
+
+  it('says nothing when both figures are present', () => {
+    expect(evaluateSpecRules({ case: box(fits) }, gpu({ slotsThick: 3 })).status).toBe('ok')
+  })
+
+  it('is unverified when the GPU length is not published', () => {
+    const r = evaluateSpecRules({ case: box(fits) }, gpu({ slotsThick: 3 }, { length: undefined }))
+    expect(r.status).toBe('unverified')
+    expect(r.reason).toMatch(/length/i)
+  })
+
+  it('is unverified when the case does not state its GPU clearance', () => {
+    const r = evaluateSpecRules({ case: box(fits, { maxGpuLength: undefined }) }, gpu({ slotsThick: 3 }))
+    expect(r.status).toBe('unverified')
+    expect(r.reason).toMatch(/clearance/i)
+  })
+
+  // The invariant the whole module exists for: not being able to check is
+  // never grounds for taking a part away from somebody.
+  it('never blocks on a length it does not have', () => {
+    const r = evaluateSpecRules({ case: box(fits) }, gpu({ slotsThick: 3 }, { length: undefined }))
+    expect(r.status).not.toBe('blocked')
   })
 })
 

@@ -622,15 +622,19 @@
   {
     "id": "gpu-rtx-4070ti",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4070 Ti",
+    "name": "ASUS TUF Gaming GeForce RTX 4070 Ti OC",
     "brand": "NVIDIA",
     "price": 799.99,
     "tdp": 285,
-    "length": 336,
+    "length": 305,
     "perfScore": 72,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3.25,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -639,12 +643,16 @@
     "name": "NVIDIA GeForce RTX 4060 Ti",
     "brand": "NVIDIA",
     "price": 399.99,
-    "tdp": 165,
-    "length": 240,
+    "tdp": 160,
+    "length": 244,
     "perfScore": 50,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 1 }
     }
   },
   {
@@ -658,7 +666,10 @@
     "perfScore": 88,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -668,11 +679,14 @@
     "brand": "AMD",
     "price": 259.99,
     "tdp": 165,
-    "length": 210,
+    "length": 204,
     "perfScore": 42,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -682,11 +696,15 @@
     "brand": "NVIDIA",
     "price": 1199.99,
     "tdp": 320,
-    "length": 336,
+    "length": 304,
     "perfScore": 85,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
@@ -696,25 +714,32 @@
     "brand": "NVIDIA",
     "price": 549.99,
     "tdp": 200,
-    "length": 285,
+    "length": 244,
     "perfScore": 62,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rtx-4060",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4060",
+    "name": "ASUS Dual GeForce RTX 4060 OC 8GB",
     "brand": "NVIDIA",
     "price": 289.99,
     "tdp": 115,
-    "length": 200,
+    "length": 227.2,
     "perfScore": 40,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -728,7 +753,10 @@
     "perfScore": 78,
     "specs": {
       "vram": 20,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -742,7 +770,10 @@
     "perfScore": 64,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -756,27 +787,33 @@
     "perfScore": 56,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rx-6650xt",
     "category": "gpu",
-    "name": "AMD Radeon RX 6650 XT",
+    "name": "ASUS Dual Radeon RX 6650 XT OC 8GB",
     "brand": "AMD",
     "price": 229.99,
     "tdp": 180,
-    "length": 245,
+    "length": 243,
     "perfScore": 38,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-3050",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3050",
+    "name": "ASUS Dual GeForce RTX 3050 OC 8GB",
     "brand": "NVIDIA",
     "price": 199.99,
     "tdp": 130,
@@ -784,7 +821,10 @@
     "perfScore": 28,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -799,49 +839,63 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-4070ti-super",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4070 Ti Super",
+    "name": "ASUS Dual GeForce RTX 4070 Ti SUPER OC 16GB",
     "brand": "NVIDIA",
     "price": 849.99,
     "tdp": 285,
-    "length": 304,
+    "length": 267.01,
     "perfScore": 76,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2.56,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rtx-4070-super",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4070 Super",
+    "name": "ASUS Dual GeForce RTX 4070 SUPER OC 12GB",
     "brand": "NVIDIA",
     "price": 599.99,
     "tdp": 220,
-    "length": 304,
+    "length": 267.01,
     "perfScore": 68,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2.56,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rtx-4060ti-16gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 4060 Ti 16GB",
+    "name": "ASUS Dual GeForce RTX 4060 Ti OC 16GB",
     "brand": "NVIDIA",
     "price": 449.99,
     "tdp": 165,
-    "length": 240,
+    "length": 227.2,
     "perfScore": 52,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -851,11 +905,14 @@
     "brand": "AMD",
     "price": 319.99,
     "tdp": 190,
-    "length": 267,
+    "length": 241,
     "perfScore": 46,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -869,21 +926,27 @@
     "perfScore": 48,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
     "id": "gpu-intel-arc-a770",
     "category": "gpu",
-    "name": "Intel Arc A770 16GB",
+    "name": "Intel Arc A770 Limited Edition 16GB",
     "brand": "Intel",
     "price": 279.99,
     "tdp": 225,
-    "length": 280,
+    "length": 268.6,
     "perfScore": 44,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -2885,11 +2948,15 @@
     "brand": "NVIDIA",
     "price": 1899.99,
     "tdp": 575,
-    "length": 357,
+    "length": 304,
     "perfScore": 132,
     "specs": {
       "vram": 32,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 4 }
     }
   },
   {
@@ -2899,25 +2966,33 @@
     "brand": "NVIDIA",
     "price": 999.99,
     "tdp": 360,
-    "length": 340,
+    "length": 304,
     "perfScore": 93,
     "specs": {
       "vram": 16,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
     "id": "gpu-rtx-5070ti",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5070 Ti",
+    "name": "ASUS Prime GeForce RTX 5070 Ti OC 16GB",
     "brand": "NVIDIA",
     "price": 729.99,
     "tdp": 300,
-    "length": 300,
+    "length": 304,
     "perfScore": 86,
     "specs": {
       "vram": 16,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -2927,81 +3002,100 @@
     "brand": "NVIDIA",
     "price": 539.99,
     "tdp": 250,
-    "length": 250,
+    "length": 242,
     "perfScore": 70,
     "specs": {
       "vram": 12,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2,
+      "pcieGen": 5,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rtx-5060ti",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5060 Ti 16GB",
+    "name": "ASUS Prime GeForce RTX 5060 Ti OC 16GB",
     "brand": "NVIDIA",
     "price": 399.99,
     "tdp": 180,
-    "length": 245,
+    "length": 304,
     "perfScore": 55,
     "specs": {
       "vram": 16,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-5060",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5060",
+    "name": "ASUS Prime GeForce RTX 5060 OC 8GB",
     "brand": "NVIDIA",
     "price": 289.99,
     "tdp": 145,
-    "length": 200,
+    "length": 268.3,
     "perfScore": 46,
     "specs": {
       "vram": 8,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rx-9070xt",
     "category": "gpu",
-    "name": "AMD Radeon RX 9070 XT",
+    "name": "ASUS Prime Radeon RX 9070 XT OC 16GB",
     "brand": "AMD",
     "price": 579.99,
     "tdp": 304,
-    "length": 287,
+    "length": 312,
     "perfScore": 80,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 3 }
     }
   },
   {
     "id": "gpu-rx-9070",
     "category": "gpu",
-    "name": "AMD Radeon RX 9070",
+    "name": "ASUS Prime Radeon RX 9070 OC 16GB",
     "brand": "AMD",
     "price": 519.99,
     "tdp": 220,
-    "length": 267,
+    "length": 312,
     "perfScore": 72,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rx-9060xt",
     "category": "gpu",
-    "name": "AMD Radeon RX 9060 XT 16GB",
+    "name": "ASUS Prime Radeon RX 9060 XT OC 16GB",
     "brand": "AMD",
     "price": 319.99,
     "tdp": 160,
-    "length": 245,
+    "length": 304,
     "perfScore": 53,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -3011,11 +3105,14 @@
     "brand": "Intel",
     "price": 249.99,
     "tdp": 190,
-    "length": 270,
+    "length": 272,
     "perfScore": 43,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -3586,39 +3683,49 @@
     "brand": "NVIDIA",
     "price": 949.99,
     "tdp": 320,
-    "length": 336,
+    "length": 304,
     "perfScore": 87,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {
     "id": "gpu-rtx-3060-12gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3060 12GB",
+    "name": "ASUS Dual GeForce RTX 3060 OC 12GB",
     "brand": "NVIDIA",
     "price": 249.99,
     "tdp": 170,
-    "length": 242,
+    "length": 200,
     "perfScore": 34,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rx-6600",
     "category": "gpu",
-    "name": "AMD Radeon RX 6600",
+    "name": "ASUS Dual Radeon RX 6600",
     "brand": "AMD",
     "price": 189.99,
     "tdp": 132,
-    "length": 190,
+    "length": 243,
     "perfScore": 30,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -3915,7 +4022,11 @@
     "perfScore": 46,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 1 }
     }
   },
   {
@@ -3929,7 +4040,11 @@
     "perfScore": 60,
     "specs": {
       "vram": 10,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -3943,35 +4058,44 @@
     "perfScore": 45,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
     "id": "gpu-rx-7900-gre",
     "category": "gpu",
-    "name": "AMD Radeon RX 7900 GRE",
+    "name": "ASUS Dual Radeon RX 7900 GRE OC 16GB",
     "brand": "AMD",
     "price": 529.99,
     "tdp": 260,
-    "length": 287,
+    "length": 279.9,
     "perfScore": 70,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.47,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-arc-b570",
     "category": "gpu",
-    "name": "Intel Arc B570",
+    "name": "ASRock Intel Arc B570 Challenger 10GB OC",
     "brand": "Intel",
     "price": 219.99,
     "tdp": 150,
-    "length": 244,
+    "length": 249,
     "perfScore": 38,
     "specs": {
       "vram": 10,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -4562,29 +4686,35 @@
   {
     "id": "gpu-arc-a380",
     "category": "gpu",
-    "name": "Intel Arc A380",
+    "name": "ASRock Intel Arc A380 Challenger ITX 6GB OC",
     "brand": "Intel",
     "price": 109.99,
     "tdp": 75,
-    "length": 200,
+    "length": 190,
     "perfScore": 14,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rx-6500xt",
     "category": "gpu",
-    "name": "AMD Radeon RX 6500 XT",
+    "name": "ASUS Dual Radeon RX 6500 XT OC 4GB",
     "brand": "AMD",
     "price": 119.99,
     "tdp": 107,
-    "length": 200,
+    "length": 201,
     "perfScore": 16,
     "specs": {
       "vram": 4,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie6": 1 }
     }
   },
   {
@@ -4599,21 +4729,27 @@
     "legacy": true,
     "specs": {
       "vram": 4,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": {  }
     }
   },
   {
     "id": "gpu-rtx-3050-6gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3050 6GB",
+    "name": "ASUS Dual GeForce RTX 3050 OC 6GB",
     "brand": "NVIDIA",
     "price": 149.99,
     "tdp": 70,
-    "length": 200,
+    "length": 201,
     "perfScore": 20,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": {  }
     }
   },
   {
@@ -5407,21 +5543,27 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-3060-8gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 3060 8GB",
+    "name": "ASUS Dual GeForce RTX 3060 OC 8GB",
     "brand": "NVIDIA",
     "price": 219.99,
     "tdp": 170,
-    "length": 242,
+    "length": 200,
     "perfScore": 30,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -5435,7 +5577,11 @@
     "perfScore": 42,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 1 }
     }
   },
   {
@@ -5449,7 +5595,11 @@
     "perfScore": 50,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -5463,7 +5613,11 @@
     "perfScore": 66,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
@@ -5477,49 +5631,62 @@
     "perfScore": 70,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12pin": 1 },
+      "adapterFrom": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rtx-5050",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5050",
+    "name": "ASUS Prime GeForce RTX 5050 OC 8GB",
     "brand": "NVIDIA",
     "price": 229.99,
     "tdp": 130,
-    "length": 244,
+    "length": 268.3,
     "perfScore": 38,
     "specs": {
       "vram": 8,
-      "memType": "GDDR7"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rtx-5060-ti-8gb",
     "category": "gpu",
-    "name": "NVIDIA GeForce RTX 5060 Ti 8GB",
+    "name": "ASUS Prime GeForce RTX 5060 Ti OC 8GB",
     "brand": "NVIDIA",
     "price": 349.99,
     "tdp": 180,
-    "length": 244,
+    "length": 304,
     "perfScore": 52,
     "specs": {
       "vram": 8,
-      "memType": "GDDR7"
+      "memType": "GDDR7",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rx-6600-xt",
     "category": "gpu",
-    "name": "AMD Radeon RX 6600 XT",
+    "name": "ASUS Dual Radeon RX 6600 XT OC 8GB",
     "brand": "AMD",
     "price": 239.99,
     "tdp": 160,
-    "length": 220,
+    "length": 243,
     "perfScore": 36,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -5533,7 +5700,10 @@
     "perfScore": 55,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -5547,7 +5717,10 @@
     "perfScore": 62,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -5561,21 +5734,27 @@
     "perfScore": 68,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-rx-6950-xt",
     "category": "gpu",
-    "name": "AMD Radeon RX 6950 XT",
+    "name": "ASUS TUF Gaming Radeon RX 6950 XT OC 16GB",
     "brand": "AMD",
     "price": 549.99,
     "tdp": 335,
-    "length": 287,
+    "length": 320,
     "perfScore": 71,
     "specs": {
       "vram": 16,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.9,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -5584,68 +5763,82 @@
     "name": "AMD Radeon RX 7650 GRE",
     "brand": "AMD",
     "price": 239.99,
-    "tdp": 165,
-    "length": 232,
+    "tdp": 170,
+    "length": 204,
     "perfScore": 40,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rx-9060-xt-8gb",
     "category": "gpu",
-    "name": "AMD Radeon RX 9060 XT 8GB",
+    "name": "ASUS Prime Radeon RX 9060 XT OC 8GB",
     "brand": "AMD",
     "price": 269.99,
     "tdp": 150,
-    "length": 245,
+    "length": 304,
     "perfScore": 48,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
     "id": "gpu-rx-9070-gre",
     "category": "gpu",
-    "name": "AMD Radeon RX 9070 GRE",
+    "name": "ASUS Prime Radeon RX 9070 GRE OC 12GB",
     "brand": "AMD",
     "price": 459.99,
     "tdp": 220,
-    "length": 280,
+    "length": 312,
     "perfScore": 76,
     "specs": {
       "vram": 12,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.5,
+      "pcieGen": 5,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-arc-a580",
     "category": "gpu",
-    "name": "Intel Arc A580",
+    "name": "ASRock Intel Arc A580 Challenger 8GB OC",
     "brand": "Intel",
     "price": 149.99,
     "tdp": 185,
-    "length": 267,
+    "length": 271,
     "perfScore": 30,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2.4,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
     "id": "gpu-arc-a750",
     "category": "gpu",
-    "name": "Intel Arc A750",
+    "name": "Intel Arc A750 Limited Edition 8GB",
     "brand": "Intel",
     "price": 179.99,
     "tdp": 225,
-    "length": 268,
+    "length": 268.6,
     "perfScore": 36,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7333,7 +7526,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7348,7 +7544,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7363,7 +7562,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7378,7 +7580,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7393,7 +7598,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7408,7 +7616,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7423,7 +7634,10 @@
     "legacy": true,
     "specs": {
       "vram": 11,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 2 }
     }
   },
   {
@@ -7438,7 +7652,10 @@
     "legacy": true,
     "specs": {
       "vram": 4,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": {  }
     }
   },
   {
@@ -7453,7 +7670,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie6": 1 }
     }
   },
   {
@@ -7468,7 +7688,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7483,7 +7706,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7498,7 +7724,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR5X"
+      "memType": "GDDR5X",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7513,7 +7742,10 @@
     "legacy": true,
     "specs": {
       "vram": 11,
-      "memType": "GDDR5X"
+      "memType": "GDDR5X",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7523,12 +7755,15 @@
     "brand": "AMD",
     "price": 119.99,
     "tdp": 130,
-    "length": 200,
+    "length": 180,
     "perfScore": 18,
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7538,12 +7773,15 @@
     "brand": "AMD",
     "price": 149.99,
     "tdp": 150,
-    "length": 230,
+    "length": 267,
     "perfScore": 26,
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -7553,12 +7791,15 @@
     "brand": "AMD",
     "price": 169.99,
     "tdp": 180,
-    "length": 254,
+    "length": 270,
     "perfScore": 30,
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7573,7 +7814,10 @@
     "legacy": true,
     "specs": {
       "vram": 8,
-      "memType": "GDDR6"
+      "memType": "GDDR6",
+      "slotsThick": 2,
+      "pcieGen": 4,
+      "powerConnectors": { "pcie8": 1, "pcie6": 1 }
     }
   },
   {
@@ -7993,7 +8237,10 @@
     "legacy": true,
     "specs": {
       "vram": 6,
-      "memType": "GDDR5"
+      "memType": "GDDR5",
+      "slotsThick": 2,
+      "pcieGen": 3,
+      "powerConnectors": { "pcie8": 1 }
     }
   },
   {
@@ -8007,7 +8254,11 @@
     "perfScore": 76,
     "specs": {
       "vram": 24,
-      "memType": "GDDR6X"
+      "memType": "GDDR6X",
+      "slotsThick": 3,
+      "pcieGen": 4,
+      "powerConnectors": { "12vhpwr": 1 },
+      "adapterFrom": { "pcie8": 3 }
     }
   },
   {

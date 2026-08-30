@@ -1,10 +1,731 @@
 {
-  "_README": "Provenance for researched hardware specs. Build/authoring input ONLY - never imported by src/, so it never reaches the browser. Same rule as data/benchmarks/. Keyed part id -> spec key -> {url, checkedOn}.",
+  "_README": "Provenance for researched hardware specs. Build/authoring input ONLY - never imported by src/, so it never reaches the browser. Same rule as data/benchmarks/. Keyed part id -> spec key -> {url, checkedOn} for a verified figure, or {checkedOn, result: 'unverifiable', note} when the figure is not published anywhere and the field has been DELETED from partsData.json.",
   "gpu-rtx-4090": {
     "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 450 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" },
     "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4090/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4070ti": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070ti-o12g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA made no Founders Edition 4070 Ti, so the part models one named partner card. ASUS lists 305 x 138 x 65 mm." },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070ti-o12g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 3.25 Slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "SKU-level TGP 285 W; ASUS does not publish a board power for the card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box; ASUS lists 1 x Adapter Cable (1 to 2)" }
+  },
+  "gpu-rtx-2060": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28", "note": "NVIDIA retired the RTX 2060 product page - it now redirects to a 20-series stub carrying no dimensions or power figures. Reference-design figures taken from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28", "note": "PCIe 3.0 x16 - Turing, not 4.0" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c3310", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-7900xtx": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions section: Length 287 mm. KitGuru's 276 mm is an outlier against AMD, The FPS Review and XFX." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 355 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions section: Slots 2.5" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xtx.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 2x8-Pin" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-7900-xtx.c3941", "checkedOn": "2026-08-28", "note": "AMD does not publish a PCIe generation on the product page" }
+  },
+  "gpu-rx-7600": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "AMD publishes reference dimensions for this card, so no rename to a partner card was needed. Length 204 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 165 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions section: Slots 2" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin" },
+    "pcieGen": { "url": "https://www.techpowerup.com/309079/amd-launches-radeon-rx-7600-graphics-card", "checkedOn": "2026-08-28", "note": "PCIe 4.0 x8 - AMD does not publish a PCIe generation on the product page. Only the generation is modelled, not the lane count." }
+  },
+  "gpu-intel-arc-a770": {
+    "length": { "url": "https://www.intel.com/content/www/us/en/support/articles/000092554/graphics.html", "checkedOn": "2026-08-28", "note": "Intel publishes 268.6 mm without I/O bracket and 279.9 mm with it. Case GPU clearance is measured against the card body, so the without-bracket figure is the one modelled." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 225 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html", "checkedOn": "2026-08-28", "note": "Up to PCI Express 4.0 x16" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/arc-a770.c3914", "checkedOn": "2026-08-28", "note": "Intel publishes a shroud height of 40.81 mm but no slot count" },
+    "powerConnectors": { "url": "https://www.intel.com/content/www/us/en/support/articles/000092523/graphics.html", "checkedOn": "2026-08-28", "note": "Upgraded off TechPowerUp to Intel's own words: the A750 and A770 Limited Edition cards 'feature 8-pin and 6-pin PCIe power connectors', both required." }
+  },
+  "gpu-rtx-4080": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28", "note": "Founders Edition 304 mm x 137 mm, 3-slot. The catalogue's 336 mm was a shared bucket value, not a measurement." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 320 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28", "note": "3x PCIe 8-pin cables (adapter in box) OR 1x 450 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4080-super": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28", "note": "Founders Edition 304 mm x 137 mm, 3-slot. The catalogue's 336 mm was a shared bucket value." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 320 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4070": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Founders Edition 244 mm x 112 mm, 2-slot. The catalogue's 285 mm was 41 mm too long." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 200 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "NVIDIA lists GDDR6 / GDDR6X for this SKU; the catalogue models the original GDDR6X card." },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3080": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 285 mm x 112 mm, 2-slot - the catalogue value was already correct." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28", "note": "320 W for the 10 GB card the catalogue models; the 12 GB variant is 350 W." },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28", "note": "The FE socket is NVIDIA's proprietary 12-pin, not the 16-pin 12VHPWR. NVIDIA: 2x PCIe 8-pin (adapter to 1x 12-pin included)." },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3080-ti": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 285 mm x 112 mm, 2-slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin (adapter to 1x 12-pin included). Proprietary 12-pin, not 12VHPWR." },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3080-3080ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3090": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 313 mm x 138 mm, 3-slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin (adapter to 1x 12-pin included). Proprietary 12-pin, not 12VHPWR." },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3090-ti": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 313 mm x 138 mm, 3-slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28", "note": "3x PCIe 8-pin cables (adapter in box) OR 450 W or greater PCIe Gen 5 cable. Unlike the rest of the 30 series this card is 12VHPWR." },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3090-3090ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3070": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 242 mm x 112 mm, 2-slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28", "note": "1x PCIe 8-pin (adapter to 1x 12-pin included)" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3070-ti": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 267 mm x 112 mm, 2-slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin (adapter to 1x 12-pin included)" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3070-3070ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-3060-ti": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 242 mm x 112 mm, 2-slot" },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "NVIDIA lists 8 GB GDDR6 / GDDR6X; the catalogue models the GDDR6 card." },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "1x PCIe 8-pin (adapter to 1x 12-pin included)" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-5090": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "Founders Edition 304 mm x 137 mm, 2-slot. The catalogue's 357 mm was 53 mm too long - the largest single error found in this catalogue so far, on the flagship." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 575 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "Gen 5" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28", "note": "4x PCIe 8-pin cables (adapter in box) OR 1x 600 W PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5090/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-5080": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "Founders Edition 304 mm x 137 mm, 2-slot. The catalogue's 340 mm was 36 mm too long." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 360 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "Gen 5" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28", "note": "3x PCIe 8-pin cables (adapter in box) OR 1x 450 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5080/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-5070": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Founders Edition 242 mm x 112 mm, 2-slot. Only the 5070 carries published FE dimensions on this page; the 5070 Ti says 'Varies by manufacturer'." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 250 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Gen 5" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4060ti": {
+    "length": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28", "note": "Founders Edition 244 mm x 112 mm, 2-slot. NVIDIA publishes FE dimensions for the 8GB 4060 Ti; the 16GB was partner-only." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-4060-ti-8-gb.c3890", "checkedOn": "2026-08-28", "note": "NVIDIA publishes an ambiguous '165 or 160' covering both capacities. TechPowerUp separates them: the 8GB is 160 W, the 16GB is 165 W. The catalogue had both at 165." },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28", "note": "1x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-4060ti-16gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA made no Founders Edition 4060 Ti 16GB, so the part models one named partner card. ASUS lists 227.2 x 123.24 x 49.6 mm." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-4060-ti-16-gb.c4155", "checkedOn": "2026-08-28", "note": "165 W for the 16GB card; NVIDIA's page gives an ambiguous '165 or 160' for both capacities." },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin. This partner card uses a native 8-pin, not the FE's 12VHPWR, so no adapter is involved." }
+  },
+  "gpu-rtx-4060": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 4060, so the part models one named partner card. ASUS lists 227.2 x 123.24 x 49.6 mm. The catalogue's 200 mm was a shared bucket value." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 115 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4060-4060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists one 8-pin" }
+  },
+  "gpu-rtx-5070ti": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5070ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 5070 Ti, so the part models one named partner card. ASUS lists 304 x 126 x 50 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 300 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5070ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5070ti-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "ASUS does not list the connector; NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box, from 2x PCIe 8-pin" }
+  },
+  "gpu-rtx-5060ti": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 5060 Ti, so the part models one named partner card. ASUS lists 304 x 120 x 50 mm; the catalogue's 245 mm was a guess." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 180 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists a single 8-pin" }
+  },
+  "gpu-rtx-5060-ti-8gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 304 x 120 x 50 mm. The catalogue's 244 mm was a guess." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 180 W, the same as the 16GB card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060ti-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-5060": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer', so the part models one named partner card. ASUS lists 268.3 x 120 x 50 mm. The catalogue's 200 mm was a shared bucket value it held alongside an Arc A380." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 145 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5060-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists a single 8-pin" }
+  },
+  "gpu-rtx-5050": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer', so the part models one named partner card. ASUS lists 268.3 x 120 x 50 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5050/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 130 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5050/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5050/", "checkedOn": "2026-08-28", "note": "GDDR6, NOT GDDR7. The catalogue said GDDR7; both NVIDIA and ASUS say GDDR6." },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.5 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rtx5050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-4070-super": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070s-o12g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 4070 SUPER, so the part models one named partner card. ASUS lists 267.01 x 133.94 x 51.13 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 220 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070s-o12g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.56 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070s-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "ASUS does not list the connector; NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box, from 2x PCIe 8-pin" }
+  },
+  "gpu-rtx-4070ti-super": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070tis-o16g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA publishes 'Varies by manufacturer' for the 4070 Ti SUPER, so the part models one named partner card. ASUS lists 267.01 x 133.94 x 51.13 mm - the same board as its 4070 SUPER Dual." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 285 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070tis-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.56 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4070tis-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "ASUS does not list the connector; NVIDIA: 2x PCIe 8-pin cables (adapter in box) OR 300 W or greater PCIe Gen 5 cable" },
+    "adapterFrom": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/", "checkedOn": "2026-08-28", "note": "Adapter in box, from 2x PCIe 8-pin" }
+  },
+  "gpu-rtx-3060-12gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA published no Founders Edition 3060, so the part models one named partner card. ASUS lists 20 x 12.3 x 3.8 cm. The catalogue's 242 mm was the 30-series bucket value, and is 42 mm too long for this card." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 170 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o12g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-3060-8gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 200 x 123 x 38 mm. The catalogue's 242 mm was the 30-series bucket value." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28", "note": "Total Graphics Power 170 W" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3060-3060ti/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3060-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-3050": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "NVIDIA published no Founders Edition 3050, so the part models one named partner card. ASUS lists 200 x 123 x 38 mm - which happens to match the bucket value the catalogue already held." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28", "note": "Graphics power 130 W for the 8GB card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o8g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 8-pin" }
+  },
+  "gpu-rtx-3050-6gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 201 x 120 x 37 mm." },
+    "tdp": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28", "note": "Graphics power 70 W for the 6GB card" },
+    "vram": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.nvidia.com/en-gb/geforce/graphics-cards/30-series/rtx-3050/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2 Slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx3050-o6g/techspec/", "checkedOn": "2026-08-28", "note": "EMPTY ON PURPOSE. ASUS says 'None required' and NVIDIA lists no supplementary connector: at 70 W this card runs entirely off the PCIe slot. An empty map is the honest record - covers() treats it as satisfied by any PSU, and the info sheet omits the row rather than printing nothing." }
+  },
+  "gpu-rx-7900xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 276 mm, Slots 2.5 - the catalogue value was already correct." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 315 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx7900xt-o20g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "AMD publishes no PCIe generation for any card, so this comes from a named partner board carrying the same GPU: ASUS TUF Gaming RX 7900 XT states PCI Express 4.0. The part still models AMD's reference card." }
+  },
+  "gpu-rx-7800xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5. The 267 mm the catalogue held for this card is genuinely AMD's reference length, not a guess." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 263 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7800-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7800xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD publishes no PCIe generation for any card, so this comes from a named partner board carrying the same GPU: ASUS states PCI Express 4.0. The part itself still models AMD's reference card." }
+  },
+  "gpu-rx-7700xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 245 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7700-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7700xt-o12g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 7700 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-7600xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 241 mm, Slots 2. The catalogue's 267 mm was the AMD bucket value and is 26 mm too long for this card." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 190 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7600-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7600xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 7600 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-6900-xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 300 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6900-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6900xt-t16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS TUF Gaming RX 6900 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-6800-xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2.5" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 300 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800-xt.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6800xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS TUF Gaming RX 6800 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-6800": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2 - same length as the 6800 XT but one slot thinner." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 250 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6800-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS TUF Gaming RX 6800 states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-6750xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 250 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6750-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6750xt-o12g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 6750 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-6700-xt": {
+    "length": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "AMD Dimensions: Length 267 mm, Slots 2" },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 230 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6700-xt.html", "checkedOn": "2026-08-28", "note": "Additional Power Connector 1x8-Pin + 1x6-Pin" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6700xt-o12g/techspec/", "checkedOn": "2026-08-28", "note": "From a named partner board with the same GPU - ASUS Dual RX 6700 XT states PCI Express 4.0 - because AMD publishes no PCIe generation." }
+  },
+  "gpu-rx-7900-gre": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD's 7900 GRE page carries no Dimensions section, so the part models one named partner card. ASUS lists 279.9 x 133.9 x 49.3 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-gre.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 260 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-gre.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-gre.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.47 slot" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states PCI Express 4.0; AMD publishes no PCIe generation anywhere." },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7900gre-o16g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9070xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "AMD shipped no reference RDNA 4 card - no 9000-series page has a Dimensions section - so the part models one named partner card. ASUS lists 312 x 130 x 50 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 304 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 3 x 8-pin. NOTE this differs from AMD's reference figure of 2x8-Pin: the ASUS OC card really does take a third. Recorded for the card actually modelled." }
+  },
+  "gpu-rx-9070": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 312 x 130 x 50 mm. The catalogue's 267 mm was the AMD bucket value and 45 mm too short." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 220 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070-o16g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9060xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 304 x 126 x 50 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 160 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o16g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9060-xt-8gb": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 304 x 126 x 50 mm - the same board as the 16GB card." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt-8gb.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 150 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt-8gb.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt-8gb.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9060xt-o8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-9070-gre": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 312 x 130 x 50 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070-gre.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 220 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070-gre.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070-gre.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/prime/prime-rx9070gre-o12g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6950-xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "AMD's 6950 XT page carries no Dimensions section, so the part models one named partner card. ASUS lists 320 x 140.2 x 57.8 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6950-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 335 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6950-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6950-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28", "note": "ASUS states 2.9 Slot - the thickest card in the catalogue." },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rx6950xt-o16g-gaming/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6650xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28", "note": "AMD publishes no Dimensions for this card, so the part models one named partner card. ASUS lists 243 x 134 x 49 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6650-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 180 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6650-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6650-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6650xt-o8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6600-xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 243 x 134 x 49 mm." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600-xt.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 160 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600-xt.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600-xt.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600xt-o8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6600": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 243 x 134 x 49 mm. The catalogue's 190 mm was 53 mm too short." },
+    "tdp": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600.html", "checkedOn": "2026-08-28", "note": "Typical Board Power (Desktop) 132 W" },
+    "vram": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6600.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6600-8g/techspec/", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-6500xt": {
+    "length": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "Partner card; ASUS lists 201 x 128 x 40 mm. ⚠️ tdp is deliberately NOT sourced here: AMD's reachable 6500 XT page describes the 8GB variant (113 W, Max Memory 8 GB) while the catalogue models the 4GB card at 107 W, and AMD's separate '(4GB)' page 404s. Left unresearched rather than attributing the wrong variant's figure." },
+    "vram": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 4GB GDDR6, matching the 4GB variant the catalogue models." },
+    "memType": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx6500xt-o4g/techspec/", "checkedOn": "2026-08-28", "note": "ASUS lists 1 x 6-pin" },
+    "tdp": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "AMD lists the 4GB card as its own product. Filter the Name column to exactly 'AMD Radeon RX 6500 XT (4GB)': Typical Board Power 107 W, Max Memory 4 GB, 1x6-Pin. This settles the ambiguity noted earlier - the catalogue's 107 W was right for the 4GB board we model, and the 113 W on AMD's main 6500 XT page belongs to the 8GB one." }
+  },
+  "gpu-intel-arc-b580": {
+    "length": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "Intel publishes an 'Intel Reference Card Attributes' block for this card: Dimensions 272 x 115 mm, Slots 2. The B580 is the only Arc SKU in the catalogue with such a block." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 190 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "PCI Express 4.0 x8" },
+    "powerConnectors": { "url": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "Intel Reference Card Attributes: Power Connectors 1 x 8-pin. Note a web search claimed 8-pin + 6-pin for this card; Intel's own page says one 8-pin." }
+  },
+  "gpu-arc-b570": {
+    "length": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20B570%20Challenger%2010GB%20OC/", "checkedOn": "2026-08-28", "note": "Intel built no reference B570, so the part models one named partner card. ASRock lists 249 x 132 x 41 mm, 2-slot." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/241676/intel-arc-b570-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 150 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/241676/intel-arc-b570-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/241676/intel-arc-b570-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20B570%20Challenger%2010GB%20OC/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/241676/intel-arc-b570-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "PCI Express 4.0 x8" },
+    "powerConnectors": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20B570%20Challenger%2010GB%20OC/", "checkedOn": "2026-08-28", "note": "ASRock lists 1 x 8-pin" }
+  },
+  "gpu-arc-a750": {
+    "length": { "url": "https://www.intel.com/content/www/us/en/support/articles/000092554/graphics.html", "checkedOn": "2026-08-28", "note": "Intel publishes one set of dimensions for the A750 AND A770 Limited Edition: 268.6 mm without I/O bracket, 279.9 mm with it. The without-bracket figure is modelled, as for the A770." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/227954/intel-arc-a750-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 225 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/227954/intel-arc-a750-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/227954/intel-arc-a750-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/arc-a750.c3929", "checkedOn": "2026-08-28", "note": "Intel publishes a shroud height but no slot count for the Alchemist Limited Edition cards" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/227954/intel-arc-a750-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "Up to PCI Express 4.0 x16" },
+    "powerConnectors": { "url": "https://www.intel.com/content/www/us/en/support/articles/000092523/graphics.html", "checkedOn": "2026-08-28", "note": "Intel: the A750 and A770 Limited Edition cards 'feature 8-pin and 6-pin PCIe power connectors' and both are required." }
+  },
+  "gpu-arc-a580": {
+    "length": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20A580%20Challenger%208GB%20OC/", "checkedOn": "2026-08-28", "note": "Intel built no reference A580, so the part models one named partner card. ASRock lists 271 x 132 x 48 mm, 2.4-slot. ⚠️ The catalogue's old 267 mm was the AMD bucket value sitting on an Intel card - the clearest single sign that these lengths were never measured." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/227961/intel-arc-a580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 185 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/227961/intel-arc-a580-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/227961/intel-arc-a580-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20A580%20Challenger%208GB%20OC/", "checkedOn": "2026-08-28", "note": "ASRock states 2.4-slot" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/227961/intel-arc-a580-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "Up to PCI Express 4.0 x16" },
+    "powerConnectors": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20A580%20Challenger%208GB%20OC/", "checkedOn": "2026-08-28", "note": "ASRock lists 2 x 8-pin" }
+  },
+  "gpu-arc-a380": {
+    "length": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20A380%20Challenger%20ITX%206GB%20OC/", "checkedOn": "2026-08-28", "note": "Intel built no reference A380, so the part models one named partner card. ASRock lists 190 x 124 x 39 mm, 2-slot. The catalogue's 200 mm was a bucket value it shared with an RTX 5060." },
+    "tdp": { "url": "https://www.intel.com/content/www/us/en/products/sku/227959/intel-arc-a380-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "TBP 75 W" },
+    "vram": { "url": "https://www.intel.com/content/www/us/en/products/sku/227959/intel-arc-a380-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.intel.com/content/www/us/en/products/sku/227959/intel-arc-a380-graphics/specifications.html", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20A380%20Challenger%20ITX%206GB%20OC/", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.intel.com/content/www/us/en/products/sku/227959/intel-arc-a380-graphics/specifications.html", "checkedOn": "2026-08-28", "note": "Up to PCI Express 4.0 x8 in an x16 slot" },
+    "powerConnectors": { "url": "https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20A380%20Challenger%20ITX%206GB%20OC/", "checkedOn": "2026-08-28", "note": "ASRock lists 1 x 8-pin" }
+  },
+  "gpu-gtx-1050-ti": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1050-ti.c2885", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp. EMPTY ON PURPOSE: TechPowerUp lists Power Connectors \"None\". At 75 W this card runs entirely off the PCIe slot." }
+  },
+  "gpu-gtx-1060-6gb": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6-gb.c2862", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1070": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c2840", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1070-ti": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c3010", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1080": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c2839", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1080-ti": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c2877", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1650": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c3366", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c3366", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c3366", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c3366", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c3366", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c3366", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp. EMPTY ON PURPOSE: TechPowerUp lists Power Connectors \"None\". At 75 W it runs off the slot." }
+  },
+  "gpu-gtx-1660": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c3365", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1660-ti": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-ti.c3364", "checkedOn": "2026-08-28" }
+  },
+  "gpu-gtx-1660s": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660-super.c3458", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-2060-super": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c3441", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-2070": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c3252", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-2070-super": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c3440", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-2080": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c3224", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-2080-super": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c3439", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rtx-2080-ti": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-5500-xt": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp. 180 mm, not the 200 mm bucket value the catalogue held. AMD retired every RX 5000-series product page - all of them 404 - so there is no manufacturer figure to prefer." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28", "note": "⚠️ vram is deliberately NOT sourced: this TechPowerUp entry is the 4GB card and the catalogue models the 8GB one. The board length and power are shared between them; the capacity is not." },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c3468", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "AMD retired the RX 5000-series product pages, but its Graphics Specifications table still carries the card. Filter the Name column to exactly 'AMD Radeon RX 5500 XT': Max Memory Size 8 GB, GDDR6, 130 W, 1x8-Pin. This supersedes the earlier gap - TechPowerUp's database entry is the 4GB card, and the catalogue models the 8GB one, which is what AMD lists." }
+  },
+  "gpu-rx-5600-xt": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp. 267 mm - the catalogue's 230 mm was 37 mm short." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c3474", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-5700-xt": {
+    "length": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28", "note": "The vendor retired this product page, so the reference-design figures come from TechPowerUp. 272 mm, which the catalogue already had right." },
+    "tdp": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" },
+    "vram": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" },
+    "slotsThick": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" },
+    "pcieGen": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c3339", "checkedOn": "2026-08-28" }
+  },
+  "gpu-rx-5700": {
+    "powerConnectors": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "Same table: Additional Power Connector '1x8-Pin + 1x6-Pin'. This replaces the TechPowerUp review previously cited - AMD's own figure is available after all, and it agrees." },
+    "tdp": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "AMD retired the RX 5000-series product pages, but its Graphics Specifications table still carries the card. Filter the Name column to exactly 'AMD Radeon RX 5700': Typical Board Power (Desktop) 180 W." },
+    "vram": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/en/products/specifications/graphics.html", "checkedOn": "2026-08-28", "note": "⚠️ length and slotsThick are deliberately NOT sourced for this card. On that same AMD table the Length and Slots columns are EMPTY for the RX 5700 - AMD publishes neither - and TechPowerUp has no reachable database entry for it. The field keeps its existing 254 mm rather than being deleted: an absent length makes the public part page render 'undefined mm long, so it fits 0 of 59 cases'." },
+    "length": { "url": "https://www.techpowerup.com/review/amd-radeon-rx-5700/4.html", "checkedOn": "2026-08-28", "note": "TechPowerUp's review of the AMD REFERENCE card: \"Dimensions of the card are 27.0 x 11.0 cm.\" Supersedes an unverifiable record — AMD leaves Length blank on its own table, but the reference card was measured in review. The catalogue's old 254 mm was 16 mm short." },
+    "slotsThick": { "url": "https://www.techpowerup.com/review/amd-radeon-rx-5700/4.html", "checkedOn": "2026-08-28", "note": "Same review: \"Installation requires two slots in your system.\"" },
+    "pcieGen": { "url": "https://www.techpowerup.com/review/amd-radeon-rx-5700/2.html", "checkedOn": "2026-08-28", "note": "Same review: \"The chip features a PCI-Express 4.0 x16 bus interface.\" AMD publishes no PCIe generation for any card." }
+  },
+  "gpu-rx-7650-gre": {
+    "length": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "The RX 7650 GRE is a China-exclusive SKU with no page on AMD's global site, but AMD's Chinese site carries the full specification: 尺寸 长度 204 mm, 插槽 2. The catalogue's 232 mm was 28 mm too long. Secondary aggregators disagreed with each other on this card, which is why the manufacturer page was worth finding." },
+    "tdp": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "典型板载功耗（台式机）170 W. The catalogue said 165 W - the figure several aggregators quote - but AMD's own page says 170 W." },
+    "vram": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28" },
+    "memType": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "⚠️ pcieGen is deliberately NOT sourced: AMD publishes no PCIe generation for any card, and this China-only SKU has no partner page reachable from here to take it from." },
+    "slotsThick": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28" },
+    "powerConnectors": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "额外电源连接器 1x8-Pin" }
   }
 }
