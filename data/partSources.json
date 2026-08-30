@@ -729,5 +729,75 @@
     "slotsThick": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28" },
     "pcieGen": { "url": "https://www.asus.com.cn/motherboards-components/graphics-cards/asus/ats-rx7650gre-o8g/techspec/", "checkedOn": "2026-08-30", "note": "AMD publishes no PCIe generation for any card, so this comes from a named partner board carrying the same GPU: ASUS ATS-RX7650GRE-O8G lists 显示核心 AMD Radeon RX 7650 GRE and 总线标准 PCI Express 4.0. The part still models AMD's reference specification. A previous pass recorded that no partner page was reachable for this China-only SKU; ASUS's Chinese site carries one, and only the generation is modelled, not the lane count. Corroborated by AMD's own page, which gives 32 compute units on a 128-bit bus - the same configuration as the RX 7600." },
     "powerConnectors": { "url": "https://www.amd.com/zh-cn/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7650-gre.html", "checkedOn": "2026-08-28", "note": "额外电源连接器 1x8-Pin" }
+  },
+  "case-fractal-torrent": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-north": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30", "note": "Up to 300 mm with a 360 mm front radiator fitted" },
+    "maxCoolerHeight": { "url": "https://support.fractal-design.com/support/solutions/articles/4000189455-north", "checkedOn": "2026-08-30", "note": "Chassis maximum; 145 mm with the side fan bracket in the top or middle position. The product spec table publishes the 145 mm figure" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-meshify-2": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-pop-air": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-terra": {
+    "maxGpuLength": { "url": "https://support.fractal-design.com/support/solutions/articles/4000194849-terra-cpu-cooler-gpu-support", "checkedOn": "2026-08-30", "note": "200 mm if a 120 mm radiator is installed" },
+    "maxCoolerHeight": { "url": "https://support.fractal-design.com/support/solutions/articles/4000194849-terra-cpu-cooler-gpu-support", "checkedOn": "2026-08-30", "note": "Spine position 1 of 7 (the tallest-cooler setting); falls to 48 mm at position 7, which is the figure the product spec table publishes. The spine trades CPU height against GPU thickness, so this and the GPU maximum are not simultaneously achievable" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-define-7": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" }
+  },
+  "case-meshify-2-compact": {
+    "maxGpuLength": { "url": "https://support.fractal-design.com/support/solutions/articles/4000174759-meshify-2-compact", "checkedOn": "2026-08-30", "note": "With the 25 mm front fan mounted, which is how the case ships. Fractal publishes no fan-removed figure" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-north-xl": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://support.fractal-design.com/support/solutions/articles/4000203875-north-xl", "checkedOn": "2026-08-30", "note": "Chassis maximum; 155 mm with the side fan bracket in the upper position on the Mesh version" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-pop-mini-air": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" }
+  },
+  "case-fractal-ridge": {
+    "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" }
   }
 }

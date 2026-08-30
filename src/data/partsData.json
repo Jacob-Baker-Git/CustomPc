@@ -1740,11 +1740,34 @@
       "mATX",
       "ITX"
     ],
-    "maxGpuLength": 467,
+    "maxGpuLength": 461,
     "maxCoolerHeight": 188,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          140,
+          240,
+          280,
+          360,
+          420
+        ],
+        "bottom": [
+          120,
+          140,
+          240,
+          280,
+          360,
+          420
+        ],
+        "rear": [
+          120,
+          140
+        ]
+      }
     }
   },
   {
@@ -1815,7 +1838,24 @@
     "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "top": [
+          120,
+          240
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -1883,11 +1923,38 @@
       "mATX",
       "ITX"
     ],
-    "maxGpuLength": 461,
+    "maxGpuLength": 470,
     "maxCoolerHeight": 185,
     "tdp": 0,
     "specs": {
-      "type": "Full Tower"
+      "type": "Full Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "top": [
+          120,
+          140,
+          240,
+          280,
+          360,
+          420
+        ],
+        "bottom": [
+          120,
+          140,
+          240,
+          280
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -2045,7 +2112,22 @@
     "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          240,
+          280
+        ],
+        "top": [
+          120,
+          240
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -3468,7 +3550,13 @@
     "maxCoolerHeight": 77,
     "tdp": 0,
     "specs": {
-      "type": "Mini ITX"
+      "type": "Mini ITX",
+      "expansionSlots": 2,
+      "radiatorSupport": {
+        "side": [
+          120
+        ]
+      }
     }
   },
   {
@@ -3863,11 +3951,38 @@
       "mATX",
       "ITX"
     ],
-    "maxGpuLength": 467,
+    "maxGpuLength": 470,
     "maxCoolerHeight": 185,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "top": [
+          120,
+          140,
+          240,
+          280,
+          360,
+          420
+        ],
+        "bottom": [
+          120,
+          140,
+          240,
+          280
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -4391,7 +4506,27 @@
     "maxCoolerHeight": 169,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "top": [
+          120,
+          240
+        ],
+        "bottom": [
+          120
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -6649,10 +6784,31 @@
       "ITX"
     ],
     "maxGpuLength": 413,
-    "maxCoolerHeight": 170,
+    "maxCoolerHeight": 185,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          120,
+          240,
+          280,
+          360,
+          420
+        ],
+        "top": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "rear": [
+          120,
+          140
+        ]
+      }
     }
   },
   {
@@ -6666,10 +6822,24 @@
       "ITX"
     ],
     "maxGpuLength": 365,
-    "maxCoolerHeight": 160,
+    "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Micro Tower"
+      "type": "Micro Tower",
+      "expansionSlots": 4,
+      "radiatorSupport": {
+        "front": [
+          120,
+          240
+        ],
+        "top": [
+          120,
+          240
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -6681,11 +6851,17 @@
     "supportedFormFactors": [
       "ITX"
     ],
-    "maxGpuLength": 325,
+    "maxGpuLength": 335,
     "maxCoolerHeight": 70,
     "tdp": 0,
     "specs": {
-      "type": "Mini ITX"
+      "type": "Mini ITX",
+      "expansionSlots": 3,
+      "radiatorSupport": {
+        "side": [
+          120
+        ]
+      }
     }
   },
   {
