@@ -58,6 +58,35 @@ describe('rule 1: power connectors', () => {
     expect(evaluateSpecRules(parts, psu({ pcie8: 2 })).status).toBe('blocked')
   })
 
+  // 🛑 A PCIe 8-pin head IS a 6+2: leave the +2 off and it fills a 6-pin
+  // socket. Checking the two counts independently blocked twelve real cards -
+  // every RX 6700/6750 XT, Arc A750/A770, RTX 2070S/2080/2080S, GTX 1060/1080
+  // Ti and RX 5700/5700 XT - on a Corsair RM1000x with four 8-pin heads, which
+  // is nonsense. The catalogue's PSUs simply do not list a pcie6 count, because
+  // no modern supply ships a 6-pin-only cable.
+  it('feeds a 6-pin socket from an 8-pin (6+2) head', () => {
+    const parts = { gpu: gpu({ powerConnectors: { pcie8: 1, pcie6: 1 } }) }
+    expect(evaluateSpecRules(parts, psu({ pcie8: 4 })).status).toBe('ok')
+  })
+
+  it('feeds a 6-pin-only card from an 8-pin head', () => {
+    const parts = { gpu: gpu({ powerConnectors: { pcie6: 1 } }) }
+    expect(evaluateSpecRules(parts, psu({ pcie8: 1 })).status).toBe('ok')
+  })
+
+  // ⚠️ The pool is still finite. Two heads cannot fill three sockets.
+  it('still blocks when the total PCIe head count falls short', () => {
+    const parts = { gpu: gpu({ powerConnectors: { pcie8: 2, pcie6: 1 } }) }
+    expect(evaluateSpecRules(parts, psu({ pcie8: 2 })).status).toBe('blocked')
+  })
+
+  // ⚠️ And substitution runs ONE WAY. A 6-pin-only head cannot fill an 8-pin
+  // socket, so a supply of 6-pin heads must not satisfy an 8-pin need.
+  it('refuses to fill an 8-pin socket from a 6-pin-only head', () => {
+    const parts = { gpu: gpu({ powerConnectors: { pcie8: 2 } }) }
+    expect(evaluateSpecRules(parts, psu({ pcie8: 1, pcie6: 3 })).status).toBe('blocked')
+  })
+
   it('is unverified when the GPU lists no connectors', () => {
     const r = evaluateSpecRules({ gpu: gpu({}) }, psu({ pcie8: 4 }))
     expect(r.status).toBe('unverified')

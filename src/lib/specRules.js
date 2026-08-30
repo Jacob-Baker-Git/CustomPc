@@ -26,15 +26,38 @@ export function aggregate(results) {
 // restated.
 export const CONNECTOR_LABELS = { pcie8: '8-pin PCIe', pcie6: '6-pin PCIe', '12pin': '12-pin', '12vhpwr': '16-pin 12VHPWR', eps8: '8-pin EPS' }
 
+// 🛑 PCIe 8-pin and 6-pin are ONE POOL, not two independent counts. Every
+// modern PCIe head is a 6+2: leave the +2 off and it fills a 6-pin socket. No
+// catalogue PSU lists a pcie6 count at all, because none ships a 6-pin-only
+// cable — so comparing the two types independently blocked twelve real cards
+// (RX 6700/6750 XT, Arc A750/A770, RTX 2070S/2080/2080S, GTX 1060/1080 Ti,
+// RX 5700/5700 XT) on a 1000 W supply with four spare heads.
+//
+// ⚠️ Substitution runs ONE WAY. A 6-pin-only head cannot fill an 8-pin socket,
+// so the 8-pin need is still checked against the 8-pin supply on its own.
+const PCIE = ['pcie8', 'pcie6']
+const sum = (o, keys) => keys.reduce((n, k) => n + (o[k] ?? 0), 0)
+
+const pcieShortfall = (supply, need) => sum(need, PCIE) - sum(supply, PCIE)
+const eightPinShortfall = (supply, need) => (need.pcie8 ?? 0) - (supply.pcie8 ?? 0)
+
 // Can `supply` satisfy every entry in `need`?
 const covers = (supply, need) =>
-  Object.entries(need).every(([type, count]) => (supply[type] ?? 0) >= count)
+  pcieShortfall(supply, need) <= 0 &&
+  eightPinShortfall(supply, need) <= 0 &&
+  Object.entries(need).every(([type, count]) =>
+    PCIE.includes(type) ? true : (supply[type] ?? 0) >= count)
 
-const missingFrom = (supply, need) =>
-  Object.entries(need)
-    .filter(([type, count]) => (supply[type] ?? 0) < count)
+const missingFrom = (supply, need) => {
+  const parts = Object.entries(need)
+    .filter(([type, count]) => !PCIE.includes(type) && (supply[type] ?? 0) < count)
     .map(([type, count]) => `${count}x ${CONNECTOR_LABELS[type] ?? type}`)
-    .join(', ')
+  // Report the pool shortfall once rather than per type, so the message names
+  // the number of heads actually missing.
+  const short = Math.max(pcieShortfall(supply, need), eightPinShortfall(supply, need))
+  if (short > 0) parts.push(`${short}x ${CONNECTOR_LABELS.pcie8}`)
+  return parts.join(', ')
+}
 
 // Rule 1. The PSU side and the GPU side are the same question asked from two
 // directions, because either part can be the candidate.
