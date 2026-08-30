@@ -1142,5 +1142,80 @@
     "expansionSlots": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
     "radiatorSupport": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-pure-base-501-airflow", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Its slug is the Airflow variant, matching the PCPartPicker entry the other four fields come from. The row held 190 mm" }
+  },
+  "psu-corsair-rm1000x": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020271-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020271-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020271-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-cv550": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020210-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020210-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020210-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-rm850x": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020270-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020270-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020270-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-hx1200": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020140-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020140-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020140-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-sf750": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020284-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020284-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020284-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-rm750e": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020295-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020295-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020295-na/x", "checkedOn": "2026-08-30", "note": "Includes the 2 8-pin heads on the bundled 12V-2x6-to-dual-8-pin cable, which Corsair also counts in its PCIe Connector row. ⚠️ That cable occupies the same 12V-2x6 port as the native connector, so the 12vhpwr and the last two pcie8 heads are not simultaneously available - no single GPU needs both" }
+  },
+  "psu-corsair-sf1000": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020257-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020257-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020257-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-rm750x-2024": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020199-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020199-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020199-na/x", "checkedOn": "2026-08-30", "note": "Corsair lists no 12V-2x6 cable for this unit" }
+  },
+  "psu-corsair-rm1200x-shift": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020254-na/x", "checkedOn": "2026-08-30", "note": "⚠️ Corsair ships TWO SKUs for this unit and they disagree: the white variant page (cp-9020276-na) states \"1000 Watts\" for a product named RM1200x. cp-9020254-na states 1200 Watts, which matches the name and the row" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020254-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020254-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-rm650e": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020302-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020302-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020302-na/x", "checkedOn": "2026-08-30", "note": "Includes the 2 8-pin heads on the bundled 12V-2x6-to-dual-8-pin cable, which Corsair also counts in its PCIe Connector row. ⚠️ That cable occupies the same 12V-2x6 port as the native connector, so the 12vhpwr and the last two pcie8 heads are not simultaneously available - no single GPU needs both" }
+  },
+  "psu-corsair-rm850e": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020296-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020296-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020296-na/x", "checkedOn": "2026-08-30", "note": "Includes the 2 8-pin heads on the bundled 12V-2x6-to-dual-8-pin cable, which Corsair also counts in its PCIe Connector row. ⚠️ That cable occupies the same 12V-2x6 port as the native connector, so the 12vhpwr and the last two pcie8 heads are not simultaneously available - no single GPU needs both" }
+  },
+  "psu-corsair-cx650": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020278-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020278-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020278-na/x", "checkedOn": "2026-08-30", "note": "Corsair omits the EPS Connector summary row on the CX pages; the per-cable table lists 1x \"EPS / ATX 12V 8-pin (4+4)\"" }
+  },
+  "psu-corsair-rm550x": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020197-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020197-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020197-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-corsair-cx750": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020279-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020279-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020279-na/x", "checkedOn": "2026-08-30", "note": "Corsair omits the EPS Connector summary row on the CX pages; the per-cable table lists 1x \"EPS / ATX 12V 8-pin (4+4)\"" }
+  },
+  "psu-corsair-sf850": {
+    "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020256-na/x", "checkedOn": "2026-08-30" },
+    "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020256-na/x", "checkedOn": "2026-08-30" },
+    "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020256-na/x", "checkedOn": "2026-08-30" }
   }
 }
