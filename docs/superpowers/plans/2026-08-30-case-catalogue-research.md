@@ -579,13 +579,13 @@ git commit -m "data: research the six Cooler Master cases"
 | `case-phanteks-g500a` | 435 / 190 / ATX, mATX, ITX |
 | `case-phanteks-shift-2` | 335 / 82 / ITX |
 
-- [ ] **Step 1: Run protocol R for all six rows**
+- [x] **Step 1: Run protocol R for all six rows**
 
 Start at `https://phanteks.com/Enclosures.html`.
 
 ⚠️ `case-phanteks-shift-2` is a vertical ITX case; its 82 mm cooler limit is plausible but is exactly the kind of figure worth cross-checking, since a wrong value here silently blocks every tower cooler.
 
-- [ ] **Step 2: Verify the data shape before testing**
+- [x] **Step 2: Verify the data shape before testing**
 
 ```bash
 node -e "const a=require('./src/data/partsData.json');const s=require('./data/partSources.json');const ids=a.filter(p=>p.brand==='Phanteks'&&p.category==='case').map(p=>p.id);for(const id of ids){const e=s[id]||{};const need=['maxGpuLength','maxCoolerHeight','supportedFormFactors','expansionSlots','radiatorSupport'];const gaps=need.filter(k=>!e[k]);console.log((gaps.length?'GAP ':'ok  ')+id+(gaps.length?' missing source: '+gaps.join(','):''))}"
@@ -593,7 +593,7 @@ node -e "const a=require('./src/data/partsData.json');const s=require('./data/pa
 
 Expected: six `ok` lines and no `GAP`.
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -601,7 +601,7 @@ npm run test:run
 
 Expected: PASS.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
