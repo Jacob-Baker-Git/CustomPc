@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, it, expect } from 'vitest'
 import partsData from '../data/partsData.json'
+import { missingRatchetSources } from '../../scripts/catalog-coverage-core.mjs'
 
 const sources = JSON.parse(readFileSync(resolve(process.cwd(), 'data/partSources.json'), 'utf8'))
 
@@ -129,21 +130,18 @@ describe('unverifiable records', () => {
 
 // The guard above covers `specs.*` only, which is exactly how a wrong top-level
 // `length` sat in the catalogue unnoticed for months. Requiring sources for
-// length and tdp across all 559 parts today would fail instantly, so it is
-// switched on ONE CATEGORY AT A TIME, as each is brought up to standard.
+// every top-level field across all 559 parts today would fail instantly, so it
+// is switched on ONE CATEGORY AT A TIME, as each is brought up to standard.
+//
+// ⚠️ WHICH fields a category owes is per-category and lives in
+// catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
+// meaning "draws nothing", and demanding provenance for 59 such sentinels would
+// be recording a source for a figure nobody measured.
 const VERIFIED_CATEGORIES = new Set(['gpu'])
-const RATCHETED_KEYS = ['length', 'tdp']
 
 describe('verified categories', () => {
-  it('requires a source for top-level length and tdp once a category is verified', () => {
-    const missing = []
-    for (const part of partsData) {
-      if (!VERIFIED_CATEGORIES.has(part.category)) continue
-      for (const key of RATCHETED_KEYS) {
-        if (part[key] === undefined) continue
-        if (!sources[part.id]?.[key]) missing.push(`${part.id}.${key}`)
-      }
-    }
+  it('requires a source for every ratcheted field once a category is verified', () => {
+    const missing = missingRatchetSources(partsData, sources, VERIFIED_CATEGORIES)
     expect(missing, `verified-category fields with no source:\n${missing.join('\n')}`).toEqual([])
   })
 })

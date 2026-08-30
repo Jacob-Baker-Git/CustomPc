@@ -13,6 +13,36 @@ export const EXPECTED = {
     required: ['length', 'tdp', 'slotsThick', 'pcieGen', 'powerConnectors', 'vram', 'memType'],
     optional: ['adapterFrom'],
   },
+  // The five fields the compatibility engine reads off a case. Nothing here is
+  // optional: unlike a GPU's adapterFrom, a case that omits one of these has a
+  // gap, not a fact.
+  case: {
+    required: ['maxGpuLength', 'maxCoolerHeight', 'supportedFormFactors', 'expansionSlots', 'radiatorSupport'],
+    optional: [],
+  },
+}
+
+// Which top-level fields a category owes a source once it is ratcheted.
+//
+// ⚠️ PER-CATEGORY, and it must stay that way. A case carries `tdp: 0` meaning
+// "draws nothing" — a sentinel nobody measured. The global ['length','tdp']
+// this replaced would have demanded provenance for 59 such zeros.
+export const RATCHETED_KEYS = {
+  gpu: ['length', 'tdp'],
+  case: ['maxGpuLength', 'maxCoolerHeight', 'supportedFormFactors'],
+}
+
+// Every "<id>.<field>" in a verified category that carries a value but no source.
+export function missingRatchetSources(parts, sources, verifiedCategories) {
+  const missing = []
+  for (const part of parts) {
+    if (!verifiedCategories.has(part.category)) continue
+    for (const key of RATCHETED_KEYS[part.category] ?? []) {
+      if (part[key] === undefined) continue
+      if (!sources[part.id]?.[key]) missing.push(`${part.id}.${key}`)
+    }
+  }
+  return missing
 }
 
 const hasField = (part, key) =>

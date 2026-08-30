@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { coverageFor, EXPECTED } from '../../scripts/catalog-coverage-core.mjs'
+import { coverageFor, EXPECTED, RATCHETED_KEYS, missingRatchetSources } from '../../scripts/catalog-coverage-core.mjs'
 
 const gpu = (id, fields = {}, specs = {}) => ({ id, category: 'gpu', ...fields, specs })
+const pcCase = (id, fields = {}, specs = {}) => ({ id, category: 'case', tdp: 0, ...fields, specs })
 const src = (url = 'https://example.com/x') => ({ url, checkedOn: '2026-08-28' })
 
 describe('catalogue coverage', () => {
@@ -60,5 +61,62 @@ describe('catalogue coverage', () => {
 
   it('returns null for a category with no expectations yet', () => {
     expect(coverageFor('paste', [], {})).toBeNull()
+  })
+})
+
+describe('case expectations', () => {
+  it('expects the five fields the compatibility engine actually reads', () => {
+    expect(EXPECTED.case.required).toEqual([
+      'maxGpuLength', 'maxCoolerHeight', 'supportedFormFactors', 'expansionSlots', 'radiatorSupport',
+    ])
+    expect(EXPECTED.case.optional).toEqual([])
+  })
+
+  it('counts a fully sourced case as verified', () => {
+    const part = pcCase('c',
+      { maxGpuLength: 400, maxCoolerHeight: 170, supportedFormFactors: ['ATX'] },
+      { expansionSlots: 7, radiatorSupport: { top: [240] } })
+    const sources = { c: Object.fromEntries(EXPECTED.case.required.map((k) => [k, src()])) }
+    expect(coverageFor('case', [part], sources).verified).toBe(1)
+  })
+})
+
+describe('the ratchet', () => {
+  // ⚠️ THE TRAP THIS ENCODES: every case carries `tdp: 0`, meaning "draws
+  // nothing". It is a sentinel, not a researched figure. The old global
+  // ['length','tdp'] would have demanded a source for 59 such zeros.
+  it('never demands a source for a case tdp', () => {
+    const part = pcCase('c', { maxGpuLength: 400, maxCoolerHeight: 170, supportedFormFactors: ['ATX'] })
+    const sources = {
+      c: { maxGpuLength: src(), maxCoolerHeight: src(), supportedFormFactors: src() },
+    }
+    expect(missingRatchetSources([part], sources, new Set(['case']))).toEqual([])
+  })
+
+  it('reports a case field that carries no source', () => {
+    const part = pcCase('c', { maxGpuLength: 400, maxCoolerHeight: 170, supportedFormFactors: ['ATX'] })
+    expect(missingRatchetSources([part], {}, new Set(['case']))).toEqual([
+      'c.maxGpuLength', 'c.maxCoolerHeight', 'c.supportedFormFactors',
+    ])
+  })
+
+  it('still demands length and tdp for a gpu', () => {
+    const g = { id: 'g', category: 'gpu', length: 300, tdp: 200, specs: {} }
+    expect(missingRatchetSources([g], {}, new Set(['gpu']))).toEqual(['g.length', 'g.tdp'])
+  })
+
+  it('ignores a category that is not yet verified', () => {
+    const part = pcCase('c', { maxGpuLength: 400 })
+    expect(missingRatchetSources([part], {}, new Set(['gpu']))).toEqual([])
+  })
+
+  it('ignores a field the part does not carry', () => {
+    const part = pcCase('c', { maxGpuLength: 400 })
+    const sources = { c: { maxGpuLength: src() } }
+    expect(missingRatchetSources([part], sources, new Set(['case']))).toEqual([])
+  })
+
+  it('keeps gpu on length and tdp only', () => {
+    expect(RATCHETED_KEYS.gpu).toEqual(['length', 'tdp'])
   })
 })

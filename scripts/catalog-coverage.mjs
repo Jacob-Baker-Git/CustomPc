@@ -17,7 +17,7 @@ for (const category of Object.keys(EXPECTED)) {
   console.log(`\n${category}: ${c.verified}/${c.total} parts fully researched (${pct}%)`)
   for (const [key, f] of Object.entries(c.fields)) {
     const tag = f.optional ? ' (optional)' : ''
-    console.log(`  ${key.padEnd(16)} present ${String(f.present).padStart(3)}/${c.total}   researched ${String(f.sourced).padStart(3)}/${c.total}${tag}`)
+    console.log(`  ${key.padEnd(20)} present ${String(f.present).padStart(3)}/${c.total}   researched ${String(f.sourced).padStart(3)}/${c.total}${tag}`)
   }
 }
 console.log('')
