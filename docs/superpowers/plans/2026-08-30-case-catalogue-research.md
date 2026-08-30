@@ -434,7 +434,7 @@ git commit -m "data: research the ten Lian Li cases"
 | `case-nzxt-h210` | 325 / 165 / ITX |
 | `case-hyte-y60` | 375 / 160 / ATX, mATX, ITX |
 
-- [ ] **Step 1: Run protocol R for all eight rows**
+- [x] **Step 1: Run protocol R for all eight rows**
 
 NZXT: `https://nzxt.com/collections/cases`. HYTE: `https://hyte.com/`.
 
@@ -442,7 +442,7 @@ NZXT: `https://nzxt.com/collections/cases`. HYTE: `https://hyte.com/`.
 
 ⚠️ `case-nzxt-h210` is discontinued. If NZXT's page is gone, the manual PDF is still a manufacturer source; a review is a secondary, not a substitute.
 
-- [ ] **Step 2: Verify the data shape before testing**
+- [x] **Step 2: Verify the data shape before testing**
 
 ```bash
 node -e "const a=require('./src/data/partsData.json');const s=require('./data/partSources.json');const ids=a.filter(p=>p.brand==='NZXT'||p.brand==='HYTE').map(p=>p.id);for(const id of ids){const e=s[id]||{};const need=['maxGpuLength','maxCoolerHeight','supportedFormFactors','expansionSlots','radiatorSupport'];const gaps=need.filter(k=>!e[k]);console.log((gaps.length?'GAP ':'ok  ')+id+(gaps.length?' missing source: '+gaps.join(','):''))}"
@@ -450,7 +450,7 @@ node -e "const a=require('./src/data/partsData.json');const s=require('./data/pa
 
 Expected: eight `ok` lines and no `GAP`. A field deliberately recorded as `unverifiable` counts as `ok` here — the entry exists.
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -458,7 +458,7 @@ npm run test:run
 
 Expected: PASS.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
