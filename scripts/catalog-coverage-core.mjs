@@ -20,6 +20,14 @@ export const EXPECTED = {
     required: ['maxGpuLength', 'maxCoolerHeight', 'supportedFormFactors', 'expansionSlots', 'radiatorSupport'],
     optional: [],
   },
+  // The three fields the engine reads off a supply: `connectors` for rules 1
+  // and 1b, `wattage` for psuTooSmall and autoBuilder, `rating` for the quality
+  // score via psuEfficiency(). Length, form factor and modularity are omitted
+  // deliberately - no rule reads them.
+  psu: {
+    required: ['wattage', 'rating', 'connectors'],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.
@@ -30,6 +38,9 @@ export const EXPECTED = {
 export const RATCHETED_KEYS = {
   gpu: ['length', 'tdp'],
   case: ['maxGpuLength', 'maxCoolerHeight', 'supportedFormFactors'],
+  // ⚠️ `wattage` ONLY. A PSU carries tdp: 0 for the same reason a case does -
+  // it draws nothing itself - so tdp here is a sentinel, not a measurement.
+  psu: ['wattage'],
 }
 
 // Every "<id>.<field>" in a verified category that carries a value but no source.

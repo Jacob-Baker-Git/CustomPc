@@ -120,3 +120,29 @@ describe('the ratchet', () => {
     expect(RATCHETED_KEYS.gpu).toEqual(['length', 'tdp'])
   })
 })
+
+describe('psu expectations', () => {
+  const psu = (id, fields = {}, specs = {}) => ({ id, category: 'psu', tdp: 0, ...fields, specs })
+
+  it('expects the three fields the engine actually reads', () => {
+    expect(EXPECTED.psu.required).toEqual(['wattage', 'rating', 'connectors'])
+    expect(EXPECTED.psu.optional).toEqual([])
+  })
+
+  it('counts a fully sourced psu as verified', () => {
+    const part = psu('p', { wattage: 850 }, { rating: '80+ Gold', connectors: { pcie8: 4, eps8: 2 } })
+    const sources = { p: Object.fromEntries(EXPECTED.psu.required.map((k) => [k, src()])) }
+    expect(coverageFor('psu', [part], sources).verified).toBe(1)
+  })
+
+  // ⚠️ SAME TRAP AS THE CASE WORK: a PSU carries tdp: 0 because it draws
+  // nothing itself. Ratcheting tdp would demand provenance for 53 sentinels.
+  it('never demands a source for a psu tdp', () => {
+    const part = psu('p', { wattage: 850 })
+    expect(missingRatchetSources([part], { p: { wattage: src() } }, new Set(['psu']))).toEqual([])
+  })
+
+  it('reports an unsourced psu wattage', () => {
+    expect(missingRatchetSources([psu('p', { wattage: 850 })], {}, new Set(['psu']))).toEqual(['p.wattage'])
+  })
+})
