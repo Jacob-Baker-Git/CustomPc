@@ -925,5 +925,54 @@
     "supportedFormFactors": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30", "note": "HYTE publishes \"3 + 7 half-height\"; 3 is the full-height count the GPU occupies. The Y60 mounts the card vertically on an included PCIe 4.0 x16 riser" },
     "radiatorSupport": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" }
+  },
+  "case-corsair-4000d": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" }
+  },
+  "case-corsair-3000d": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://pcpartpicker.com/product/NcRwrH/corsair-3000d-airflow-atx-mid-tower-case-cc-9011251-ww", "checkedOn": "2026-08-30", "note": "Corsair publishes NO motherboard form-factor row for the 3000D AIRFLOW - not on the black, white or RGB SKU, nor the UK region page. PCPartPicker lists ATX/EATX/Micro ATX/Mini ITX for CC-9011251-WW, and independently agrees with Corsair on the 360 mm GPU length and 7 slots" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" }
+  },
+  "case-corsair-5000d": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" }
+  },
+  "case-corsair-6500x": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"8 horizontal (+4 vertical with Vertical Mount Accessory)\"" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" }
+  },
+  "case-corsair-2500x": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"4 horizontal (4 vertical with accessory)\"" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" }
+  },
+  "case-corsair-4000d-rs": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30", "note": "Re-pointed: Corsair has no \"4000D Airflow RS\". The row now models the FRAME 4000D RS ARGB (CC-9011296-WW), which it was named after; it had been carrying the plain 4000D Airflow's 360 mm" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"7 Horizontal or 3 Vertical\"" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" }
+  },
+  "case-corsair-icue-2500x": {
+    "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
+    "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
+    "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
+    "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"4 horizontal (4 vertical with accessory)\"" },
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" }
   }
 }

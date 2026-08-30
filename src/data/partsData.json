@@ -1917,7 +1917,18 @@
     "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          240,
+          280,
+          360
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -2058,7 +2069,18 @@
     "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          240,
+          280,
+          360
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -2148,7 +2170,23 @@
     "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          240,
+          280,
+          360
+        ],
+        "side": [
+          240,
+          280,
+          360
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
@@ -5460,10 +5498,31 @@
       "ITX"
     ],
     "maxGpuLength": 400,
-    "maxCoolerHeight": 170,
+    "maxCoolerHeight": 190,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 8,
+      "radiatorSupport": {
+        "top": [
+          240,
+          280,
+          360
+        ],
+        "bottom": [
+          240,
+          280,
+          360
+        ],
+        "side": [
+          240,
+          360
+        ],
+        "rear": [
+          120,
+          140
+        ]
+      }
     }
   },
   {
@@ -7062,16 +7121,35 @@
       "ITX"
     ],
     "maxGpuLength": 400,
-    "maxCoolerHeight": 165,
+    "maxCoolerHeight": 180,
     "tdp": 0,
     "specs": {
-      "type": "Micro Tower"
+      "type": "Micro Tower",
+      "expansionSlots": 4,
+      "radiatorSupport": {
+        "top": [
+          240,
+          280,
+          360
+        ],
+        "bottom": [
+          240,
+          280,
+          360
+        ],
+        "side": [
+          240
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
     "id": "case-corsair-4000d-rs",
     "category": "case",
-    "name": "Corsair 4000D Airflow RS",
+    "name": "Corsair FRAME 4000D RS ARGB",
     "brand": "Corsair",
     "price": 109.99,
     "supportedFormFactors": [
@@ -7079,11 +7157,33 @@
       "mATX",
       "ITX"
     ],
-    "maxGpuLength": 360,
+    "maxGpuLength": 430,
     "maxCoolerHeight": 170,
     "tdp": 0,
     "specs": {
-      "type": "Mid Tower"
+      "type": "Mid Tower",
+      "expansionSlots": 7,
+      "radiatorSupport": {
+        "front": [
+          240,
+          280,
+          360
+        ],
+        "top": [
+          240,
+          280,
+          360
+        ],
+        "side": [
+          240,
+          280,
+          360
+        ],
+        "rear": [
+          120,
+          140
+        ]
+      }
     }
   },
   {
@@ -7097,10 +7197,29 @@
       "ITX"
     ],
     "maxGpuLength": 400,
-    "maxCoolerHeight": 165,
+    "maxCoolerHeight": 180,
     "tdp": 0,
     "specs": {
-      "type": "Micro Tower"
+      "type": "Micro Tower",
+      "expansionSlots": 4,
+      "radiatorSupport": {
+        "top": [
+          240,
+          280,
+          360
+        ],
+        "bottom": [
+          240,
+          280,
+          360
+        ],
+        "side": [
+          240
+        ],
+        "rear": [
+          120
+        ]
+      }
     }
   },
   {
