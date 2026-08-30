@@ -386,13 +386,13 @@ Report to the user: how many of the 50 re-verified values were wrong, any unveri
 | `case-lianli-lancool-3` | 435 / 187 / ATX, mATX, ITX |
 | `case-lianli-q58` | 320 / 67 / ITX |
 
-- [ ] **Step 1: Run protocol R for all ten rows**
+- [x] **Step 1: Run protocol R for all ten rows**
 
 Start at `https://lian-li.com/product-category/cases/`. ⚠️ Two id spellings are in use (`lian-li-` and `lianli-`); both are Lian Li and both are in this tranche.
 
 ⚠️ The O11 family lists board support including E-ATX. Per protocol R step 2, record only `ATX` / `mATX` / `ITX`.
 
-- [ ] **Step 2: Verify the data shape before testing**
+- [x] **Step 2: Verify the data shape before testing**
 
 ```bash
 node -e "const a=require('./src/data/partsData.json');const s=require('./data/partSources.json');const ids=a.filter(p=>p.brand==='Lian Li').map(p=>p.id);for(const id of ids){const p=a.find(x=>x.id===id);const e=s[id]||{};const need=['maxGpuLength','maxCoolerHeight','supportedFormFactors','expansionSlots','radiatorSupport'];const gaps=need.filter(k=>!e[k]);console.log((gaps.length?'GAP ':'ok  ')+id+(gaps.length?' missing source: '+gaps.join(','):''))}"
@@ -400,7 +400,7 @@ node -e "const a=require('./src/data/partsData.json');const s=require('./data/pa
 
 Expected: ten `ok` lines and no `GAP`.
 
-- [ ] **Step 3: Run the full suite**
+- [x] **Step 3: Run the full suite**
 
 ```bash
 npm run test:run
@@ -408,7 +408,7 @@ npm run test:run
 
 Expected: PASS.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
