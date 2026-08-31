@@ -1262,5 +1262,45 @@
     "wattage": { "url": "https://www.bequiet.com/en/powersupply/4103", "checkedOn": "2026-08-31" },
     "rating": { "url": "https://www.bequiet.com/en/powersupply/4103", "checkedOn": "2026-08-31" },
     "connectors": { "url": "https://www.bequiet.com/en/powersupply/4103", "checkedOn": "2026-08-31" }
+  },
+  "psu-seasonic-focus-750": {
+    "wattage": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31", "note": "750 W tab of the FOCUS GX series page (FOCUS-GX-750); CPU 1 connector x 2 cables, PCIe 2 connectors x 2 cables" }
+  },
+  "psu-seasonic-focus-650": {
+    "wattage": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31", "note": "650 W tab of the FOCUS GX series page (FOCUS-GX-650); CPU 1 connector x 2 cables, PCIe 2 connectors x 2 cables" }
+  },
+  "psu-seasonic-focus-gx-1000": {
+    "wattage": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/focus-gx/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/cable-compatibility/", "checkedOn": "2026-08-31", "note": "No native 12VHPWR: this KB table gives \"FOCUS PX / GX (Any models)\" a cross for Native 12VHPWR and Native 12V-2x6, remark 2 \"not ATX 3.x\". The 1000 W tab of the product page lists a \"12VHPWR (12+4 Pins to 12+4 Pins)\" cable the unit cannot accept; PCPartPicker (FOCUS-GX-1000) also reports 0. Head counts 6 PCIe / 2 EPS are from that tab" }
+  },
+  "psu-seasonic-prime-1000": {
+    "wattage": { "url": "https://seasonic.com/prime-tx/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/prime-tx/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/cable-compatibility/", "checkedOn": "2026-08-31", "note": "No native 12VHPWR: the Legacy PRIME table gives \"PRIME Titanium Platinum - Gold\" a cross for Native 12VHPWR and Native 12V-2x6, remark 2 \"not ATX 3.x\". The 1000 W tab of the product page lists one anyway; PCPartPicker (PRIME-TX-1000) also reports 0. Head counts 6 PCIe / 2 EPS are from that tab" }
+  },
+  "psu-seasonic-vertex-1000": {
+    "wattage": { "url": "https://seasonic.com/vertex-gx/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/vertex-gx/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/vertex-gx/", "checkedOn": "2026-08-31", "note": "1000 W tab (VERTEX GX-1000). Native 12V-2x6 confirmed by the KB cable table, which ticks it for VERTEX GX (ATX 3.0 / 3.1)" }
+  },
+  "psu-seasonic-gx850-atx3": {
+    "wattage": { "url": "https://seasonic.com/focus-gx-atx-3/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/focus-gx-atx-3/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/focus-gx-atx-3/", "checkedOn": "2026-08-31", "note": "850 W tab. Seasonic has re-badged this page \"FOCUS GX ATX 3.1\"; its figures match PCPartPicker's ATX3-FOCUS-GX-850 / SSR-850FX3 exactly" }
+  },
+  "psu-seasonic-core-gm-650": {
+    "wattage": { "url": "https://seasonic.com/core-gm/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://seasonic.com/core-gm/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://seasonic.com/core-gm/", "checkedOn": "2026-08-31", "note": "650 W tab. Semi-modular: the CPU cable (1 connector) and both PCIe cables (2 connectors each) are attached" }
+  },
+  "psu-lianli-sp750": {
+    "wattage": { "url": "https://lian-li.com/product/sp750/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://lian-li.com/product/sp750/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://lian-li.com/product/sp750/", "checkedOn": "2026-08-31", "note": "From the CONNECTORS row of the spec table: \"2 x 8 / 4-Pin CPU / ATX 12V connector ... x 1pcs\" is two heads on one cable, plus 1 and 2 PCIe heads on two cables. The feature bullets above it count cables, not heads" }
   }
 }
