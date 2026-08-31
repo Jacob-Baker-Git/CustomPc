@@ -249,23 +249,99 @@ In `data/partSources.json` — ten entries, one per researched field:
 
 ⚠️ `tdp: 14` stays exactly as it is and **must never get a source entry**.
 
-## Tranches
+## Tranches — ✅ ALL COMPLETE, 70/70 (100%)
 
-| # | tranche | rows |
-|---|---|---|
-| 1 | Code: `EXPECTED.motherboard`, `RATCHETED_KEYS.motherboard`, the rule 1b change | — |
-| 2 | MSI, AM5 current (B650/B850/X670E/X870E) | 11 |
-| 3 | MSI, Intel + AM4/legacy | 11 |
-| 4 | ASUS, AM5 | 9 |
-| 5 | ASUS, Intel + AM4/legacy | 10 |
-| 6 | Gigabyte, AM5 | 8 |
-| 7 | Gigabyte, Intel + legacy | 8 |
-| 8 | ASRock, all 13 | 13 |
-| 9 | Switch the motherboard ratchet on | — |
+| # | tranche | rows | commit | outcome |
+|---|---|---|---|---|
+| 1 | Rule 1b: block on absence, not shortfall | — | `8c93673` | prevented ~300 false blocks |
+| 2 | `EXPECTED.motherboard` + `RATCHETED_KEYS.motherboard` | — | `3f8093a` | — |
+| 3 | MSI, AM5 | 11 | `f2eeaed` | 1 name; snapshot moved for the first time |
+| 4 | MSI, Intel + AM4 | 11 | `1405c2d` | 3 boards 8+4; 2 conflicts resolved |
+| 5 | ASUS, AM5 | 9 | `b3d38d1` | 1 name; 3 extraction traps |
+| 6 | ASUS, Intel + AM4 | 10 | `eecda11` | 1 name; 2 gutted spec pages |
+| 7 | Gigabyte, AM5 | 8 | `1d0ba8a` | 1 name (B850M WiFi7 → WiFi6E) |
+| 8 | Gigabyte, Intel + legacy | 8 | `64afe40` | 2 names, one changing formFactor |
+| 9 | ASRock, all 13 | 13 | `268873e` | 1 name; the SATA-only M.2 |
+| 10 | Switch the ratchet on | — | `caf8368` | proved non-vacuous |
 
-Splitting MSI, ASUS and Gigabyte by platform rather than arbitrarily keeps each
+Splitting MSI, ASUS and Gigabyte by platform rather than arbitrarily kept each
 tranche on one maker's spec-page layout **and** one socket's vocabulary, so a
-convention decided in a tranche applies to all of it.
+convention decided in a tranche applied to all of it. That held.
+
+## What the work actually found
+
+🛑 **SEVEN WRONG PRODUCT NAMES**, taking the running total to **thirteen** across
+four categories (one case, five PSUs, seven boards). Every one was a row naming
+something its maker does not sell:
+
+| row | was | is |
+|---|---|---|
+| `mb-msi-x670e` | MAG X670E Tomahawk | …**WiFi** (the plain URL 404s) |
+| `mb-asus-b650e-itx` | ROG Strix B650E-I Gaming | …**WiFi** |
+| `mb-asus-z790` | ROG Strix Z790-F | …**Gaming WiFi** |
+| `mb-gigabyte-b850m-aorus` | B850M Aorus Elite **WiFi7** | …**WiFi6E** — it had borrowed its ATX sibling's suffix |
+| `mb-gigabyte-z790-ultra` | **Z790** Aorus Ultra, ATX | **Z790I** Aorus Ultra, **ITX** |
+| `mb-gigabyte-b760m` | B760M DS3H | …**DDR4** — the row's own `ramType` disagreed with its name |
+| `mb-asrock-h610m-hvs` | H610M-HVS/M.2 DDR4 | …**R2.0** |
+
+🛑 **NO MAKER PUBLISHES EVERYTHING, AND EACH HIDES A DIFFERENT FIELD.**
+
+- **MSI** publishes the CPU power connector **count** and never the **pin type**.
+  The manual's own spec table is the only MSI source that states it, so all 22
+  MSI `epsConnectors` are sourced to a PDF.
+- **ASUS** publishes the pin type outright but has **gutted two legacy spec
+  pages** — the TUF B550-PLUS page now lists only Model, USB, OS and Form
+  Factor, and the PRIME B560M-A omits its DIMM row and reports its form factor
+  as the literal string **"Others"**.
+- **Gigabyte's** legacy template drops PCIe generation, memory speed and
+  per-slot M.2 detail altogether.
+- **ASRock** publishes everything, but only behind the `#Specification` anchor.
+
+⚠️ **A regional page can carry what the global one drops**: the PRIME B560M-A's
+DIMM row exists on ASUS's **UK** page and not its global one.
+
+## The three conventions, in hindsight
+
+All three earned their place:
+
+1. **`epsConnectors` counts 8-pin sockets only.** **42 of the 70 boards are 1
+   and 28 are 2**, and 8+4 boards turned up in every tranche. They are the ones
+   the convention is for: had MSI's *count* of CPU power connectors been trusted
+   as a proxy for the pin type, every 8+4 board would have been recorded as 2 and
+   rule 1b would have demanded a second EPS head that the board does not have.
+2. **`maxRamSpeed` takes the published OC maximum.** Two boards are exceptions
+   that prove it — the B460M PRO-VDH and both H610M boards publish no OC figure
+   at all, because those chipsets forbid memory overclocking, so their JEDEC
+   number *is* the maximum.
+3. **`m2Slots` is per-slot.** **Exactly eight boards, spanning all four makers**,
+   carry a PCIe 5.0 M.2 behind a PCIe 4.0 x16 — MSI MPG B650 Edge, ASUS TUF
+   B650-Plus and Prime B650M-A II, Gigabyte B650 Aorus Elite AX and X670 Gaming
+   X AX, ASRock B650 PG Lightning, B650M-HDV/M.2 and B860M-X WiFi. A per-board
+   `pcieGen` would have been wrong on every one.
+
+   The `sata` flag earned its place too: **25 of 70 boards have a SATA-capable
+   M.2, and exactly one of those is AM5** (the ASRock A620M-HDV/M.2). Reading
+   the AM5 tranches alone would have suggested the flag was dead weight.
+
+⚠️ **One case the schema did not anticipate**: the ASRock B450M Pro4's M2_2 is
+**SATA-only, with no PCIe lanes at all**. Recorded as `pcieGen: 0` with
+`sata: true` — zero is the fact here, not a stand-in for unknown, and the
+cross-row invariant now enforces that a `pcieGen: 0` slot must be SATA-capable.
+
+## Outcome against the success criteria
+
+- ✅ `catalog:coverage` reports **motherboard 70/70 (100%)**.
+- ✅ Ratchet on, proved non-vacuous by deleting one source and watching it fail.
+- ✅ **Zero `unverified` motherboards in both reference builds** — 13 ok / 57
+  blocked and 33 ok / 37 blocked, each totalling 70. Rules 1b, 3 and 5 answer
+  for every board.
+- ✅ Lint clean, 1602 unit, 101 e2e, build clean, sitemap 551 URLs unchanged,
+  prerender drift resolved.
+
+🛑 **None of this has reached a user.** `partsData.json` is overridden by
+Supabase on mount, so the seven corrected names and all 770 researched values
+ship to nobody until `npm run catalog:push -- --apply`, and `main` is far ahead
+of `origin`. Both remain the user's to run.
 
 ## Risks
 
