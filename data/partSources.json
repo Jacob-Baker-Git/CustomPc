@@ -1342,5 +1342,40 @@
     "wattage": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-850-v2.html", "checkedOn": "2026-08-31" },
     "rating": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-850-v2.html", "checkedOn": "2026-08-31" },
     "connectors": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-850-v2.html", "checkedOn": "2026-08-31", "note": "MPE-8501-ACAAG. PCIe row \"750W / 850W: x4\", EPS 4+4 x1 plus EPS 8 x1, ATX 12V Ver. 2.41 so no 12VHPWR" }
+  },
+  "psu-evga-650w": {
+    "wattage": { "url": "https://pcpartpicker.com/product/gnGbt6/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/gnGbt6/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/gnGbt6/", "checkedOn": "2026-08-31", "note": "220-G6-0650-X1. evga.com now redirects every /products/ URL to its homepage, so there is no maker page left to cite. EPS 8-pin 1, PCIe 6+2 3, no 12VHPWR" }
+  },
+  "psu-evga-supernova-1000": {
+    "wattage": { "url": "https://pcpartpicker.com/product/yyhFf7/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/yyhFf7/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/yyhFf7/", "checkedOn": "2026-08-31", "note": "220-G7-1000-X1. evga.com now redirects every /products/ URL to its homepage, so there is no maker page left to cite. EPS 8-pin 2, PCIe 6+2 8, no 12VHPWR" }
+  },
+  "psu-evga-500w1": {
+    "wattage": { "url": "https://pcpartpicker.com/product/XCjG3C/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/XCjG3C/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/XCjG3C/", "checkedOn": "2026-08-31", "note": "100-W1-0500-KR. evga.com now redirects every /products/ URL to its homepage, so there is no maker page left to cite. Rated \"80+\" with no metal tier, which is the White level the catalogue records. EPS 8-pin 1, PCIe 6+2 2" }
+  },
+  "psu-evga-750-gt": {
+    "wattage": { "url": "https://pcpartpicker.com/product/J9drxr/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/J9drxr/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/J9drxr/", "checkedOn": "2026-08-31", "note": "220-GT-0750-Y1. evga.com now redirects every /products/ URL to its homepage, so there is no maker page left to cite. EPS 8-pin 2, PCIe 6+2 4, no 12VHPWR" }
+  },
+  "psu-nzxt-c750": {
+    "wattage": { "url": "https://pcpartpicker.com/product/ZCQcCJ/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/ZCQcCJ/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/ZCQcCJ/", "checkedOn": "2026-08-31", "note": "C750 (2022), PA-7G1BB-US - the generation NZXT named \"C750\", as distinct from the 2019 \"C\" and the current \"C750 Gold Core\". NZXT has 404'd its pre-ATX-3.1 C-series pages; only the current ATX 3.1 and Core lines remain" }
+  },
+  "psu-nzxt-c850": {
+    "wattage": { "url": "https://pcpartpicker.com/product/YYZ9TW/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/YYZ9TW/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/YYZ9TW/", "checkedOn": "2026-08-31", "note": "C850 (2022), PA-8G1BB-US - the generation NZXT named \"C850\". NZXT has 404'd its pre-ATX-3.1 C-series pages; only the current ATX 3.1 and Core lines remain; its successor, C850 Gold ATX 3.1 (PA-8G2BB-US), is a different unit with 3 PCIe heads and a 12V-2x6" }
+  },
+  "psu-nzxt-c1000-gold": {
+    "wattage": { "url": "https://pcpartpicker.com/product/43JgXL/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/43JgXL/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/43JgXL/", "checkedOn": "2026-08-31", "note": "C1000 (2022), PA-0G1BB-US - the generation NZXT named \"C1000\". NZXT has 404'd its pre-ATX-3.1 C-series pages; only the current ATX 3.1 and Core lines remain" }
   }
 }

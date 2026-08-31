@@ -1524,7 +1524,8 @@
     "wattage": 650,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 3, "eps8": 1 }
     }
   },
   {
@@ -1652,7 +1653,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 6, "eps8": 2 }
     }
   },
   {
@@ -1703,7 +1705,8 @@
     "wattage": 1000,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 8, "eps8": 2 }
     }
   },
   {
@@ -3722,7 +3725,8 @@
     "wattage": 1000,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 6, "eps8": 2 }
     }
   },
   {
@@ -5472,7 +5476,8 @@
     "wattage": 500,
     "tdp": 0,
     "specs": {
-      "rating": "80+ White"
+      "rating": "80+ White",
+      "connectors": { "pcie8": 2, "eps8": 1 }
     }
   },
   {
@@ -7177,7 +7182,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 6, "eps8": 2 }
     }
   },
   {
@@ -7226,7 +7232,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2 }
     }
   },
   {
