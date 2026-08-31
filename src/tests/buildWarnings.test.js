@@ -83,6 +83,37 @@ describe('advisories', () => {
     expect(w.find((x) => /8000/.test(x.message))?.level).toBe('note')
   })
 
+  // ⚠️ The counterpart to rule 1b's weakening in specRules.js. The shortfall has
+  // to surface SOMEWHERE, or softening the rule just deletes the check.
+  const boardEps = (n) => ({ id: 'm', category: 'motherboard', name: 'Test Board', specs: { epsConnectors: n } })
+  const psuEps = (n) => ({ id: 'p', category: 'psu', name: 'Test PSU', wattage: 1000, specs: { connectors: { eps8: n } } })
+
+  it('notes a board EPS socket the PSU cannot fill', () => {
+    const w = getBuildWarnings({ motherboard: boardEps(2), psu: psuEps(1) })
+    const note = w.find((x) => /EPS/i.test(x.message))
+    expect(note?.level).toBe('note')
+    expect(note?.message).toMatch(/overclock/i)
+  })
+
+  it('says nothing when the PSU fills every EPS socket', () => {
+    const w = getBuildWarnings({ motherboard: boardEps(2), psu: psuEps(2) })
+    expect(w.some((x) => /EPS/i.test(x.message))).toBe(false)
+  })
+
+  // A PSU with no EPS head at all is rule 1b's job — it BLOCKS. Saying it twice,
+  // once as a block and once as a note, would read as two different problems.
+  it('says nothing when the PSU has no EPS head at all', () => {
+    const w = getBuildWarnings({ motherboard: boardEps(2), psu: psuEps(0) })
+    expect(w.some((x) => /EPS/i.test(x.message))).toBe(false)
+  })
+
+  it('says nothing about EPS when either side is unresearched', () => {
+    expect(getBuildWarnings({ motherboard: boardEps(2), psu: { id: 'p', wattage: 1000, specs: {} } })
+      .some((x) => /EPS/i.test(x.message))).toBe(false)
+    expect(getBuildWarnings({ motherboard: { id: 'm', specs: {} }, psu: psuEps(1) })
+      .some((x) => /EPS/i.test(x.message))).toBe(false)
+  })
+
   it('sorts notes below warnings and criticals', () => {
     const mb = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: { pcieGen: 4 } }
     const gpu = { id: 'g', category: 'gpu', tdp: 300, specs: { pcieGen: 5 } }

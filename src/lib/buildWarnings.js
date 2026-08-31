@@ -55,5 +55,20 @@ export function getBuildWarnings(selectedParts) {
     })
   }
 
+  // ⚠️ NOT a block — see rule 1b in specRules.js, which deliberately blocks only
+  // on a supply with NO EPS head. A board with two 8-pin sockets runs at stock
+  // on one, so an unfilled second socket is worth knowing and is not a fault.
+  // Fires only when both sides are researched, and never when the supply has
+  // none — that case is already blocked, and saying it twice reads as two
+  // different problems.
+  const epsNeed = motherboard?.specs?.epsConnectors
+  const epsHave = psu?.specs?.connectors?.eps8
+  if (typeof epsNeed === 'number' && typeof epsHave === 'number' && epsHave >= 1 && epsHave < epsNeed) {
+    warnings.push({
+      level: 'note',
+      message: `This board has ${epsNeed} 8-pin EPS sockets and the ${psu.name ?? 'PSU'} can fill ${epsHave}. It runs at stock; the spare socket matters only for sustained overclocking.`,
+    })
+  }
+
   return warnings.sort((a, b) => RANK[a.level] - RANK[b.level])
 }

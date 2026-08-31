@@ -98,21 +98,37 @@ describe('rule 1: power connectors', () => {
   })
 
   // The CPU side of the same question: the board's EPS headers must be fed too.
-  it('blocks a PSU with one EPS cable on a board needing two', () => {
-    const b = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: { epsConnectors: 2 } }
-    const r = evaluateSpecRules({ motherboard: b }, psu({ eps8: 1 }))
+  //
+  // 🛑 The rule blocks on ABSENCE, not on shortfall. A board with two 8-pin EPS
+  // sockets populated by one boots and runs at stock, so refusing the pairing
+  // would be a false block — the same shape as 53fba98 and 0a192ce. The
+  // shortfall is a note in buildWarnings.js instead.
+  const board = (specs) => ({ id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs })
+
+  it('blocks a board needing EPS against a PSU with no EPS head at all', () => {
+    const r = evaluateSpecRules({ motherboard: board({ epsConnectors: 2 }) }, psu({ eps8: 0 }))
     expect(r.status).toBe('blocked')
     expect(r.reason).toMatch(/EPS/i)
   })
 
+  it('blocks a single-socket board too when the PSU has no EPS head', () => {
+    expect(evaluateSpecRules({ motherboard: board({ epsConnectors: 1 }) }, psu({ eps8: 0 })).status).toBe('blocked')
+  })
+
+  it('does NOT block a two-socket board on a one-head supply', () => {
+    expect(evaluateSpecRules({ motherboard: board({ epsConnectors: 2 }) }, psu({ eps8: 1 })).status).toBe('ok')
+  })
+
   it('passes a PSU with enough EPS cables', () => {
-    const b = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: { epsConnectors: 2 } }
-    expect(evaluateSpecRules({ motherboard: b }, psu({ eps8: 2 })).status).toBe('ok')
+    expect(evaluateSpecRules({ motherboard: board({ epsConnectors: 2 }) }, psu({ eps8: 2 })).status).toBe('ok')
   })
 
   it('is unverified when the board does not state its EPS headers', () => {
-    const b = { id: 'm', category: 'motherboard', socket: 'AM5', ramType: 'DDR5', specs: {} }
-    expect(evaluateSpecRules({ motherboard: b }, psu({ eps8: 2 })).status).toBe('unverified')
+    expect(evaluateSpecRules({ motherboard: board({}) }, psu({ eps8: 2 })).status).toBe('unverified')
+  })
+
+  it('is unverified when the PSU does not state its connectors', () => {
+    expect(evaluateSpecRules({ motherboard: board({ epsConnectors: 2 }) }, psu(null)).status).toBe('unverified')
   })
 })
 

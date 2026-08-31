@@ -82,6 +82,18 @@ function powerConnectors(selectedParts, candidate) {
 
 // Rule 1b. The board's EPS headers. A supply that can run the graphics card and
 // not the CPU is just as dead a build.
+//
+// 🛑 BLOCKS ON ABSENCE, NOT ON SHORTFALL, and that is deliberate. A board with
+// two 8-pin EPS sockets populated by one boots and runs at stock; the second
+// header matters for sustained overclocking. Ten of the 53 researched supplies
+// carry exactly one EPS head and most ATX boards in this catalogue are 8+8, so
+// blocking on the count would refuse hundreds of pairings that work — the same
+// shape of false block as 53fba98 (PCIe 8-pin and 6-pin as separate pools) and
+// 0a192ce (choosePsu sizing on watts alone).
+//
+// The shortfall is not dropped: buildWarnings.js raises it as a `note`. It
+// lives there because this module has no warning level, and giving it one would
+// change aggregate()'s precedence for every rule in this file.
 function epsConnectors(selectedParts, candidate) {
   const psu = candidate.category === 'psu' ? candidate : selectedParts.psu
   const board = candidate.category === 'motherboard' ? candidate : selectedParts.motherboard
@@ -92,8 +104,10 @@ function epsConnectors(selectedParts, candidate) {
   if (typeof need !== 'number') return { status: 'unverified', reason: `EPS headers on ${board.name ?? 'this motherboard'} are not verified` }
   if (!supply) return { status: 'unverified', reason: `Connectors on ${psu.name ?? 'this PSU'} are not verified` }
 
-  if ((supply.eps8 ?? 0) >= need) return null
-  return { status: 'blocked', reason: `Board needs ${need}x 8-pin EPS; PSU has ${supply.eps8 ?? 0}` }
+  // A board that asks for nothing is satisfied by a supply that offers nothing.
+  if (need < 1) return null
+  if ((supply.eps8 ?? 0) >= 1) return null
+  return { status: 'blocked', reason: 'Board needs an 8-pin EPS connector; this PSU has none' }
 }
 
 // Rule 2. Card thickness against the case's expansion-slot budget. This is the
