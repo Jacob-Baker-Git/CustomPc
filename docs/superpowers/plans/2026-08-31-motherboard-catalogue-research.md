@@ -654,11 +654,11 @@ pairing Task 1 stopped blocking — check the note fires rather than a block.
 
 ### Task 7: Gigabyte, AM5 (8 rows)
 
-- [ ] **S1** — protocol M for all 8 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 8 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 `mb-gigabyte-x870e-elite` · `mb-gigabyte-x670-gaming` ·
 `mb-gigabyte-b850-elite` · `mb-gigabyte-b850-eagle` ·

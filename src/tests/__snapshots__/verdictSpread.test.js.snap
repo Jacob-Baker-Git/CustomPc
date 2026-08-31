@@ -29,8 +29,8 @@ exports[`verdict spread > matches the committed snapshot (cramped) 1`] = `
   },
   "motherboard": {
     "blocked": 57,
-    "ok": 7,
-    "unverified": 6,
+    "ok": 10,
+    "unverified": 3,
   },
   "paste": {
     "blocked": 0,
@@ -84,8 +84,8 @@ exports[`verdict spread > matches the committed snapshot (roomy) 1`] = `
   },
   "motherboard": {
     "blocked": 37,
-    "ok": 20,
-    "unverified": 13,
+    "ok": 28,
+    "unverified": 5,
   },
   "paste": {
     "blocked": 0,
