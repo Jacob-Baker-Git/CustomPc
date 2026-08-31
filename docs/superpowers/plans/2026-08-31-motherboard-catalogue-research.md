@@ -632,11 +632,11 @@ population qualifier in the note.
 
 ### Task 6: ASUS, Intel and AM4 (10 rows)
 
-- [ ] **S1** — protocol M for all 10 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 10 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 `mb-asus-z890-e` · `mb-asus-z790-maximus` · `mb-asus-z790` ·
 `mb-asus-tuf-b760plus` · `mb-asus-b760-plus` · `mb-asus-b760m-a-wifi` ·
