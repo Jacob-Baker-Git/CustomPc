@@ -142,7 +142,7 @@ describe('unverifiable records', () => {
 // catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
 // meaning "draws nothing", and demanding provenance for 59 such sentinels would
 // be recording a source for a figure nobody measured.
-const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu'])
+const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard'])
 
 describe('verified categories', () => {
   it('requires a source for every ratcheted field once a category is verified', () => {

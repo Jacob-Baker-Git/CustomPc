@@ -727,7 +727,7 @@ non-empty note and **no `url`**, and remove the field.
 **Files:**
 - Modify: `src/tests/partSources.test.js:145`
 
-- [ ] **Step 1: Confirm every board is researched first**
+- [x] **Step 1: Confirm every board is researched first**
 
 ```bash
 npm run catalog:coverage
@@ -737,7 +737,7 @@ Expected: `motherboard: 70/70 parts fully researched (100%)`. **Do not proceed
 if it is not 70/70** — the ratchet would fail against the gap, and the honest
 fix is to research the gap, not to relax the ratchet.
 
-- [ ] **Step 2: Add the category**
+- [x] **Step 2: Add the category**
 
 In `src/tests/partSources.test.js`, change:
 
@@ -751,7 +751,7 @@ to:
 const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard'])
 ```
 
-- [ ] **Step 3: Run it**
+- [x] **Step 3: Run it**
 
 ```bash
 npx vitest run src/tests/partSources.test.js
@@ -759,7 +759,7 @@ npx vitest run src/tests/partSources.test.js
 
 Expected: PASS.
 
-- [ ] **Step 4: Prove the ratchet is NOT vacuous**
+- [x] **Step 4: Prove the ratchet is NOT vacuous**
 
 A green ratchet that would be green with the data removed protects nothing.
 Delete one board's `socket` source by hand:
@@ -778,7 +778,7 @@ git checkout -- data/partSources.json
 ⚠️ `git checkout --` on a file with uncommitted work destroys it. Only run this
 because the previous tranche was committed — confirm with `git status` first.
 
-- [ ] **Step 5: Run the whole suite, including e2e and the build**
+- [x] **Step 5: Run the whole suite, including e2e and the build**
 
 ```bash
 npm run lint && npm run test:run && npm run build && npm run sitemap && npm run prerender
@@ -797,7 +797,7 @@ change.
 output committed** — fragments go stale silently, and a failed run leaves the
 folder untouched so `git diff` reports clean.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/tests/partSources.test.js prerendered/
