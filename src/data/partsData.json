@@ -1511,7 +1511,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Platinum"
+      "rating": "80+ Platinum",
+      "connectors": { "pcie8": 4, "eps8": 2 }
     }
   },
   {
@@ -1592,13 +1593,14 @@
   {
     "id": "psu-bequiet-pure-power-600",
     "category": "psu",
-    "name": "be quiet! Pure Power 12 M 600W",
+    "name": "be quiet! Pure Power 12 M 650W",
     "brand": "be quiet!",
     "price": 84.99,
-    "wattage": 600,
+    "wattage": 650,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 2, "eps8": 1, "12vhpwr": 1 }
     }
   },
   {
@@ -1684,7 +1686,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Titanium"
+      "rating": "80+ Titanium",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -3675,7 +3678,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 2, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -4197,7 +4201,8 @@
     "wattage": 1000,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Platinum"
+      "rating": "80+ Platinum",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -4729,7 +4734,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -5482,7 +5488,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Bronze",
+      "connectors": { "pcie8": 4, "eps8": 2 }
     }
   },
   {
@@ -7082,7 +7089,8 @@
     "wattage": 1000,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -7094,7 +7102,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Platinum"
+      "rating": "80+ Platinum",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {

@@ -1217,5 +1217,50 @@
     "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020256-na/x", "checkedOn": "2026-08-30" },
     "rating": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020256-na/x", "checkedOn": "2026-08-30" },
     "connectors": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020256-na/x", "checkedOn": "2026-08-30" }
+  },
+  "psu-bequiet-750w": {
+    "wattage": { "url": "https://pcpartpicker.com/product/f4mFf7/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/f4mFf7/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/f4mFf7/", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-pure-power-600": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/4074", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/4074", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/4074", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-dark-power-850": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/4043", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/4043", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/4043", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-pp12m-750": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/4073", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/4073", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/4073", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-sp12-1000": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/4104", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/4104", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/4104", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-purepower-850": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/4072", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/4072", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/4072", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-sp10-750": {
+    "wattage": { "url": "https://pcpartpicker.com/product/YdpzK8/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://pcpartpicker.com/product/YdpzK8/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/YdpzK8/", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-pure-13m-1000": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/5943", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/5943", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/5943", "checkedOn": "2026-08-31" }
+  },
+  "psu-bequiet-straight-12-850": {
+    "wattage": { "url": "https://www.bequiet.com/en/powersupply/4103", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.bequiet.com/en/powersupply/4103", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.bequiet.com/en/powersupply/4103", "checkedOn": "2026-08-31" }
   }
 }
