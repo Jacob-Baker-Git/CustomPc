@@ -16,6 +16,11 @@ const RESEARCHED_KEYS = [
   'ratedTdpW', 'radiatorMm',
   'connectors', 'formFactor',
   'm2FormFactor', 'm2Sata',
+  // ⚠️ `rating` could only join this list once all 53 PSUs had one recorded.
+  // Adding it earlier would have failed instantly against 53 unsourced values,
+  // which is why it waited for the end of the PSU research rather than shipping
+  // with `connectors` at the start of it.
+  'rating',
 ]
 
 describe('partSources.json', () => {
@@ -137,7 +142,7 @@ describe('unverifiable records', () => {
 // catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
 // meaning "draws nothing", and demanding provenance for 59 such sentinels would
 // be recording a source for a figure nobody measured.
-const VERIFIED_CATEGORIES = new Set(['gpu', 'case'])
+const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu'])
 
 describe('verified categories', () => {
   it('requires a source for every ratcheted field once a category is verified', () => {
