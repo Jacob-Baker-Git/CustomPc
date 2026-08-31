@@ -26,14 +26,30 @@ function weightsFor(resolution) {
 const ofCategory = (parts, c) => parts.filter((p) => p.category === c && !p.legacy)
 const drawOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.tdp ?? 0), 0)
 
-function choosePsu(candidates, draw, remaining) {
+// ⚠️ Wattage is NOT the only thing that makes a supply run a build. A unit can
+// have watts to spare and still lack the plug the graphics card needs — an
+// RTX 5080 wants a 16-pin, or three 8-pins through its bundled adapter, and a
+// 650W Bronze unit with two PCIe heads has neither. Sizing on watts alone paired
+// exactly that, and the build came out `blocked` by the app's own rule 1.
+//
+// So candidates are filtered through `checkCompatibility` first. That rejects
+// only what the app would actually block: an `unverified` rule is compatible, so
+// a supply whose connectors nobody has researched yet stays eligible and this
+// stays a no-op for every PSU still missing `specs.connectors`.
+//
+// ⚠️ The filter can empty the pool — a build whose card no catalogue supply can
+// feed must still come out with a power supply rather than none, so the
+// unfiltered list is kept as a last resort.
+function choosePsu(candidates, draw, remaining, selection = {}) {
   const byPrice = [...candidates].sort((a, b) => a.price - b.price)
+  const usable = byPrice.filter((p) => checkCompatibility(selection, p).compatible)
+  const pool = usable.length > 0 ? usable : byPrice
   return (
-    byPrice.find((p) => p.wattage >= draw * 1.3 && p.price <= remaining) ||
-    byPrice.find((p) => p.wattage >= draw && p.price <= remaining) ||
-    byPrice.find((p) => p.wattage >= draw * 1.3) ||
-    byPrice.find((p) => p.wattage >= draw) ||
-    byPrice[byPrice.length - 1] ||
+    pool.find((p) => p.wattage >= draw * 1.3 && p.price <= remaining) ||
+    pool.find((p) => p.wattage >= draw && p.price <= remaining) ||
+    pool.find((p) => p.wattage >= draw * 1.3) ||
+    pool.find((p) => p.wattage >= draw) ||
+    pool[pool.length - 1] ||
     null
   )
 }
@@ -327,7 +343,7 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
 
   // Size the PSU last, against the final draw.
   if (!result.psu) {
-    const psu = choosePsu(ofCategory(partsData, 'psu'), drawOf(result), remaining)
+    const psu = choosePsu(ofCategory(partsData, 'psu'), drawOf(result), remaining, result)
     if (psu) {
       result.psu = psu
       remaining -= psu.price
