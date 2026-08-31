@@ -146,3 +146,49 @@ describe('psu expectations', () => {
     expect(missingRatchetSources([psu('p', { wattage: 850 })], {}, new Set(['psu']))).toEqual(['p.wattage'])
   })
 })
+
+describe('motherboard expectations', () => {
+  const board = (id, fields = {}, specs = {}) =>
+    ({ id, category: 'motherboard', tdp: 14, ...fields, specs })
+
+  it('expects the eleven fields a researched board carries', () => {
+    expect(EXPECTED.motherboard.required).toEqual([
+      'socket', 'formFactor', 'ramType', 'chipset',
+      'ramSlots', 'maxRamGb', 'maxRamSpeed', 'pcieGen',
+      'epsConnectors', 'sataPorts', 'm2Slots',
+    ])
+    expect(EXPECTED.motherboard.optional).toEqual([])
+  })
+
+  it('counts a fully sourced board as verified', () => {
+    const part = board('m',
+      { socket: 'AM5', formFactor: 'ATX', ramType: 'DDR5' },
+      { chipset: 'B650', ramSlots: 4, maxRamGb: 256, maxRamSpeed: 8000, pcieGen: 5,
+        epsConnectors: 2, sataPorts: 4, m2Slots: [{ pcieGen: 5, sata: false }] })
+    const sources = { m: Object.fromEntries(EXPECTED.motherboard.required.map((k) => [k, src()])) }
+    expect(coverageFor('motherboard', [part], sources).verified).toBe(1)
+  })
+
+  // ⚠️ A DIFFERENT trap from the case and PSU zeros. A board's tdp is 12-15, a
+  // real number feeding the build's draw total - but no maker publishes a
+  // motherboard TDP, so it is the app's own estimate and must not be given
+  // provenance it does not have.
+  it('never demands a source for a board tdp', () => {
+    const part = board('m', { socket: 'AM5', formFactor: 'ATX', ramType: 'DDR5' })
+    const sources = { m: { socket: src(), formFactor: src(), ramType: src() } }
+    expect(missingRatchetSources([part], sources, new Set(['motherboard']))).toEqual([])
+  })
+
+  // `chipset` is re-verified (EXPECTED lists it) but nothing blocks on it, so no
+  // future board owes it provenance.
+  it('ratchets the three fields compatibility.js blocks on, and no others', () => {
+    expect(RATCHETED_KEYS.motherboard).toEqual(['socket', 'formFactor', 'ramType'])
+  })
+
+  it('reports a board field that carries no source', () => {
+    const part = board('m', { socket: 'AM5', formFactor: 'ATX', ramType: 'DDR5' })
+    expect(missingRatchetSources([part], {}, new Set(['motherboard']))).toEqual([
+      'm.socket', 'm.formFactor', 'm.ramType',
+    ])
+  })
+})

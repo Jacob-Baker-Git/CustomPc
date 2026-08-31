@@ -28,6 +28,18 @@ export const EXPECTED = {
     required: ['wattage', 'rating', 'connectors'],
     optional: [],
   },
+  // The eleven fields a researched board carries. Four already had values -
+  // socket, formFactor and ramType at top level, chipset in specs - and are
+  // RE-VERIFIED rather than added, because compatibility.js blocks on the first
+  // three and a wrong one refuses a correct build in silence.
+  motherboard: {
+    required: [
+      'socket', 'formFactor', 'ramType', 'chipset',
+      'ramSlots', 'maxRamGb', 'maxRamSpeed', 'pcieGen',
+      'epsConnectors', 'sataPorts', 'm2Slots',
+    ],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.
@@ -41,6 +53,16 @@ export const RATCHETED_KEYS = {
   // ⚠️ `wattage` ONLY. A PSU carries tdp: 0 for the same reason a case does -
   // it draws nothing itself - so tdp here is a sentinel, not a measurement.
   psu: ['wattage'],
+  // ⚠️ `tdp` is absent for a DIFFERENT reason from the case and PSU zeros. A
+  // board carries tdp: 12-15, a real number feeding the build's draw total in
+  // compatibility.js, buildWarnings.js, autoBuilder.js and partSynergy.js - but
+  // NO MAKER PUBLISHES A MOTHERBOARD TDP. It is the app's own estimate, in the
+  // family of partSynergy.coolerCapacityW's derived ladder, and a source entry
+  // would assert provenance for a figure nobody published.
+  //
+  // `chipset` is absent too: EXPECTED requires it, so it is re-verified, but no
+  // rule blocks on it and no future board should owe it provenance.
+  motherboard: ['socket', 'formFactor', 'ramType'],
 }
 
 // Every "<id>.<field>" in a verified category that carries a value but no source.
