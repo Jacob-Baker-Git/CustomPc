@@ -610,11 +610,11 @@ differ.
 
 ### Task 5: ASUS, AM5 (9 rows)
 
-- [ ] **S1** — protocol M for all 9 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 9 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 `mb-asus-x670e` · `mb-asus-proart-x870e` · `mb-asus-x870-tuf` ·
 `mb-asus-b850a` · `mb-asus-b650e-f` · `mb-asus-b650e-itx` ·
