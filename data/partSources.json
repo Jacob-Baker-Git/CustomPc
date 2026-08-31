@@ -1302,5 +1302,45 @@
     "wattage": { "url": "https://lian-li.com/product/sp750/", "checkedOn": "2026-08-31" },
     "rating": { "url": "https://lian-li.com/product/sp750/", "checkedOn": "2026-08-31" },
     "connectors": { "url": "https://lian-li.com/product/sp750/", "checkedOn": "2026-08-31", "note": "From the CONNECTORS row of the spec table: \"2 x 8 / 4-Pin CPU / ATX 12V connector ... x 1pcs\" is two heads on one cable, plus 1 and 2 PCIe heads on two cables. The feature bullets above it count cables, not heads" }
+  },
+  "psu-msi-mag-a650": {
+    "wattage": { "url": "https://www.msi.com/Power-Supply/MAG-A650BN/Specification", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.msi.com/Power-Supply/MAG-A650BN/Specification", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.msi.com/Power-Supply/MAG-A650BN/Specification", "checkedOn": "2026-08-31", "note": "EPS (4+4 pin) 1, PCI-E (6+2 pin) 2, no PCI-E 5.0 row" }
+  },
+  "psu-msi-mpg-a850g": {
+    "wattage": { "url": "https://www.msi.com/Power-Supply/MPG-A850G-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.msi.com/Power-Supply/MPG-A850G-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.msi.com/Power-Supply/MPG-A850G-PCIE5/Specification", "checkedOn": "2026-08-31", "note": "EPS (4+4 pin) 2, PCI-E 5.0 (16 pin) 1 (600W), PCI-E (6+2 pin) 6" }
+  },
+  "psu-msi-a1000g": {
+    "wattage": { "url": "https://www.msi.com/Power-Supply/MPG-A1000G-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.msi.com/Power-Supply/MPG-A1000G-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.msi.com/Power-Supply/MPG-A1000G-PCIE5/Specification", "checkedOn": "2026-08-31", "note": "EPS (4+4 pin) 2, PCI-E 5.0 (16 pin) 1 (600W), PCI-E (6+2 pin) 6" }
+  },
+  "psu-msi-a850gl": {
+    "wattage": { "url": "https://www.msi.com/Power-Supply/MAG-A850GL-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.msi.com/Power-Supply/MAG-A850GL-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.msi.com/Power-Supply/MAG-A850GL-PCIE5/Specification", "checkedOn": "2026-08-31", "note": "EPS (4+4 pin) 2, PCI-E 5.0 (16 pin) 1 (600W), PCI-E (6+2 pin) 4" }
+  },
+  "psu-msi-a750bn": {
+    "wattage": { "url": "https://www.msi.com/Power-Supply/MAG-A750BN-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.msi.com/Power-Supply/MAG-A750BN-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.msi.com/Power-Supply/MAG-A750BN-PCIE5/Specification", "checkedOn": "2026-08-31", "note": "MSI has no plain \"MAG A750BN\" - that slug returns a page with no title, and PCPartPicker lists only MAG A750BN PCIE5. EPS (4+4 pin) 2, PCI-E 5.0 (16 pin) 1 (300W), PCI-E (6+2 pin) 2" }
+  },
+  "psu-msi-a1250g": {
+    "wattage": { "url": "https://www.msi.com/Power-Supply/MPG-A1250GS-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.msi.com/Power-Supply/MPG-A1250GS-PCIE5/Specification", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.msi.com/Power-Supply/MPG-A1250GS-PCIE5/Specification", "checkedOn": "2026-08-31", "note": "MSI has no \"MPG A1250G PCIE5\" - that slug returns a page with no title; the 1250 W MPG unit is the A1250GS. EPS (4+4 pin) 2, PCI-E 5.1 (16 pin) 2 (600W), PCI-E (6+2 pin) 1" }
+  },
+  "psu-cooler-master-mwe-650": {
+    "wattage": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-650-v2.html", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-650-v2.html", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/M6M48d/", "checkedOn": "2026-08-31", "note": "Cooler Master's own page does NOT publish this model's PCIe count: its \"PCI-e 6+2 Pin Connectors\" row reads \"750W / 850W: x4 ... 1000W: x3\" and skips 650 W entirely. PCPartPicker gives MPE-6501-ACAAG four 6+2 heads and no 12VHPWR. eps8 is from the Cooler Master page: EPS 4+4 x1 plus EPS 8 x1, and the feature list says \"2 EPS Connectors\"" }
+  },
+  "psu-cm-mwe-gold-850": {
+    "wattage": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-850-v2.html", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-850-v2.html", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.coolermaster.com/en-global/products/mwe-gold-850-v2.html", "checkedOn": "2026-08-31", "note": "MPE-8501-ACAAG. PCIe row \"750W / 850W: x4\", EPS 4+4 x1 plus EPS 8 x1, ATX 12V Ver. 2.41 so no 12VHPWR" }
   }
 }

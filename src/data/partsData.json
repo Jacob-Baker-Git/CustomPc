@@ -1588,7 +1588,8 @@
     "wattage": 650,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Bronze"
+      "rating": "80+ Bronze",
+      "connectors": { "pcie8": 2, "eps8": 1 }
     }
   },
   {
@@ -1714,7 +1715,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 6, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -1726,7 +1728,8 @@
     "wattage": 650,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2 }
     }
   },
   {
@@ -4751,7 +4754,8 @@
     "wattage": 1000,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 6, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -5506,7 +5510,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -7140,25 +7145,27 @@
   {
     "id": "psu-msi-a750bn",
     "category": "psu",
-    "name": "MSI MAG A750BN 750W",
+    "name": "MSI MAG A750BN PCIE5 750W",
     "brand": "MSI",
     "price": 64.99,
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Bronze"
+      "rating": "80+ Bronze",
+      "connectors": { "pcie8": 2, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
     "id": "psu-msi-a1250g",
     "category": "psu",
-    "name": "MSI MPG A1250G PCIE5 1250W",
+    "name": "MSI MPG A1250GS PCIE5 1250W",
     "brand": "MSI",
     "price": 229.99,
     "wattage": 1250,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 1, "eps8": 2, "12vhpwr": 2 }
     }
   },
   {
@@ -7182,7 +7189,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2 }
     }
   },
   {
