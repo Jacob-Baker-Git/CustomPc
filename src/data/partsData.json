@@ -80,7 +80,7 @@
   {
     "id": "mb-gigabyte-b760m",
     "category": "motherboard",
-    "name": "Gigabyte B760M DS3H",
+    "name": "Gigabyte B760M DS3H DDR4",
     "brand": "Gigabyte",
     "price": 109.99,
     "socket": "LGA1700",
@@ -88,7 +88,17 @@
     "ramType": "DDR4",
     "tdp": 10,
     "specs": {
-      "chipset": "B760"
+      "chipset": "B760",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 5333,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -209,15 +219,25 @@
   {
     "id": "mb-gigabyte-z790-ultra",
     "category": "motherboard",
-    "name": "Gigabyte Z790 Aorus Ultra",
+    "name": "Gigabyte Z790I Aorus Ultra",
     "brand": "Gigabyte",
     "price": 429.99,
     "socket": "LGA1700",
-    "formFactor": "ATX",
+    "formFactor": "ITX",
     "ramType": "DDR5",
     "tdp": 16,
     "specs": {
-      "chipset": "Z790"
+      "chipset": "Z790",
+      "ramSlots": 2,
+      "maxRamGb": 128,
+      "maxRamSpeed": 8000,
+      "pcieGen": 5,
+      "epsConnectors": 1,
+      "sataPorts": 2,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -294,7 +314,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B760"
+      "chipset": "B760",
+      "ramSlots": 2,
+      "maxRamGb": 128,
+      "maxRamSpeed": 8000,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 2,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -3315,7 +3345,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B860"
+      "chipset": "B860",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 9200,
+      "pcieGen": 5,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -4820,7 +4860,17 @@
     "ramType": "DDR4",
     "tdp": 12,
     "specs": {
-      "chipset": "B760"
+      "chipset": "B760",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 5333,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -7124,7 +7174,19 @@
     "ramType": "DDR5",
     "tdp": 14,
     "specs": {
-      "chipset": "Z890"
+      "chipset": "Z890",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 9200,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": true }
+      ]
     }
   },
   {
@@ -9509,7 +9571,17 @@
     "tdp": 12,
     "legacy": true,
     "specs": {
-      "chipset": "B550"
+      "chipset": "B550",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 4733,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": true },
+        { "pcieGen": 3, "sata": true }
+      ]
     }
   },
   {
@@ -9649,7 +9721,17 @@
     "tdp": 12,
     "legacy": true,
     "specs": {
-      "chipset": "Z490"
+      "chipset": "Z490",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 5000,
+      "pcieGen": 3,
+      "epsConnectors": 1,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 3, "sata": true },
+        { "pcieGen": 3, "sata": true }
+      ]
     }
   },
   {

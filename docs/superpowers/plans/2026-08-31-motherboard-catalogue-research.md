@@ -675,11 +675,11 @@ some models. Record the current revision and name it in the note.
 
 ### Task 8: Gigabyte, Intel and legacy (8 rows)
 
-- [ ] **S1** — protocol M for all 8 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 8 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 `mb-gigabyte-z890-aorus-elite` · `mb-gigabyte-z790-ultra` ·
 `mb-gigabyte-b860m` · `mb-gigabyte-b760-itx` · `mb-gigabyte-b760m` ·
