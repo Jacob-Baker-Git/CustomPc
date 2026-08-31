@@ -189,7 +189,7 @@ stock.
 - Test: `src/tests/specRules.test.js:100-118`
 - Test: `src/tests/buildWarnings.test.js`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 In `src/tests/specRules.test.js`, **replace** the test currently reading
 `it('blocks a PSU with one EPS cable on a board needing two', ...)` and the two
@@ -269,7 +269,7 @@ In `src/tests/buildWarnings.test.js`, append inside the top-level
   })
 ```
 
-- [ ] **Step 2: Run the tests to verify they fail**
+- [x] **Step 2: Run the tests to verify they fail**
 
 ```bash
 npx vitest run src/tests/specRules.test.js src/tests/buildWarnings.test.js
@@ -279,7 +279,7 @@ Expected: FAIL. `does NOT block a two-socket board on a one-head supply` gets
 `blocked` where it wants `ok`, and all four buildWarnings tests fail because no
 message matches `/EPS/i`.
 
-- [ ] **Step 3: Change rule 1b**
+- [x] **Step 3: Change rule 1b**
 
 Replace the whole of `epsConnectors` in `src/lib/specRules.js` (currently lines
 83–97, comment included) with:
@@ -316,7 +316,7 @@ function epsConnectors(selectedParts, candidate) {
 }
 ```
 
-- [ ] **Step 4: Add the advisory**
+- [x] **Step 4: Add the advisory**
 
 In `src/lib/buildWarnings.js`, insert immediately **after** the `maxRamSpeed`
 block and **before** `return warnings.sort(...)`:
@@ -337,7 +337,7 @@ block and **before** `return warnings.sort(...)`:
   }
 ```
 
-- [ ] **Step 5: Run the tests to verify they pass**
+- [x] **Step 5: Run the tests to verify they pass**
 
 ```bash
 npx vitest run src/tests/specRules.test.js src/tests/buildWarnings.test.js
@@ -345,7 +345,7 @@ npx vitest run src/tests/specRules.test.js src/tests/buildWarnings.test.js
 
 Expected: PASS, all files.
 
-- [ ] **Step 6: Run the full unit suite and the linter**
+- [x] **Step 6: Run the full unit suite and the linter**
 
 ```bash
 npm run lint && npm run test:run
@@ -355,7 +355,7 @@ Expected: lint clean; every test passing. ⚠️ No board carries `epsConnectors
 yet, so `verdictSpread` **must not move** in this task. If its snapshot changes
 here, something else changed — stop and find out what.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/lib/specRules.js src/lib/buildWarnings.js src/tests/specRules.test.js src/tests/buildWarnings.test.js
@@ -370,7 +370,7 @@ git commit -m "fix: block on a missing EPS header, not on an unfilled second one
 - Modify: `scripts/catalog-coverage-core.mjs:18-45`
 - Test: `src/tests/catalogCoverage.test.js`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `src/tests/catalogCoverage.test.js`:
 
@@ -422,7 +422,7 @@ describe('motherboard expectations', () => {
 })
 ```
 
-- [ ] **Step 2: Run the tests to verify they fail**
+- [x] **Step 2: Run the tests to verify they fail**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -431,7 +431,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 Expected: FAIL with `Cannot read properties of undefined (reading 'required')` —
 `EXPECTED.motherboard` does not exist.
 
-- [ ] **Step 3: Add the expectations**
+- [x] **Step 3: Add the expectations**
 
 In `scripts/catalog-coverage-core.mjs`, add inside `EXPECTED`, after the `psu`
 entry:
@@ -466,7 +466,7 @@ And inside `RATCHETED_KEYS`, after the `psu` entry:
   motherboard: ['socket', 'formFactor', 'ramType'],
 ```
 
-- [ ] **Step 4: Run the tests to verify they pass**
+- [x] **Step 4: Run the tests to verify they pass**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -474,7 +474,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Confirm the coverage report shows the new category at zero**
+- [x] **Step 5: Confirm the coverage report shows the new category at zero**
 
 ```bash
 npm run catalog:coverage
@@ -484,7 +484,7 @@ Expected: a `motherboard: 0/70 parts fully researched (0%)` section listing all
 eleven fields. `socket`, `formFactor`, `ramType` and `chipset` show
 `present 70/70   researched 0/70`; the other seven show `present 0/70`.
 
-- [ ] **Step 6: Run the full suite**
+- [x] **Step 6: Run the full suite**
 
 ```bash
 npm run lint && npm run test:run
@@ -494,7 +494,7 @@ Expected: all green. ⚠️ `partSources.test.js` must still pass —
 `VERIFIED_CATEGORIES` does **not** include `motherboard` yet, and it must not
 until Task 10.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add scripts/catalog-coverage-core.mjs src/tests/catalogCoverage.test.js
@@ -561,11 +561,11 @@ git commit -m "data: research the <n> <maker> <platform> boards"
 
 ### Task 3: MSI, AM5 (11 rows)
 
-- [ ] **S1** — protocol M for all 11 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 11 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 
 `mb-msi-x670e` · `mb-msi-x670e-carbon` · `mb-msi-x870e-carbon` ·
@@ -588,11 +588,11 @@ invariant in M7 asserts it.
 
 ### Task 4: MSI, Intel and AM4 (11 rows)
 
-- [ ] **S1** — protocol M for all 11 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 11 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 `mb-msi-z890-tomahawk` · `mb-msi-z790-edge` · `mb-msi-z790-tomahawk` ·
 `mb-msi-b760-pro` · `mb-msi-b760m-mortar` · `mb-msi-b760m-e` ·

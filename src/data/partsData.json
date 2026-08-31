@@ -144,7 +144,20 @@
     "ramType": "DDR5",
     "tdp": 15,
     "specs": {
-      "chipset": "Z790"
+      "chipset": "Z790",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7200,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 7,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": true },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -186,7 +199,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B760"
+      "chipset": "B760",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 6800,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": true }
+      ]
     }
   },
   {
@@ -324,7 +347,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B760"
+      "chipset": "B760",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7200,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": true }
+      ]
     }
   },
   {
@@ -3137,7 +3170,19 @@
     "ramType": "DDR5",
     "tdp": 15,
     "specs": {
-      "chipset": "Z890"
+      "chipset": "Z890",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 9200,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": true }
+      ]
     }
   },
   {
@@ -5368,7 +5413,16 @@
     "ramType": "DDR4",
     "tdp": 12,
     "specs": {
-      "chipset": "B760"
+      "chipset": "B760",
+      "ramSlots": 2,
+      "maxRamGb": 64,
+      "maxRamSpeed": 4800,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": true }
+      ]
     }
   },
   {
@@ -6728,7 +6782,16 @@
     "ramType": "DDR4",
     "tdp": 8,
     "specs": {
-      "chipset": "H610"
+      "chipset": "H610",
+      "ramSlots": 2,
+      "maxRamGb": 64,
+      "maxRamSpeed": 4600,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 3, "sata": true }
+      ]
     }
   },
   {
@@ -6756,7 +6819,19 @@
     "ramType": "DDR5",
     "tdp": 14,
     "specs": {
-      "chipset": "Z790"
+      "chipset": "Z790",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7200,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 7,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": true },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -9130,7 +9205,16 @@
     "tdp": 12,
     "legacy": true,
     "specs": {
-      "chipset": "B450"
+      "chipset": "B450",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 4133,
+      "pcieGen": 3,
+      "epsConnectors": 1,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 3, "sata": true }
+      ]
     }
   },
   {
@@ -9190,7 +9274,17 @@
     "tdp": 12,
     "legacy": true,
     "specs": {
-      "chipset": "B550"
+      "chipset": "B550",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 4866,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": true },
+        { "pcieGen": 3, "sata": false }
+      ]
     }
   },
   {
@@ -9220,7 +9314,17 @@
     "tdp": 12,
     "legacy": true,
     "specs": {
-      "chipset": "B460"
+      "chipset": "B460",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 2933,
+      "pcieGen": 3,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 3, "sata": true },
+        { "pcieGen": 3, "sata": false }
+      ]
     }
   },
   {
@@ -9265,7 +9369,18 @@
     "tdp": 12,
     "legacy": true,
     "specs": {
-      "chipset": "Z590"
+      "chipset": "Z590",
+      "ramSlots": 4,
+      "maxRamGb": 128,
+      "maxRamSpeed": 5333,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 3, "sata": true },
+        { "pcieGen": 3, "sata": true }
+      ]
     }
   },
   {
