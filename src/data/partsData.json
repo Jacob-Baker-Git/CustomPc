@@ -16,7 +16,7 @@
   {
     "id": "mb-msi-x670e",
     "category": "motherboard",
-    "name": "MSI MAG X670E Tomahawk",
+    "name": "MSI MAG X670E Tomahawk WiFi",
     "brand": "MSI",
     "price": 279.99,
     "socket": "AM5",
@@ -24,7 +24,19 @@
     "ramType": "DDR5",
     "tdp": 12,
     "specs": {
-      "chipset": "X670E"
+      "chipset": "X670E",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7800,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -80,7 +92,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B650"
+      "chipset": "B650",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7600,
+      "pcieGen": 4,
+      "epsConnectors": 2,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -220,7 +242,19 @@
     "ramType": "DDR5",
     "tdp": 14,
     "specs": {
-      "chipset": "X670E"
+      "chipset": "X670E",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7800,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -3501,7 +3535,19 @@
     "ramType": "DDR5",
     "tdp": 15,
     "specs": {
-      "chipset": "B850"
+      "chipset": "B850",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 8400,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -4121,7 +4167,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B650"
+      "chipset": "B650",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7200,
+      "pcieGen": 4,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -4545,7 +4601,17 @@
     "ramType": "DDR5",
     "tdp": 14,
     "specs": {
-      "chipset": "B650"
+      "chipset": "B650",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7200,
+      "pcieGen": 4,
+      "epsConnectors": 2,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -5344,7 +5410,19 @@
     "ramType": "DDR5",
     "tdp": 15,
     "specs": {
-      "chipset": "X870E"
+      "chipset": "X870E",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 8400,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -6497,7 +6575,16 @@
     "ramType": "DDR5",
     "tdp": 8,
     "specs": {
-      "chipset": "A620"
+      "chipset": "A620",
+      "ramSlots": 2,
+      "maxRamGb": 128,
+      "maxRamSpeed": 6800,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -6525,7 +6612,18 @@
     "ramType": "DDR5",
     "tdp": 12,
     "specs": {
-      "chipset": "B650"
+      "chipset": "B650",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 7800,
+      "pcieGen": 4,
+      "epsConnectors": 2,
+      "sataPorts": 6,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -6553,7 +6651,17 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B650"
+      "chipset": "B650",
+      "ramSlots": 2,
+      "maxRamGb": 128,
+      "maxRamSpeed": 7200,
+      "pcieGen": 4,
+      "epsConnectors": 1,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 4, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {
@@ -6581,7 +6689,18 @@
     "ramType": "DDR5",
     "tdp": 11,
     "specs": {
-      "chipset": "B850"
+      "chipset": "B850",
+      "ramSlots": 4,
+      "maxRamGb": 256,
+      "maxRamSpeed": 8200,
+      "pcieGen": 5,
+      "epsConnectors": 2,
+      "sataPorts": 4,
+      "m2Slots": [
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 5, "sata": false },
+        { "pcieGen": 4, "sata": false }
+      ]
     }
   },
   {

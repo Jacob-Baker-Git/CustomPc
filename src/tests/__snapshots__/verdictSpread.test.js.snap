@@ -4,53 +4,53 @@ exports[`verdict spread > matches the committed snapshot (cramped) 1`] = `
 {
   "case": {
     "blocked": 8,
-    "ok": 0,
-    "unverified": 51,
+    "ok": 51,
+    "unverified": 0,
   },
   "cooler": {
     "blocked": 10,
-    "ok": 0,
-    "unverified": 43,
+    "ok": 21,
+    "unverified": 22,
   },
   "cpu": {
     "blocked": 54,
-    "ok": 0,
-    "unverified": 26,
+    "ok": 26,
+    "unverified": 0,
   },
   "fans": {
     "blocked": 0,
-    "ok": 0,
-    "unverified": 46,
+    "ok": 46,
+    "unverified": 0,
   },
   "gpu": {
     "blocked": 0,
-    "ok": 0,
-    "unverified": 79,
+    "ok": 79,
+    "unverified": 0,
   },
   "motherboard": {
     "blocked": 57,
-    "ok": 0,
-    "unverified": 13,
+    "ok": 4,
+    "unverified": 9,
   },
   "paste": {
     "blocked": 0,
-    "ok": 0,
-    "unverified": 15,
+    "ok": 15,
+    "unverified": 0,
   },
   "psu": {
     "blocked": 0,
-    "ok": 0,
-    "unverified": 53,
+    "ok": 53,
+    "unverified": 0,
   },
   "ram": {
     "blocked": 17,
-    "ok": 0,
-    "unverified": 35,
+    "ok": 35,
+    "unverified": 0,
   },
   "storage": {
     "blocked": 0,
-    "ok": 0,
-    "unverified": 52,
+    "ok": 52,
+    "unverified": 0,
   },
 }
 `;
@@ -84,8 +84,8 @@ exports[`verdict spread > matches the committed snapshot (roomy) 1`] = `
   },
   "motherboard": {
     "blocked": 37,
-    "ok": 0,
-    "unverified": 33,
+    "ok": 11,
+    "unverified": 22,
   },
   "paste": {
     "blocked": 0,
