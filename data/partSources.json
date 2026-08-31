@@ -1377,5 +1377,35 @@
     "wattage": { "url": "https://pcpartpicker.com/product/43JgXL/", "checkedOn": "2026-08-31" },
     "rating": { "url": "https://pcpartpicker.com/product/43JgXL/", "checkedOn": "2026-08-31" },
     "connectors": { "url": "https://pcpartpicker.com/product/43JgXL/", "checkedOn": "2026-08-31", "note": "C1000 (2022), PA-0G1BB-US - the generation NZXT named \"C1000\". NZXT has 404'd its pre-ATX-3.1 C-series pages; only the current ATX 3.1 and Core lines remain" }
+  },
+  "psu-asus-tuf-750": {
+    "wattage": { "url": "https://www.asus.com/motherboards-components/power-supply-units/tuf-gaming/tuf-gaming-750g/techspec/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.asus.com/motherboards-components/power-supply-units/tuf-gaming/tuf-gaming-750g/techspec/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.asus.com/motherboards-components/power-supply-units/tuf-gaming/tuf-gaming-750g/techspec/", "checkedOn": "2026-08-31", "note": "CPU 4+4-pin x 2; \"PCI-E 16-pin x 1 (both PSU & component side)\" - ASUS says PSU side explicitly, so the 12V-2x6 is native; PCI-E 8-pin x 3. Two of those three heads come from the bundled 16-pin-to-8-pin-8-pin cable, which occupies the same 16-pin port as the native cable, so the 3 PCIe heads and the 12V-2x6 are not all available at once. Recorded together per the Corsair precedent, because no single GPU needs both" }
+  },
+  "psu-asus-tuf-850": {
+    "wattage": { "url": "https://www.asus.com/motherboards-components/power-supply-units/tuf-gaming/tuf-gaming-850g/techspec/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.asus.com/motherboards-components/power-supply-units/tuf-gaming/tuf-gaming-850g/techspec/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://www.asus.com/motherboards-components/power-supply-units/tuf-gaming/tuf-gaming-850g/techspec/", "checkedOn": "2026-08-31", "note": "Identical connector set to the 750 W. CPU 4+4-pin x 2; \"PCI-E 16-pin x 1 (both PSU & component side)\"; PCI-E 8-pin x 3, two of them from the 16-pin-to-8-pin-8-pin cable sharing that port" }
+  },
+  "psu-asus-thor-1200": {
+    "wattage": { "url": "https://rog.asus.com/power-supply-units/rog-thor/rog-thor-1200p2-gaming-model/spec/", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://rog.asus.com/power-supply-units/rog-thor/rog-thor-1200p2-gaming-model/spec/", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://rog.asus.com/power-supply-units/rog-thor/rog-thor-1200p2-gaming-model/spec/", "checkedOn": "2026-08-31", "note": "NO native 12V-2x6. ASUS lists \"PCI-E 16-pin x 1 (component side)\" - component side only, where the TUF units say \"both PSU & component side\", so this one is a cable off the PCIe ports, not a port. PCPartPicker also reports 0 native 12VHPWR. CPU 4+4-pin x 2, PCI-E 6+2-pin x 8" }
+  },
+  "psu-thermaltake-smart-500": {
+    "wattage": { "url": "https://www.thermaltake.com/smart-500w.html", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.thermaltake.com/smart-500w.html", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/Wbhj4D/", "checkedOn": "2026-08-31", "note": "PS-SPD-0500NPCWUS-W. Re-pointed from \"Smart BX1 500W\", which does not exist: Thermaltake's BX1 line is 450/550/650/750 W and thermaltake.com/smart-bx1-500w.html is a 404. The real 500 W unit is the plain Smart, rated 80 PLUS Standard rather than Bronze. Thermaltake publishes no CPU/EPS row at all in its spec table, so the EPS count cannot come from the maker" }
+  },
+  "psu-thermaltake-gf3-750": {
+    "wattage": { "url": "https://www.thermaltake.com/toughpower-gf3-750w-gold-tt-premium-edition.html", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.thermaltake.com/toughpower-gf3-750w-gold-tt-premium-edition.html", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/hCGbt6/", "checkedOn": "2026-08-31", "note": "PS-TPD-0750FNFAGx-4. Thermaltake publishes no CPU/EPS row at all in its spec table, so the EPS count cannot come from the maker; PCPartPicker gives EPS 8-pin 2 and agrees with Thermaltake on the rest, whose spec row reads \"PCIe 6+2Pin X 4 / PCIe 12+4Pin X 1\"" }
+  },
+  "psu-thermaltake-gf-a3-850": {
+    "wattage": { "url": "https://www.thermaltake.com/toughpower-gf-a3-gold-850w-tt-premium-edition.html", "checkedOn": "2026-08-31" },
+    "rating": { "url": "https://www.thermaltake.com/toughpower-gf-a3-gold-850w-tt-premium-edition.html", "checkedOn": "2026-08-31" },
+    "connectors": { "url": "https://pcpartpicker.com/product/vNcgXL/", "checkedOn": "2026-08-31", "note": "PS-TPD-0850FNFAGT-H. Thermaltake publishes no CPU/EPS row at all in its spec table, so the EPS count cannot come from the maker; PCPartPicker gives EPS 8-pin 2 and agrees with Thermaltake, whose rows read \"PCI-E 6+2PIN 4\" and \"PCIE 12+4PIN 1(450W)\"" }
   }
 }

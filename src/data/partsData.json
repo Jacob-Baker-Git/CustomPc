@@ -1635,13 +1635,14 @@
   {
     "id": "psu-thermaltake-smart-500",
     "category": "psu",
-    "name": "Thermaltake Smart BX1 500W",
+    "name": "Thermaltake Smart 500W",
     "brand": "Thermaltake",
     "price": 44.99,
     "wattage": 500,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Bronze"
+      "rating": "80+ White",
+      "connectors": { "pcie8": 2, "eps8": 1 }
     }
   },
   {
@@ -3713,7 +3714,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -4797,7 +4799,8 @@
     "wattage": 750,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 3, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -5528,7 +5531,8 @@
     "wattage": 1200,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Platinum"
+      "rating": "80+ Platinum",
+      "connectors": { "pcie8": 8, "eps8": 2 }
     }
   },
   {
@@ -7208,7 +7212,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 4, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
@@ -7220,7 +7225,8 @@
     "wattage": 850,
     "tdp": 0,
     "specs": {
-      "rating": "80+ Gold"
+      "rating": "80+ Gold",
+      "connectors": { "pcie8": 3, "eps8": 2, "12vhpwr": 1 }
     }
   },
   {
