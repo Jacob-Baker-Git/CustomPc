@@ -695,11 +695,11 @@ if the page names it explicitly (`B760M DS3H DDR4`).
 
 ### Task 9: ASRock, all 13 rows
 
-- [ ] **S1** — protocol M for all 13 rows below
-- [ ] **S2** — write the data and the eleven source entries per board
-- [ ] **S3** — invariants, lint, full unit suite
-- [ ] **S4** — re-record the verdict snapshot and read the diff
-- [ ] **S5** — commit, naming every corrected value
+- [x] **S1** — protocol M for all 13 rows below
+- [x] **S2** — write the data and the eleven source entries per board
+- [x] **S3** — invariants, lint, full unit suite
+- [x] **S4** — re-record the verdict snapshot and read the diff
+- [x] **S5** — commit, naming every corrected value
 
 `mb-asrock-z890-taichi` · `mb-asrock-z890-pro-rs` · `mb-asrock-z790-pro` ·
 `mb-asrock-b860m-x` · `mb-asrock-b760m-pro-rs-d4` · `mb-asrock-h610m` ·
