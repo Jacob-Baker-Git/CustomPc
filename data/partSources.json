@@ -2407,5 +2407,45 @@
     "sockets": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
     "type": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02" },
     "radiatorMm": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 240 from the maker's own product name. Cites the BLACK ARGB V2, the only Frozen Notte 240 still listed" }
+  },
+  "cooler-arctic-freezer-36": {
+    "sockets": { "url": "https://www.arctic.de/en/Freezer-36", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4 only" },
+    "type": { "url": "https://www.arctic.de/en/Freezer-36", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.arctic.de/en/Freezer-36", "checkedOn": "2026-09-02", "note": "Dimensions 104 (L) x 126 (W) x 159 (H) mm" }
+  },
+  "cooler-arctic-freezer-36-argb": {
+    "sockets": { "url": "https://www.arctic.de/en/Freezer-36-A-RGB-Black/ACFRE00124A", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4 only. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Freezer-36-A-RGB-Black/ACFRE00124A", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.arctic.de/en/Freezer-36-A-RGB-Black/ACFRE00124A", "checkedOn": "2026-09-02", "note": "Dimensions 104 (L) x 126 (W) x 159 (H) mm. Cites the BLACK variant; the catalogue row is the generic product" }
+  },
+  "cooler-arctic-freezer-50": {
+    "sockets": { "url": "https://www.arctic.de/en/Freezer-50/ACFRE00065A", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1700/1200/115X/2066/2011(-3) and AM5/AM4. LGA1851 REMOVED: Arctic does not list it, and its LGA1851 guarantee covers only the Liquid Freezer III and III Pro lines. Retail listings do claim LGA1851 - the mount is shared with LGA1700 - but the maker does not, and this product is end-of-life" },
+    "type": { "url": "https://www.arctic.de/en/Freezer-50/ACFRE00065A", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.arctic.de/en/Freezer-50/ACFRE00065A", "checkedOn": "2026-09-02", "note": "Size & Weight gives Height 166 mm (L148 x W149.5). Was 165" }
+  },
+  "cooler-arctic-lf2-240": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700/1200/115X/2011-3/2066 and AM5/AM4; LGA1200 is native on this older cooler, needing no kit" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B", "checkedOn": "2026-09-02", "note": "Radiator 277 (L) x 120 (W) x 38 (H) mm; nominal 240" }
+  },
+  "cooler-arctic-lf3-240": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A", "checkedOn": "2026-09-02", "note": "Radiator 277 (L) x 120 (W) x 38 (H) mm; nominal 240" }
+  },
+  "cooler-arctic-lf3-280": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-280/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-280/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-280/", "checkedOn": "2026-09-02", "note": "Radiator 317 (L) x 138 (W) x 38 (H) mm; nominal 280" }
+  },
+  "cooler-arctic-lf3-360": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-360/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-360/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-360/", "checkedOn": "2026-09-02", "note": "Radiator 398 (L) x 120 (W) x 38 (H) mm; nominal 360" }
+  },
+  "cooler-arctic-lf3-420": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02", "note": "Radiator 458 (L) x 138 (W) x 38 (H) mm; nominal 420" }
   }
 }

@@ -8,9 +8,9 @@ exports[`verdict spread > matches the committed snapshot (cramped) 1`] = `
     "unverified": 0,
   },
   "cooler": {
-    "blocked": 15,
-    "ok": 22,
-    "unverified": 16,
+    "blocked": 18,
+    "ok": 24,
+    "unverified": 11,
   },
   "cpu": {
     "blocked": 54,
@@ -64,8 +64,8 @@ exports[`verdict spread > matches the committed snapshot (roomy) 1`] = `
   },
   "cooler": {
     "blocked": 0,
-    "ok": 37,
-    "unverified": 16,
+    "ok": 42,
+    "unverified": 11,
   },
   "cpu": {
     "blocked": 54,
