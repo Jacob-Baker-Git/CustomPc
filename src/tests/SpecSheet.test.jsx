@@ -34,10 +34,15 @@ describe('SpecSheet insights', () => {
     expect(insight(psu)).toMatch(/~595W/) // 850 * 0.7
   })
 
+  // ⚠️ Reads the height out of the catalogue rather than naming a number. This
+  // test used to hardcode 165mm and broke the moment the NH-D15 was researched
+  // to Noctua's published 168mm - which proved nothing about the insight, only
+  // that a figure had changed. What it is actually for is that an air cooler
+  // gets a height and an AIO gets a radiator.
   it('cooler insight distinguishes AIO from air height limits', () => {
     const air = partsData.find((p) => p.id === 'cooler-noctua-d15')
     const aio = partsData.find((p) => p.id === 'cooler-arctic-lf3-360')
-    expect(insight(air)).toMatch(/165mm/)
+    expect(insight(air)).toMatch(new RegExp(`${air.specs.height}mm`))
     expect(insight(aio)).toMatch(/radiator/i)
   })
 })

@@ -2447,5 +2447,35 @@
     "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
     "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02" },
     "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02", "note": "Radiator 458 (L) x 138 (W) x 38 (H) mm; nominal 420" }
+  },
+  "cooler-noctua-d15": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-d15/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-d15/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-d15/specifications", "checkedOn": "2026-09-02", "note": "Total height and \"height with fan(s)\" both 168 mm; the fin stack alone is 160 mm. Was 165, which is Noctua's older published figure and is still widely quoted by retailers. At 168 it no longer clears a 165 mm case limit" }
+  },
+  "cooler-noctua-d15-chromax": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-d15-chromax-black/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-d15-chromax-black/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-d15-chromax-black/specifications", "checkedOn": "2026-09-02", "note": "Total height and \"height with fan(s)\" both 168 mm; the fin stack alone is 160 mm. Was 165, which is Noctua's older published figure and is still widely quoted by retailers. At 168 it no longer clears a 165 mm case limit" }
+  },
+  "cooler-noctua-d15-g2": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-d15-g2/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count. LGA1200 ADDED: the catalogue row omitted it" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-d15-g2/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-d15-g2/specifications", "checkedOn": "2026-09-02", "note": "Total height 168 mm, with and without fans - the G2's fans do not sit above the fin stack" }
+  },
+  "cooler-noctua-u12s": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-u12s-redux/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-u12s-redux/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-u12s-redux/specifications", "checkedOn": "2026-09-02", "note": "Total height 158 mm, with and without fans" }
+  },
+  "cooler-noctua-u9s": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-u9s/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-u9s/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-u9s/specifications", "checkedOn": "2026-09-02", "note": "Total height 125 mm, with and without fans" }
+  },
+  "cooler-noctua-l9a": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5 and nothing else. AM4 REMOVED: the NH-L9a-AM5 is the AM5-specific model and Noctua sells a separate NH-L9a-AM4 for AM4" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02", "note": "Total height 37 mm with the fan; the heatsink alone is 23 mm" }
   }
 }
