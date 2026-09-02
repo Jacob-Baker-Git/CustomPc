@@ -2890,7 +2890,7 @@
     "tdp": 4,
     "specs": {
       "type": "Air",
-      "height": 155
+      "height": 162
     }
   },
   {
@@ -5422,7 +5422,8 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -6273,7 +6274,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 155
+      "height": 148
     }
   },
   {
@@ -8594,7 +8595,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 154
+      "height": 158
     }
   },
   {
@@ -8746,13 +8747,14 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
     "id": "cooler-tr-notte-240",
     "category": "cooler",
-    "name": "Thermalright Notte 240 ARGB AIO",
+    "name": "Thermalright Frozen Notte 240 ARGB AIO",
     "brand": "Thermalright",
     "price": 54.99,
     "sockets": [
@@ -8765,7 +8767,8 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiator": "240mm",
+      "radiatorMm": 240
     }
   },
   {

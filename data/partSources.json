@@ -2362,5 +2362,50 @@
     "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02" },
     "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02" },
     "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02", "note": "Radiator 402 x 120 x 27 mm; nominal 360" }
+  },
+  "cooler-thermalright-pa120": {
+    "sockets": { "url": "https://www.thermalright.com/product/peerless-assassin-120-se/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/peerless-assassin-120-se/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/peerless-assassin-120-se/", "checkedOn": "2026-09-02", "note": "Heatsink L125 x W110 x H155 mm" }
+  },
+  "cooler-thermalright-phantom-120": {
+    "sockets": { "url": "https://www.thermalright.com/product/phantom-spirit-120-se/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/phantom-spirit-120-se/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/phantom-spirit-120-se/", "checkedOn": "2026-09-02", "note": "Heatsink L110 x W125 x H154 mm" }
+  },
+  "cooler-thermalright-pa120-digital": {
+    "sockets": { "url": "https://www.thermalright.com/product/peerless-assassin-120-digital-black/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/peerless-assassin-120-digital-black/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/peerless-assassin-120-digital-black/", "checkedOn": "2026-09-02", "note": "Heatsink L125 x W110 x H162 mm. The maker labels it \"(Without Fan)\", but the fans sit below the tower top, so 162 is the installation height - confirmed as the overall height by the retail listing. Was 155, the plain PA 120 SE figure. Cites the BLACK variant; the catalogue row is the generic product" }
+  },
+  "cooler-thermalright-ax120r": {
+    "sockets": { "url": "https://www.thermalright.com/product/assassin-x-120-refined-se/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/assassin-x-120-refined-se/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/assassin-x-120-refined-se/", "checkedOn": "2026-09-02", "note": "Heatsink L120 x W46 x H148 mm. \"AX120 R SE\" is Thermalright's Assassin X 120 Refined SE. Was 155" }
+  },
+  "cooler-tr-peerless-140": {
+    "sockets": { "url": "https://www.thermalright.com/product/peerless-assassin-140-black/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/peerless-assassin-140-black/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/peerless-assassin-140-black/", "checkedOn": "2026-09-02", "note": "Heatsink L140 x W132 x H158 mm. Cites the BLACK variant; the catalogue row is the generic product" }
+  },
+  "cooler-tr-frost-commander": {
+    "sockets": { "url": "https://www.thermalright.com/product/frost-commander-140/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/frost-commander-140/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/frost-commander-140/", "checkedOn": "2026-09-02", "note": "Heatsink L140 x W121 x H158 mm. Was 154" }
+  },
+  "cooler-thermalright-frozen-notte-360": {
+    "sockets": { "url": "https://www.thermalright.com/product/frozen-notte-360-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/frozen-notte-360-black-argb-v2/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.thermalright.com/product/frozen-notte-360-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 360 from the maker's own product name. Cites the BLACK ARGB V2, the only Frozen Notte 360 still listed" }
+  },
+  "cooler-tr-aqua-elite-360": {
+    "sockets": { "url": "https://www.thermalright.com/product/aqua-elite-360-argb/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/aqua-elite-360-argb/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.thermalright.com/product/aqua-elite-360-argb/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 360 from the maker's own product name" }
+  },
+  "cooler-tr-notte-240": {
+    "sockets": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 240 from the maker's own product name. Cites the BLACK ARGB V2, the only Frozen Notte 240 still listed" }
   }
 }
