@@ -285,3 +285,57 @@ Tasks 1, 9 and 10 are the code changes above, giving ten tasks in all.
   rule reads them). Later projects, in that order.
 - `npm run catalog:push` and any push to `origin`. Both are the user's to run,
   and until the push happens none of this reaches a user.
+
+---
+
+## ✅ Outcome — DONE, 53/53, ratchet on
+
+Executed on `feat/cooler-catalogue-research`, ten commits. Full detail in
+`docs/superpowers/plans/2026-09-02-cooler-catalogue-research.md`.
+
+**Every success criterion met**, and the headline one is the catalogue's:
+**zero `unverified` parts in either reference build, across all ten
+categories** — 20 of 20 snapshot rows. There is no longer a part in the
+catalogue the compatibility engine cannot judge.
+
+**29 of 53 rows carried a wrong value** — 2 names, 11 heights, 16 socket lists
+— plus the 22 radiator sizes that did not exist at all.
+
+### What the spec got right
+
+- **`radiatorMm` as the nominal size** was correct and load-bearing. Makers
+  publish 277 mm for a "240" and 398 mm for a "360"; a measured length would
+  have matched nothing and blocked every AIO.
+- **Conditional variants** were the right shape. The flat-list alternative
+  would have passed a cooler carrying neither size field, and the test written
+  for that case is the one that pins it.
+- **Requiring `type`** paid off in an unexpected way — see below.
+- **The bracket rule** turned out to be the single most load-bearing decision:
+  it decided **eleven of the sixteen** socket corrections, and it resolved
+  differently per maker. Arctic's LGA1200 kit is a EUR 9.99 purchase (excluded);
+  Noctua's are free on request (included).
+
+### What the spec got wrong
+
+1. **The verdict snapshot moves at every AIO tranche**, not once at the end.
+2. **Five production sites read `specs.radiator`, not four.** `partQuality.js`
+   held a second private copy of the parser, and deleting the string without it
+   would have flattened the AIO quality ranking to a tie **with no test
+   failing**.
+3. **`type` could not join the global `RESEARCHED_KEYS`.** Cases carry
+   `specs.type` too — "Mid Tower", an unmeasured label — so the global list
+   failed against 59 cases. It needed a per-category companion, the same split
+   `RATCHETED_KEYS` already required.
+
+### Correcting this spec's own correction
+
+This spec noted that the motherboard spec was wrong to say rules 3 and 5 report
+`unverified` for an unresearched drive or kit. That stands: **17 RAM kits are
+still refused today on numbers nobody checked**, and storage still passes all
+52 on an unverified `storageType`. Those two projects are next, and rule 4's
+design — demanding a *new* field rather than trusting an old one — is the model
+they should follow. It is the reason coolers were honest about their gap.
+
+🛑 **Not shipped.** The branch is unmerged and unpushed, and the catalogue is
+now out of step with Supabase. `npm run catalog:push -- --apply`, the merge and
+the push are all the user's to run.

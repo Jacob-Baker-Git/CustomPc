@@ -39,7 +39,6 @@ const SPEC_LABELS = {
   pack: 'Fans in pack',
   rpm: 'Max RPM',
   rgb: 'RGB',
-  radiator: 'Radiator',
   height: 'Height (mm)',
   efficiency: 'Efficiency',
   rating: 'Efficiency rating',
@@ -120,7 +119,7 @@ export function insight(part) {
         `and air coolers to ${part.maxCoolerHeight}mm.`
     case 'cooler':
       return s.type === 'AIO'
-        ? `${s.radiator} liquid cooler, so it needs a matching radiator mount in the case, but no height limit. Fits ${(part.sockets ?? []).join(', ')}.`
+        ? `${s.radiatorMm}mm liquid cooler, so it needs a matching radiator mount in the case, but no height limit. Fits ${(part.sockets ?? []).join(', ')}.`
         : `${s.height}mm tall air cooler, so check case clearance. Fits ${(part.sockets ?? []).join(', ')}.`
     case 'fans':
       return `${s.count > 1 ? `${s.count}-pack of ` : ''}${s.size} fans${s.rgb ? ' with RGB' : ''}. ` +

@@ -207,7 +207,7 @@ export function compatibilityNotes(part, parts = []) {
         add('Capacity', `Around ${capacity} W of heat, comfortable with ${handled} of the ${cpus.length} processors here.`)
       }
       add('Case clearance', s.type === 'AIO'
-        ? `A ${s.radiator ?? ''} radiator needs a case with matching mounts.`.replace('  ', ' ')
+        ? `A ${s.radiatorMm}mm radiator needs a case with matching mounts.`
         : `${height} mm tall, so ${caseFits} of ${cases.length} cases have the clearance.`)
       break
     }

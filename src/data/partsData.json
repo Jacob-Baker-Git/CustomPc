@@ -2646,7 +2646,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 165
+      "height": 168
     }
   },
   {
@@ -2659,32 +2659,30 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 162
+      "height": 163
     }
   },
   {
     "id": "cooler-cm-hyper212",
     "category": "cooler",
-    "name": "Cooler Master Hyper 212",
+    "name": "Cooler Master Hyper 212 Black Edition",
     "brand": "Cooler Master",
     "price": 29.99,
     "sockets": [
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 4,
     "specs": {
       "type": "Air",
-      "height": 158
+      "height": 159
     }
   },
   {
@@ -2703,7 +2701,7 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -2716,13 +2714,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
-      "LGA1200"
+      "LGA1851"
     ],
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -2792,13 +2789,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -2817,7 +2813,7 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -2836,7 +2832,7 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -2846,8 +2842,7 @@
     "brand": "Noctua",
     "price": 44.99,
     "sockets": [
-      "AM5",
-      "AM4"
+      "AM5"
     ],
     "tdp": 3,
     "specs": {
@@ -2865,7 +2860,6 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 4,
@@ -2890,7 +2884,7 @@
     "tdp": 4,
     "specs": {
       "type": "Air",
-      "height": 155
+      "height": 162
     }
   },
   {
@@ -2928,7 +2922,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 165
+      "height": 168
     }
   },
   {
@@ -2941,13 +2935,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
-      "LGA1200"
+      "LGA1851"
     ],
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -2960,13 +2953,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -2985,7 +2977,7 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -4258,7 +4250,7 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "280mm"
+      "radiatorMm": 280
     }
   },
   {
@@ -4271,12 +4263,13 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851"
+      "LGA1851",
+      "LGA1200"
     ],
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -4289,6 +4282,7 @@
       "AM5",
       "AM4",
       "LGA1700",
+      "LGA1851",
       "LGA1200"
     ],
     "tdp": 4,
@@ -4307,7 +4301,8 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851"
+      "LGA1851",
+      "LGA1200"
     ],
     "tdp": 6,
     "specs": {
@@ -4681,7 +4676,7 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -5421,7 +5416,7 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -5434,12 +5429,13 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851"
+      "LGA1851",
+      "LGA1200"
     ],
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -6272,7 +6268,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 155
+      "height": 148
     }
   },
   {
@@ -8593,7 +8589,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 154
+      "height": 158
     }
   },
   {
@@ -8612,7 +8608,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 155
+      "height": 156
     }
   },
   {
@@ -8631,7 +8627,7 @@
     "tdp": 6,
     "specs": {
       "type": "Air",
-      "height": 160
+      "height": 162
     }
   },
   {
@@ -8644,8 +8640,7 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
-      "LGA1200"
+      "LGA1851"
     ],
     "tdp": 5,
     "specs": {
@@ -8663,13 +8658,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 6,
     "specs": {
       "type": "Air",
-      "height": 165
+      "height": 166
     }
   },
   {
@@ -8682,7 +8676,6 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 5,
@@ -8707,7 +8700,7 @@
     "tdp": 6,
     "specs": {
       "type": "Air",
-      "height": 154
+      "height": 157
     }
   },
   {
@@ -8745,13 +8738,13 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
     "id": "cooler-tr-notte-240",
     "category": "cooler",
-    "name": "Thermalright Notte 240 ARGB AIO",
+    "name": "Thermalright Frozen Notte 240 ARGB AIO",
     "brand": "Thermalright",
     "price": 54.99,
     "sockets": [
@@ -8764,7 +8757,7 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiatorMm": 240
     }
   },
   {
@@ -8783,7 +8776,7 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -8802,7 +8795,7 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -8815,13 +8808,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
-      "LGA1200"
+      "LGA1851"
     ],
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "420mm"
+      "radiatorMm": 420
     }
   },
   {
@@ -8840,7 +8832,7 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "280mm"
+      "radiatorMm": 280
     }
   },
   {
@@ -8859,7 +8851,7 @@
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -8878,7 +8870,7 @@
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {
@@ -8897,7 +8889,7 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiatorMm": 360
     }
   },
   {

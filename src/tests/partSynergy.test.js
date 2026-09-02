@@ -10,7 +10,7 @@ describe('helpers', () => {
     expect(systemDrawW({ cpu: cpuBig, gpu: gpuBig })).toBe(620)
   })
   it('coolerCapacityW rates AIO by radiator and air by height', () => {
-    expect(coolerCapacityW({ specs: { type: 'AIO', radiator: '360mm' } })).toBe(320)
+    expect(coolerCapacityW({ specs: { type: 'AIO', radiatorMm: 360 } })).toBe(320)
     expect(coolerCapacityW({ specs: { type: 'Air', height: 165 } })).toBe(220)
     expect(coolerCapacityW({ specs: {} })).toBe(0)
   })

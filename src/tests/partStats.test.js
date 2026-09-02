@@ -72,7 +72,7 @@ describe('derived part stats', () => {
   })
 
   it('rates a bigger radiator as more cooling capacity than a short tower', () => {
-    const aio360 = { category: 'cooler', price: 90, specs: { type: 'AIO', radiator: '360mm' } }
+    const aio360 = { category: 'cooler', price: 90, specs: { type: 'AIO', radiatorMm: 360 } }
     const lowTower = { category: 'cooler', price: 20, specs: { type: 'Air', height: 120 } }
     expect(coolerCapacity(aio360)).toBeGreaterThan(coolerCapacity(lowTower))
   })
@@ -88,16 +88,28 @@ describe('derived part stats', () => {
     const coolers = ofCat('cooler')
     expect(coolers.length).toBeGreaterThan(0)
     for (const c of coolers) {
-      expect(coolerCapacity(c), `${c.id} (${c.specs.type} ${c.specs.radiator ?? c.specs.height})`)
+      expect(coolerCapacity(c), `${c.id} (${c.specs.type} ${c.specs.radiatorMm ?? c.specs.height})`)
         .toBe(coolerCapacityW(c))
+    }
+  })
+
+  // The string this replaced was never verified against a maker's page, and it
+  // drove the only cooling-capacity figure on the site. One stored fact now.
+  it('reads every AIO capacity off the researched radiatorMm', () => {
+    const aios = ofCat('cooler').filter((c) => c.specs.type === 'AIO')
+    expect(aios.length).toBe(22)
+    for (const c of aios) {
+      expect(c.specs.radiator, `${c.id} still carries the unverified string`).toBeUndefined()
+      expect(typeof c.specs.radiatorMm, `${c.id} radiatorMm`).toBe('number')
+      expect(coolerCapacityW(c), `${c.id}`).toBeGreaterThan(0)
     }
   })
 
   // The ladder used to flatten everything at or above 360mm into one rung, so
   // the largest radiator in the catalogue claimed no more cooling than a 360.
   it('does not flatten a 420mm radiator into the 360mm rung', () => {
-    const aio420 = { category: 'cooler', price: 150, specs: { type: 'AIO', radiator: '420mm' } }
-    const aio360 = { category: 'cooler', price: 90, specs: { type: 'AIO', radiator: '360mm' } }
+    const aio420 = { category: 'cooler', price: 150, specs: { type: 'AIO', radiatorMm: 420 } }
+    const aio360 = { category: 'cooler', price: 90, specs: { type: 'AIO', radiatorMm: 360 } }
     expect(coolerCapacity(aio420)).toBeGreaterThan(coolerCapacity(aio360))
   })
 

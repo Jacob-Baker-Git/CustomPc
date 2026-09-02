@@ -2317,5 +2317,270 @@
     "epsConnectors": { "url": "https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp#Specification", "checkedOn": "2026-08-31" },
     "sataPorts": { "url": "https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp#Specification", "checkedOn": "2026-08-31" },
     "m2Slots": { "url": "https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp#Specification", "checkedOn": "2026-08-31", "note": "🛑 M2_2 IS SATA-ONLY - \"supports type 2230/2242/2260/2280 SATA3 6.0 Gb/s mode\" and no PCIe at all - so its pcieGen is 0. That is the fact, not an unknown: the slot takes a SATA M.2 and cannot take an NVMe drive. M2_1 is Ultra M.2 PCIe Gen3x4" }
+  },
+  "cooler-deepcool-ak620": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml", "checkedOn": "2026-09-02", "note": "Also lists LGA2066/2011-v3/2011, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 129 x 138 x 160 mm" }
+  },
+  "cooler-deepcool-ak400": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 127 x 97 x 155 mm" }
+  },
+  "cooler-deepcool-ak500": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-High-Performance-CPU-Cooler-1851-1700-AM5/2022/16040.shtml", "checkedOn": "2026-09-02", "note": "Also lists LGA2066/2011-v3/2011, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-High-Performance-CPU-Cooler-1851-1700-AM5/2022/16040.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-High-Performance-CPU-Cooler-1851-1700-AM5/2022/16040.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 127 x 117 x 158 mm" }
+  },
+  "cooler-deepcool-ag400": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler-1851-1700-AM5/2024/15898.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler-1851-1700-AM5/2024/15898.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler-1851-1700-AM5/2024/15898.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 125 x 92 x 150 mm" }
+  },
+  "cooler-deepcool-ak400-digital": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Digital-CPU-Cooler-With-A-Status-Display-1851-1700-AM5/2024/17203.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Digital-CPU-Cooler-With-A-Status-Display-1851-1700-AM5/2024/17203.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Digital-CPU-Cooler-With-A-Status-Display-1851-1700-AM5/2024/17203.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 126 x 97 x 156 mm assembled; the bare tower is 152 mm. Was 155, the plain AK400 figure" }
+  },
+  "cooler-deepcool-ak620-digital": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml", "checkedOn": "2026-09-02", "note": "Also lists LGA2066/2011-v3/2011, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 129 x 138 x 162 mm. Was 160, the plain AK620 figure" }
+  },
+  "cooler-deepcool-ls520": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LS520-SE-Liquid-CPU-Cooler-1851-1700-AM5/2022/16453.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LS520-SE-Liquid-CPU-Cooler-1851-1700-AM5/2022/16453.shtml", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LS520-SE-Liquid-CPU-Cooler-1851-1700-AM5/2022/16453.shtml", "checkedOn": "2026-09-02", "note": "Radiator 282 x 120 x 27 mm; nominal 240" }
+  },
+  "cooler-deepcool-le720": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE720-360mm-Liquid-CPU-Cooler-1851-1700-AM5/2024/16983.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE720-360mm-Liquid-CPU-Cooler-1851-1700-AM5/2024/16983.shtml", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE720-360mm-Liquid-CPU-Cooler-1851-1700-AM5/2024/16983.shtml", "checkedOn": "2026-09-02", "note": "Radiator 402 x 120 x 27 mm; nominal 360" }
+  },
+  "cooler-deepcool-mystique-360": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02", "note": "Radiator 402 x 120 x 27 mm; nominal 360" }
+  },
+  "cooler-thermalright-pa120": {
+    "sockets": { "url": "https://www.thermalright.com/product/peerless-assassin-120-se/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/peerless-assassin-120-se/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/peerless-assassin-120-se/", "checkedOn": "2026-09-02", "note": "Heatsink L125 x W110 x H155 mm" }
+  },
+  "cooler-thermalright-phantom-120": {
+    "sockets": { "url": "https://www.thermalright.com/product/phantom-spirit-120-se/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/phantom-spirit-120-se/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/phantom-spirit-120-se/", "checkedOn": "2026-09-02", "note": "Heatsink L110 x W125 x H154 mm" }
+  },
+  "cooler-thermalright-pa120-digital": {
+    "sockets": { "url": "https://www.thermalright.com/product/peerless-assassin-120-digital-black/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/peerless-assassin-120-digital-black/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/peerless-assassin-120-digital-black/", "checkedOn": "2026-09-02", "note": "Heatsink L125 x W110 x H162 mm. The maker labels it \"(Without Fan)\", but the fans sit below the tower top, so 162 is the installation height - confirmed as the overall height by the retail listing. Was 155, the plain PA 120 SE figure. Cites the BLACK variant; the catalogue row is the generic product" }
+  },
+  "cooler-thermalright-ax120r": {
+    "sockets": { "url": "https://www.thermalright.com/product/assassin-x-120-refined-se/", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.thermalright.com/product/assassin-x-120-refined-se/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/assassin-x-120-refined-se/", "checkedOn": "2026-09-02", "note": "Heatsink L120 x W46 x H148 mm. \"AX120 R SE\" is Thermalright's Assassin X 120 Refined SE. Was 155" }
+  },
+  "cooler-tr-peerless-140": {
+    "sockets": { "url": "https://www.thermalright.com/product/peerless-assassin-140-black/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/peerless-assassin-140-black/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/peerless-assassin-140-black/", "checkedOn": "2026-09-02", "note": "Heatsink L140 x W132 x H158 mm. Cites the BLACK variant; the catalogue row is the generic product" }
+  },
+  "cooler-tr-frost-commander": {
+    "sockets": { "url": "https://www.thermalright.com/product/frost-commander-140/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/frost-commander-140/", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.thermalright.com/product/frost-commander-140/", "checkedOn": "2026-09-02", "note": "Heatsink L140 x W121 x H158 mm. Was 154" }
+  },
+  "cooler-thermalright-frozen-notte-360": {
+    "sockets": { "url": "https://www.thermalright.com/product/frozen-notte-360-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/frozen-notte-360-black-argb-v2/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.thermalright.com/product/frozen-notte-360-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 360 from the maker's own product name. Cites the BLACK ARGB V2, the only Frozen Notte 360 still listed" }
+  },
+  "cooler-tr-aqua-elite-360": {
+    "sockets": { "url": "https://www.thermalright.com/product/aqua-elite-360-argb/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/aqua-elite-360-argb/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.thermalright.com/product/aqua-elite-360-argb/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 360 from the maker's own product name" }
+  },
+  "cooler-tr-notte-240": {
+    "sockets": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Also lists LGA2011/2066 and FM1/FM2/FM2+/AM2/AM2+/AM3/AM3+, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.thermalright.com/product/frozen-notte-240-black-argb-v2/", "checkedOn": "2026-09-02", "note": "Thermalright publishes no radiator dimensions, only the material; nominal 240 from the maker's own product name. Cites the BLACK ARGB V2, the only Frozen Notte 240 still listed" }
+  },
+  "cooler-arctic-freezer-36": {
+    "sockets": { "url": "https://www.arctic.de/en/Freezer-36", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4 only" },
+    "type": { "url": "https://www.arctic.de/en/Freezer-36", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.arctic.de/en/Freezer-36", "checkedOn": "2026-09-02", "note": "Dimensions 104 (L) x 126 (W) x 159 (H) mm" }
+  },
+  "cooler-arctic-freezer-36-argb": {
+    "sockets": { "url": "https://www.arctic.de/en/Freezer-36-A-RGB-Black/ACFRE00124A", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4 only. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Freezer-36-A-RGB-Black/ACFRE00124A", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.arctic.de/en/Freezer-36-A-RGB-Black/ACFRE00124A", "checkedOn": "2026-09-02", "note": "Dimensions 104 (L) x 126 (W) x 159 (H) mm. Cites the BLACK variant; the catalogue row is the generic product" }
+  },
+  "cooler-arctic-freezer-50": {
+    "sockets": { "url": "https://www.arctic.de/en/Freezer-50/ACFRE00065A", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1700/1200/115X/2066/2011(-3) and AM5/AM4. LGA1851 REMOVED: Arctic does not list it, and its LGA1851 guarantee covers only the Liquid Freezer III and III Pro lines. Retail listings do claim LGA1851 - the mount is shared with LGA1700 - but the maker does not, and this product is end-of-life" },
+    "type": { "url": "https://www.arctic.de/en/Freezer-50/ACFRE00065A", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.arctic.de/en/Freezer-50/ACFRE00065A", "checkedOn": "2026-09-02", "note": "Size & Weight gives Height 166 mm (L148 x W149.5). Was 165" }
+  },
+  "cooler-arctic-lf2-240": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700/1200/115X/2011-3/2066 and AM5/AM4; LGA1200 is native on this older cooler, needing no kit" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B", "checkedOn": "2026-09-02", "note": "Radiator 277 (L) x 120 (W) x 38 (H) mm; nominal 240" }
+  },
+  "cooler-arctic-lf3-240": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-240/ACFRE00134A", "checkedOn": "2026-09-02", "note": "Radiator 277 (L) x 120 (W) x 38 (H) mm; nominal 240" }
+  },
+  "cooler-arctic-lf3-280": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-280/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-280/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-280/", "checkedOn": "2026-09-02", "note": "Radiator 317 (L) x 138 (W) x 38 (H) mm; nominal 280" }
+  },
+  "cooler-arctic-lf3-360": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-360/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-360/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-360/", "checkedOn": "2026-09-02", "note": "Radiator 398 (L) x 120 (W) x 38 (H) mm; nominal 360" }
+  },
+  "cooler-arctic-lf3-420": {
+    "sockets": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02", "note": "Arctic lists LGA1851/1700 and AM5/AM4. LGA1200 REMOVED: LGA1200 needs Arctic's Intel LGA1200/115X Mounting Kit, sold separately at EUR 9.99 MSRP, so it does not count under the bracket rule. See https://www.arctic.de/us/blog/compatibility-upgrade-for-liquid-freezer-iii-and-freezer-36" },
+    "type": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.arctic.de/en/Liquid-Freezer-III-420/", "checkedOn": "2026-09-02", "note": "Radiator 458 (L) x 138 (W) x 38 (H) mm; nominal 420" }
+  },
+  "cooler-noctua-d15": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-d15/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-d15/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-d15/specifications", "checkedOn": "2026-09-02", "note": "Total height and \"height with fan(s)\" both 168 mm; the fin stack alone is 160 mm. Was 165, which is Noctua's older published figure and is still widely quoted by retailers. At 168 it no longer clears a 165 mm case limit" }
+  },
+  "cooler-noctua-d15-chromax": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-d15-chromax-black/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-d15-chromax-black/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-d15-chromax-black/specifications", "checkedOn": "2026-09-02", "note": "Total height and \"height with fan(s)\" both 168 mm; the fin stack alone is 160 mm. Was 165, which is Noctua's older published figure and is still widely quoted by retailers. At 168 it no longer clears a 165 mm case limit" }
+  },
+  "cooler-noctua-d15-g2": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-d15-g2/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count. LGA1200 ADDED: the catalogue row omitted it" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-d15-g2/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-d15-g2/specifications", "checkedOn": "2026-09-02", "note": "Total height 168 mm, with and without fans - the G2's fans do not sit above the fin stack" }
+  },
+  "cooler-noctua-u12s": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-u12s-redux/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-u12s-redux/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-u12s-redux/specifications", "checkedOn": "2026-09-02", "note": "Total height 158 mm, with and without fans" }
+  },
+  "cooler-noctua-u9s": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-u9s/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5, AM4, LGA1700, LGA1851, LGA1954, LGA1156, LGA1155, LGA1150, LGA1151, LGA1200. LGA1954 is outside the catalogue vocabulary and 115x folds into LGA1200. Noctua supplies SecuFirm2 kits free on request, so all listed sockets count" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-u9s/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-u9s/specifications", "checkedOn": "2026-09-02", "note": "Total height 125 mm, with and without fans" }
+  },
+  "cooler-noctua-l9a": {
+    "sockets": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5 and nothing else. AM4 REMOVED: the NH-L9a-AM5 is the AM5-specific model and Noctua sells a separate NH-L9a-AM4 for AM4" },
+    "type": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02", "note": "Total height 37 mm with the fan; the heatsink alone is 23 mm" }
+  },
+  "cooler-bequiet-drp4": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/1378", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4. LGA1851 REMOVED: this cooler predates it and be quiet! does not list it. 2066/2011 and 115x fold away - 115x into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/1378", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/1378", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 121 x 136 x 163 mm, and the heatsink table agrees at 163. Was 162, a truncation of the widely quoted 162.8. Delisted from the current line-up; the numeric-id page is still live" }
+  },
+  "cooler-bequiet-pure-rock-2": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/1841", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4. LGA1851 REMOVED: this cooler predates it and be quiet! does not list it. 2066/2011 and 115x fold away - 115x into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/1841", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/1841", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 62 x 121 x 155 mm. Delisted from the current line-up; the numeric-id page is still live" }
+  },
+  "cooler-bequiet-shadow-rock-3": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/1743", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4. LGA1851 REMOVED: this cooler predates it and be quiet! does not list it. 2066/2011 and 115x fold away - 115x into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/1743", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/1743", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 96 x 130 x 163 mm. Delisted from the current line-up; the numeric-id page is still live" }
+  },
+  "cooler-bequiet-dark-rock-5": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/4466", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/1150/1151/1155 and AMD AM5/AM4; 115x folds into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/4466", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/4466", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 145 x 136 x 168 mm. ⚠️ The id says dark-rock-5 but the row names the Dark Rock PRO 5, and be quiet! sells both as separate coolers. The name matches this page; the id is kept as it is" }
+  },
+  "cooler-bequiet-dark-rock-elite": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/4468", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/1150/1151/1155 and AMD AM5/AM4; 115x folds into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/4468", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/4468", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 145 x 136 x 168 mm" }
+  },
+  "cooler-bequiet-pure-loop-2-280": {
+    "sockets": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4" },
+    "type": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02", "note": "Radiator incl. fan 317 x 140 x 52 mm; nominal 280" }
+  },
+  "cooler-cm-hyper212": {
+    "sockets": { "url": "https://www.coolermaster.com/en-global/products/hyper-212-black-edition-with-lga1700.html", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1700/1200/1156/1155/1151/1150/1366 and AMD AM5*/AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1. LGA1851 REMOVED: not listed. ⚠️ AM5 carries the maker's note that its bracket \"is included from a certain point in production\" and may otherwise be obtained through the CM store; kept, because current production includes it" },
+    "type": { "url": "https://www.coolermaster.com/en-global/products/hyper-212-black-edition-with-lga1700.html", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.coolermaster.com/en-global/products/hyper-212-black-edition-with-lga1700.html", "checkedOn": "2026-09-02", "note": "Dimensions 123 x 77 x 158.8 mm, stored as 159 (rounded up, the safe direction for a clearance check). Was 158. ⚠️ The row named the \"Hyper 212\" FAMILY; this is the Black Edition with LGA1700, RR-212S-20PK-R2. The plain Black Edition RR-212S-20PK-R1 lists no LGA1700, LGA1200, LGA1851 or AM5 at all" }
+  },
+  "cooler-cm-hyper-622-halo": {
+    "sockets": { "url": "https://www.coolermaster.com/en-global/products/hyper-622-halo-black.html", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4" },
+    "type": { "url": "https://www.coolermaster.com/en-global/products/hyper-622-halo-black.html", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.coolermaster.com/en-global/products/hyper-622-halo-black.html", "checkedOn": "2026-09-02", "note": "Dimensions 125 x 137 x 157 mm (RR-D6BB-20PA-R1). Was 154. Cites the Black variant; the catalogue row is the generic product" }
+  },
+  "cooler-cm-ml240l": {
+    "sockets": { "url": "https://legacy.coolermaster.com/en-global/products/masterliquid-ml240l-v2-rgb/", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1851/1700/1200/2066/2011-v3/2011/1151/1150/1155/1156 and AMD AM5/AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1" },
+    "type": { "url": "https://legacy.coolermaster.com/en-global/products/masterliquid-ml240l-v2-rgb/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://legacy.coolermaster.com/en-global/products/masterliquid-ml240l-v2-rgb/", "checkedOn": "2026-09-02", "note": "Radiator 277 x 119.6 x 27.2 mm; Cooler Master's own data labels it \"240:\". Nominal 240. ⚠️ Delisted from the current site - coolermaster.com 404s for this SKU (MLW-D24M-A18PC-R2) and only the legacy page carries it" }
+  },
+  "cooler-cm-360l-core": {
+    "sockets": { "url": "https://www.coolermaster.com/en-global/products/masterliquid-360l-core-argb.html", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1" },
+    "type": { "url": "https://www.coolermaster.com/en-global/products/masterliquid-360l-core-argb.html", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.coolermaster.com/en-global/products/masterliquid-360l-core-argb.html", "checkedOn": "2026-09-02", "note": "Radiator 394 x 119.6 x 27.2 mm, and the page carries an explicit \"Radiator Size 360\" field (MLW-D36M-A18PZ-R1)" }
+  },
+  "cooler-corsair-h100i": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler-cw-9060046-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1700/1200/1150/1151/1155/1156/1366/2011/2066 and AMD AM5/AM4/sTRX4/sTR4. LGA1851 REMOVED: Corsair does not list it. ⚠️ LGA1700 carries an asterisk that Corsair's own page truncates - \"*Intel LGA1700 is supported with purchase of CW-8960091 or CW\" - and is KEPT, because Corsair lists it as supported; the caveat is recorded, not resolved" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler-cw-9060046-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler-cw-9060046-ww", "checkedOn": "2026-09-02", "note": "Radiator 277 x 120 x 27 mm, and the page carries an explicit \"Radiator Size 240mm\" field (CW-9060046-WW)" }
+  },
+  "cooler-corsair-h150i": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler-cw-9060048-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1700/1200/1150/1151/1155/1156/1366/2011/2066 and AMD AM5/AM4/sTRX4/sTR4. LGA1851 REMOVED: Corsair does not list it. ⚠️ LGA1700 carries an asterisk that Corsair's own page truncates - \"*Intel LGA1700 is supported with purchase of CW-8960091 or CW\" - and is KEPT, because Corsair lists it as supported; the caveat is recorded, not resolved" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler-cw-9060048-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler-cw-9060048-ww", "checkedOn": "2026-09-02", "note": "The page carries an explicit \"Radiator Size 360mm\" field (CW-9060048-WW)" }
+  },
+  "cooler-corsair-nautilus-360": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060089-ww/nautilus-360-rs-liquid-cpu-cooler-cw-9060089-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1851, Intel 1700, AMD AM5, AMD AM4 and nothing else - exactly the four the row already carried" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060089-ww/nautilus-360-rs-liquid-cpu-cooler-cw-9060089-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060089-ww/nautilus-360-rs-liquid-cpu-cooler-cw-9060089-ww", "checkedOn": "2026-09-02", "note": "Corsair publishes no radiator dimensions for this model; nominal 360 from the maker's own product name (CW-9060089-WW)" }
+  },
+  "cooler-corsair-link-h150i": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1851/1700/1200/1150/1151/1155/1156 and AMD AM5/AM4" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02", "note": "Radiator 397 x 120 x 27 mm; nominal 360 (CW-9061003-WW)" }
+  },
+  "cooler-nzxt-kraken-240": {
+    "sockets": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "NZXT lists Intel LGA 1851/1700/1200/115X and AMD AM5/AM4, plus TR4/sTRX4 with the Threadripper bracket NOT included - dropped, and outside the catalogue vocabulary in any case. NZXT's support KB adds that every NZXT cooler with LGA1700 support takes LGA1851 with no new bracket. LGA1200 ADDED: the row omitted a socket NZXT lists" },
+    "type": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "Radiator 275 x 123 x 30 mm; nominal 240" }
+  },
+  "cooler-nzxt-kraken-360": {
+    "sockets": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "NZXT lists Intel LGA 1851/1700/1200/115X and AMD AM5/AM4, plus TR4/sTRX4 with the Threadripper bracket NOT included - dropped, and outside the catalogue vocabulary in any case. NZXT's support KB adds that every NZXT cooler with LGA1700 support takes LGA1851 with no new bracket" },
+    "type": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "Radiator 394 x 121 x 30 mm; nominal 360" }
+  },
+  "cooler-nzxt-kraken-elite-360": {
+    "sockets": { "url": "https://support.nzxt.com/hc/en-us/articles/47306825106459-Kraken-Elite-2024-Specs", "checkedOn": "2026-09-02", "note": "NZXT lists Intel LGA 1851/1700/1200/115X and AMD AM5/AM4, plus TR4/sTRX4 with the Threadripper bracket NOT included - dropped, and outside the catalogue vocabulary in any case. NZXT's support KB adds that every NZXT cooler with LGA1700 support takes LGA1851 with no new bracket" },
+    "type": { "url": "https://support.nzxt.com/hc/en-us/articles/47306825106459-Kraken-Elite-2024-Specs", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://support.nzxt.com/hc/en-us/articles/47306825106459-Kraken-Elite-2024-Specs", "checkedOn": "2026-09-02", "note": "Radiator 401 x 120 x 27 mm; nominal 360" }
+  },
+  "cooler-lianli-galahad2-360": {
+    "sockets": { "url": "https://lian-li.com/product/galahad-ii-trinity/", "checkedOn": "2026-09-02", "note": "Lian Li lists Intel LGA 1851/1700/1200/115x and AMD AM5/AM4. LGA1200 ADDED: the row omitted a socket Lian Li lists" },
+    "type": { "url": "https://lian-li.com/product/galahad-ii-trinity/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://lian-li.com/product/galahad-ii-trinity/", "checkedOn": "2026-09-02", "note": "Radiator 397.5 x 119.2 x 27 mm for the 360 (GA2T36B/W); the same table gives 277.5 x 119.2 x 27 for the 240. Nominal 360" }
+  },
+  "cooler-scythe-fuma-3": {
+    "sockets": { "url": "https://www.scytheus.com/fuma-3", "checkedOn": "2026-09-02", "note": "Scythe lists Intel LGA 1851/1700/115x/1200/2011(v3)/2066 and AMD AM5/AM4; 2011/2066 are outside the catalogue vocabulary and 115x folds into LGA1200" },
+    "type": { "url": "https://www.scytheus.com/fuma-3", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.scytheus.com/fuma-3", "checkedOn": "2026-09-02", "note": "Dimension (w/Fan) W138 x D128 x H154 mm (SCFM-3000)" }
+  },
+  "cooler-scythe-mugen-6": {
+    "sockets": { "url": "https://www.scytheus.com/mugen6", "checkedOn": "2026-09-02", "note": "Scythe lists Intel LGA 1851/1700/115x/1200/2011/2066 and AMD AM5/AM4; 2011/2066 are outside the catalogue vocabulary and 115x folds into LGA1200" },
+    "type": { "url": "https://www.scytheus.com/mugen6", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.scytheus.com/mugen6", "checkedOn": "2026-09-02", "note": "Dimension (w/Fan) W132 x D106 x H154 mm (SCMG-6000). ⚠️ Third-party listings give 154.5; Scythe's own table says 154, and the maker wins" }
+  },
+  "cooler-idcooling-se214xt": {
+    "sockets": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "ID-Cooling lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4. LGA1851 ADDED: the row omitted a socket ID-Cooling lists" },
+    "type": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "Overall Dimension 124 x 72 x 150 mm. ⚠️ The SE-214-XT BLACK is a different SKU at 151 mm; this row is the plain SE-214-XT" }
   }
 }

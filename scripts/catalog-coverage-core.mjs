@@ -40,6 +40,23 @@ export const EXPECTED = {
     ],
     optional: [],
   },
+  // ⚠️ THE FIRST CATEGORY WHOSE REQUIRED LIST DEPENDS ON THE PART. An air
+  // cooler owes its height; an AIO owes its radiator size. The split in the
+  // data is already clean - all 31 air rows carry `height` and no radiator,
+  // all 22 AIO rows the reverse - so a flat list with both marked `optional`
+  // would pass a cooler carrying NEITHER. That is a gap, not a fact.
+  //
+  // `type` is required rather than assumed because it selects WHICH RULE RUNS:
+  // compatibility.js skips the height check for anything typed AIO, and rule 4
+  // in specRules.js skips anything not typed AIO. A mislabelled cooler is
+  // checked by neither rule and blocks nothing.
+  cooler: {
+    variants: [
+      { when: (p) => p.specs?.type === 'AIO', required: ['sockets', 'type', 'radiatorMm'] },
+      { when: (p) => p.specs?.type === 'Air', required: ['sockets', 'type', 'height'] },
+    ],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.
@@ -63,6 +80,11 @@ export const RATCHETED_KEYS = {
   // `chipset` is absent too: EXPECTED requires it, so it is re-verified, but no
   // rule blocks on it and no future board should owe it provenance.
   motherboard: ['socket', 'formFactor', 'ramType'],
+  // `sockets` is the only top-level field on a cooler that any rule reads, and
+  // it blocks in FOUR directions in compatibility.js. `tdp` is absent for the
+  // same reason it is absent for a motherboard: the 2-5 W is the app's own
+  // estimate of fan and pump draw, which no maker publishes.
+  cooler: ['sockets'],
 }
 
 // Every "<id>.<field>" in a verified category that carries a value but no source.
@@ -90,25 +112,44 @@ const isResearched = (part, sources, key) => {
   return hasField(part, key)
 }
 
+// The fields THIS part owes. A flat category answers the same list for every
+// row; a variant category answers by the part's own type. `null` means no
+// variant matched - an unclassifiable part, which can never be verified.
+export function requiredFor(spec, part) {
+  if (!spec.variants) return spec.required
+  return spec.variants.find((v) => v.when(part))?.required ?? null
+}
+
 export function coverageFor(category, parts, sources) {
   const spec = EXPECTED[category]
   if (!spec) return null
 
   const rows = parts.filter((p) => p.category === category)
+  const required = spec.variants
+    ? [...new Set(spec.variants.flatMap((v) => v.required))]
+    : spec.required
+
   const fields = {}
-  for (const key of [...spec.required, ...spec.optional]) {
+  for (const key of [...required, ...spec.optional]) {
     let present = 0
     let sourced = 0
+    let applies = 0
     for (const part of rows) {
+      const owed = requiredFor(spec, part)
+      // A key this part does not owe is not counted against it, so a variant
+      // category reports `height 31/31` rather than a misleading `31/53`.
+      if (owed && !owed.includes(key) && !spec.optional.includes(key)) continue
+      applies++
       if (hasField(part, key)) present++
       if (isResearched(part, sources, key)) sourced++
     }
-    fields[key] = { present, sourced, optional: spec.optional.includes(key) }
+    fields[key] = { present, sourced, applies, optional: spec.optional.includes(key) }
   }
 
-  const verified = rows.filter((part) =>
-    spec.required.every((key) => isResearched(part, sources, key))
-  ).length
+  const verified = rows.filter((part) => {
+    const owed = requiredFor(spec, part)
+    return owed !== null && owed.every((key) => isResearched(part, sources, key))
+  }).length
 
   return { category, total: rows.length, verified, fields }
 }
