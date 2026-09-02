@@ -2477,5 +2477,35 @@
     "sockets": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02", "note": "Noctua lists AM5 and nothing else. AM4 REMOVED: the NH-L9a-AM5 is the AM5-specific model and Noctua sells a separate NH-L9a-AM4 for AM4" },
     "type": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02" },
     "height": { "url": "https://www.noctua.at/en/products/nh-l9a-am5/specifications", "checkedOn": "2026-09-02", "note": "Total height 37 mm with the fan; the heatsink alone is 23 mm" }
+  },
+  "cooler-bequiet-drp4": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/1378", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4. LGA1851 REMOVED: this cooler predates it and be quiet! does not list it. 2066/2011 and 115x fold away - 115x into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/1378", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/1378", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 121 x 136 x 163 mm, and the heatsink table agrees at 163. Was 162, a truncation of the widely quoted 162.8. Delisted from the current line-up; the numeric-id page is still live" }
+  },
+  "cooler-bequiet-pure-rock-2": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/1841", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4. LGA1851 REMOVED: this cooler predates it and be quiet! does not list it. 2066/2011 and 115x fold away - 115x into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/1841", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/1841", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 62 x 121 x 155 mm. Delisted from the current line-up; the numeric-id page is still live" }
+  },
+  "cooler-bequiet-shadow-rock-3": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/1743", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4. LGA1851 REMOVED: this cooler predates it and be quiet! does not list it. 2066/2011 and 115x fold away - 115x into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/1743", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/1743", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 96 x 130 x 163 mm. Delisted from the current line-up; the numeric-id page is still live" }
+  },
+  "cooler-bequiet-dark-rock-5": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/4466", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/1150/1151/1155 and AMD AM5/AM4; 115x folds into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/4466", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/4466", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 145 x 136 x 168 mm. ⚠️ The id says dark-rock-5 but the row names the Dark Rock PRO 5, and be quiet! sells both as separate coolers. The name matches this page; the id is kept as it is" }
+  },
+  "cooler-bequiet-dark-rock-elite": {
+    "sockets": { "url": "https://www.bequiet.com/en/cpucooler/4468", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/1150/1151/1155 and AMD AM5/AM4; 115x folds into LGA1200" },
+    "type": { "url": "https://www.bequiet.com/en/cpucooler/4468", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.bequiet.com/en/cpucooler/4468", "checkedOn": "2026-09-02", "note": "Overall dimensions without mounting material 145 x 136 x 168 mm" }
+  },
+  "cooler-bequiet-pure-loop-2-280": {
+    "sockets": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4" },
+    "type": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02", "note": "Radiator incl. fan 317 x 140 x 52 mm; nominal 280" }
   }
 }

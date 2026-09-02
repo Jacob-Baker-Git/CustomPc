@@ -2659,13 +2659,12 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 162
+      "height": 163
     }
   },
   {
@@ -2865,7 +2864,6 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 4,
@@ -8684,7 +8682,6 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 5,
@@ -8846,7 +8843,8 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "280mm"
+      "radiator": "280mm",
+      "radiatorMm": 280
     }
   },
   {
