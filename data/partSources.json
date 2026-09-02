@@ -2507,5 +2507,45 @@
     "sockets": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02", "note": "be quiet! lists Intel 1851/1700/1200/2066/1150/1151/1155/2011(-3) and AMD AM5/AM4" },
     "type": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02" },
     "radiatorMm": { "url": "https://www.bequiet.com/en/watercooler/3744", "checkedOn": "2026-09-02", "note": "Radiator incl. fan 317 x 140 x 52 mm; nominal 280" }
+  },
+  "cooler-cm-hyper212": {
+    "sockets": { "url": "https://www.coolermaster.com/en-global/products/hyper-212-black-edition-with-lga1700.html", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1700/1200/1156/1155/1151/1150/1366 and AMD AM5*/AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1. LGA1851 REMOVED: not listed. ⚠️ AM5 carries the maker's note that its bracket \"is included from a certain point in production\" and may otherwise be obtained through the CM store; kept, because current production includes it" },
+    "type": { "url": "https://www.coolermaster.com/en-global/products/hyper-212-black-edition-with-lga1700.html", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.coolermaster.com/en-global/products/hyper-212-black-edition-with-lga1700.html", "checkedOn": "2026-09-02", "note": "Dimensions 123 x 77 x 158.8 mm, stored as 159 (rounded up, the safe direction for a clearance check). Was 158. ⚠️ The row named the \"Hyper 212\" FAMILY; this is the Black Edition with LGA1700, RR-212S-20PK-R2. The plain Black Edition RR-212S-20PK-R1 lists no LGA1700, LGA1200, LGA1851 or AM5 at all" }
+  },
+  "cooler-cm-hyper-622-halo": {
+    "sockets": { "url": "https://www.coolermaster.com/en-global/products/hyper-622-halo-black.html", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4" },
+    "type": { "url": "https://www.coolermaster.com/en-global/products/hyper-622-halo-black.html", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.coolermaster.com/en-global/products/hyper-622-halo-black.html", "checkedOn": "2026-09-02", "note": "Dimensions 125 x 137 x 157 mm (RR-D6BB-20PA-R1). Was 154. Cites the Black variant; the catalogue row is the generic product" }
+  },
+  "cooler-cm-ml240l": {
+    "sockets": { "url": "https://legacy.coolermaster.com/en-global/products/masterliquid-ml240l-v2-rgb/", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1851/1700/1200/2066/2011-v3/2011/1151/1150/1155/1156 and AMD AM5/AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1" },
+    "type": { "url": "https://legacy.coolermaster.com/en-global/products/masterliquid-ml240l-v2-rgb/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://legacy.coolermaster.com/en-global/products/masterliquid-ml240l-v2-rgb/", "checkedOn": "2026-09-02", "note": "Radiator 277 x 119.6 x 27.2 mm; Cooler Master's own data labels it \"240:\". Nominal 240. ⚠️ Delisted from the current site - coolermaster.com 404s for this SKU (MLW-D24M-A18PC-R2) and only the legacy page carries it" }
+  },
+  "cooler-cm-360l-core": {
+    "sockets": { "url": "https://www.coolermaster.com/en-global/products/masterliquid-360l-core-argb.html", "checkedOn": "2026-09-02", "note": "Cooler Master lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1" },
+    "type": { "url": "https://www.coolermaster.com/en-global/products/masterliquid-360l-core-argb.html", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.coolermaster.com/en-global/products/masterliquid-360l-core-argb.html", "checkedOn": "2026-09-02", "note": "Radiator 394 x 119.6 x 27.2 mm, and the page carries an explicit \"Radiator Size 360\" field (MLW-D36M-A18PZ-R1)" }
+  },
+  "cooler-corsair-h100i": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler-cw-9060046-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1700/1200/1150/1151/1155/1156/1366/2011/2066 and AMD AM5/AM4/sTRX4/sTR4. LGA1851 REMOVED: Corsair does not list it. ⚠️ LGA1700 carries an asterisk that Corsair's own page truncates - \"*Intel LGA1700 is supported with purchase of CW-8960091 or CW\" - and is KEPT, because Corsair lists it as supported; the caveat is recorded, not resolved" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler-cw-9060046-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler-cw-9060046-ww", "checkedOn": "2026-09-02", "note": "Radiator 277 x 120 x 27 mm, and the page carries an explicit \"Radiator Size 240mm\" field (CW-9060046-WW)" }
+  },
+  "cooler-corsair-h150i": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler-cw-9060048-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1700/1200/1150/1151/1155/1156/1366/2011/2066 and AMD AM5/AM4/sTRX4/sTR4. LGA1851 REMOVED: Corsair does not list it. ⚠️ LGA1700 carries an asterisk that Corsair's own page truncates - \"*Intel LGA1700 is supported with purchase of CW-8960091 or CW\" - and is KEPT, because Corsair lists it as supported; the caveat is recorded, not resolved" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler-cw-9060048-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler-cw-9060048-ww", "checkedOn": "2026-09-02", "note": "The page carries an explicit \"Radiator Size 360mm\" field (CW-9060048-WW)" }
+  },
+  "cooler-corsair-nautilus-360": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060089-ww/nautilus-360-rs-liquid-cpu-cooler-cw-9060089-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1851, Intel 1700, AMD AM5, AMD AM4 and nothing else - exactly the four the row already carried" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060089-ww/nautilus-360-rs-liquid-cpu-cooler-cw-9060089-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060089-ww/nautilus-360-rs-liquid-cpu-cooler-cw-9060089-ww", "checkedOn": "2026-09-02", "note": "Corsair publishes no radiator dimensions for this model; nominal 360 from the maker's own product name (CW-9060089-WW)" }
+  },
+  "cooler-corsair-link-h150i": {
+    "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1851/1700/1200/1150/1151/1155/1156 and AMD AM5/AM4" },
+    "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02", "note": "Radiator 397 x 120 x 27 mm; nominal 360 (CW-9061003-WW)" }
   }
 }

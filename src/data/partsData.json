@@ -2670,20 +2670,19 @@
   {
     "id": "cooler-cm-hyper212",
     "category": "cooler",
-    "name": "Cooler Master Hyper 212",
+    "name": "Cooler Master Hyper 212 Black Edition",
     "brand": "Cooler Master",
     "price": 29.99,
     "sockets": [
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 4,
     "specs": {
       "type": "Air",
-      "height": 158
+      "height": 159
     }
   },
   {
@@ -2792,13 +2791,13 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiator": "240mm",
+      "radiatorMm": 240
     }
   },
   {
@@ -2836,7 +2835,8 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiator": "240mm",
+      "radiatorMm": 240
     }
   },
   {
@@ -2958,13 +2958,13 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851",
       "LGA1200"
     ],
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -4682,7 +4682,8 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -8706,7 +8707,7 @@
     "tdp": 6,
     "specs": {
       "type": "Air",
-      "height": 154
+      "height": 157
     }
   },
   {
@@ -8863,7 +8864,8 @@
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -8901,7 +8903,8 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
