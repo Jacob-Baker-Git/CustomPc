@@ -2547,5 +2547,40 @@
     "sockets": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02", "note": "Corsair lists Intel 1851/1700/1200/1150/1151/1155/1156 and AMD AM5/AM4" },
     "type": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02" },
     "radiatorMm": { "url": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9061003-ww/icue-link-h150i-rgb-aio-liquid-cpu-cooler-cw-9061003-ww", "checkedOn": "2026-09-02", "note": "Radiator 397 x 120 x 27 mm; nominal 360 (CW-9061003-WW)" }
+  },
+  "cooler-nzxt-kraken-240": {
+    "sockets": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "NZXT lists Intel LGA 1851/1700/1200/115X and AMD AM5/AM4, plus TR4/sTRX4 with the Threadripper bracket NOT included - dropped, and outside the catalogue vocabulary in any case. NZXT's support KB adds that every NZXT cooler with LGA1700 support takes LGA1851 with no new bracket. LGA1200 ADDED: the row omitted a socket NZXT lists" },
+    "type": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "Radiator 275 x 123 x 30 mm; nominal 240" }
+  },
+  "cooler-nzxt-kraken-360": {
+    "sockets": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "NZXT lists Intel LGA 1851/1700/1200/115X and AMD AM5/AM4, plus TR4/sTRX4 with the Threadripper bracket NOT included - dropped, and outside the catalogue vocabulary in any case. NZXT's support KB adds that every NZXT cooler with LGA1700 support takes LGA1851 with no new bracket" },
+    "type": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://support.nzxt.com/hc/en-us/articles/47207322896923-Kraken-2023-Specs", "checkedOn": "2026-09-02", "note": "Radiator 394 x 121 x 30 mm; nominal 360" }
+  },
+  "cooler-nzxt-kraken-elite-360": {
+    "sockets": { "url": "https://support.nzxt.com/hc/en-us/articles/47306825106459-Kraken-Elite-2024-Specs", "checkedOn": "2026-09-02", "note": "NZXT lists Intel LGA 1851/1700/1200/115X and AMD AM5/AM4, plus TR4/sTRX4 with the Threadripper bracket NOT included - dropped, and outside the catalogue vocabulary in any case. NZXT's support KB adds that every NZXT cooler with LGA1700 support takes LGA1851 with no new bracket" },
+    "type": { "url": "https://support.nzxt.com/hc/en-us/articles/47306825106459-Kraken-Elite-2024-Specs", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://support.nzxt.com/hc/en-us/articles/47306825106459-Kraken-Elite-2024-Specs", "checkedOn": "2026-09-02", "note": "Radiator 401 x 120 x 27 mm; nominal 360" }
+  },
+  "cooler-lianli-galahad2-360": {
+    "sockets": { "url": "https://lian-li.com/product/galahad-ii-trinity/", "checkedOn": "2026-09-02", "note": "Lian Li lists Intel LGA 1851/1700/1200/115x and AMD AM5/AM4. LGA1200 ADDED: the row omitted a socket Lian Li lists" },
+    "type": { "url": "https://lian-li.com/product/galahad-ii-trinity/", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://lian-li.com/product/galahad-ii-trinity/", "checkedOn": "2026-09-02", "note": "Radiator 397.5 x 119.2 x 27 mm for the 360 (GA2T36B/W); the same table gives 277.5 x 119.2 x 27 for the 240. Nominal 360" }
+  },
+  "cooler-scythe-fuma-3": {
+    "sockets": { "url": "https://www.scytheus.com/fuma-3", "checkedOn": "2026-09-02", "note": "Scythe lists Intel LGA 1851/1700/115x/1200/2011(v3)/2066 and AMD AM5/AM4; 2011/2066 are outside the catalogue vocabulary and 115x folds into LGA1200" },
+    "type": { "url": "https://www.scytheus.com/fuma-3", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.scytheus.com/fuma-3", "checkedOn": "2026-09-02", "note": "Dimension (w/Fan) W138 x D128 x H154 mm (SCFM-3000)" }
+  },
+  "cooler-scythe-mugen-6": {
+    "sockets": { "url": "https://www.scytheus.com/mugen6", "checkedOn": "2026-09-02", "note": "Scythe lists Intel LGA 1851/1700/115x/1200/2011/2066 and AMD AM5/AM4; 2011/2066 are outside the catalogue vocabulary and 115x folds into LGA1200" },
+    "type": { "url": "https://www.scytheus.com/mugen6", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.scytheus.com/mugen6", "checkedOn": "2026-09-02", "note": "Dimension (w/Fan) W132 x D106 x H154 mm (SCMG-6000). ⚠️ Third-party listings give 154.5; Scythe's own table says 154, and the maker wins" }
+  },
+  "cooler-idcooling-se214xt": {
+    "sockets": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "ID-Cooling lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4. LGA1851 ADDED: the row omitted a socket ID-Cooling lists" },
+    "type": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "Overall Dimension 124 x 72 x 150 mm. ⚠️ The SE-214-XT BLACK is a different SKU at 151 mm; this row is the plain SE-214-XT" }
   }
 }

@@ -2816,7 +2816,8 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -4271,12 +4272,14 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851"
+      "LGA1851",
+      "LGA1200"
     ],
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -4289,6 +4292,7 @@
       "AM5",
       "AM4",
       "LGA1700",
+      "LGA1851",
       "LGA1200"
     ],
     "tdp": 4,
@@ -5437,12 +5441,14 @@
       "AM5",
       "AM4",
       "LGA1700",
-      "LGA1851"
+      "LGA1851",
+      "LGA1200"
     ],
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiator": "240mm",
+      "radiatorMm": 240
     }
   },
   {
@@ -8884,7 +8890,8 @@
     "tdp": 10,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
