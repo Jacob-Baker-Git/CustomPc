@@ -385,7 +385,10 @@ Create `<scratchpad>/apply-tranche.mjs` — written once, reused by Tasks 3–8:
 // Applies one research tranche to both data files, in the repo's own JSON
 // style. Refuses to write unless house-json round-trips BOTH files first.
 import { readFileSync, writeFileSync } from 'node:fs'
-import { FILES, toFile, roundTripOk } from '../../scripts/house-json.mjs'
+// ⚠️ An ABSOLUTE file: URL. The scratchpad is not inside the repo, so a
+// relative '../../scripts/...' does not resolve. house-json itself reads
+// RELATIVE paths, so this script must still be RUN from the repo root.
+import { FILES, toFile, roundTripOk } from 'file:///C:/Users/jacob/IdeaProjects/CustomPc/scripts/house-json.mjs'
 
 // EDIT THIS PER TRANCHE. `specs` is merged into the part's existing specs;
 // `sources` is merged into that part's source entry. A field set to null is
@@ -448,7 +451,18 @@ Expected: tens of lines changed, not thousands. **A diff of 3236 lines means the
 npm run catalog:coverage && npm run test:run && npm run lint
 ```
 
-Expected: `cooler: 9/53 parts fully researched (17%)`, and PASS on both.
+Expected: `cooler: 9/53 parts fully researched (17%)`, lint clean, and **`verdictSpread` failing on two snapshots**.
+
+🛑 **THE SNAPSHOT MOVES AT EVERY TRANCHE CONTAINING AN AIO, not once at Task 10.** The moment a cooler gets a `radiatorMm`, rule 4 stops reporting `unverified` for it and returns a real verdict. Update it as part of the tranche and **read the diff before accepting it**:
+
+```bash
+npx vitest run src/tests/verdictSpread.test.js -u
+git diff src/tests/__snapshots__/verdictSpread.test.js.snap
+```
+
+⚠️ **Only the `cooler` rows may change.** Any other category moving means something unrelated broke — stop and find out why rather than accepting the snapshot.
+
+Check the movement makes physical sense against the two reference cases, whose researched support is `Q300L front [120,240] rear [120]` and `Torrent front/bottom [120,140,240,280,360,420]`. In this tranche the three DeepCool AIOs are a 240 and two 360s, so the cramped build gains **1 ok and 2 blocked** and the roomy build gains **3 ok** — which is exactly what landed.
 
 - [ ] **Step 5: Commit**
 
@@ -845,14 +859,16 @@ Expected: **FAIL**, naming that exact `<id>.sockets`. Restore the entry with `gi
 
 ⚠️ A ratchet that cannot fail is worth nothing. Do not skip this step.
 
-- [ ] **Step 4: Update the verdict snapshot**
+- [ ] **Step 4: Confirm the verdict snapshot is already at its final values**
+
+The snapshot was updated tranche by tranche as each AIO landed (see Task 2 Step 4), so by here it should need **no change at all**:
 
 ```bash
-npx vitest run src/tests/verdictSpread.test.js -u
-git diff src/tests/__snapshots__/verdictSpread.test.js.snap
+npx vitest run src/tests/verdictSpread.test.js
+git diff --exit-code src/tests/__snapshots__/verdictSpread.test.js.snap && echo "SNAPSHOT SETTLED"
 ```
 
-Expected: **`cooler.unverified` goes from 22 to 0 in both builds**, with those 22 redistributed into `ok` and `blocked`. Every other category's `unverified` was already 0 and must stay 0. Read the diff before accepting it: this is the headline outcome of the project, and a snapshot update is the one place a regression can be rubber-stamped.
+Expected: PASS and `SNAPSHOT SETTLED`, with **`cooler.unverified` at 0 in both builds** and every other category still 0. If it fails here, an AIO was missed — find it rather than re-recording the snapshot.
 
 - [ ] **Step 5: Run everything**
 

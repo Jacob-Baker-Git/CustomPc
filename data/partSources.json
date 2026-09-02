@@ -2317,5 +2317,50 @@
     "epsConnectors": { "url": "https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp#Specification", "checkedOn": "2026-08-31" },
     "sataPorts": { "url": "https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp#Specification", "checkedOn": "2026-08-31" },
     "m2Slots": { "url": "https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp#Specification", "checkedOn": "2026-08-31", "note": "🛑 M2_2 IS SATA-ONLY - \"supports type 2230/2242/2260/2280 SATA3 6.0 Gb/s mode\" and no PCIe at all - so its pcieGen is 0. That is the fact, not an unknown: the slot takes a SATA M.2 and cannot take an NVMe drive. M2_1 is Ultra M.2 PCIe Gen3x4" }
+  },
+  "cooler-deepcool-ak620": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml", "checkedOn": "2026-09-02", "note": "Also lists LGA2066/2011-v3/2011, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 129 x 138 x 160 mm" }
+  },
+  "cooler-deepcool-ak400": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 127 x 97 x 155 mm" }
+  },
+  "cooler-deepcool-ak500": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-High-Performance-CPU-Cooler-1851-1700-AM5/2022/16040.shtml", "checkedOn": "2026-09-02", "note": "Also lists LGA2066/2011-v3/2011, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-High-Performance-CPU-Cooler-1851-1700-AM5/2022/16040.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-High-Performance-CPU-Cooler-1851-1700-AM5/2022/16040.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 127 x 117 x 158 mm" }
+  },
+  "cooler-deepcool-ag400": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler-1851-1700-AM5/2024/15898.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler-1851-1700-AM5/2024/15898.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler-1851-1700-AM5/2024/15898.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 125 x 92 x 150 mm" }
+  },
+  "cooler-deepcool-ak400-digital": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Digital-CPU-Cooler-With-A-Status-Display-1851-1700-AM5/2024/17203.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Digital-CPU-Cooler-With-A-Status-Display-1851-1700-AM5/2024/17203.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Digital-CPU-Cooler-With-A-Status-Display-1851-1700-AM5/2024/17203.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 126 x 97 x 156 mm assembled; the bare tower is 152 mm. Was 155, the plain AK400 figure" }
+  },
+  "cooler-deepcool-ak620-digital": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml", "checkedOn": "2026-09-02", "note": "Also lists LGA2066/2011-v3/2011, outside the catalogue vocabulary" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml", "checkedOn": "2026-09-02" },
+    "height": { "url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml", "checkedOn": "2026-09-02", "note": "Product dimensions 129 x 138 x 162 mm. Was 160, the plain AK620 figure" }
+  },
+  "cooler-deepcool-ls520": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LS520-SE-Liquid-CPU-Cooler-1851-1700-AM5/2022/16453.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LS520-SE-Liquid-CPU-Cooler-1851-1700-AM5/2022/16453.shtml", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LS520-SE-Liquid-CPU-Cooler-1851-1700-AM5/2022/16453.shtml", "checkedOn": "2026-09-02", "note": "Radiator 282 x 120 x 27 mm; nominal 240" }
+  },
+  "cooler-deepcool-le720": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE720-360mm-Liquid-CPU-Cooler-1851-1700-AM5/2024/16983.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE720-360mm-Liquid-CPU-Cooler-1851-1700-AM5/2024/16983.shtml", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE720-360mm-Liquid-CPU-Cooler-1851-1700-AM5/2024/16983.shtml", "checkedOn": "2026-09-02", "note": "Radiator 402 x 120 x 27 mm; nominal 360" }
+  },
+  "cooler-deepcool-mystique-360": {
+    "sockets": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02" },
+    "type": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02" },
+    "radiatorMm": { "url": "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/MYSTIQUE-360-5th-Gen-Liquid-Cooler-with-LCD-1851-1700-AM5/2024/18059.shtml", "checkedOn": "2026-09-02", "note": "Radiator 402 x 120 x 27 mm; nominal 360" }
   }
 }

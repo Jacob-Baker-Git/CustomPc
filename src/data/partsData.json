@@ -2985,7 +2985,8 @@
     "tdp": 8,
     "specs": {
       "type": "AIO",
-      "radiator": "240mm"
+      "radiator": "240mm",
+      "radiatorMm": 240
     }
   },
   {
@@ -8612,7 +8613,7 @@
     "tdp": 5,
     "specs": {
       "type": "Air",
-      "height": 155
+      "height": 156
     }
   },
   {
@@ -8631,7 +8632,7 @@
     "tdp": 6,
     "specs": {
       "type": "Air",
-      "height": 160
+      "height": 162
     }
   },
   {
@@ -8783,7 +8784,8 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
@@ -8802,7 +8804,8 @@
     "tdp": 9,
     "specs": {
       "type": "AIO",
-      "radiator": "360mm"
+      "radiator": "360mm",
+      "radiatorMm": 360
     }
   },
   {
