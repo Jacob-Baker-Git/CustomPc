@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { coverageFor, EXPECTED, RATCHETED_KEYS, missingRatchetSources } from '../../scripts/catalog-coverage-core.mjs'
+import { coverageFor, EXPECTED, RATCHETED_KEYS, missingRatchetSources, requiredFor } from '../../scripts/catalog-coverage-core.mjs'
 
 const gpu = (id, fields = {}, specs = {}) => ({ id, category: 'gpu', ...fields, specs })
 const pcCase = (id, fields = {}, specs = {}) => ({ id, category: 'case', tdp: 0, ...fields, specs })
@@ -190,5 +190,73 @@ describe('motherboard expectations', () => {
     expect(missingRatchetSources([part], {}, new Set(['motherboard']))).toEqual([
       'm.socket', 'm.formFactor', 'm.ramType',
     ])
+  })
+})
+
+describe('cooler expectations', () => {
+  const cooler = (id, type, specs = {}, fields = {}) =>
+    ({ id, category: 'cooler', tdp: 3, sockets: ['AM5'], ...fields, specs: { type, ...specs } })
+
+  it('asks an air cooler for its height and an AIO for its radiator size', () => {
+    expect(requiredFor(EXPECTED.cooler, cooler('a', 'Air', { height: 165 })))
+      .toEqual(['sockets', 'type', 'height'])
+    expect(requiredFor(EXPECTED.cooler, cooler('b', 'AIO', { radiatorMm: 360 })))
+      .toEqual(['sockets', 'type', 'radiatorMm'])
+  })
+
+  it('counts a fully sourced air cooler and a fully sourced AIO as verified', () => {
+    const parts = [cooler('a', 'Air', { height: 165 }), cooler('b', 'AIO', { radiatorMm: 360 })]
+    const sources = {
+      a: { sockets: src(), type: src(), height: src() },
+      b: { sockets: src(), type: src(), radiatorMm: src() },
+    }
+    expect(coverageFor('cooler', parts, sources).verified).toBe(2)
+  })
+
+  // 🛑 THE CASE A FLAT LIST WITH BOTH SIZE FIELDS `optional` WOULD HAVE PASSED.
+  // A cooler carrying neither a height nor a radiator size has a gap, not a
+  // fact, and must never count as researched however well its other fields are
+  // sourced.
+  it('refuses to verify an air cooler that carries no height', () => {
+    const sources = { a: { sockets: src(), type: src(), height: src() } }
+    expect(coverageFor('cooler', [cooler('a', 'Air')], sources).verified).toBe(0)
+  })
+
+  it('refuses to verify a cooler whose type matches no variant', () => {
+    const odd = { id: 'a', category: 'cooler', sockets: ['AM5'], tdp: 3, specs: { height: 165 } }
+    expect(requiredFor(EXPECTED.cooler, odd)).toBeNull()
+    const sources = { a: { sockets: src(), type: src(), height: src() } }
+    expect(coverageFor('cooler', [odd], sources).verified).toBe(0)
+  })
+
+  // Without this the report would read `height 31/53`, which looks like a gap
+  // and is not one: 22 of those rows are AIOs that owe no height at all.
+  it('counts a size field only against the parts that owe it', () => {
+    const parts = [cooler('a', 'Air', { height: 165 }), cooler('b', 'AIO', { radiatorMm: 360 })]
+    const c = coverageFor('cooler', parts, {})
+    expect(c.total).toBe(2)
+    expect(c.fields.height.applies).toBe(1)
+    expect(c.fields.radiatorMm.applies).toBe(1)
+  })
+
+  it('leaves a flat category reporting against its full row count', () => {
+    const c = coverageFor('gpu', [gpu('a', { length: 300, tdp: 200 })], {})
+    expect(c.fields.length.applies).toBe(c.total)
+  })
+})
+
+describe('the cooler ratchet', () => {
+  const air = { id: 'a', category: 'cooler', sockets: ['AM5'], tdp: 3, specs: { type: 'Air', height: 165 } }
+
+  it('demands a source for a cooler sockets list', () => {
+    expect(missingRatchetSources([air], {}, new Set(['cooler']))).toEqual(['a.sockets'])
+  })
+
+  // ⚠️ THE TRAP THIS ENCODES: a cooler's `tdp` of 2-5 W is the app's own
+  // estimate of fan and pump draw, not a published figure. It must never be
+  // asked for provenance.
+  it('never demands a source for a cooler tdp', () => {
+    expect(missingRatchetSources([air], { a: { sockets: src() } }, new Set(['cooler']))).toEqual([])
+    expect(RATCHETED_KEYS.cooler).toEqual(['sockets'])
   })
 })
