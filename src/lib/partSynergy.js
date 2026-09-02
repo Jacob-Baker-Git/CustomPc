@@ -7,11 +7,6 @@ const ratioPct = (have, target) => clamp(Math.round((100 * have) / target), 0, 1
 // A bottlenecked part is a weak link but still runs — floor it at 25, not 0.
 const soften = (pct) => Math.round(25 + 0.75 * pct)
 
-function radiatorMm(radiator) {
-  const m = /(\d{2,3})/.exec(String(radiator ?? ''))
-  return m ? Number(m[1]) : 0
-}
-
 // Nobody shops for a "2000GB" drive.
 const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${gb}GB`)
 
@@ -28,7 +23,9 @@ const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${
 export function coolerCapacityW(cooler) {
   const s = cooler?.specs ?? {}
   if (s.type === 'AIO') {
-    const mm = radiatorMm(s.radiator)
+    // ⚠️ The researched number, not the old "240mm" string that used to be
+    // parsed here. 0 still means unknown and still costs nothing upstream.
+    const mm = s.radiatorMm ?? 0
     // 420 is a real rung, not a rounding of 360. Without it the largest
     // radiator in the catalogue claimed exactly as much cooling as a 360 —
     // which made the biggest AIO on the list look like money for nothing.

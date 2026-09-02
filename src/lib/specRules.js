@@ -179,12 +179,20 @@ function m2Interface(selectedParts, candidate) {
 // Rule 4. AIOs only — an air cooler is already governed by maxCoolerHeight in
 // compatibility.js.
 //
-// ⚠️ Reads `radiatorMm` (a number), NOT the existing `specs.radiator` string
-// ("240mm") that all 22 catalogue AIOs carry. Those strings predate the research
-// standard and have not been verified against a manufacturer page, so this rule
-// deliberately reports `unverified` for them until the follow-on task does that
-// work. Treating an unverified string as verified is the exact error the
-// standard exists to prevent.
+// ⚠️ Reads `radiatorMm`, a NUMBER, and this rule is the reason it exists. It
+// was written to refuse the old `specs.radiator` string ("240mm") that all 22
+// AIOs used to carry, because those strings had never been checked against a
+// maker's page — so the rule reported `unverified` rather than treat an
+// unverified string as fact. That was the right call and it paid: when the 22
+// were researched, five rows' socket lists and two product names turned out to
+// be wrong as well. The string is now gone and every AIO carries a researched
+// number, so the rule answers for real.
+//
+// 🛑 `radiatorMm` is the NOMINAL size the maker names the product by — 240,
+// 280, 360, 420 — not a measured length. It is matched against the cases'
+// `radiatorSupport` arrays, which speak the same vocabulary. A real measured
+// length (a "240" radiator is ~277 mm over the tanks) would match nothing and
+// block every AIO in the catalogue.
 function radiatorFit(selectedParts, candidate) {
   const pcCase = candidate.category === 'case' ? candidate : selectedParts.case
   const cooler = candidate.category === 'cooler' ? candidate : selectedParts.cooler

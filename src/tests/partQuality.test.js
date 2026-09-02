@@ -34,7 +34,7 @@ describe('partQuality', () => {
   })
   it('cooler: AIO outranks air', () => {
     const air = partQuality({ category: 'cooler', specs: { type: 'air', height: 158 } })
-    const aio = partQuality({ category: 'cooler', specs: { type: 'AIO', radiator: '360mm' } })
+    const aio = partQuality({ category: 'cooler', specs: { type: 'AIO', radiatorMm: 360 } })
     expect(aio).toBeGreaterThan(air)
   })
   it('null part scores 0', () => {

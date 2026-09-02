@@ -24,7 +24,7 @@ describe('dimensionsCheck', () => {
     expect(rows).toHaveLength(2)
   })
   it('marks AIO coolers NA by type, not by missing height', () => {
-    const rows = dimensionsCheck({ cooler: { specs: { type: 'AIO', radiator: '240mm' } }, case: { maxGpuLength: 360, maxCoolerHeight: 170 } })
+    const rows = dimensionsCheck({ cooler: { specs: { type: 'AIO', radiatorMm: 240 } }, case: { maxGpuLength: 360, maxCoolerHeight: 170 } })
     const row = rows.find((r) => r.id === 'cooler-height')
     expect(row.status).toBe('na')
     expect(row.detail).toMatch(/AIO/i)

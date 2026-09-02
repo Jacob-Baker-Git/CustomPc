@@ -163,7 +163,7 @@ export function partStats(part, { resolution = '1440p' } = {}) {
     case 'cooler':
       addDerived('Cooling capacity', coolerCapacity(part), ' W', 'Roughly the CPU power it can keep in check')
       add('Type', s.type)
-      add('Radiator', s.radiator)
+      add('Radiator', s.radiatorMm && `${s.radiatorMm}mm`)
       add('Height', num(s.height), ' mm', 'Must clear the case side panel')
       break
 

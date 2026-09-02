@@ -4,11 +4,6 @@ import { psuEfficiency, fanArea } from './partStats'
 // scale. Not a cross-category metric. Used by the whole-system upgrade scorer
 // and by the use-case builder's maximise pass.
 
-function radiatorMm(radiator) {
-  const m = /(\d{2,3})/.exec(String(radiator ?? ''))
-  return m ? Number(m[1]) : 0
-}
-
 // Motherboards carry no perf number, so the chipset is the ranking — it is what
 // decides lane count, VRM class, memory support and how far the board can be
 // pushed. Without this every board scored identically, which quietly made a
@@ -45,7 +40,12 @@ export function partQuality(part) {
       // ever overturning a genuine wattage gap.
       return (part.wattage ?? 0) * (1 + (psuEfficiency(part) ?? 45) / 500)
     case 'cooler':
-      return s.type === 'AIO' ? 300 + radiatorMm(s.radiator) : (s.height ?? 0)
+      // ⚠️ The researched number. This used to parse the "240mm" string with a
+      // second private copy of the same regex partSynergy carried; both are
+      // gone. Had the string been deleted without changing this line, every
+      // AIO would have scored a flat 300 and the AIO ranking would have
+      // silently collapsed - no test would have said so.
+      return s.type === 'AIO' ? 300 + (s.radiatorMm ?? 0) : (s.height ?? 0)
     case 'motherboard':
       return CHIPSET_TIER[String(s.chipset ?? '').toUpperCase()] ?? 50
     case 'case':
