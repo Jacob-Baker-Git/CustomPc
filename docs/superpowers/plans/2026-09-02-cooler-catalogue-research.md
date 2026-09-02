@@ -128,7 +128,7 @@ For each cooler id:
 - Modify: `scripts/catalog-coverage.mjs:20`
 - Test: `src/tests/catalogCoverage.test.js`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Add to `src/tests/catalogCoverage.test.js`. First extend the import on line 2:
 
@@ -208,7 +208,7 @@ describe('the cooler ratchet', () => {
 })
 ```
 
-- [ ] **Step 2: Run the tests and watch them fail**
+- [x] **Step 2: Run the tests and watch them fail**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -216,7 +216,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: FAIL. `requiredFor is not a function`, and `EXPECTED.cooler` / `RATCHETED_KEYS.cooler` are `undefined`.
 
-- [ ] **Step 3: Add the expectations**
+- [x] **Step 3: Add the expectations**
 
 In `scripts/catalog-coverage-core.mjs`, add to `EXPECTED` after the `motherboard` entry (before the closing `}` on line 43):
 
@@ -250,7 +250,7 @@ Add to `RATCHETED_KEYS` after the `motherboard` entry:
   cooler: ['sockets'],
 ```
 
-- [ ] **Step 4: Add `requiredFor` and make `coverageFor` use it**
+- [x] **Step 4: Add `requiredFor` and make `coverageFor` use it**
 
 In `scripts/catalog-coverage-core.mjs`, add above `coverageFor`:
 
@@ -302,7 +302,7 @@ export function coverageFor(category, parts, sources) {
 }
 ```
 
-- [ ] **Step 5: Print the per-field denominator in the CLI**
+- [x] **Step 5: Print the per-field denominator in the CLI**
 
 In `scripts/catalog-coverage.mjs`, replace line 20:
 
@@ -312,7 +312,7 @@ In `scripts/catalog-coverage.mjs`, replace line 20:
 
 For a flat category `applies === total`, so the four finished categories print exactly as before. The test in Step 1 pins that.
 
-- [ ] **Step 6: Run the tests and verify they pass**
+- [x] **Step 6: Run the tests and verify they pass**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -320,7 +320,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS, all cases green.
 
-- [ ] **Step 7: Confirm the new category reports zero and the old four are unchanged**
+- [x] **Step 7: Confirm the new category reports zero and the old four are unchanged**
 
 ```bash
 npm run catalog:coverage
@@ -328,7 +328,7 @@ npm run catalog:coverage
 
 Expected: `cooler: 0/53 parts fully researched (0%)` with `sockets 53/53 present, 0 researched`, `height 31/31 present, 0 researched`, `radiatorMm 0/22 present, 0 researched`. The gpu, case, psu and motherboard blocks must be **byte-identical** to before — all still `100%`.
 
-- [ ] **Step 8: Run the full unit suite and the linter**
+- [x] **Step 8: Run the full unit suite and the linter**
 
 ```bash
 npm run test:run && npm run lint
@@ -336,7 +336,7 @@ npm run test:run && npm run lint
 
 Expected: PASS. The ratchet is inert — `cooler` is not yet in `VERIFIED_CATEGORIES`, so `partSources.test.js` does not yet demand the 53 socket sources.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add scripts/catalog-coverage-core.mjs scripts/catalog-coverage.mjs src/tests/catalogCoverage.test.js
@@ -373,11 +373,11 @@ Each task has the same five steps. They are written out in full in Task 2; Tasks
 
 **Traps for this tranche:** DeepCool ships regional sites with different catalogues; confirm the SKU suffix (`SE`, `Digital`, `WH`) belongs to the page you opened. The AK400 and AK400 Digital are separate products with separate pages — do not let one stand in for the other.
 
-- [ ] **Step 1: Research all nine rows under protocol C**
+- [x] **Step 1: Research all nine rows under protocol C**
 
 For each id above, open the maker's page, read `sockets`, `type`, and either `height` or `radiatorMm`, cross-check the size figure against one secondary source, and record the exact URL you opened. Collect the results as the literal for Step 2. Anything unpublished is `result: "unverifiable"` with a note and no URL — never a guess.
 
-- [ ] **Step 2: Write the values with the house serializer**
+- [x] **Step 2: Write the values with the house serializer**
 
 Create `<scratchpad>/apply-tranche.mjs` — written once, reused by Tasks 3–8:
 
@@ -437,7 +437,7 @@ node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"
 
 Expected: `MATCH  src/data/partsData.json`, `MATCH  data/partSources.json`, then `applied 9 rows`.
 
-- [ ] **Step 3: Check the diff is small**
+- [x] **Step 3: Check the diff is small**
 
 ```bash
 git diff --stat src/data/partsData.json data/partSources.json
@@ -445,7 +445,7 @@ git diff --stat src/data/partsData.json data/partSources.json
 
 Expected: tens of lines changed, not thousands. **A diff of 3236 lines means the serializer was bypassed — revert and fix before going on.**
 
-- [ ] **Step 4: Verify coverage moved and the suite is green**
+- [x] **Step 4: Verify coverage moved and the suite is green**
 
 ```bash
 npm run catalog:coverage && npm run test:run && npm run lint
@@ -464,7 +464,7 @@ git diff src/tests/__snapshots__/verdictSpread.test.js.snap
 
 Check the movement makes physical sense against the two reference cases, whose researched support is `Q300L front [120,240] rear [120]` and `Torrent front/bottom [120,140,240,280,360,420]`. In this tranche the three DeepCool AIOs are a 240 and two 360s, so the cramped build gains **1 ok and 2 blocked** and the roomy build gains **3 ok** — which is exactly what landed.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -491,11 +491,11 @@ git commit -m "data: research the nine DeepCool coolers"
 
 **Traps for this tranche:** 🛑 **Three of these six air coolers currently read 154 or 155 mm and Thermalright's naming is dense with near-identical SKUs** — `SE`, `Plus`, `ARGB`, `Digital`, `EVO` are different products. This tranche carries the highest name-collision risk in the project. Confirm the exact SKU on the page you cite. Thermalright's spec tables sometimes give heatsink dimensions without the fan; protocol C wants the **assembled** height.
 
-- [ ] **Step 1: Research all nine rows under protocol C**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (edit `TRANCHE`, run `node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"`; expect two `MATCH` lines then `applied 9 rows`)
-- [ ] **Step 3: Check the diff is small** — `git diff --stat src/data/partsData.json data/partSources.json`, tens of lines
-- [ ] **Step 4: Verify** — `npm run catalog:coverage && npm run test:run && npm run lint`; expect `cooler: 18/53 (34%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all nine rows under protocol C**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (edit `TRANCHE`, run `node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"`; expect two `MATCH` lines then `applied 9 rows`)
+- [x] **Step 3: Check the diff is small** — `git diff --stat src/data/partsData.json data/partSources.json`, tens of lines
+- [x] **Step 4: Verify** — `npm run catalog:coverage && npm run test:run && npm run lint`; expect `cooler: 18/53 (34%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -519,11 +519,11 @@ git commit -m "data: research the nine Thermalright coolers"
 
 **Traps for this tranche:** 🛑 **The two Freezer 36 rows disagree with each other on LGA1200 today** — one lists it, the other does not. At most one is right; this is exactly the kind of copied-list error protocol C's whole-list rule exists to catch. ⚠️ The Liquid Freezer III radiators are **38 mm thick**, and thickness is deliberately out of scope — record the nominal length (`240`/`280`/`360`/`420`) and put the measured dimensions in the `note`. ⚠️ Arctic sells `A-RGB` and non-RGB variants of the same cooler with different SKUs.
 
-- [ ] **Step 1: Research all eight rows under protocol C**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 8 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cooler: 26/53 (49%)` and PASS on `test:run` and `lint`
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all eight rows under protocol C**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 8 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cooler: 26/53 (49%)` and PASS on `test:run` and `lint`
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -545,11 +545,11 @@ git commit -m "data: research the eight Arctic coolers"
 
 **Traps for this tranche:** 🛑 **This is the tranche the bracket rule was written for.** Noctua supports sockets across generations via SecuFirm2 mounting kits, some **in the box**, some **free on request**, some **bought separately**. Only the first two count for `sockets`; record which applies in the `note`. ⚠️ `cooler-noctua-l9a` is the 37 mm row — Noctua publishes height with and without the fan for low-profile models, and protocol C wants the **assembled** figure. ⚠️ The NH-L9a is an **AMD-only** part by design (there is a separate NH-L9i for Intel), so its two-socket list is plausible and must still be verified rather than assumed. ⚠️ The NH-D15 and NH-D15 chromax.black are separate product pages; the G2 is a different cooler again.
 
-- [ ] **Step 1: Research all six rows under protocol C**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 6 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cooler: 32/53 (60%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all six rows under protocol C**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 6 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cooler: 32/53 (60%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -571,11 +571,11 @@ git commit -m "data: research the six Noctua coolers"
 
 **Traps for this tranche:** 🛑 **be quiet! removes a discontinued product's page completely, while search engines still index the dead URL** — a 404 here means "discontinued", not "spec unpublished", and the row may need re-pointing (keep the id). ⚠️ **Its full specs ARE in static HTML, addressed by numeric product id only.** ⚠️ **Its throttle returns an EMPTY 200** — an empty body is rate limiting, not a missing spec; back off and retry rather than recording `unverifiable`. ⚠️ `cooler-bequiet-dark-rock-5` is named "Dark Rock Pro 5" but its id says `dark-rock-5`; Dark Rock 5 and Dark Rock Pro 5 are **different coolers**. Establish which one this row is, correct the name if needed, and keep the id.
 
-- [ ] **Step 1: Research all six rows under protocol C**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 6 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cooler: 38/53 (72%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all six rows under protocol C**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 6 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cooler: 38/53 (72%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -599,11 +599,11 @@ git commit -m "data: research the six be quiet! coolers"
 
 **Traps for this tranche:** 🛑 **"Hyper 212" is a product family, not a SKU** — Hyper 212 Black Edition, EVO, EVO V2, Halo and Spectrum are different coolers with different heights and socket lists. Protocol C rule 4 is about exactly this; establish which SKU this row is and re-point the name if needed, keeping the id. ⚠️ **Corsair's "Elite Capellix" line has both an original and an XT revision**, with different socket support. ⚠️ Corsair lists AM5 support for older AIOs through a **free bracket request**; that counts under the bracket rule, and it belongs in the `note`.
 
-- [ ] **Step 1: Research all eight rows under protocol C**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 8 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cooler: 46/53 (87%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all eight rows under protocol C**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 8 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cooler: 46/53 (87%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -626,11 +626,11 @@ git commit -m "data: research the four Cooler Master and four Corsair coolers"
 
 **Traps for this tranche:** 🛑 **This tranche closes the AIOs**, so Task 9 cannot start until it lands. ⚠️ **The NZXT Kraken line has RGB, non-RGB and Elite variants at each radiator size**, and the 2023 relaunch reused old names — confirm the generation on the page. ⚠️ **Scythe publishes separate EU and JP sites** whose spec tables differ in completeness; cite the one you actually read. ⚠️ **Lian Li's Galahad II comes in Trinity, Trinity Performance and LCD editions.** ⚠️ `cooler-idcooling-se214xt` is the only row already missing LGA1851 — verify rather than assume that is right, and note that ID-Cooling ships several near-identical `SE-214` SKUs (`XT`, `XT ARGB`, `XT Black`).
 
-- [ ] **Step 1: Research all seven rows under protocol C**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 7 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cooler: 53/53 parts fully researched (100%)` and PASS on `test:run` and `lint`
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all seven rows under protocol C**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect two `MATCH` lines then `applied 7 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cooler: 53/53 parts fully researched (100%)` and PASS on `test:run` and `lint`
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -651,7 +651,7 @@ git commit -m "data: research the three NZXT, two Scythe, Lian Li and ID-Cooling
 - Modify: `src/tests/partStats.test.js:91`
 - Modify: `src/data/partsData.json` (22 AIO rows)
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Add to `src/tests/partStats.test.js`, inside the existing top-level `describe`:
 
@@ -669,7 +669,7 @@ Add to `src/tests/partStats.test.js`, inside the existing top-level `describe`:
   })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 ```bash
 npx vitest run src/tests/partStats.test.js -t "researched radiatorMm"
@@ -677,7 +677,7 @@ npx vitest run src/tests/partStats.test.js -t "researched radiatorMm"
 
 Expected: FAIL — `cooler-arctic-lf2-240 still carries the unverified string`.
 
-- [ ] **Step 3: Read the number in `partSynergy.js`**
+- [x] **Step 3: Read the number in `partSynergy.js`**
 
 Delete the local parser at lines 10–13:
 
@@ -702,7 +702,7 @@ with:
     const mm = s.radiatorMm ?? 0
 ```
 
-- [ ] **Step 4: Rewire the three copy sites**
+- [x] **Step 4: Rewire the three copy sites**
 
 `src/lib/partStats.js:166` — replace:
 
@@ -742,7 +742,7 @@ with:
 
 The `.replace('  ', ' ')` went with it: it existed only to tidy the double space a missing string left behind, and `radiatorMm` is now guaranteed present on every AIO by Task 8.
 
-- [ ] **Step 5: Fix the capacity cross-check's failure label**
+- [x] **Step 5: Fix the capacity cross-check's failure label**
 
 `src/tests/partStats.test.js:91` — replace:
 
@@ -756,7 +756,7 @@ with:
       expect(coolerCapacity(c), `${c.id} (${c.specs.type} ${c.specs.radiatorMm ?? c.specs.height})`)
 ```
 
-- [ ] **Step 6: Delete the string from the 22 AIO rows**
+- [x] **Step 6: Delete the string from the 22 AIO rows**
 
 Reuse the Task 2 Step 2 writer with a `null` value, which deletes the field:
 
@@ -774,7 +774,7 @@ node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"
 
 Expected: two `MATCH` lines then `applied 22 rows`.
 
-- [ ] **Step 7: Prove the field is gone from the source tree**
+- [x] **Step 7: Prove the field is gone from the source tree**
 
 ```bash
 grep -rn "specs\.radiator\b\|s\.radiator\b" src/ scripts/ || echo "CLEAN"
@@ -782,7 +782,7 @@ grep -rn "specs\.radiator\b\|s\.radiator\b" src/ scripts/ || echo "CLEAN"
 
 Expected: `CLEAN`. ⚠️ `radiatorSupport` and `radiatorMm` are different fields and must still be there — the `\b` in the pattern is what keeps them out of the result.
 
-- [ ] **Step 8: Run the tests**
+- [x] **Step 8: Run the tests**
 
 ```bash
 npm run test:run && npm run lint
@@ -790,7 +790,7 @@ npm run test:run && npm run lint
 
 Expected: PASS, including the new test from Step 1.
 
-- [ ] **Step 9: Re-render the committed fragments**
+- [x] **Step 9: Re-render the committed fragments**
 
 `partPages.js` copy changed, and pre-rendered fragments go stale **silently**.
 
@@ -804,7 +804,7 @@ Expected: `prerender: wrote 7 fragments to prerendered/`.
 
 ⚠️ **A failed prerender run leaves the folder untouched, so a clean `git diff` can also mean it never ran** — read the command's own output line, not just the diff.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add src/lib src/tests src/data/partsData.json prerendered
@@ -821,7 +821,7 @@ If `prerendered/` did change, commit it separately afterwards as `chore: re-rend
 - Modify: `src/tests/partSources.test.js:12-24` (`RESEARCHED_KEYS`), `:145` (`VERIFIED_CATEGORIES`)
 - Modify: `src/tests/__snapshots__/verdictSpread.test.js.snap`
 
-- [ ] **Step 1: Add the two spec keys and the category**
+- [x] **Step 1: Add the two spec keys and the category**
 
 In `src/tests/partSources.test.js`, add to `RESEARCHED_KEYS` after `'rating',`:
 
@@ -839,7 +839,7 @@ and on line 145:
 const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler'])
 ```
 
-- [ ] **Step 2: Run the suite**
+- [x] **Step 2: Run the suite**
 
 ```bash
 npm run test:run
@@ -847,7 +847,7 @@ npm run test:run
 
 Expected: PASS. A failure here names the exact `<id>.<field>` still missing provenance — go back and finish that row rather than weakening the list.
 
-- [ ] **Step 3: Prove the ratchet is non-vacuous**
+- [x] **Step 3: Prove the ratchet is non-vacuous**
 
 Temporarily delete one cooler's `sockets` source entry from `data/partSources.json`, then:
 
@@ -859,7 +859,7 @@ Expected: **FAIL**, naming that exact `<id>.sockets`. Restore the entry with `gi
 
 ⚠️ A ratchet that cannot fail is worth nothing. Do not skip this step.
 
-- [ ] **Step 4: Confirm the verdict snapshot is already at its final values**
+- [x] **Step 4: Confirm the verdict snapshot is already at its final values**
 
 The snapshot was updated tranche by tranche as each AIO landed (see Task 2 Step 4), so by here it should need **no change at all**:
 
@@ -870,7 +870,7 @@ git diff --exit-code src/tests/__snapshots__/verdictSpread.test.js.snap && echo 
 
 Expected: PASS and `SNAPSHOT SETTLED`, with **`cooler.unverified` at 0 in both builds** and every other category still 0. If it fails here, an AIO was missed — find it rather than re-recording the snapshot.
 
-- [ ] **Step 5: Run everything**
+- [x] **Step 5: Run everything**
 
 ```bash
 npm run test:run && npm run lint && npm run build && npm run test:e2e
@@ -878,18 +878,18 @@ npm run test:run && npm run lint && npm run build && npm run test:e2e
 
 Expected: PASS throughout. ⚠️ **One 30 s e2e timeout fails the whole suite — re-run before blaming your change.**
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/tests
 git commit -m "feat: switch the cooler ratchet on"
 ```
 
-- [ ] **Step 7: Close out the plan and the spec**
+- [x] **Step 7: Close out the plan and the spec**
 
 Tick every checkbox in this file, add the outcome to the spec's success criteria, and record what the research actually found — wrong names, corrected heights, socket lists that were wrong in either direction. Commit as `docs: close out the cooler research plan - 53/53`.
 
-- [ ] **Step 8: Report to the user, and stop**
+- [x] **Step 8: Report to the user, and stop**
 
 🛑 **Do not push and do not run `npm run catalog:push`.** Report:
 
@@ -906,3 +906,128 @@ Tick every checkbox in this file, add the outcome to the spec's success criteria
 - **Zero `unverified` parts in either reference build** in `verdictSpread`.
 - `specs.radiator` appears nowhere in `src/` or `scripts/`, and `coolerCapacityW` reads the researched number.
 - Lint, unit, e2e, build and prerender all green.
+
+---
+
+## ✅ COMPLETE — 53/53, ratchet on
+
+| # | task | rows | commit |
+|---|---|---|---|
+| 1 | Coverage learns a conditional category | — | `4f23be9` |
+| 2 | DeepCool | 9 | `26a9b61` |
+| 3 | Thermalright | 9 | `fe9e886` |
+| 4 | Arctic | 8 | `3090af7` |
+| 5 | Noctua | 6 | `65afced` |
+| 6 | be quiet! | 6 | `d5eef62` |
+| 7 | Cooler Master + Corsair | 8 | `5a7c3c0` |
+| 8 | NZXT, Scythe, Lian Li, ID-Cooling | 7 | `c9b83af` |
+| 9 | Retire the radiator string | — | `5135c71`, `7025fe6` |
+| 10 | Switch the ratchet on | — | `8f7a5da` |
+
+## What the work actually found
+
+**29 of 53 rows carried a wrong value** — 2 names, 11 heights and 16 socket
+lists — on top of the 22 radiator sizes that did not exist at all.
+
+🛑 **SOCKET LISTS WERE THE REAL PROBLEM, NOT HEIGHTS.** Sixteen of 53 were
+wrong, and the plan's guess that "nearly every row claims the identical five
+sockets, which is a copying tell" was right. What the plan did **not**
+anticipate is that they were wrong in **both directions**:
+
+| direction | rows | example |
+|---|---|---|
+| claimed a socket the maker does not support | 11 | every Liquid Freezer III claimed LGA1200 |
+| omitted a socket the maker does support | 5 | the NH-D15 G2 and Kraken 240 omitted LGA1200 |
+
+The over-claims are the dangerous half: the app was telling people a cooler
+would mount on a socket its maker does not support.
+
+🛑 **THE BRACKET RULE DECIDED ELEVEN OF THOSE SIXTEEN, AND IT WENT DIFFERENT
+WAYS FOR DIFFERENT MAKERS.** It was written as a convention and turned out to
+be the single most load-bearing decision in the project:
+
+- **Arctic** sells an "Intel LGA1200/115X Mounting Kit" for the Liquid Freezer
+  III line at **EUR 9.99 MSRP** — separately purchased, so LGA1200 does **not**
+  count, and four rows lost it. The Liquid Freezer **II** keeps LGA1200,
+  because there it is native and needs no kit.
+- **Noctua** lists every socket on one flat line and ships SecuFirm2 kits
+  **free on request**, so the whole line counts.
+- **Corsair** and **Cooler Master** state their conditions too vaguely to
+  resolve — Corsair's LGA1700 asterisk is *truncated mid-sentence on its own
+  page*, and Cooler Master says the Hyper 212's AM5 bracket "is included from a
+  certain point in production". Both were **kept and recorded**, not guessed at.
+
+🛑 **TWO WRONG PRODUCT NAMES**, taking the running total to **fifteen** across
+five categories. Both were the same failure in different clothes: a row naming
+a *family* rather than a SKU.
+
+| row | was | is |
+|---|---|---|
+| `cooler-cm-hyper212` | "Hyper 212" | **Hyper 212 Black Edition** — the plain Black Edition lists no LGA1700, LGA1200, LGA1851 or AM5 at all |
+| `cooler-tr-notte-240` | "Notte 240 ARGB" | **Frozen Notte 240 ARGB** |
+
+⚠️ **THE 154/155 CLUSTER WAS REAL, AND THE HEIGHTS THAT WERE WRONG WERE
+ELSEWHERE.** The plan flagged five coolers reading 154 and six reading 155 as a
+copying tell. Of the eleven wrong heights, only three came from that cluster;
+the rest included the **NH-D15 at 165 → 168**, a figure a decade of reviews
+still repeats and which Noctua itself now publishes as 168 (fin stack 160).
+
+**Two heights changed a real verdict.** The Thermalright PA 120 Digital
+(155 → 162) and the Noctua NH-D15 no longer fit a 159 mm case, and the app now
+says so.
+
+### Where the makers hid things
+
+Every maker hid a different field, and two hid the same one in the same way:
+
+- **Arctic and be quiet!** both open their spec area on the **PACKAGING** box —
+  186 x 117 x 190 for the Freezer 36 against a real 104 x 126 x 159. A
+  first-match read takes the carton.
+- **Thermalright** publishes no radiator dimensions at all, only the material,
+  so all three AIO sizes came from the maker's own product names.
+- **be quiet!** delists a discontinued product but **keeps the numeric-id page
+  live** — three of its six were reachable only by id. This CORRECTS the
+  standing note that a discontinued be quiet! product "vanishes completely".
+- **Cooler Master** 404s the ML240L V2 entirely; only `legacy.coolermaster.com`
+  has it, and that page embeds a CMS payload carrying **several products'**
+  dimensions at once.
+- **NZXT** puts the load-bearing fact in its **support KB**, not the spec
+  table: every NZXT cooler with LGA1700 support takes LGA1851 with no new
+  bracket. Same pattern the case project found at Fractal.
+
+⚠️ **Tooling, both directions.** `WebFetch` 403s on `support.nzxt.com` where
+the in-app Browser reads it fine — but **ID-Cooling is the reverse**: its
+product page renders a 427-character shell in the Browser and only `WebFetch`
+returned the spec table. Neither tool is sufficient alone.
+
+## Two things the plan got wrong
+
+1. **The verdict snapshot moves at every tranche containing an AIO, not once at
+   Task 10.** Fixed in the plan during Task 2.
+2. **Task 9 enumerated FOUR production reads of `specs.radiator`. There were
+   FIVE.** `partQuality.js` carried its own private copy of the same regex
+   parser, ranking coolers with it. Deleting the string without finding it would
+   have scored every AIO a flat 300 — the AIO quality ranking collapsing into a
+   tie — and **no test would have failed**, because `partQuality.test.js`
+   exercises that line with a synthetic AIO and asserts nothing about its value.
+   `grep` found it; the suite did not.
+
+## Outcome against the success criteria
+
+- ✅ `catalog:coverage` reports **cooler 53/53 (100%)**; the other four
+  categories print byte-identically at 100%.
+- ✅ Ratchet on, proved non-vacuous on **all three** new demands — `sockets`,
+  `type` and `height` each fail the suite by name when a source is removed.
+- 🛑 **ZERO `unverified` parts in either reference build, in all ten
+  categories** — 20 of 20 snapshot rows read `unverified: 0`. Rule 4 answers
+  for every AIO against every case, and the catalogue no longer contains a
+  single part the engine cannot judge.
+- ✅ `specs.radiator` appears nowhere in `src/` or `scripts/`; the capacity
+  ladder and the quality ranking both read the researched number.
+- ✅ Lint clean, 1611 unit tests, build clean, prerender re-run (one line: the
+  Hyper 212 rename).
+
+🛑 **None of this has reached a user.** `partsData.json` is overridden by
+Supabase on mount, so the two corrected names and all 29 corrected values ship
+to nobody until `npm run catalog:push -- --apply`, and the branch is not
+merged or pushed. All three remain the user's to run.
