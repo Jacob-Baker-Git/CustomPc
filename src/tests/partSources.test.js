@@ -21,13 +21,35 @@ const RESEARCHED_KEYS = [
   // which is why it waited for the end of the PSU research rather than shipping
   // with `connectors` at the start of it.
   'rating',
+  // ⚠️ Same rule as `rating` above, one project later: `height` could only
+  // join this list once all 31 air coolers had a source recorded. Adding it at
+  // the START of the cooler project would have failed instantly against 31
+  // unsourced values. It is safe in the GLOBAL list because coolers are the
+  // only category that carries a `specs.height` at all.
+  'height',
 ]
+
+// Researched specs whose key is NOT globally unambiguous.
+//
+// ⚠️ PER-CATEGORY, and it has to be. `type` means two different things in this
+// catalogue. On a COOLER it is "Air" or "AIO" - a researched fact that decides
+// WHICH RULE RUNS, since compatibility.js skips the height check for an AIO and
+// specRules' rule 4 skips anything that is not one - and all 53 carry a source.
+// On a CASE it is "Mid Tower" - a classification nobody measured, that nothing
+// blocks on, and that no source entry should ever be demanded for. Putting
+// `type` in the global list above fails against 59 cases, which is the same
+// mistake the old global ['length','tdp'] ratchet made before RATCHETED_KEYS
+// was split per category.
+const RESEARCHED_KEYS_BY_CATEGORY = {
+  cooler: ['type'],
+}
 
 describe('partSources.json', () => {
   it('has a source for every researched spec on every part', () => {
     const missing = []
     for (const part of partsData) {
-      for (const key of RESEARCHED_KEYS) {
+      const keys = [...RESEARCHED_KEYS, ...(RESEARCHED_KEYS_BY_CATEGORY[part.category] ?? [])]
+      for (const key of keys) {
         if (part.specs?.[key] === undefined) continue
         if (!sources[part.id]?.[key]) missing.push(`${part.id}.${key}`)
       }
@@ -142,7 +164,7 @@ describe('unverifiable records', () => {
 // catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
 // meaning "draws nothing", and demanding provenance for 59 such sentinels would
 // be recording a source for a figure nobody measured.
-const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard'])
+const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler'])
 
 describe('verified categories', () => {
   it('requires a source for every ratcheted field once a category is verified', () => {
