@@ -2714,5 +2714,69 @@
     "storageType": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT1000BX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
     "capacityGb": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT1000BX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
     "readMbps": { "url": "https://content.crucial.com/content/dam/crucial/ssd-products/bx500/flyer/crucial-bx500-ssd-productflyer.pdf", "checkedOn": "2026-09-03", "note": "Sequential read up to 540 MB/s. ⚠️ DOCUMENTED EXCEPTION: this URL is Crucial's own flyer but could NOT be opened from here - Crucial's product pages 404 or bounce on every host, WebFetch is WAF-rejected and the flyer PDFs 503. The figure is from that flyer's indexed content and Crucial's press release, cross-checked against multiple independent retail and review listings that agree. It matches the value the catalogue already carried" }
+  },
+  "storage-wd-sn850x-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WDS100T2X0E-00BCA0. ⚠️ The plan predicted the 1TB would be rated LOWER than its siblings; it is not - WD rates 1TB, 2TB and 4TB all at 7,300" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn850x-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WDS200T2X0E-00BCA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn850x-4tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WDS400T2X0E-00BCA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn7100-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WDS100T4X0E-00CJA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn7100-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WDS200T4X0E-00CJA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn770-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 5150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn770-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 5150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn580-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 4150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn580-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 4150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-blue-1tb-hdd": {
+    "storageType": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "WD's WD Blue PC HDD product brief gives Internal Transfer Rate (max) = 150 MB/s for this capacity. Read out of the PDF with pdfjs-dist: WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-wd-blue-4tb-hdd": {
+    "storageType": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "WD's WD Blue PC HDD product brief gives Internal Transfer Rate (max) = 180 MB/s for this capacity. Read out of the PDF with pdfjs-dist: WebFetch returns the raw binary and cannot parse it" }
   }
 }
