@@ -14,7 +14,7 @@ exports[`verdict spread > matches the committed snapshot (cramped) 1`] = `
   },
   "cpu": {
     "blocked": 54,
-    "ok": 26,
+    "ok": 25,
     "unverified": 0,
   },
   "fans": {
@@ -69,7 +69,7 @@ exports[`verdict spread > matches the committed snapshot (roomy) 1`] = `
   },
   "cpu": {
     "blocked": 54,
-    "ok": 26,
+    "ok": 25,
     "unverified": 0,
   },
   "fans": {

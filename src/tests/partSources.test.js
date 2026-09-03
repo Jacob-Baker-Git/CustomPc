@@ -47,6 +47,13 @@ const RESEARCHED_KEYS = [
   // unit test (demanded only by the coverage report), because no rule blocks on
   // it - it feeds buildWarnings advisories, not a compatibility refusal.
   'sticks',
+  // ⚠️ Fifth time for this rule: `cores`/`boostClock` could only join once all
+  // 79 CPUs had a source. Safe in the GLOBAL list because CPUs are the only
+  // category carrying `specs.cores`/`specs.boostClock`.
+  //
+  // 🛑 `socket` and `tdp` are deliberately NOT here - both TOP-LEVEL, enforced
+  // by RATCHETED_KEYS.cpu. `perfScore` is a benchmark figure and owes no source.
+  'cores', 'boostClock',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
@@ -184,7 +191,7 @@ describe('unverifiable records', () => {
 // catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
 // meaning "draws nothing", and demanding provenance for 59 such sentinels would
 // be recording a source for a figure nobody measured.
-const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage', 'ram'])
+const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage', 'ram', 'cpu'])
 
 describe('verified categories', () => {
   it('requires a source for every ratcheted field once a category is verified', () => {

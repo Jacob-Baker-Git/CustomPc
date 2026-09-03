@@ -6465,21 +6465,7 @@
     "perfScore": 82,
     "specs": {
       "cores": 8,
-      "boostClock": 5.4
-    }
-  },
-  {
-    "id": "cpu-ryzen-9-9900",
-    "category": "cpu",
-    "name": "AMD Ryzen 9 9900",
-    "brand": "AMD",
-    "price": 429.99,
-    "socket": "AM5",
-    "tdp": 65,
-    "perfScore": 92,
-    "specs": {
-      "cores": 12,
-      "boostClock": 5.4
+      "boostClock": 5.5
     }
   },
   {
