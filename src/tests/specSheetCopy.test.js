@@ -105,3 +105,22 @@ describe('a memory-speed spec field is labelled as a transfer rate', () => {
     expect(label).toMatch(/MT\/s/)
   })
 })
+
+// 🛑 specSheetContent.js:98 hardcoded the word "sticks", so a single-DIMM kit
+// rendered "8GB across 1 sticks". partPages.js:145 prints the same field through
+// count(n, 'stick') and pluralises correctly - two readers, one robust, one not,
+// exactly the storage partPages cable bug. The two 8GB kits ship this today.
+describe('a single-DIMM kit is not described as "1 sticks"', () => {
+  const singles = ofCat(partsData, 'ram').filter((p) => p.specs?.sticks === 1)
+
+  it('has a single-DIMM kit to describe', () => {
+    expect(singles.length).toBeGreaterThan(0)
+  })
+
+  it('never renders "1 sticks"', () => {
+    for (const kit of singles) {
+      expect(insight(kit), kit.id).not.toMatch(/\b1 sticks\b/)
+      expect(insight(kit), kit.id).toMatch(/\b1 stick\b/)
+    }
+  })
+})
