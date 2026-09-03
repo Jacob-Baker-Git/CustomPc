@@ -95,7 +95,9 @@ export function insight(part) {
       return `${s.chipset} board for ${part.socket} CPUs, taking ${part.ramType} memory only, ` +
         `${part.formFactor} cases or larger.`
     case 'ram':
-      return `${part.capacityGb}GB across ${s.sticks ?? 2} sticks of ${part.ramType}-${part.speed}. ` +
+      // ⚠️ Pluralise: a single-DIMM kit read "1 sticks" until 2026-09-03. The
+      // sibling reader partPages.js:145 already does this through count().
+      return `${part.capacityGb}GB across ${s.sticks ?? 2} stick${(s.sticks ?? 2) === 1 ? '' : 's'} of ${part.ramType}-${part.speed}. ` +
         // MT/s, not MHz: DDR5-6000 runs a 3000 MHz clock and transfers 6000
         // mega-transfers a second. This line said MHz while the spec table
         // directly below it said MT/s, on the same card.

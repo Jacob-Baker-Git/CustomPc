@@ -337,3 +337,32 @@ describe('the M.2 definition', () => {
     }
   })
 })
+
+describe('ram expectations', () => {
+  const kit = (id, over = {}) =>
+    ({ id, category: 'ram', ramType: 'DDR5', speed: 6000, capacityGb: 32, specs: { sticks: 2 }, ...over })
+
+  it('expects the four fields the rules read, flat for every kit', () => {
+    expect(requiredFor(EXPECTED.ram, kit('a')))
+      .toEqual(['ramType', 'speed', 'capacityGb', 'sticks'])
+    // A DDR4 single-DIMM kit owes exactly the same four - RAM is not conditional.
+    expect(requiredFor(EXPECTED.ram, kit('b', { ramType: 'DDR4', capacityGb: 8, specs: { sticks: 1 } })))
+      .toEqual(['ramType', 'speed', 'capacityGb', 'sticks'])
+  })
+
+  it('counts a fully sourced kit as verified', () => {
+    const parts = [kit('a')]
+    const sources = { a: { ramType: src(), speed: src(), capacityGb: src(), sticks: src() } }
+    expect(coverageFor('ram', parts, sources).verified).toBe(1)
+  })
+
+  it('does not verify a kit whose sticks was never sourced', () => {
+    const parts = [kit('a')]
+    const sources = { a: { ramType: src(), speed: src(), capacityGb: src() } }
+    expect(coverageFor('ram', parts, sources).verified).toBe(0)
+  })
+
+  it('ratchets the two top-level block-driving fields and no others', () => {
+    expect(RATCHETED_KEYS.ram).toEqual(['ramType', 'capacityGb'])
+  })
+})

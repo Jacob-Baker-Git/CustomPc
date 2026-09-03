@@ -2879,5 +2879,317 @@
     "storageType": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
     "capacityGb": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03" },
     "readMbps": { "checkedOn": "2026-09-03", "result": "unverifiable", "note": "Toshiba publishes no sustained transfer rate for this drive. Its own datasheet PDF lists form factor, interface, RPM, buffer, average latency, MTTF, warranty, power, physical and environmental specs - and no data rate of any kind, at any capacity. A 2016 Toshiba press release quotes 210 MiB/s for the 7200RPM 2TB P300, but that is a different unit from the catalogue field, is not in the current datasheet, and would be a conversion rather than a reading" }
+  },
+  "ram-gskill-ddr5-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J...16GX2-TZ5)" }
+  },
+  "ram-gskill-ddr5-64": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (F5-6400J3239G32GX2-TZ5RK)" }
+  },
+  "ram-gskill-ddr4-16": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (F4-3600C16D-16GVKC)" }
+  },
+  "ram-gskill-ddr5-48": {
+    "ramType": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03", "note": "kit of 2 x 24GB (F5-6400J3239F24GX2-TZ5RK)" }
+  },
+  "ram-gskill-ddr5-32-6000": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J3038F16GX2-FX5)" }
+  },
+  "ram-gskill-ddr4-32-3600": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F4-3600C18D-32GTZR)" }
+  },
+  "ram-gskill-ddr5-8000-32": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-8000J3848H16GX2-TZ5RK)" }
+  },
+  "ram-gskill-neo-ddr5-6000-64": {
+    "ramType": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (F5-6000J3040G32GX2-TZ5NR)" }
+  },
+  "ram-gskill-ripjaws-s5-16": {
+    "ramType": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-5600J3636C16GX2-RS5K)" }
+  },
+  "ram-gskill-ddr4-3200-32": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F4-3200C16D-32GVK)" }
+  },
+  "ram-gskill-z5-7200-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-7200J3445G16GX2-TZ5RK)" }
+  },
+  "ram-gskill-s5-ddr5-6000-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J3636F16GX2-RS5K)" }
+  },
+  "ram-gskill-neo-rgb-ddr5-6000-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J3038F16GX2-TZ5NR)" }
+  },
+  "ram-gskill-z5-rgb-ddr5-6000-48": {
+    "ramType": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "kit of 2 x 24GB (F5-6000J4048F24GX2-TZ5RK)" }
+  },
+  "ram-gskill-aegis-ddr4-3200-16": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (F4-3200C16D-16GIS)" }
+  },
+  "ram-corsair-ddr5-32": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5600c36/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5600c36/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5600c36/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5600c36/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CMK32GX5M2B5600C36)" }
+  },
+  "ram-corsair-ddr4-32": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2e3200c16/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2e3200c16/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2e3200c16/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2e3200c16/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CMK32GX4M2E3200C16)" }
+  },
+  "ram-corsair-ddr5-64": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmt64gx5m2b6000c30/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmt64gx5m2b6000c30/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmt64gx5m2b6000c30/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmt64gx5m2b6000c30/", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (CMT64GX5M2B6000C30)" }
+  },
+  "ram-corsair-ddr4-16": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2b3200c16/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2b3200c16/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2b3200c16/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2b3200c16/", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (CMK16GX4M2B3200C16)" }
+  },
+  "ram-corsair-ddr5-32-6400": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmh32gx5m2b6400c32/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmh32gx5m2b6400c32/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmh32gx5m2b6400c32/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmh32gx5m2b6400c32/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CMH32GX5M2B6400C32)" }
+  },
+  "ram-corsair-ddr4-64": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx4m2e3200c16/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx4m2e3200c16/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx4m2e3200c16/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx4m2e3200c16/", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (CMK64GX4M2E3200C16)" }
+  },
+  "ram-corsair-ddr5-6000-32": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6000c30/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6000c30/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6000c30/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6000c30/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CMK32GX5M2B6000C30)" }
+  },
+  "ram-corsair-ddr4-3600-32": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2d3600c18/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2d3600c18/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2d3600c18/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2d3600c18/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CMK32GX4M2D3600C18)" }
+  },
+  "ram-corsair-ddr5-5600-16": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx5m1b5600c40/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx5m1b5600c40/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx5m1b5600c40/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk16gx5m1b5600c40/", "checkedOn": "2026-09-03", "note": "single 1 x 16GB module (CMK16GX5M1B5600C40)" }
+  },
+  "ram-corsair-ddr5-6000-64": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b6000c30/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b6000c30/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b6000c30/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b6000c30/", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (CMK64GX5M2B6000C30)" }
+  },
+  "ram-corsair-ddr5-5200-32": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5200c40/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5200c40/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5200c40/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5200c40/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CMK32GX5M2B5200C40)" }
+  },
+  "ram-corsair-ddr5-6400-96": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk96gx5m2b6400c32/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk96gx5m2b6400c32/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk96gx5m2b6400c32/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk96gx5m2b6400c32/", "checkedOn": "2026-09-03", "note": "kit of 2 x 48GB (CMK96GX5M2B6400C32)" }
+  },
+  "ram-corsair-lpx-ddr4-3200-8": {
+    "ramType": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03", "note": "single 1 x 8GB module (CMK8GX4M1E3200C16)" }
+  },
+  "ram-kingston-ddr5-16": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (KF552C40BBK2-16)" }
+  },
+  "ram-kingston-ddr4-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF432C16BBK2/32)" }
+  },
+  "ram-kingston-ddr5-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF560C36BBEK2-32)" }
+  },
+  "ram-kingston-ddr4-16": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (KF432C16BBK2/16)" }
+  },
+  "ram-kingston-fury-ddr5-6400-32": {
+    "ramType": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF564C32RSK2-32)" }
+  },
+  "ram-kingston-renegade-64": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (KF564C32RSK2-64)" }
+  },
+  "ram-kingston-beast-ddr5-5600-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF556C40BBK2-32)" }
+  },
+  "ram-kingston-beast-ddr4-3600-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF436C18BBK2/32)" }
+  },
+  "ram-teamgroup-ddr5-32": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (FF3D532G6000HC30DC01)" }
+  },
+  "ram-teamgroup-ddr4-32": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (TLZGD432G3600HC18JDC01)" }
+  },
+  "ram-teamgroup-tcreate-ddr5-6400-48": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 24GB (CTCED548G6400HC32ADC01)" }
+  },
+  "ram-team-ddr5-6000-16": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (FF3D516G6000HC38ADC01)" }
+  },
+  "ram-teamgroup-ddr5-16": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03", "note": "single 1 x 16GB module (TED516G5600C4601)" }
+  },
+  "ram-teamgroup-delta-rgb-ddr5-6400-32": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (FF3D532G6400HC32ADC01)" }
+  },
+  "ram-teamgroup-elite-ddr4-3200-16": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (TED416G3200C22DC01)" }
+  },
+  "ram-crucial-ddr5-16": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03", "note": "single 1 x 16GB module (CT16G48C40U5)" }
+  },
+  "ram-crucial-ddr4-16": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (BL2K8G32C16U4B)" }
+  },
+  "ram-crucial-pro-ddr5-5600-32": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CP2K16G56C46U5)" }
+  },
+  "ram-crucial-ddr5-5600-64": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (CP2K32G56C46U5)" }
+  },
+  "ram-crucial-pro-ddr5-6000-32": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CP2K16G60C48U5)" }
+  },
+  "ram-crucial-ddr4-3200-8": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03", "note": "single 1 x 8GB module (CT8G4DFRA32A)" }
+  },
+  "ram-patriot-ddr5-6000-32": {
+    "ramType": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (PVV532G600C36K)" }
+  },
+  "ram-patriot-ddr4-16": {
+    "ramType": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (PVS416G320C6K)" }
+  },
+  "ram-patriot-venom-ddr5-6400-32": {
+    "ramType": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (PVV532G640C32K)" }
   }
 }
