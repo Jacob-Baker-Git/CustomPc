@@ -2650,5 +2650,67 @@
     "storageType": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
     "capacityGb": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03" },
     "readMbps": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure. Cites Samsung AU: the UK path for this SKU does not resolve" }
+  },
+  "storage-crucial-p3-500gb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03", "note": "CT500P3SSD8, PCIe Gen3 M.2 2280" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p3-1tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03", "note": "CT1000P3SSD8, PCIe Gen3 M.2 2280" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p3plus-1tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03", "note": "CT1000P3PSSD8. The P3 PLUS is Gen4 and a different drive from the P3" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p3plus-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03", "note": "CT2000P3PSSD8" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p310-1tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03", "note": "CT1000P310SSD8. Crucial rates the P310 at 7,100 for both 1TB and 2TB" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p310-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03", "note": "CT2000P310SSD8. Same 7,100 as the 1TB" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-t500-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03", "note": "CT2000T500SSD8" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-t700-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03", "note": "CT2000T700SSD3, PCIe Gen5. T700 and T705 are different drives" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-t705-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03", "note": "CT2000T705SSD3, PCIe Gen5" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-mx500-500gb": {
+    "storageType": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT500MX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
+    "capacityGb": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT500MX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" }
+  },
+  "storage-crucial-bx500-1tb": {
+    "storageType": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT1000BX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
+    "capacityGb": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT1000BX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" }
   }
 }
