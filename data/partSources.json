@@ -3095,5 +3095,47 @@
     "speed": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
     "capacityGb": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03" },
     "sticks": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF436C18BBK2/32)" }
+  },
+  "ram-teamgroup-ddr5-32": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6000HC30DC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (FF3D532G6000HC30DC01)" }
+  },
+  "ram-teamgroup-ddr4-32": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-gray/vulcan-z-ddr4-gray-TLZGD432G3600HC18JDC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (TLZGD432G3600HC18JDC01)" }
+  },
+  "ram-teamgroup-tcreate-ddr5-6400-48": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-black/expert-u-dimm-ddr5-black-CTCED548G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 24GB (CTCED548G6400HC32ADC01)" }
+  },
+  "ram-team-ddr5-6000-16": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D516G6000HC38ADC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (FF3D516G6000HC38ADC01)" }
+  },
+  "ram-teamgroup-ddr5-16": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr5/elite-u-dimm-ddr5-TED516G5600C4601/", "checkedOn": "2026-09-03", "note": "single 1 x 16GB module (TED516G5600C4601)" }
+  },
+  "ram-teamgroup-delta-rgb-ddr5-6400-32": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/delta-rgb-ddr5-black/delta-rgb-ddr5-black-FF3D532G6400HC32ADC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (FF3D532G6400HC32ADC01)" }
+  },
+  "ram-teamgroup-elite-ddr4-3200-16": {
+    "ramType": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (TED416G3200C22DC01)" }
   }
 }
