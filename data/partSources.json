@@ -3341,5 +3341,83 @@
     "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
     "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-5500": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5500.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5500.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5500.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5500.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-5600": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-5600x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-5700x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-5800x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-5800x3d": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-5900x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5900x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5900x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5900x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5900x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-5950x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5950x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5950x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5950x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5950x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-3600": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-5-3600.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-5-3600.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-5-3600.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-5-3600.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-3700x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-7-3700x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-7-3700x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-7-3700x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-7-3700x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-3900x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-9-3900x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-9-3900x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-9-3900x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/3000-series/amd-ryzen-9-3900x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-5600g": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600g.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600g.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600g.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600g.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-5700g": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700g.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700g.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700g.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5700g.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
   }
 }
