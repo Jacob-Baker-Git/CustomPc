@@ -2582,5 +2582,302 @@
     "sockets": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "ID-Cooling lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4. LGA1851 ADDED: the row omitted a socket ID-Cooling lists" },
     "type": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02" },
     "height": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "Overall Dimension 124 x 72 x 150 mm. ⚠️ The SE-214-XT BLACK is a different SKU at 151 mm; this row is the plain SE-214-XT" }
+  },
+  "storage-samsung-990-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung rates the 990 PRO at 7,450 MB/s across 1TB, 2TB and 4TB alike - this is genuinely flat, not a copied figure" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung rates the 990 PRO at 7,450 MB/s across 1TB, 2TB and 4TB alike - this is genuinely flat, not a copied figure" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-4tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung rates the 990 PRO at 7,450 MB/s across 1TB, 2TB and 4TB alike - this is genuinely flat, not a copied figure" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-980-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03", "note": "PCIe Gen 3.0 x4, NVMe 1.4" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-9100-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03", "note": "PCIe 5.0 x4, NVMe 2.0" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-evo-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03", "note": "The 990 EVO, not the EVO Plus - a different drive at a different rating" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990evo-plus-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03", "note": "Was 7250, which is the 2TB figure. Samsung rates the 990 EVO Plus 1TB at 7,150 and the 2TB/4TB at 7,250 - the per-capacity difference protocol S exists for. Cross-checked against Samsung US and retail listings" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-evo-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03", "note": "This row is the 990 EVO PLUS 2TB, as its name says; the id reads 990-evo-2tb but the id is kept" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-870-evo-500gb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure" }
+  },
+  "storage-samsung-870-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0b-eu/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0b-eu/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0b-eu/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure" }
+  },
+  "storage-samsung-870-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-2tb-sata-3-2-5-ssd-mz-77e2t0b-eu/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-2tb-sata-3-2-5-ssd-mz-77e2t0b-eu/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-2tb-sata-3-2-5-ssd-mz-77e2t0b-eu/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure" }
+  },
+  "storage-samsung-870-qvo-4tb": {
+    "storageType": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure. Cites Samsung AU: the UK path for this SKU does not resolve" }
+  },
+  "storage-crucial-p3-500gb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03", "note": "CT500P3SSD8, PCIe Gen3 M.2 2280" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3/ct500p3ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p3-1tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03", "note": "CT1000P3SSD8, PCIe Gen3 M.2 2280" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3/ct1000p3ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p3plus-1tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03", "note": "CT1000P3PSSD8. The P3 PLUS is Gen4 and a different drive from the P3" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p3plus-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03", "note": "CT2000P3PSSD8" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p3-plus/ct2000p3pssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p310-1tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03", "note": "CT1000P310SSD8. Crucial rates the P310 at 7,100 for both 1TB and 2TB" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p310/ct1000p310ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-p310-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03", "note": "CT2000P310SSD8. Same 7,100 as the 1TB" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/p310/ct2000p310ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-t500-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03", "note": "CT2000T500SSD8" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/t500/ct2000t500ssd8", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-t700-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03", "note": "CT2000T700SSD3, PCIe Gen5. T700 and T705 are different drives" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-t705-2tb": {
+    "storageType": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03", "note": "CT2000T705SSD3, PCIe Gen5" },
+    "m2Sata": { "url": "https://www.crucial.com/ssd/t705/ct2000t705ssd3", "checkedOn": "2026-09-03", "note": "Crucial lists PCIe NVMe M.2 2280; not a SATA M.2 card" }
+  },
+  "storage-crucial-mx500-500gb": {
+    "storageType": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT500MX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
+    "capacityGb": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT500MX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
+    "readMbps": { "url": "https://content.crucial.com/content/dam/crucial/ssd-products/mx500/flyer/crucial-mx500-ssd-productflyer-en.pdf", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s. ⚠️ DOCUMENTED EXCEPTION: this URL is Crucial's own flyer but could NOT be opened from here - Crucial's product pages 404 or bounce on every host, WebFetch is WAF-rejected and the flyer PDFs 503. The figure is from that flyer's indexed content and Crucial's press release, cross-checked against multiple independent retail and review listings that agree. It matches the value the catalogue already carried" }
+  },
+  "storage-crucial-bx500-1tb": {
+    "storageType": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT1000BX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
+    "capacityGb": { "url": "https://www.crucial.com/catalog/ssd/sata", "checkedOn": "2026-09-03", "note": "CT1000BX500SSD1. Crucial's SATA listing names this SKU as a 2.5-inch SATA SSD, but every route to its own product page fails (www/uk/bare all 404 or bounce to the listing), WebFetch is WAF-rejected and the flyer PDFs 503. Type and capacity are from the listing; readMbps is NOT sourced and the row stays unverified" },
+    "readMbps": { "url": "https://content.crucial.com/content/dam/crucial/ssd-products/bx500/flyer/crucial-bx500-ssd-productflyer.pdf", "checkedOn": "2026-09-03", "note": "Sequential read up to 540 MB/s. ⚠️ DOCUMENTED EXCEPTION: this URL is Crucial's own flyer but could NOT be opened from here - Crucial's product pages 404 or bounce on every host, WebFetch is WAF-rejected and the flyer PDFs 503. The figure is from that flyer's indexed content and Crucial's press release, cross-checked against multiple independent retail and review listings that agree. It matches the value the catalogue already carried" }
+  },
+  "storage-wd-sn850x-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WDS100T2X0E-00BCA0. ⚠️ The plan predicted the 1TB would be rated LOWER than its siblings; it is not - WD rates 1TB, 2TB and 4TB all at 7,300" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn850x-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WDS200T2X0E-00BCA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS200T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn850x-4tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "WDS400T2X0E-00BCA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn7100-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WDS100T4X0E-00CJA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS100T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn7100-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "WDS200T4X0E-00CJA0" },
+    "m2Sata": { "url": "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn7100-nvme-internal-ssd?sku=WDS200T4X0E-00CJA0", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn770-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 5150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn770-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 5150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-black-sn770-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn580-1tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 4150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-sn580-2tb": {
+    "storageType": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD's consumer SSD line now lives on sandisk.com; westerndigital.com redirects there" },
+    "capacityGb": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "WD rates this drive at 4150 MB/s sequential read. ⚠️ DOCUMENTED EXCEPTION: SanDisk has retired the product page - every slug bounces to the internal-SSD listing - so this is WD's published figure as carried by multiple independent reviews that agree with each other and with the value already in the catalogue. Not read off a maker page" },
+    "m2Sata": { "url": "https://www.sandisk.com/en-gb/products/ssd/internal-ssd/wd-blue-sn580-nvme-ssd", "checkedOn": "2026-09-03", "note": "PCIe NVMe M.2; not a SATA M.2 card" }
+  },
+  "storage-wd-blue-1tb-hdd": {
+    "storageType": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "WD's WD Blue PC HDD product brief gives Internal Transfer Rate (max) = 150 MB/s for this capacity. Read out of the PDF with pdfjs-dist: WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-wd-blue-4tb-hdd": {
+    "storageType": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "WD's WD Blue PC HDD product brief gives Internal Transfer Rate (max) = 180 MB/s for this capacity. Read out of the PDF with pdfjs-dist: WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-1tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST1000DM014, 7200RPM: 220 MB/s. WAS 210 - the 1TB and the 2TB ST2000DM008 are the fast 7200RPM pair in this family, not the 210 the row carried. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-2tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "Seagate lists TWO 2TB models: ST2000DM005 at 190 MB/s (5400RPM) and ST2000DM008 at 220 (7200RPM). 190 matches the row and the slower, more common DM005; the faster model is noted here rather than assumed. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-4tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST4000DM004, 5400RPM: 190 MB/s. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-6tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST6000DM003, 5400RPM: 185 MB/s. WAS 190 - the 6TB is the one capacity in the middle of the range Seagate rates BELOW 190. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-8tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST8000DM004, 5400RPM: 190 MB/s. WAS 210, which Seagate does not publish for any BarraCuda capacity. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-firecuda-530-2tb": {
+    "storageType": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03", "note": "FireCuda 530: 7300 at 4TB, 2TB and 1TB, dropping to 7000 only at 500GB. Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" },
+    "m2Sata": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe 1.4; not a SATA M.2 card" }
+  },
+  "storage-firecuda-530r-4tb": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "FireCuda 530R (ZP4000GM30063): 7400 at all three capacities. WAS 7300, which is the FireCuda 530's figure - the 530 and 530R are different drives, and the row had borrowed its sibling's number. Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" },
+    "m2Sata": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe 1.4; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv3-500": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV3 per capacity: 500GB 5,000 / 1TB 6,000 / 2TB-4TB 6,000 MB/s. WAS 6000, which is the 1TB-4TB figure. The plan named this the single most likely wrong value in the project, and it was: a small capacity has fewer NAND dies and Kingston rates it lower" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv3-1tb": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV3 per capacity: 500GB 5,000 / 1TB 6,000 / 2TB-4TB 6,000 MB/s" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv3-2tb": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV3 per capacity: 500GB 5,000 / 1TB 6,000 / 2TB-4TB 6,000 MB/s" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-kc3000-1tb": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03", "note": "Kingston publishes the KC3000 at 7,000 read for every capacity (512GB to 4096GB); only the write speed varies" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv2-1tb": {
+    "storageType": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV2 per capacity: 250GB 3,000 / 500GB 3,500 / 1TB 3,500 / 2TB 3,500 MB/s. ⚠️ DOCUMENTED EXCEPTION: the NV2 product page is retired (it bounces to Kingston's SSD listing, superseded by the NV3) and this datasheet URL returns 403 to WebFetch, so the table is from that Kingston datasheet's indexed content rather than a page opened here. It matches the value the catalogue already carried" },
+    "m2Sata": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-lexar-nm790-2tb": {
+    "storageType": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "Lexar rates the NM790 at 7,400 read across 512GB-4TB; only write varies" },
+    "m2Sata": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-lexar-nm790-4tb": {
+    "storageType": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "Lexar rates the NM790 at 7,400 read across 512GB-4TB; only write varies" },
+    "m2Sata": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-solidigm-p44-1tb": {
+    "storageType": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03", "note": "Solidigm's own product brief: \"up to 7000 MB/s sequential read\". ⚠️ The P44 Pro is an SK hynix Platinum P41 twin and reviews often conflate the two; this is Solidigm's own document. Read out of the PDF with pdfjs-dist" },
+    "m2Sata": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-teamgroup-mp44l-1tb": {
+    "storageType": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03", "note": "TEAMGROUP's own 1TB SKU page (TM8FPK001T0C101): read/write up to 5,000/4,500 MB/s" },
+    "m2Sata": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-toshiba-p300-2tb": {
+    "storageType": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-p300/", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-p300/", "checkedOn": "2026-09-03" },
+    "readMbps": { "checkedOn": "2026-09-03", "result": "unverifiable", "note": "Toshiba publishes no sustained transfer rate for this drive. Its own datasheet PDF lists form factor, interface, RPM, buffer, average latency, MTTF, warranty, power, physical and environmental specs - and no data rate of any kind, at any capacity. A 2016 Toshiba press release quotes 210 MiB/s for the 7200RPM 2TB P300, but that is a different unit from the catalogue field, is not in the current datasheet, and would be a conversion rather than a reading" }
+  },
+  "storage-toshiba-x300-8tb": {
+    "storageType": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03" },
+    "readMbps": { "checkedOn": "2026-09-03", "result": "unverifiable", "note": "Toshiba publishes no sustained transfer rate for this drive. Its own datasheet PDF lists form factor, interface, RPM, buffer, average latency, MTTF, warranty, power, physical and environmental specs - and no data rate of any kind, at any capacity. A 2016 Toshiba press release quotes 210 MiB/s for the 7200RPM 2TB P300, but that is a different unit from the catalogue field, is not in the current datasheet, and would be a conversion rather than a reading" }
   }
 }

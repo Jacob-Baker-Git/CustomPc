@@ -1468,7 +1468,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7450
+      "readMbps": 7450,
+      "m2Sata": false
     }
   },
   {
@@ -1481,7 +1482,8 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7300
+      "readMbps": 7300,
+      "m2Sata": false
     }
   },
   {
@@ -1494,7 +1496,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 3500
+      "readMbps": 3500,
+      "m2Sata": false
     }
   },
   {
@@ -1520,7 +1523,8 @@
     "capacityGb": 4000,
     "tdp": 8,
     "specs": {
-      "readMbps": 7450
+      "readMbps": 7450,
+      "m2Sata": false
     }
   },
   {
@@ -1533,7 +1537,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7300
+      "readMbps": 7300,
+      "m2Sata": false
     }
   },
   {
@@ -1546,7 +1551,8 @@
     "capacityGb": 2000,
     "tdp": 10,
     "specs": {
-      "readMbps": 12400
+      "readMbps": 12400,
+      "m2Sata": false
     }
   },
   {
@@ -1559,7 +1565,8 @@
     "capacityGb": 500,
     "tdp": 4,
     "specs": {
-      "readMbps": 3500
+      "readMbps": 3500,
+      "m2Sata": false
     }
   },
   {
@@ -1572,7 +1579,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 3500
+      "readMbps": 3500,
+      "m2Sata": false
     }
   },
   {
@@ -1637,7 +1645,8 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7450
+      "readMbps": 7450,
+      "m2Sata": false
     }
   },
   {
@@ -1650,7 +1659,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 5150
+      "readMbps": 5150,
+      "m2Sata": false
     }
   },
   {
@@ -1663,7 +1673,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 3500
+      "readMbps": 3500,
+      "m2Sata": false
     }
   },
   {
@@ -1676,7 +1687,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7400
+      "readMbps": 7400,
+      "m2Sata": false
     }
   },
   {
@@ -1689,7 +1701,8 @@
     "capacityGb": 4000,
     "tdp": 8,
     "specs": {
-      "readMbps": 7300
+      "readMbps": 7300,
+      "m2Sata": false
     }
   },
   {
@@ -1715,7 +1728,7 @@
     "capacityGb": 8000,
     "tdp": 8,
     "specs": {
-      "readMbps": 210
+      "readMbps": 190
     }
   },
   {
@@ -3925,7 +3938,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 5000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
@@ -3938,7 +3952,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 5150
+      "readMbps": 5150,
+      "m2Sata": false
     }
   },
   {
@@ -3951,7 +3966,8 @@
     "capacityGb": 2000,
     "tdp": 9,
     "specs": {
-      "readMbps": 14700
+      "readMbps": 14700,
+      "m2Sata": false
     }
   },
   {
@@ -3964,7 +3980,8 @@
     "capacityGb": 1000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7000
+      "readMbps": 7000,
+      "m2Sata": false
     }
   },
   {
@@ -3977,7 +3994,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 4150
+      "readMbps": 4150,
+      "m2Sata": false
     }
   },
   {
@@ -3990,7 +4008,8 @@
     "capacityGb": 1000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7000
+      "readMbps": 7000,
+      "m2Sata": false
     }
   },
   {
@@ -4527,7 +4546,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 7250
+      "readMbps": 7150,
+      "m2Sata": false
     }
   },
   {
@@ -4540,7 +4560,8 @@
     "capacityGb": 2000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7100
+      "readMbps": 7100,
+      "m2Sata": false
     }
   },
   {
@@ -5074,20 +5095,22 @@
     "capacityGb": 2000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7250
+      "readMbps": 7250,
+      "m2Sata": false
     }
   },
   {
     "id": "storage-wd-sn580-2tb",
     "category": "storage",
     "name": "WD Blue SN580 2TB NVMe",
-    "brand": "Western Digital",
+    "brand": "WD",
     "price": 109.99,
     "storageType": "NVMe SSD",
     "capacityGb": 2000,
     "tdp": 5,
     "specs": {
-      "readMbps": 4150
+      "readMbps": 4150,
+      "m2Sata": false
     }
   },
   {
@@ -5100,7 +5123,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 5000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
@@ -5113,7 +5137,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7300
+      "readMbps": 7300,
+      "m2Sata": false
     }
   },
   {
@@ -5139,7 +5164,7 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 210
+      "readMbps": 220
     }
   },
   {
@@ -5933,7 +5958,8 @@
     "capacityGb": 500,
     "tdp": 7,
     "specs": {
-      "readMbps": 6000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
@@ -5945,9 +5971,7 @@
     "storageType": "HDD",
     "capacityGb": 2000,
     "tdp": 6,
-    "specs": {
-      "readMbps": 190
-    }
+    "specs": {}
   },
   {
     "id": "storage-firecuda-530r-4tb",
@@ -5959,7 +5983,8 @@
     "capacityGb": 4000,
     "tdp": 9,
     "specs": {
-      "readMbps": 7300
+      "readMbps": 7400,
+      "m2Sata": false
     }
   },
   {
@@ -7534,7 +7559,8 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7250
+      "readMbps": 7250,
+      "m2Sata": false
     }
   },
   {
@@ -7547,7 +7573,8 @@
     "capacityGb": 2000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7250
+      "readMbps": 7250,
+      "m2Sata": false
     }
   },
   {
@@ -7560,7 +7587,8 @@
     "capacityGb": 2000,
     "tdp": 11,
     "specs": {
-      "readMbps": 14500
+      "readMbps": 14500,
+      "m2Sata": false
     }
   },
   {
@@ -7573,7 +7601,8 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 5000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
@@ -7586,7 +7615,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 6000
+      "readMbps": 6000,
+      "m2Sata": false
     }
   },
   {
@@ -7599,7 +7629,8 @@
     "capacityGb": 2000,
     "tdp": 5,
     "specs": {
-      "readMbps": 6000
+      "readMbps": 6000,
+      "m2Sata": false
     }
   },
   {
@@ -7612,7 +7643,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 7100
+      "readMbps": 7100,
+      "m2Sata": false
     }
   },
   {
@@ -7625,7 +7657,8 @@
     "capacityGb": 2000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7400
+      "readMbps": 7400,
+      "m2Sata": false
     }
   },
   {
@@ -7638,7 +7671,8 @@
     "capacityGb": 4000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7400
+      "readMbps": 7400,
+      "m2Sata": false
     }
   },
   {
@@ -7651,7 +7685,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 5000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
@@ -7690,7 +7725,7 @@
     "capacityGb": 6000,
     "tdp": 7,
     "specs": {
-      "readMbps": 190
+      "readMbps": 185
     }
   },
   {
@@ -7715,9 +7750,7 @@
     "storageType": "HDD",
     "capacityGb": 8000,
     "tdp": 8,
-    "specs": {
-      "readMbps": 210
-    }
+    "specs": {}
   },
   {
     "id": "psu-corsair-rm550x",

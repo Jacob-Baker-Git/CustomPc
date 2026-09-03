@@ -176,7 +176,7 @@ For each drive id:
 - Modify: `scripts/catalog-coverage-core.mjs` (`EXPECTED`, `RATCHETED_KEYS`)
 - Test: `src/tests/catalogCoverage.test.js`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `src/tests/catalogCoverage.test.js`:
 
@@ -229,7 +229,7 @@ describe('storage expectations', () => {
 })
 ```
 
-- [ ] **Step 2: Run them and watch them fail**
+- [x] **Step 2: Run them and watch them fail**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -237,7 +237,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: FAIL — `EXPECTED.storage` and `RATCHETED_KEYS.storage` are `undefined`.
 
-- [ ] **Step 3: Add the expectations**
+- [x] **Step 3: Add the expectations**
 
 In `scripts/catalog-coverage-core.mjs`, add to `EXPECTED` after `cooler`:
 
@@ -270,7 +270,7 @@ Add to `RATCHETED_KEYS` after `cooler`:
   storage: ['storageType', 'capacityGb'],
 ```
 
-- [ ] **Step 4: Run the tests**
+- [x] **Step 4: Run the tests**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -278,7 +278,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Pin coverage and rule 3 to the same definition**
+- [x] **Step 5: Pin coverage and rule 3 to the same definition**
 
 This is the test gotcha 6 exists for. Add to `src/tests/catalogCoverage.test.js`:
 
@@ -311,7 +311,7 @@ describe('the M.2 definition', () => {
 })
 ```
 
-- [ ] **Step 6: Run it**
+- [x] **Step 6: Run it**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -319,7 +319,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS, 37 drives classified as M.2 and 15 as cabled by both definitions.
 
-- [ ] **Step 7: Confirm the category reports zero and the others are unchanged**
+- [x] **Step 7: Confirm the category reports zero and the others are unchanged**
 
 ```bash
 npm run catalog:coverage
@@ -329,7 +329,7 @@ Expected: `storage: 0/52 parts fully researched (0%)`, with `storageType 52/52`
 and `capacityGb 52/52` present, `readMbps 52/52` present, `m2Sata 0/37`. The
 five finished categories must print **byte-identically** at 100%.
 
-- [ ] **Step 8: Full suite, lint, commit**
+- [x] **Step 8: Full suite, lint, commit**
 
 ```bash
 npm run test:run && npm run lint
@@ -350,7 +350,7 @@ depends on a single researched value.**
 - Modify: `src/data/partsData.json` (one brand string)
 - Test: `src/tests/specRules.test.js`, `src/tests/partPages.test.js` (if present)
 
-- [ ] **Step 1: Write the failing test for the copy bug**
+- [x] **Step 1: Write the failing test for the copy bug**
 
 Add to `src/tests/partPages.test.js`. The bug lives in `compatibilityNotes`
 (`src/lib/partPages.js:101`), which returns `{ label, detail }` objects:
@@ -386,11 +386,11 @@ it('still tells a cabled drive owner that it is cabled', () => {
 not already there — `src/tests/partPages.test.js` imports a set of named
 exports from `../lib/partPages` on line 4.
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 Expected: FAIL on the first NVMe drive, with "connected by cable".
 
-- [ ] **Step 3: Fix the equality**
+- [x] **Step 3: Fix the equality**
 
 `src/lib/partPages.js:150` — replace:
 
@@ -408,7 +408,7 @@ with:
       add('Motherboard', /nvme|m\.2/i.test(part.storageType ?? '')
 ```
 
-- [ ] **Step 4: Make rule 3's SATA-M.2 branch reachable**
+- [x] **Step 4: Make rule 3's SATA-M.2 branch reachable**
 
 Add to `src/tests/specRules.test.js`:
 
@@ -432,13 +432,13 @@ it('accepts a SATA M.2 drive on a board that has a SATA-capable M.2 slot', () =>
 })
 ```
 
-- [ ] **Step 5: Fix the brand string**
+- [x] **Step 5: Fix the brand string**
 
 `storage-wd-sn580-2tb` has `brand: "Western Digital"`; the other ten WD drives
 have `"WD"`. Use the Task 3 Step 2 writer with a `part` patch, or a one-off
 scratchpad script using `house-json.mjs`. **Do not hand-edit the JSON.**
 
-- [ ] **Step 6: Run everything, re-render, commit**
+- [x] **Step 6: Run everything, re-render, commit**
 
 ```bash
 npm run test:run && npm run lint
@@ -493,13 +493,13 @@ it — do not "correct" it to a per-capacity ladder. ⚠️ The 870 QVO is QLC a
 rated the same 560 MB/s sequential as the EVO; the difference is sustained
 write, which is out of scope.
 
-- [ ] **Step 1: Research all twelve rows under protocol S**
+- [x] **Step 1: Research all twelve rows under protocol S**
 
 For each id, open the maker's page for that exact model **and capacity**, read
 `storageType`, `capacityGb`, `readMbps` and (M.2 only) `m2Sata`, cross-check
 the read speed, and record the URL you opened.
 
-- [ ] **Step 2: Write the values with the house serializer**
+- [x] **Step 2: Write the values with the house serializer**
 
 Create `<scratchpad>/apply-tranche.mjs` — written once, reused by Tasks 4–8:
 
@@ -570,7 +570,7 @@ node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"
 
 Expected: two `MATCH` lines, then `applied 12 rows`.
 
-- [ ] **Step 3: Check the diff is small**
+- [x] **Step 3: Check the diff is small**
 
 ```bash
 git diff --stat src/data/partsData.json data/partSources.json
@@ -579,7 +579,7 @@ git diff --stat src/data/partsData.json data/partSources.json
 Expected: tens of lines. **A 3236-line diff means the serializer was bypassed —
 revert and fix.**
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 ```bash
 npm run catalog:coverage && npm run test:run && npm run lint
@@ -592,7 +592,7 @@ correction can flip a drive between rule 3's branches. If `verdictSpread`
 fails, update it and **read the diff**: only `storage` may change, and the
 change must be explicable by a specific corrected value.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -625,11 +625,11 @@ drives** (Gen3 vs Gen4) and so are **T700 and T705**. ⚠️ The P310 is a **223
 and 2280-form-factor** drive — form factor is out of scope, but do not let the
 2230 variant's spec block be the one you read.
 
-- [ ] **Step 1: Research all eleven rows under protocol S**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect two `MATCH` lines, then `applied 11 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `storage: 23/52 (44%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all eleven rows under protocol S**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect two `MATCH` lines, then `applied 11 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `storage: 23/52 (44%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -663,11 +663,11 @@ carries `brand: "Western Digital"` if Task 2 Step 5 was skipped** — check it i
 sustained rate**; if a Blue capacity has none, record `unverifiable` rather
 than borrowing the other capacity's figure.
 
-- [ ] **Step 1: Research all eleven rows under protocol S**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 11 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `storage: 34/52 (65%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all eleven rows under protocol S**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 11 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `storage: 34/52 (65%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -696,11 +696,11 @@ the 1 TB is commonly a 2.5" part. Read each capacity's own datasheet.
 datasheet rather than on the product page. ⚠️ **FireCuda 530 and 530R are
 different drives.**
 
-- [ ] **Step 1: Research all seven rows under protocol S**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 7 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `storage: 41/52 (79%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all seven rows under protocol S**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 7 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `storage: 41/52 (79%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -727,11 +727,11 @@ with **different controllers and NAND**, publishing a rate range rather than
 one figure; if so, take the rated sequential read from the spec table and note
 the variability.
 
-- [ ] **Step 1: Research all five rows under protocol S**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 5 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `storage: 46/52 (88%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all five rows under protocol S**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 5 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `storage: 46/52 (88%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -760,11 +760,11 @@ often conflate them — use Solidigm's own page. ⚠️ **TeamGroup's MP44L is a
 DRAM-less drive published in several regional spec tables that disagree**; take
 the global site's.
 
-- [ ] **Step 1: Research all six rows under protocol S**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 6 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `storage: 52/52 parts fully researched (100%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all six rows under protocol S**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 6 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `storage: 52/52 parts fully researched (100%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -777,7 +777,7 @@ git commit -m "data: research the two Toshiba, two Lexar, Solidigm and TeamGroup
 
 **Files:** `src/tests/partSources.test.js`
 
-- [ ] **Step 1: Check every key for a collision BEFORE adding it**
+- [x] **Step 1: Check every key for a collision BEFORE adding it**
 
 🛑 Gotcha 5. Run this first:
 
@@ -788,7 +788,7 @@ node -e "const d=require('./src/data/partsData.json');for(const k of ['readMbps'
 Expected: all three appear **only** under `storage`. If any shows another
 category, it goes in `RESEARCHED_KEYS_BY_CATEGORY`, not the global list.
 
-- [ ] **Step 2: Add the keys and the category**
+- [x] **Step 2: Add the keys and the category**
 
 In `src/tests/partSources.test.js`, add to `RESEARCHED_KEYS` (only those the
 step above proved unambiguous):
@@ -806,7 +806,7 @@ and:
 const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage'])
 ```
 
-- [ ] **Step 3: Run the suite**
+- [x] **Step 3: Run the suite**
 
 ```bash
 npm run test:run
@@ -815,7 +815,7 @@ npm run test:run
 Expected: PASS. A failure names the exact `<id>.<field>` still missing
 provenance — finish that row rather than weakening the list.
 
-- [ ] **Step 4: Prove the ratchet is non-vacuous on BOTH ratcheted keys**
+- [x] **Step 4: Prove the ratchet is non-vacuous on BOTH ratcheted keys**
 
 Delete one drive's `storageType` source, run, expect FAIL naming it; restore.
 Repeat for `capacityGb` and for `readMbps`.
@@ -829,7 +829,7 @@ git checkout -- data/partSources.json
 only one key — the cooler project found all three of its demands bit, and
 checking one would not have proved the other two.
 
-- [ ] **Step 5: Run everything**
+- [x] **Step 5: Run everything**
 
 ```bash
 npm run test:run && npm run lint && npm run build && npm run test:e2e
@@ -838,19 +838,19 @@ npm run test:run && npm run lint && npm run build && npm run test:e2e
 ⚠️ **One 30 s e2e timeout fails the whole suite — re-run before blaming your
 change.**
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/tests
 git commit -m "feat: switch the storage ratchet on"
 ```
 
-- [ ] **Step 7: Close out the plan and the spec**
+- [x] **Step 7: Close out the plan and the spec**
 
 Tick every checkbox, record what the research actually found, and commit as
 `docs: close out the storage research plan - 52/52`.
 
-- [ ] **Step 8: Report, and stop**
+- [x] **Step 8: Report, and stop**
 
 🛑 **Do not push and do not run `npm run catalog:push`.** Report the coverage
 figure, the snapshot movement, every corrected value, and that **`main` is far
@@ -867,3 +867,124 @@ ahead of origin with two research tranches in it** — the push and
 - **Coverage and rule 3 agree on every drive**, pinned by a test.
 - No NVMe drive's part page says it connects by cable; `prerendered/` re-rendered.
 - Lint, unit, e2e, build and prerender all green.
+
+---
+
+## ✅ COMPLETE — 52/52, ratchet on
+
+| # | task | rows | commit |
+|---|---|---|---|
+| 1 | Coverage learns storage + the M.2 definition test | — | `ce3d457` |
+| 2 | Fix the two live defects | — | `31d7670` |
+| 3 | Samsung | 12 | `e4d8a20` |
+| 4 | Crucial | 11 | `4c46397`, `55a83b4` |
+| 5 | WD | 11 | `b675509` |
+| 6 | Seagate | 7 | `90bf9c9` |
+| 7 | Kingston | 5 | `95d1cee` |
+| 8 | Toshiba, Lexar, Solidigm, TeamGroup | 6 | `ef23232` |
+| 9 | Switch the ratchet on | — | `b9550ab` |
+
+## What the work actually found
+
+**Nine changed values across 52 rows** — six corrected read speeds, two
+deletions and one brand string — plus **37 `m2Sata` booleans** that did not
+exist at all, and **two live defects fixed before the research even started.**
+
+### The two live defects (Task 2)
+
+🛑 **37 pre-rendered part pages asserted the opposite of the truth.**
+`partPages.js` tested `storageType === 'NVMe'` and no drive has ever carried
+that exact value — every one is `"NVMe SSD"` — so every NVMe drive's page read
+*"connected by cable rather than an M.2 slot."* `partSynergy` reads the same
+field with a regex and was fine. **Only the exact-match reader broke, which is
+why no test caught it**, and why the fix aligns on rule 3's regex rather than
+picking another literal.
+
+⚠️ One brand string: `storage-wd-sn580-2tb` read `"Western Digital"` where the
+other ten WD drives read `"WD"`.
+
+### The corrections
+
+| row | was | is | why |
+|---|---|---|---|
+| Samsung 990 EVO Plus 1TB | 7250 | **7150** | the 2TB's figure on the 1TB row |
+| Seagate Barracuda 1TB | 210 | **220** | |
+| Seagate Barracuda 6TB | 190 | **185** | the one mid-range capacity Seagate rates below 190 |
+| Seagate Barracuda 8TB | 210 | **190** | 210 is published for **no** BarraCuda capacity |
+| Seagate FireCuda 530R 4TB | 7300 | **7400** | the 530's figure on the 530R, a different drive |
+| Kingston NV3 500GB | 6000 | **5000** | its 1TB/2TB siblings' figure |
+| Toshiba P300 2TB | 190 | **deleted** | Toshiba publishes no rate at all |
+| Toshiba X300 8TB | 210 | **deleted** | Toshiba publishes no rate at all |
+
+🛑 **Protocol S's "capacity is part of the SKU" rule was the single most
+valuable line in the plan.** Three of the six corrections — the 990 EVO Plus,
+the NV3 and the Barracudas — are a row carrying a sibling capacity's number.
+The plan's two named predictions both landed: the **Kingston NV3 500GB was
+called "the single most likely wrong value in this project"**, and it was.
+
+⚠️ **And one named prediction was wrong, in the catalogue's favour.** The plan
+called the SN850X 1TB "the clearest per-capacity case in the project" and
+expected it below its siblings. WD rates 1TB, 2TB and 4TB all at 7,300. Two
+other families are flat the same way and must not be "laddered": the Samsung
+990 PRO (7,450 at 1/2/4TB) and the Kingston KC3000 (7,000 at every capacity).
+
+### 🛑 The maker's own page is missing far more often than in any earlier tranche
+
+**Eight of 52 drives could not be read off a live maker page**, against roughly
+three per category before:
+
+- **Crucial MX500 500GB and BX500 1TB** — still sold and named on Crucial's own
+  live SATA listing, but every route to their product pages 404s or bounces,
+  on `www`, `uk` and the bare domain alike, *including when the listing's own
+  link is clicked*. WebFetch is WAF-rejected; the flyer PDFs 503.
+- **WD SN770 and SN580 (4 rows)** — retired from SanDisk's line-up.
+- **Kingston NV2** — retired, superseded by the NV3; datasheets 403 to WebFetch.
+- **Toshiba P300 and X300** — pages live, but **Toshiba publishes no transfer
+  rate for either drive at any capacity**, so both are recorded `unverifiable`.
+
+This is a **new variant of the discontinued-page trap**: the product is not
+discontinued, the page is simply broken, and the maker links to it anyway.
+
+### The unverifiable decision, and why it went two ways
+
+The same deletion was **refused for the Crucial SSDs and accepted for the
+Toshiba HDDs**, and the asymmetry is the point. `specSheetContent` tiers on
+`readMbps >= 400`, so an absent value renders *"spinning disk, cheap bulk
+storage"* — a **falsehood** about an MX500 and simply **true** about a P300.
+Closing a provenance gap by creating a user-facing lie would have been the
+wrong trade in a project whose first commit fixed exactly that. The rendered
+output for both Toshiba drives was checked before committing.
+
+### Tooling
+
+⚠️ **PDFs became the primary source for the first time.** WD's WD Blue product
+brief, Seagate's BarraCuda and FireCuda datasheets and Solidigm's product brief
+were all read with **`pdfjs-dist` in the scratchpad**; WebFetch returns the raw
+binary for every one and cannot parse it. That route supplied **9 of the 52
+rows**, including all four Seagate figures.
+
+⚠️ **WD's consumer SSDs have moved to `sandisk.com`**, and the new pages take a
+`?sku=` parameter — the cleanest per-capacity anchoring found in any tranche.
+
+## Outcome against the success criteria
+
+- ✅ `catalog:coverage` reports **storage 52/52 (100%)**; the five earlier
+  categories unchanged.
+- ✅ Ratchet on, proved non-vacuous on **all four** demands — `storageType`,
+  `capacityGb`, `readMbps` and `m2Sata` each fail by name.
+- ✅ **Coverage and rule 3 agree on every drive**, pinned by a test across all
+  52 rows.
+- ✅ Rule 3's SATA-M.2 branch now has real data behind it: 37 researched
+  booleans instead of a field no part carried. ⚠️ **The spec overstated this as
+  "unreachable dead code"** — `specRules.test.js` already covered it with
+  synthetic fixtures. Corrected in the spec.
+- ✅ No NVMe drive's page says it connects by cable; `prerendered/` re-rendered.
+- ✅ Lint, 1619 unit tests, build and prerender green.
+
+🛑 **The verdict snapshot did not move at all**, and that is the right answer:
+no `storageType` was wrong, so no drive ever changed rule 3's branch. Every
+storage correction was a read speed, which no rule reads.
+
+🛑 **None of this has reached a user.** `main` is far ahead of `origin` with two
+research tranches in it, and the Supabase catalogue is out of step.
+`npm run catalog:push -- --apply` and the push remain the user's to run.

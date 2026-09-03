@@ -148,7 +148,13 @@ export function compatibilityNotes(part, parts = []) {
 
     case 'storage': {
       const boards = of(parts, 'motherboard').length
-      add('Motherboard', part.storageType === 'NVMe'
+      // ⚠️ A REGEX, matching rule 3's definition in specRules.js. This was
+      // `=== 'NVMe'` and no drive has ever carried that exact value — every one
+      // is typed "NVMe SSD" — so the equality was dead and all 37 NVMe drives'
+      // pages said the opposite of the truth, in pre-rendered HTML, until
+      // 2026-09-03. partSynergy reads the same field with a regex and was fine;
+      // only the exact-match reader broke, which is why no test caught it.
+      add('Motherboard', /nvme|m\.2/i.test(part.storageType ?? '')
         ? `An M.2 NVMe drive, and every one of the ${boards} boards here has a slot for it.`
         : `A ${part.storageType} drive, connected by cable rather than an M.2 slot.`)
       add('Capacity', `${part.capacityGb} GB${s.readMbps ? `, reading up to ${s.readMbps} MB/s` : ''}.`)

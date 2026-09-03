@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { coverageFor, EXPECTED, RATCHETED_KEYS, missingRatchetSources, requiredFor } from '../../scripts/catalog-coverage-core.mjs'
+import partsData from '../data/partsData.json'
+import { evaluateSpecRules } from '../lib/specRules'
 
 const gpu = (id, fields = {}, specs = {}) => ({ id, category: 'gpu', ...fields, specs })
 const pcCase = (id, fields = {}, specs = {}) => ({ id, category: 'case', tdp: 0, ...fields, specs })
@@ -258,5 +260,80 @@ describe('the cooler ratchet', () => {
   it('never demands a source for a cooler tdp', () => {
     expect(missingRatchetSources([air], { a: { sockets: src() } }, new Set(['cooler']))).toEqual([])
     expect(RATCHETED_KEYS.cooler).toEqual(['sockets'])
+  })
+})
+
+describe('storage expectations', () => {
+  const drive = (id, storageType, specs = {}) =>
+    ({ id, category: 'storage', storageType, capacityGb: 1000, tdp: 7, specs })
+
+  it('asks an M.2 drive for m2Sata and a cabled drive for nothing extra', () => {
+    expect(requiredFor(EXPECTED.storage, drive('a', 'NVMe SSD', { readMbps: 7000, m2Sata: false })))
+      .toEqual(['storageType', 'capacityGb', 'readMbps', 'm2Sata'])
+    expect(requiredFor(EXPECTED.storage, drive('b', 'HDD', { readMbps: 190 })))
+      .toEqual(['storageType', 'capacityGb', 'readMbps'])
+    expect(requiredFor(EXPECTED.storage, drive('c', 'SATA SSD', { readMbps: 560 })))
+      .toEqual(['storageType', 'capacityGb', 'readMbps'])
+  })
+
+  it('counts a fully sourced drive of each kind as verified', () => {
+    const parts = [
+      drive('a', 'NVMe SSD', { readMbps: 7000, m2Sata: false }),
+      drive('b', 'HDD', { readMbps: 190 }),
+    ]
+    const sources = {
+      a: { storageType: src(), capacityGb: src(), readMbps: src(), m2Sata: src() },
+      b: { storageType: src(), capacityGb: src(), readMbps: src() },
+    }
+    expect(coverageFor('storage', parts, sources).verified).toBe(2)
+  })
+
+  // 🛑 An absent m2Sata and a researched `false` are DIFFERENT claims. Every
+  // mainstream NVMe drive is `false`, and that has to be recorded rather than
+  // left out, or the research cannot be told apart from the gap.
+  it('refuses to verify an M.2 drive whose m2Sata was never recorded', () => {
+    const sources = { a: { storageType: src(), capacityGb: src(), readMbps: src(), m2Sata: src() } }
+    expect(coverageFor('storage', [drive('a', 'NVMe SSD', { readMbps: 7000 })], sources).verified).toBe(0)
+  })
+
+  it('does not count m2Sata against a drive that has no M.2 interface', () => {
+    const parts = [
+      drive('a', 'NVMe SSD', { readMbps: 7000, m2Sata: false }),
+      drive('b', 'HDD', { readMbps: 190 }),
+    ]
+    const c = coverageFor('storage', parts, {})
+    expect(c.total).toBe(2)
+    expect(c.fields.m2Sata.applies).toBe(1)
+    expect(c.fields.readMbps.applies).toBe(2)
+  })
+
+  it('ratchets the two top-level fields and no others', () => {
+    expect(RATCHETED_KEYS.storage).toEqual(['storageType', 'capacityGb'])
+  })
+})
+
+// 🛑 Coverage and rule 3 each hold their OWN copy of "is this an M.2 drive",
+// because scripts/ cannot import src/lib (vite-node is not a dependency). This
+// test is the only thing keeping them honest. If it fails, the two definitions
+// have drifted and coverage will certify a drive against a rule that classifies
+// it differently — which is the exact shape of the partPages.js bug that told
+// 37 NVMe drives' readers the drive connects by cable.
+describe('the M.2 definition', () => {
+  // A board with one NVMe-only M.2 slot and NO SATA ports: it satisfies an M.2
+  // drive and must block a cabled one, so which branch rule 3 took is
+  // observable from the outside.
+  const board = {
+    id: 'b', category: 'motherboard', name: 'Test board',
+    specs: { m2Slots: [{ pcieGen: 4, sata: false }], sataPorts: 0 },
+  }
+
+  it('agrees with rule 3 for every drive in the catalogue', () => {
+    const drives = partsData.filter((p) => p.category === 'storage')
+    expect(drives.length).toBe(52)
+    for (const drive of drives) {
+      const coverageSaysM2 = requiredFor(EXPECTED.storage, drive).includes('m2Sata')
+      const ruleBlocked = evaluateSpecRules({ motherboard: board }, drive).status === 'blocked'
+      expect(coverageSaysM2, `${drive.id} (${drive.storageType})`).toBe(!ruleBlocked)
+    }
   })
 })

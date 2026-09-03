@@ -27,6 +27,16 @@ const RESEARCHED_KEYS = [
   // unsourced values. It is safe in the GLOBAL list because coolers are the
   // only category that carries a `specs.height` at all.
   'height',
+  // ⚠️ Third time for this rule: `readMbps` could only join once all 52 drives
+  // had a source recorded. Safe in the GLOBAL list because storage is the only
+  // category carrying a `specs.readMbps`.
+  //
+  // 🛑 `storageType` and `capacityGb` are deliberately NOT here. Both are
+  // TOP-LEVEL, so this list would never see them - it only reads `part.specs` -
+  // and they are enforced by RATCHETED_KEYS.storage instead. `capacityGb` in
+  // particular is shared with RAM (52 kits carry one), so it could never be a
+  // global researched key anyway.
+  'readMbps',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
@@ -164,7 +174,7 @@ describe('unverifiable records', () => {
 // catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
 // meaning "draws nothing", and demanding provenance for 59 such sentinels would
 // be recording a source for a figure nobody measured.
-const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler'])
+const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage'])
 
 describe('verified categories', () => {
   it('requires a source for every ratcheted field once a category is verified', () => {

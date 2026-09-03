@@ -34,20 +34,28 @@ because both branches currently pass for every catalogue board, the error is
 invisible. The three values in use are `"NVMe SSD"` (37), `"HDD"` (9) and
 `"SATA SSD"` (6), and none has ever been read off a maker's page.
 
-### 🛑 The SATA-M.2 branch is unreachable dead code
+### 🛑 The SATA-M.2 branch never fires for a real build
 
-Rule 3's blocked case for an M.2 drive reads:
+⚠️ **CORRECTED after checking the tests.** This section first said the branch
+was "unreachable dead code". That is too strong: `src/tests/specRules.test.js`
+already covers it with **synthetic** fixtures, and those tests pass.
+
+The accurate statement is narrower and still worth fixing. Rule 3's blocked
+case for an M.2 drive reads:
 
 ```js
 const needsSata = storage.specs?.m2Sata === true
 ```
 
-**No part in the catalogue carries `m2Sata`.** So `needsSata` is always false,
-every M.2 slot counts as usable, and the rule can never return its
-"no M.2 slot on this board accepts SATA" block. The motherboard project
-researched the board half of this — **25 of 70 boards have a SATA-capable M.2,
-and exactly one of those is AM5** — and that work is currently checking against
-a constant.
+**No part in the catalogue carries `m2Sata`** — 0 of 52. So for any real build
+`needsSata` is always false, every M.2 slot counts as usable, and the branch
+cannot fire. The motherboard project researched the board half of this —
+**25 of 70 boards have a SATA-capable M.2, and exactly one of those is AM5** —
+and against real data that work is currently checked against a constant.
+
+**Consequence for the plan:** no new rule-3 tests are needed. What the research
+supplies is the *real* data that makes the existing, already-tested branch
+exercisable — 37 drives carrying a researched boolean instead of nothing.
 
 ### 🛑 A live copy bug on 37 pre-rendered part pages
 
@@ -200,3 +208,57 @@ ratchet.
   (80), then **fans + paste** (61, no rule reads them).
 - `npm run catalog:push` and any push to `origin`. Both the user's to run —
   and `main` is already 15 commits ahead with the cooler tranche in it.
+
+---
+
+## ✅ Outcome — DONE, 52/52, ratchet on
+
+Executed on `feat/storage-catalogue-research`, nine commits. Full detail in
+`docs/superpowers/plans/2026-09-03-storage-catalogue-research.md`.
+
+**Nine changed values across 52 rows** — six corrected read speeds, two
+deletions, one brand string — plus 37 `m2Sata` booleans that did not exist, and
+the two live defects fixed before the research began.
+
+### What the spec got right
+
+- **The two defects were real and worth fixing first.** 37 pre-rendered part
+  pages told readers an NVMe drive connects by cable.
+- **Refusing `m2FormFactor` was correct.** Nothing in the project produced a
+  reason to want it, and the board side still has no slot lengths to check it
+  against.
+- **"Capacity is part of the SKU"** was the most valuable rule in the plan:
+  three of six corrections are a row carrying a sibling capacity's figure.
+- **Pinning coverage and rule 3 to one definition** with a test — the drift it
+  guards against is the exact bug this project fixed.
+
+### What the spec got wrong
+
+1. **"Unreachable dead code" overstated rule 3's SATA-M.2 branch.**
+   `specRules.test.js` already covered it with synthetic fixtures. The accurate
+   claim — no *real* part carried `m2Sata`, so it could not fire for a real
+   build — is narrower, and it meant the plan needed no new rule-3 tests.
+   Corrected in place above.
+2. **The spec assumed the maker's page would be there.** Eight of 52 drives
+   could not be read off one, against roughly three per category before, and
+   the user approved a documented secondary-source exception mid-project.
+
+### The decision worth carrying forward
+
+`unverifiable` deletes the field, and **that is safe for some categories and
+not others**. `specSheetContent` tiers on `readMbps >= 400`, so an absent value
+says *"spinning disk, cheap bulk storage"* — true of a Toshiba HDD, false of a
+Crucial SSD. The same protocol step was therefore **refused for two rows and
+applied to two others**. Check what a deletion renders before taking it.
+
+### ⏭️ Next
+
+**RAM (52 kits).** It is the last rule running on unverified data: rule 5
+refuses **17 kits today** on `specs.sticks` and `capacityGb` nobody checked.
+⚠️ `capacityGb` is shared between RAM and storage — this project put it in the
+per-category ratchet for that reason, and the RAM project will meet the same
+field from the other side. Then CPUs (80), then fans + paste (61).
+
+🛑 **Not shipped.** `main` is far ahead of `origin` with two research tranches
+in it and the Supabase catalogue out of step. The merge, the push and
+`npm run catalog:push -- --apply` are all the user's to run.
