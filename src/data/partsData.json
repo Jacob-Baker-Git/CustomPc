@@ -4511,12 +4511,12 @@
   {
     "id": "ram-gskill-ripjaws-s5-16",
     "category": "ram",
-    "name": "G.Skill Ripjaws S5 DDR5-5600 16GB",
+    "name": "G.Skill Ripjaws S5 DDR5-5600 32GB",
     "brand": "G.Skill",
-    "price": 49.99,
+    "price": 99.99,
     "ramType": "DDR5",
     "speed": 5600,
-    "capacityGb": 16,
+    "capacityGb": 32,
     "tdp": 4,
     "specs": {
       "sticks": 2

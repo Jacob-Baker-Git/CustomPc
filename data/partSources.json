@@ -2879,5 +2879,95 @@
     "storageType": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
     "capacityGb": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03" },
     "readMbps": { "checkedOn": "2026-09-03", "result": "unverifiable", "note": "Toshiba publishes no sustained transfer rate for this drive. Its own datasheet PDF lists form factor, interface, RPM, buffer, average latency, MTTF, warranty, power, physical and environmental specs - and no data rate of any kind, at any capacity. A 2016 Toshiba press release quotes 210 MiB/s for the 7200RPM 2TB P300, but that is a different unit from the catalogue field, is not in the current datasheet, and would be a conversion rather than a reading" }
+  },
+  "ram-gskill-ddr5-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/374/1640229752/F5-6000J3636F16GX2-TZ5RK-F5-6000J3636F16GA2-TZ5RK", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J...16GX2-TZ5)" }
+  },
+  "ram-gskill-ddr5-64": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/374/1665644504/F5-6400J3239G32GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (F5-6400J3239G32GX2-TZ5RK)" }
+  },
+  "ram-gskill-ddr4-16": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/184/1562831134/F4-3600C16D-16GVKC-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (F4-3600C16D-16GVKC)" }
+  },
+  "ram-gskill-ddr5-48": {
+    "ramType": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/products/1/165/374/Trident-Z5-RGB-DDR5-Intel-XMP", "checkedOn": "2026-09-03", "note": "kit of 2 x 24GB (F5-6400J3239F24GX2-TZ5RK)" }
+  },
+  "ram-gskill-ddr5-32-6000": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/396/1673491242/F5-6000J3038F16GX2-FX5-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J3038F16GX2-FX5)" }
+  },
+  "ram-gskill-ddr4-32-3600": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/166/1562823993/F4-3600C18D-32GTZR-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F4-3600C18D-32GTZR)" }
+  },
+  "ram-gskill-ddr5-8000-32": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/374/1669019807/F5-8000J3848H16GX2-TZ5RK-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-8000J3848H16GX2-TZ5RK)" }
+  },
+  "ram-gskill-neo-ddr5-6000-64": {
+    "ramType": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/390/1665020865/F5-6000J3040G32GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (F5-6000J3040G32GX2-TZ5NR)" }
+  },
+  "ram-gskill-ripjaws-s5-16": {
+    "ramType": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/377/1640229565/F5-5600J3636C16GX2-RS5K-F5-5600J3636C16GA2-RS5K", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-5600J3636C16GX2-RS5K)" }
+  },
+  "ram-gskill-ddr4-3200-32": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/184/1536110922/F4-3200C16D-32GVK-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F4-3200C16D-32GVK)" }
+  },
+  "ram-gskill-z5-7200-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/374/1665644656/F5-7200J3445G16GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-7200J3445G16GX2-TZ5RK)" }
+  },
+  "ram-gskill-s5-ddr5-6000-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/377/1664845977/F5-6000J3636F16GX2-RS5K", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J3636F16GX2-RS5K)" }
+  },
+  "ram-gskill-neo-rgb-ddr5-6000-32": {
+    "ramType": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/390/1661410135/F5-6000J3038F16GX2-TZ5NR", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (F5-6000J3038F16GX2-TZ5NR)" }
+  },
+  "ram-gskill-z5-rgb-ddr5-6000-48": {
+    "ramType": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/product/165/374/1682585424/F5-6000J4048F24GX2-TZ5RK", "checkedOn": "2026-09-03", "note": "kit of 2 x 24GB (F5-6000J4048F24GX2-TZ5RK)" }
+  },
+  "ram-gskill-aegis-ddr4-3200-16": {
+    "ramType": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.gskill.com/specification/165/185/1567584549/F4-3200C16D-16GIS-Specification", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (F4-3200C16D-16GIS)" }
   }
 }
