@@ -37,6 +37,16 @@ const RESEARCHED_KEYS = [
   // particular is shared with RAM (52 kits carry one), so it could never be a
   // global researched key anyway.
   'readMbps',
+  // ⚠️ Fourth time for this rule: `sticks` could only join once all 52 RAM kits
+  // had a source. Safe in the GLOBAL list because RAM is the only category that
+  // carries a `specs.sticks` at all.
+  //
+  // 🛑 `ramType`, `capacityGb` and `speed` are deliberately NOT here. All three
+  // are TOP-LEVEL, so this list never sees them. `ramType` and `capacityGb` are
+  // enforced by RATCHETED_KEYS.ram; `speed` is intentionally unenforced by a
+  // unit test (demanded only by the coverage report), because no rule blocks on
+  // it - it feeds buildWarnings advisories, not a compatibility refusal.
+  'sticks',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
@@ -174,7 +184,7 @@ describe('unverifiable records', () => {
 // catalog-coverage-core.mjs. It is not a global list: a case carries `tdp: 0`
 // meaning "draws nothing", and demanding provenance for 59 such sentinels would
 // be recording a source for a figure nobody measured.
-const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage'])
+const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage', 'ram'])
 
 describe('verified categories', () => {
   it('requires a source for every ratcheted field once a category is verified', () => {
