@@ -366,3 +366,32 @@ describe('ram expectations', () => {
     expect(RATCHETED_KEYS.ram).toEqual(['ramType', 'capacityGb'])
   })
 })
+
+describe('cpu expectations', () => {
+  const chip = (id, over = {}) =>
+    ({ id, category: 'cpu', socket: 'AM5', tdp: 65, perfScore: 70, specs: { cores: 6, boostClock: 5.1 }, ...over })
+
+  it('expects the four fields, flat for every processor', () => {
+    expect(requiredFor(EXPECTED.cpu, chip('a')))
+      .toEqual(['socket', 'tdp', 'cores', 'boostClock'])
+    // A legacy Intel chip owes exactly the same four.
+    expect(requiredFor(EXPECTED.cpu, chip('b', { socket: 'LGA1200', tdp: 125, legacy: true, specs: { cores: 8, boostClock: 5.3 } })))
+      .toEqual(['socket', 'tdp', 'cores', 'boostClock'])
+  })
+
+  it('counts a fully sourced processor as verified', () => {
+    const parts = [chip('a')]
+    const sources = { a: { socket: src(), tdp: src(), cores: src(), boostClock: src() } }
+    expect(coverageFor('cpu', parts, sources).verified).toBe(1)
+  })
+
+  it('does not verify a processor whose boostClock was never sourced', () => {
+    const parts = [chip('a')]
+    const sources = { a: { socket: src(), tdp: src(), cores: src() } }
+    expect(coverageFor('cpu', parts, sources).verified).toBe(0)
+  })
+
+  it('ratchets the two top-level block-driving fields and no others', () => {
+    expect(RATCHETED_KEYS.cpu).toEqual(['socket', 'tdp'])
+  })
+})

@@ -84,6 +84,15 @@ export const EXPECTED = {
     required: ['ramType', 'speed', 'capacityGb', 'sticks'],
     optional: [],
   },
+  // The eighth category, flat like RAM: every processor owes all four. Two rules
+  // read a CPU and both block - `socket` (compatibility.js's CPU<->board,
+  // CPU<->cooler and CPU->DDR-type checks) and `tdp` (psuTooSmall + the cooler
+  // warning). `cores` and `boostClock` are the headline specs the spec sheet
+  // prints. `perfScore` is absent: it is a benchmark figure, not a maker spec.
+  cpu: {
+    required: ['socket', 'tdp', 'cores', 'boostClock'],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.
@@ -128,6 +137,12 @@ export const RATCHETED_KEYS = {
   // `speed` is absent deliberately (required by EXPECTED, but no rule blocks on
   // it), and `sticks` is a `specs.*` field enforced by RESEARCHED_KEYS instead.
   ram: ['ramType', 'capacityGb'],
+  // `socket` is the biggest verdict-driver in the catalogue and `tdp` block-
+  // drives psuTooSmall; both top-level. ⚠️ `tdp` is ratcheted HERE and nowhere
+  // else that carries a tdp: a CPU's 58-170 is a real maker number, whereas the
+  // case/PSU/board tdp is a 0/12 sentinel. Per-category keys are what let that
+  // distinction stand. `cores`/`boostClock` are specs, enforced by RESEARCHED_KEYS.
+  cpu: ['socket', 'tdp'],
 }
 
 // Every "<id>.<field>" in a verified category that carries a value but no source.
