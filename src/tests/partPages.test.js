@@ -197,3 +197,33 @@ describe('pairings', () => {
     expect(pairings(gpu, parts).map((s) => s.part.id)).toEqual(pairings(gpu, parts).map((s) => s.part.id))
   })
 })
+
+// 🛑 partPages.js tested `storageType === 'NVMe'`, and NO drive has ever had
+// that exact value - every one is typed "NVMe SSD". The equality was dead, so
+// all 37 NVMe drives' pages asserted the OPPOSITE of the truth, in pre-rendered
+// HTML that shipped. partSynergy reads the same field with a regex and was
+// unaffected: only the exact-match reader broke, which is why nothing caught it
+// and why the fix uses rule 3's regex rather than a different literal.
+describe('a drive is told how it connects', () => {
+  const motherboardNote = (drive) =>
+    compatibilityNotes(drive, parts).find((n) => n.label === 'Motherboard')
+
+  it('does not tell an NVMe drive owner that the drive connects by cable', () => {
+    const nvme = parts.filter((p) => p.category === 'storage' && /nvme|m\.2/i.test(p.storageType ?? ''))
+    expect(nvme.length).toBe(37)
+    for (const drive of nvme) {
+      const mb = motherboardNote(drive)
+      expect(mb, drive.id).toBeTruthy()
+      expect(mb.detail, drive.id).not.toMatch(/connected by cable/)
+      expect(mb.detail, drive.id).toMatch(/M\.2/)
+    }
+  })
+
+  it('still tells a cabled drive owner that it is cabled', () => {
+    const cabled = parts.filter((p) => p.category === 'storage' && !/nvme|m\.2/i.test(p.storageType ?? ''))
+    expect(cabled.length).toBe(15)
+    for (const drive of cabled) {
+      expect(motherboardNote(drive).detail, drive.id).toMatch(/connected by cable/)
+    }
+  })
+})

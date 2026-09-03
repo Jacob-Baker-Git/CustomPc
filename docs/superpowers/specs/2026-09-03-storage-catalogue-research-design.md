@@ -34,20 +34,28 @@ because both branches currently pass for every catalogue board, the error is
 invisible. The three values in use are `"NVMe SSD"` (37), `"HDD"` (9) and
 `"SATA SSD"` (6), and none has ever been read off a maker's page.
 
-### 🛑 The SATA-M.2 branch is unreachable dead code
+### 🛑 The SATA-M.2 branch never fires for a real build
 
-Rule 3's blocked case for an M.2 drive reads:
+⚠️ **CORRECTED after checking the tests.** This section first said the branch
+was "unreachable dead code". That is too strong: `src/tests/specRules.test.js`
+already covers it with **synthetic** fixtures, and those tests pass.
+
+The accurate statement is narrower and still worth fixing. Rule 3's blocked
+case for an M.2 drive reads:
 
 ```js
 const needsSata = storage.specs?.m2Sata === true
 ```
 
-**No part in the catalogue carries `m2Sata`.** So `needsSata` is always false,
-every M.2 slot counts as usable, and the rule can never return its
-"no M.2 slot on this board accepts SATA" block. The motherboard project
-researched the board half of this — **25 of 70 boards have a SATA-capable M.2,
-and exactly one of those is AM5** — and that work is currently checking against
-a constant.
+**No part in the catalogue carries `m2Sata`** — 0 of 52. So for any real build
+`needsSata` is always false, every M.2 slot counts as usable, and the branch
+cannot fire. The motherboard project researched the board half of this —
+**25 of 70 boards have a SATA-capable M.2, and exactly one of those is AM5** —
+and against real data that work is currently checked against a constant.
+
+**Consequence for the plan:** no new rule-3 tests are needed. What the research
+supplies is the *real* data that makes the existing, already-tested branch
+exercisable — 37 drives carrying a researched boolean instead of nothing.
 
 ### 🛑 A live copy bug on 37 pre-rendered part pages
 
