@@ -74,6 +74,16 @@ export const EXPECTED = {
     ],
     optional: [],
   },
+  // The seventh category, and the first FLAT conditional-free one since PSUs:
+  // every kit owes all four fields, so there are no `variants`. Two rules read
+  // a kit and both are covered here - `ramType` (compatibility.js's DDR match
+  // and the DDR5-only-socket block) and `sticks`/`capacityGb` (specRules rule
+  // 5). `speed` is required so a future kit owes a source, but it is not
+  // ratcheted: no rule blocks on it, only buildWarnings advises on it.
+  ram: {
+    required: ['ramType', 'speed', 'capacityGb', 'sticks'],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.
@@ -110,6 +120,14 @@ export const RATCHETED_KEYS = {
   // owes a source, but no rule blocks on it and it is a sequential-read
   // headline that varies with capacity and test conditions.
   storage: ['storageType', 'capacityGb'],
+  // `ramType` hard-blocks in compatibility.js and `capacityGb` block-drives
+  // rule 5; both are top-level, so they belong here rather than in the
+  // specs-only RESEARCHED_KEYS. `capacityGb` is shared with storage, which is
+  // exactly why RATCHETED_KEYS is per-category - the two never collide.
+  //
+  // `speed` is absent deliberately (required by EXPECTED, but no rule blocks on
+  // it), and `sticks` is a `specs.*` field enforced by RESEARCHED_KEYS instead.
+  ram: ['ramType', 'capacityGb'],
 }
 
 // Every "<id>.<field>" in a verified category that carries a value but no source.
