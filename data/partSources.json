@@ -3191,5 +3191,155 @@
     "speed": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
     "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
     "sticks": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (PVV532G640C32K)" }
+  },
+  "cpu-ryzen-9-7950x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-7700x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-7600x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-7900x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-7800x3d": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-7600": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-8500g": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8500g.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8500g.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8500g.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8500g.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-7900": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-7700": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-7950x3d": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x3d.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x3d.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x3d.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x3d.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-8700g": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700g.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700g.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700g.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700g.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-9950x3d": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-9950x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-9800x3d": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-9900x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-9700x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-9600x": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-7500f": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7500f.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7500f.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7500f.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7500f.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-9-7900x3d": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x3d.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x3d.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x3d.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x3d.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-9600": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-8400f": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8400f.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8400f.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8400f.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8400f.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-8600g": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8600g.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8600g.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8600g.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8600g.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-8700f": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700f.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700f.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700f.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-7-8700f.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-5-9500f": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9500f.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9500f.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9500f.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9500f.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
+  },
+  "cpu-ryzen-7-9700f": {
+    "socket": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03", "note": "Default TDP (base power)" },
+    "cores": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700f.html", "checkedOn": "2026-09-03", "note": "Max Boost Clock, GHz" }
   }
 }
