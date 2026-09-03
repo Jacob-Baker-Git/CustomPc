@@ -183,3 +183,38 @@ The 29-row and 26-row tranches may split further in the plan; the two code tasks
 - **Fans + paste** (61 rows, no rule reads them) — the last category after this.
 - `npm run catalog:push` and any push to `origin`. Both the user's to run — and
   `main` is already far ahead with the cooler, storage and RAM tranches in it.
+
+---
+
+## ✅ Outcome — DONE, 79/79, ratchet on
+
+Executed on `feat/cpu-catalogue-research`, seven commits. Full detail in
+`docs/superpowers/plans/2026-09-03-cpu-catalogue-research.md`.
+
+**The cleanest tranche of the eight: 78 of 80 rows exactly right.** One value
+correction (Ryzen 7 9700F boost `5.4 → 5.5`) and one removal — `cpu-ryzen-9-9900`
+was a phantom SKU AMD never shipped (amd.com 404, absent from TechPowerUp, and
+already flagged "not listed" in the perf source table). User approved deleting
+it; the catalogue is now **79 CPUs**.
+
+### What the spec got right
+
+- **Base TDP** was correct — Intel Base Power / AMD Default TDP, matching the
+  existing data; taking Max Turbo Power would have been a mass value shift.
+- **`socket` was already correct on all 79** — the biggest verdict-driver in the
+  catalogue needed no fixing, only sourcing.
+
+### What the spec did not anticipate
+
+- **A phantom part.** Removing one reached FOUR files (`partsData`, the
+  `cpuSpecs.json` note, `public/sitemap.xml`, `prerendered/parts.html`) plus the
+  `verdictSpread` snapshot. The RAM Ripjaws precedent covered the *decision*; the
+  deletion fan-out was new.
+- **The perf table's `unverified` notes vindicated the catalogue.** All three it
+  flagged (12900KS, Ultra 9 285, 10700K) confirmed the catalogue's boost right
+  and the perf source wrong.
+
+### ⏭️ Next
+
+**Fans + paste (61)** — the last category. 🛑 **Not shipped** — the merge, push
+and `npm run catalog:push -- --apply` are the user's.

@@ -1,6 +1,6 @@
 # CPU catalogue research Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Bring all 80 CPUs up to the research standard — verify `socket`, `tdp`, `specs.cores` and `specs.boostClock` against each maker's spec page, record provenance, and switch the CPU ratchet on.
 
@@ -162,7 +162,7 @@ source entry.**
 - Modify: `scripts/catalog-coverage-core.mjs` (`EXPECTED`, `RATCHETED_KEYS`)
 - Test: `src/tests/catalogCoverage.test.js`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `src/tests/catalogCoverage.test.js`:
 
@@ -197,7 +197,7 @@ describe('cpu expectations', () => {
 })
 ```
 
-- [ ] **Step 2: Run them and watch them fail**
+- [x] **Step 2: Run them and watch them fail**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -205,7 +205,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: FAIL — `EXPECTED.cpu` and `RATCHETED_KEYS.cpu` are `undefined`.
 
-- [ ] **Step 3: Add the expectations**
+- [x] **Step 3: Add the expectations**
 
 In `scripts/catalog-coverage-core.mjs`, add to `EXPECTED` after `ram`:
 
@@ -233,7 +233,7 @@ Add to `RATCHETED_KEYS` after `ram`:
   cpu: ['socket', 'tdp'],
 ```
 
-- [ ] **Step 4: Run the tests**
+- [x] **Step 4: Run the tests**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -241,7 +241,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Confirm the category reports zero and the others are unchanged**
+- [x] **Step 5: Confirm the category reports zero and the others are unchanged**
 
 ```bash
 npm run catalog:coverage
@@ -251,7 +251,7 @@ Expected: `cpu: 0/80 parts fully researched (0%)`, with `socket 80/80`,
 `tdp 80/80`, `cores 80/80`, `boostClock 80/80` all **present**, 0 sourced. The
 seven finished categories must print **byte-identically** at 100%.
 
-- [ ] **Step 6: Full suite, lint, commit**
+- [x] **Step 6: Full suite, lint, commit**
 
 ```bash
 npm run test:run && npm run lint
@@ -309,9 +309,9 @@ own rows, traps and commit, and refer to Task 2 Step 2 for the writer.
 mainstream chip but differ in boost** — read each SKU. ⚠️ AMD's 65W parts have a
 much higher PPT than 65W; take **Default TDP**, not PPT.
 
-- [ ] **Step 1: Research all 26 rows under protocol P**
+- [x] **Step 1: Research all 26 rows under protocol P**
 
-- [ ] **Step 2: Write the values with the house serializer**
+- [x] **Step 2: Write the values with the house serializer**
 
 Create `<scratchpad>/apply-tranche.mjs` — written once, reused by Tasks 3–5:
 
@@ -385,7 +385,7 @@ node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"
 
 Expected: two `MATCH` lines, any correction lines, then `applied 26 rows`.
 
-- [ ] **Step 3: Check the diff is small**
+- [x] **Step 3: Check the diff is small**
 
 ```bash
 git diff --stat src/data/partsData.json data/partSources.json
@@ -395,7 +395,7 @@ Expected: tens of lines in `partsData` at most (only corrections), a large
 block of new `partSources` entries. **A multi-thousand-line `partsData` diff
 means the serializer was bypassed — revert and fix.**
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 ```bash
 npm run catalog:coverage && npm run test:run && npm run lint
@@ -406,7 +406,7 @@ was corrected** — update the snapshot with `npx vitest run -u
 src/tests/verdictSpread.test.js`, then read the diff: only `cpu` may move, and
 each change must trace to a specific corrected socket.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -440,11 +440,11 @@ git commit -m "data: research the twenty-six AMD AM5 processors"
 are Zen 3 APUs at 65W; confirm each against its own page. ⚠️ If a Ryzen 3000
 page has been retired, record `unverifiable` rather than guessing.
 
-- [ ] **Step 1: Research all 13 rows under protocol P**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect `applied 13 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cpu: 39/80 (49%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all 13 rows under protocol P**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect `applied 13 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cpu: 39/80 (49%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -496,11 +496,11 @@ socket but differ per SKU** in tdp/cores/boost — read each. ⚠️ `KS` parts 
 150W base and the highest boost (14900KS 6.2, 12900KS 5.5). ⚠️ `i3` parts are
 58/60W — genuine, do not round to 65.
 
-- [ ] **Step 1: Research all 29 rows under protocol P**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect `applied 29 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cpu: 68/80 (85%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all 29 rows under protocol P**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect `applied 29 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cpu: 68/80 (85%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -533,11 +533,11 @@ Base Power" is 125. ⚠️ Core Ultra boost: take the **Max Turbo Frequency**
 (285K 5.7). ⚠️ The 11900K is 8 cores (Rocket Lake capped at 8), not 10 — a
 believable place for a wrong `cores`.
 
-- [ ] **Step 1: Research all 12 rows under protocol P**
-- [ ] **Step 2: Write them with the Task 2 Step 2 writer** (expect `applied 12 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `cpu: 80/80 (100%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all 12 rows under protocol P**
+- [x] **Step 2: Write them with the Task 2 Step 2 writer** (expect `applied 12 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `cpu: 80/80 (100%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -550,7 +550,7 @@ git commit -m "data: research the six Core Ultra and six LGA1200 processors"
 
 **Files:** `src/tests/partSources.test.js`
 
-- [ ] **Step 1: Check every key for a collision BEFORE adding it**
+- [x] **Step 1: Check every key for a collision BEFORE adding it**
 
 🛑 Gotcha 10. Run this first:
 
@@ -563,7 +563,7 @@ shows `motherboard`; `tdp` shows every category — both are top-level, handled 
 `RATCHETED_KEYS` per category, not this specs-only list.) If `cores`/`boostClock`
 show another category, they go in `RESEARCHED_KEYS_BY_CATEGORY`.
 
-- [ ] **Step 2: Add the keys and the category**
+- [x] **Step 2: Add the keys and the category**
 
 In `src/tests/partSources.test.js`, add to `RESEARCHED_KEYS`:
 
@@ -583,7 +583,7 @@ and add `cpu` to `VERIFIED_CATEGORIES`:
 const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage', 'ram', 'cpu'])
 ```
 
-- [ ] **Step 3: Run the suite**
+- [x] **Step 3: Run the suite**
 
 ```bash
 npm run test:run
@@ -592,7 +592,7 @@ npm run test:run
 Expected: PASS. A failure names the exact `<id>.<field>` still missing
 provenance — finish that row rather than weakening the list.
 
-- [ ] **Step 4: Prove the ratchet is non-vacuous on all four demanded keys**
+- [x] **Step 4: Prove the ratchet is non-vacuous on all four demanded keys**
 
 Delete one CPU's `socket` source, run, expect FAIL naming it; restore. Repeat
 for `tdp` (the other `RATCHETED_KEYS.cpu` key) and for `cores`/`boostClock` (the
@@ -604,7 +604,7 @@ original is the clean way (see the RAM plan's `nonvacuity.mjs`).
 `missingRatchetSources`; `cores`/`boostClock` through the `RESEARCHED_KEYS` loop
 — different code paths, so test all four.
 
-- [ ] **Step 5: Run everything**
+- [x] **Step 5: Run everything**
 
 ```bash
 npm run test:run && npm run lint && npm run build && npm run test:e2e
@@ -613,20 +613,20 @@ npm run test:run && npm run lint && npm run build && npm run test:e2e
 ⚠️ **One 30 s e2e timeout fails the whole suite — re-run before blaming your
 change.** No prerender step unless a CPU name changed (Task 2–5 note).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/tests
 git commit -m "feat: switch the cpu ratchet on"
 ```
 
-- [ ] **Step 7: Close out the plan and the spec**
+- [x] **Step 7: Close out the plan and the spec**
 
 Tick every checkbox, record what the research found — the real `socket`/`tdp`/
 `cores`/`boostClock` corrections, whether the verdict snapshot moved and why —
 and commit as `docs: close out the cpu research plan - 80/80`.
 
-- [ ] **Step 8: Report, and stop**
+- [x] **Step 8: Report, and stop**
 
 🛑 **Do not push and do not run `npm run catalog:push`.** Report the coverage
 figure, the snapshot movement, every corrected value, and that **`main` is far
@@ -648,6 +648,60 @@ this branch, the push and `npm run catalog:push -- --apply` are the user's.
 
 ---
 
-## Outcome
+## Outcome — DONE, 79/79, ratchet on
 
-_Filled in at close-out (Task 6 Step 7)._
+Executed on `feat/cpu-catalogue-research`, seven commits. `catalog:coverage`
+reports **cpu 79/79 (100%)** (was 80 — one phantom removed); the seven earlier
+categories unchanged. Lint, unit, build, 101 e2e and prerender all green.
+
+### The cleanest tranche yet: one correction, one removal
+
+Of 80 rows, **78 were exactly right** — socket, base TDP, total cores and max
+boost all correct. The AMD half (39) and Intel half (41) both verified against
+the maker's own page (amd.com, ark.intel.com) with essentially no drift.
+
+| kit | change | why |
+|---|---|---|
+| AMD Ryzen 7 9700F | boost 5.4 → **5.5** | amd.com lists Max Boost 5.5 GHz |
+| AMD Ryzen 9 9900 | **removed** (80 → 79 CPUs) | a phantom SKU AMD never shipped |
+
+🛑 **The phantom `cpu-ryzen-9-9900`.** Three authoritative checks — amd.com
+(404), general search (only ever the 9900X), and TechPowerUp (only the 9900X) —
+confirmed AMD never shipped a non-X Ryzen 9 9900. The perf source table had
+already flagged it "not listed". Its two natural re-point targets (the 9900X,
+and the real 65W 12-core 7900) **both already existed**, so it was a redundant
+phantom, not a rename candidate. **User approved removal.** This is the RAM
+Ripjaws S5 situation with a deletion twist: removing a part reached FOUR files —
+`partsData`, the `cpuSpecs.json` note, `public/sitemap.xml` (a URL per part) and
+`prerendered/parts.html` — plus the `verdictSpread` snapshot (ok 26 → 25 per
+build). Every one was regenerated and the diffs traced back to the one removal.
+
+### What the spec got right
+
+- **Base TDP was the right call.** Intel lists Base Power (125) and Max Turbo
+  Power (253) on one page; taking the base kept every value consistent with the
+  existing data. AMD Default TDP likewise.
+- **`socket` is THE field, and it was already correct.** 4041 of 5600 CPU×board
+  pairings block on it; not one socket was wrong, so the verdict grid only moved
+  for the *removed* part, never a corrected one.
+- **No new field, no new rule, no latent bug** — confirmed.
+
+### What the spec did not anticipate
+
+- **A phantom part.** The spec planned for wrong values and dead pages, not for a
+  catalogue entry describing a product that was never made. The RAM re-point
+  policy covered the decision, but the *deletion* fan-out (sitemap, snapshot,
+  prerender, perf-note) was new for a research tranche.
+- **The perf source table's `unverified` notes are a gift, not a warning.** Three
+  it flagged as "source vs catalogue, unresolved" — 12900KS 5.5, Ultra 9 285
+  5.6, 10700K 5.1 — all confirmed the **catalogue right and the perf source
+  wrong**. The catalogue's boost figures are more trustworthy than that table.
+
+### ⏭️ Next
+
+**Fans + paste (61 rows)** — the last category, and the easiest: no rule reads
+either, so it is pure provenance with no ratchet-blocking risk.
+
+🛑 **Not shipped.** `main` is far ahead of `origin` with the cooler, storage and
+RAM tranches in it; this branch is unmerged on top. The merge, `git push` and
+`npm run catalog:push -- --apply` are all the user's to run.
