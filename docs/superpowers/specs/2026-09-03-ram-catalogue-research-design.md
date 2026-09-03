@@ -226,3 +226,44 @@ Brand tranches, so each sits on one maker's spec-page layout. Five data tasks,
   after this one.
 - `npm run catalog:push` and any push to `origin`. Both the user's to run —
   and `main` is already far ahead with the cooler and storage tranches in it.
+
+---
+
+## ✅ Outcome — DONE, 52/52, ratchet on
+
+Executed on `feat/ram-catalogue-research`, eight commits. Full detail in
+`docs/superpowers/plans/2026-09-03-ram-catalogue-research.md`.
+
+**Four data corrections across 52 kits** — three single-DIMM `sticks` fixes
+(Corsair, TeamGroup, Crucial 16GB DDR5, all `2 → 1`) and one re-point (G.Skill
+Ripjaws S5 16GB → 32GB, a product G.Skill does not make), plus the pluralisation
+bug fixed first.
+
+### What the spec got right
+
+- **The pluralisation bug was real and shipped** — two 8GB kits rendered "1 sticks".
+- **The single-DIMM hypothesis landed**, narrowly: 3 of ~13 16GB kits, all DDR5
+  16GB budget/entry parts whose maker offering *at that speed* is a single 1×16.
+
+### What the spec got wrong
+
+1. **`sticks:2` was far less suspect than feared.** 48 of 52 were correct. The
+   "64GB DDR4 = 4×16" worry did not materialise (Corsair's is 2×32), and no 32GB+
+   kit was a single. Kit-branded lines (Kingston Fury, Ballistix, Viper Steel,
+   Ripjaws V/Aegis) sell real 2×8 kits at 16GB and correctly kept `sticks:2`.
+2. **The memory's "17 kits refused" was wrong** — corrected in this spec before
+   work began. Rule 5 blocks 4 pairings / 1 kit; 17 is the DDR4 count.
+
+### The decision worth carrying forward
+
+**A wrong stick count is a provenance problem, not a live-verdict problem here.**
+`verdictSpread` did not move: a `2 → 1` correction cannot flip rule 5, so the
+value of the research is the sourcing and the displayed copy, not a changed
+compatibility answer. Contrast storage, where a `storageType` correction *could*
+have flipped rule 3's branch — RAM's block-driving field (`sticks`) is bounded
+below the board's slot count in every real build.
+
+### ⏭️ Next
+
+**CPUs (80)**, then **fans + paste (61)**. 🛑 **Not shipped** — the merge, push
+and `npm run catalog:push -- --apply` are all the user's to run.

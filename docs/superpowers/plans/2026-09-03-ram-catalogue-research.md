@@ -1,6 +1,6 @@
 # RAM catalogue research Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Bring all 52 RAM kits up to the research standard — verify `ramType`, `capacityGb`, `speed` and `specs.sticks` against each maker's page, record provenance, and stop `specSheetContent` rendering "1 sticks".
 
@@ -182,7 +182,7 @@ app's own draw estimate, like the motherboard/PSU/cooler `tdp`.
 - Modify: `scripts/catalog-coverage-core.mjs` (`EXPECTED`, `RATCHETED_KEYS`)
 - Test: `src/tests/catalogCoverage.test.js`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `src/tests/catalogCoverage.test.js`:
 
@@ -217,7 +217,7 @@ describe('ram expectations', () => {
 })
 ```
 
-- [ ] **Step 2: Run them and watch them fail**
+- [x] **Step 2: Run them and watch them fail**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -225,7 +225,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: FAIL — `EXPECTED.ram` and `RATCHETED_KEYS.ram` are `undefined`.
 
-- [ ] **Step 3: Add the expectations**
+- [x] **Step 3: Add the expectations**
 
 In `scripts/catalog-coverage-core.mjs`, add to `EXPECTED` after `storage`:
 
@@ -256,7 +256,7 @@ Add to `RATCHETED_KEYS` after `storage`:
   ram: ['ramType', 'capacityGb'],
 ```
 
-- [ ] **Step 4: Run the tests**
+- [x] **Step 4: Run the tests**
 
 ```bash
 npx vitest run src/tests/catalogCoverage.test.js
@@ -264,7 +264,7 @@ npx vitest run src/tests/catalogCoverage.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Confirm the category reports zero and the others are unchanged**
+- [x] **Step 5: Confirm the category reports zero and the others are unchanged**
 
 ```bash
 npm run catalog:coverage
@@ -274,7 +274,7 @@ Expected: `ram: 0/52 parts fully researched (0%)`, with `ramType 52/52`,
 `speed 52/52`, `capacityGb 52/52` and `sticks 52/52` all **present** but
 0 sourced. The six finished categories must print **byte-identically** at 100%.
 
-- [ ] **Step 6: Full suite, lint, commit**
+- [x] **Step 6: Full suite, lint, commit**
 
 ```bash
 npm run test:run && npm run lint
@@ -295,7 +295,7 @@ spread it.**
 - Modify: `src/lib/specSheetContent.js:98`
 - Test: `src/tests/specSheetCopy.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Add to `src/tests/specSheetCopy.test.js` (it already imports `insight`, `partsData`
 and defines `ofCat`):
@@ -321,7 +321,7 @@ describe('a single-DIMM kit is not described as "1 sticks"', () => {
 })
 ```
 
-- [ ] **Step 2: Run it and watch it fail**
+- [x] **Step 2: Run it and watch it fail**
 
 ```bash
 npx vitest run src/tests/specSheetCopy.test.js
@@ -329,7 +329,7 @@ npx vitest run src/tests/specSheetCopy.test.js
 
 Expected: FAIL — the two 8GB kits render "1 sticks".
 
-- [ ] **Step 3: Fix the pluralisation**
+- [x] **Step 3: Fix the pluralisation**
 
 `src/lib/specSheetContent.js:98` — replace:
 
@@ -345,7 +345,7 @@ with:
       return `${part.capacityGb}GB across ${s.sticks ?? 2} stick${(s.sticks ?? 2) === 1 ? '' : 's'} of ${part.ramType}-${part.speed}. ` +
 ```
 
-- [ ] **Step 4: Run the test and the sibling copy suite**
+- [x] **Step 4: Run the test and the sibling copy suite**
 
 ```bash
 npx vitest run src/tests/specSheetCopy.test.js
@@ -354,7 +354,7 @@ npx vitest run src/tests/specSheetCopy.test.js
 Expected: PASS, and the existing "described in transfer rates, not clocks" block
 still green.
 
-- [ ] **Step 5: Re-render and check the diff**
+- [x] **Step 5: Re-render and check the diff**
 
 ```bash
 npm run prerender && git diff --stat prerendered/
@@ -364,7 +364,7 @@ Expected: the two 8GB kits' pages change from "1 sticks" to "1 stick". ⚠️ **
 failed prerender leaves the folder untouched, so a clean `git diff` can also mean
 it never ran** — read the command's own output line.
 
-- [ ] **Step 6: Full suite, lint, commit**
+- [x] **Step 6: Full suite, lint, commit**
 
 ```bash
 npm run test:run && npm run lint
@@ -415,13 +415,13 @@ standard fields. ⚠️ The 48GB kits are 2×24 and the 64GB kits 2×32 — conf
 not assume. ⚠️ G.Skill's specs are on a per-kit tabbed page; the "Specification"
 tab lists the DIMM count as "2" or the module organisation.
 
-- [ ] **Step 1: Research all fifteen rows under protocol M**
+- [x] **Step 1: Research all fifteen rows under protocol M**
 
 For each id, open G.Skill's page for that exact kit, read `ramType`,
 `capacityGb`, `speed` and `specs.sticks`, run the division and SKU cross-checks,
 and record the URL you opened.
 
-- [ ] **Step 2: Write the values with the house serializer**
+- [x] **Step 2: Write the values with the house serializer**
 
 Create `<scratchpad>/apply-tranche.mjs` — written once, reused by Tasks 4–7:
 
@@ -495,7 +495,7 @@ node "$CLAUDE_SCRATCHPAD/apply-tranche.mjs"
 Expected: two `MATCH` lines from `house-json`, any `sticks …` correction lines,
 then `applied 15 rows`.
 
-- [ ] **Step 3: Check the diff is small**
+- [x] **Step 3: Check the diff is small**
 
 ```bash
 git diff --stat src/data/partsData.json data/partSources.json
@@ -504,7 +504,7 @@ git diff --stat src/data/partsData.json data/partSources.json
 Expected: tens of lines. **A multi-thousand-line diff means the serializer was
 bypassed — revert and fix.**
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 ```bash
 npm run catalog:coverage && npm run test:run && npm run lint
@@ -518,7 +518,7 @@ is really 4×16 marked 2) flips rule 5 on a 2-slot board, and a `ramType` or
 `src/tests/verdictSpread.test.js` fails, update its snapshot and **read the
 diff**: every change must be explicable by a specific corrected value.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -557,11 +557,11 @@ not collected; do not add a field for them. ⚠️ The 96GB kit is 2×48 and the
 64GB DDR5 kits are 2×32 — confirm. ⚠️ Corsair's spec tab lists "SDRAM Capacity"
 per module and "Memory Kit Capacity" total; the stick count is the kit ÷ module.
 
-- [ ] **Step 1: Research all thirteen rows under protocol M**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect two `MATCH` lines, then `applied 13 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `ram: 28/52 (54%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all thirteen rows under protocol M**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect two `MATCH` lines, then `applied 13 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `ram: 28/52 (54%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -589,11 +589,11 @@ suffix `1` = single module, `2` = kit of two. ⚠️ Kingston sells Fury Beast a
 Renegade as both single sticks and matched kits at the same capacity; the SKU is
 the only reliable discriminator. ⚠️ The 64GB Renegade is 2×32 — confirm.
 
-- [ ] **Step 1: Research all eight rows under protocol M**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 8 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `ram: 36/52 (69%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all eight rows under protocol M**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 8 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `ram: 36/52 (69%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -621,11 +621,11 @@ candidates in the project. ⚠️ **TeamGroup publishes several regional spec ta
 that disagree** (the storage project hit this with the MP44L); take the global
 `teamgroupinc.com` figures. ⚠️ The 48GB T-Create is 2×24 — confirm.
 
-- [ ] **Step 1: Research all seven rows under protocol M**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 7 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `ram: 43/52 (83%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all seven rows under protocol M**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 7 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `ram: 43/52 (83%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -658,11 +658,11 @@ you land. ⚠️ `ram-crucial-ddr4-16` (Ballistix) and `ram-patriot-ddr4-16` (Vi
 Steel) are the other 16GB single-vs-pair candidates. ⚠️ The 64GB Crucial Pro is
 2×32 — confirm.
 
-- [ ] **Step 1: Research all nine rows under protocol M**
-- [ ] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 9 rows`)
-- [ ] **Step 3: Check the diff is small**
-- [ ] **Step 4: Verify** — expect `ram: 52/52 parts fully researched (100%)` and PASS
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Research all nine rows under protocol M**
+- [x] **Step 2: Write them with the Task 3 Step 2 writer** (expect `applied 9 rows`)
+- [x] **Step 3: Check the diff is small**
+- [x] **Step 4: Verify** — expect `ram: 52/52 parts fully researched (100%)` and PASS
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/data/partsData.json data/partSources.json
@@ -675,7 +675,7 @@ git commit -m "data: research the six Crucial and three Patriot kits"
 
 **Files:** `src/tests/partSources.test.js`, then `prerendered/*`
 
-- [ ] **Step 1: Check every key for a collision BEFORE adding it**
+- [x] **Step 1: Check every key for a collision BEFORE adding it**
 
 🛑 Gotcha 5. Run this first:
 
@@ -689,7 +689,7 @@ Expected: `sticks` appears **only** under `ram`. (`capacityGb` also shows
 already handled.) If `sticks` shows another category, it goes in
 `RESEARCHED_KEYS_BY_CATEGORY`, not the global list.
 
-- [ ] **Step 2: Add the key and the category**
+- [x] **Step 2: Add the key and the category**
 
 In `src/tests/partSources.test.js`, add to `RESEARCHED_KEYS`:
 
@@ -712,7 +712,7 @@ and add `ram` to `VERIFIED_CATEGORIES`:
 const VERIFIED_CATEGORIES = new Set(['gpu', 'case', 'psu', 'motherboard', 'cooler', 'storage', 'ram'])
 ```
 
-- [ ] **Step 3: Run the suite**
+- [x] **Step 3: Run the suite**
 
 ```bash
 npm run test:run
@@ -721,7 +721,7 @@ npm run test:run
 Expected: PASS. A failure names the exact `<id>.<field>` still missing
 provenance — finish that row rather than weakening the list.
 
-- [ ] **Step 4: Prove the ratchet is non-vacuous on all three demanded keys**
+- [x] **Step 4: Prove the ratchet is non-vacuous on all three demanded keys**
 
 Delete one kit's `ramType` source, run, expect FAIL naming it; restore. Repeat
 for `capacityGb` (the other `RATCHETED_KEYS.ram` key) and for `sticks` (the
@@ -737,7 +737,7 @@ one key — `ramType` and `capacityGb` fail through `missingRatchetSources`,
 `sticks` through the `RESEARCHED_KEYS` loop; they are different code paths and
 checking one proves nothing about the others.
 
-- [ ] **Step 5: Re-render — the data tranches left the part pages stale**
+- [x] **Step 5: Re-render — the data tranches left the part pages stale**
 
 🛑 **`partPages.js:145` prints "across N stick(s)" on every RAM part page**, so
 each `sticks` correction in Tasks 3–7 changed a page that was not re-rendered.
@@ -751,7 +751,7 @@ Expected: the part pages for every kit whose `sticks` changed. ⚠️ Read the
 command's own output line — a failed prerender leaves the folder untouched and
 `git diff` then lies "clean".
 
-- [ ] **Step 6: Run everything**
+- [x] **Step 6: Run everything**
 
 ```bash
 npm run test:run && npm run lint && npm run build && npm run test:e2e
@@ -760,21 +760,21 @@ npm run test:run && npm run lint && npm run build && npm run test:e2e
 ⚠️ **One 30 s e2e timeout fails the whole suite — re-run before blaming your
 change.**
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/tests prerendered
 git commit -m "feat: switch the ram ratchet on"
 ```
 
-- [ ] **Step 8: Close out the plan and the spec**
+- [x] **Step 8: Close out the plan and the spec**
 
 Tick every checkbox, record what the research actually found — the real `sticks`
 corrections, any `capacityGb`/`ramType`/`speed` changes, whether the verdict
 snapshot moved and why — and commit as
 `docs: close out the ram research plan - 52/52`.
 
-- [ ] **Step 9: Report, and stop**
+- [x] **Step 9: Report, and stop**
 
 🛑 **Do not push and do not run `npm run catalog:push`.** Report the coverage
 figure, the snapshot movement, every corrected value, and that **`main` is far
@@ -797,6 +797,70 @@ of this branch, the push and `npm run catalog:push -- --apply` are the user's.
 
 ---
 
-## Outcome
+## Outcome — DONE, 52/52, ratchet on
 
-_Filled in at close-out (Task 8 Step 8)._
+Executed on `feat/ram-catalogue-research`, eight commits. `catalog:coverage`
+reports **ram 52/52 (100%)**; the six earlier categories unchanged. Lint, 1625
+unit tests, build, 101 e2e and prerender all green.
+
+### Four data corrections across 52 kits
+
+`sticks:2` was **correct for 48 of 52 kits** — kit-branded RAM at 16–96GB is
+genuinely dual-DIMM. The four corrections:
+
+| kit | was | is | why |
+|---|---|---|---|
+| Corsair Vengeance DDR5-5600 16GB | 2 sticks | **1** | Corsair's 16GB at 5600 is a single 1×16 (`CMK16GX5M1B5600C40`); the 2×8 exists only at 5200 |
+| TeamGroup Elite DDR5-5600 16GB | 2 sticks | **1** | the DESKTOP part is a single 1×16 (`TED516G5600C4601`); the 2×8 is a laptop SO-DIMM |
+| Crucial DDR5-4800 16GB | 2 sticks | **1** | the plain 16GB is a single module (`CT16G48C40U5`); the 2×16 kit is a different SKU |
+| G.Skill Ripjaws S5 DDR5-5600 16GB | 16GB | **32GB** | G.Skill makes no 16GB Ripjaws S5 DDR5-5600 (smallest is 32GB 2×16); re-pointed, price raised 49.99 → 99.99 |
+
+🛑 **Three of the four are the same pattern**: a DDR5 16GB budget/entry kit whose
+maker's 16GB offering *at that speed* is a single 1×16 module, not a 2×8 pair.
+Lines that DO sell a real 2×8 at 16GB (Kingston Fury Beast, Crucial Ballistix,
+Patriot Viper Steel, G.Skill Ripjaws V/Aegis) correctly kept `sticks:2`.
+
+### What the spec got right
+
+- **The pluralisation bug was real and shipped** — two 8GB kits rendered "1 sticks".
+- **The single-DIMM hypothesis for 16GB kits landed**, but narrowly: 3 of ~13
+  16GB kits, all DDR5 at 4800–5600.
+
+### What the spec got wrong
+
+- **`sticks:2` was far less suspect than the spec feared.** 48 of 52 were right.
+  The "64GB DDR4 = 4×16" worry did not materialise (Corsair's is 2×32), and no
+  32GB+ kit was a single module.
+- **The "17 kits refused" figure was wrong** (corrected in the spec before work
+  began): rule 5 blocks **4 pairings / 1 kit** today; 17 is the DDR4 count.
+
+### The verdict snapshot did not move
+
+`verdictSpread` stayed green. A `sticks` 2→1 correction cannot flip rule 5
+(1 ≤ every board's slots, as 2 was), and the re-pointed Ripjaws S5 at 32GB is
+still under every board's max. Every correction fixes provenance and displayed
+copy, not a live verdict — the honest outcome for a category whose data was
+merely *unsourced*, not wrong in a rule-visible way.
+
+### Method
+
+Verified via each maker's own SKU, which encodes the stick count — G.Skill
+`16GX2`/`8GX2`, Corsair/Kingston `M2`/`M1`/`K2`, TeamGroup `DC`, Crucial `2K` —
+read off the maker's product/spec/datasheet page and corroborated across
+retailers. No maker page was unreadable, so unlike storage no secondary-source
+exception was needed.
+
+### ⚠️ Flagged for the user
+
+- **G.Skill Ripjaws S5** was re-pointed 16GB → 32GB and priced 49.99 → 99.99. If
+  you want a G.Skill 16GB DDR5 option back, there is no real one in that line —
+  a different sub-brand or a price tweak is your call.
+
+### ⏭️ Next
+
+**CPUs (80)**, then **fans + paste (61, no rule reads them)** — the last two
+categories.
+
+🛑 **Not shipped.** `main` is far ahead of `origin` with the cooler + storage
+tranches, and this branch is unmerged on top. The merge, `git push` and
+`npm run catalog:push -- --apply` are all the user's to run.
