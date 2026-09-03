@@ -2778,5 +2778,42 @@
     "storageType": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
     "capacityGb": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03" },
     "readMbps": { "url": "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-blue-hdd/product-brief-western-digital-wd-blue-pc-hdd.pdf", "checkedOn": "2026-09-03", "note": "WD's WD Blue PC HDD product brief gives Internal Transfer Rate (max) = 180 MB/s for this capacity. Read out of the PDF with pdfjs-dist: WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-1tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST1000DM014, 7200RPM: 220 MB/s. WAS 210 - the 1TB and the 2TB ST2000DM008 are the fast 7200RPM pair in this family, not the 210 the row carried. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-2tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "Seagate lists TWO 2TB models: ST2000DM005 at 190 MB/s (5400RPM) and ST2000DM008 at 220 (7200RPM). 190 matches the row and the slower, more common DM005; the faster model is noted here rather than assumed. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-4tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST4000DM004, 5400RPM: 190 MB/s. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-6tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST6000DM003, 5400RPM: 185 MB/s. WAS 190 - the 6TB is the one capacity in the middle of the range Seagate rates BELOW 190. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-seagate-8tb-hdd": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/barracuda-3-5-hdd/barracuda-3-5-hdd-DS17-1-2501US-en_US.pdf", "checkedOn": "2026-09-03", "note": "ST8000DM004, 5400RPM: 190 MB/s. WAS 210, which Seagate does not publish for any BarraCuda capacity. Seagate's figure is \"Max Sustained Data Rate, OD Read\". Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" }
+  },
+  "storage-firecuda-530-2tb": {
+    "storageType": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03", "note": "FireCuda 530: 7300 at 4TB, 2TB and 1TB, dropping to 7000 only at 500GB. Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" },
+    "m2Sata": { "url": "https://www.seagate.com/www-content/datasheets/pdfs/firecuda-530-ssd-DS2059-1-2106US-en_US.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe 1.4; not a SATA M.2 card" }
+  },
+  "storage-firecuda-530r-4tb": {
+    "storageType": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "FireCuda 530R (ZP4000GM30063): 7400 at all three capacities. WAS 7300, which is the FireCuda 530's figure - the 530 and 530R are different drives, and the row had borrowed its sibling's number. Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" },
+    "m2Sata": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe 1.4; not a SATA M.2 card" }
   }
 }
