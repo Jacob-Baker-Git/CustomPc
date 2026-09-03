@@ -3137,5 +3137,59 @@
     "speed": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
     "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03" },
     "sticks": { "url": "https://www.teamgroupinc.com/en/product-detail/memory/TEAMGROUP/elite-u-dimm-ddr4/elite-u-dimm-ddr4-TED416G3200C22DC01/", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (TED416G3200C22DC01)" }
+  },
+  "ram-crucial-ddr5-16": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/ct16g48c40u5", "checkedOn": "2026-09-03", "note": "single 1 x 16GB module (CT16G48C40U5)" }
+  },
+  "ram-crucial-ddr4-16": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr4/bl2k8g32c16u4b", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (BL2K8G32C16U4B)" }
+  },
+  "ram-crucial-pro-ddr5-5600-32": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g56c46u5", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CP2K16G56C46U5)" }
+  },
+  "ram-crucial-ddr5-5600-64": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/cp2k32g56c46u5", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (CP2K32G56C46U5)" }
+  },
+  "ram-crucial-pro-ddr5-6000-32": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr5/cp2k16g60c48u5", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (CP2K16G60C48U5)" }
+  },
+  "ram-crucial-ddr4-3200-8": {
+    "ramType": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.crucial.com/memory/ddr4/ct8g4dfra32a", "checkedOn": "2026-09-03", "note": "single 1 x 8GB module (CT8G4DFRA32A)" }
+  },
+  "ram-patriot-ddr5-6000-32": {
+    "ramType": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (PVV532G600C36K)" }
+  },
+  "ram-patriot-ddr4-16": {
+    "ramType": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://viper.patriotmemory.com/products/viper-steel-ddr4-performance-memory", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (PVS416G320C6K)" }
+  },
+  "ram-patriot-venom-ddr5-6400-32": {
+    "ramType": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://viper.patriotmemory.com/products/viper-venom-ddr5-performance-ram", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (PVV532G640C32K)" }
   }
 }
