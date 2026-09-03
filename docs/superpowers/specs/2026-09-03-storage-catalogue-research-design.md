@@ -208,3 +208,57 @@ ratchet.
   (80), then **fans + paste** (61, no rule reads them).
 - `npm run catalog:push` and any push to `origin`. Both the user's to run —
   and `main` is already 15 commits ahead with the cooler tranche in it.
+
+---
+
+## ✅ Outcome — DONE, 52/52, ratchet on
+
+Executed on `feat/storage-catalogue-research`, nine commits. Full detail in
+`docs/superpowers/plans/2026-09-03-storage-catalogue-research.md`.
+
+**Nine changed values across 52 rows** — six corrected read speeds, two
+deletions, one brand string — plus 37 `m2Sata` booleans that did not exist, and
+the two live defects fixed before the research began.
+
+### What the spec got right
+
+- **The two defects were real and worth fixing first.** 37 pre-rendered part
+  pages told readers an NVMe drive connects by cable.
+- **Refusing `m2FormFactor` was correct.** Nothing in the project produced a
+  reason to want it, and the board side still has no slot lengths to check it
+  against.
+- **"Capacity is part of the SKU"** was the most valuable rule in the plan:
+  three of six corrections are a row carrying a sibling capacity's figure.
+- **Pinning coverage and rule 3 to one definition** with a test — the drift it
+  guards against is the exact bug this project fixed.
+
+### What the spec got wrong
+
+1. **"Unreachable dead code" overstated rule 3's SATA-M.2 branch.**
+   `specRules.test.js` already covered it with synthetic fixtures. The accurate
+   claim — no *real* part carried `m2Sata`, so it could not fire for a real
+   build — is narrower, and it meant the plan needed no new rule-3 tests.
+   Corrected in place above.
+2. **The spec assumed the maker's page would be there.** Eight of 52 drives
+   could not be read off one, against roughly three per category before, and
+   the user approved a documented secondary-source exception mid-project.
+
+### The decision worth carrying forward
+
+`unverifiable` deletes the field, and **that is safe for some categories and
+not others**. `specSheetContent` tiers on `readMbps >= 400`, so an absent value
+says *"spinning disk, cheap bulk storage"* — true of a Toshiba HDD, false of a
+Crucial SSD. The same protocol step was therefore **refused for two rows and
+applied to two others**. Check what a deletion renders before taking it.
+
+### ⏭️ Next
+
+**RAM (52 kits).** It is the last rule running on unverified data: rule 5
+refuses **17 kits today** on `specs.sticks` and `capacityGb` nobody checked.
+⚠️ `capacityGb` is shared between RAM and storage — this project put it in the
+per-category ratchet for that reason, and the RAM project will meet the same
+field from the other side. Then CPUs (80), then fans + paste (61).
+
+🛑 **Not shipped.** `main` is far ahead of `origin` with two research tranches
+in it and the Supabase catalogue out of step. The merge, the push and
+`npm run catalog:push -- --apply` are all the user's to run.
