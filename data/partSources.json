@@ -2845,5 +2845,39 @@
     "capacityGb": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03" },
     "readMbps": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV2 per capacity: 250GB 3,000 / 500GB 3,500 / 1TB 3,500 / 2TB 3,500 MB/s. ⚠️ DOCUMENTED EXCEPTION: the NV2 product page is retired (it bounces to Kingston's SSD listing, superseded by the NV3) and this datasheet URL returns 403 to WebFetch, so the table is from that Kingston datasheet's indexed content rather than a page opened here. It matches the value the catalogue already carried" },
     "m2Sata": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-lexar-nm790-2tb": {
+    "storageType": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "Lexar rates the NM790 at 7,400 read across 512GB-4TB; only write varies" },
+    "m2Sata": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-lexar-nm790-4tb": {
+    "storageType": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "Lexar rates the NM790 at 7,400 read across 512GB-4TB; only write varies" },
+    "m2Sata": { "url": "https://americas.lexar.com/product/lexar-nm790-m-2-2280-pcie-gen-4x4-nvme-ssd/", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-solidigm-p44-1tb": {
+    "storageType": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03", "note": "Solidigm's own product brief: \"up to 7000 MB/s sequential read\". ⚠️ The P44 Pro is an SK hynix Platinum P41 twin and reviews often conflate the two; this is Solidigm's own document. Read out of the PDF with pdfjs-dist" },
+    "m2Sata": { "url": "https://www.solidigm.com/content/dam/solidigm/en/site/products/client/d6/p44/documents/P44-Pro-Product-Brief.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-teamgroup-mp44l-1tb": {
+    "storageType": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe Gen4 x4 NVMe" },
+    "capacityGb": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03", "note": "TEAMGROUP's own 1TB SKU page (TM8FPK001T0C101): read/write up to 5,000/4,500 MB/s" },
+    "m2Sata": { "url": "https://www.teamgroupinc.com/en/product-detail/ssd/TEAMGROUP/mp44l/mp44l-TM8FPK001T0C101/", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-toshiba-p300-2tb": {
+    "storageType": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-p300/", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-p300/", "checkedOn": "2026-09-03" },
+    "readMbps": { "checkedOn": "2026-09-03", "result": "unverifiable", "note": "Toshiba publishes no sustained transfer rate for this drive. Its own datasheet PDF lists form factor, interface, RPM, buffer, average latency, MTTF, warranty, power, physical and environmental specs - and no data rate of any kind, at any capacity. A 2016 Toshiba press release quotes 210 MiB/s for the 7200RPM 2TB P300, but that is a different unit from the catalogue field, is not in the current datasheet, and would be a conversion rather than a reading" }
+  },
+  "storage-toshiba-x300-8tb": {
+    "storageType": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03", "note": "3.5in SATA hard drive, cabled" },
+    "capacityGb": { "url": "https://www.toshiba-storage.com/products/toshiba-internal-hard-drives-x300/", "checkedOn": "2026-09-03" },
+    "readMbps": { "checkedOn": "2026-09-03", "result": "unverifiable", "note": "Toshiba publishes no sustained transfer rate for this drive. Its own datasheet PDF lists form factor, interface, RPM, buffer, average latency, MTTF, warranty, power, physical and environmental specs - and no data rate of any kind, at any capacity. A 2016 Toshiba press release quotes 210 MiB/s for the 7200RPM 2TB P300, but that is a different unit from the catalogue field, is not in the current datasheet, and would be a conversion rather than a reading" }
   }
 }

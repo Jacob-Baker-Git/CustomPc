@@ -4008,7 +4008,8 @@
     "capacityGb": 1000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7000
+      "readMbps": 7000,
+      "m2Sata": false
     }
   },
   {
@@ -5970,9 +5971,7 @@
     "storageType": "HDD",
     "capacityGb": 2000,
     "tdp": 6,
-    "specs": {
-      "readMbps": 190
-    }
+    "specs": {}
   },
   {
     "id": "storage-firecuda-530r-4tb",
@@ -7658,7 +7657,8 @@
     "capacityGb": 2000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7400
+      "readMbps": 7400,
+      "m2Sata": false
     }
   },
   {
@@ -7671,7 +7671,8 @@
     "capacityGb": 4000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7400
+      "readMbps": 7400,
+      "m2Sata": false
     }
   },
   {
@@ -7684,7 +7685,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 5000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
@@ -7748,9 +7750,7 @@
     "storageType": "HDD",
     "capacityGb": 8000,
     "tdp": 8,
-    "specs": {
-      "readMbps": 210
-    }
+    "specs": {}
   },
   {
     "id": "psu-corsair-rm550x",
