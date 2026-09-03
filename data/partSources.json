@@ -2582,5 +2582,73 @@
     "sockets": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "ID-Cooling lists Intel LGA1851/1700/1200/1151/1150/1155/1156 and AMD AM5/AM4. LGA1851 ADDED: the row omitted a socket ID-Cooling lists" },
     "type": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02" },
     "height": { "url": "https://www.idcooling.com/product/detail?id=271&name=SE-214-XT", "checkedOn": "2026-09-02", "note": "Overall Dimension 124 x 72 x 150 mm. ⚠️ The SE-214-XT BLACK is a different SKU at 151 mm; this row is the plain SE-214-XT" }
+  },
+  "storage-samsung-990-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung rates the 990 PRO at 7,450 MB/s across 1TB, 2TB and 4TB alike - this is genuinely flat, not a copied figure" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung rates the 990 PRO at 7,450 MB/s across 1TB, 2TB and 4TB alike - this is genuinely flat, not a copied figure" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-2tb-nvme-pcie-gen-4-mz-v9p2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-4tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung rates the 990 PRO at 7,450 MB/s across 1TB, 2TB and 4TB alike - this is genuinely flat, not a copied figure" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-980-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03", "note": "PCIe Gen 3.0 x4, NVMe 1.4" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-9100-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03", "note": "PCIe 5.0 x4, NVMe 2.0" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-evo-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03", "note": "The 990 EVO, not the EVO Plus - a different drive at a different rating" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-1tb-nvme-pcie-mz-v9e1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990evo-plus-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03", "note": "Was 7250, which is the 2TB figure. Samsung rates the 990 EVO Plus 1TB at 7,150 and the 2TB/4TB at 7,250 - the per-capacity difference protocol S exists for. Cross-checked against Samsung US and retail listings" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-1tb-nvme-pcie-gen-4-mz-v9s1t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-990-evo-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03", "note": "This row is the 990 EVO PLUS 2TB, as its name says; the id reads 990-evo-2tb but the id is kept" },
+    "m2Sata": { "url": "https://www.samsung.com/uk/memory-storage/nvme-ssd/990-evo-plus-2tb-nvme-pcie-gen-4-mz-v9s2t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists the interface as PCIe NVMe; this is not a SATA M.2 card" }
+  },
+  "storage-samsung-870-evo-500gb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure" }
+  },
+  "storage-samsung-870-1tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0b-eu/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0b-eu/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0b-eu/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure" }
+  },
+  "storage-samsung-870-2tb": {
+    "storageType": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-2tb-sata-3-2-5-ssd-mz-77e2t0b-eu/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-2tb-sata-3-2-5-ssd-mz-77e2t0b-eu/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-2tb-sata-3-2-5-ssd-mz-77e2t0b-eu/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure" }
+  },
+  "storage-samsung-870-qvo-4tb": {
+    "storageType": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03", "note": "Samsung lists SATA 6 Gb/s on a 2.5in drive, so it is cabled, not M.2" },
+    "capacityGb": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.samsung.com/au/memory-storage/sata-ssd/ssd-870-qvo-sata-3-2-5-inch-4tb-mz-77q4t0bw/", "checkedOn": "2026-09-03", "note": "Sequential read up to 560 MB/s, which is the SATA 6 Gb/s interface ceiling rather than a drive-specific figure. Cites Samsung AU: the UK path for this SKU does not resolve" }
   }
 }

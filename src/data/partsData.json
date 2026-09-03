@@ -1468,7 +1468,8 @@
     "capacityGb": 2000,
     "tdp": 7,
     "specs": {
-      "readMbps": 7450
+      "readMbps": 7450,
+      "m2Sata": false
     }
   },
   {
@@ -1520,7 +1521,8 @@
     "capacityGb": 4000,
     "tdp": 8,
     "specs": {
-      "readMbps": 7450
+      "readMbps": 7450,
+      "m2Sata": false
     }
   },
   {
@@ -1637,7 +1639,8 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7450
+      "readMbps": 7450,
+      "m2Sata": false
     }
   },
   {
@@ -1663,7 +1666,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 3500
+      "readMbps": 3500,
+      "m2Sata": false
     }
   },
   {
@@ -3951,7 +3955,8 @@
     "capacityGb": 2000,
     "tdp": 9,
     "specs": {
-      "readMbps": 14700
+      "readMbps": 14700,
+      "m2Sata": false
     }
   },
   {
@@ -4527,7 +4532,8 @@
     "capacityGb": 1000,
     "tdp": 5,
     "specs": {
-      "readMbps": 7250
+      "readMbps": 7150,
+      "m2Sata": false
     }
   },
   {
@@ -5074,7 +5080,8 @@
     "capacityGb": 2000,
     "tdp": 6,
     "specs": {
-      "readMbps": 7250
+      "readMbps": 7250,
+      "m2Sata": false
     }
   },
   {
@@ -7573,7 +7580,8 @@
     "capacityGb": 1000,
     "tdp": 6,
     "specs": {
-      "readMbps": 5000
+      "readMbps": 5000,
+      "m2Sata": false
     }
   },
   {
