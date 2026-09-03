@@ -57,6 +57,23 @@ export const EXPECTED = {
     ],
     optional: [],
   },
+  // The SECOND conditional category, after coolers. Only an M.2 drive can owe
+  // `m2Sata`: a 2.5" SATA SSD and a 3.5" HDD have no M.2 interface to describe.
+  //
+  // 🛑 THE PREDICATE IS THE SAME REGEX RULE 3 USES, deliberately, and
+  // catalogCoverage.test.js pins the two copies together across the whole
+  // catalogue. It cannot be a shared import: scripts/ may not require src/lib,
+  // because vite-node is not a local dependency. Two private copies of one
+  // definition drifting apart is exactly what shipped the partPages.js
+  // `=== 'NVMe'` bug that this project fixes - that comparison never matched
+  // anything, because every NVMe row is typed "NVMe SSD".
+  storage: {
+    variants: [
+      { when: (p) => /nvme|m\.2/i.test(p.storageType ?? ''), required: ['storageType', 'capacityGb', 'readMbps', 'm2Sata'] },
+      { when: () => true, required: ['storageType', 'capacityGb', 'readMbps'] },
+    ],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.
@@ -85,6 +102,14 @@ export const RATCHETED_KEYS = {
   // same reason it is absent for a motherboard: the 2-5 W is the app's own
   // estimate of fan and pump draw, which no maker publishes.
   cooler: ['sockets'],
+  // `storageType` is rule 3's branch selector - a drive typed wrongly is
+  // checked against the wrong bus entirely - and `capacityGb` is the number
+  // users compare drives on, feeding pricePerGb, partQuality and partSynergy.
+  //
+  // `readMbps` is deliberately absent: EXPECTED requires it, so a future drive
+  // owes a source, but no rule blocks on it and it is a sequential-read
+  // headline that varies with capacity and test conditions.
+  storage: ['storageType', 'capacityGb'],
 }
 
 // Every "<id>.<field>" in a verified category that carries a value but no source.
