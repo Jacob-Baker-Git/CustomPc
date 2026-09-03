@@ -2815,5 +2815,35 @@
     "capacityGb": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03" },
     "readMbps": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "FireCuda 530R (ZP4000GM30063): 7400 at all three capacities. WAS 7300, which is the FireCuda 530's figure - the 530 and 530R are different drives, and the row had borrowed its sibling's number. Read out of the PDF with pdfjs-dist; WebFetch returns the raw binary and cannot parse it" },
     "m2Sata": { "url": "https://www.seagate.com/content/dam/seagate/en/content-fragments/products/datasheets/firecuda-530r-ssd/firecuda-530r-ssd-DS7-1-2403US-en_US.pdf", "checkedOn": "2026-09-03", "note": "PCIe Gen4 x4 NVMe 1.4; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv3-500": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV3 per capacity: 500GB 5,000 / 1TB 6,000 / 2TB-4TB 6,000 MB/s. WAS 6000, which is the 1TB-4TB figure. The plan named this the single most likely wrong value in the project, and it was: a small capacity has fewer NAND dies and Kingston rates it lower" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv3-1tb": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV3 per capacity: 500GB 5,000 / 1TB 6,000 / 2TB-4TB 6,000 MB/s" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv3-2tb": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV3 per capacity: 500GB 5,000 / 1TB 6,000 / 2TB-4TB 6,000 MB/s" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/nv3-nvme-pcie-ssd", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-kc3000-1tb": {
+    "storageType": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03", "note": "Kingston publishes the KC3000 at 7,000 read for every capacity (512GB to 4096GB); only the write speed varies" },
+    "m2Sata": { "url": "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
+  },
+  "storage-kingston-nv2-1tb": {
+    "storageType": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "M.2 2280, PCIe 4.0 x4 NVMe" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03" },
+    "readMbps": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "Kingston publishes the NV2 per capacity: 250GB 3,000 / 500GB 3,500 / 1TB 3,500 / 2TB 3,500 MB/s. ⚠️ DOCUMENTED EXCEPTION: the NV2 product page is retired (it bounces to Kingston's SSD listing, superseded by the NV3) and this datasheet URL returns 403 to WebFetch, so the table is from that Kingston datasheet's indexed content rather than a page opened here. It matches the value the catalogue already carried" },
+    "m2Sata": { "url": "https://www.kingston.com/datasheets/SNV2S_us.pdf", "checkedOn": "2026-09-03", "note": "PCIe 4.0 x4 NVMe; not a SATA M.2 card" }
   }
 }
