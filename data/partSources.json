@@ -3047,5 +3047,53 @@
     "speed": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
     "capacityGb": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03" },
     "sticks": { "url": "https://www.corsair.com/us/en/p/memory/cmk8gx4m1e3200c16/", "checkedOn": "2026-09-03", "note": "single 1 x 8GB module (CMK8GX4M1E3200C16)" }
+  },
+  "ram-kingston-ddr5-16": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (KF552C40BBK2-16)" }
+  },
+  "ram-kingston-ddr4-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF432C16BBK2/32)" }
+  },
+  "ram-kingston-ddr5-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF560C36BBEK2-32)" }
+  },
+  "ram-kingston-ddr4-16": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 8GB (KF432C16BBK2/16)" }
+  },
+  "ram-kingston-fury-ddr5-6400-32": {
+    "ramType": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/en/memory/search?partid=KF564C32RSK2-32", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF564C32RSK2-32)" }
+  },
+  "ram-kingston-renegade-64": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF564C32RSK2-64.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 32GB (KF564C32RSK2-64)" }
+  },
+  "ram-kingston-beast-ddr5-5600-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF556C40BBK2-32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF556C40BBK2-32)" }
+  },
+  "ram-kingston-beast-ddr4-3600-32": {
+    "ramType": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "speed": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "rated XMP/EXPO speed" },
+    "capacityGb": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03" },
+    "sticks": { "url": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf", "checkedOn": "2026-09-03", "note": "kit of 2 x 16GB (KF436C18BBK2/32)" }
   }
 }
