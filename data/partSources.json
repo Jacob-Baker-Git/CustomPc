@@ -3593,5 +3593,77 @@
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/225916.html", "checkedOn": "2026-09-03", "note": "Processor Base Power (base TDP)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/225916.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/225916.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-intel-ultra-9-285k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241060.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241060.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241060.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241060.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-intel-ultra-7-265k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241063.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241063.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241063.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241063.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-intel-ultra-5-245k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241067.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241067.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241067.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241067.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-ultra-5-225": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241070.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241070.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241070.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241070.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-ultra-7-265kf": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241062.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241062.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241062.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241062.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-ultra-9-285": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241061.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241061.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241061.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/241061.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-i5-10400f": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-i7-10700k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-i9-10900k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-i5-11400f": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-i7-11700k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "cpu-i9-11900k": {
+    "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
+    "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
+    "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
+    "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
   }
 }
