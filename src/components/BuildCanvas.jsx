@@ -37,7 +37,12 @@ export default function BuildCanvas({ selectedParts }) {
   const [coarse] = useState(isCoarse)
 
   return (
-    <div className="w-full h-full">
+    // role="img" + a name so the 3D view is not an unlabelled <canvas> to a
+    // screen reader. It is an image, not an application: the rotate/zoom is
+    // pointer-only with no keyboard path, so exposing it as interactive would
+    // promise an operation an AT user cannot perform. The name states what it
+    // shows; the drag hint beside it carries the how for those who can see it.
+    <div className="w-full h-full" role="img" aria-label="3D model of your PC build">
       <Canvas
         // ⚠️ "demand", not r3f's default of "always". Measured before this
         // change: 964 draw calls during five seconds of ABSOLUTE IDLE — 193 a

@@ -29,6 +29,13 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
     <div className="relative min-h-screen flex flex-col items-center justify-center text-ink py-12">
       <BoardBackground column={COLUMN_2XL} />
       <div className="relative z-10 flex flex-col items-center px-4 w-full max-w-2xl">
+        {/* The hub had no landmark either — a screen reader's region menu had
+            nothing to jump to. A flex-column <main> reproduces this wrapper's
+            own centering (its children were direct flex items of it), so the
+            layout does not shift; the footer stays a sibling below, outside
+            main, so its <footer> keeps its contentinfo. landmarks.test.jsx
+            guards both. */}
+        <main className="flex flex-col items-center w-full">
         {/* Two visible lines, both inside the h1. The heading used to be the
             wordmark alone — "PC Builder" — which told a reader nothing the logo
             had not already said and gave the root URL, the one page with no path
@@ -122,6 +129,8 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
             </RamBox>
           </button>
         </div>
+
+        </main>
 
         <div className="rise rise-3 w-full"><SiteFooter /></div>
       </div>

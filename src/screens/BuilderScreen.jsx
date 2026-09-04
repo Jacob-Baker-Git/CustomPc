@@ -81,6 +81,14 @@ export default function BuilderScreen() {
           90px at lg–wide, 63px above it — so 84 / 96 / 64 of padding clears
           each band. e2e/topBar.spec.js fails if they ever drift apart. */}
       <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 wide:pt-16 pb-16 lg:pb-0">
+        {/* The builder had no landmark at all — a screen reader's region menu
+            skipped straight past it. A plain, unstyled <main> wraps the tab
+            content (its h1 and every panel) while the nav header, the board
+            backdrop and the footer below stay outside it. It carries no
+            position or transform, so it is transparent to the z-10/absolute
+            layers inside — landmarks.test.jsx guards its presence, and that the
+            footer's contentinfo is NOT swallowed by it. */}
+        <main>
         {/* The one screen that had no h1. Every panel here opens at h2 — "Your
             parts", "Build checks", each Section on the Performance tab — so
             without this the outline a screen reader builds starts inside a
@@ -234,11 +242,16 @@ export default function BuilderScreen() {
         ) : (
           <BuildSummary />
         )}
+        </main>
 
         {/* Inside the scroller, not beside it: this screen's scroll container is
             the h-screen div, so a footer outside it would sit off the bottom of
             the viewport and never be reachable. The container's own pb-16
             already clears the fixed tab bar below lg.
+
+            It sits AFTER </main>, not inside it: SiteFooter renders a <footer>,
+            and a <footer> nested in <main> stops being the page's contentinfo
+            landmark. Kept a sibling, it stays one — same as SiteChrome.
 
             FULL WIDTH on purpose — this is the one screen with no scrim, so the
             footer's own ground band is what protects its text from the board.
