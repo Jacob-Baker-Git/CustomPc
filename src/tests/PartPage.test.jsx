@@ -3,6 +3,7 @@ import PartPage from '../components/PartPage'
 import useBuilderStore from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import { partPath, pagedParts } from '../lib/partPages'
+import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import parts from '../data/partsData.json'
 
 const find = (id) => parts.find((p) => p.id === id)
@@ -55,7 +56,9 @@ describe('a part page carries more than a spec table', () => {
 describe('what a part page promises about price and performance', () => {
   it('calls the figure an estimate, with its date', () => {
     show('gpu-rtx-4090')
-    expect(screen.getByText(/curated estimate/i)).toHaveTextContent(/July 2026/)
+    // The snapshot date is PRICE_SNAPSHOT, not a hardcoded month — bumping it
+    // (siteContent.js) must not break this, only priceSnapshot.test.js gates it.
+    expect(screen.getByText(/curated estimate/i)).toHaveTextContent(PRICE_SNAPSHOT)
   })
 
   // FPS_CAVEAT is the legacy estimate's caveat and belongs with the legacy

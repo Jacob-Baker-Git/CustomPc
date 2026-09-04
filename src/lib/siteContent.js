@@ -1,7 +1,13 @@
 // When the price snapshot was taken. Lived in three components as a hardcoded
-// "July 2026" that would silently rot at different rates; keep it here so the
-// Summary, the footer and the Help page can never disagree about it.
-export const PRICE_SNAPSHOT = 'July 2026'
+// string that would silently rot at different rates; keep it here so the
+// Summary, the footer, the Help page and each part page can never disagree.
+//
+// ⚠️ priceSnapshot.test.js FAILS once this is more than 4 months behind today —
+// a deliberate, self-firing reminder to re-check catalogue prices and bump it.
+// Update it ONLY when the estimates have actually been reviewed: a fresher month
+// on stale numbers is a false freshness claim, and "curated estimates (<month>)"
+// is the one credibility line the pricing makes.
+export const PRICE_SNAPSHOT = 'September 2026'
 
 // Every frame-rate figure on the site is model output, not a measurement.
 // Shown as bare integers they read as a promise we can't stand behind, so this
