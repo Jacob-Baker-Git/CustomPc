@@ -103,9 +103,19 @@ export default function PartsBrowser() {
       </div>
 
       <p className="text-xs text-muted mb-3">{results.length} parts</p>
+      {/* The full catalogue is ~560 rows, each with an inline-SVG thumbnail —
+          ~15,600 DOM nodes, ~10x Lighthouse's threshold, which is a scroll-cost
+          problem on a low-end phone. content-visibility lets the browser SKIP
+          layout and paint for rows that are off-screen while leaving them in the
+          DOM, so the crawlable markup and the prerendered fragment are unchanged
+          (a virtualiser would have removed them). contain-intrinsic-size reserves
+          each skipped row's height so the scrollbar does not jump; `auto` lets it
+          remember the real height once a row has been rendered once. Rows measure
+          ~102px (118 with a Discontinued badge). Unsupported browsers just render
+          every row as before — a pure progressive enhancement. */}
       <ul className="space-y-2">
         {results.map((p) => (
-          <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2">
+          <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2 [content-visibility:auto] [contain-intrinsic-size:auto_102px]">
             {/* The picture sits OUTSIDE PartName, not inside its anchor. A
                 crawler following this list should see the part's name as the
                 link text; wrapping a decorative drawing into the same anchor
