@@ -5,6 +5,8 @@ import { applyMeta, injectFragment, escapeAttr } from '../../scripts/apply-prere
 import { PAGES as SCRIPT_PAGES } from '../../scripts/prerender-routes.mjs'
 import { PAGES as APP_PAGES } from '../hooks/usePageRoute'
 import { PAGE_META, canonicalFor } from '../lib/pageMeta'
+import { partPageMeta, pagedParts } from '../lib/partPages'
+import parts from '../data/partsData.json'
 
 // A miniature of index.html carrying one of every tag the injector rewrites,
 // plus the verification tag it must not touch, and the <!--app-->/<!--/app-->
@@ -104,6 +106,42 @@ describe('applyMeta', () => {
     })
     expect(withTitle).not.toContain('</title><script>')
     expect(withTitle).toContain('<title>Weird &lt;/title&gt;&lt;script&gt;alert(1)&lt;/script&gt; Title</title>')
+  })
+})
+
+describe('part pages (head-only)', () => {
+  // Each catalogue part is pre-rendered head-only (apply-prerender.mjs
+  // writePartPages): its own title, description and canonical baked into the
+  // shell, body left to hydrate. Before this, /parts/<id> served the root's
+  // canonical, so ~543 sitemapped URLs pointed at / and cancelled out. This
+  // guards that the baked head is the PART's, not the root's.
+  const part = pagedParts(parts).find((p) => p.id === 'gpu-rtx-4090') ?? pagedParts(parts)[0]
+
+  it('bakes the part canonical, title and og:url, not the root', () => {
+    const { title, description } = partPageMeta(part)
+    const out = applyMeta(SHELL, { title, description, canonical: canonicalFor(`parts/${part.id}`) })
+    const canonical = attrOf(out, /<link rel="canonical" href="([^"]*)"/)
+    // Its own canonical, unslashed to match the sitemap and the _redirects rewrite.
+    expect(canonical).toBe(`https://custompcbuilder.netlify.app/parts/${part.id}`)
+    expect(canonical).not.toBe('https://custompcbuilder.netlify.app/')
+    expect(attrOf(out, /<title>([\s\S]*?)<\/title>/)).toContain(part.name)
+    // og:url follows it, so a shared part link previews the part, not the root.
+    expect(attrOf(out, /<meta property="og:url" content="([^"]*)"/)).toBe(`https://custompcbuilder.netlify.app/parts/${part.id}`)
+  })
+})
+
+describe('_redirects', () => {
+  const redirects = readFileSync(resolve(process.cwd(), 'public/_redirects'), 'utf8')
+
+  it('rewrites a part URL to its own head-only page, ABOVE the SPA fallback', () => {
+    // Without this the /* fallback serves /index.html (root canonical) for every
+    // part path — the self-cancel. A 200 REWRITE keeps the URL unslashed (matching
+    // the sitemap + each page's canonical); it must sit above /* or it never runs.
+    const partsRule = /^\/parts\/:id\s+\/parts\/:id\/index\.html\s+200/m
+    const spaFallback = /^\/\*\s+\/index\.html\s+200/m
+    expect(redirects).toMatch(partsRule)
+    expect(redirects).toMatch(spaFallback)
+    expect(redirects.search(partsRule)).toBeLessThan(redirects.search(spaFallback))
   })
 })
 

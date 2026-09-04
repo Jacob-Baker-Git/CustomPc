@@ -12,6 +12,7 @@
 // dist/index.html Vite has just written. Netlify runs this and needs no browser.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
+import { createServer } from 'vite'
 import { PAGE_META, canonicalFor } from '../src/lib/pageMeta.js'
 import { PAGES } from './prerender-routes.mjs'
 
@@ -98,7 +99,44 @@ export function applyMeta(html, { title, description, canonical }) {
   return out
 }
 
-function main() {
+// Every catalogue part, HEAD-ONLY: its own title, description and canonical
+// baked into the shell's head, keeping the boot-placeholder body so App.jsx
+// hydrates the page client-side. That is the whole fix — the SERVED HTML must
+// carry the part's own canonical, not the root's, or the ~543 sitemapped part
+// URLs all point at / and cancel out (see public/_redirects for the rewrite
+// that reaches these files). Prerendering the BODY too would be 540 browser
+// captures for content App already renders; the canonical is what indexing
+// needs. `shell` is the pristine dist/index.html captured before main()
+// overwrote it with the root body, so it carries the correct hashed asset URLs.
+//
+// partPageMeta lives in src/lib and imports across the app's extensionless
+// module graph, which plain Node cannot resolve — so it is loaded through Vite's
+// SSR loader, exactly as build-sitemap.mjs loads the same catalogue. partsData is
+// the committed FILE, so this is deterministic and never races live Supabase.
+async function writePartPages(shell) {
+  const server = await createServer({
+    server: { middlewareMode: true },
+    logLevel: 'error',
+    appType: 'custom',
+  })
+  try {
+    const { pagedParts, partPageMeta } = await server.ssrLoadModule('/src/lib/partPages.js')
+    const { default: parts } = await server.ssrLoadModule('/src/data/partsData.json')
+    let written = 0
+    for (const part of pagedParts(parts)) {
+      const { title, description } = partPageMeta(part)
+      const html = applyMeta(shell, { title, description, canonical: canonicalFor(`parts/${part.id}`) })
+      mkdirSync(new URL(`parts/${part.id}/`, DIST), { recursive: true })
+      writeFileSync(new URL(`parts/${part.id}/index.html`, DIST), html)
+      written += 1
+    }
+    return written
+  } finally {
+    await server.close()
+  }
+}
+
+async function main() {
   const shell = readFileSync(new URL('index.html', DIST), 'utf8')
   const read = (name) => readFileSync(new URL(`${name}.html`, FRAGMENTS), 'utf8')
   let written = 0
@@ -121,7 +159,11 @@ function main() {
   writeFileSync(new URL('index.html', DIST), injectFragment(shell, read('index')))
   written += 1
 
-  console.log(`apply-prerender: wrote ${written} pre-rendered pages into dist/`)
+  // Part pages last, from the pristine shell captured above (the loop overwrote
+  // dist/index.html, but `shell` is still the original boot-placeholder markup).
+  const partCount = await writePartPages(shell)
+
+  console.log(`apply-prerender: wrote ${written} pre-rendered pages and ${partCount} part pages into dist/`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
@@ -129,5 +171,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     console.error('apply-prerender: prerendered/ is empty — run `npm run prerender` first')
     process.exit(1)
   }
-  main()
+  await main()
 }

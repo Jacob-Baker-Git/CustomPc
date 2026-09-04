@@ -10,4 +10,16 @@
 /fonts/*    /fonts/:splat    404
 /hdri/*     /hdri/:splat     404
 
+# Each catalogue part is pre-rendered head-only to dist/parts/<id>/index.html
+# (apply-prerender.mjs), so a part URL can carry its OWN canonical instead of the
+# root's — without this rewrite the /* fallback below serves /index.html, whose
+# hardcoded root canonical made all ~543 sitemapped part URLs point at / and
+# cancel each other out. A 200 REWRITE (not a redirect) keeps the URL unslashed,
+# matching the sitemap and each page's own canonical; a bare 301-to-slash would
+# make the canonical point away from the URL it sits on. This is ABOVE /* so a
+# part path never reaches the generic fallback. An id with no generated file
+# (thermal paste, a typo) falls through to a 404 rather than a soft-200 — which
+# is correct: it is not a page.
+/parts/:id  /parts/:id/index.html  200
+
 /*          /index.html      200
