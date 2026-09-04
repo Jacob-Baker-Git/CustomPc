@@ -35,11 +35,17 @@ const TONE = {
 // The contact pad. `edge` cuts the keying notch that stops a DIMM or a PCIe card
 // going in backwards — the one detail that makes the shape read as a socket
 // rather than a progress bar.
+//
+// ⚠️ Hidden below `sm`. At 375px the pad + its gap cost 60px that the part NAME
+// needs far more: measured, a seated name got 55px and "Intel Core i7-14700KF"
+// needs 137, so the row showed "Inte…". The pad is aria-hidden decoration whose
+// meaning (seated) the rail already carries and whose placement the designator
+// label above still teaches, so the phone drops it and the desktop keeps it.
 function Pad({ seated, notch }) {
   return (
     <span
       aria-hidden="true"
-      className={`relative h-3 w-12 shrink-0 rounded-sm ${seated ? 'bg-gold' : 'bg-surface-2'}`}
+      className={`relative hidden sm:block h-3 w-12 shrink-0 rounded-sm ${seated ? 'bg-gold' : 'bg-surface-2'}`}
     >
       {notch === 'edge' && <i className="absolute inset-y-0 left-[34%] w-[3px] bg-ground" />}
       {notch === 'pins' && <i className="absolute inset-y-0 left-1/2 w-px bg-ground" />}
@@ -95,7 +101,11 @@ export default function PartSlot({
             {seated && label && (
               <span className="block text-[10px] uppercase leading-none tracking-wide text-faint">{label}</span>
             )}
-            <span className={`block truncate ${seated ? 'mt-0.5 leading-tight' : ''}`}>
+            {/* On a phone the row is a full-width list item, so the name wraps
+                to two lines rather than losing its meaningful tail — "i7-14700KF"
+                keeps the KF, the RAM keeps its 32GB. From `sm` up the row shares
+                a grid cell and stays one truncated line, as before. */}
+            <span className={`line-clamp-2 sm:line-clamp-none sm:block sm:truncate ${seated ? 'mt-0.5 leading-tight' : ''}`}>
               {seated ? part.name : (label ?? `Choose a ${category}`)}
             </span>
           </span>

@@ -53,6 +53,28 @@ describe('PartSlot', () => {
     expect(within(empty).queryByRole('button', { name: /remove ram/i })).toBeNull()
   })
 
+  it('keeps a phone from crushing the part name: pad hidden, name wraps', () => {
+    // At 375px the row is a full-width list item, and the flex button's fixed
+    // children (thumbnail, socket pad, price) left the flex-1 name just 55px —
+    // "Intel Core i7-14700KF" (needs 137) rendered as "Inte…". The pad is
+    // aria-hidden decoration whose meaning the rail already carries, so it is
+    // hidden below `sm` (freeing ~60px) and the name wraps to two lines there
+    // instead of truncating; from `sm` up both revert. jsdom computes no
+    // layout, so this pins the responsive classes that produce that behaviour —
+    // the widths themselves were verified in a browser.
+    const { container } = render(
+      <PartSlot category="ram" label="RAM" part={{ name: 'TeamGroup T-Force Vulcan DDR4-3600 32GB' }} />,
+    )
+    const pad = container.querySelector('span[aria-hidden="true"].w-12')
+    expect(pad).not.toBeNull()
+    expect(pad.className).toMatch(/(?:^|\s)hidden(?:\s|$)/)
+    expect(pad.className).toMatch(/sm:block/)
+
+    const name = within(container).getByText('TeamGroup T-Force Vulcan DDR4-3600 32GB')
+    expect(name.className).toMatch(/line-clamp-2/) // wraps on a phone
+    expect(name.className).toMatch(/sm:truncate/) // one line on desktop
+  })
+
   it('falls back to the category when a connector is unknown', () => {
     // Not every category plugs into a named connector — a case does not.
     render(<PartSlot category="case" />)
