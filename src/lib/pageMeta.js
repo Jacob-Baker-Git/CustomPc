@@ -42,4 +42,17 @@ export const PAGE_META = {
 
 // The root is DELIBERATELY absent above: index.html owns its own copy and
 // App.jsx reads it back via captureRootMeta().
-export const canonicalFor = (path) => (path ? `${SITE}/${path}` : `${SITE}/`)
+// Content pages are pre-rendered as dist/<page>/index.html, so /help/ returns
+// 200 directly while bare /help gets Netlify's directory 301 to it — and the
+// sitemap lists the slashed form (build-sitemap.mjs). A page's canonical must
+// therefore carry the trailing slash: a canonical that itself 301s points away
+// from the very URL it sits on, and disagreeing with the sitemap splits the
+// signal across two URLs for one document. Part detail pages resolve through the
+// SPA fallback and 200 either way, are listed unslashed, and so must NOT gain a
+// slash; the root is the bare origin. `path` is a bare page key ('help') for a
+// content page and 'parts/<id>' for a part page (App.jsx), and the content-page
+// keys are exactly PAGE_META's — so membership there is the test.
+export const canonicalFor = (path) => {
+  if (!path) return `${SITE}/`
+  return Object.hasOwn(PAGE_META, path) ? `${SITE}/${path}/` : `${SITE}/${path}`
+}

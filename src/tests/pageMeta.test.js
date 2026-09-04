@@ -23,8 +23,19 @@ describe('pageMeta', () => {
     expect(PAGE_META.index).toBeUndefined()
   })
 
-  it('builds a canonical with no double slash and no trailing slash on a page', () => {
-    expect(canonicalFor('help')).toBe(`${SITE}/help`)
+  it('gives every content page a trailing-slash canonical, matching the sitemap', () => {
+    // The slashed form is the one that returns 200 (dist/<page>/index.html); the
+    // bare form 301s to it, so a bare canonical points away from itself. The
+    // sitemap lists the slashed form too — the two must not disagree.
+    for (const p of PAGES) {
+      expect(canonicalFor(p)).toBe(`${SITE}/${p}/`)
+    }
+  })
+
+  it('leaves part pages unslashed and the root bare, with no double slash', () => {
+    // Part detail pages resolve through the SPA fallback either way and are listed
+    // unslashed; a trailing slash there would invent a second, un-listed URL.
+    expect(canonicalFor('parts/gpu-rtx-3080')).toBe(`${SITE}/parts/gpu-rtx-3080`)
     expect(canonicalFor(null)).toBe(`${SITE}/`)
     expect(canonicalFor('')).toBe(`${SITE}/`)
   })
