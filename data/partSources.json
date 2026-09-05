@@ -3722,5 +3722,54 @@
   },
   "paste-arctic-mx6-8g": {
     "amountG": { "url": "https://www.arctic.de/en/MX-6/ACTCP00081A", "checkedOn": "2026-09-05", "note": "MX-6 offered in 2/4/8g; 8g tube" }
+  },
+  "fans-noctua-nf-a12": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-a14": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-a12-chromax": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm-chromax-black-swap", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm-chromax-black-swap", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-a14x25-g2": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-p12-redux": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-a14g2-single": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-p12-redux-3": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-a14-3pack": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-f12": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-f12-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-f12-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-s12a": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-s12a-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-s12a-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "paste-noctua-nth1": {
+    "amountG": { "url": "https://www.noctua.at/en/products/nt-h1-3-5g", "checkedOn": "2026-09-05", "note": "NT-H1 3.5g tube" }
+  },
+  "paste-noctua-nth2": {
+    "amountG": { "url": "https://www.noctua.at/en/products/nt-h2-3-5g", "checkedOn": "2026-09-05", "note": "NT-H2 3.5g tube" }
+  },
+  "paste-noctua-nth2-10g": {
+    "amountG": { "url": "https://www.noctua.at/en/products/nt-h2-10g", "checkedOn": "2026-09-05", "note": "NT-H2 10g tube" }
   }
 }

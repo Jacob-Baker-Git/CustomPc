@@ -3289,7 +3289,10 @@
     "name": "Noctua NT-H1 (3.5g)",
     "brand": "Noctua",
     "price": 7.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.5
+    }
   },
   {
     "id": "paste-tg-kryonaut",
@@ -4367,7 +4370,10 @@
     "name": "Noctua NT-H2 (3.5g)",
     "brand": "Noctua",
     "price": 12.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.5
+    }
   },
   {
     "id": "paste-tg-kryonaut-extreme",
@@ -9098,7 +9104,10 @@
     "name": "Noctua NT-H2 (10g)",
     "brand": "Noctua",
     "price": 17.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 10
+    }
   },
   {
     "id": "paste-cm-cryofuze",
