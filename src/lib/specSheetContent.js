@@ -127,7 +127,11 @@ export function insight(part) {
       return `${s.count > 1 ? `${s.count}-pack of ` : ''}${s.size} fans${s.rgb ? ' with RGB' : ''}. ` +
         'Front/bottom intake, rear/top exhaust. Slight positive pressure keeps dust down.'
     case 'paste':
-      return 'Sits between the CPU and the cooler plate. Any quality paste performs within a degree or two, and a pea-sized dot is enough.'
+      // ⚠️ amountG (the tube weight) is the paste SKU differentiator - MX-6
+      // ships 4g and 8g, NT-H2 3.5g and 10g. Lead with it when present; fall
+      // back to the generic sentence for a row not yet researched. `s` is
+      // `part.specs ?? {}`, so a paste with no specs is safe.
+      return `${s.amountG ? `${s.amountG}g tube. ` : ''}Sits between the CPU and the cooler plate. Any quality paste performs within a degree or two, and a pea-sized dot is enough.`
     case 'monitor':
       return `To make full use of ${part.refresh}Hz you need ~${part.refresh} fps at ${part.resolution}, ` +
         'the Summary tab shows whether your build keeps up.'

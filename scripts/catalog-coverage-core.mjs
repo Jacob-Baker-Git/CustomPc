@@ -93,6 +93,30 @@ export const EXPECTED = {
     required: ['socket', 'tdp', 'cores', 'boostClock'],
     optional: [],
   },
+  // The ninth and last category pair, and the FIRST with no ratchet: no rule
+  // reads a fan or a paste, so nothing here feeds a verdict. Enforcement is the
+  // coverage report plus the RESEARCHED_KEYS unit test - never RATCHETED_KEYS or
+  // VERIFIED_CATEGORIES.
+  //
+  // ⚠️ `count` is deliberately NOT researched. It is the pack size, and the
+  // catalogue mixes real maker packs (a single, a 5-pack) with app-chosen
+  // bundles (a 3-pack, a 10-pack) that the maker never sells - Arctic ships its
+  // non-RGB P12/P14 only as Single or 5-Pack, yet the catalogue offers 3/4/10.
+  // So `count` is an app bundling choice, like `tdp`, not a maker spec, and owes
+  // no provenance. Only `size` and `rgb` are genuine maker facts to source.
+  fans: {
+    required: ['size', 'rgb'],
+    optional: [],
+  },
+  // Paste had NO specs object until this project. `amountG` (the tube weight) is
+  // added as the one real, SKU-differentiating, displayable field - MX-6 ships
+  // 4g and 8g, NT-H2 3.5g and 10g, distinct rows. `type` is deliberately absent:
+  // all 15 are grease, so it would be uniform and imply a conductivity rule that
+  // does not exist.
+  paste: {
+    required: ['amountG'],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.

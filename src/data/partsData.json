@@ -3278,7 +3278,10 @@
     "name": "Arctic MX-4 (4g)",
     "brand": "Arctic",
     "price": 6.49,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 4
+    }
   },
   {
     "id": "paste-noctua-nth1",
@@ -3286,7 +3289,10 @@
     "name": "Noctua NT-H1 (3.5g)",
     "brand": "Noctua",
     "price": 7.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.5
+    }
   },
   {
     "id": "paste-tg-kryonaut",
@@ -3294,7 +3300,10 @@
     "name": "Thermal Grizzly Kryonaut (1g)",
     "brand": "Thermal Grizzly",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 1
+    }
   },
   {
     "id": "paste-arctic-mx6",
@@ -3302,7 +3311,10 @@
     "name": "Arctic MX-6 (4g)",
     "brand": "Arctic",
     "price": 8.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 4
+    }
   },
   {
     "id": "paste-cm-mastergel",
@@ -4361,7 +4373,10 @@
     "name": "Noctua NT-H2 (3.5g)",
     "brand": "Noctua",
     "price": 12.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.5
+    }
   },
   {
     "id": "paste-tg-kryonaut-extreme",
@@ -4369,7 +4384,10 @@
     "name": "Thermal Grizzly Kryonaut Extreme (2g)",
     "brand": "Thermal Grizzly",
     "price": 14.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "paste-corsair-xtm70",
@@ -4377,7 +4395,10 @@
     "name": "Corsair XTM70 (3g)",
     "brand": "Corsair",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3
+    }
   },
   {
     "id": "cpu-ryzen-5-7500f",
@@ -4719,7 +4740,10 @@
     "name": "Thermal Grizzly Hydronaut (3.9g)",
     "brand": "Thermal Grizzly",
     "price": 8.49,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.9
+    }
   },
   {
     "id": "cpu-i5-13500",
@@ -5572,7 +5596,10 @@
     "name": "Thermalright TF7 (2g)",
     "brand": "Thermalright",
     "price": 6.49,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "paste-gelid-gc-extreme",
@@ -5580,7 +5607,10 @@
     "name": "Gelid GC-Extreme (3.5g)",
     "brand": "Gelid",
     "price": 11.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.5
+    }
   },
   {
     "id": "cpu-i3-12100f",
@@ -9070,10 +9100,13 @@
   {
     "id": "paste-tg-duronaut",
     "category": "paste",
-    "name": "Thermal Grizzly Duronaut (3.9g)",
+    "name": "Thermal Grizzly Duronaut (2g)",
     "brand": "Thermal Grizzly",
     "price": 8.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "paste-arctic-mx6-8g",
@@ -9081,7 +9114,10 @@
     "name": "Arctic MX-6 (8g)",
     "brand": "Arctic",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 8
+    }
   },
   {
     "id": "paste-noctua-nth2-10g",
@@ -9089,7 +9125,10 @@
     "name": "Noctua NT-H2 (10g)",
     "brand": "Noctua",
     "price": 17.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 10
+    }
   },
   {
     "id": "paste-cm-cryofuze",
@@ -9097,7 +9136,10 @@
     "name": "Cooler Master CryoFuze (2g)",
     "brand": "Cooler Master",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "gpu-rtx-2060",

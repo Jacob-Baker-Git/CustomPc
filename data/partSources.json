@@ -3665,5 +3665,234 @@
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" }
+  },
+  "fans-arctic-p12-single": {
+    "size": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p12-3pack": {
+    "size": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-f14-single": {
+    "size": { "url": "https://www.arctic.de/en/F14-PWM/ACFAN00078A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/F14-PWM/ACFAN00078A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p14-single": {
+    "size": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p14-3pack": {
+    "size": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p12-max-single": {
+    "size": { "url": "https://www.arctic.de/en/P12-Max/ACFAN00280A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-Max/ACFAN00280A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p12-pro-4pack": {
+    "size": { "url": "https://www.arctic.de/us/P12-Pro/ACFAN00305A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/us/P12-Pro/ACFAN00305A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p14-max": {
+    "size": { "url": "https://www.arctic.de/us/P14-Max-Black/ACFAN00287A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/us/P14-Max-Black/ACFAN00287A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p12-5pack": {
+    "size": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p12-10pack": {
+    "size": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p14-5pack": {
+    "size": { "url": "https://www.arctic.de/us/P14-PWM-PST/ACFAN00125A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/us/P14-PWM-PST/ACFAN00125A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "fans-arctic-p12-slim": {
+    "size": { "url": "https://www.arctic.de/en/P12-Slim-PWM-PST/ACFAN00187A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-Slim-PWM-PST/ACFAN00187A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  },
+  "paste-arctic-mx4": {
+    "amountG": { "url": "https://www.arctic.de/us/MX-4/ACTCP00024A", "checkedOn": "2026-09-05", "note": "MX-4 offered in 2/4/8/20/45g; this row is the 4g tube" }
+  },
+  "paste-arctic-mx6": {
+    "amountG": { "url": "https://www.arctic.de/en/MX-6/ACTCP00080A", "checkedOn": "2026-09-05", "note": "MX-6 offered in 2/4/8g; 4g tube" }
+  },
+  "paste-arctic-mx6-8g": {
+    "amountG": { "url": "https://www.arctic.de/en/MX-6/ACTCP00081A", "checkedOn": "2026-09-05", "note": "MX-6 offered in 2/4/8g; 8g tube" }
+  },
+  "fans-noctua-nf-a12": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-a14": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-a12-chromax": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm-chromax-black-swap", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a12x25-pwm-chromax-black-swap", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-a14x25-g2": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-p12-redux": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-a14g2-single": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-p12-redux-3": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-a14-3pack": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-f12": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-f12-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-f12-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "fans-noctua-nf-s12a": {
+    "size": { "url": "https://www.noctua.at/en/products/nf-s12a-pwm", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.noctua.at/en/products/nf-s12a-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
+  },
+  "paste-noctua-nth1": {
+    "amountG": { "url": "https://www.noctua.at/en/products/nt-h1-3-5g", "checkedOn": "2026-09-05", "note": "NT-H1 3.5g tube" }
+  },
+  "paste-noctua-nth2": {
+    "amountG": { "url": "https://www.noctua.at/en/products/nt-h2-3-5g", "checkedOn": "2026-09-05", "note": "NT-H2 3.5g tube" }
+  },
+  "paste-noctua-nth2-10g": {
+    "amountG": { "url": "https://www.noctua.at/en/products/nt-h2-10g", "checkedOn": "2026-09-05", "note": "NT-H2 10g tube" }
+  },
+  "fans-be-quiet-silent-wings-4": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-sw4-140": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-pw3-140-2": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-pure-wings-3-120": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-light-wings-3pack": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/light-wings/3447", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/light-wings/3447", "checkedOn": "2026-09-05", "note": "ARGB" }
+  },
+  "fans-lian-li-sl120-3pack": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-lian-li-sl120-single": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-lian-li-sl140-2pack": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-lianli-tl-lcd-3": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-tl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-tl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan) + LCD" }
+  },
+  "fans-lianli-sl-inf-3pack": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl-infinity/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl-infinity/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-corsair-ll120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050072-ww/ll120-rgb-120mm-dual-light-loop-rgb-led-pwm-fan-3-fan-pack-with-lighting-node-pro-co-9050072-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050072-ww/ll120-rgb-120mm-dual-light-loop-rgb-led-pwm-fan-3-fan-pack-with-lighting-node-pro-co-9050072-ww", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  },
+  "fans-corsair-ql120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050098-ww/icue-ql120-rgb-120mm-pwm-triple-fan-kit-with-lighting-node-core-co-9050098-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050098-ww/icue-ql120-rgb-120mm-pwm-triple-fan-kit-with-lighting-node-core-co-9050098-ww", "checkedOn": "2026-09-05", "note": "addressable RGB (34 LEDs)" }
+  },
+  "fans-corsair-af120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050154-ww/icue-af120-rgb-elite-120mm-pwm-triple-fan-kit-co-9050154-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050154-ww/icue-af120-rgb-elite-120mm-pwm-triple-fan-kit-co-9050154-ww", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  },
+  "fans-corsair-rx120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9051018-ww/icue-link-rx120-rgb-120mm-pwm-fan-triple-starter-kit-co-9051018-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9051018-ww/icue-link-rx120-rgb-120mm-pwm-fan-triple-starter-kit-co-9051018-ww", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  },
+  "fans-corsair-rs120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050189-ww/rs120-120mm-pwm-fans-triple-pack-co-9050189-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050189-ww/rs120-120mm-pwm-fans-triple-pack-co-9050189-ww", "checkedOn": "2026-09-05", "note": "non-RGB; the RS120 ARGB is a separate model" }
+  },
+  "paste-corsair-xtm70": {
+    "amountG": { "url": "https://www.corsair.com/us/en/p/pc-components-accessories/ct-9010010-ww/xtm70-extreme-performance-thermal-paste-ct-9010010-ww", "checkedOn": "2026-09-05", "note": "Corsair states 3g of paste" }
+  },
+  "paste-tg-kryonaut": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/kryonaut/s-tg-k-001-rs", "checkedOn": "2026-09-05", "note": "Kryonaut sold in 1g/1.5ml/3ml/10ml; 1g tube" }
+  },
+  "paste-tg-kryonaut-extreme": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/kryonaut-extreme/s-tg-ke-002-r", "checkedOn": "2026-09-05", "note": "Kryonaut Extreme sold in 2g tube and 9ml jar; 2g" }
+  },
+  "paste-tg-hydronaut": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/hydronaut/s-tg-h", "checkedOn": "2026-09-05", "note": "TG now lists this tube as 1.5ml; 3.9g is its gram weight (density 2.6 g/cm3)" }
+  },
+  "paste-tg-duronaut": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/duronaut/s-tg-d-006", "checkedOn": "2026-09-05", "note": "Duronaut sold in 2/6/30g only; catalogue 3.9g does not exist for Duronaut - corrected to the 2g tube" }
+  },
+  "fans-cm-sickleflow-3pack": {
+    "size": { "url": "https://www.coolermaster.com/catalog/coolers/case-fan/sickleflow-120-argb-3in1/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.coolermaster.com/catalog/coolers/case-fan/sickleflow-120-argb-3in1/", "checkedOn": "2026-09-05", "note": "addressable RGB (SickleFlow 120 ARGB)" }
+  },
+  "fans-deepcool-fc120-3pack": {
+    "size": { "url": "https://www.deepcool.com/products/Cooling/fans/FC120-3-IN-1-Daisy-Chain-Performance-ARGB-Fan/2021/13582.shtml", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.deepcool.com/products/Cooling/fans/FC120-3-IN-1-Daisy-Chain-Performance-ARGB-Fan/2021/13582.shtml", "checkedOn": "2026-09-05", "note": "ARGB (6 addressable LEDs)" }
+  },
+  "fans-deepcool-fk120-3pack": {
+    "size": { "url": "https://www.deepcool.com/products/Cooling/fans/FK120-3in1-Performance-Fan/2022/15426.shtml", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.deepcool.com/products/Cooling/fans/FK120-3in1-Performance-Fan/2022/15426.shtml", "checkedOn": "2026-09-05", "note": "non-RGB (FK120 is the unlit FC120)" }
+  },
+  "fans-nzxt-f120-rgb": {
+    "size": { "url": "https://nzxt.com/products/f120-rgb", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://nzxt.com/products/f120-rgb", "checkedOn": "2026-09-05", "note": "addressable RGB (8 LEDs)" }
+  },
+  "fans-thermaltake-toughfan-12": {
+    "size": { "url": "https://www.thermaltake.com/toughfan-12-high-static-pressure-fan-single-pack.html", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.thermaltake.com/toughfan-12-high-static-pressure-fan-single-pack.html", "checkedOn": "2026-09-05", "note": "non-RGB (ToughFan 12 has no lighting)" }
+  },
+  "fans-phanteks-t30-3pack": {
+    "size": { "url": "https://phanteks.com/product/t30-120/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://phanteks.com/product/t30-120/", "checkedOn": "2026-09-05", "note": "non-RGB (T30 is the unlit performance fan)" }
+  },
+  "fans-phanteks-m25-3pack": {
+    "size": { "url": "https://phanteks.com/product/m25-120-black/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://phanteks.com/product/m25-120-black/", "checkedOn": "2026-09-05", "note": "non-RGB (M25-120 Black; the D-RGB M25 is a separate SKU)" }
+  },
+  "fans-thermalright-tlc12-3": {
+    "size": { "url": "https://www.thermalright.com/product/tl-c12c-x3/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.thermalright.com/product/tl-c12c-x3/", "checkedOn": "2026-09-05", "note": "non-RGB (plain TL-C12C; the -S is ARGB)" }
+  },
+  "fans-tr-c12cw-3pack": {
+    "size": { "url": "https://www.thermalright.com/product/tl-c12cw-s/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.thermalright.com/product/tl-c12cw-s/", "checkedOn": "2026-09-05", "note": "ARGB (TL-C12CW-S, white frame)" }
+  },
+  "paste-thermalright-tf7": {
+    "amountG": { "url": "https://www.thermalright.com/product/tf7-2g/", "checkedOn": "2026-09-05", "note": "TF7 sold in 2/4/8g; 2g tube" }
+  },
+  "paste-cm-mastergel": {
+    "amountG": { "checkedOn": "2026-09-05", "result": "unverifiable", "note": "Cooler Master's MasterGel Pro product pages return 404 (superseded by New MasterGel Pro / V2); no maker page states this SKU's fill weight" }
+  },
+  "paste-cm-cryofuze": {
+    "amountG": { "url": "https://www.coolermaster.com/en-us/products/cryofuze/", "checkedOn": "2026-09-05", "note": "Cooler Master CryoFuze sold in a 2g tube (2g/4g)" }
+  },
+  "paste-gelid-gc-extreme": {
+    "amountG": { "url": "https://gelidsolutions.com/wp-content/uploads/2023/08/GC-Extreme-3.5g-EN.pdf", "checkedOn": "2026-09-05", "note": "Gelid GC-Extreme 3.5g spec sheet (TC-GC-03-A)" }
   }
 }
