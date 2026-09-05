@@ -3300,7 +3300,10 @@
     "name": "Thermal Grizzly Kryonaut (1g)",
     "brand": "Thermal Grizzly",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 1
+    }
   },
   {
     "id": "paste-arctic-mx6",
@@ -4381,7 +4384,10 @@
     "name": "Thermal Grizzly Kryonaut Extreme (2g)",
     "brand": "Thermal Grizzly",
     "price": 14.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "paste-corsair-xtm70",
@@ -4389,7 +4395,10 @@
     "name": "Corsair XTM70 (3g)",
     "brand": "Corsair",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3
+    }
   },
   {
     "id": "cpu-ryzen-5-7500f",
@@ -4731,7 +4740,10 @@
     "name": "Thermal Grizzly Hydronaut (3.9g)",
     "brand": "Thermal Grizzly",
     "price": 8.49,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.9
+    }
   },
   {
     "id": "cpu-i5-13500",
@@ -9082,10 +9094,13 @@
   {
     "id": "paste-tg-duronaut",
     "category": "paste",
-    "name": "Thermal Grizzly Duronaut (3.9g)",
+    "name": "Thermal Grizzly Duronaut (2g)",
     "brand": "Thermal Grizzly",
     "price": 8.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "paste-arctic-mx6-8g",

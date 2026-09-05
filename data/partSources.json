@@ -3811,5 +3811,40 @@
   "fans-lianli-sl-inf-3pack": {
     "size": { "url": "https://lian-li.com/product/uni-fan-sl-infinity/", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://lian-li.com/product/uni-fan-sl-infinity/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-corsair-ll120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050072-ww/ll120-rgb-120mm-dual-light-loop-rgb-led-pwm-fan-3-fan-pack-with-lighting-node-pro-co-9050072-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050072-ww/ll120-rgb-120mm-dual-light-loop-rgb-led-pwm-fan-3-fan-pack-with-lighting-node-pro-co-9050072-ww", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  },
+  "fans-corsair-ql120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050098-ww/icue-ql120-rgb-120mm-pwm-triple-fan-kit-with-lighting-node-core-co-9050098-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050098-ww/icue-ql120-rgb-120mm-pwm-triple-fan-kit-with-lighting-node-core-co-9050098-ww", "checkedOn": "2026-09-05", "note": "addressable RGB (34 LEDs)" }
+  },
+  "fans-corsair-af120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050154-ww/icue-af120-rgb-elite-120mm-pwm-triple-fan-kit-co-9050154-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050154-ww/icue-af120-rgb-elite-120mm-pwm-triple-fan-kit-co-9050154-ww", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  },
+  "fans-corsair-rx120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9051018-ww/icue-link-rx120-rgb-120mm-pwm-fan-triple-starter-kit-co-9051018-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9051018-ww/icue-link-rx120-rgb-120mm-pwm-fan-triple-starter-kit-co-9051018-ww", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  },
+  "fans-corsair-rs120-3pack": {
+    "size": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050189-ww/rs120-120mm-pwm-fans-triple-pack-co-9050189-ww", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.corsair.com/us/en/p/case-fans/co-9050189-ww/rs120-120mm-pwm-fans-triple-pack-co-9050189-ww", "checkedOn": "2026-09-05", "note": "non-RGB; the RS120 ARGB is a separate model" }
+  },
+  "paste-corsair-xtm70": {
+    "amountG": { "url": "https://www.corsair.com/us/en/p/pc-components-accessories/ct-9010010-ww/xtm70-extreme-performance-thermal-paste-ct-9010010-ww", "checkedOn": "2026-09-05", "note": "Corsair states 3g of paste" }
+  },
+  "paste-tg-kryonaut": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/kryonaut/s-tg-k-001-rs", "checkedOn": "2026-09-05", "note": "Kryonaut sold in 1g/1.5ml/3ml/10ml; 1g tube" }
+  },
+  "paste-tg-kryonaut-extreme": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/kryonaut-extreme/s-tg-ke-002-r", "checkedOn": "2026-09-05", "note": "Kryonaut Extreme sold in 2g tube and 9ml jar; 2g" }
+  },
+  "paste-tg-hydronaut": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/hydronaut/s-tg-h", "checkedOn": "2026-09-05", "note": "TG now lists this tube as 1.5ml; 3.9g is its gram weight (density 2.6 g/cm3)" }
+  },
+  "paste-tg-duronaut": {
+    "amountG": { "url": "https://www.thermal-grizzly.com/en/duronaut/s-tg-d-006", "checkedOn": "2026-09-05", "note": "Duronaut sold in 2/6/30g only; catalogue 3.9g does not exist for Duronaut - corrected to the 2g tube" }
   }
 }
