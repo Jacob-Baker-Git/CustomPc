@@ -929,6 +929,67 @@ categories a rule or a spec sheet reads runs on sourced data.**
 
 ---
 
-## Outcome
+## Outcome — DONE, fans 46/46 + paste 15/15, no ratchet
 
-_(filled in at close-out)_
+Executed on `feat/fans-paste-catalogue-research`. `catalog:coverage` reports
+**fans 46/46 (100%)** and **paste 15/15 (100%)** — ten categories now on sourced
+data; the eight earlier categories unchanged. Unit (1650), lint, build, prerender
+and e2e (100 passed, 1 unrelated flaky on retry) all green.
+
+**The last category, and the first with no ratchet.** No rule reads a fan or a
+paste, so neither joined `VERIFIED_CATEGORIES`/`RATCHETED_KEYS`; the
+`RESEARCHED_KEYS` unit test (size, rgb, amountG) plus the coverage report are the
+whole enforcement, proved non-vacuous on both a fan key and a paste key. The
+verdict snapshot did **not** move — it cannot, since no rule reads either.
+
+### What the research changed
+
+- **One data correction:** `paste-tg-duronaut` renamed `(3.9g) → (2g)` with
+  `amountG` set to `2`. Thermal Grizzly sells Duronaut only in 2/6/30g; the 3.9g
+  was a phantom size, almost certainly copied from Hydronaut (whose 1.5ml tube
+  genuinely is 3.9g at density 2.6 g/cm³).
+- **One unverifiable:** `paste-cm-mastergel` (`amountG` absent, recorded
+  unverifiable). Cooler Master's MasterGel Pro pages 404 across every path
+  (superseded by New MasterGel Pro / V2); no maker page states this SKU's fill
+  weight. Its spec sheet falls back to the generic sentence.
+- **Everything else was already right.** All 46 fan sizes (120/140mm) and all 46
+  `rgb` booleans matched the catalogue, including every RGB split that could have
+  been wrong — be quiet! Light Wings ARGB vs Silent/Pure Wings, Corsair RS120
+  non-RGB among four RGB packs, DeepCool FK120 vs FC120, Thermalright TL-C12C vs
+  TL-C12CW-S, Phanteks M25-120 Black. 13 of 15 paste amounts matched their names.
+
+### The decision that reshaped the project: `count` is not a maker spec
+
+The Arctic tranche disproved the spec's assumption that a fan's `count` is a maker
+SKU. Arctic ships its non-RGB P12/P14 only as **Single or 5-Pack**, yet the
+catalogue offers 3-, 4- and 10-packs at their own price points — the author mixed
+real maker packs with **app-chosen bundles**. Per the user's decision, `count`
+was dropped from research (treated like `tdp`): only `size` and `rgb` are
+sourced, and every `count` was left exactly as it is. `EXPECTED.fans` is
+`['size', 'rgb']`; `RESEARCHED_KEYS` gained `size`, `rgb`, `amountG` (not
+`count`). See the spec's amendment and `fix: drop fan count from research`.
+
+### ⚠️ Flagged for the user
+
+- **Noctua NF-A14x25 G2 appears twice** — `fans-noctua-a14x25-g2` and
+  `fans-noctua-a14g2-single` are the same product (both 140mm, both count 1), a
+  likely catalogue duplicate. Left as two rows (not a size/rgb error); your call
+  whether to merge or differentiate them.
+- **`count` is now unsourced app data.** The invented Arctic pack sizes (3/4/10)
+  remain in the catalogue as bundling choices. If you ever want the displayed
+  pack sizes to match real maker SKUs, that is a separate editorial pass.
+
+### Two pre-existing issues fixed in passing
+
+- **Stale prerendered fragments** — three backlog commits (`<main>` landmark,
+  `/parts` content-visibility, July→September price) had never been re-rendered,
+  so the deployed static HTML lagged the source. Regenerated (`a3ca337`).
+- The **paste spec sheet** now shows the tube size (`"4g tube. …"`).
+
+### ⏭️ Next — nothing; this is the last category
+
+🛑 **Not shipped.** `main` is far ahead of `origin` with the cooler, storage,
+RAM and CPU tranches and the whole site-quality backlog, and this branch is
+unmerged on top. The merge, `git push` and `npm run catalog:push -- --apply` are
+all the user's to run. With this branch merged and pushed, every one of the ten
+catalogue categories a rule **or a spec sheet** reads runs on sourced data.
