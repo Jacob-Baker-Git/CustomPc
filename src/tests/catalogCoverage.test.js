@@ -402,18 +402,20 @@ describe('fans expectations', () => {
   const fan = (id, over = {}) =>
     ({ id, category: 'fans', tdp: 2, specs: { size: '120mm', count: 1, rgb: false }, ...over })
 
-  it('expects the three displayed specs, flat for every fan', () => {
-    expect(requiredFor(EXPECTED.fans, fan('a'))).toEqual(['size', 'count', 'rgb'])
+  it('expects the two maker specs, flat for every fan', () => {
+    expect(requiredFor(EXPECTED.fans, fan('a'))).toEqual(['size', 'rgb'])
   })
 
-  it('counts a fully sourced fan as verified', () => {
-    const sources = { a: { size: src(), count: src(), rgb: src() } }
-    expect(coverageFor('fans', [fan('a')], sources).verified).toBe(1)
+  // 🛑 count is the pack size - an app bundling choice (the catalogue offers
+  // 3/4/10-packs the maker never sells), not a maker spec. It owes no source,
+  // exactly like tdp, so a fan is verified on size + rgb alone.
+  it('does not require count - it is an app bundle, not a maker spec', () => {
+    expect(requiredFor(EXPECTED.fans, fan('a'))).not.toContain('count')
+    expect(coverageFor('fans', [fan('a')], { a: { size: src(), rgb: src() } }).verified).toBe(1)
   })
 
   it('does not verify a fan whose rgb was never sourced', () => {
-    const sources = { a: { size: src(), count: src() } }
-    expect(coverageFor('fans', [fan('a')], sources).verified).toBe(0)
+    expect(coverageFor('fans', [fan('a')], { a: { size: src() } }).verified).toBe(0)
   })
 
   // 🛑 No rule reads a fan, so there is deliberately NO ratchet entry.

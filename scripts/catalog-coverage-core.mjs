@@ -96,10 +96,16 @@ export const EXPECTED = {
   // The ninth and last category pair, and the FIRST with no ratchet: no rule
   // reads a fan or a paste, so nothing here feeds a verdict. Enforcement is the
   // coverage report plus the RESEARCHED_KEYS unit test - never RATCHETED_KEYS or
-  // VERIFIED_CATEGORIES. Fans carry three displayed specs (specSheetContent.js
-  // and partPages.js render size/count/rgb); flat, every fan owes all three.
+  // VERIFIED_CATEGORIES.
+  //
+  // ⚠️ `count` is deliberately NOT researched. It is the pack size, and the
+  // catalogue mixes real maker packs (a single, a 5-pack) with app-chosen
+  // bundles (a 3-pack, a 10-pack) that the maker never sells - Arctic ships its
+  // non-RGB P12/P14 only as Single or 5-Pack, yet the catalogue offers 3/4/10.
+  // So `count` is an app bundling choice, like `tdp`, not a maker spec, and owes
+  // no provenance. Only `size` and `rgb` are genuine maker facts to source.
   fans: {
-    required: ['size', 'count', 'rgb'],
+    required: ['size', 'rgb'],
     optional: [],
   },
   // Paste had NO specs object until this project. `amountG` (the tube weight) is
