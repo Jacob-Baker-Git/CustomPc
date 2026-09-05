@@ -3771,5 +3771,45 @@
   },
   "paste-noctua-nth2-10g": {
     "amountG": { "url": "https://www.noctua.at/en/products/nt-h2-10g", "checkedOn": "2026-09-05", "note": "NT-H2 10g tube" }
+  },
+  "fans-be-quiet-silent-wings-4": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-sw4-140": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/silent-wings-4/3696", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-pw3-140-2": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-pure-wings-3-120": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/pure-wings-3/4602", "checkedOn": "2026-09-05", "note": "non-RGB; Silent/Pure Wings have no lighting" }
+  },
+  "fans-bequiet-light-wings-3pack": {
+    "size": { "url": "https://www.bequiet.com/en/casefans/light-wings/3447", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.bequiet.com/en/casefans/light-wings/3447", "checkedOn": "2026-09-05", "note": "ARGB" }
+  },
+  "fans-lian-li-sl120-3pack": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-lian-li-sl120-single": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-lian-li-sl140-2pack": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
+  },
+  "fans-lianli-tl-lcd-3": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-tl/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-tl/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan) + LCD" }
+  },
+  "fans-lianli-sl-inf-3pack": {
+    "size": { "url": "https://lian-li.com/product/uni-fan-sl-infinity/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://lian-li.com/product/uni-fan-sl-infinity/", "checkedOn": "2026-09-05", "note": "addressable RGB (Uni Fan)" }
   }
 }
