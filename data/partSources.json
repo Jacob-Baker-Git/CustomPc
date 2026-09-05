@@ -3743,10 +3743,6 @@
     "size": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
   },
-  "fans-noctua-a14g2-single": {
-    "size": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05" },
-    "rgb": { "url": "https://www.noctua.at/en/products/nf-a14x25-g2-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }
-  },
   "fans-noctua-p12-redux-3": {
     "size": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.noctua.at/en/products/nf-p12-redux-1700-pwm", "checkedOn": "2026-09-05", "note": "non-RGB; Noctua makes no RGB fans" }

@@ -5539,19 +5539,6 @@
     }
   },
   {
-    "id": "fans-noctua-a14g2-single",
-    "category": "fans",
-    "name": "Noctua NF-A14x25 G2 (single)",
-    "brand": "Noctua",
-    "price": 39.99,
-    "tdp": 2,
-    "specs": {
-      "size": "140mm",
-      "count": 1,
-      "rgb": false
-    }
-  },
-  {
     "id": "fans-phanteks-t30-3pack",
     "category": "fans",
     "name": "Phanteks T30-120 (3-pack)",
