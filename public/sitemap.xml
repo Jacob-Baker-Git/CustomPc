@@ -999,16 +999,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p12-10pack</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p12-3pack</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p12-5pack</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1019,7 +1009,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p12-pro-4pack</loc>
+    <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p12-pro-single</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1030,11 +1020,6 @@
   </url>
   <url>
     <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p12-slim</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://custompcbuilder.netlify.app/parts/fans-arctic-p14-3pack</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

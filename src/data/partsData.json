@@ -3026,19 +3026,6 @@
     }
   },
   {
-    "id": "fans-arctic-p12-3pack",
-    "category": "fans",
-    "name": "Arctic P12 PWM (3-pack)",
-    "brand": "Arctic",
-    "price": 24.99,
-    "tdp": 6,
-    "specs": {
-      "size": "120mm",
-      "count": 3,
-      "rgb": false
-    }
-  },
-  {
     "id": "fans-arctic-f14-single",
     "category": "fans",
     "name": "Arctic F14 140mm",
@@ -3204,19 +3191,6 @@
     "specs": {
       "size": "120mm",
       "count": 2,
-      "rgb": false
-    }
-  },
-  {
-    "id": "fans-arctic-p14-3pack",
-    "category": "fans",
-    "name": "Arctic P14 PWM (3-pack)",
-    "brand": "Arctic",
-    "price": 21.99,
-    "tdp": 6,
-    "specs": {
-      "size": "140mm",
-      "count": 3,
       "rgb": false
     }
   },
@@ -4355,15 +4329,15 @@
     }
   },
   {
-    "id": "fans-arctic-p12-pro-4pack",
+    "id": "fans-arctic-p12-pro-single",
     "category": "fans",
-    "name": "Arctic P12 Pro (4-pack)",
+    "name": "Arctic P12 Pro 120mm",
     "brand": "Arctic",
-    "price": 24.99,
-    "tdp": 6,
+    "price": 9.49,
+    "tdp": 2,
     "specs": {
       "size": "120mm",
-      "count": 4,
+      "count": 1,
       "rgb": false
     }
   },
@@ -8926,19 +8900,6 @@
     "specs": {
       "type": "AIO",
       "radiatorMm": 360
-    }
-  },
-  {
-    "id": "fans-arctic-p12-10pack",
-    "category": "fans",
-    "name": "Arctic P12 PWM PST (10-pack)",
-    "brand": "Arctic",
-    "price": 34.99,
-    "tdp": 20,
-    "specs": {
-      "size": "120mm",
-      "count": 10,
-      "rgb": false
     }
   },
   {

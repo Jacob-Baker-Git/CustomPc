@@ -3670,10 +3670,6 @@
     "size": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
   },
-  "fans-arctic-p12-3pack": {
-    "size": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05" },
-    "rgb": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
-  },
   "fans-arctic-f14-single": {
     "size": { "url": "https://www.arctic.de/en/F14-PWM/ACFAN00078A", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.arctic.de/en/F14-PWM/ACFAN00078A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
@@ -3682,27 +3678,19 @@
     "size": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
   },
-  "fans-arctic-p14-3pack": {
-    "size": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05" },
-    "rgb": { "url": "https://www.arctic.de/en/P14-PWM/ACFAN00124A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
-  },
   "fans-arctic-p12-max-single": {
     "size": { "url": "https://www.arctic.de/en/P12-Max/ACFAN00280A", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.arctic.de/en/P12-Max/ACFAN00280A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
   },
-  "fans-arctic-p12-pro-4pack": {
-    "size": { "url": "https://www.arctic.de/us/P12-Pro/ACFAN00305A", "checkedOn": "2026-09-05" },
-    "rgb": { "url": "https://www.arctic.de/us/P12-Pro/ACFAN00305A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
+  "fans-arctic-p12-pro-single": {
+    "size": { "url": "https://www.arctic.de/en/P12-Pro-PST/ACFAN00306A", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.arctic.de/en/P12-Pro-PST/ACFAN00306A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
   },
   "fans-arctic-p14-max": {
     "size": { "url": "https://www.arctic.de/us/P14-Max-Black/ACFAN00287A", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.arctic.de/us/P14-Max-Black/ACFAN00287A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
   },
   "fans-arctic-p12-5pack": {
-    "size": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05" },
-    "rgb": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
-  },
-  "fans-arctic-p12-10pack": {
     "size": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05" },
     "rgb": { "url": "https://www.arctic.de/en/P12-PWM-PST/ACFAN00120A", "checkedOn": "2026-09-05", "note": "non-RGB; Arctic sells any A-RGB version as a separate model" }
   },
