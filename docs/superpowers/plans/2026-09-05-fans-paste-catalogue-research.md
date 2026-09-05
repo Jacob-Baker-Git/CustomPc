@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Bring all 46 fans and 15 paste rows up to the research standard — source the three displayed fan specs (`size`, `count`, `rgb`), give paste one real spec (`amountG`, the tube weight) and enrich its spec sheet to show it, record provenance for every value, and report both categories in `catalog:coverage`.
+**Goal:** Bring all 46 fans and 15 paste rows up to the research standard — source the two maker fan specs (`size`, `rgb`; `count` is an app bundle, not researched), give paste one real spec (`amountG`, the tube weight) and enrich its spec sheet to show it, record provenance for every value, and report both categories in `catalog:coverage`.
 
 **Architecture:** Task 1 teaches the coverage core about fans and paste with **flat** required lists (neither is conditional). Task 2 enriches the paste spec-sheet line so a reader for `amountG` exists before the data arrives. Tasks 3–7 research 61 rows under protocol F, brand-grouped so a maker who makes both fans and paste is done in one pass. Task 8 adds the four keys to the `RESEARCHED_KEYS` unit test. **This is the first category with no ratchet:** no compatibility rule reads a fan or a paste, so nothing joins `RATCHETED_KEYS` or `VERIFIED_CATEGORIES` — enforcement is the coverage report plus the `RESEARCHED_KEYS` test, and that is enough.
 
@@ -103,18 +103,20 @@ For each part id:
 
 2. **Read the fields for the category:**
 
-   **A fan** — three fields, all under `specs`:
+   **A fan** — two researched fields, both under `specs`:
 
    - **`size`** — a string, `"120mm"` or `"140mm"` (the two tokens in the data).
      Keep the string format; a slim or thick fan (Arctic P12 Slim, Phanteks T30)
      is still `"120mm"` — thickness is not stored.
-   - **`count`** — the number of fans in the pack (the SKU: a single is `1`, a
-     three-pack `3`, and Arctic ships 4-, 5- and 10-packs). 🛑 **This is the
-     SKU-driven field, like a RAM kit's stick count.** Read it off the exact
-     pack SKU, do not infer.
    - **`rgb`** — a boolean: does this SKU have RGB/ARGB lighting? ⚠️ **Confirm on
      the page, do not infer from the name alone** — a line often sells both a
      lit and an unlit model (Corsair RS120 is non-RGB; the LL/QL/AF/RX are lit).
+
+   🛑 **`count` is NOT researched** (decided during execution — see the count
+   gotcha). The catalogue mixes real maker packs with app-chosen bundles the
+   maker never sells (Arctic ships Single/5-Pack only, yet the catalogue offers
+   3/4/10-packs), so `count` is an app bundling number like `tdp`, not a maker
+   spec. Leave it exactly as it is; do not source it, correct it, or delete it.
 
    **A paste** — one field, under `specs`:
 
@@ -124,9 +126,6 @@ For each part id:
 
 3. **Cross-check:**
 
-   - **A fan `count`** — the pack number in the name must equal `count`, and the
-     maker must actually sell that multipack SKU. A "(3-pack)" that is really
-     sold only as a single is a wrong `count`.
    - **A fan `rgb`** — the product page's lighting spec, not the name's marketing.
    - **A paste `amountG`** — the tube weight stated on the SKU page. If a product
      is sold in several tube sizes, land on the one this row names.
@@ -171,9 +170,8 @@ A fan (its three specs sourced; usually no value changes):
 
 ```json
 "fans-example-3pack": {
-  "size":  { "url": "https://example.com/x120", "checkedOn": "2026-09-05" },
-  "count": { "url": "https://example.com/x120", "checkedOn": "2026-09-05", "note": "sold as a 3-pack (SKU ...-3)" },
-  "rgb":   { "url": "https://example.com/x120", "checkedOn": "2026-09-05", "note": "addressable RGB" }
+  "size": { "url": "https://example.com/x120", "checkedOn": "2026-09-05" },
+  "rgb":  { "url": "https://example.com/x120", "checkedOn": "2026-09-05", "note": "addressable RGB" }
 }
 ```
 
@@ -456,9 +454,10 @@ one pass. **Every row follows research protocol F.** Each task has the same five
 steps, written out in full in Task 3; later tranches give their own rows, traps
 and commit, and refer to Task 3 Step 2 for the writer.
 
-⚠️ **A fan row usually needs only its three sources — its `size`/`count`/`rgb`
-are probably already right (the names are descriptive). Verify anyway; the CPU
-tranche taught that 78 of 80 rows were correct, and the value was proving it.**
+⚠️ **A fan row needs only its two sources — `size` and `rgb`** (`count` is not
+researched). Both are usually already right (the names are descriptive), but
+verify anyway; the CPU tranche taught that 78 of 80 rows were correct, and the
+value was proving it.
 
 ### Task 3: Arctic — 12 fans + 3 paste = 15 rows
 
@@ -491,14 +490,14 @@ tranche taught that 78 of 80 rows were correct, and the value was proving it.**
 
 **Entry point:** `arctic.de/en`. ⚠️ Entry points are to navigate from, not to cite.
 
-**Traps:** 🛑 **`count` is the field to check** — Arctic ships the P12/P14 in an
-unusually wide range (1, 3, 4, 5, 10), so confirm each pack SKU exists at that
-quantity (the P12 Pro is a 4-pack, the PST fans come in 5- and 10-packs).
+**Traps:** 🛑 **`rgb` is the field to check** (count is not researched).
 ⚠️ **All Arctic P/F fans here are non-RGB** — Arctic does make a "P12 A-RGB", so
 confirm none of these twelve is secretly the RGB variant. ⚠️ **P12 Slim, P12 Max
 and P14 Max are distinct SKUs from the plain P12/P14** — read the specific
-model's page, not the family. ⚠️ **MX-6 is in twice (4g and 8g)** — anchor each
-on its own tube SKU; MX-4 is also sold in 2g/8g/20g, so confirm the 4g.
+model's page (P14 Max is 140mm), not the family. ⚠️ **MX-6 is in twice (4g and
+8g)** — anchor each on its own tube SKU; MX-4 is also sold in 2g/8g/20g, so
+confirm the 4g. (Noted for the record: Arctic ships non-RGB P12/P14 as Single or
+5-Pack only, so the 3/4/10-packs are app bundles — left as-is per the decision.)
 
 - [ ] **Step 1: Research all fifteen rows under protocol F**
 
@@ -523,11 +522,11 @@ import { FILES, toFile, roundTripOk } from 'file:///C:/Users/jacob/IdeaProjects/
 // paste; null DELETES a key); `sources` merges into that part's provenance.
 const TRANCHE = {
   'fans-example': {
-    specs: { size: '120mm', count: 3, rgb: true },
+    // `specs` only when a size or rgb VALUE is actually wrong; usually a fan
+    // needs just its two sources. `count` is never touched (app bundle).
     sources: {
-      size:  { url: 'https://arctic.de/x', checkedOn: '2026-09-05' },
-      count: { url: 'https://arctic.de/x', checkedOn: '2026-09-05', note: '3-pack SKU' },
-      rgb:   { url: 'https://arctic.de/x', checkedOn: '2026-09-05' },
+      size: { url: 'https://arctic.de/x', checkedOn: '2026-09-05' },
+      rgb:  { url: 'https://arctic.de/x', checkedOn: '2026-09-05' },
     },
   },
   'paste-example': {
@@ -814,27 +813,32 @@ git commit -m "data: research the nine tail fans and four tail pastes - both cat
 🛑 Gotcha 6. Run this first (backtick-free, so it is safe in `node -e`):
 
 ```bash
-node -e "const d=require('./src/data/partsData.json');for(const k of ['size','count','rgb','amountG']){const by={};for(const p of d){if(p.specs&&p.specs[k]!==undefined)by[p.category]=(by[p.category]||0)+1}console.log(k,JSON.stringify(by))}"
+node -e "const d=require('./src/data/partsData.json');for(const k of ['size','rgb','amountG']){const by={};for(const p of d){if(p.specs&&p.specs[k]!==undefined)by[p.category]=(by[p.category]||0)+1}console.log(k,JSON.stringify(by))}"
 ```
 
-Expected: `size`, `count`, `rgb` appear **only** under `fans` (46 each), and
-`amountG` only under `paste` (15). If any key shows another category, it goes in
-`RESEARCHED_KEYS_BY_CATEGORY`, not the global list.
+Expected: `size`, `rgb` appear **only** under `fans` (46 each), and `amountG`
+only under `paste` (15). If any key shows another category, it goes in
+`RESEARCHED_KEYS_BY_CATEGORY`, not the global list. (`count` is intentionally
+excluded — it is an app bundle, not a maker spec.)
 
 - [ ] **Step 2: Add the four keys — and NOTHING else**
 
 In `src/tests/partSources.test.js`, add to `RESEARCHED_KEYS` (after `cores`, `boostClock`):
 
 ```js
-  // ⚠️ Sixth time for this ordering rule: these four could only join once all 46
-  // fans and 15 paste had a source. Safe in the GLOBAL list because fans are the
-  // only category carrying specs.size/count/rgb, and paste the only one carrying
-  // specs.amountG (Step 1 proves it).
+  // ⚠️ Sixth time for this ordering rule: these three could only join once all
+  // 46 fans (size, rgb) and 15 paste (amountG) had a source. Safe in the GLOBAL
+  // list because fans are the only category carrying specs.size/rgb, and paste
+  // the only one carrying specs.amountG (Step 1 proves it).
+  //
+  // 🛑 `count` is NOT here: it is a fan's pack size, an app bundling choice the
+  // maker often does not sell (Arctic ships Single/5-Pack, the catalogue offers
+  // 3/4/10), so it owes no provenance - like tdp.
   //
   // 🛑 There is NO VERIFIED_CATEGORIES entry and NO RATCHETED_KEYS entry for
   // fans or paste - no rule blocks on either, so this RESEARCHED_KEYS test IS
   // the whole enforcement. Do not "finish the pattern" by adding them below.
-  'size', 'count', 'rgb', 'amountG',
+  'size', 'rgb', 'amountG',
 ```
 
 🛑 **Do NOT add `fans` or `paste` to `VERIFIED_CATEGORIES`.** It stays the
@@ -913,13 +917,14 @@ categories a rule or a spec sheet reads runs on sourced data.**
 - `npm run catalog:coverage` reports **fans 46/46 (100%)** and **paste 15/15
   (100%)** — two new lines, ten categories in total; the eight finished
   categories unchanged.
-- `partSources.test.js` passes with `size`, `count`, `rgb`, `amountG` in
-  `RESEARCHED_KEYS`, proved **non-vacuous on a fan key and a paste key**, with
-  **no** `fans`/`paste` entry in `VERIFIED_CATEGORIES` or `RATCHETED_KEYS`.
+- `partSources.test.js` passes with `size`, `rgb`, `amountG` in
+  `RESEARCHED_KEYS` (`count` deliberately absent), proved **non-vacuous on a fan
+  key and a paste key**, with **no** `fans`/`paste` entry in
+  `VERIFIED_CATEGORIES` or `RATCHETED_KEYS`.
 - `specSheetContent.js` renders a paste's tube size when `amountG` is present and
   the generic sentence when it is not; `prerendered/` re-rendered.
-- Every fan `size`/`count`/`rgb` and every paste `amountG` carries a
-  `partSources.json` entry, or is `unverifiable` with a note.
+- Every fan `size`/`rgb` and every paste `amountG` carries a `partSources.json`
+  entry, or is `unverifiable` with a note. (`count` is not sourced.)
 - Lint, unit, e2e, build and prerender all green.
 
 ---

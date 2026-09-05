@@ -232,3 +232,21 @@ code-first / close-out-last frame are fixed.
 - `npm run catalog:push` and any push to `origin`. Both the user's to run —
   `main` is already far ahead with the cooler, storage, RAM and CPU tranches plus
   the site-quality backlog in it, none of it pushed.
+
+---
+
+## Amendment (2026-09-05, during execution): `count` dropped from research
+
+The Arctic tranche disproved this spec's assumption that a fan's `count` is a
+maker spec. Arctic ships its non-RGB P12/P14 as **Single or 5-Pack only**, yet
+the catalogue offers 3-, 4- and 10-packs at their own price points — the author
+mixed real maker packs with **app-chosen bundles the maker never sells**. So a
+`count` cannot honestly carry maker provenance; it is an app bundling number, in
+the family of `tdp`.
+
+**Decision (user-approved):** research and source only `size` and `rgb` per fan.
+`EXPECTED.fans` becomes `['size', 'rgb']`, `RESEARCHED_KEYS` gains `size`, `rgb`,
+`amountG` (not `count`), and every `count` value is **left exactly as it is** —
+not sourced, not corrected, not deleted. Paste's `amountG` is unaffected; it is a
+genuine maker spec. Every "researched three fan fields" statement above should be
+read as "two". See `fix: drop fan count from research` on the branch.
