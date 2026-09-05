@@ -54,6 +54,19 @@ const RESEARCHED_KEYS = [
   // 🛑 `socket` and `tdp` are deliberately NOT here - both TOP-LEVEL, enforced
   // by RATCHETED_KEYS.cpu. `perfScore` is a benchmark figure and owes no source.
   'cores', 'boostClock',
+  // ⚠️ Sixth time for this ordering rule: these three could only join once all
+  // 46 fans (size, rgb) and 15 paste (amountG) had a source. Safe in the GLOBAL
+  // list because fans are the only category carrying specs.size/rgb, and paste
+  // the only one carrying specs.amountG (a catalogue scan proves it).
+  //
+  // 🛑 `count` is NOT here: a fan's pack size is an app bundling choice the maker
+  // often does not sell (Arctic ships Single/5-Pack, the catalogue offers
+  // 3/4/10), so it owes no provenance - like tdp.
+  //
+  // 🛑 There is NO VERIFIED_CATEGORIES entry and NO RATCHETED_KEYS entry for
+  // fans or paste: no rule blocks on either, so this RESEARCHED_KEYS test IS the
+  // whole enforcement. Do not "finish the pattern" by adding them.
+  'size', 'rgb', 'amountG',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
