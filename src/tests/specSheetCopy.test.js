@@ -124,3 +124,20 @@ describe('a single-DIMM kit is not described as "1 sticks"', () => {
     }
   })
 })
+
+// amountG is added to paste in this project (the tube weight, the SKU
+// differentiator). The sheet leads with it when present and falls back to the
+// generic sentence when it is not, so a mid-research row still reads correctly.
+describe('a paste spec sheet shows its tube size', () => {
+  it('leads with the gram weight when amountG is present', () => {
+    expect(insight({ id: 'p', category: 'paste', specs: { amountG: 4 } }))
+      .toMatch(/^4g tube\. /)
+  })
+
+  it('falls back to the generic sentence when amountG is absent', () => {
+    const generic = insight({ id: 'p', category: 'paste', specs: {} })
+    expect(generic).toMatch(/^Sits between the CPU/)
+    // a paste row with no specs object at all must not throw
+    expect(insight({ id: 'q', category: 'paste' })).toBe(generic)
+  })
+})
