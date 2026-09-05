@@ -3846,5 +3846,53 @@
   },
   "paste-tg-duronaut": {
     "amountG": { "url": "https://www.thermal-grizzly.com/en/duronaut/s-tg-d-006", "checkedOn": "2026-09-05", "note": "Duronaut sold in 2/6/30g only; catalogue 3.9g does not exist for Duronaut - corrected to the 2g tube" }
+  },
+  "fans-cm-sickleflow-3pack": {
+    "size": { "url": "https://www.coolermaster.com/catalog/coolers/case-fan/sickleflow-120-argb-3in1/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.coolermaster.com/catalog/coolers/case-fan/sickleflow-120-argb-3in1/", "checkedOn": "2026-09-05", "note": "addressable RGB (SickleFlow 120 ARGB)" }
+  },
+  "fans-deepcool-fc120-3pack": {
+    "size": { "url": "https://www.deepcool.com/products/Cooling/fans/FC120-3-IN-1-Daisy-Chain-Performance-ARGB-Fan/2021/13582.shtml", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.deepcool.com/products/Cooling/fans/FC120-3-IN-1-Daisy-Chain-Performance-ARGB-Fan/2021/13582.shtml", "checkedOn": "2026-09-05", "note": "ARGB (6 addressable LEDs)" }
+  },
+  "fans-deepcool-fk120-3pack": {
+    "size": { "url": "https://www.deepcool.com/products/Cooling/fans/FK120-3in1-Performance-Fan/2022/15426.shtml", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.deepcool.com/products/Cooling/fans/FK120-3in1-Performance-Fan/2022/15426.shtml", "checkedOn": "2026-09-05", "note": "non-RGB (FK120 is the unlit FC120)" }
+  },
+  "fans-nzxt-f120-rgb": {
+    "size": { "url": "https://nzxt.com/products/f120-rgb", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://nzxt.com/products/f120-rgb", "checkedOn": "2026-09-05", "note": "addressable RGB (8 LEDs)" }
+  },
+  "fans-thermaltake-toughfan-12": {
+    "size": { "url": "https://www.thermaltake.com/toughfan-12-high-static-pressure-fan-single-pack.html", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.thermaltake.com/toughfan-12-high-static-pressure-fan-single-pack.html", "checkedOn": "2026-09-05", "note": "non-RGB (ToughFan 12 has no lighting)" }
+  },
+  "fans-phanteks-t30-3pack": {
+    "size": { "url": "https://phanteks.com/product/t30-120/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://phanteks.com/product/t30-120/", "checkedOn": "2026-09-05", "note": "non-RGB (T30 is the unlit performance fan)" }
+  },
+  "fans-phanteks-m25-3pack": {
+    "size": { "url": "https://phanteks.com/product/m25-120-black/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://phanteks.com/product/m25-120-black/", "checkedOn": "2026-09-05", "note": "non-RGB (M25-120 Black; the D-RGB M25 is a separate SKU)" }
+  },
+  "fans-thermalright-tlc12-3": {
+    "size": { "url": "https://www.thermalright.com/product/tl-c12c-x3/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.thermalright.com/product/tl-c12c-x3/", "checkedOn": "2026-09-05", "note": "non-RGB (plain TL-C12C; the -S is ARGB)" }
+  },
+  "fans-tr-c12cw-3pack": {
+    "size": { "url": "https://www.thermalright.com/product/tl-c12cw-s/", "checkedOn": "2026-09-05" },
+    "rgb": { "url": "https://www.thermalright.com/product/tl-c12cw-s/", "checkedOn": "2026-09-05", "note": "ARGB (TL-C12CW-S, white frame)" }
+  },
+  "paste-thermalright-tf7": {
+    "amountG": { "url": "https://www.thermalright.com/product/tf7-2g/", "checkedOn": "2026-09-05", "note": "TF7 sold in 2/4/8g; 2g tube" }
+  },
+  "paste-cm-mastergel": {
+    "amountG": { "checkedOn": "2026-09-05", "result": "unverifiable", "note": "Cooler Master's MasterGel Pro product pages return 404 (superseded by New MasterGel Pro / V2); no maker page states this SKU's fill weight" }
+  },
+  "paste-cm-cryofuze": {
+    "amountG": { "url": "https://www.coolermaster.com/en-us/products/cryofuze/", "checkedOn": "2026-09-05", "note": "Cooler Master CryoFuze sold in a 2g tube (2g/4g)" }
+  },
+  "paste-gelid-gc-extreme": {
+    "amountG": { "url": "https://gelidsolutions.com/wp-content/uploads/2023/08/GC-Extreme-3.5g-EN.pdf", "checkedOn": "2026-09-05", "note": "Gelid GC-Extreme 3.5g spec sheet (TC-GC-03-A)" }
   }
 }

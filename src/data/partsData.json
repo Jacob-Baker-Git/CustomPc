@@ -5596,7 +5596,10 @@
     "name": "Thermalright TF7 (2g)",
     "brand": "Thermalright",
     "price": 6.49,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "paste-gelid-gc-extreme",
@@ -5604,7 +5607,10 @@
     "name": "Gelid GC-Extreme (3.5g)",
     "brand": "Gelid",
     "price": 11.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 3.5
+    }
   },
   {
     "id": "cpu-i3-12100f",
@@ -9130,7 +9136,10 @@
     "name": "Cooler Master CryoFuze (2g)",
     "brand": "Cooler Master",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 2
+    }
   },
   {
     "id": "gpu-rtx-2060",
