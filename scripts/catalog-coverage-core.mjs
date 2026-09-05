@@ -93,6 +93,24 @@ export const EXPECTED = {
     required: ['socket', 'tdp', 'cores', 'boostClock'],
     optional: [],
   },
+  // The ninth and last category pair, and the FIRST with no ratchet: no rule
+  // reads a fan or a paste, so nothing here feeds a verdict. Enforcement is the
+  // coverage report plus the RESEARCHED_KEYS unit test - never RATCHETED_KEYS or
+  // VERIFIED_CATEGORIES. Fans carry three displayed specs (specSheetContent.js
+  // and partPages.js render size/count/rgb); flat, every fan owes all three.
+  fans: {
+    required: ['size', 'count', 'rgb'],
+    optional: [],
+  },
+  // Paste had NO specs object until this project. `amountG` (the tube weight) is
+  // added as the one real, SKU-differentiating, displayable field - MX-6 ships
+  // 4g and 8g, NT-H2 3.5g and 10g, distinct rows. `type` is deliberately absent:
+  // all 15 are grease, so it would be uniform and imply a conductivity rule that
+  // does not exist.
+  paste: {
+    required: ['amountG'],
+    optional: [],
+  },
 }
 
 // Which top-level fields a category owes a source once it is ratcheted.

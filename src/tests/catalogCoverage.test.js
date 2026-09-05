@@ -61,8 +61,10 @@ describe('catalogue coverage', () => {
     expect(coverageFor('gpu', parts, {}).total).toBe(1)
   })
 
-  it('returns null for a category with no expectations yet', () => {
-    expect(coverageFor('paste', [], {})).toBeNull()
+  // ⚠️ Was 'paste' until 2026-09-05, when paste gained expectations. Every real
+  // category is now in EXPECTED, so this uses a name that never will be.
+  it('returns null for a category with no expectations', () => {
+    expect(coverageFor('nonexistent', [], {})).toBeNull()
   })
 })
 
@@ -393,5 +395,53 @@ describe('cpu expectations', () => {
 
   it('ratchets the two top-level block-driving fields and no others', () => {
     expect(RATCHETED_KEYS.cpu).toEqual(['socket', 'tdp'])
+  })
+})
+
+describe('fans expectations', () => {
+  const fan = (id, over = {}) =>
+    ({ id, category: 'fans', tdp: 2, specs: { size: '120mm', count: 1, rgb: false }, ...over })
+
+  it('expects the three displayed specs, flat for every fan', () => {
+    expect(requiredFor(EXPECTED.fans, fan('a'))).toEqual(['size', 'count', 'rgb'])
+  })
+
+  it('counts a fully sourced fan as verified', () => {
+    const sources = { a: { size: src(), count: src(), rgb: src() } }
+    expect(coverageFor('fans', [fan('a')], sources).verified).toBe(1)
+  })
+
+  it('does not verify a fan whose rgb was never sourced', () => {
+    const sources = { a: { size: src(), count: src() } }
+    expect(coverageFor('fans', [fan('a')], sources).verified).toBe(0)
+  })
+
+  // 🛑 No rule reads a fan, so there is deliberately NO ratchet entry.
+  it('has no ratchet keys - nothing blocks on a fan', () => {
+    expect(RATCHETED_KEYS.fans).toBeUndefined()
+  })
+})
+
+describe('paste expectations', () => {
+  const paste = (id, over = {}) =>
+    ({ id, category: 'paste', tdp: 0, specs: { amountG: 4 }, ...over })
+
+  it('expects the one researched spec, amountG', () => {
+    expect(requiredFor(EXPECTED.paste, paste('a'))).toEqual(['amountG'])
+  })
+
+  it('counts a fully sourced paste as verified', () => {
+    expect(coverageFor('paste', [paste('a')], { a: { amountG: src() } }).verified).toBe(1)
+  })
+
+  // The one paste with no published fill weight is DONE when recorded absent.
+  it('counts an amountG recorded unverifiable (field absent) as researched', () => {
+    const parts = [{ id: 'a', category: 'paste', tdp: 0, specs: {} }]
+    const sources = { a: { amountG: { checkedOn: '2026-09-05', result: 'unverifiable', note: 'no published fill weight' } } }
+    expect(coverageFor('paste', parts, sources).verified).toBe(1)
+  })
+
+  it('has no ratchet keys - nothing blocks on a paste', () => {
+    expect(RATCHETED_KEYS.paste).toBeUndefined()
   })
 })
