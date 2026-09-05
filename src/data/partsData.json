@@ -3278,7 +3278,10 @@
     "name": "Arctic MX-4 (4g)",
     "brand": "Arctic",
     "price": 6.49,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 4
+    }
   },
   {
     "id": "paste-noctua-nth1",
@@ -3302,7 +3305,10 @@
     "name": "Arctic MX-6 (4g)",
     "brand": "Arctic",
     "price": 8.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 4
+    }
   },
   {
     "id": "paste-cm-mastergel",
@@ -9081,7 +9087,10 @@
     "name": "Arctic MX-6 (8g)",
     "brand": "Arctic",
     "price": 9.99,
-    "tdp": 0
+    "tdp": 0,
+    "specs": {
+      "amountG": 8
+    }
   },
   {
     "id": "paste-noctua-nth2-10g",
