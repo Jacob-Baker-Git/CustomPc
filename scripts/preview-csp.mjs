@@ -101,6 +101,12 @@ const server = createServer(async (req, res) => {
     body = await readIfFile(join(target, 'index.html'))
     if (body) served = join(path, 'index.html')
   }
+  // The _redirects rewrite /parts/:id -> /parts/:id.html, which is the only
+  // rule whose target is not a directory index.
+  if (!body) {
+    body = await readIfFile(target + '.html')
+    if (body) served = path + '.html'
+  }
   if (!body) {
     body = await readIfFile(join(ROOT, 'index.html'))
     served = '/index.html'

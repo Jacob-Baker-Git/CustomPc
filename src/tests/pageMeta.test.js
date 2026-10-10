@@ -33,7 +33,7 @@ describe('pageMeta', () => {
   })
 
   it('leaves part pages unslashed and the root bare, with no double slash', () => {
-    // Part detail pages resolve through the SPA fallback either way and are listed
+    // Part detail pages are flat files served 200 at the unslashed URL and are listed
     // unslashed; a trailing slash there would invent a second, un-listed URL.
     expect(canonicalFor('parts/gpu-rtx-3080')).toBe(`${SITE}/parts/gpu-rtx-3080`)
     expect(canonicalFor(null)).toBe(`${SITE}/`)

@@ -122,12 +122,16 @@ async function writePartPages(shell) {
   try {
     const { pagedParts, partPageMeta } = await server.ssrLoadModule('/src/lib/partPages.js')
     const { default: parts } = await server.ssrLoadModule('/src/data/partsData.json')
+    // FLAT files, not parts/<id>/index.html: Netlify answers a directory index's
+    // unslashed URL with a 301 to the slashed one before _redirects is consulted,
+    // which sent every sitemapped part URL through a redirect to a page whose
+    // canonical pointed back at the redirect.
+    mkdirSync(new URL('parts/', DIST), { recursive: true })
     let written = 0
     for (const part of pagedParts(parts)) {
       const { title, description } = partPageMeta(part)
       const html = applyMeta(shell, { title, description, canonical: canonicalFor(`parts/${part.id}`) })
-      mkdirSync(new URL(`parts/${part.id}/`, DIST), { recursive: true })
-      writeFileSync(new URL(`parts/${part.id}/index.html`, DIST), html)
+      writeFileSync(new URL(`parts/${part.id}.html`, DIST), html)
       written += 1
     }
     return written

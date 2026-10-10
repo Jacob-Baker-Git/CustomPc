@@ -137,7 +137,9 @@ describe('_redirects', () => {
     // Without this the /* fallback serves /index.html (root canonical) for every
     // part path — the self-cancel. A 200 REWRITE keeps the URL unslashed (matching
     // the sitemap + each page's canonical); it must sit above /* or it never runs.
-    const partsRule = /^\/parts\/:id\s+\/parts\/:id\/index\.html\s+200/m
+    // The target is a FLAT file: with a directory index at /parts/<id>/, Netlify
+    // 301s the unslashed URL to the slashed one before this rule is consulted.
+    const partsRule = /^\/parts\/:id\s+\/parts\/:id\.html\s+200/m
     const spaFallback = /^\/\*\s+\/index\.html\s+200/m
     expect(redirects).toMatch(partsRule)
     expect(redirects).toMatch(spaFallback)
