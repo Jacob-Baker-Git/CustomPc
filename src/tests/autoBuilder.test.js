@@ -223,3 +223,24 @@ describe('auto-build PSU sizing agrees with the Performance tab', () => {
     expect(short).toEqual([])
   })
 })
+
+// The greedy pass measured gains on the ROUNDED overall, so a cheap upgrade in
+// a low-weight category (a better case, more fans) usually rounded to zero and
+// was never bought, while 64 GB of RAM happened to round up. Every gaming build
+// up to £3,800 shipped in the cheapest case on sale.
+describe('auto-build greedy pass sees sub-point gains', () => {
+  it('keeps gaming builds at or under 32 GB of memory', () => {
+    for (const budget of [900, 1200, 1700, 2500, 3800]) {
+      expect(buildForUseCase(budget, 'gaming', partsData).ram.capacityGb, `£${budget}`).toBeLessThanOrEqual(32)
+    }
+  })
+
+  // Only where money is genuinely left over: up to ~£2,500 a gaming build
+  // spends 99%+ and the score rightly prefers CPU/GPU/RAM to a case.
+  it('spends leftover money on a better case instead of leaving it in the cheapest one', () => {
+    const cheapest = [...partsData].filter((p) => p.category === 'case' && !p.legacy).sort((a, b) => a.price - b.price)[0]
+    for (const uc of ['gaming', 'streaming', 'programming']) {
+      expect(buildForUseCase(3800, uc, partsData).case.id, uc).not.toBe(cheapest.id)
+    }
+  })
+})

@@ -1,6 +1,7 @@
 import { checkCompatibility } from './compatibility'
 import { partQuality } from './partQuality'
 import { rateBuild } from './partRatings'
+import { usefulRamGb } from './buildProfiles'
 import { peakDrawW, recommendedPsuW } from './partSynergy'
 
 const BASE_WEIGHTS = {
@@ -11,6 +12,8 @@ const BASE_WEIGHTS = {
 // CPU/GPU first (perf drivers), parts that depend on them next, PSU last.
 const FILL_ORDER = ['cpu', 'gpu', 'motherboard', 'ram', 'cooler', 'case', 'storage', 'fans', 'psu']
 const PERF = new Set(['cpu', 'gpu'])
+// Smallest score gain (on the 0-100 scale) the greedy pass will pay for.
+const MIN_GAIN = 0.5
 
 function weightsFor(resolution) {
   const w = { ...BASE_WEIGHTS }
@@ -68,15 +71,24 @@ function choosePsu(candidates, peak, remaining, selection = {}) {
 // choosePsu's last two fallbacks ignore `remaining` entirely. The build came out
 // at 136% of budget. A step has to be priced with the power supply it drags
 // along behind it.
+//
+// It prices only supplies the build could actually take - the same
+// checkCompatibility filter choosePsu applies (a card's power connectors, a
+// board's EPS header) - or it under-prices exactly the builds whose cheapest
+// big-enough supply lacks the right plugs.
 function psuPricer(candidates) {
   const byPrice = [...candidates].sort((a, b) => a.price - b.price)
   const cache = new Map()
-  return (peak) => {
-    const key = Math.ceil(peak / 25) * 25
+  return (sel) => {
+    const peak = peakDrawW(sel)
+    const watts = Math.ceil(peak / 25) * 25
+    const key = `${watts}|${sel.gpu?.id ?? ''}|${sel.motherboard?.id ?? ''}`
     if (!cache.has(key)) {
-      const fit = byPrice.find((p) => p.wattage >= recommendedPsuW(key))
-        || byPrice.find((p) => p.wattage >= key)
-        || byPrice[byPrice.length - 1]
+      const usable = byPrice.filter((p) => checkCompatibility(sel, p).compatible)
+      const pool = usable.length > 0 ? usable : byPrice
+      const fit = pool.find((p) => p.wattage >= recommendedPsuW(watts))
+        || pool.find((p) => p.wattage >= watts)
+        || pool[pool.length - 1]
       cache.set(key, fit?.price ?? 0)
     }
     return cache.get(key)
@@ -140,14 +152,12 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
 
   const emptyCats = FILL_ORDER.filter((c) => !result[c])
   const weightSum = emptyCats.reduce((s, c) => s + (weights[c] ?? 0), 0) || 1
-  // Hold back the PSU's slice so the upgrade pass can't spend the power budget.
-  const psuReserve = result.psu ? 0 : ((weights.psu ?? 0) / weightSum) * available
 
   const priceOfPsuFor = psuPricer(ofCategory(partsData, 'psu'))
   const spendOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.price ?? 0), 0)
   // What this selection really costs: the parts, plus the power supply it will
   // need if one has not been chosen yet.
-  const projectedTotal = (sel) => spendOf(sel) + (sel.psu ? 0 : priceOfPsuFor(peakDrawW(sel)))
+  const projectedTotal = (sel) => spendOf(sel) + (sel.psu ? 0 : priceOfPsuFor(sel))
   const affordable = (sel) => projectedTotal(sel) <= budget
 
   // The least a category can possibly be filled for. Ignores compatibility, so
@@ -237,13 +247,15 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     const without = { ...result, [category]: undefined }
     let pool = ofCategory(partsData, category)
       .filter((p) => checkCompatibility(without, p).compatible)
-      .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining - psuReserve)
+      .filter((p) => partQuality(p) > curQ && p.price - current.price <= remaining)
     // Same gap as the fill pass: compatibility.js checks GPU length when picking
     // a GPU, never when picking the case it has to fit inside. And the same
     // guard — an unknown length must not empty the pool.
     if (category === 'case' && typeof result.gpu?.length === 'number') {
       pool = pool.filter((p) => result.gpu.length <= p.maxGpuLength)
     }
+    // Capacity the use case cannot use earns no score, so never pay for it.
+    if (category === 'ram' && rateFor) pool = pool.filter((p) => (p.capacityGb ?? 0) <= usefulRamGb(rateFor))
     return pool.sort((a, b) => a.price - b.price)
   }
 
@@ -303,33 +315,43 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     // gamer would feel — while the GPU, which the profile weights nearly twice as
     // heavily, sat at 76. Rating each candidate is what makes "best within the
     // budget" mean the thing the user is shown.
-    let guard = 0
-    while (guard++ < 60) {
-      const base = rateBuild(result, rateFor, partsData).overall
-      const steps = []
-      for (const category of FILL_ORDER) {
-        if (category === 'psu' || userCats.has(category) || !result[category]) continue
-        for (const cand of upgradeCandidates(category)) {
-          const next = { ...result, [category]: cand }
-          if (!affordable(next)) continue
-          const cost = cand.price - result[category].price
-          const gain = rateBuild(next, rateFor, partsData).overall - base
-          if (gain <= 0) continue
-          steps.push({ category, cand, cost, value: cost > 0 ? gain / cost : Infinity })
+    const greedy = (scoreOf, minGain) => {
+      let guard = 0
+      while (guard++ < 60) {
+        const base = scoreOf(rateBuild(result, rateFor, partsData))
+        const steps = []
+        for (const category of FILL_ORDER) {
+          if (category === 'psu' || userCats.has(category) || !result[category]) continue
+          for (const cand of upgradeCandidates(category)) {
+            const next = { ...result, [category]: cand }
+            if (!affordable(next)) continue
+            const cost = cand.price - result[category].price
+            const gain = scoreOf(rateBuild(next, rateFor, partsData)) - base
+            if (gain < minGain) continue
+            steps.push({ category, cand, cost, value: cost > 0 ? gain / cost : Infinity })
+          }
         }
+        if (steps.length === 0) break
+        // Deterministic ordering: score-per-pound, then the cheaper step, then the
+        // part id — so ties never resolve on catalogue order, which shifts whenever
+        // the Supabase catalogue is re-fetched.
+        steps.sort((a, b) => b.value - a.value || a.cost - b.cost || (a.cand.id < b.cand.id ? -1 : 1))
+        const step = pick(steps, rng, 2)
+        remaining -= step.cost
+        result[step.category] = step.cand
       }
-      if (steps.length === 0) break
-      // Deterministic ordering: score-per-pound, then the cheaper step, then the
-      // part id — so ties never resolve on catalogue order, which shifts whenever
-      // the Supabase catalogue is re-fetched.
-      steps.sort((a, b) => b.value - a.value || a.cost - b.cost || (a.cand.id < b.cand.id ? -1 : 1))
-      const step = pick(steps, rng, 2)
-      remaining -= step.cost
-      result[step.category] = step.cand
     }
+    greedy((r) => r.overall, Number.MIN_VALUE)
+    // The pass above sees only whole points, so a cheap step in a low-weight
+    // category (a better case, more fans) rounds to no gain and was never bought:
+    // every gaming build up to £3,800 shipped in the cheapest case on sale. This
+    // spends what is left on exact-score gains of at least MIN_GAIN - after the
+    // main pass, so it can only add to the build that pass chose, never reroute
+    // it, and MIN_GAIN keeps office and programming stopping when money buys
+    // nothing.
+    greedy((r) => r.exact, MIN_GAIN)
     // Nothing left that raises the score, so put any remainder into raw quality
-    // the way the old pass did — a better case or cooler still beats change in
-    // the user's pocket.
+    // in the profile's upgrade order (memory capped at what the use can use).
     stepUpQuality()
   } else if (maximise) {
     stepUpQuality()
