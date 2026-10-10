@@ -26,6 +26,14 @@ describe('GeneratedBanner', () => {
     expect(container).toBeEmptyDOMElement()
   })
 
+  it('says a shared build was opened and where the previous one went', () => {
+    useBuilderStore.setState({ lastGenerated: { shared: true, savedPrevious: true } })
+    render(<GeneratedBanner />)
+    expect(screen.getByRole('status')).toHaveTextContent(/opened a shared build/i)
+    expect(screen.getByRole('status')).toHaveTextContent(/previous build is in saved builds/i)
+    expect(screen.queryByRole('button', { name: /spend the leftover/i })).toBeNull()
+  })
+
   it('summarises what the generated build cost', () => {
     render(<GeneratedBanner />)
     expect(screen.getByText(/gaming build/i)).toBeInTheDocument()
