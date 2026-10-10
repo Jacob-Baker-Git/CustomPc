@@ -90,7 +90,7 @@ export const EXPECTED = {
   // warning). `cores` and `boostClock` are the headline specs the spec sheet
   // prints. `perfScore` is absent: it is a benchmark figure, not a maker spec.
   cpu: {
-    required: ['socket', 'tdp', 'cores', 'boostClock'],
+    required: ['socket', 'tdp', 'cores', 'boostClock', 'maxPowerW'],
     optional: [],
   },
   // The ninth and last category pair, and the FIRST with no ratchet: no rule

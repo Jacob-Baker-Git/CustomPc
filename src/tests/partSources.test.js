@@ -67,6 +67,10 @@ const RESEARCHED_KEYS = [
   // fans or paste: no rule blocks on either, so this RESEARCHED_KEYS test IS the
   // whole enforcement. Do not "finish the pattern" by adding them.
   'size', 'rgb', 'amountG',
+  // CPU peak package power (Intel Maximum Turbo Power / AMD PPT). It joined with
+  // all 79 CPUs accounted for: 73 sourced, six 10th/11th-gen Intel recorded
+  // unverifiable. Safe globally: only CPUs carry specs.maxPowerW.
+  'maxPowerW',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
