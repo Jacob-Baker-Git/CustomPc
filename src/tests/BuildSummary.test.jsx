@@ -103,10 +103,22 @@ describe('BuildSummary', () => {
   it('flags unpicked core categories as visibly missing', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)
-    // 10 core categories, 2 picked → 8 flagged.
-    expect(screen.getAllByText(/not selected/i)).toHaveLength(8)
-    expect(screen.getByText(/8 parts missing/i)).toBeInTheDocument()
+    // 9 essentials, 2 picked → 7 flagged. Paste is optional, as on the Build tab.
+    expect(screen.getAllByText(/not selected/i)).toHaveLength(7)
+    expect(screen.getByText(/7 parts missing/i)).toBeInTheDocument()
     expect(screen.getByText('Thermal Paste')).toBeInTheDocument()
+  })
+
+  it('counts the same essentials as the Build tab, so an unpicked paste is not missing', () => {
+    const full = {}
+    for (const cat of ['motherboard', 'cpu', 'gpu', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans']) {
+      full[cat] = { ...cpu, category: cat, name: `Part ${cat}` }
+    }
+    useBuilderStore.setState({ selectedParts: full })
+    render(<BuildSummary />)
+    expect(screen.queryByText(/missing/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/not selected/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/optional/i)).toBeInTheDocument()
   })
 
   it('shows no missing banner once every core part is picked', () => {
