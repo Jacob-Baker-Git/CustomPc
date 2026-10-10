@@ -2,10 +2,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import ErrorBoundary from './components/ErrorBoundary'
 import { applyShareLinkFromUrl } from './lib/shareLink'
+import { syncBuildWithCatalog } from './store/useCatalogStore'
 import './index.css'
 
-// Hydrate from a ?build= share link before the first render (no BudgetEntry flash).
+// Before the first render: apply a ?build= share link, then re-point the
+// persisted build at the bundled catalogue (loadCatalog repeats this live).
 applyShareLinkFromUrl()
+syncBuildWithCatalog()
 
 // ⚠️ NO React.StrictMode, deliberately. This is not an oversight, and re-adding
 // it breaks the 3D view in development. src/tests/mainEntry.test.js holds the

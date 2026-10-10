@@ -124,3 +124,35 @@ describe('useBuilderStore', () => {
     expect(selTotalSpent(useBuilderStore.getState())).toBe(0)
   })
 })
+
+// A persisted build holds whole part objects. Without this they keep whatever
+// price and specs the part had when it was picked, forever, and the
+// compatibility checks run on those stale values.
+describe('syncWithCatalog', () => {
+  const monitor = { id: 'mon-x', category: 'monitor', name: 'Mon', price: 200 }
+
+  it('replaces each selected part with the catalogue copy of the same id', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: { ...cpu, price: 1 } } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(useBuilderStore.getState().selectedParts.cpu).toBe(cpu)
+  })
+
+  it('drops a part the catalogue no longer has', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu: { ...gpu, id: 'gpu-gone' } } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(useBuilderStore.getState().selectedParts).toEqual({ cpu })
+  })
+
+  it('refreshes peripherals the same way', () => {
+    useBuilderStore.setState({ selectedPeripherals: { monitor: { ...monitor, price: 1 }, mouse: { id: 'gone' } } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [monitor])
+    expect(useBuilderStore.getState().selectedPeripherals).toEqual({ monitor })
+  })
+
+  it('leaves state untouched when nothing changed', () => {
+    const selectedParts = { cpu }
+    useBuilderStore.setState({ selectedParts, selectedPeripherals: {} })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(useBuilderStore.getState().selectedParts).toBe(selectedParts)
+  })
+})

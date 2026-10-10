@@ -2,6 +2,21 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
 
+// Swap each selected part for the catalogue's copy of the same id, dropping any
+// the catalogue no longer has. Returns `selection` itself when nothing changed.
+// ponytail: a dropped part disappears silently; add a notice if removals become common.
+function resolveById(selection, catalog) {
+  const byId = new Map(catalog.map((p) => [p.id, p]))
+  let changed = false
+  const next = {}
+  for (const [cat, part] of Object.entries(selection)) {
+    const fresh = byId.get(part?.id)
+    if (fresh) next[cat] = fresh
+    if (fresh !== part) changed = true
+  }
+  return changed ? next : selection
+}
+
 const useBuilderStore = create(persist((set) => ({
   budget: 0,
   selectedParts: {},
@@ -30,6 +45,17 @@ const useBuilderStore = create(persist((set) => ({
   setBuild: (parts) => set({ selectedParts: parts }),
 
   clearBuild: () => set({ selectedParts: {}, selectedPeripherals: {} }),
+
+  // The build persists whole part objects, so without this a returning visitor
+  // keeps the prices and specs from whenever each part was picked.
+  syncWithCatalog: (parts, peripherals) =>
+    set((state) => {
+      const selectedParts = resolveById(state.selectedParts, parts)
+      const selectedPeripherals = resolveById(state.selectedPeripherals, peripherals)
+      return selectedParts === state.selectedParts && selectedPeripherals === state.selectedPeripherals
+        ? state
+        : { selectedParts, selectedPeripherals }
+    }),
 
   caseTransparent: false,
   toggleCaseTransparency: () =>
