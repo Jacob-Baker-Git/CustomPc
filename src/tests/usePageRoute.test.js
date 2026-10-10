@@ -27,6 +27,15 @@ describe('usePageRoute', () => {
     expect(renderHook(() => usePageRoute()).result.current.page).toBeNull()
   })
 
+  it('flags an unknown path as not found, but never the root', () => {
+    at('/not-a-page')
+    expect(renderHook(() => usePageRoute()).result.current.notFound).toBe(true)
+    at('/#build')
+    expect(renderHook(() => usePageRoute()).result.current.notFound).toBe(false)
+    at('/parts/gpu-rtx-4090')
+    expect(renderHook(() => usePageRoute()).result.current.notFound).toBe(false)
+  })
+
   it('navigate pushes a real URL and clears back to the root', () => {
     const { result } = renderHook(() => usePageRoute())
     act(() => result.current.navigate('parts'))

@@ -28,9 +28,10 @@ const pathOf = (p) => (p ? `/${p}` : '/')
 // the chrome, the back link and the crawl path all still lead through it.
 const routeOf = (path) => {
   const partId = partIdFromPath(path)
-  if (partId) return { page: 'parts', partId }
+  if (partId) return { page: 'parts', partId, notFound: false }
   const p = path.replace(/^\/+|\/+$/g, '')
-  return { page: PAGES.includes(p) ? p : null, partId: null }
+  const page = PAGES.includes(p) ? p : null
+  return { page, partId: null, notFound: p !== '' && !page }
 }
 
 const fromPath = () => routeOf(window.location.pathname)
@@ -44,7 +45,7 @@ const canonicaliseLegacyHash = () => {
   const m = /^#\/([a-z]+)$/.exec(window.location.hash)
   if (m && PAGES.includes(m[1])) {
     window.history.replaceState(null, '', pathOf(m[1]))
-    return { page: m[1], partId: null }
+    return { page: m[1], partId: null, notFound: false }
   }
   return null
 }
@@ -96,5 +97,5 @@ export function usePageRoute() {
     }
   }, [])
 
-  return { page: route.page, partId: route.partId, navigate }
+  return { page: route.page, partId: route.partId, notFound: route.notFound, navigate }
 }

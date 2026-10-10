@@ -140,7 +140,9 @@ describe('_redirects', () => {
     // The target is a FLAT file: with a directory index at /parts/<id>/, Netlify
     // 301s the unslashed URL to the slashed one before this rule is consulted.
     const partsRule = /^\/parts\/:id\s+\/parts\/:id\.html\s+200/m
-    const spaFallback = /^\/\*\s+\/index\.html\s+200/m
+    // 404, not 200: real files, the pre-rendered page folders and the part
+    // rewrite all match first, so only a genuinely unknown path reaches this.
+    const spaFallback = /^\/\*\s+\/index\.html\s+404/m
     expect(redirects).toMatch(partsRule)
     expect(redirects).toMatch(spaFallback)
     expect(redirects.search(partsRule)).toBeLessThan(redirects.search(spaFallback))

@@ -1,6 +1,9 @@
-# Content pages are real paths (/help, /glossary, …) served by one SPA bundle,
-# so every unknown path has to return index.html — with 200, not 301. A redirect
-# would send a crawler back to / and undo the entire point of having paths.
+# Content pages are real paths (/help, /glossary, …) served by one SPA bundle.
+# Each exists as a pre-rendered file, as does every part page, so the catch-all
+# at the bottom only sees unknown paths: it serves the app (which says "Page not
+# found") with a 404 status, so a typo or dead link is not indexed as a copy of
+# the home page. Never a redirect: that would send a crawler back to / and undo
+# the point of having paths.
 #
 # Netlify matches these top to bottom and stops at the first hit, so the asset
 # directories are listed first: without them a mistyped /models/foo.glb would
@@ -26,4 +29,4 @@
 # is correct: it is not a page.
 /parts/:id  /parts/:id.html  200
 
-/*          /index.html      200
+/*          /index.html      404

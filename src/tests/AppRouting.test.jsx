@@ -18,6 +18,17 @@ beforeEach(() => {
 })
 
 describe('App routing', () => {
+  // An unknown path used to render the hub, so a typo or a dead link looked
+  // like the home page with no sign anything was wrong.
+  it('says a page was not found instead of showing the hub', () => {
+    window.history.replaceState(null, '', '/no-such-page')
+    render(<App />)
+    expect(screen.getByRole('heading', { name: /page not found/i })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /start a build/i })).toBeNull()
+    expect(document.title).toMatch(/not found/i)
+    window.history.replaceState(null, '', '/')
+  })
+
   it('shows the hub by default', () => {
     render(<App />)
     expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
