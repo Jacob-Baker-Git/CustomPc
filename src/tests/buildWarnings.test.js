@@ -122,3 +122,24 @@ describe('advisories', () => {
     expect(levels.indexOf('note')).toBe(levels.length - 1)
   })
 })
+
+describe('cooler vs full-boost power', () => {
+  const cpu = { id: 'c', name: 'i7-14700KF', category: 'cpu', tdp: 125, specs: { maxPowerW: 253 } }
+  const cooler = (ratedTdpW) => ({ id: 'k', category: 'cooler', specs: { type: 'Air', ratedTdpW } })
+
+  it('notes a cooler that covers base power but not full boost', () => {
+    const w = getBuildWarnings({ cpu, cooler: cooler(220) }).find((x) => /full boost/.test(x.message))
+    expect(w?.level).toBe('note')
+    expect(w.message).toMatch(/220W.*253W/)
+  })
+
+  it('says nothing when the cooler covers full boost', () => {
+    expect(getBuildWarnings({ cpu, cooler: cooler(260) }).some((x) => /full boost/.test(x.message))).toBe(false)
+  })
+
+  it('leaves a cooler below base power to the existing warning', () => {
+    const ws = getBuildWarnings({ cpu, cooler: cooler(100) })
+    expect(ws.some((x) => /full boost/.test(x.message))).toBe(false)
+    expect(ws.some((x) => x.level === 'warning' && /rated for 100W/.test(x.message))).toBe(true)
+  })
+})

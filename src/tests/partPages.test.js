@@ -227,3 +227,11 @@ describe('a drive is told how it connects', () => {
     }
   })
 })
+
+describe('CPU page cooling note', () => {
+  it('gives base and full-boost power', () => {
+    const cpu = parts.find((p) => p.id === 'cpu-i7-14700kf')
+    const note = compatibilityNotes(cpu, parts).find((n) => n.label === 'Cooling')
+    expect(note.detail).toMatch(/^125 W base power, up to 253 W at full boost\./)
+  })
+})

@@ -201,3 +201,25 @@ describe('autoBuild budget discipline', () => {
     for (const c of ESSENTIALS) expect(build[c], `missing ${c}`).toBeTruthy()
   })
 })
+
+// The Performance tab recommends a supply from PEAK draw, which uses each CPU's
+// full-boost power. Auto-build sized on the base-power TDP sum instead, so it
+// fitted a 500 W unit under an i7-14700KF build peaking at 475 W, and a 650 W
+// under one the same site recommended 800 W for. One sizing, both places.
+describe('auto-build PSU sizing agrees with the Performance tab', () => {
+  it('fits at least the recommended supply whenever the build is within budget', async () => {
+    const { buildForUseCase } = await import('../lib/useCaseBuilder')
+    const { estimatePower } = await import('../lib/perfEngine/power')
+    const short = []
+    for (const uc of ['gaming', 'creation', 'office', 'programming']) {
+      for (const budget of [900, 1200, 1700, 2500]) {
+        const build = buildForUseCase(budget, uc, partsData)
+        const total = Object.values(build).reduce((t, p) => t + p.price, 0)
+        if (total > budget) continue
+        const rec = estimatePower(build).recommendedPsuW
+        if (build.psu.wattage < rec) short.push(`${uc} £${budget}: ${build.psu.wattage}W < ${rec}W`)
+      }
+    }
+    expect(short).toEqual([])
+  })
+})

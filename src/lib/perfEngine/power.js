@@ -5,8 +5,23 @@ import { coolerCapacityW } from '../partSynergy'
 // supply, this one describes what the machine actually pulls.
 //
 // Everything here comes from `tdp` fields the catalogue already carries on
-// every part, so no benchmark data is needed — this works on day one, before a
+// every part (plus the CPU's researched full-boost `maxPowerW`), so no benchmark data is needed — this works on day one, before a
 // single measurement has been curated.
+
+// What a CPU can draw at full boost: Intel Maximum Turbo Power / AMD PPT where
+// researched, else base power. `tdp` alone is base power by design, and an
+// i7-14700KF that reads 125 W really peaks at 253 W.
+export const cpuPeakW = (cpu) => cpu?.specs?.maxPowerW ?? cpu?.tdp ?? 0
+
+// The most the build can pull: every part at its rated figure, the CPU at full
+// boost. Shared with autoBuilder so the supply it fits is the one this file
+// recommends.
+export const peakDrawW = (parts) =>
+  (parts?.gpu?.tdp ?? 0) + cpuPeakW(parts?.cpu) + STEADY.reduce((sum, c) => sum + (parts?.[c]?.tdp ?? 0), 0)
+
+// Transient spikes are what actually trip a supply, not sustained draw, so the
+// recommendation is peak with 35% over it, rounded up to a 50 W size.
+export const recommendedPsuW = (peakW) => (peakW > 0 ? Math.ceil((peakW * 1.35) / 50) * 50 : null)
 
 // Categories that draw roughly their rated figure whatever the workload. The
 // CPU and GPU are excluded because their draw depends on which of them is
@@ -49,7 +64,7 @@ export function estimatePower(parts, cpuShare = 0.5) {
   const cpuLoad = 0.42 + 0.30 * share
 
   const gamingW = gpuTdp * gpuLoad + cpuTdp * cpuLoad + steadyW
-  const peakW = gpuTdp + cpuTdp * 0.95 + steadyW
+  const peakW = peakDrawW(parts)
   const idleW = 0.06 * gpuTdp + 0.10 * cpuTdp + steadyW * 0.5 + 10
 
   const eff = psuEfficiency(parts?.psu)
@@ -59,9 +74,7 @@ export function estimatePower(parts, cpuShare = 0.5) {
     idleW: Math.round(idleW),
     gamingW: Math.round(gamingW),
     peakW: Math.round(peakW),
-    // Transient spikes are what actually trip a supply, not sustained draw, so
-    // the recommendation is built on peak with real headroom over it.
-    recommendedPsuW: peakW > 0 ? Math.ceil((peakW * 1.35) / 50) * 50 : null,
+    recommendedPsuW: recommendedPsuW(peakW),
     psuWattage: wattage || null,
     psuHeadroomPct: wattage > 0 && peakW > 0
       ? Math.round((100 * wattage) / peakW - 100) : null,
@@ -75,18 +88,19 @@ export function estimatePower(parts, cpuShare = 0.5) {
   }
 }
 
-// Cooling headroom: what the cooler can shed against what the CPU produces.
-// Returns null rather than a number when either side is unknown, because a
-// missing spec is not evidence of a problem.
+// Cooling headroom: what the cooler can shed against what the CPU produces at
+// full boost, which is what a long all-core load holds it at. Returns null
+// rather than a number when either side is unknown, because a missing spec is
+// not evidence of a problem.
 export function estimateThermals(parts) {
   const capacityW = coolerCapacityW(parts?.cooler)
-  const cpuTdp = parts?.cpu?.tdp ?? 0
-  if (!(capacityW > 0) || !(cpuTdp > 0)) {
-    return { capacityW: capacityW || null, cpuTdp: cpuTdp || null, headroomPct: null, verdict: null }
+  const cpuHeatW = cpuPeakW(parts?.cpu)
+  if (!(capacityW > 0) || !(cpuHeatW > 0)) {
+    return { capacityW: capacityW || null, cpuHeatW: cpuHeatW || null, headroomPct: null, verdict: null }
   }
-  const headroomPct = Math.round((100 * capacityW) / cpuTdp - 100)
+  const headroomPct = Math.round((100 * capacityW) / cpuHeatW - 100)
   const verdict = headroomPct >= 40 ? 'comfortable'
     : headroomPct >= 0 ? 'adequate'
       : 'working hard'
-  return { capacityW, cpuTdp, headroomPct, verdict }
+  return { capacityW, cpuHeatW, headroomPct, verdict }
 }

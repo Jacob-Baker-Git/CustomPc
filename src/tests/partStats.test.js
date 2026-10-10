@@ -154,3 +154,11 @@ describe('derived part stats', () => {
     expect(perfPerPound(ofCat('case')[0])).toBeNull()
   })
 })
+
+describe('CPU max power row', () => {
+  const row = (part) => partStats(part).find((s) => s.label === 'Max power')
+  it('shows full-boost power where it is researched, and nothing where it is not', () => {
+    expect(row(byId('cpu-i7-14700kf'))?.value).toBe(253)
+    expect(row(byId('cpu-i9-10900k'))).toBeUndefined()
+  })
+})

@@ -141,3 +141,20 @@ describe('a paste spec sheet shows its tube size', () => {
     expect(insight({ id: 'q', category: 'paste' })).toBe(generic)
   })
 })
+
+// Base power is not what a CPU draws flat out; full-boost power is researched
+// for 73 of 79 CPUs and the copy says so, falling back where it is not.
+describe('CPU full-boost power copy', () => {
+  const k = partsData.find((p) => p.id === 'cpu-i7-14700kf')
+  const old = partsData.find((p) => p.id === 'cpu-i9-10900k')
+
+  it('names base and full-boost power in the blurb', () => {
+    expect(insight(k)).toMatch(/125W base power, up to 253W at full boost/)
+    expect(insight(old)).toMatch(/125W base power, so pick a cooler rated for at least that/)
+  })
+
+  it('labels the max power row on the spec sheet', () => {
+    expect(specRows(k)).toContainEqual(['Max power at full boost (W)', '253'])
+    expect(specRows(old).some(([label]) => /Max power/.test(label))).toBe(false)
+  })
+})

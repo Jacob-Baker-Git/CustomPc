@@ -1,6 +1,7 @@
 import { checkCompatibility } from './compatibility'
 import { partQuality } from './partQuality'
 import { rateBuild } from './partRatings'
+import { peakDrawW, recommendedPsuW } from './perfEngine/power'
 
 const BASE_WEIGHTS = {
   cpu: 0.18, gpu: 0.32, motherboard: 0.11, ram: 0.08, storage: 0.07,
@@ -24,7 +25,6 @@ function weightsFor(resolution) {
 // one is advice that cannot be acted on. A part already in the selection is
 // still honoured; this only governs what we reach for ourselves.
 const ofCategory = (parts, c) => parts.filter((p) => p.category === c && !p.legacy)
-const drawOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.tdp ?? 0), 0)
 
 // ⚠️ Wattage is NOT the only thing that makes a supply run a build. A unit can
 // have watts to spare and still lack the plug the graphics card needs — an
@@ -40,22 +40,26 @@ const drawOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.tdp ?? 0), 0
 // ⚠️ The filter can empty the pool — a build whose card no catalogue supply can
 // feed must still come out with a power supply rather than none, so the
 // unfiltered list is kept as a last resort.
-function choosePsu(candidates, draw, remaining, selection = {}) {
+//
+// `peak` is peakDrawW: the CPU at full boost, not the base-power TDP sum, and
+// the first choice is the size the Performance tab recommends for that peak.
+function choosePsu(candidates, peak, remaining, selection = {}) {
   const byPrice = [...candidates].sort((a, b) => a.price - b.price)
   const usable = byPrice.filter((p) => checkCompatibility(selection, p).compatible)
   const pool = usable.length > 0 ? usable : byPrice
+  const rec = recommendedPsuW(peak) ?? 0
   return (
-    pool.find((p) => p.wattage >= draw * 1.3 && p.price <= remaining) ||
-    pool.find((p) => p.wattage >= draw && p.price <= remaining) ||
-    pool.find((p) => p.wattage >= draw * 1.3) ||
-    pool.find((p) => p.wattage >= draw) ||
+    pool.find((p) => p.wattage >= rec && p.price <= remaining) ||
+    pool.find((p) => p.wattage >= peak && p.price <= remaining) ||
+    pool.find((p) => p.wattage >= rec) ||
+    pool.find((p) => p.wattage >= peak) ||
     pool[pool.length - 1] ||
     null
   )
 }
 
-// Price of the cheapest PSU that could actually run a build drawing `draw`
-// watts, at the same 30% headroom choosePsu targets.
+// Price of the cheapest PSU that could actually run a build peaking at `peak`
+// watts, at the same recommended size choosePsu targets.
 //
 // This is what makes "can I afford this upgrade?" an honest question. The pass
 // used to compare a swap's price difference against a PSU reserve fixed before
@@ -67,10 +71,10 @@ function choosePsu(candidates, draw, remaining, selection = {}) {
 function psuPricer(candidates) {
   const byPrice = [...candidates].sort((a, b) => a.price - b.price)
   const cache = new Map()
-  return (draw) => {
-    const key = Math.ceil(draw / 25) * 25
+  return (peak) => {
+    const key = Math.ceil(peak / 25) * 25
     if (!cache.has(key)) {
-      const fit = byPrice.find((p) => p.wattage >= key * 1.3)
+      const fit = byPrice.find((p) => p.wattage >= recommendedPsuW(key))
         || byPrice.find((p) => p.wattage >= key)
         || byPrice[byPrice.length - 1]
       cache.set(key, fit?.price ?? 0)
@@ -143,7 +147,7 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
   const spendOf = (sel) => Object.values(sel).reduce((s, p) => s + (p?.price ?? 0), 0)
   // What this selection really costs: the parts, plus the power supply it will
   // need if one has not been chosen yet.
-  const projectedTotal = (sel) => spendOf(sel) + (sel.psu ? 0 : priceOfPsuFor(drawOf(sel)))
+  const projectedTotal = (sel) => spendOf(sel) + (sel.psu ? 0 : priceOfPsuFor(peakDrawW(sel)))
   const affordable = (sel) => projectedTotal(sel) <= budget
 
   // The least a category can possibly be filled for. Ignores compatibility, so
@@ -334,7 +338,8 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
     for (const category of upgradeOrder) {
       if (userCats.has(category)) continue
       const better = affordableUpgrade(category, false)
-      if (better) {
+      // Priced with the power supply it drags along, like the maximise passes.
+      if (better && affordable({ ...result, [category]: better })) {
         remaining -= better.price - result[category].price
         result[category] = better
       }
@@ -343,7 +348,7 @@ export function autoBuild(selectedParts, budget, partsData, resolution = '1440p'
 
   // Size the PSU last, against the final draw.
   if (!result.psu) {
-    const psu = choosePsu(ofCategory(partsData, 'psu'), drawOf(result), remaining, result)
+    const psu = choosePsu(ofCategory(partsData, 'psu'), peakDrawW(result), remaining, result)
     if (psu) {
       result.psu = psu
       remaining -= psu.price

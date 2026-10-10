@@ -34,6 +34,13 @@ export function getBuildWarnings(selectedParts) {
       level: 'warning',
       message: `Cooler is rated for ${rated}W; the ${cpu.name ?? 'CPU'} draws ${cpu.tdp}W.`,
     })
+  } else if (cpu && typeof rated === 'number' && typeof cpu.specs?.maxPowerW === 'number' && rated < cpu.specs.maxPowerW) {
+    // Enough for base power, not for full boost: the CPU runs, and simply
+    // clocks down during long all-core loads. Worth knowing, not a fault.
+    warnings.push({
+      level: 'note',
+      message: `Cooler is rated for ${rated}W; the ${cpu.name ?? 'CPU'} can draw ${cpu.specs.maxPowerW}W at full boost, so long all-core loads will run at lower clocks.`,
+    })
   }
 
   // ⚠️ Both of these are BACKWARD COMPATIBLE. A Gen5 card in a Gen4 slot runs at

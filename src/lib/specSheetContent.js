@@ -25,6 +25,7 @@ const SPEC_LABELS = {
   cores: 'Cores',
   threads: 'Threads',
   boostClock: 'Boost clock (GHz)',
+  maxPowerW: 'Max power at full boost (W)',
   baseClock: 'Base clock (GHz)',
   vram: 'VRAM (GB)',
   vramGb: 'VRAM (GB)',
@@ -81,7 +82,8 @@ export function insight(part) {
   switch (part.category) {
     case 'cpu':
       return `A ${tier(part.perfScore)} ${s.cores}-core chip boosting to ${s.boostClock}GHz. ` +
-        `Drops into ${part.socket} boards and draws ~${part.tdp}W under load, so pick a cooler rated for that.`
+        `Drops into ${part.socket} boards; ${part.tdp}W base power` +
+        (s.maxPowerW ? `, up to ${s.maxPowerW}W at full boost, so size the cooler for that if you run long all-core loads.` : ', so pick a cooler rated for at least that.')
     case 'gpu': {
       // ⚠️ Not every card has a published length — see gpuLengthUnknown.test.js.
       // This sentence used to read "At undefinedmm check your case clearance".
