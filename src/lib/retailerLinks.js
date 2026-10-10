@@ -7,6 +7,7 @@
 // ASA require it visible before the click, and Amazon's own terms would then
 // forbid showing our curated price snapshot beside the link at all.
 export function searchUrl(name, brand) {
-  const term = brand ? `${brand} ${name}` : name
+  const named = brand && name.toLowerCase().startsWith(brand.toLowerCase())
+  const term = brand && !named ? `${brand} ${name}` : name
   return `https://www.amazon.co.uk/s?k=${encodeURIComponent(term)}`
 }
