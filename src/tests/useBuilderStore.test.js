@@ -1,5 +1,5 @@
 import useBuilderStore, {
-  selTotalSpent, selRemainingBudget, selTotalPower, selPsuWattage, selPeripheralsTotal
+  selTotalSpent, selRemainingBudget, selPeakDraw, selPsuWattage, selPeripheralsTotal
 } from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
 
@@ -89,10 +89,11 @@ describe('useBuilderStore', () => {
     expect(selRemainingBudget(useBuilderStore.getState())).toBeCloseTo(1000 - cpu.price)
   })
 
-  it('selTotalPower sums TDPs', () => {
+  it('selPeakDraw counts the CPU at full boost', () => {
     useBuilderStore.getState().addPart('cpu', cpu)
     useBuilderStore.getState().addPart('gpu', gpu)
-    expect(selTotalPower(useBuilderStore.getState())).toBe(cpu.tdp + gpu.tdp)
+    expect(cpu.specs.maxPowerW).toBeGreaterThan(cpu.tdp)
+    expect(selPeakDraw(useBuilderStore.getState())).toBe(cpu.specs.maxPowerW + gpu.tdp)
   })
 
   it('selPsuWattage is null with no PSU', () => {

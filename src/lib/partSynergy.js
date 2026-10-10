@@ -48,6 +48,21 @@ export function systemDrawW(parts) {
   return Object.values(parts).reduce((sum, p) => sum + (p?.tdp ?? 0), 0)
 }
 
+// What a CPU can draw at full boost: Intel Maximum Turbo Power / AMD PPT where
+// researched, else base power. `tdp` alone is base power by design, and an
+// i7-14700KF that reads 125 W really peaks at 253 W.
+export const cpuPeakW = (cpu) => cpu?.specs?.maxPowerW ?? cpu?.tdp ?? 0
+
+// The most the build can pull: every part at its rated figure, the CPU at full
+// boost. The one definition behind the Performance tab's peak, the PSU
+// warnings and rating, and the supply auto-build fits.
+export const peakDrawW = (parts) =>
+  systemDrawW(parts) - (parts?.cpu?.tdp ?? 0) + cpuPeakW(parts?.cpu)
+
+// Transient spikes are what actually trip a supply, not sustained draw, so the
+// recommended size is peak with 35% over it, rounded up to a 50 W size.
+export const recommendedPsuW = (peakW) => (peakW > 0 ? Math.ceil((peakW * 1.35) / 50) * 50 : null)
+
 const OK = { balance: 100, reason: null, detail: null }
 
 // How well `category` pairs with the rest of the build for `useCase`.
@@ -125,15 +140,15 @@ export function partSynergy(parts, category, useCase) {
   }
 
   if (category === 'psu') {
-    const draw = systemDrawW(parts)
+    const draw = peakDrawW(parts)
     if (!(part.wattage > 0) || draw <= 0) return OK
-    const recommended = draw * 1.3
+    const recommended = recommendedPsuW(draw)
     const b = clamp(Math.round((100 * part.wattage) / recommended), 0, 100)
     if (b >= 100) return { balance: b, reason: null, detail: null }
     return {
       balance: b,
-      reason: `Not much headroom over a ${draw}W draw`,
-      detail: `The parts here add up to about ${draw}W, and a ${part.wattage}W supply leaves less than the ~30% margin worth aiming for. Headroom matters less for the average draw than for the split-second spikes a graphics card pulls, which are what trip a supply into shutting down. It also lets the supply sit nearer its quiet, efficient half-load band.`,
+      reason: `Not much headroom over a ${draw}W peak`,
+      detail: `The parts here peak at about ${draw}W with the CPU at full boost, and a ${part.wattage}W supply is under the ${recommended}W worth aiming for. Headroom matters less for the average draw than for the split-second spikes a graphics card pulls, which are what trip a supply into shutting down. It also lets the supply sit nearer its quiet, efficient half-load band.`,
     }
   }
 

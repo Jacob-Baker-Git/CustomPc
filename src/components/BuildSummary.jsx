@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selTotalPower } from '../store/useBuilderStore'
+import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selPeakDraw } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
@@ -108,7 +108,7 @@ export default function BuildSummary() {
   const saveBuild = useSavedStore((s) => s.saveBuild)
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
-  const power = useBuilderStore(selTotalPower)
+  const power = useBuilderStore(selPeakDraw)
   const resolution = useBuilderStore((s) => s.resolution)
   const useCase = useBuilderStore((s) => s.useCase)
   const partsData = useCatalogStore((s) => s.parts)
@@ -241,7 +241,7 @@ export default function BuildSummary() {
               <div className="flex flex-wrap gap-x-5 gap-y-1 mt-4 pt-3 border-t border-line text-xs text-muted">
                 <span>Build <span className="font-mono text-muted">£{buildTotal.toFixed(2)}</span></span>
                 <span>Peripherals <span className="font-mono text-muted">£{periphTotal.toFixed(2)}</span></span>
-                <span>Draw <span className="font-mono text-ok">{power}W</span></span>
+                <span>Peak draw <span className="font-mono text-ok">{power}W</span></span>
                 <span>Total <span className="font-mono text-ink">£{grandTotal.toFixed(2)}</span></span>
               </div>
 

@@ -1,7 +1,7 @@
 import { checkCompatibility } from './compatibility'
 import { partQuality } from './partQuality'
 import { rateBuild } from './partRatings'
-import { peakDrawW, recommendedPsuW } from './perfEngine/power'
+import { peakDrawW, recommendedPsuW } from './partSynergy'
 
 const BASE_WEIGHTS = {
   cpu: 0.18, gpu: 0.32, motherboard: 0.11, ram: 0.08, storage: 0.07,

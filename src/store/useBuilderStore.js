@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
+import { peakDrawW } from '../lib/partSynergy'
 
 // Swap each selected part for the catalogue's copy of the same id, dropping any
 // the catalogue no longer has. Returns `selection` itself when nothing changed.
@@ -121,8 +122,9 @@ export const selTotalSpent = (s) =>
 
 export const selRemainingBudget = (s) => s.budget - selTotalSpent(s)
 
-export const selTotalPower = (s) =>
-  Object.values(s.selectedParts).reduce((sum, p) => sum + (p?.tdp ?? 0), 0)
+// What the build can pull with the CPU at full boost: the figure every power
+// readout shows, so the top bar, Summary and Performance tab agree.
+export const selPeakDraw = (s) => peakDrawW(s.selectedParts)
 
 export const selPsuWattage = (s) => s.selectedParts.psu?.wattage ?? null
 

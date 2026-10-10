@@ -1,4 +1,5 @@
 import { psuTooSmall } from './compatibility'
+import { peakDrawW, recommendedPsuW } from './partSynergy'
 
 // 'note' is informational only — a thing that is true and worth knowing, and
 // which is NOT a problem. It sorts last so it never crowds out a real warning.
@@ -14,8 +15,11 @@ export function getBuildWarnings(selectedParts) {
     warnings.push({ level: 'critical', message: `Add a PSU: the build draws ${draw}W with no power supply.` })
   } else if (psu && psuTooSmall(draw, psu.wattage)) {
     warnings.push({ level: 'critical', message: `PSU too small: ${draw}W draw meets or exceeds the ${psu.wattage}W supply.` })
-  } else if (psu && draw * 1.3 > psu.wattage) {
-    warnings.push({ level: 'warning', message: `Low PSU headroom: ${draw}W draw vs ${psu.wattage}W (aim for ~30% spare).` })
+  } else if (psu && psu.wattage < (recommendedPsuW(peakDrawW(selectedParts)) ?? 0)) {
+    // Judged on full-boost peak against the size the Performance tab and
+    // auto-build use. The hard block above stays on the base-power sum.
+    const peak = peakDrawW(selectedParts)
+    warnings.push({ level: 'warning', message: `Low PSU headroom: the build peaks at ${peak}W and ${psu.wattage}W leaves little margin (aim for ${recommendedPsuW(peak)}W).` })
   }
 
   if (cpu && !motherboard) warnings.push({ level: 'warning', message: 'Add a motherboard.' })

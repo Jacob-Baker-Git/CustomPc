@@ -1,4 +1,4 @@
-import { coolerCapacityW } from '../partSynergy'
+import { coolerCapacityW, cpuPeakW, peakDrawW, recommendedPsuW } from '../partSynergy'
 
 // Realistic system power draw, as distinct from the conservative TDP sum that
 // `systemDrawW` computes for the PSU warning. Both are wanted: one sizes the
@@ -7,21 +7,6 @@ import { coolerCapacityW } from '../partSynergy'
 // Everything here comes from `tdp` fields the catalogue already carries on
 // every part (plus the CPU's researched full-boost `maxPowerW`), so no benchmark data is needed — this works on day one, before a
 // single measurement has been curated.
-
-// What a CPU can draw at full boost: Intel Maximum Turbo Power / AMD PPT where
-// researched, else base power. `tdp` alone is base power by design, and an
-// i7-14700KF that reads 125 W really peaks at 253 W.
-export const cpuPeakW = (cpu) => cpu?.specs?.maxPowerW ?? cpu?.tdp ?? 0
-
-// The most the build can pull: every part at its rated figure, the CPU at full
-// boost. Shared with autoBuilder so the supply it fits is the one this file
-// recommends.
-export const peakDrawW = (parts) =>
-  (parts?.gpu?.tdp ?? 0) + cpuPeakW(parts?.cpu) + STEADY.reduce((sum, c) => sum + (parts?.[c]?.tdp ?? 0), 0)
-
-// Transient spikes are what actually trip a supply, not sustained draw, so the
-// recommendation is peak with 35% over it, rounded up to a 50 W size.
-export const recommendedPsuW = (peakW) => (peakW > 0 ? Math.ceil((peakW * 1.35) / 50) * 50 : null)
 
 // Categories that draw roughly their rated figure whatever the workload. The
 // CPU and GPU are excluded because their draw depends on which of them is

@@ -60,3 +60,10 @@ describe('partSynergy', () => {
     expect(partSynergy({ cpu: cpuBig, gpu: gpuBig, case: { category: 'case' } }, 'case', 'gaming')).toBeNull()
   })
 })
+
+it('rates PSU headroom against full-boost peak, the same size the Performance tab recommends', () => {
+  const cpu = { category: 'cpu', tdp: 125, specs: { maxPowerW: 253 } }
+  const gpu = { category: 'gpu', tdp: 300 }
+  expect(partSynergy({ cpu, gpu, psu: { category: 'psu', wattage: 650 } }, 'psu', 'gaming').balance).toBeLessThan(100)
+  expect(partSynergy({ cpu, gpu, psu: { category: 'psu', wattage: 750 } }, 'psu', 'gaming').balance).toBe(100)
+})

@@ -143,3 +143,16 @@ describe('cooler vs full-boost power', () => {
     expect(ws.some((x) => x.level === 'warning' && /rated for 100W/.test(x.message))).toBe(true)
   })
 })
+
+describe('PSU headroom is judged on full-boost peak', () => {
+  it('warns when the supply is under the size the Performance tab recommends', () => {
+    // Base-power sum 425 W x 1.3 = 552 W looked fine on 650 W; full-boost peak is
+    // 553 W, which wants 750 W.
+    const cpu = { tdp: 125, specs: { maxPowerW: 253 } }
+    const w = getBuildWarnings({ cpu, gpu: { tdp: 300 }, psu: { wattage: 650 } })
+      .find((x) => /headroom/i.test(x.message))
+    expect(w?.level).toBe('warning')
+    expect(w.message).toMatch(/553W/)
+    expect(w.message).toMatch(/750W/)
+  })
+})
