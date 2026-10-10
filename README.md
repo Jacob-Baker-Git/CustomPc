@@ -23,7 +23,7 @@ bottlenecks, and renders the machine in an interactive 3D case.
 - **Auto-build** — fills the remaining slots with the best-value compatible parts for your budget
 - **Compatibility guardrails** — socket, RAM type, PSU wattage, GPU length / cooler height vs. case dimensions
 - **Performance estimates** — bottleneck balance, est. average FPS at 1080p/1440p/4K, and per-game FPS for popular titles
-- **Budget tracking** — live spend/remaining, parts over budget are locked (swaps credit back the part you're replacing)
+- **Budget tracking** — live spend/remaining; the part picker hides parts above 60% of the budget unless you search for them
 - **Peripherals** — monitor, keyboard, mouse, headset alongside the core build
 - **Save, share & compare** — named saved builds (localStorage), shareable `?build=` links, print/markdown export, side-by-side comparison of two saved builds
 - **The in-progress build persists** across refreshes

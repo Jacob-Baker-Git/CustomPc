@@ -74,8 +74,6 @@ const useBuilderStore = create(persist((set, get) => ({
   setLastGenerated: (info) => set({ lastGenerated: info }),
   clearLastGenerated: () => set({ lastGenerated: null }),
 
-  // Category chip currently hovered — the matching 3D part highlights. Transient.
-
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
 
