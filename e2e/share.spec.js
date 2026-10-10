@@ -58,14 +58,11 @@ test('a shared build round-trips into a browser that has never seen it', async (
   // the codec is the thing under test, not the landing screen.
   expect(await selectedParts(page)).toEqual(before)
 
-  // The share code carries the build but not the `flow`, so a recipient lands
-  // on the entry menu with the build waiting rather than inside the builder.
-  // That is the designed behaviour, so the journey is asserted as it really
-  // is — including that the menu already knows what was shared.
+  // The recipient lands straight in the builder on the shared build, with a
+  // note saying so. (It used to land on the entry menu, asking them to "carry
+  // on building" a build they had never started.)
   await expect(page).toHaveURL(/localhost:5173\/?$/)
-  await expect(page.getByText(new RegExp(`${before.length} parts chosen`, 'i'))).toBeVisible()
-
-  await page.getByRole('button', { name: /carry on building/i }).click()
+  await expect(page.getByRole('status').filter({ hasText: /opened a shared build/i })).toBeVisible()
   await expect(page.getByText('/100')).toBeVisible()
   expect(await selectedParts(page)).toEqual(before)
 })
