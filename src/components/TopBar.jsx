@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import useBuilderStore, {
-  selTotalSpent, selTotalPower, selPsuWattage
+  selTotalSpent, selPeakDraw, selPsuWattage
 } from '../store/useBuilderStore'
 import DynamicBars from './DynamicBars'
 import ViewTabs from './ViewTabs'
@@ -11,7 +11,7 @@ export default function TopBar({ view, onViewChange }) {
   const setBudget  = useBuilderStore((s) => s.setBudget)
   const setFlow    = useBuilderStore((s) => s.setFlow)
   const totalSpent = useBuilderStore(selTotalSpent)
-  const totalPower = useBuilderStore(selTotalPower)
+  const totalPower = useBuilderStore(selPeakDraw)
   const psuwattage = useBuilderStore(selPsuWattage)
   const remaining  = budget - totalSpent
 

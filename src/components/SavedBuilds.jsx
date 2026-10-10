@@ -5,12 +5,13 @@ import { decodeBuild } from '../lib/buildCodec'
 import { shareUrlFromCode } from '../lib/shareLink'
 import { estimateFps } from '../lib/fpsEstimate'
 import { CATEGORIES } from '../lib/categories'
+import { peakDrawW } from '../lib/partSynergy'
 import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import RamBox from './RamBox'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const totalOf = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.price ?? 0), 0)
-const drawOf  = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.tdp ?? 0), 0)
+const drawOf  = (d) => peakDrawW(d.parts)
 
 function CompareTable({ a, b }) {
   const da = decodeBuild(a.code)
@@ -19,7 +20,7 @@ function CompareTable({ a, b }) {
 
   const summaryRows = [
     ['Total', `£${totalOf(da).toFixed(0)}`, `£${totalOf(db).toFixed(0)}`],
-    ['Power draw', `${drawOf(da)}W`, `${drawOf(db)}W`],
+    ['Peak draw', `${drawOf(da)}W`, `${drawOf(db)}W`],
     [
       'Est. FPS',
       da.parts.cpu && da.parts.gpu ? `${estimateFps(da.parts.cpu, da.parts.gpu, da.resolution)} @ ${RES_LABEL[da.resolution] ?? da.resolution}` : '—',

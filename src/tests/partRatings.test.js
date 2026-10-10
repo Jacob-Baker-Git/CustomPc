@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { partLevel, rateBuild, partUpgradeOptions } from '../lib/partRatings'
+import partsData from '../data/partsData.json'
 
 const cpuLo = { id: 'cpu-lo', category: 'cpu', perfScore: 50 }
 const cpuMid = { id: 'cpu-mid', category: 'cpu', perfScore: 150 }
@@ -84,7 +85,7 @@ describe('rateBuild', () => {
     expect(r.verdict).toMatch(/gaming/i)
   })
   it('returns overall 0 without a CPU or GPU', () => {
-    expect(rateBuild({ cpu: cS }, 'gaming', ratingCatalog)).toEqual({ overall: 0, verdict: expect.any(String), parts: {} })
+    expect(rateBuild({ cpu: cS }, 'gaming', ratingCatalog)).toEqual({ overall: 0, exact: 0, verdict: expect.any(String), parts: {} })
   })
   it('surfaces a synergy reason on a held-back part', () => {
     const gVram = { id: 'gv', category: 'gpu', perfScore: 400, price: 900, tdp: 300, length: 300, specs: { vram: 8 } }
@@ -153,5 +154,32 @@ describe('partUpgradeOptions', () => {
   })
   it('is empty when the part is already the best in its category', () => {
     expect(partUpgradeOptions({ cpu: cS, gpu: gS }, 'gaming', 'cpu', ratingCatalog, { game })).toEqual([])
+  })
+})
+
+// Capacity past twice what a use case needs buys nothing that use can feel, so
+// it must not buy score either - or the optimiser pays for 64 GB in a gaming PC.
+describe('RAM beyond the use case need', () => {
+  const kit = (capacityGb) => partsData.find((p) => p.category === 'ram' && p.ramType === 'DDR5' && p.capacityGb === capacityGb && p.speed === 6000 && !p.legacy)
+  const build = (ram) => ({ cpu: partsData.find((p) => p.id === 'cpu-ryzen-7-7700x'), gpu: partsData.find((p) => p.id === 'gpu-rtx-4060ti'), ram })
+
+  it('scores 64 GB no higher than 32 GB for gaming (need 16 GB)', () => {
+    const k32 = kit(32), k64 = kit(64)
+    expect(k32 && k64).toBeTruthy()
+    expect(rateBuild(build(k64), 'gaming', partsData).parts.ram.score)
+      .toBe(rateBuild(build(k32), 'gaming', partsData).parts.ram.score)
+  })
+
+  it('still rewards 64 GB for content creation (need 32 GB)', () => {
+    expect(rateBuild(build(kit(64)), 'creation', partsData).parts.ram.score)
+      .toBeGreaterThan(rateBuild(build(kit(32)), 'creation', partsData).parts.ram.score)
+  })
+})
+
+describe('rateBuild exact score', () => {
+  it('exposes the unrounded overall the rounded one comes from', () => {
+    const r = rateBuild({ cpu: partsData.find((p) => p.id === 'cpu-ryzen-7-7700x'), gpu: partsData.find((p) => p.id === 'gpu-rtx-4060ti') }, 'gaming', partsData)
+    expect(typeof r.exact).toBe('number')
+    expect(Math.round(r.exact)).toBe(r.overall)
   })
 })

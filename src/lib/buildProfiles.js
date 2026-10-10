@@ -41,6 +41,10 @@ export const BUILD_PROFILES = {
   },
 }
 
+// Memory past twice what a use case needs is capacity it cannot use: the rating
+// gives it no credit and the builder will not buy it.
+export const usefulRamGb = (useCase) => 2 * (BUILD_PROFILES[useCase]?.needs?.ramGb ?? Infinity)
+
 export const USE_CASE_LABEL = {
   gaming: 'Gaming', office: 'Everyday & Office', creation: 'Content Creation',
   programming: 'Programming', streaming: 'Streaming',

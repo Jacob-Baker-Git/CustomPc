@@ -13,7 +13,6 @@ import PartPage from './components/PartPage'
 import useBuilderStore from './store/useBuilderStore'
 import useCatalogStore, { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
-import { enterBuildTab } from './lib/enterBuildTab'
 import { partById, partPageMeta } from './lib/partPages'
 import { PAGE_META, canonicalFor } from './lib/pageMeta'
 
@@ -44,7 +43,7 @@ export default function App() {
   const flow    = useBuilderStore((s) => s.flow)
   const setFlow = useBuilderStore((s) => s.setFlow)
   const parts   = useCatalogStore((s) => s.parts)
-  const { page, partId, navigate } = usePageRoute()
+  const { page, partId, notFound, navigate } = usePageRoute()
 
   useEffect(() => { loadCatalog() }, [])
 
@@ -54,7 +53,9 @@ export default function App() {
     // 90 times over — and a shared canonical is a direct instruction not to index
     // any of them separately.
     const part = partId ? partById(parts, partId) : null
-    const meta = part ? partPageMeta(part) : (PAGE_META[page] ?? captureRootMeta())
+    const meta = part ? partPageMeta(part)
+      : notFound ? { ...captureRootMeta(), title: 'Page not found | Custom PC Builder' }
+      : (PAGE_META[page] ?? captureRootMeta())
     document.title = meta.title
     setMeta('meta[name="description"]', 'content', meta.description)
     setMeta('meta[property="og:title"]', 'content', meta.title)
@@ -63,12 +64,22 @@ export default function App() {
     // root, which is the exact instruction not to index them separately.
     const path = part ? `parts/${part.id}` : page
     setMeta('link[rel="canonical"]', 'href', canonicalFor(path))
-  }, [page, partId, parts])
+  }, [page, partId, notFound, parts])
 
   if (partId) {
     return (
       <SiteChrome onBack={() => navigate('parts')}>
         <PartPage partId={partId} onNavigate={navigate} />
+      </SiteChrome>
+    )
+  }
+
+  if (notFound) {
+    return (
+      <SiteChrome onBack={() => navigate(null)}>
+        <h1 className="text-3xl font-bold mb-2">Page not found</h1>
+        <p className="text-muted text-sm mb-6">There is nothing at this address. The link may be mistyped or out of date.</p>
+        <a href="/" className="text-brass text-sm hover:underline">Go to the home page →</a>
       </SiteChrome>
     )
   }
@@ -83,14 +94,14 @@ export default function App() {
   if (flow === 'saved') {
     return (
       <SiteChrome onBack={() => setFlow('hub')}>
-        <SavedBuilds onLoaded={() => { enterBuildTab(); setFlow('builder') }} />
+        <SavedBuilds onLoaded={() => setFlow('builder')} />
       </SiteChrome>
     )
   }
   return (
     <MainMenu
       onStart={() => setFlow('setup')}
-      onResume={() => { enterBuildTab(); setFlow('builder') }}
+      onResume={() => setFlow('builder')}
       onSaved={() => setFlow('saved')}
     />
   )

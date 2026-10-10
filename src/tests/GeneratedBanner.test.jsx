@@ -6,9 +6,9 @@ import partsData from '../data/partsData.json'
 
 beforeEach(() => {
   localStorage.clear()
-  // A non-maximised build deliberately leaves money on the table, which is what
-  // the "spend the leftover" path needs to act on.
-  const parts = autoBuild({}, 1600, partsData, '1440p')
+  // A build made for £1000 against a £1600 budget leaves money on the table,
+  // which is what the "spend the leftover" path needs to act on.
+  const parts = autoBuild({}, 1000, partsData, '1440p')
   useBuilderStore.setState({
     budget: 1600,
     resolution: '1440p',
@@ -24,6 +24,14 @@ describe('GeneratedBanner', () => {
     useBuilderStore.setState({ lastGenerated: null })
     const { container } = render(<GeneratedBanner />)
     expect(container).toBeEmptyDOMElement()
+  })
+
+  it('says a shared build was opened and where the previous one went', () => {
+    useBuilderStore.setState({ lastGenerated: { shared: true, savedPrevious: true } })
+    render(<GeneratedBanner />)
+    expect(screen.getByRole('status')).toHaveTextContent(/opened a shared build/i)
+    expect(screen.getByRole('status')).toHaveTextContent(/previous build is in saved builds/i)
+    expect(screen.queryByRole('button', { name: /spend the leftover/i })).toBeNull()
   })
 
   it('summarises what the generated build cost', () => {

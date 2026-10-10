@@ -373,17 +373,24 @@ describe('cpu expectations', () => {
   const chip = (id, over = {}) =>
     ({ id, category: 'cpu', socket: 'AM5', tdp: 65, perfScore: 70, specs: { cores: 6, boostClock: 5.1 }, ...over })
 
-  it('expects the four fields, flat for every processor', () => {
+  it('expects the five fields, flat for every processor', () => {
     expect(requiredFor(EXPECTED.cpu, chip('a')))
-      .toEqual(['socket', 'tdp', 'cores', 'boostClock'])
-    // A legacy Intel chip owes exactly the same four.
+      .toEqual(['socket', 'tdp', 'cores', 'boostClock', 'maxPowerW'])
+    // A legacy Intel chip owes exactly the same five.
     expect(requiredFor(EXPECTED.cpu, chip('b', { socket: 'LGA1200', tdp: 125, legacy: true, specs: { cores: 8, boostClock: 5.3 } })))
-      .toEqual(['socket', 'tdp', 'cores', 'boostClock'])
+      .toEqual(['socket', 'tdp', 'cores', 'boostClock', 'maxPowerW'])
   })
 
   it('counts a fully sourced processor as verified', () => {
+    const parts = [chip('a', { specs: { cores: 6, boostClock: 5.1, maxPowerW: 88 } })]
+    const sources = { a: { socket: src(), tdp: src(), cores: src(), boostClock: src(), maxPowerW: src() } }
+    expect(coverageFor('cpu', parts, sources).verified).toBe(1)
+  })
+
+  it('counts a processor whose max power is recorded unverifiable, and absent, as verified', () => {
     const parts = [chip('a')]
-    const sources = { a: { socket: src(), tdp: src(), cores: src(), boostClock: src() } }
+    const gone = { checkedOn: '2026-10-10', result: 'unverifiable', note: 'n' }
+    const sources = { a: { socket: src(), tdp: src(), cores: src(), boostClock: src(), maxPowerW: gone } }
     expect(coverageFor('cpu', parts, sources).verified).toBe(1)
   })
 

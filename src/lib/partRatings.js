@@ -2,7 +2,7 @@ import { partQuality } from './partQuality'
 import { checkCompatibility } from './compatibility'
 import { gameFps } from './gameFps'
 import { partSynergy } from './partSynergy'
-import { BUILD_PROFILES, USE_CASE_LABEL } from './buildProfiles'
+import { BUILD_PROFILES, USE_CASE_LABEL, usefulRamGb } from './buildProfiles'
 
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n))
 const FPS_USES = new Set(['gaming', 'streaming'])
@@ -143,7 +143,7 @@ function tierBalance(level, buildLevel) {
 export function rateBuild(parts, useCase, catalog) {
   const profile = BUILD_PROFILES[useCase] ?? BUILD_PROFILES.gaming
   const label = USE_CASE_LABEL[useCase] ?? 'this use'
-  if (!parts.cpu || !parts.gpu) return { overall: 0, verdict: verdictFor(0, label), parts: {} }
+  if (!parts.cpu || !parts.gpu) return { overall: 0, exact: 0, verdict: verdictFor(0, label), parts: {} }
 
   const cats = Object.keys(parts).filter((c) => parts[c])
   const w = profile.weights
@@ -151,6 +151,11 @@ export function rateBuild(parts, useCase, catalog) {
 
   const level = {}
   for (const c of cats) level[c] = partLevel(parts[c], catalog)
+  // Memory past twice what the use case needs is capacity it cannot use, so it
+  // earns no level - otherwise the optimiser buys 64 GB for a gaming PC. Speed
+  // still counts between kits of the capped size.
+  const ramCap = usefulRamGb(useCase)
+  if (parts.ram?.capacityGb > ramCap) level.ram = partLevel({ ...parts.ram, capacityGb: ramCap }, catalog)
 
   let wsum = 0, lsum = 0
   for (const c of cats) { const wc = w[c] ?? 0; wsum += wc; lsum += wc * level[c] }
@@ -187,8 +192,11 @@ export function rateBuild(parts, useCase, catalog) {
 
   let owsum = 0, ossum = 0
   for (const c of cats) { const wc = w[c] ?? 0; owsum += wc; ossum += wc * out[c].score }
-  const overall = owsum > 0 ? Math.round(ossum / owsum) : 0
-  return { overall, verdict: verdictFor(overall, label), parts: out }
+  // `exact` is for optimisers: a cheap upgrade in a low-weight category moves
+  // the score by less than a point, which the rounded figure cannot see.
+  const exact = owsum > 0 ? ossum / owsum : 0
+  const overall = Math.round(exact)
+  return { overall, exact, verdict: verdictFor(overall, label), parts: out }
 }
 
 // The single best next purchase, given a rating and the per-category upgrade

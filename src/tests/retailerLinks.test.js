@@ -22,4 +22,8 @@ describe('retailerLinks', () => {
     const url = searchUrl('RTX 4070', 'NVIDIA')
     expect(url).toContain(encodeURIComponent('NVIDIA RTX 4070'))
   })
+
+  it('does not repeat a brand the name already starts with', () => {
+    expect(searchUrl('Intel Core i3-12100F', 'Intel')).toBe('https://www.amazon.co.uk/s?k=Intel%20Core%20i3-12100F')
+  })
 })

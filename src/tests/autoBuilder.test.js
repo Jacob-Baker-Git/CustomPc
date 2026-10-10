@@ -201,3 +201,46 @@ describe('autoBuild budget discipline', () => {
     for (const c of ESSENTIALS) expect(build[c], `missing ${c}`).toBeTruthy()
   })
 })
+
+// The Performance tab recommends a supply from PEAK draw, which uses each CPU's
+// full-boost power. Auto-build sized on the base-power TDP sum instead, so it
+// fitted a 500 W unit under an i7-14700KF build peaking at 475 W, and a 650 W
+// under one the same site recommended 800 W for. One sizing, both places.
+describe('auto-build PSU sizing agrees with the Performance tab', () => {
+  it('fits at least the recommended supply whenever the build is within budget', async () => {
+    const { buildForUseCase } = await import('../lib/useCaseBuilder')
+    const { estimatePower } = await import('../lib/perfEngine/power')
+    const short = []
+    for (const uc of ['gaming', 'creation', 'office', 'programming']) {
+      for (const budget of [900, 1200, 1700, 2500]) {
+        const build = buildForUseCase(budget, uc, partsData)
+        const total = Object.values(build).reduce((t, p) => t + p.price, 0)
+        if (total > budget) continue
+        const rec = estimatePower(build).recommendedPsuW
+        if (build.psu.wattage < rec) short.push(`${uc} £${budget}: ${build.psu.wattage}W < ${rec}W`)
+      }
+    }
+    expect(short).toEqual([])
+  })
+})
+
+// The greedy pass measured gains on the ROUNDED overall, so a cheap upgrade in
+// a low-weight category (a better case, more fans) usually rounded to zero and
+// was never bought, while 64 GB of RAM happened to round up. Every gaming build
+// up to £3,800 shipped in the cheapest case on sale.
+describe('auto-build greedy pass sees sub-point gains', () => {
+  it('keeps gaming builds at or under 32 GB of memory', () => {
+    for (const budget of [900, 1200, 1700, 2500, 3800]) {
+      expect(buildForUseCase(budget, 'gaming', partsData).ram.capacityGb, `£${budget}`).toBeLessThanOrEqual(32)
+    }
+  })
+
+  // Only where money is genuinely left over: up to ~£2,500 a gaming build
+  // spends 99%+ and the score rightly prefers CPU/GPU/RAM to a case.
+  it('spends leftover money on a better case instead of leaving it in the cheapest one', () => {
+    const cheapest = [...partsData].filter((p) => p.category === 'case' && !p.legacy).sort((a, b) => a.price - b.price)[0]
+    for (const uc of ['gaming', 'streaming', 'programming']) {
+      expect(buildForUseCase(3800, uc, partsData).case.id, uc).not.toBe(cheapest.id)
+    }
+  })
+})

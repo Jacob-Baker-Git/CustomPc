@@ -21,6 +21,24 @@ export default function GeneratedBanner() {
 
   const leftover = budget - spent
 
+  if (info.shared) {
+    return (
+      <div role="status" className={`${PANEL_STRONG} flex items-center gap-4 px-4 py-2.5`}>
+        <p className="text-xs text-muted">
+          Opened a shared build.
+          {info.savedPrevious && <> Your previous build is in <span className="text-ink">Saved builds</span>.</>}
+        </p>
+        <button
+          onClick={clear}
+          aria-label="Dismiss"
+          className="ml-auto w-6 h-6 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors"
+        >
+          <X size={14} aria-hidden="true" />
+        </button>
+      </div>
+    )
+  }
+
   function spendLeftover() {
     setBuild(maxOutBudget(selectedParts, budget, partsData, useCase))
     clear()

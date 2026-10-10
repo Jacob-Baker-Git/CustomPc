@@ -1,5 +1,5 @@
 import useBuilderStore, {
-  selTotalSpent, selRemainingBudget, selTotalPower, selPsuWattage, selPeripheralsTotal
+  selTotalSpent, selRemainingBudget, selPeakDraw, selPsuWattage, selPeripheralsTotal
 } from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
 
@@ -89,10 +89,11 @@ describe('useBuilderStore', () => {
     expect(selRemainingBudget(useBuilderStore.getState())).toBeCloseTo(1000 - cpu.price)
   })
 
-  it('selTotalPower sums TDPs', () => {
+  it('selPeakDraw counts the CPU at full boost', () => {
     useBuilderStore.getState().addPart('cpu', cpu)
     useBuilderStore.getState().addPart('gpu', gpu)
-    expect(selTotalPower(useBuilderStore.getState())).toBe(cpu.tdp + gpu.tdp)
+    expect(cpu.specs.maxPowerW).toBeGreaterThan(cpu.tdp)
+    expect(selPeakDraw(useBuilderStore.getState())).toBe(cpu.specs.maxPowerW + gpu.tdp)
   })
 
   it('selPsuWattage is null with no PSU', () => {
@@ -122,5 +123,37 @@ describe('useBuilderStore', () => {
   it('peripherals do not affect selTotalSpent', () => {
     useBuilderStore.getState().addPeripheral('monitor', { price: 300 })
     expect(selTotalSpent(useBuilderStore.getState())).toBe(0)
+  })
+})
+
+// A persisted build holds whole part objects. Without this they keep whatever
+// price and specs the part had when it was picked, forever, and the
+// compatibility checks run on those stale values.
+describe('syncWithCatalog', () => {
+  const monitor = { id: 'mon-x', category: 'monitor', name: 'Mon', price: 200 }
+
+  it('replaces each selected part with the catalogue copy of the same id', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: { ...cpu, price: 1 } } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(useBuilderStore.getState().selectedParts.cpu).toBe(cpu)
+  })
+
+  it('drops a part the catalogue no longer has', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu: { ...gpu, id: 'gpu-gone' } } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(useBuilderStore.getState().selectedParts).toEqual({ cpu })
+  })
+
+  it('refreshes peripherals the same way', () => {
+    useBuilderStore.setState({ selectedPeripherals: { monitor: { ...monitor, price: 1 }, mouse: { id: 'gone' } } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [monitor])
+    expect(useBuilderStore.getState().selectedPeripherals).toEqual({ monitor })
+  })
+
+  it('leaves state untouched when nothing changed', () => {
+    const selectedParts = { cpu }
+    useBuilderStore.setState({ selectedParts, selectedPeripherals: {} })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(useBuilderStore.getState().selectedParts).toBe(selectedParts)
   })
 })

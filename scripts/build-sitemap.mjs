@@ -55,9 +55,9 @@ export async function buildSitemap() {
     // Content pages carry a TRAILING SLASH because the pre-render writes each one
     // as dist/<page>/index.html (apply-prerender.mjs). The slashed form is the
     // directory index and serves 200; the bare form gets Netlify's directory
-    // redirect, so listing it would point a crawler at a 301. Part pages are NOT
-    // pre-rendered as directories — they resolve through the SPA fallback either
-    // way — so partPath() is left alone.
+    // redirect, so listing it would point a crawler at a 301. Part pages are
+    // flat files (dist/parts/<id>.html) served 200 at the unslashed URL, so
+    // partPath() is left alone.
     const urls = [
       { loc: `${SITE}/`, ...PAGE_PRIORITY[''] },
       ...PAGES.map((p) => ({ loc: `${SITE}/${p}/`, ...(PAGE_PRIORITY[p] ?? PART_ENTRY) })),

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selTotalPower } from '../store/useBuilderStore'
+import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selPeakDraw } from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
@@ -15,6 +15,7 @@ import GamePerformanceList from './GamePerformanceList'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
 import ConfirmDialog from './ConfirmDialog'
+import { countEssentials, isOptional } from '../lib/recommendedOrder'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
@@ -79,15 +80,19 @@ function Row({ label, name, brand, price }) {
   )
 }
 
-function MissingRow({ label }) {
+function MissingRow({ label, optional }) {
   return (
     <div className="flex items-center py-1.5 border-t border-line">
       <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
         {DESIGNATOR[label] ?? label}
       </span>
-      <span className="flex-1 text-sm text-ok">
-        <span aria-hidden="true" className="mr-1.5">⚠</span>Not selected
-      </span>
+      {optional ? (
+        <span className="flex-1 text-sm text-muted">Optional</span>
+      ) : (
+        <span className="flex-1 text-sm text-ok">
+          <span aria-hidden="true" className="mr-1.5">⚠</span>Not selected
+        </span>
+      )}
       <span className="font-mono text-sm text-faint w-20 text-right">—</span>
       <span className="w-28" />
     </div>
@@ -103,7 +108,7 @@ export default function BuildSummary() {
   const saveBuild = useSavedStore((s) => s.saveBuild)
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
-  const power = useBuilderStore(selTotalPower)
+  const power = useBuilderStore(selPeakDraw)
   const resolution = useBuilderStore((s) => s.resolution)
   const useCase = useBuilderStore((s) => s.useCase)
   const partsData = useCatalogStore((s) => s.parts)
@@ -124,7 +129,7 @@ export default function BuildSummary() {
   const framePaced = Boolean(BUILD_PROFILES[useCase]?.cpuGpuPaced)
 
   const buildRows = CATEGORIES.map((c) => ({ key: c.id, label: c.label, part: selectedParts[c.id] })).filter((r) => r.part)
-  const missingCount = CATEGORIES.length - buildRows.length
+  const missingCount = countEssentials(selectedParts).missing.length
   const periphRows = PERIPHERAL_ORDER.map((id) => ({ key: id, label: PERIPHERAL_LABELS[id], part: selectedPeripherals[id] })).filter((r) => r.part)
   const isEmpty = buildRows.length === 0 && periphRows.length === 0
   const grandTotal = buildTotal + periphTotal
@@ -222,7 +227,7 @@ export default function BuildSummary() {
                     const part = selectedParts[c.id]
                     return part
                       ? <Row key={c.id} label={c.label} name={part.name} brand={part.brand} price={part.price} />
-                      : <MissingRow key={c.id} label={c.label} />
+                      : <MissingRow key={c.id} label={c.label} optional={isOptional(c.id)} />
                   })}
                 </>
               )}
@@ -236,7 +241,7 @@ export default function BuildSummary() {
               <div className="flex flex-wrap gap-x-5 gap-y-1 mt-4 pt-3 border-t border-line text-xs text-muted">
                 <span>Build <span className="font-mono text-muted">£{buildTotal.toFixed(2)}</span></span>
                 <span>Peripherals <span className="font-mono text-muted">£{periphTotal.toFixed(2)}</span></span>
-                <span>Draw <span className="font-mono text-ok">{power}W</span></span>
+                <span>Peak draw <span className="font-mono text-ok">{power}W</span></span>
                 <span>Total <span className="font-mono text-ink">£{grandTotal.toFixed(2)}</span></span>
               </div>
 

@@ -101,9 +101,18 @@ const server = createServer(async (req, res) => {
     body = await readIfFile(join(target, 'index.html'))
     if (body) served = join(path, 'index.html')
   }
+  // The _redirects rewrite /parts/:id -> /parts/:id.html, which is the only
+  // rule whose target is not a directory index.
+  if (!body) {
+    body = await readIfFile(target + '.html')
+    if (body) served = path + '.html'
+  }
+  // The catch-all: the app shell with a 404, as public/_redirects serves it.
+  let status = 200
   if (!body) {
     body = await readIfFile(join(ROOT, 'index.html'))
     served = '/index.html'
+    status = 404
   }
   if (!body) {
     res.writeHead(404).end('Not found — run `npm run build` first')
@@ -114,7 +123,7 @@ const server = createServer(async (req, res) => {
     if (matches(rule.pattern, path)) for (const [k, v] of rule.headers) res.setHeader(k, v)
   }
   res.setHeader('Content-Type', TYPES[extname(served)] ?? 'application/octet-stream')
-  res.writeHead(200).end(body)
+  res.writeHead(status).end(body)
 })
 
 // ⚠️ Fail CLOSED, and this is the whole point of the tool.

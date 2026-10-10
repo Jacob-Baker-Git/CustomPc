@@ -339,7 +339,7 @@ export default function PerformanceScreen() {
             ? 'Needs a CPU and a cooler with a known size.'
             : 'Nothing gets damaged when a cooler is undersized: the CPU drops its clocks to stay in range, so you lose boost speed during long loads and gain fan noise.'}
         >
-          <StatRow label="CPU heat output" value={thermals.cpuTdp} unit="W" />
+          <StatRow label="CPU heat output" value={thermals.cpuHeatW} unit="W" hint="at full boost" />
           <StatRow label="Cooler capacity" value={thermals.capacityW} unit="W" />
           <StatRow
             label="Headroom"

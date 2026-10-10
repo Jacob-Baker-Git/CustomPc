@@ -110,7 +110,8 @@ export function compatibilityNotes(part, parts = []) {
       const coolers = of(parts, 'cooler').filter((c) => (c.sockets ?? []).includes(part.socket))
       add('Motherboard', `Needs the ${part.socket} socket, and ${count(boards.length, 'board')} in the catalogue have it.`)
       if (memory.length) add('Memory', `Those boards take ${memory.join(' or ')}.`)
-      add('Cooling', `Draws ${part.tdp} W. ${count(coolers.length, 'cooler')} list ${part.socket} support.`)
+      const power = s.maxPowerW ? `${part.tdp} W base power, up to ${s.maxPowerW} W at full boost.` : `Draws ${part.tdp} W.`
+      add('Cooling', `${power} ${count(coolers.length, 'cooler')} list ${part.socket} support.`)
       break
     }
 

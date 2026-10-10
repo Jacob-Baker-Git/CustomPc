@@ -225,3 +225,25 @@ describe('SetupFlow — I already have a PC', () => {
     expect(useBuilderStore.getState().budget).toBe(1200)
   })
 })
+
+describe('SetupFlow — budget sanity', () => {
+  beforeEach(() => { reset(); useCatalogStore.setState({ parts: realParts, games: [game] }) })
+  const type = (v) => fireEvent.change(screen.getByRole('spinbutton'), { target: { value: v } })
+
+  it('says when a budget is below the cheapest complete build', () => {
+    render(<SetupFlow onBack={() => {}} />)
+    startAt(/pick parts for me/i)
+    type('150')
+    expect(screen.getByText(/cheapest complete build/i)).toHaveTextContent(/£\d{3}/)
+    type('2000')
+    expect(screen.queryByText(/cheapest complete build/i)).toBeNull()
+  })
+
+  it('caps an absurd budget at the same ceiling share links use', () => {
+    render(<SetupFlow onBack={() => {}} />)
+    startAt(/empty build/i)
+    enterBudget('1000000000000')
+    fireEvent.click(screen.getByRole('button', { name: /start building/i }))
+    expect(useBuilderStore.getState().budget).toBe(1e7)
+  })
+})

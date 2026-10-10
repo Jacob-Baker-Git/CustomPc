@@ -121,7 +121,8 @@ export function partStats(part, { resolution = '1440p' } = {}) {
       addDerived('Efficiency', fmt(perfPerWatt(part), 2), ' pts/W', 'Performance per watt: drives cooler choice')
       add('Cores', num(s.cores))
       add('Boost clock', num(s.boostClock), ' GHz', 'Peak single-core speed')
-      add('Power draw', num(part.tdp), ' W')
+      add('Power draw', num(part.tdp), ' W', 'Base power')
+      add('Max power', num(s.maxPowerW), ' W', 'At full boost: what a long all-core load draws')
       add('Socket', part.socket, '', 'Must match the motherboard')
       break
 

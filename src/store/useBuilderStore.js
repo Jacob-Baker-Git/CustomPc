@@ -1,8 +1,24 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
+import { peakDrawW } from '../lib/partSynergy'
 
-const useBuilderStore = create(persist((set) => ({
+// Swap each selected part for the catalogue's copy of the same id, dropping any
+// the catalogue no longer has. Returns `selection` itself when nothing changed.
+// ponytail: a dropped part disappears silently; add a notice if removals become common.
+function resolveById(selection, catalog) {
+  const byId = new Map(catalog.map((p) => [p.id, p]))
+  let changed = false
+  const next = {}
+  for (const [cat, part] of Object.entries(selection)) {
+    const fresh = byId.get(part?.id)
+    if (fresh) next[cat] = fresh
+    if (fresh !== part) changed = true
+  }
+  return changed ? next : selection
+}
+
+const useBuilderStore = create(persist((set, get) => ({
   budget: 0,
   selectedParts: {},
 
@@ -12,8 +28,16 @@ const useBuilderStore = create(persist((set) => ({
   // Persisted, so a refresh returns you where you were. This used to be
   // derived from `budget > 0`, which meant leaving the builder had to zero
   // the budget and a returning visitor could never reach the hub at all.
+  // Each change is a browser history entry ({ flow }), so Back moves between
+  // screens (flowHistory.js restores it). Entering the builder always opens
+  // the Build tab rather than whatever tab a previous visit left in the hash.
   flow: 'hub',
-  setFlow: (flow) => set({ flow }),
+  setFlow: (flow) => {
+    const same = get().flow === flow
+    set({ flow })
+    if (typeof window === 'undefined') return
+    window.history[same ? 'replaceState' : 'pushState']({ flow }, '', flow === 'builder' ? '/#build' : '/')
+  },
 
   addPart: (category, part) =>
     set((state) => ({
@@ -31,6 +55,17 @@ const useBuilderStore = create(persist((set) => ({
 
   clearBuild: () => set({ selectedParts: {}, selectedPeripherals: {} }),
 
+  // The build persists whole part objects, so without this a returning visitor
+  // keeps the prices and specs from whenever each part was picked.
+  syncWithCatalog: (parts, peripherals) =>
+    set((state) => {
+      const selectedParts = resolveById(state.selectedParts, parts)
+      const selectedPeripherals = resolveById(state.selectedPeripherals, peripherals)
+      return selectedParts === state.selectedParts && selectedPeripherals === state.selectedPeripherals
+        ? state
+        : { selectedParts, selectedPeripherals }
+    }),
+
   caseTransparent: false,
   toggleCaseTransparency: () =>
     set((state) => ({ caseTransparent: !state.caseTransparent })),
@@ -39,8 +74,6 @@ const useBuilderStore = create(persist((set) => ({
   lastGenerated: null,
   setLastGenerated: (info) => set({ lastGenerated: info }),
   clearLastGenerated: () => set({ lastGenerated: null }),
-
-  // Category chip currently hovered — the matching 3D part highlights. Transient.
 
   resolution: '1440p',
   setResolution: (resolution) => set({ resolution }),
@@ -89,8 +122,9 @@ export const selTotalSpent = (s) =>
 
 export const selRemainingBudget = (s) => s.budget - selTotalSpent(s)
 
-export const selTotalPower = (s) =>
-  Object.values(s.selectedParts).reduce((sum, p) => sum + (p?.tdp ?? 0), 0)
+// What the build can pull with the CPU at full boost: the figure every power
+// readout shows, so the top bar, Summary and Performance tab agree.
+export const selPeakDraw = (s) => peakDrawW(s.selectedParts)
 
 export const selPsuWattage = (s) => s.selectedParts.psu?.wattage ?? null
 

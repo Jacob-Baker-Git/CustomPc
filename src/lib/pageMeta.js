@@ -47,9 +47,9 @@ export const PAGE_META = {
 // sitemap lists the slashed form (build-sitemap.mjs). A page's canonical must
 // therefore carry the trailing slash: a canonical that itself 301s points away
 // from the very URL it sits on, and disagreeing with the sitemap splits the
-// signal across two URLs for one document. Part detail pages resolve through the
-// SPA fallback and 200 either way, are listed unslashed, and so must NOT gain a
-// slash; the root is the bare origin. `path` is a bare page key ('help') for a
+// signal across two URLs for one document. Part detail pages are flat files
+// (dist/parts/<id>.html, reached by a _redirects rewrite) that serve 200 at the
+// unslashed URL, are listed unslashed, and so must NOT gain a slash; the root is the bare origin. `path` is a bare page key ('help') for a
 // content page and 'parts/<id>' for a part page (App.jsx), and the content-page
 // keys are exactly PAGE_META's — so membership there is the test.
 export const canonicalFor = (path) => {

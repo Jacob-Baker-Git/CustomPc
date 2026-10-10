@@ -1,5 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import useCatalogStore, { loadCatalog } from '../store/useCatalogStore'
+import useBuilderStore from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
 import peripheralsData from '../data/peripheralsData.json'
 import gamesData from '../data/gamesData.json'
@@ -40,6 +41,17 @@ describe('useCatalogStore', () => {
     expect(s.parts[0].id).toBe('cpu-db')
     expect(s.peripherals[0].id).toBe('mon-db')
     expect(s.games[0].id).toBe('game-db')
+  })
+
+  it('refreshes the in-progress build against the fetched catalogue', async () => {
+    const live = { id: 'cpu-db', category: 'cpu', name: 'DB CPU', price: 120 }
+    useBuilderStore.setState({ selectedParts: { cpu: { ...live, price: 100 } }, selectedPeripherals: {} })
+    vi.stubGlobal('fetch', vi.fn(async (url) => ({
+      ok: true,
+      json: async () => (String(url).includes('rest/v1/parts') ? dbRows([live]) : dbRows([{ id: 'x', name: 'x' }])),
+    })))
+    await loadCatalog()
+    expect(useBuilderStore.getState().selectedParts.cpu.price).toBe(120)
   })
 
   it('keeps the bundled snapshot when the fetch fails', async () => {
