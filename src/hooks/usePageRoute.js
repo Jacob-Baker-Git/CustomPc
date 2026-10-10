@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { partIdFromPath } from '../lib/partPages'
+import useBuilderStore from '../store/useBuilderStore'
 
 export const PAGES = ['help', 'parts', 'glossary', 'feedback', 'privacy', 'terms']
 
@@ -54,7 +55,8 @@ export function usePageRoute() {
   // Takes a path body — 'parts', 'parts/gpu-rtx-4090', or null for the root — so
   // one function still covers both depths and callers never build a URL by hand.
   const navigate = (p) => {
-    window.history.pushState(null, '', pathOf(p))
+    // Home records which screen it shows, so Back to it restores that screen.
+    window.history.pushState(p ? null : { flow: useBuilderStore.getState().flow }, '', pathOf(p))
     setRoute(routeOf(pathOf(p)))
     window.scrollTo(0, 0)
   }

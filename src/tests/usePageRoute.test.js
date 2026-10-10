@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react'
 import { usePageRoute, PAGES } from '../hooks/usePageRoute'
+import useBuilderStore from '../store/useBuilderStore'
 
 // jsdom starts at http://localhost/, and history.pushState works there, so the
 // whole router is exercisable without a server.
@@ -36,6 +37,15 @@ describe('usePageRoute', () => {
     act(() => result.current.navigate(null))
     expect(window.location.pathname).toBe('/')
     expect(result.current.page).toBeNull()
+  })
+
+  it('navigating home records the current flow, so Back returns to that screen', () => {
+    useBuilderStore.setState({ flow: 'builder' })
+    const { result } = renderHook(() => usePageRoute())
+    act(() => result.current.navigate('help'))
+    act(() => result.current.navigate(null))
+    expect(window.history.state).toEqual({ flow: 'builder' })
+    useBuilderStore.setState({ flow: 'hub' })
   })
 
   it('rewrites a legacy #/page link to its path, without a history entry', () => {

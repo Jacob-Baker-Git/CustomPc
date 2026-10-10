@@ -12,7 +12,6 @@ import { decodeBuild } from '../lib/buildCodec'
 import { TIERS } from '../lib/tiers'
 import { BUILD_PROFILES, USE_CASES } from '../lib/buildProfiles'
 import { buildForUseCase } from '../lib/useCaseBuilder'
-import { enterBuildTab } from '../lib/enterBuildTab'
 import { BTN_PRIMARY, TELEMETRY } from '../lib/uiTokens'
 import RamBox from './RamBox'
 
@@ -97,8 +96,6 @@ export default function SetupFlow({ onBack }) {
 
   function finish() {
     const profile = BUILD_PROFILES[useCase]
-    // Land on the Build tab, not whatever tab the last visit left in the hash.
-    enterBuildTab()
     setResolution(profile.resolution)
     setStoreUseCase(useCase)
 

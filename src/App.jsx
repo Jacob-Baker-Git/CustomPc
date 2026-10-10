@@ -13,7 +13,6 @@ import PartPage from './components/PartPage'
 import useBuilderStore from './store/useBuilderStore'
 import useCatalogStore, { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
-import { enterBuildTab } from './lib/enterBuildTab'
 import { partById, partPageMeta } from './lib/partPages'
 import { PAGE_META, canonicalFor } from './lib/pageMeta'
 
@@ -83,14 +82,14 @@ export default function App() {
   if (flow === 'saved') {
     return (
       <SiteChrome onBack={() => setFlow('hub')}>
-        <SavedBuilds onLoaded={() => { enterBuildTab(); setFlow('builder') }} />
+        <SavedBuilds onLoaded={() => setFlow('builder')} />
       </SiteChrome>
     )
   }
   return (
     <MainMenu
       onStart={() => setFlow('setup')}
-      onResume={() => { enterBuildTab(); setFlow('builder') }}
+      onResume={() => setFlow('builder')}
       onSaved={() => setFlow('saved')}
     />
   )

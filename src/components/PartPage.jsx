@@ -6,7 +6,6 @@ import { partStats } from '../lib/partStats'
 import { insight, gpuResChips, specRows } from '../lib/specSheetContent'
 import { searchUrl } from '../lib/retailerLinks'
 import { PRICE_SNAPSHOT, FPS_CAVEAT } from '../lib/siteContent'
-import { enterBuildTab } from '../lib/enterBuildTab'
 
 const CATEGORY_LABEL = {
   cpu: 'Processor',
@@ -63,9 +62,9 @@ export default function PartPage({ partId, onNavigate }) {
 
   const buildWithIt = () => {
     addPart(part.category, part)
-    enterBuildTab()
-    setFlow('builder')
+    // Home first, so the builder's history entry sits on the root path.
     onNavigate?.(null)
+    setFlow('builder')
   }
 
   return (

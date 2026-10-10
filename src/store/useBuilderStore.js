@@ -17,7 +17,7 @@ function resolveById(selection, catalog) {
   return changed ? next : selection
 }
 
-const useBuilderStore = create(persist((set) => ({
+const useBuilderStore = create(persist((set, get) => ({
   budget: 0,
   selectedParts: {},
 
@@ -27,8 +27,16 @@ const useBuilderStore = create(persist((set) => ({
   // Persisted, so a refresh returns you where you were. This used to be
   // derived from `budget > 0`, which meant leaving the builder had to zero
   // the budget and a returning visitor could never reach the hub at all.
+  // Each change is a browser history entry ({ flow }), so Back moves between
+  // screens (flowHistory.js restores it). Entering the builder always opens
+  // the Build tab rather than whatever tab a previous visit left in the hash.
   flow: 'hub',
-  setFlow: (flow) => set({ flow }),
+  setFlow: (flow) => {
+    const same = get().flow === flow
+    set({ flow })
+    if (typeof window === 'undefined') return
+    window.history[same ? 'replaceState' : 'pushState']({ flow }, '', flow === 'builder' ? '/#build' : '/')
+  },
 
   addPart: (category, part) =>
     set((state) => ({

@@ -1,4 +1,5 @@
 import useBuilderStore from '../store/useBuilderStore'
+import { initFlowHistory } from '../lib/flowHistory'
 
 describe('builder store flow field', () => {
   it('defaults to the hub', () => {
@@ -40,5 +41,57 @@ describe('persist migration v1 -> v2', () => {
     expect(out.useCase).toBe('creation')
     expect(out.resolution).toBe('4k')
     expect(out.budget).toBe(900)
+  })
+})
+
+// `flow` used to live only in the store, so the browser's Back button could not
+// move between the hub, setup and the builder: from the builder it walked back
+// through the tab hashes and then left the site.
+describe('flow and browser history', () => {
+  beforeEach(() => {
+    useBuilderStore.setState({ flow: 'hub' })
+    window.history.replaceState({ flow: 'hub' }, '', '/')
+  })
+
+  it('setFlow adds a history entry carrying the flow', () => {
+    const before = window.history.length
+    useBuilderStore.getState().setFlow('setup')
+    expect(window.history.length).toBe(before + 1)
+    expect(window.history.state).toEqual({ flow: 'setup' })
+  })
+
+  it('entering the builder always opens the Build tab', () => {
+    window.history.replaceState({ flow: 'hub' }, '', '/#summary')
+    useBuilderStore.getState().setFlow('builder')
+    expect(window.location.hash).toBe('#build')
+  })
+
+  it('re-entering the same flow replaces the entry instead of adding one', () => {
+    useBuilderStore.setState({ flow: 'builder' })
+    const before = window.history.length
+    useBuilderStore.getState().setFlow('builder')
+    expect(window.history.length).toBe(before)
+    expect(window.location.hash).toBe('#build')
+  })
+
+  it('Back restores the flow recorded on the entry', () => {
+    initFlowHistory()
+    useBuilderStore.setState({ flow: 'builder' })
+    window.dispatchEvent(new PopStateEvent('popstate', { state: { flow: 'setup' } }))
+    expect(useBuilderStore.getState().flow).toBe('setup')
+  })
+
+  it('an entry with no recorded flow leaves the flow alone', () => {
+    initFlowHistory()
+    useBuilderStore.setState({ flow: 'builder' })
+    window.dispatchEvent(new PopStateEvent('popstate', { state: null }))
+    expect(useBuilderStore.getState().flow).toBe('builder')
+  })
+
+  it('stamps the entry the app opened on with the current flow', () => {
+    window.history.replaceState(null, '', '/')
+    useBuilderStore.setState({ flow: 'saved' })
+    initFlowHistory()
+    expect(window.history.state).toEqual({ flow: 'saved' })
   })
 })

@@ -31,7 +31,9 @@ export function useHashView(defaultView = 'build') {
   }, [])
 
   const set = (v) => {
-    window.location.hash = v
+    // pushState rather than location.hash so the entry records that it belongs
+    // to the builder (see flowHistory.js); Back still fires hashchange.
+    window.history.pushState({ flow: 'builder' }, '', `#${v}`)
     setView(v)
   }
 

@@ -34,3 +34,9 @@ describe('useHashView', () => {
     expect(result.current[0]).toBe('peripherals')
   })
 })
+
+it('records the builder flow on each tab entry, so Back into a tab reopens the builder', () => {
+  const { result } = renderHook(() => useHashView('build'))
+  act(() => result.current[1]('summary'))
+  expect(window.history.state).toEqual({ flow: 'builder' })
+})
