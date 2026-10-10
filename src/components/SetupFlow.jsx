@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Wand2, Wrench, FileQuestion } from 'lucide-react'
 import BoardBackground from './BoardBackground'
 import SiteFooter from './SiteFooter'
@@ -8,7 +8,7 @@ import PartSelector from './PartSelector'
 import useBuilderStore from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import useSavedStore from '../store/useSavedStore'
-import { decodeBuild } from '../lib/buildCodec'
+import { decodeBuild, MAX_BUDGET } from '../lib/buildCodec'
 import { TIERS } from '../lib/tiers'
 import { BUILD_PROFILES, USE_CASES } from '../lib/buildProfiles'
 import { buildForUseCase } from '../lib/useCaseBuilder'
@@ -61,10 +61,13 @@ export default function SetupFlow({ onBack }) {
   const setFlow           = useBuilderStore((s) => s.setFlow)
   const partsData         = useCatalogStore((s) => s.parts)
   const saved             = useSavedStore((s) => s.saved)
+  // What a budget too small to buy anything comes out at: the cheapest
+  // complete build the catalogue allows.
+  const floor = useMemo(() => totalOf(buildForUseCase(1, 'gaming', partsData)), [partsData])
 
   const existing   = start === 'existing'
   const partsTotal = totalOf(currentParts)
-  const budgetNum  = parseFloat(value)
+  const budgetNum  = Math.min(parseFloat(value), MAX_BUDGET)
   const hasCore    = Boolean(currentParts.cpu && currentParts.gpu)
   const steps      = ['Start', existing ? 'Your PC' : 'Budget', 'Use case']
   const canAdvance = existing ? hasCore : budgetNum > 0
@@ -186,6 +189,11 @@ export default function SetupFlow({ onBack }) {
                 Next: use case
               </button>
             </form>
+            {start === 'generate' && budgetNum > 0 && budgetNum < floor && (
+              <p className="mt-4 text-xs text-muted text-center max-w-sm">
+                The cheapest complete build here is about <span className={TELEMETRY}>£{Math.ceil(floor)}</span>, so the build will come out over this budget.
+              </p>
+            )}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
               <span className="text-xs text-faint">or start from a preset:</span>
               {TIERS.map((tier) => (

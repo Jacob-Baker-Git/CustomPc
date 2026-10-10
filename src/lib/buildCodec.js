@@ -21,7 +21,7 @@ const RESOLUTIONS = ['1080p', '1440p', '4k']
 
 // Budgets drive the auto-builder and get rendered as currency; negatives, NaN
 // and 1e308 all produce nonsense downstream.
-const MAX_BUDGET = 1e7
+export const MAX_BUDGET = 1e7
 
 // Category keys are used as object keys, and JSON.parse makes `__proto__` a real
 // own property (an object literal does not), so an unchecked `parts[cat] = part`
