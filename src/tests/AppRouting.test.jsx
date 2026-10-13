@@ -42,11 +42,14 @@ describe('App routing', () => {
   })
 
   it('routes "What will my build get?" to the Build tab on the parts path', () => {
-    useBuilderStore.setState({ path: 'game' })
+    // A budget left by Build-for-a-game (or the old wizard) would hide and lock
+    // parts on a path that has no budget at all — final review, Important #3.
+    useBuilderStore.setState({ path: 'game', budget: 1000 })
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: /what will my build get/i }))
     expect(useBuilderStore.getState().flow).toBe('builder')
     expect(useBuilderStore.getState().path).toBe('parts')
+    expect(useBuilderStore.getState().budget).toBe(0)
     expect(window.location.hash).toBe('#build')
   })
 

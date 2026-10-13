@@ -107,7 +107,14 @@ export default function App() {
   }
   return (
     <MainMenu
-      onExplore={() => { useBuilderStore.getState().setPath('parts'); setFlow('builder', 'build') }}
+      onExplore={() => {
+        // Entering your own parts has no budget; one left by Build-for-a-game
+        // would hide and lock parts here.
+        const s = useBuilderStore.getState()
+        s.setPath('parts')
+        s.setBudget(0)
+        setFlow('builder', 'build')
+      }}
       onTarget={() => setFlow('target')}
       onSaved={() => setFlow('saved')}
     />

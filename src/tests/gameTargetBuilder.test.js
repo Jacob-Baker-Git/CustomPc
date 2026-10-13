@@ -3,6 +3,7 @@ import partsData from '../data/partsData.json'
 import perfModel from '../data/perfModel.json'
 import perfGames from '../data/perfGames.json'
 import { getBuildWarnings } from '../lib/buildWarnings'
+import { computeBottleneck } from '../lib/bottleneck'
 import {
   presetKey, findPreset, fpsFor, completeBuild, buildForGame,
 } from '../lib/gameTargetBuilder'
@@ -98,4 +99,32 @@ describe('buildForGame', () => {
     const r3 = run({ game: ghost, preset: ghost.presets[0] })
     expect(r3).toEqual({ noData: true, unreachable: false, best: null, cheapestHit: null, fastest: null })
   })
+})
+
+// Final review, Important #1: a ceiling ("up to") cannot see the CPU, so it
+// must not be allowed to pair a flagship card with the weakest chip. Those
+// pairs answer only when the site's own balance rule (computeBottleneck, which
+// the CustomPC score also uses) does not call them CPU-limited.
+describe('ceilings never buy a CPU-bottlenecked pair', () => {
+  const unbalanced = (o) => Boolean(o) && o.bound === 'upper' &&
+    computeBottleneck(o.parts.cpu, o.parts.gpu, RES).limitedBy === 'cpu'
+
+  it.each(['a-plague-tale-requiem', 'alan-wake-2', 'armored-core-6', 'fortnite'])('%s', (id) => {
+    const g = perfGames.find((x) => x.id === id)
+    const r = buildForGame({ game: g, preset: findPreset(g, null), resolution: RES, targetFps: 120,
+      budget: 600, parts: partsData, model: perfModel })
+    for (const o of [r.best, r.cheapestHit, r.fastest]) expect(unbalanced(o), JSON.stringify(o && [o.parts.cpu.id, o.parts.gpu.id])).toBe(false)
+  })
+})
+
+// Final review, Important #2: the fallback must be the heaviest NATIVE preset;
+// an upscaled run of the top tier is a higher frame rate, not a heavier one.
+it('falls back to a native preset for every game that has one at its top tier', () => {
+  for (const g of perfGames) {
+    const top = Math.max(...g.presets.map((p) => p.tier))
+    const hasNative = g.presets.some((p) => p.tier === top && p.upscaling === 'native')
+    const p = findPreset(g, null)
+    expect(p.tier, g.id).toBe(top)
+    if (hasNative) expect(p.upscaling, g.id).toBe('native')
+  }
 })

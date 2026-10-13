@@ -2,6 +2,7 @@ import { estimateBuildPerformance } from './perfEngine'
 import { autoBuild } from './autoBuilder'
 import { presetsFor } from './gamePresets'
 import { BUILD_PROFILES } from './buildProfiles'
+import { computeBottleneck } from './bottleneck'
 import perfGames from '../data/perfGames.json'
 
 const ESSENTIAL = ['cpu', 'gpu', 'motherboard', 'ram', 'cooler', 'case', 'storage', 'psu']
@@ -17,11 +18,16 @@ export const gameById = (id) => perfGames.find((g) => g.id === id) ?? null
 // render scales are different measurements — so the key carries both halves.
 export const presetKey = (p) => `${p.id}|${p.upscaling}`
 
-// Heaviest preset as the fallback: the games list writes presets lowest tier
-// first, and erring toward the heavier preset errs toward a LOWER frame rate.
+// Heaviest preset as the fallback, because erring toward the heavier preset
+// errs toward a LOWER frame rate. Native over upscaled at the same tier: an
+// upscaled run of the top preset is a higher frame rate, not a heavier one.
 export function findPreset(game, key) {
   const presets = presetsFor(game)
-  return presets.find((p) => presetKey(p) === key) ?? presets[presets.length - 1]
+  const exact = presets.find((p) => presetKey(p) === key)
+  if (exact) return exact
+  const top = Math.max(...presets.map((p) => p.tier))
+  const atTop = presets.filter((p) => p.tier === top)
+  return atTop.find((p) => p.upscaling === 'native') ?? atTop[0]
 }
 
 export function fpsFor(parts, game, resolution, preset, model) {
@@ -54,7 +60,13 @@ export function buildForGame({ game, preset, resolution, targetFps, budget, part
   for (const cpu of cpus) {
     for (const gpu of gpus) {
       const row = fpsFor({ cpu, gpu }, game, resolution, preset, model)
-      if (row?.avgFps != null) pairs.push({ cpu, gpu, row, core: cpu.price + gpu.price })
+      if (row?.avgFps == null) continue
+      // A ceiling ("up to", no CPU term) cannot see the CPU, so on its own it
+      // would pair a flagship card with the weakest chip. Such a pair counts
+      // only if the site's own balance rule — the one the CustomPC score uses —
+      // does not call it CPU-limited.
+      if (row.limitedBy == null && computeBottleneck(cpu, gpu, resolution)?.limitedBy === 'cpu') continue
+      pairs.push({ cpu, gpu, row, core: cpu.price + gpu.price })
     }
   }
   if (pairs.length === 0) return { noData: true, unreachable: false, best: null, cheapestHit: null, fastest: null }

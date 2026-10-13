@@ -2,7 +2,7 @@ import { useState } from 'react'
 import useBuilderStore from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import perfModel from '../data/perfModel.json'
-import { buildForGame, findPreset, gameById } from '../lib/gameTargetBuilder'
+import { buildForGame, findPreset, gameById, presetKey } from '../lib/gameTargetBuilder'
 import GameSettingsFields from '../components/GameSettingsFields'
 import { CATEGORIES } from '../lib/categories'
 import { BTN_PRIMARY, PANEL, TELEMETRY } from '../lib/uiTokens'
@@ -37,13 +37,18 @@ export default function TargetScreen() {
   const fpsNum = Number(fps)
   const budgetNum = Number(budget)
   const ready = Boolean(game) && fpsNum > 0 && budgetNum > 0
+  const preset = game ? findPreset(game, target.presetKey) : null
+  // Results answer one set of inputs; once any changes they are hidden rather
+  // than left under a "Use this build" button for settings they do not match.
+  const inputs = game ? `${game.id}|${presetKey(preset)}|${resolution}|${fpsNum}|${budgetNum}` : null
+  const shown = result?.inputs === inputs ? result : null
 
   function find() {
     setTarget({ fps: fpsNum })
     useBuilderStore.getState().setBudget(budgetNum)
     setResult({
-      budget: budgetNum, fps: fpsNum, game,
-      ...buildForGame({ game, preset: findPreset(game, target.presetKey), resolution,
+      inputs, budget: budgetNum, fps: fpsNum, game, preset, resolution,
+      ...buildForGame({ game, preset, resolution,
                         targetFps: fpsNum, budget: budgetNum, parts, model: perfModel }),
     })
   }
@@ -76,22 +81,23 @@ export default function TargetScreen() {
         </button>
       </div>
 
-      {result && (
+      {shown && (
         <div className="mt-6 flex flex-col gap-3">
-          {result.noData ? (
-            <p className="text-sm text-muted">No benchmark data for {result.game.name} at these settings yet, so there is nothing to build towards.</p>
+          <p className="text-xs text-muted">{shown.game.name} · {shown.resolution} · {shown.preset.label} · target {shown.fps} fps</p>
+          {shown.noData ? (
+            <p className="text-sm text-muted">No benchmark data for {shown.game.name} at these settings yet, so there is nothing to build towards.</p>
           ) : (
             <>
-              {result.best
-                ? <BuildOption title={`Best build within £${result.budget}`} option={result.best} onUse={() => use(result.best)} />
-                : <p className="text-sm text-muted">No complete build fits £{result.budget}.</p>}
-              {result.cheapestHit && (
-                <BuildOption title={`Cheapest build that hits ${result.fps} fps`} option={result.cheapestHit} onUse={() => use(result.cheapestHit)} />
+              {shown.best
+                ? <BuildOption title={`Best build within £${shown.budget}`} option={shown.best} onUse={() => use(shown.best)} />
+                : <p className="text-sm text-muted">No complete build fits £{shown.budget}.</p>}
+              {shown.cheapestHit && (
+                <BuildOption title={`Cheapest build that hits ${shown.fps} fps`} option={shown.cheapestHit} onUse={() => use(shown.cheapestHit)} />
               )}
-              {result.unreachable && (
+              {shown.unreachable && (
                 <p className="text-sm text-muted">
-                  No build in the catalogue reaches {result.fps} fps in {result.game.name} at these settings.
-                  The fastest manages {fpsText(result.fastest)} for £{result.fastest.total.toFixed(0)}.
+                  No build in the catalogue reaches {shown.fps} fps in {shown.game.name} at these settings.
+                  The fastest manages {fpsText(shown.fastest)} for £{shown.fastest.total.toFixed(0)}.
                 </p>
               )}
             </>

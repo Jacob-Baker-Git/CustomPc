@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, beforeEach } from 'vitest'
 import TargetScreen from '../screens/TargetScreen'
@@ -40,6 +40,21 @@ describe('TargetScreen', () => {
     expect(s.path).toBe('game')
     expect(s.selectedParts.cpu && s.selectedParts.gpu).toBeTruthy()
     expect(window.location.hash).toBe('#peripherals')
+  })
+
+  // Final review, Important #4: results belong to the inputs they answered.
+  it('drops results once an input changes', async () => {
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/best build within £1600/i)).toBeInTheDocument()
+    act(() => useBuilderStore.setState({ resolution: '4k' }))
+    expect(screen.queryByText(/best build within/i)).toBeNull()
+  })
+
+  it('names the settings the results are for', async () => {
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/fortnite · 1440p · epic/i)).toBeInTheDocument()
   })
 
   it('says plainly when no build can reach the target', async () => {
