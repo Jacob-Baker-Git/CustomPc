@@ -99,12 +99,14 @@ const run = async () => {
 
   console.log(`target: ${BASE}\n`)
   await page.goto(BASE)
-  await page.getByRole('button', { name: /start a build/i }).click()
-  await page.getByRole('button', { name: /pick parts for me/i }).click()
-  await page.getByPlaceholder('Enter budget').fill('1600')
-  await page.getByRole('button', { name: /next: use case/i }).click()
-  await page.getByRole('button', { name: /gaming/i }).click()
-  await page.getByRole('button', { name: /generate build/i }).click()
+  // Same route as e2e/helpers.js generateBuild: the 3D view lives on Summary.
+  await page.getByRole('button', { name: /build for a game/i }).click()
+  await page.getByRole('combobox', { name: 'Game' }).fill('Fortnite')
+  await page.getByRole('spinbutton', { name: /target fps/i }).fill('60')
+  await page.getByRole('spinbutton', { name: /budget/i }).fill('1600')
+  await page.getByRole('button', { name: /find builds/i }).click()
+  await page.getByRole('button', { name: /use this build/i }).first().click()
+  await page.getByRole('button', { name: /^summary$/i }).first().click()
   await page.getByText('/100').first().waitFor()
 
   const opt = page.getByRole('button', { name: /view in 3d/i })

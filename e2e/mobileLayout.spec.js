@@ -416,6 +416,7 @@ test.describe('the frame-rate table fits the box it is in', () => {
     await generateBuild(page)
 
     await page.getByRole('button', { name: /^Performance/i }).click()
+    await page.getByText('Every game at once').click()
     // Genre bars ship shut, so there are no game rows to measure until one opens.
     const genre = page.getByRole('button', { name: /shooters/i }).first()
     await expect(genre).toBeVisible({ timeout: 30_000 })
@@ -443,6 +444,7 @@ test.describe('the frame-rate table fits the box it is in', () => {
     await generateBuild(page)
 
     await page.getByRole('button', { name: /^Performance/i }).click()
+    await page.getByText('Every game at once').click()
     const genre = page.getByRole('button', { name: /shooters/i }).first()
     await expect(genre).toBeVisible({ timeout: 30_000 })
     await genre.click()

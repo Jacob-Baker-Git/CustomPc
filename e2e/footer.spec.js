@@ -28,11 +28,11 @@ test.describe('every screen carries the footer', () => {
     })
   }
 
-  test('the setup wizard', async ({ page }) => {
+  test('the Build-for-a-game screen', async ({ page }) => {
     await page.goto('/')
-    await page.getByRole('button', { name: /start a build/i }).click()
-    await expect(page.getByRole('heading', { name: /build your pc/i })).toBeVisible()
-    await expectFooter(page, 'setup wizard')
+    await page.getByRole('button', { name: /build for a game/i }).click()
+    await expect(page.getByRole('heading', { name: /build for a game/i })).toBeVisible()
+    await expectFooter(page, 'build for a game')
   })
 
   test('the builder', async ({ page }) => {

@@ -1,44 +1,53 @@
 import { test, expect } from '@playwright/test'
+import { generateBuild, openTab } from './helpers.js'
 
-// Walks the real setup flow in a real browser and asserts the parts UI is
-// actually VISIBLE — guards paint/compositing regressions that unit tests
-// (jsdom) can never catch. Also the only test where the CSS actually applies,
-// so it proves exactly one set of view tabs is on screen.
-test('setup generates a build and the selected parts are visible', async ({ page }) => {
+// The new flow (spec 2026-10-13) in a real browser: the Welcome's three paths,
+// both journeys end to end, and the 3D view mounting on Summary alone. Also the
+// only place the CSS actually applies, so it proves exactly one set of view
+// tabs is on screen.
+test('Welcome shows exactly three buttons', async ({ page }) => {
   await page.goto('/')
+  const names = await page.getByRole('main').getByRole('button').allTextContents()
+  expect(names).toHaveLength(3)
+  expect(names[0]).toMatch(/what will my build get\?/i)
+  expect(names[1]).toMatch(/build for a game/i)
+  expect(names[2]).toMatch(/saved builds/i)
+})
 
-  await page.getByRole('button', { name: /start a build/i }).click()
-  await page.getByRole('button', { name: /pick parts for me/i }).click()
+test('path 1: enter parts, then estimate a game on Performance', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /what will my build get/i }).click()
+  await expect(page).toHaveURL(/#build/)
+  for (const cat of ['CPU', 'GPU']) {
+    await page.getByRole('button', { name: new RegExp(`\\b${cat}\\b`) }).first().click()
+    await page.getByRole('dialog', { name: new RegExp(`select ${cat}`, 'i') })
+      .getByRole('button').filter({ hasText: '£' }).first().click()
+  }
+  await page.getByRole('button', { name: /next: performance/i }).click()
+  await page.getByRole('combobox', { name: 'Game' }).fill('Fortnite')
+  await expect(page.getByTestId('estimate-fps')).toHaveText(/\d+ fps/)
+})
 
-  await page.getByPlaceholder('Enter budget').fill('1600')
-  await page.getByRole('button', { name: /next: use case/i }).click()
-  await page.getByRole('button', { name: /gaming/i }).click()
-  await page.getByRole('button', { name: /generate build/i }).click()
-
-  // The generated-build banner summarises the use-case build.
-  await expect(page.getByText(/gaming build/i)).toBeVisible()
-
-  // Selected parts are visible on screen (part list rows).
-  await expect(page.getByRole('button', { name: /remove cpu$/i })).toBeVisible()
-  await expect(page.getByRole('button', { name: /remove gpu/i })).toBeVisible()
-
-  // The Build tab now rates the generated build inline.
-  await expect(page.getByText('/100')).toBeVisible()
-
-  // Both tab sets are in the DOM — the header row and the bottom bar — but CSS
-  // shows one at a time, and the hidden one drops out of the accessibility
-  // tree. So exactly one is reachable by role, at any width.
-  const summaryTab = page.getByRole('button', { name: /^summary$/i })
-  await expect(summaryTab).toHaveCount(1)
-
-  await page.setViewportSize({ width: 390, height: 844 })
-  await expect(page.getByRole('button', { name: /^summary$/i })).toHaveCount(1)
-  await page.setViewportSize({ width: 1440, height: 900 })
-
-  // Deep-linkable tabs: summary shows the same build.
-  await summaryTab.click()
+test('path 2: build for a game, then Peripherals, then Summary', async ({ page }) => {
+  await generateBuild(page)
   await expect(page).toHaveURL(/#summary/)
   await expect(page.getByText(/your build/i)).toBeVisible()
+})
+
+test('the 3D canvas mounts only on Summary', async ({ page }) => {
+  await generateBuild(page)
+  await expect(page.locator('canvas')).toHaveCount(1, { timeout: 30_000 })
+  for (const tab of ['build', 'performance', 'peripherals']) {
+    await openTab(page, tab)
+    await expect(page.locator('canvas')).toHaveCount(0)
+  }
+})
+
+test('exactly one tab set is reachable at any width', async ({ page }) => {
+  await generateBuild(page)
+  await expect(page.getByRole('button', { name: /^summary$/i })).toHaveCount(1)
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect(page.getByRole('button', { name: /^summary$/i })).toHaveCount(1)
 })
 
 // The 3D column's min-height used to leak into the row above it: .area-viz
@@ -50,15 +59,7 @@ test('setup generates a build and the selected parts are visible', async ({ page
 //
 // jsdom computes no grid layout, so this can only be caught here.
 test('the left column stays tight to the 3D preview at any viewport height', async ({ page }) => {
-  await page.goto('/')
-
-  await page.getByRole('button', { name: /start a build/i }).click()
-  await page.getByRole('button', { name: /pick parts for me/i }).click()
-  await page.getByPlaceholder('Enter budget').fill('1600')
-  await page.getByRole('button', { name: /next: use case/i }).click()
-  await page.getByRole('button', { name: /gaming/i }).click()
-  await page.getByRole('button', { name: /generate build/i }).click()
-  await expect(page.getByText('/100')).toBeVisible()
+  await generateBuild(page)
 
   for (const height of [900, 1900, 2400]) {
     await page.setViewportSize({ width: 1440, height })
