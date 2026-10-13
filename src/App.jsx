@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import SetupFlow from './components/SetupFlow'
 import BuilderScreen from './screens/BuilderScreen'
 import MainMenu from './components/MainMenu'
@@ -10,6 +10,8 @@ import GlossaryPage from './components/GlossaryPage'
 import FeedbackPage from './components/FeedbackPage'
 import { PrivacyPage, TermsPage } from './components/LegalPage'
 import PartPage from './components/PartPage'
+// Lazy: it pulls in perfModel.json, which the hub must not download.
+const TargetScreen = lazy(() => import('./screens/TargetScreen'))
 import useBuilderStore from './store/useBuilderStore'
 import useCatalogStore, { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
@@ -90,7 +92,13 @@ export default function App() {
   }
 
   if (flow === 'builder') return <BuilderScreen />
-  if (flow === 'setup')   return <SetupFlow onBack={() => setFlow('hub')} />
+  if (flow === 'target') {
+    return (
+      <SiteChrome onBack={() => setFlow('hub')}>
+        <Suspense fallback={<p className="text-sm text-muted">Loading…</p>}><TargetScreen /></Suspense>
+      </SiteChrome>
+    )
+  }
   if (flow === 'saved') {
     return (
       <SiteChrome onBack={() => setFlow('hub')}>
