@@ -165,7 +165,9 @@ export default function PerformanceScreen() {
       {/* The all-games table is no longer the main view. Collapsed until the
           user decides where it goes (spec 2026-10-13). */}
       <details className="mt-3">
-        <summary className="cursor-pointer text-sm text-muted">Every game at once</summary>
+        {/* On its own surface: this screen has no scrim, so bare text would
+            sit on the board (e2e/builderLegibility.spec.js). */}
+        <summary className={`cursor-pointer rounded-xl ${ELEV_GROUP} px-4 py-2 text-sm text-muted`}>Every game at once</summary>
       <Section
         title="Frame rates"
         blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like. Open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."

@@ -90,4 +90,18 @@ describe('PartSelector modal behaviour', () => {
     fireEvent.click(card)
     expect(onSelect).toHaveBeenCalled()
   })
+
+  // "What will my build get?" sets no budget, and 0 means none — the same
+  // reading filterParts gives it. Locking on it greyed out every part in the
+  // catalogue, so that path could not pick anything at all.
+  it('locks nothing for budget when there is no budget', () => {
+    useBuilderStore.setState({ budget: 0, selectedParts: {} })
+    const onSelect = vi.fn()
+    const gpus = useCatalogStore.getState().parts.filter((p) => p.category === 'gpu' && !p.legacy)
+    const priciest = gpus.reduce((m, p) => (p.price > m.price ? p : m), gpus[0])
+    render(<PartSelector category="gpu" onSelect={onSelect} onClose={() => {}} />)
+    expect(screen.queryByTitle('Over remaining budget')).toBeNull()
+    fireEvent.click(screen.getByText(priciest.name))
+    expect(onSelect).toHaveBeenCalled()
+  })
 })
