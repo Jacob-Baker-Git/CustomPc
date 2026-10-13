@@ -24,6 +24,7 @@ import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
 import Deferred3D from '../components/Deferred3D'
 import ViewTabs from '../components/ViewTabs'
+import NextStep from '../components/NextStep'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
 import { PANEL } from '../lib/uiTokens'
@@ -56,7 +57,7 @@ export default function BuilderScreen() {
   const [show3D, setShow3D] = useState(() => !wantsDeferred3D())
   const scrollRef = useRef(null)
 
-  // Fresh views (and the first landing after setup) start at the top.
+  // Fresh views (and the first landing in the builder) start at the top.
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 })
   }, [view])
@@ -100,6 +101,32 @@ export default function BuilderScreen() {
             renamed itself under the reader would be the noisier choice. */}
         <h1 className="sr-only">Your PC build</h1>
         {view === 'build' ? (
+          <div className="relative z-10 w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12 flex flex-col gap-3">
+            <SelectedPartsPanel
+              selectedParts={selectedParts}
+              onSelectCategory={setActiveCategory}
+              onDeselect={removePart}
+            />
+            <BuildWarnings />
+          </div>
+        ) : view === 'peripherals' ? (
+          <PeripheralsPanel />
+        ) : view === 'performance' ? (
+          /* The fallback needs its own surface for the same reason every panel
+             on this screen does — there is no scrim here, so bare text sits on
+             the board. Easy to miss because it is only on screen while the
+             chunk loads: e2e/builderLegibility.spec.js caught it under
+             full-suite load, having never seen it when run alone. */
+          <Suspense fallback={
+            <div className="mx-4 my-3 rounded-xl bg-surface p-6 text-sm text-muted motion-safe:animate-pulse sm:mx-6 lg:mx-10">
+              Working out frame rates…
+            </div>
+          }>
+            <PerformanceScreen />
+          </Suspense>
+        ) : (
+          // Summary: the 3D view, the CustomPC score with its use-case chips, and
+          // the parts list (spec 2026-10-13 — the only tab that mounts the 3D).
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which
           // wasted most of a wide display.
@@ -212,34 +239,12 @@ export default function BuilderScreen() {
                 <div className="area-rating"><BuildRatingPanel /></div>
               </div>
               <div className="area-banner"><GeneratedBanner /></div>
-              <div className="area-parts">
-                <SelectedPartsPanel
-                  selectedParts={selectedParts}
-                  onSelectCategory={setActiveCategory}
-                  onDeselect={removePart}
-                />
-              </div>
+              <div className="area-parts"><BuildSummary /></div>
               <div className="area-warnings"><BuildWarnings /></div>
             </div>
           </div>
-        ) : view === 'peripherals' ? (
-          <PeripheralsPanel />
-        ) : view === 'performance' ? (
-          /* The fallback needs its own surface for the same reason every panel
-             on this screen does — there is no scrim here, so bare text sits on
-             the board. Easy to miss because it is only on screen while the
-             chunk loads: e2e/builderLegibility.spec.js caught it under
-             full-suite load, having never seen it when run alone. */
-          <Suspense fallback={
-            <div className="mx-4 my-3 rounded-xl bg-surface p-6 text-sm text-muted motion-safe:animate-pulse sm:mx-6 lg:mx-10">
-              Working out frame rates…
-            </div>
-          }>
-            <PerformanceScreen />
-          </Suspense>
-        ) : (
-          <BuildSummary />
         )}
+        <NextStep view={view} onChange={setView} />
         </main>
 
         {/* Inside the scroller, not beside it: this screen's scroll container is

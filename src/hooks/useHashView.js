@@ -8,6 +8,11 @@ import { useEffect, useState } from 'react'
 // Build raises; peripherals are an accessory to a decision already made.
 export const VIEWS = ['build', 'performance', 'peripherals', 'summary']
 
+// Each Welcome path's steps through those views. A game-target build arrives
+// already chosen, so its steps skip Build and Performance; both tabs stay
+// reachable from the tab bar.
+export const stepsFor = (path) => (path === 'game' ? ['peripherals', 'summary'] : VIEWS)
+
 // Views still visibly under construction. The Performance tab answers from a
 // benchmark corpus that is still being filled — plenty of builds still get "no
 // benchmark data yet" — so it says so rather than looking finished and thin.

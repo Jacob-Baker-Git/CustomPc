@@ -117,7 +117,7 @@ body {
   .chip-pick { animation: none; }
 }
 
-/* Desktop-only Build-tab layout: 3D on the right, the rating panel on the left,
+/* Summary-tab layout: 3D on the right, the rating panel on the left,
    everything else full-width below. Below lg it is a plain flex column, so the
    child DOM order IS the (unchanged) mobile order. Every child sits above the
    WebGL canvas child to avoid the known compositing gotcha where content paints
@@ -151,7 +151,6 @@ body {
 .build-grid .area-usecase     { order: 4; }
 .build-grid > .area-banner    { order: 5; }
 .build-grid > .area-warnings  { order: 6; }
-.build-grid > .area-autobuild { order: 7; }
 
 /* Give the vertical axis back to the page on touch devices.
 
@@ -206,8 +205,7 @@ body {
       "left      viz"
       "banner    banner"
       "parts     parts"
-      "warnings  warnings"
-      "autobuild autobuild";
+      "warnings  warnings";
     align-items: start;
     gap: 1rem;
   }
@@ -238,5 +236,4 @@ body {
   .build-grid > .area-banner    { grid-area: banner; }
   .build-grid > .area-parts     { grid-area: parts; }
   .build-grid > .area-warnings  { grid-area: warnings; }
-  .build-grid > .area-autobuild { grid-area: autobuild; }
 }

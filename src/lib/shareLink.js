@@ -37,7 +37,8 @@ export function applyShareLinkFromUrl() {
       lastGenerated: { shared: true, savedPrevious },
     })
   }
-  // Strip the param either way so a refresh doesn't reload a stale link.
-  window.history.replaceState({}, '', window.location.pathname)
+  // Strip the param either way so a refresh doesn't reload a stale link; a
+  // build that opened lands on its Summary.
+  window.history.replaceState({}, '', window.location.pathname + (decoded ? '#summary' : ''))
   return Boolean(decoded)
 }
