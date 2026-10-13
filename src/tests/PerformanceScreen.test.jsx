@@ -115,7 +115,7 @@ describe('PerformanceScreen', () => {
 
   it('renders nothing misleading with an entirely empty build', () => {
     render(<PerformanceScreen />)
-    expect(screen.getByText('Performance')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /what will this build get/i })).toBeInTheDocument()
     expect(screen.getAllByText(/pick a cpu and a graphics card/i).length).toBeGreaterThan(0)
   })
 

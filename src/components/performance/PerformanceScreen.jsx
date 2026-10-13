@@ -143,20 +143,14 @@ export default function PerformanceScreen() {
 
   return (
     <div className="w-full max-w-2xl lg:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-3 pb-12">
-      {/* On its own surface for the same reason the sections are: this screen
-          has no scrim, so a bare heading sits directly on the board. */}
-      <header className={`mb-4 rounded-xl ${ELEV_GROUP} p-4 sm:p-5`}>
-        <h2 className="text-lg text-ink">Performance</h2>
-        <p className="mt-1 max-w-[80ch] text-xs text-muted leading-relaxed">
-          How this build behaves under load: what it draws, what it can shed, and
-          what it renders. Everything except the frame rates is computed from the
-          parts themselves.
-        </p>
-      </header>
-
+      {/* The game estimate leads the tab and carries its heading; the
+          tab-wide readouts follow. (A separate "Performance" header panel used
+          to sit above it, repeating what the tab bar already says.) */}
       <GameEstimate />
 
-      <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+      <div className="mt-6">
+        <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+      </div>
 
       <div className="mt-3">
         <BasisBar rows={allGameRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />

@@ -48,6 +48,23 @@ describe('GameEstimate', () => {
     expect(screen.getByRole('combobox', { name: 'Graphics setting' })).toBeInTheDocument()
   })
 
+  it('reads the estimate against monitor refresh rates', async () => {
+    render(<GameEstimate />)
+    await userEvent.type(screen.getByRole('combobox', { name: 'Game' }), 'Fortnite')
+    // Fortnite answers this pair with a ceiling, so the verdict is hedged.
+    expect(screen.getByText(/^At best, /)).toBeInTheDocument()
+    const meter = screen.getByRole('img', { name: /frame rate on a scale/i })
+    expect(meter).toHaveAccessibleName(/up to \d+ fps/i)
+  })
+
+  it('keeps how the figure is worked out behind a disclosure', async () => {
+    render(<GameEstimate />)
+    await userEvent.type(screen.getByRole('combobox', { name: 'Game' }), 'Fortnite')
+    const how = screen.getByText(/how this figure is worked out/i)
+    expect(how.closest('details')).not.toBeNull()
+    expect(how.closest('details')).not.toHaveAttribute('open')
+  })
+
   it('says so when the cell has no data, never a number', () => {
     // Measured 2026-10-13: for this CPU/GPU at 1440p Fortnite answers "epic"
     // (a ceiling) and has nothing at all for "high". If perfModel.json gains a
