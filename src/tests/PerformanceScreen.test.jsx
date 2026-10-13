@@ -108,7 +108,7 @@ describe('PerformanceScreen', () => {
   it('asks for a CPU and a GPU before estimating frame rates', () => {
     useBuilderStore.setState({ selectedParts: { cpu } })
     render(<PerformanceScreen />)
-    expect(screen.getByText(/pick a cpu and a graphics card/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/pick a cpu and a graphics card/i).length).toBeGreaterThan(0)
     // Power still works off the one part that is present.
     expect(screen.getByText('Power')).toBeInTheDocument()
   })
@@ -116,7 +116,7 @@ describe('PerformanceScreen', () => {
   it('renders nothing misleading with an entirely empty build', () => {
     render(<PerformanceScreen />)
     expect(screen.getByText('Performance')).toBeInTheDocument()
-    expect(screen.getByText(/pick a cpu and a graphics card/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/pick a cpu and a graphics card/i).length).toBeGreaterThan(0)
   })
 
   it('carries the engine caveat, not the legacy one', async () => {
@@ -187,15 +187,28 @@ describe('PerformanceScreen', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1440p' })
     render(<PerformanceScreen />)
     expect(useBuilderStore.getState().resolution).toBe('1440p')
-    await user.click(screen.getByRole('radio', { name: /^4K$/i }))
-    expect(useBuilderStore.getState().resolution).toBe('4k')
+    // Two pickers now (the game estimator's and the all-games table's), both
+    // driving the one stored resolution.
+    for (const radio of screen.getAllByRole('radio', { name: /^4K$/i })) {
+      useBuilderStore.setState({ resolution: '1440p' })
+      await user.click(radio)
+      expect(useBuilderStore.getState().resolution).toBe('4k')
+    }
   })
 
   it('marks the picker with the resolution the build is actually for', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1080p' })
     render(<PerformanceScreen />)
-    expect(screen.getByRole('radio', { name: /1080p/i })).toBeChecked()
-    expect(screen.getByRole('radio', { name: /1440p/i })).not.toBeChecked()
+    for (const r of screen.getAllByRole('radio', { name: /1080p/i })) expect(r).toBeChecked()
+    for (const r of screen.getAllByRole('radio', { name: /1440p/i })) expect(r).not.toBeChecked()
+  })
+
+  it('gives each resolution picker its own label id', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+    const ids = [...document.querySelectorAll('[role="radiogroup"]')].map((g) => g.getAttribute('aria-labelledby'))
+    expect(ids.length).toBeGreaterThan(1)
+    expect(new Set(ids).size).toBe(ids.length)
   })
 })
 

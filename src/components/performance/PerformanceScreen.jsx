@@ -19,6 +19,7 @@ import ResolutionPicker from './ResolutionPicker'
 import Section from './Section'
 import SummaryStrip from './SummaryStrip'
 import BasisBar from './BasisBar'
+import GameEstimate from './GameEstimate'
 
 // One grid definition for every band, so the panels line up across sections
 // rather than each group inventing its own rhythm.
@@ -153,12 +154,18 @@ export default function PerformanceScreen() {
         </p>
       </header>
 
+      <GameEstimate />
+
       <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
 
       <div className="mt-3">
         <BasisBar rows={allGameRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
       </div>
 
+      {/* The all-games table is no longer the main view. Collapsed until the
+          user decides where it goes (spec 2026-10-13). */}
+      <details className="mt-3">
+        <summary className="cursor-pointer text-sm text-muted">Every game at once</summary>
       <Section
         title="Frame rates"
         blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like. Open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."
@@ -224,6 +231,7 @@ export default function PerformanceScreen() {
           {hasCore && ` · ${gameRows.length} game${gameRows.length === 1 ? '' : 's'} shown`}
         </p>
       </Section>
+      </details>
 
       <Section
         title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
