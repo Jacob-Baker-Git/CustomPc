@@ -7,8 +7,10 @@ Date: 2026-10-13. Status: design agreed in chat; awaiting spec review.
 Make the site easy to follow and put real benchmark data front and centre.
 Order of work (the user's call): **I build the new flow functionally first →
 the user decides where everything goes → Lovable polishes the visuals.**
-This spec covers the first step only. The parts-as-buttons theme (each button a
-different part — RAM, GPU, CPU, SSD…) is the Lovable step and is out of scope here.
+This spec covers the first step only. The visual theme is the Lovable step and is
+out of scope here. Its brief: the design just has to be **computer-related** — not
+necessarily hardware. Parts as buttons (RAM, GPU, CPU…) is one option; others are
+fair game (e.g. BIOS/terminal screens, OS windows, cursors, code).
 
 ## The flow
 
