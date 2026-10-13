@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import useBuilderStore from '../store/useBuilderStore'
 import perfGames from '../data/perfGames.json'
-import { findPreset, presetKey } from '../lib/gameTargetBuilder'
+import { findPreset, presetKey, gameById } from '../lib/gameTargetBuilder'
 import { presetsFor } from '../lib/gamePresets'
 import ResolutionPicker from './performance/ResolutionPicker'
-
-export const gameById = (id) => perfGames.find((g) => g.id === id) ?? null
 
 // A native <datalist>: the browser does the searching and the list, and a typed
 // name only counts once it matches a game exactly — partial text selects nothing.

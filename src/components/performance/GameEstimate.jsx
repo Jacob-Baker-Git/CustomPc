@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import useBuilderStore from '../../store/useBuilderStore'
 import perfModel from '../../data/perfModel.json'
-import { findPreset, fpsFor } from '../../lib/gameTargetBuilder'
-import GameSettingsFields, { gameById } from '../GameSettingsFields'
+import { findPreset, fpsFor, gameById } from '../../lib/gameTargetBuilder'
+import GameSettingsFields from '../GameSettingsFields'
 import { BASIS_LABEL, CAVEAT_TEXT } from './basisText'
 import { ELEV_GROUP, TELEMETRY } from '../../lib/uiTokens'
 

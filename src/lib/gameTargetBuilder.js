@@ -2,11 +2,16 @@ import { estimateBuildPerformance } from './perfEngine'
 import { autoBuild } from './autoBuilder'
 import { presetsFor } from './gamePresets'
 import { BUILD_PROFILES } from './buildProfiles'
+import perfGames from '../data/perfGames.json'
 
 const ESSENTIAL = ['cpu', 'gpu', 'motherboard', 'ram', 'cooler', 'case', 'storage', 'psu']
 const NEEDS = BUILD_PROFILES.gaming.needs
 const sumPrice = (sel) => Object.values(sel).reduce((s, p) => s + (p?.price ?? 0), 0)
 const byId = (a, b) => (a < b ? -1 : a > b ? 1 : 0)
+
+// The engine's game list, not the catalogue's — see PerformanceScreen. A stored
+// id the list no longer has is no game at all.
+export const gameById = (id) => perfGames.find((g) => g.id === id) ?? null
 
 // A preset is a measurement condition, and two runs of one preset at different
 // render scales are different measurements — so the key carries both halves.
