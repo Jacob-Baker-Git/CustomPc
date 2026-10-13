@@ -1,65 +1,22 @@
-import { X, Zap } from 'lucide-react'
-import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
-import { maxOutBudget } from '../lib/maxOutBudget'
-import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
-import useCatalogStore from '../store/useCatalogStore'
-import { USE_CASE_LABEL } from '../lib/buildProfiles'
+import { X } from 'lucide-react'
+import useBuilderStore from '../store/useBuilderStore'
+import { PANEL_STRONG } from '../lib/uiTokens'
 
-// One-off summary shown after setup generates a build: what it cost, and when
-// money is left on the table, a one-click way to spend it.
+// Shown after a share link replaces the build: what happened, and where the
+// visitor's own build went. The setup wizard's "generated build" notices went
+// with the wizard (spec 2026-10-13).
 export default function GeneratedBanner() {
-  const info          = useBuilderStore((s) => s.lastGenerated)
-  const budget        = useBuilderStore((s) => s.budget)
-  const useCase       = useBuilderStore((s) => s.useCase)
-  const selectedParts = useBuilderStore((s) => s.selectedParts)
-  const setBuild      = useBuilderStore((s) => s.setBuild)
-  const clear         = useBuilderStore((s) => s.clearLastGenerated)
-  const spent         = useBuilderStore(selTotalSpent)
-  const partsData     = useCatalogStore((s) => s.parts)
+  const info  = useBuilderStore((s) => s.lastGenerated)
+  const clear = useBuilderStore((s) => s.clearLastGenerated)
 
-  if (!info) return null
-
-  const leftover = budget - spent
-
-  if (info.shared) {
-    return (
-      <div role="status" className={`${PANEL_STRONG} flex items-center gap-4 px-4 py-2.5`}>
-        <p className="text-xs text-muted">
-          Opened a shared build.
-          {info.savedPrevious && <> Your previous build is in <span className="text-ink">Saved builds</span>.</>}
-        </p>
-        <button
-          onClick={clear}
-          aria-label="Dismiss"
-          className="ml-auto w-6 h-6 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors"
-        >
-          <X size={14} aria-hidden="true" />
-        </button>
-      </div>
-    )
-  }
-
-  function spendLeftover() {
-    setBuild(maxOutBudget(selectedParts, budget, partsData, useCase))
-    clear()
-  }
+  if (!info?.shared) return null
 
   return (
-    <div role="status" className={`${PANEL_STRONG} flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5`}>
+    <div role="status" className={`${PANEL_STRONG} flex items-center gap-4 px-4 py-2.5`}>
       <p className="text-xs text-muted">
-        {info.useCase
-          ? <>Your <span className="text-ink">{USE_CASE_LABEL[info.useCase] ?? info.useCase} build</span> uses <span className={`${TELEMETRY} text-tech font-semibold`}>£{spent.toFixed(0)}</span> of your £{budget.toFixed(0)} budget</>
-          : <>Upgrade applied</>}
-        {leftover > 0 && <> — <span className={`${TELEMETRY} text-good`}>£{leftover.toFixed(0)}</span> under budget</>}
+        Opened a shared build.
+        {info.savedPrevious && <> Your previous build is in <span className="text-ink">Saved builds</span>.</>}
       </p>
-      {leftover > 20 && (
-        <button
-          onClick={spendLeftover}
-          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-brass hover:brightness-110 text-accent-ink font-semibold transition-colors"
-        >
-          <Zap size={12} aria-hidden="true" /> Spend the leftover
-        </button>
-      )}
       <button
         onClick={clear}
         aria-label="Dismiss"

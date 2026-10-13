@@ -1,5 +1,4 @@
 import { useEffect, lazy, Suspense } from 'react'
-import SetupFlow from './components/SetupFlow'
 import BuilderScreen from './screens/BuilderScreen'
 import MainMenu from './components/MainMenu'
 import SavedBuilds from './components/SavedBuilds'
@@ -102,14 +101,14 @@ export default function App() {
   if (flow === 'saved') {
     return (
       <SiteChrome onBack={() => setFlow('hub')}>
-        <SavedBuilds onLoaded={() => setFlow('builder')} />
+        <SavedBuilds onLoaded={() => setFlow('builder', 'summary')} />
       </SiteChrome>
     )
   }
   return (
     <MainMenu
-      onStart={() => setFlow('setup')}
-      onResume={() => setFlow('builder')}
+      onExplore={() => { useBuilderStore.getState().setPath('parts'); setFlow('builder', 'build') }}
+      onTarget={() => setFlow('target')}
       onSaved={() => setFlow('saved')}
     />
   )

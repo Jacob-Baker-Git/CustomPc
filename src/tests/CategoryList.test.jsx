@@ -97,8 +97,8 @@ describe('CategoryList', () => {
     })
   })
 
-  // SetupFlow renders this same list for "the PC I already own", where an empty
-  // slot means "I don't have one" — flagging those red would be a lie.
+  // Only the Build tab asks for the louder treatment; anywhere else an empty
+  // slot is not a fault.
   it('stays quiet about missing parts by default', () => {
     render(<CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} />)
     expect(screen.queryByText('Missing')).toBeNull()

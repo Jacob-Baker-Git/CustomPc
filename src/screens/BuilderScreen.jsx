@@ -19,7 +19,6 @@ import BuildSummary from '../components/BuildSummary'
 // chunk that is fetched when the tab is opened.
 const PerformanceScreen = lazy(() => import('../components/performance/PerformanceScreen'))
 import BuildWarnings from '../components/BuildWarnings'
-import AutoBuildButton from '../components/AutoBuildButton'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
@@ -221,7 +220,6 @@ export default function BuilderScreen() {
                 />
               </div>
               <div className="area-warnings"><BuildWarnings /></div>
-              <div className="area-autobuild"><AutoBuildButton /></div>
             </div>
           </div>
         ) : view === 'peripherals' ? (

@@ -1,26 +1,18 @@
-import { Cpu, ArrowRight, Bookmark } from 'lucide-react'
+import { Cpu, Gamepad2, ArrowRight, Bookmark } from 'lucide-react'
 import BoardBackground from './BoardBackground'
 import { COLUMN_2XL } from '../lib/boardGeometry'
 import RamBox from './RamBox'
 import SiteFooter from './SiteFooter'
-import useBuilderStore, { selTotalSpent } from '../store/useBuilderStore'
 import useSavedStore from '../store/useSavedStore'
-import { TELEMETRY } from '../lib/uiTokens'
 
-// The app's home. Previously this forked into "new PC" vs "upgrade", which led
-// to the same builder either way — so it now leads with continuing or starting
-// a build. Parts/glossary/help/feedback are deliberately footer-only: they were
+// The app's home: the Welcome screen's three paths (spec 2026-10-13) — enter
+// your parts and see what they get, build for a game, or open a saved build.
+// Parts/glossary/help/feedback are deliberately footer-only: they were
 // briefly promoted to a row of tiles, which said the same four things twice on
-// one screen and gave secondary pages the same visual weight as the one action
+// one screen and gave secondary pages the same visual weight as the actions
 // this page exists for.
-export default function MainMenu({ onStart, onResume, onSaved }) {
-  const selectedParts = useBuilderStore((s) => s.selectedParts)
-  const budget        = useBuilderStore((s) => s.budget)
-  const spent         = useBuilderStore(selTotalSpent)
-  const savedCount    = useSavedStore((s) => s.saved.length)
-
-  const partCount = Object.values(selectedParts).filter(Boolean).length
-  const hasBuild = partCount > 0
+export default function MainMenu({ onExplore, onTarget, onSaved }) {
+  const savedCount = useSavedStore((s) => s.saved.length)
 
   return (
     // No bg-ground here: BoardBackground is fixed at -z-10, so an opaque
@@ -78,34 +70,26 @@ export default function MainMenu({ onStart, onResume, onSaved }) {
             migration's invented ones (BUILD_1, SETUP_1) were rejected for
             exactly this reason. The silhouette carries the identity. */}
         <div className="rise rise-2 w-full flex flex-col gap-3">
-          {hasBuild && (
-            <button onClick={onResume} className="w-full text-left transition group hover:brightness-110">
-              <RamBox seated liftOnHover>
-                <div className="flex items-center gap-3">
-                  <div className="flex-1">
-                    <div className="text-xl font-semibold text-brass">Carry on building</div>
-                    <div className="text-sm text-muted mt-0.5">
-                      <span className={TELEMETRY}>{partCount}</span> part{partCount === 1 ? '' : 's'} chosen
-                      {budget > 0 && <> · <span className={TELEMETRY}>£{spent.toFixed(0)}</span> of <span className={TELEMETRY}>£{budget.toFixed(0)}</span></>}
-                    </div>
-                  </div>
-                  <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </div>
-              </RamBox>
-            </button>
-          )}
-
-          <button onClick={onStart} className="w-full text-left transition group hover:brightness-110">
+          <button onClick={onExplore} className="w-full text-left transition group hover:brightness-110">
             <RamBox seated liftOnHover>
               <div className="flex items-center gap-3">
                 <Cpu size={24} className="text-brass shrink-0" aria-hidden="true" />
                 <div className="flex-1">
-                  <div className={`text-xl font-semibold ${hasBuild ? 'text-ink group-hover:text-brass' : 'text-brass'}`}>
-                    {hasBuild ? 'Start a different build' : 'Start a build'}
-                  </div>
-                  <div className="text-sm text-muted mt-0.5">
-                    Set a budget, or enter the PC you already own to see what's worth upgrading.
-                  </div>
+                  <div className="text-xl font-semibold text-brass">What will my build get?</div>
+                  <div className="text-sm text-muted mt-0.5">Enter your PC parts and see the frame rates they get in a game.</div>
+                </div>
+                <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </div>
+            </RamBox>
+          </button>
+
+          <button onClick={onTarget} className="w-full text-left transition group hover:brightness-110">
+            <RamBox seated liftOnHover>
+              <div className="flex items-center gap-3">
+                <Gamepad2 size={24} className="text-brass shrink-0" aria-hidden="true" />
+                <div className="flex-1">
+                  <div className="text-xl font-semibold text-brass">Build for a game</div>
+                  <div className="text-sm text-muted mt-0.5">Pick a game, a frame rate and a budget, and get the build that hits it.</div>
                 </div>
                 <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </div>

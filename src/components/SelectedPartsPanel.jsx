@@ -6,9 +6,8 @@ import { countEssentials } from '../lib/recommendedOrder'
 import { TELEMETRY } from '../lib/uiTokens'
 import RamBox from './RamBox'
 
-// The Build tab's framing for CategoryList. It lives here rather than inside
-// CategoryList because SetupFlow renders that same list for "the PC I already
-// own", where a completeness counter would be meaningless.
+// The Build tab's framing for CategoryList: the completeness counter and the
+// spend, kept out of CategoryList so the list itself stays plain.
 export default function SelectedPartsPanel({ selectedParts, onSelectCategory, onDeselect }) {
   const { chosen, total, missing } = countEssentials(selectedParts)
   const spend = Object.values(selectedParts).reduce((sum, p) => sum + (p?.price ?? 0), 0)

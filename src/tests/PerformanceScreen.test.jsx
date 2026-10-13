@@ -179,7 +179,7 @@ describe('PerformanceScreen', () => {
 
   it('changes the build’s resolution from the picker beside the heading', async () => {
     // The complaint that started this: "you can't select that res is shown".
-    // setResolution had exactly one caller, in SetupFlow, with no UI after.
+    // setResolution had exactly one caller, in the old setup wizard, with no UI after.
     //
     // The control moved off the column headers when they took up sorting — two
     // jobs on one hit area meant neither could be discovered from the other.
