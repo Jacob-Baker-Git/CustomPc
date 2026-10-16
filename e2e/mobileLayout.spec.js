@@ -1,5 +1,5 @@
 import { test, expect, devices } from '@playwright/test'
-import { generateBuild } from './helpers.js'
+import { generateBuild, openAllGames } from './helpers.js'
 
 // Phone-width layout guards.
 //
@@ -363,8 +363,7 @@ test.describe('the frame-rate table fits the box it is in', () => {
     test.setTimeout(120_000)
     await generateBuild(page)
 
-    await page.getByRole('button', { name: /^Performance/i }).click()
-    await page.getByText('Every game at once').click()
+    await openAllGames(page)
     // Genre bars ship shut, so there are no game rows to measure until one opens.
     const genre = page.getByRole('button', { name: /shooters/i }).first()
     await expect(genre).toBeVisible({ timeout: 30_000 })
@@ -391,8 +390,7 @@ test.describe('the frame-rate table fits the box it is in', () => {
     await page.setViewportSize({ width: 375, height: 812 })
     await generateBuild(page)
 
-    await page.getByRole('button', { name: /^Performance/i }).click()
-    await page.getByText('Every game at once').click()
+    await openAllGames(page)
     const genre = page.getByRole('button', { name: /shooters/i }).first()
     await expect(genre).toBeVisible({ timeout: 30_000 })
     await genre.click()

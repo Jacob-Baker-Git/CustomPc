@@ -439,3 +439,28 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     expect(screen.getByRole('checkbox', { name: /only show real data/i })).not.toBeChecked()
   })
 })
+
+// Configurator redesign (spec 2026-10-16): the estimate answers first, and
+// every other section folds away with its headline numbers still showing.
+describe('PerformanceScreen — folded sections', () => {
+  beforeEach(() => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu, psu, cooler }, resolution: '1440p' })
+  })
+
+  it('folds every section under the estimate', () => {
+    const { container } = render(<PerformanceScreen />)
+    const summaries = [...container.querySelectorAll('details > summary')].map((s) => s.textContent)
+    expect(summaries).toHaveLength(4)
+    expect(summaries[0]).toMatch(/what's holding it back/i)
+    expect(summaries[1]).toMatch(/power and cooling.*W gaming/i)
+    expect(summaries[2]).toMatch(/the hardware.*(GB|no memory chosen)/i)
+    expect(summaries[3]).toMatch(/every game at once.*games answered/i)
+  })
+
+  it('shows the estimate before any fold', () => {
+    const { container } = render(<PerformanceScreen />)
+    const heading = screen.getByRole('heading', { name: /what will this build get/i })
+    const firstFold = container.querySelector('details')
+    expect(heading.compareDocumentPosition(firstFold) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+})

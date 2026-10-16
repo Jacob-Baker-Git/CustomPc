@@ -13,11 +13,13 @@ export const openTab = (page, name) =>
     .first()
     .click()
 
-// The all-games frame-rate table sits in a closed <details> under the game
-// estimator (spec 2026-10-13), so anything that reads it opens it first.
+// The all-games frame-rate table sits in a Fold under the game estimator. Folds
+// start open on desktop and shut on a phone (spec 2026-10-16), so open it only
+// if it is shut: a blind click would close it on desktop.
 export async function openAllGames(page) {
   await openTab(page, 'performance')
-  await page.getByText('Every game at once').click()
+  const fold = page.locator('details', { hasText: 'Every game at once' })
+  if (!(await fold.evaluate((d) => d.open))) await fold.locator('summary').click()
 }
 
 // Every spec needs a real build on screen before it can assert anything, and

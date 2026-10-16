@@ -42,7 +42,8 @@ async function openEveryGenre(page) {
 // died with "object null is not iterable" — a stack trace about iteration
 // protocol for what was really "the sentence I was parsing no longer exists".
 async function readFooter(page) {
-  const text = await page.getByText(/games answered/i).first().innerText()
+  // The footer line, not the fold headline above it, which also says "games answered".
+  const text = await page.getByText(/games? shown/i).first().innerText()
   const coverage = /(\d+)\s+of\s+(\d+)\s+games answered/i.exec(text)
   const drawn = /(\d+)\s+games?\s+shown/i.exec(text)
   expect(coverage, `the footer states coverage — read "${text}"`).not.toBeNull()

@@ -5,7 +5,8 @@ import { findPreset, fpsFor, gameById } from '../../lib/gameTargetBuilder'
 import { refreshFit } from '../../lib/refreshFit'
 import GameSettingsFields from '../GameSettingsFields'
 import { BASIS_LABEL, CAVEAT_TEXT } from './basisText'
-import { ELEV_GROUP, TELEMETRY } from '../../lib/uiTokens'
+import { TELEMETRY } from '../../lib/uiTokens'
+import Tag from '../ui/Tag'
 
 const LIMIT = { cpu: 'the processor', gpu: 'the graphics card', balanced: 'neither part; the two are balanced' }
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
@@ -68,8 +69,8 @@ export default function GameEstimate() {
   const caveats = row?.caveats?.map((c) => CAVEAT_TEXT[c]).filter(Boolean) ?? []
 
   return (
-    <section aria-labelledby="estimate-h" className={`rounded-xl ${ELEV_GROUP} border border-line p-4 sm:p-6`}>
-      <h2 id="estimate-h" className="font-display text-xl font-bold text-ink mb-4">What will this build get?</h2>
+    <section aria-labelledby="estimate-h" className="pt-2">
+      <h2 id="estimate-h" className="mb-4 font-wide text-2xl font-extrabold text-ink">What will this build get?</h2>
       <GameSettingsFields />
       <div className="mt-6" aria-live="polite">
         {!hasCore ? (
@@ -85,13 +86,14 @@ export default function GameEstimate() {
           <>
             <div className="grid gap-x-10 gap-y-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
               <div>
-                <p className="text-sm text-muted">{game.name} at {preset.label}, {RES_LABEL[resolution] ?? resolution}</p>
+                <Tag>{preset.label.toLowerCase()} / {RES_LABEL[resolution] ?? resolution}</Tag>
+                <p className="mt-1 font-wide text-xl font-extrabold text-ink">{game.name}</p>
                 <p data-testid="estimate-fps" className="mt-1 flex items-baseline gap-2 font-display text-ink">
                   {row.bound === 'upper' && <span className="text-base font-semibold text-muted">up to</span>}
                   {row.bound === 'upper' && ' '}
-                  <span className="text-7xl font-extrabold leading-none tabular-nums text-tech">{row.avgFps}</span>
+                  <span className="font-wide text-7xl font-black leading-none tabular-nums text-ink">{row.avgFps}</span>
                   {' '}
-                  <span className="text-2xl font-bold text-muted">fps</span>
+                  <span className="font-wide text-2xl font-bold text-muted">fps</span>
                 </p>
                 {row.lowFps != null && (
                   <p className="mt-2 text-sm text-muted">

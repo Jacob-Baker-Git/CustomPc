@@ -10,7 +10,6 @@ import perfModel from '../../data/perfModel.json'
 import perfGames from '../../data/perfGames.json'
 import gpuSpecs from '../../../data/specs/gpuSpecs.json'
 import cpuSpecs from '../../../data/specs/cpuSpecs.json'
-import { ELEV_GROUP } from '../../lib/uiTokens'
 import { PERF_CAVEAT } from '../../lib/siteContent'
 import StatPanel from './StatPanel'
 import StatRow from './StatRow'
@@ -20,10 +19,16 @@ import Section from './Section'
 import SummaryStrip from './SummaryStrip'
 import BasisBar from './BasisBar'
 import GameEstimate from './GameEstimate'
+import Fold from '../ui/Fold'
+import { perfFoldSummaries } from '../../lib/perfFoldSummaries'
 
 // One grid definition for every band, so the panels line up across sections
 // rather than each group inventing its own rhythm.
 const GRID = 'grid gap-3 sm:grid-cols-2 xl:grid-cols-3'
+
+// Fold headers pin just under the builder's sticky top bar and step row,
+// whose live height BuilderScreen publishes as --chrome-h.
+const STICKY = 'top-[var(--chrome-h,0px)]'
 
 const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${gb}GB`)
 
@@ -141,6 +146,12 @@ export default function PerformanceScreen() {
     return [...seen.values()]
   }, [allGameRows, report])
 
+  const folds = perfFoldSummaries({
+    report, power, memory,
+    answered: allGameRows.length,
+    total: report?.coverage?.gamesTotal ?? games.length,
+  })
+
   return (
     <div className="w-full max-w-2xl lg:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-3 pb-12">
       {/* The game estimate leads the tab and carries its heading; the
@@ -148,91 +159,10 @@ export default function PerformanceScreen() {
           to sit above it, repeating what the tab bar already says.) */}
       <GameEstimate />
 
-      <div className="mt-6">
-        <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
-      </div>
 
-      <div className="mt-3">
-        <BasisBar rows={allGameRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
-      </div>
-
-      {/* The all-games table is no longer the main view. Collapsed until the
-          user decides where it goes (spec 2026-10-13). */}
-      <details className="mt-3">
-        {/* On its own surface: this screen has no scrim, so bare text would
-            sit on the board (e2e/builderLegibility.spec.js). */}
-        <summary className={`cursor-pointer rounded-xl ${ELEV_GROUP} px-4 py-2 text-sm text-muted`}>Every game at once</summary>
-      <Section
-        title="Frame rates"
-        blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like. Open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."
-        action={hasCore ? <ResolutionPicker value={resolution} onChange={setResolution} /> : null}
-      >
-        {!hasCore ? (
-          <p className="text-xs text-muted leading-relaxed">
-            Pick a CPU and a graphics card to estimate frame rates.
-          </p>
-        ) : allGameRows.length === 0 ? (
-          <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
-            No benchmark data for these parts yet. The engine only reports figures it
-            can trace to a published measurement, so rather than estimate around the
-            gap it says nothing. Coverage grows as the benchmark corpus does — every
-            section below is computed from the parts themselves and does not depend
-            on it.
-          </p>
-        ) : gameRows.length === 0 ? (
-          // Reachable only through the filter — the branch above got us here, so
-          // the build HAS rows and the filter removed all of them. Common now
-          // that a chip no review has charted answers entirely from the prior.
-          // A table that silently empties reads as a broken page rather than as
-          // an answered question, so it says which it is.
-          <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
-            Nothing here was measured. Every figure for this build is worked out from
-            the parts&rsquo; specifications rather than from a benchmark of them, so
-            the filter leaves nothing to show. Untick it to see the estimates and what
-            each one is based on.
-          </p>
-        ) : (
-          <FrameRateTable
-            rows={gameRows}
-            target={resolution}
-            uncovered={uncovered}
-            onSelect={setSelectedGameId}
-          />
-        )}
-
-        <p className="mt-3 max-w-[80ch] text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
-        {report?.coverage?.gpuResolutionCopied && (
-          <p className="mt-1.5 max-w-[80ch] text-[11px] text-ok leading-relaxed">
-            No measurements exist for this card at {resolution}, so its index was carried
-            over from 1440p. Treat these as the shape of the result rather than the figure.
-          </p>
-        )}
-        {/* Both clauses count GAMES, and they used to count different things.
-            Coverage was in games while the second clause was in ROWS, because
-            the grid drew one card per game AND preset — the footer would claim
-            "19 of 22 games" under 43 cards, which reads as a counting bug. The
-            table draws one row per game, so the row unit is gone entirely.
-
-            Coverage is answered at ANY of the three resolutions, matching what
-            the table actually lists rather than the target column alone. */}
-        <p className="mt-1.5 text-[10px] text-muted">
-          Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
-          {hasCore && ` · ${allGameRows.length} of ${report.coverage.gamesTotal} games answered`}
-          {/* Counted off the SHOWN rows, unlike BasisBar's mix line directly
-              above the table. The two make opposite claims on purpose: the mix
-              line reports what the build has and must not be shrinkable by
-              hiding rows, while this one reports what is on screen and read
-              "60 results shown" above an empty grid until it followed the
-              filter. */}
-          {hasCore && ` · ${gameRows.length} game${gameRows.length === 1 ? '' : 's'} shown`}
-        </p>
-      </Section>
-      </details>
-
-      <Section
-        title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
-        blurb="Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract."
-      >
+      <Fold title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
+            summary={folds.holding} stickyTop={STICKY}>
+        <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract.</p>
         <div className="grid gap-3 sm:grid-cols-2">
           <StatPanel
             title="Bottleneck"
@@ -293,12 +223,10 @@ export default function PerformanceScreen() {
             <StatRow label="Storage" value={selectedParts.storage?.storageType} />
           </StatPanel>
         </div>
-      </Section>
+      </Fold>
 
-      <Section
-        title="Power and cooling"
-        blurb="What the build draws, whether the supply has room for it, and whether the cooler can shed it."
-      >
+      <Fold title="Power and cooling" summary={folds.power} stickyTop={STICKY}>
+        <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the build draws, whether the supply has room for it, and whether the cooler can shed it.</p>
       <div className={GRID}>
         <StatPanel
           title="Power"
@@ -353,12 +281,10 @@ export default function PerformanceScreen() {
           <StatRow label="Verdict" value={thermals.verdict} />
         </StatPanel>
       </div>
-      </Section>
+      </Fold>
 
-      <Section
-        title="The hardware"
-        blurb="What the parts can do on paper. Computed from published specifications, so this half works whether or not anyone has benchmarked your exact combination."
-      >
+      <Fold title="The hardware" summary={folds.hardware} stickyTop={STICKY}>
+        <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the parts can do on paper. Computed from published specifications, so this half works whether or not anyone has benchmarked your exact combination.</p>
       <div className={GRID}>
         <StatPanel
           title="Memory"
@@ -430,7 +356,82 @@ export default function PerformanceScreen() {
                      : undefined} />
         </StatPanel>
       </div>
+      </Fold>
+      <Fold title="Every game at once" summary={folds.games} stickyTop={STICKY}>
+      <div className="mt-6">
+        <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+      </div>
+
+      <div className="mt-3">
+        <BasisBar rows={allGameRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
+      </div>
+
+      <Section
+        title="Frame rates"
+        blurb="Every game the corpus covers, at all three resolutions, grouped by kind. One preset per game so the columns compare like with like. Open a row for its other presets, its 1% lows and what each figure is based on, or a column header to sort by it."
+        action={hasCore ? <ResolutionPicker value={resolution} onChange={setResolution} /> : null}
+      >
+        {!hasCore ? (
+          <p className="text-xs text-muted leading-relaxed">
+            Pick a CPU and a graphics card to estimate frame rates.
+          </p>
+        ) : allGameRows.length === 0 ? (
+          <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
+            No benchmark data for these parts yet. The engine only reports figures it
+            can trace to a published measurement, so rather than estimate around the
+            gap it says nothing. Coverage grows as the benchmark corpus does — every
+            section below is computed from the parts themselves and does not depend
+            on it.
+          </p>
+        ) : gameRows.length === 0 ? (
+          // Reachable only through the filter — the branch above got us here, so
+          // the build HAS rows and the filter removed all of them. Common now
+          // that a chip no review has charted answers entirely from the prior.
+          // A table that silently empties reads as a broken page rather than as
+          // an answered question, so it says which it is.
+          <p className="max-w-[68ch] text-xs text-muted leading-relaxed">
+            Nothing here was measured. Every figure for this build is worked out from
+            the parts&rsquo; specifications rather than from a benchmark of them, so
+            the filter leaves nothing to show. Untick it to see the estimates and what
+            each one is based on.
+          </p>
+        ) : (
+          <FrameRateTable
+            rows={gameRows}
+            target={resolution}
+            uncovered={uncovered}
+            onSelect={setSelectedGameId}
+          />
+        )}
+
+        <p className="mt-3 max-w-[80ch] text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
+        {report?.coverage?.gpuResolutionCopied && (
+          <p className="mt-1.5 max-w-[80ch] text-[11px] text-ok leading-relaxed">
+            No measurements exist for this card at {resolution}, so its index was carried
+            over from 1440p. Treat these as the shape of the result rather than the figure.
+          </p>
+        )}
+        {/* Both clauses count GAMES, and they used to count different things.
+            Coverage was in games while the second clause was in ROWS, because
+            the grid drew one card per game AND preset — the footer would claim
+            "19 of 22 games" under 43 cards, which reads as a counting bug. The
+            table draws one row per game, so the row unit is gone entirely.
+
+            Coverage is answered at ANY of the three resolutions, matching what
+            the table actually lists rather than the target column alone. */}
+        <p className="mt-1.5 text-[10px] text-muted">
+          Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
+          {hasCore && ` · ${allGameRows.length} of ${report.coverage.gamesTotal} games answered`}
+          {/* Counted off the SHOWN rows, unlike BasisBar's mix line directly
+              above the table. The two make opposite claims on purpose: the mix
+              line reports what the build has and must not be shrinkable by
+              hiding rows, while this one reports what is on screen and read
+              "60 results shown" above an empty grid until it followed the
+              filter. */}
+          {hasCore && ` · ${gameRows.length} game${gameRows.length === 1 ? '' : 's'} shown`}
+        </p>
       </Section>
+      </Fold>
     </div>
   )
 }
