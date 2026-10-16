@@ -1,6 +1,4 @@
 import { Cpu, Gamepad2, ArrowRight, Bookmark } from 'lucide-react'
-import BoardBackground from './BoardBackground'
-import { COLUMN_2XL } from '../lib/boardGeometry'
 import RamBox from './RamBox'
 import SiteFooter from './SiteFooter'
 import useSavedStore from '../store/useSavedStore'
@@ -15,11 +13,7 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
   const savedCount = useSavedStore((s) => s.saved.length)
 
   return (
-    // No bg-ground here: BoardBackground is fixed at -z-10, so an opaque
-    // background on this container would paint straight over it. `html` carries
-    // --ground for both, so nothing is left unpainted.
     <div className="relative min-h-screen flex flex-col items-center justify-center text-ink py-12">
-      <BoardBackground column={COLUMN_2XL} />
       <div className="relative z-10 flex flex-col items-center px-4 w-full max-w-2xl">
         {/* The hub had no landmark either — a screen reader's region menu had
             nothing to jump to. A flex-column <main> reproduces this wrapper's
