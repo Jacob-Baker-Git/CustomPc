@@ -8,13 +8,6 @@ import { ELEV_GROUP } from '../../lib/uiTokens'
 // heading carries the hierarchy so the panels inside can stay quiet, and the
 // eye gets three or four landmarks to navigate by instead of nine.
 //
-// ⚠️ THE SURFACE IS LOAD-BEARING, not decoration. BuilderScreen renders
-// <BoardBackground /> with no `column`, so this screen has NO SCRIM and the
-// board is drawn at full strength behind it. Opaque modules are the only thing
-// keeping text off it: 28 glyph runs on this tab were sitting on bare board
-// while this section was transparent, including its own heading and blurb.
-// e2e/builderLegibility.spec.js fails if it goes back.
-//
 // A hairline rule separated these bands while they were transparent. The gap
 // between two opaque cards does that job now, and uiTokens.js is explicit that
 // depth rather than borders carries hierarchy here — the border is gone rather

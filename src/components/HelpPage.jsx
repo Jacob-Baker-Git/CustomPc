@@ -1,18 +1,17 @@
+import Fold from './ui/Fold'
 import { MODEL_CREDITS, PRICE_SNAPSHOT, FPS_CAVEAT } from '../lib/siteContent'
 
-// These answers name what the buttons actually say. They previously described
-// "Build a new PC" and "Upgrade your PC" — two flows that had been renamed to
-// "Pick parts for me" and "I already have a PC" — and pointed at a "View on
-// Amazon" link that is labelled "Find Best Price". Copy that names the wrong
+// These answers name what the buttons actually say: the Welcome screen's
+// "What will my build get?" and "Build for a game", and the "Find Best Price"
+// links. They have named renamed buttons twice before. Copy that names the wrong
 // button is worse than no copy: it makes people think they are in the wrong place.
 const FAQS = [
-  { q: 'How do I start?', a: 'Three ways. "Pick parts for me" takes a budget and a use case and assembles a balanced, compatible build you can then change. "I already have a PC" lets you enter what you own to see what is holding it back. "Empty build" gives you a blank slate to choose every part yourself.' },
-  { q: 'Why does the same budget give me a different build?', a: 'Because the use case changes what the money should go on. A gaming build spends heavily on the graphics card; an office build spreads it across the processor, memory and storage instead. Pick the one closest to what you actually do.' },
+  { q: 'How do I start?', a: 'Two ways. "What will my build get?" lets you enter your parts and see the frame rates they get in a game. "Build for a game" takes a game, a target frame rate and a budget, and finds the build that gets there.' },
   { q: 'What does the CustomPC score mean?', a: 'Each part is scored out of 100 two ways: how well it suits your chosen task, and how well it works with the rest of the build: a strong graphics card held back by a weak processor, too little memory or an undersized power supply all lose points. The lower of the two is the part\'s score, and we say what is holding it back.' },
-  { q: 'How do I see upgrades?', a: 'Open the Build tab. Every part has an "Upgrade…" dropdown listing cheaper-first swaps that would raise its score, with the extra cost and, for gaming and streaming, the estimated frame-rate gain. "Best next move" at the top picks out the single change with the most impact.' },
+  { q: 'How do I see upgrades?', a: 'Open the Summary tab. Every part has an "Upgrade…" dropdown listing cheaper-first swaps that would raise its score, with the extra cost and, for gaming and streaming, the estimated frame-rate gain. "Best next move" at the top picks out the single change with the most impact.' },
   { q: 'Are the prices real?', a: `Prices are curated estimates from ${PRICE_SNAPSHOT}, shown so builds compare sensibly against each other rather than as live retail data. Use the "Find Best Price" links to check what a part actually costs today.` },
   { q: 'Are the frame rates real?', a: FPS_CAVEAT },
-  { q: 'What does "Discontinued" mean on a part?', a: 'It is a part that is no longer made: older graphics cards, processors and motherboards. They are listed so you can tell us what you already own in the upgrade flow, and so the parts browser is a useful reference. We never put them in a build we assemble for you, and a retailer link for one will mostly turn up used or third-party stock.' },
+  { q: 'What does "Discontinued" mean on a part?', a: 'It is a part that is no longer made: older graphics cards, processors and motherboards. They are listed so the parts browser is a useful reference. We never put them in a build we assemble for you, and a retailer link for one will mostly turn up used or third-party stock.' },
   { q: 'What does compatibility checking cover?', a: 'Processor and motherboard sockets, DDR4 versus DDR5 memory, graphics card length against the case, air-cooler height against the case and power supply headroom. Parts that would not fit stay visible but locked, with the reason. It catches common mistakes rather than every possible one, so check the manufacturer\'s specifications before you buy.' },
   { q: 'Do I need an account?', a: 'No. It is free with no sign-up. Your builds are saved in your own browser and never sent to us. See the Privacy page for what that means in practice.' },
   { q: 'What happens if I clear my browser data?', a: 'Your saved builds go with it, permanently. We hold no copy, so we cannot restore them. If you want to keep a build, use Share to get a link that encodes it; anyone with that link can open the same build.' },
@@ -22,22 +21,19 @@ const FAQS = [
 export default function HelpPage() {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-1">Help &amp; FAQ</h1>
-      <p className="text-muted text-sm mb-6">How the builder and upgrade tools work.</p>
-      <div className="space-y-3">
+      <h1 className="font-wide text-3xl font-extrabold mb-1">Help &amp; FAQ</h1>
+      <p className="text-muted text-sm mb-6">How the two paths, the score and the frame rates work.</p>
+      {/* Questions, so every answer starts shut, on desktop too. */}
+      <div className="border-b border-line">
         {FAQS.map((f) => (
-          <details key={f.q} className="group border border-line rounded-lg px-4 py-3">
-            <summary className="cursor-pointer text-ink font-medium list-none flex justify-between items-center">
-              {f.q}
-              <span className="text-muted group-open:rotate-180 transition-transform">⌄</span>
-            </summary>
-            <p className="text-sm text-muted mt-2 leading-relaxed">{f.a}</p>
-          </details>
+          <Fold key={f.q} title={f.q} level={2} openOnDesktop={false}>
+            <p className="max-w-[68ch] text-sm leading-relaxed text-muted">{f.a}</p>
+          </Fold>
         ))}
       </div>
 
       <section id="model-credits" className="mt-10 border-t border-line pt-6">
-        <h2 className="text-lg font-semibold mb-1">3D model credits</h2>
+        <h2 className="mb-1 font-wide text-lg font-extrabold">3D model credits</h2>
         <p className="text-sm text-muted mb-3">
           The parts in the 3D view use these models from Sketchfab, licensed under{' '}
           <a

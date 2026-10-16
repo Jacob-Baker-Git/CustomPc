@@ -95,8 +95,6 @@ function Motherboard({ v }) {
 function Ram({ v }) {
   return (
     <>
-      {/* The same silhouette as the RamBox panels, so the drawing and the
-          chrome around it are recognisably the same object. */}
       {Array.from({ length: 5 }, (_, i) => (
         <rect key={i} x={9 + i * 9.5} y="6" width="6" height="5" rx="1" fill={S.edge} />
       ))}

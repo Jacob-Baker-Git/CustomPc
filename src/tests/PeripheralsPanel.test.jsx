@@ -15,16 +15,24 @@ afterEach(() => {
   useCatalogStore.setState({ peripherals: peripheralsData })
 })
 
+// Each category shows its first four until asked (spec 2026-10-16). These tests
+// are about the full list, so they open every category first.
+function renderAll() {
+  const utils = render(<PeripheralsPanel />)
+  for (const b of screen.queryAllByRole('button', { name: /^Show all/ })) fireEvent.click(b)
+  return utils
+}
+
 describe('PeripheralsPanel', () => {
   it('lists peripherals grouped by category', () => {
-    render(<PeripheralsPanel />)
+    renderAll()
     expect(screen.getByRole('heading', { name: /monitor/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /keyboard/i })).toBeInTheDocument()
     expect(screen.getByText(monitor.name)).toBeInTheDocument()
   })
 
   it('selects on click and deselects on a second click', () => {
-    render(<PeripheralsPanel />)
+    renderAll()
     // Anchored so it can't also match the "More info about …" button.
     const card = screen.getByRole('button', { name: new RegExp(`^${monitor.name}`) })
     fireEvent.click(card)
@@ -34,7 +42,7 @@ describe('PeripheralsPanel', () => {
   })
 
   it('hides the spec sheet until the Info button is pressed', () => {
-    render(<PeripheralsPanel />)
+    renderAll()
     expect(screen.queryByText(/refresh rate/i)).not.toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: `More info about ${monitor.name}` }))
     expect(screen.getByText(/refresh rate/i)).toBeInTheDocument()
@@ -42,7 +50,7 @@ describe('PeripheralsPanel', () => {
   })
 
   it('opening info does not select the peripheral', () => {
-    render(<PeripheralsPanel />)
+    renderAll()
     fireEvent.click(screen.getByRole('button', { name: `More info about ${monitor.name}` }))
     expect(useBuilderStore.getState().selectedPeripherals.monitor).toBeUndefined()
   })
@@ -61,27 +69,27 @@ describe('PeripheralsPanel', () => {
     }
 
     it('shows every option before anything is filtered', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       expect(screen.getByText(cheapest('monitor').name)).toBeInTheDocument()
       expect(screen.getByText(dearest('monitor').name)).toBeInTheDocument()
     })
 
     it('opens from the Filters button and closes on Cancel', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       openPanel()
       fireEvent.click(screen.getByRole('button', { name: /^cancel$/i }))
       expect(screen.queryByRole('dialog')).toBeNull()
     })
 
     it('offers a brand filter, which the tab never had before', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       const panel = openPanel()
       expect(within(panel).getByRole('button', { name: 'Dell' })).toBeInTheDocument()
     })
 
     // The whole point of a panel over live chips: nothing moves until Apply.
     it('does not filter until Apply is pressed', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       openPanel()
       fireEvent.change(screen.getByLabelText(/maximum price/i), { target: { value: '100' } })
       expect(screen.getByText(dearest('monitor').name)).toBeInTheDocument()
@@ -92,7 +100,7 @@ describe('PeripheralsPanel', () => {
     })
 
     it('throws away the draft when cancelled', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       openPanel()
       fireEvent.change(screen.getByLabelText(/maximum price/i), { target: { value: '100' } })
       fireEvent.click(screen.getByRole('button', { name: /^cancel$/i }))
@@ -100,7 +108,7 @@ describe('PeripheralsPanel', () => {
     })
 
     it('filters by brand across every category at once', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       const panel = openPanel()
       fireEvent.click(within(panel).getByRole('button', { name: 'Dell' }))
       fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
@@ -113,7 +121,7 @@ describe('PeripheralsPanel', () => {
     })
 
     it('badges how many filters are active', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       const panel = openPanel()
       fireEvent.click(within(panel).getByRole('button', { name: 'Dell' }))
       fireEvent.change(screen.getByLabelText(/minimum price/i), { target: { value: '50' } })
@@ -123,7 +131,7 @@ describe('PeripheralsPanel', () => {
     })
 
     it('multi-select keeps both chosen resolutions', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       const panel = openPanel()
       fireEvent.click(within(panel).getByRole('button', { name: '1080p' }))
       fireEvent.click(within(panel).getByRole('button', { name: '4k' }))
@@ -136,7 +144,7 @@ describe('PeripheralsPanel', () => {
     })
 
     it('Clear filters resets the badge and the list', () => {
-      render(<PeripheralsPanel />)
+      renderAll()
       const panel = openPanel()
       fireEvent.click(within(panel).getByRole('button', { name: 'Dell' }))
       fireEvent.click(screen.getByRole('button', { name: /^apply$/i }))
@@ -149,25 +157,36 @@ describe('PeripheralsPanel', () => {
     })
   })
 
-  it('renders the summary strip as an unseated RamBox when nothing is picked', () => {
-    const { container } = render(<PeripheralsPanel />)
-    expect(container.querySelector('[data-ram-box]')).not.toBeNull()
-    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'false')
-  })
-
-  it('seats the summary strip once a peripheral is picked', () => {
-    const { container } = render(<PeripheralsPanel />)
-    fireEvent.click(screen.getByRole('button', { name: new RegExp(`^${monitor.name}`) }))
-    expect(container.querySelector('[data-ram-box]')).toHaveAttribute('data-seated', 'true')
-  })
-
   it('reports how many are chosen and what they cost', () => {
-    render(<PeripheralsPanel />)
-    expect(screen.getByText('0 / 4')).toBeInTheDocument()
+    renderAll()
+    const tag = () => screen.getByText(/of 4 chosen/).closest('span')
+    expect(tag()).toHaveTextContent('[ 0 of 4 chosen · £0 ]')
     fireEvent.click(screen.getByRole('button', { name: new RegExp(`^${monitor.name}`) }))
-    expect(screen.getByText('1 / 4')).toBeInTheDocument()
-    // Scoped to the header block: the card shows the same figure.
-    const subtotal = screen.getByText('Subtotal').parentElement
-    expect(subtotal).toHaveTextContent(`£${monitor.price.toFixed(2)}`)
+    expect(tag()).toHaveTextContent(`[ 1 of 4 chosen · £${monitor.price.toFixed(0)} ]`)
+  })
+})
+
+// Configurator redesign (spec 2026-10-16): four per category, the rest one tap
+// away, and never a cap on a search.
+describe('PeripheralsPanel — first four per category', () => {
+  const monitors = peripheralsData.filter((p) => p.category === 'monitor')
+  const monitorSection = () => screen.getByRole('heading', { name: /^monitor$/i }).closest('section')
+
+  it('shows four monitors and offers the rest', () => {
+    render(<PeripheralsPanel />)
+    const section = monitorSection()
+    expect(within(section).getAllByRole('button', { name: /^More info about/ })).toHaveLength(4)
+    fireEvent.click(within(section).getByRole('button', { name: `Show all ${monitors.length} monitors` }))
+    expect(within(section).getAllByRole('button', { name: /^More info about/ })).toHaveLength(monitors.length)
+  })
+
+  it('lifts the cap while searching', () => {
+    render(<PeripheralsPanel />)
+    fireEvent.change(screen.getByRole('searchbox', { name: /search peripherals/i }), { target: { value: 'a' } })
+    const section = monitorSection()
+    const matches = monitors.filter((p) => `${p.name} ${p.brand}`.toLowerCase().includes('a')).length
+    expect(matches).toBeGreaterThan(4)
+    expect(within(section).getAllByRole('button', { name: /^More info about/ })).toHaveLength(matches)
+    expect(within(section).queryByRole('button', { name: /^Show all/ })).toBeNull()
   })
 })

@@ -159,3 +159,12 @@ export function filterPeripherals(items, {
 
   return out.sort((SORTS[sort] ?? SORTS[DEFAULT_SORT]).cmp)
 }
+
+// A category's first few items, the rest one tap away (configurator redesign,
+// spec 2026-10-16). The picked item is always kept in view, in list order, and
+// nothing is capped while the caller says the list is filtered or expanded.
+export function firstFew(items, { pickedId, capped, limit = 4 }) {
+  if (!capped || items.length <= limit) return { visible: items, hidden: 0 }
+  const visible = items.filter((p, i) => i < limit || p.id === pickedId)
+  return { visible, hidden: items.length - visible.length }
+}

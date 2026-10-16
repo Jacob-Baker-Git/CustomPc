@@ -58,11 +58,11 @@ test('a shared build round-trips into a browser that has never seen it', async (
   // the codec is the thing under test, not the landing screen.
   expect(await selectedParts(page)).toEqual(before)
 
-  // The recipient lands straight in the builder on the shared build, with a
-  // note saying so. (It used to land on the entry menu, asking them to "carry
-  // on building" a build they had never started.)
-  await expect(page).toHaveURL(/localhost:5173\/?$/)
+  // The recipient lands straight in the builder on the shared build's Summary,
+  // with a note saying so. (It used to land on the entry menu, asking them to
+  // "carry on building" a build they had never started.)
+  await expect(page).toHaveURL(/localhost:5173\/#summary$/)
   await expect(page.getByRole('status').filter({ hasText: /opened a shared build/i })).toBeVisible()
-  await expect(page.getByText('/100')).toBeVisible()
+  await expect(page.getByText('/100').first()).toBeVisible()
   expect(await selectedParts(page)).toEqual(before)
 })

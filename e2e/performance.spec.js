@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { generateBuild, openTab } from './helpers.js'
+import { generateBuild, openAllGames } from './helpers.js'
 
 // The engine's one non-negotiable rule is that it never renders an unmeasured
 // number as measured. Six separate bugs have been that same failure wearing
@@ -42,7 +42,8 @@ async function openEveryGenre(page) {
 // died with "object null is not iterable" — a stack trace about iteration
 // protocol for what was really "the sentence I was parsing no longer exists".
 async function readFooter(page) {
-  const text = await page.getByText(/games answered/i).first().innerText()
+  // The footer line, not the fold headline above it, which also says "games answered".
+  const text = await page.getByText(/games? shown/i).first().innerText()
   const coverage = /(\d+)\s+of\s+(\d+)\s+games answered/i.exec(text)
   const drawn = /(\d+)\s+games?\s+shown/i.exec(text)
   expect(coverage, `the footer states coverage — read "${text}"`).not.toBeNull()
@@ -77,7 +78,7 @@ async function readBasisTally(page) {
 test.describe('the performance tab', () => {
   test.beforeEach(async ({ page }) => {
     await generateBuild(page)
-    await openTab(page, 'performance')
+    await openAllGames(page)
   })
 
   test('renders exactly as many frame rates as it claims coverage for', async ({ page }) => {
@@ -226,7 +227,7 @@ test.describe('the performance tab', () => {
       window.localStorage.setItem(key, JSON.stringify(store))
     })
     await page.reload()
-    await openTab(page, 'performance')
+    await openAllGames(page)
     await expect(page.getByText(/not yet calibrated across architectures/i)).toBeVisible()
     await expect(page.getByText(/fewer than three .* cards have been measured/i)).toBeVisible()
   })
@@ -241,7 +242,7 @@ test.describe('the performance tab', () => {
 test('every game row draws a genre mark at phone width', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await generateBuild(page)
-  await openTab(page, 'performance')
+  await openAllGames(page)
 
   // ⚠️ The table groups games by genre and every group starts COLLAPSED, so the
   // rows that carry the artwork are not mounted until one is opened. A version

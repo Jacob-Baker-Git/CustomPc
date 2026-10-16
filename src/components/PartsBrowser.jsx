@@ -68,7 +68,7 @@ export default function PartsBrowser() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-1">Parts browser</h1>
+      <h1 className="font-wide text-3xl font-extrabold mb-1">Parts browser</h1>
       <p className="text-muted text-sm mb-6">Explore every component in the catalogue.</p>
 
       <div className="flex flex-wrap gap-2 mb-3">
@@ -115,7 +115,7 @@ export default function PartsBrowser() {
           every row as before — a pure progressive enhancement. */}
       <ul className="space-y-2">
         {results.map((p) => (
-          <li key={p.id} className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2 [content-visibility:auto] [contain-intrinsic-size:auto_102px]">
+          <li key={p.id} className="flex items-center justify-between gap-3 border-t border-line px-0 py-2 [content-visibility:auto] [contain-intrinsic-size:auto_102px]">
             {/* The picture sits OUTSIDE PartName, not inside its anchor. A
                 crawler following this list should see the part's name as the
                 link text; wrapping a decorative drawing into the same anchor

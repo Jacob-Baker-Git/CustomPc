@@ -1,8 +1,5 @@
 import { render } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import StatPanel from '../components/performance/StatPanel'
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
 import Section from '../components/performance/Section'
 import { ELEV_GROUP } from '../lib/uiTokens'
 
@@ -31,31 +28,3 @@ describe('Section', () => {
   })
 })
 
-describe('StatPanel designators', () => {
-  it('shows the designator it is given', () => {
-    const { getByText } = render(<StatPanel title="Memory" designator="DIMM_A2">x</StatPanel>)
-    expect(getByText('DIMM_A2')).toBeInTheDocument()
-  })
-
-  it('shows nothing when the panel does not own one part', () => {
-    // "Bottleneck" is about the CPU/GPU relationship. Naming one of them would
-    // be a claim the panel does not make.
-    const { container } = render(<StatPanel title="Bottleneck">x</StatPanel>)
-    expect(container.querySelector('[data-designator]')).toBeNull()
-  })
-
-  it('only uses designators that name a real connector', () => {
-    // The value of a designator is that the same part is named the same way
-    // everywhere, so the vocabulary is fixed to PartSlot's CONNECTOR map. An
-    // invented one breaks exactly that, and reads as decoration.
-    const ALLOWED = ['CPU_1', 'CPU_FAN', 'DIMM_A2', 'PCIEX16_1', 'M2_1', 'ATX_PWR', 'BOARD']
-    // Read from the project root: under Vitest's transform `import.meta.url`
-    // is not a file: URL, so readFileSync rejects it outright.
-    const src = readFileSync(
-      resolve(process.cwd(), 'src/components/performance/PerformanceScreen.jsx'), 'utf8')
-    const used = [...src.matchAll(/designator="([^"]+)"/g)].map((m) => m[1])
-    // A control: an empty match set would make the loop below vacuous.
-    expect(used.length, 'no designators found to check').toBeGreaterThan(0)
-    for (const d of used) expect(ALLOWED, `${d} is not a real connector`).toContain(d)
-  })
-})

@@ -3,29 +3,15 @@ import { render, screen, within } from '@testing-library/react'
 import PartSlot from '../components/PartSlot'
 
 describe('PartSlot', () => {
-  it('names the connector a part plugs into, not the category', () => {
-    // The designator is what teaches a beginner WHERE the part goes. It is
-    // structure that encodes something true, not decoration.
-    render(<PartSlot category="gpu" />)
-    expect(screen.getByText('PCIEX16_1')).toBeInTheDocument()
-  })
-
-  it('says a slot is empty rather than leaving it blank', () => {
+  it('says what to choose rather than leaving an empty slot blank', () => {
     render(<PartSlot category="ram" />)
-    expect(screen.getByText(/empty/i)).toBeInTheDocument()
+    expect(screen.getByText(/choose a ram/i)).toBeInTheDocument()
   })
 
   it('names the seated part and drops the empty state', () => {
     render(<PartSlot category="ram" part={{ name: 'Vengeance 32GB' }} />)
     expect(screen.getByText('Vengeance 32GB')).toBeInTheDocument()
-    expect(screen.queryByText(/empty/i)).toBeNull()
-  })
-
-  it('rails a seated slot in gold and leaves an empty one unrailed', () => {
-    const { container: seated } = render(<PartSlot category="ram" part={{ name: 'X' }} />)
-    expect(seated.firstChild.className).toMatch(/shadow-\[inset/)
-    const { container: empty } = render(<PartSlot category="ram" />)
-    expect(empty.firstChild.className).not.toMatch(/shadow-\[inset/)
+    expect(screen.queryByText(/choose a ram/i)).toBeNull()
   })
 
   it('draws a flagged slot differently from a merely optional one', () => {
@@ -53,7 +39,7 @@ describe('PartSlot', () => {
     expect(within(empty).queryByRole('button', { name: /remove ram/i })).toBeNull()
   })
 
-  it('keeps a phone from crushing the part name: pad hidden, name wraps', () => {
+  it('keeps a phone from crushing the part name: it wraps', () => {
     // At 375px the row is a full-width list item, and the flex button's fixed
     // children (thumbnail, socket pad, price) left the flex-1 name just 55px —
     // "Intel Core i7-14700KF" (needs 137) rendered as "Inte…". The pad is
@@ -65,11 +51,6 @@ describe('PartSlot', () => {
     const { container } = render(
       <PartSlot category="ram" label="RAM" part={{ name: 'TeamGroup T-Force Vulcan DDR4-3600 32GB' }} />,
     )
-    const pad = container.querySelector('span[aria-hidden="true"].w-12')
-    expect(pad).not.toBeNull()
-    expect(pad.className).toMatch(/(?:^|\s)hidden(?:\s|$)/)
-    expect(pad.className).toMatch(/sm:block/)
-
     const name = within(container).getByText('TeamGroup T-Force Vulcan DDR4-3600 32GB')
     expect(name.className).toMatch(/line-clamp-2/) // wraps on a phone
     expect(name.className).toMatch(/sm:truncate/) // one line on desktop

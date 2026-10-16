@@ -50,7 +50,7 @@ export default function FeedbackPage() {
   if (status === 'done') {
     return (
       <div className="text-center py-16">
-        <h1 className="text-3xl font-bold mb-3">Thank you! 🙌</h1>
+        <h1 className="font-wide text-3xl font-extrabold mb-3">Thank you! 🙌</h1>
         <p className="text-muted">Your feedback helps make the builder better.</p>
       </div>
     )
@@ -61,7 +61,7 @@ export default function FeedbackPage() {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5">
       <div className="flex flex-col gap-[5px]">
-        <h1 className="text-3xl font-bold">Feedback</h1>
+        <h1 className="font-wide text-3xl font-extrabold">Feedback</h1>
         <p className="text-muted text-sm">Tell us what works, what doesn't, or what you'd like next.</p>
       </div>
 

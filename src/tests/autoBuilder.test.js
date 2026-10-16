@@ -193,8 +193,8 @@ describe('autoBuild budget discipline', () => {
   })
 
   // Below the floor there is no build to find, so overshooting is correct — it
-  // is how AutoBuildButton knows to say "raise the budget" instead of applying
-  // a rig with a part missing.
+  // is how a caller knows to say "raise the budget" instead of applying a rig
+  // with a part missing.
   it('overshoots visibly when the budget cannot buy a whole PC', () => {
     const build = buildForUseCase(300, 'gaming', partsData)
     expect(spendOf(build)).toBeGreaterThan(300)

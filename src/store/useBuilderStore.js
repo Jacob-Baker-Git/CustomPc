@@ -24,20 +24,33 @@ const useBuilderStore = create(persist((set, get) => ({
 
   setBudget: (amount) => set({ budget: amount }),
 
-  // Which screen the app is on: 'hub' | 'setup' | 'saved' | 'builder'.
+  // Which screen the app is on: 'hub' | 'target' | 'saved' | 'builder'.
   // Persisted, so a refresh returns you where you were. This used to be
   // derived from `budget > 0`, which meant leaving the builder had to zero
   // the budget and a returning visitor could never reach the hub at all.
   // Each change is a browser history entry ({ flow }), so Back moves between
-  // screens (flowHistory.js restores it). Entering the builder always opens
-  // the Build tab rather than whatever tab a previous visit left in the hash.
+  // screens (flowHistory.js restores it). Entering the builder opens the tab
+  // it is asked for (Build by default) rather than whatever tab a previous
+  // visit left in the hash.
   flow: 'hub',
-  setFlow: (flow) => {
+  setFlow: (flow, view = 'build') => {
     const same = get().flow === flow
     set({ flow })
     if (typeof window === 'undefined') return
-    window.history[same ? 'replaceState' : 'pushState']({ flow }, '', flow === 'builder' ? '/#build' : '/')
+    window.history[same ? 'replaceState' : 'pushState']({ flow }, '', flow === 'builder' ? `/#${view}` : '/')
   },
+
+  // Which of the Welcome screen's two paths the build came from. Drives the
+  // builder's "Next" button: entering parts walks every tab, a game-target
+  // build starts at Peripherals.
+  path: 'parts',
+  setPath: (path) => set({ path }),
+
+  // The game being asked about, shared by the Performance tab's estimator and
+  // the Build-for-a-game screen, so picking a game in one shows it in the other.
+  // Resolution is the store's existing `resolution`; budget is `budget`.
+  target: { gameId: null, presetKey: null, fps: 60 },
+  setTarget: (patch) => set((s) => ({ target: { ...s.target, ...patch } })),
 
   addPart: (category, part) =>
     set((state) => ({
@@ -97,13 +110,17 @@ const useBuilderStore = create(persist((set, get) => ({
     }),
 }), {
   name: BUILDER_STORAGE_KEY,
-  version: 2,
+  version: 3,
   // v1 had no persisted `flow` and inferred "in the builder" from a non-zero
-  // budget. Preserve that inference once, so anyone mid-build reopens in the
-  // builder rather than being dropped back on the hub.
+  // budget; that inference is preserved once, so anyone mid-build reopens in
+  // the builder. v2's `setup` screen no longer exists. Each step runs in turn,
+  // so a v1 visitor is carried all the way.
   migrate: (persisted, version) => {
-    if (version >= 2 || !persisted) return persisted
-    return { ...persisted, flow: (persisted.budget ?? 0) > 0 ? 'builder' : 'hub' }
+    if (!persisted) return persisted
+    let s = persisted
+    if (version < 2) s = { ...s, flow: (s.budget ?? 0) > 0 ? 'builder' : 'hub' }
+    if (s.flow === 'setup') s = { ...s, flow: 'hub' }
+    return s
   },
   partialize: (s) => ({
     budget: s.budget,
@@ -112,6 +129,8 @@ const useBuilderStore = create(persist((set, get) => ({
     resolution: s.resolution,
     useCase: s.useCase,
     flow: s.flow,
+    path: s.path,
+    target: s.target,
   }),
 }))
 

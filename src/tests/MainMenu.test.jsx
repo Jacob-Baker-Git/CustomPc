@@ -1,9 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent, within } from '@testing-library/react'
 import MainMenu from '../components/MainMenu'
+import perfGames from '../data/perfGames.json'
 import useBuilderStore from '../store/useBuilderStore'
-import useSavedStore from '../store/useSavedStore'
-import { BLADES } from '../lib/ramBoxGeometry'
 
 const noop = () => {}
 
@@ -18,7 +16,7 @@ beforeEach(() => {
 // than leaving the title tag to carry the meaning on its own.
 describe('the landing heading says what the page is', () => {
   const heading = () => {
-    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
     return screen.getByRole('heading', { level: 1 })
   }
 
@@ -52,196 +50,48 @@ describe('the landing heading says what the page is', () => {
 })
 
 describe('MainMenu', () => {
-  it('offers starting a build and the saved-builds library', () => {
-    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /saved builds/i })).toBeInTheDocument()
-  })
-
   it('reaches the content pages through the footer, and only through it', () => {
-    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
+    render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
     for (const href of ['/parts', '/glossary', '/help', '/feedback']) {
       // Exactly one route to each: the tile row that duplicated the footer is gone.
       expect(document.querySelectorAll(`a[href="${href}"]`)).toHaveLength(1)
     }
   })
 
-  it('hides the resume card when there is no build yet', () => {
-    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    expect(screen.queryByRole('button', { name: /carry on building/i })).toBeNull()
+  it('shows exactly three buttons, even with a build in progress', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: { id: 'x', price: 1 } } })
+    render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
+    // Inside <main> only: the footer is outside it and is not the Welcome's.
+    const names = within(screen.getByRole('main')).getAllByRole('button').map((b) => b.textContent)
+    expect(names).toHaveLength(3)
+    expect(names[0]).toMatch(/what will my build get?/i)
+    expect(names[1]).toMatch(/build for a game/i)
+    expect(names[2]).toMatch(/saved builds/i)
   })
 
-  it('shows the resume card with the build so far once parts are chosen', () => {
-    useBuilderStore.setState({
-      budget: 1500,
-      selectedParts: { cpu: { id: 'c', price: 200 }, gpu: { id: 'g', price: 400 } },
-    })
-    render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const resume = screen.getByRole('button', { name: /carry on building/i })
-    expect(resume).toHaveTextContent('2 parts chosen')
-    expect(resume).toHaveTextContent('£600')
-    expect(resume).toHaveTextContent('£1500')
-  })
-
-  it('calls the right handler for each option', () => {
-    const onStart = vi.fn()
-    const onResume = vi.fn()
-    const onSaved = vi.fn()
-    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
-    render(<MainMenu onStart={onStart} onResume={onResume} onSaved={onSaved} />)
-    fireEvent.click(screen.getByRole('button', { name: /carry on building/i }))
-    fireEvent.click(screen.getByRole('button', { name: /start a different build/i }))
+  it('wires each button to its path', () => {
+    const onExplore = vi.fn(), onTarget = vi.fn(), onSaved = vi.fn()
+    render(<MainMenu onExplore={onExplore} onTarget={onTarget} onSaved={onSaved} />)
+    fireEvent.click(screen.getByRole('button', { name: /what will my build get/i }))
+    fireEvent.click(screen.getByRole('button', { name: /build for a game/i }))
     fireEvent.click(screen.getByRole('button', { name: /saved builds/i }))
-    expect(onResume).toHaveBeenCalledTimes(1)
-    expect(onStart).toHaveBeenCalledTimes(1)
-    expect(onSaved).toHaveBeenCalledTimes(1)
+    expect([onExplore, onTarget, onSaved].map((f) => f.mock.calls.length)).toEqual([1, 1, 1])
   })
 })
 
-// A bank of RAM, all of it seated, which lifts out of its slot on hover.
-//
-// ⚠️ Seating here is UNCONDITIONAL, and that is deliberate. These briefly
-// tracked content — carry-on seated, saved-builds only once something was in
-// it, start-a-build permanently empty — which encoded real state but left a
-// first-time visitor looking at a screen of dead hardware. If a test here ever
-// starts asserting 'false', check that against the reversal before "fixing" it.
-describe('the entry cards are seated RAM that unseats on hover', () => {
-  const boxes = (c) => [...c.querySelectorAll('[data-ram-box]')]
-  const seatedOf = (c) => boxes(c).map((b) => b.getAttribute('data-seated'))
 
-  beforeEach(() => {
-    useSavedStore.setState({ saved: [] })
+// Configurator redesign (spec 2026-10-16): the PC is the picture, and the
+// benchmark coverage is the one bracket tag.
+describe('the Welcome screen in the configurator look', () => {
+  it('shows the PC picture', () => {
+    const { container } = render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
+    const img = container.querySelector('img[src="/img/welcome-pc.webp"]')
+    expect(img).not.toBeNull()
+    expect(img).toHaveAttribute('alt', '')
   })
 
-  it('draws every option as a slot', () => {
-    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    expect(boxes(container)).toHaveLength(3)
-    // Derived from BLADES rather than hardcoded at 15: the blade count is a
-    // tuned decision that lives in ramBoxGeometry, and pinning it here a second
-    // time would fail this test for a change that has nothing to do with the
-    // entry screen.
-    for (const box of boxes(container)) {
-      expect(box.querySelectorAll('[data-blade]')).toHaveLength(BLADES.length)
-    }
-  })
-
-  it('seats every slot, even for a first-time visitor', () => {
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    expect(seatedOf(container)).toEqual(['true', 'true'])
-  })
-
-  it('seats every slot once a build exists too', () => {
-    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    // Order is carry-on, start, saved.
-    expect(seatedOf(container)).toEqual(['true', 'true', 'true'])
-  })
-
-  it('unseats a slot on hover and seats it again on leave', async () => {
-    const user = userEvent.setup()
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const box = container.querySelector('[data-ram-box]')
-
-    expect(box).toHaveAttribute('data-lifted', 'false')
-    expect(box.querySelector('[data-contacts]')).toHaveAttribute('data-contacts', 'live')
-
-    await user.hover(box)
-    expect(box).toHaveAttribute('data-lifted', 'true')
-    // The stick is out of its slot, so the connection breaks — the bar stays
-    // lit, because that tracks attention rather than contact.
-    expect(box.querySelector('[data-contacts]')).toHaveAttribute('data-contacts', 'cold')
-    expect(box.querySelector('[data-bar]')).toHaveAttribute('data-bar', 'lit')
-
-    await user.unhover(box)
-    expect(box).toHaveAttribute('data-lifted', 'false')
-    expect(box.querySelector('[data-contacts]')).toHaveAttribute('data-contacts', 'live')
-  })
-
-  it('lifts on keyboard focus as well as hover', () => {
-    // ⚠️ Focus the BUTTON, not the box. The button WRAPS the box, so focus
-    // lands on an ancestor and does not travel downward — an onFocus prop on
-    // the box's own root fires never. Focusing the box here instead would make
-    // this test pass against a component that is broken for every keyboard
-    // user, which is exactly what it did before.
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const box = container.querySelector('[data-ram-box]')
-    const button = box.closest('button')
-
-    // fireEvent rather than button.focus(): the listener is a native one, so
-    // the state it sets lands outside React's act() environment and the DOM
-    // has not caught up by the time the assertion runs. Same event, same
-    // element, same listener — e2e/ramBox.spec.js drives a real .focus().
-    fireEvent.focus(button)
-    expect(box).toHaveAttribute('data-lifted', 'true')
-    expect(box.querySelector('[data-contacts]')).toHaveAttribute('data-contacts', 'cold')
-
-    fireEvent.blur(button)
-    expect(box).toHaveAttribute('data-lifted', 'false')
-  })
-
-  it('keeps a socket under every liftable slot without it costing height', () => {
-    // Rendering the socket only while lifted would add 15px to the flow on
-    // every hover and shove the page around, which reads as a glitch rather
-    // than a mechanism. It sits behind the stick instead.
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const sockets = container.querySelectorAll('[data-socket]')
-    // One per box, counted off the boxes rather than fixed at 2 — otherwise
-    // adding a fourth card silently leaves it socketless and green.
-    expect(sockets).toHaveLength(boxes(container).length)
-    for (const s of sockets) expect(s.className).toMatch(/\babsolute\b/)
-  })
-
-  it('lifts only the slot under the pointer', () => {
-    // The state belongs to each box. If it were ever hoisted into MainMenu, or
-    // driven by a CSS group on a shared ancestor, hovering one card would lift
-    // the whole bank — and every other test here would still pass, because they
-    // all look at one box at a time.
-    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const [first, ...rest] = boxes(container)
-
-    fireEvent.mouseEnter(first)
-    expect(first).toHaveAttribute('data-lifted', 'true')
-    for (const other of rest) expect(other).toHaveAttribute('data-lifted', 'false')
-  })
-
-  it('stays lifted while focused even after the pointer leaves', () => {
-    // Pointer and focus are tracked separately for exactly this case. With one
-    // shared flag, tabbing to a card and then sweeping the mouse across it and
-    // away drops it back into its slot with the focus ring still on it.
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const box = container.querySelector('[data-ram-box]')
-    const button = box.closest('button')
-
-    fireEvent.focus(button)
-    fireEvent.mouseEnter(box)
-    fireEvent.mouseLeave(box)
-    expect(box).toHaveAttribute('data-lifted', 'true')
-
-    fireEvent.blur(button)
-    expect(box).toHaveAttribute('data-lifted', 'false')
-  })
-
-  it('carries no designators', () => {
-    // A designator names a real slot holding one swappable part. These are
-    // navigation, and the first migration's invented ones were rejected for
-    // exactly this reason — the silhouette carries the identity.
-    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } } })
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    // Not `.font-mono`: TELEMETRY wears that too, so the part count would fail
-    // this for the wrong reason.
-    expect(container.querySelector('[data-designator]')).toBeNull()
-  })
-
-  it('lands every slot connected, not cold', () => {
-    // The reversal in full: this asserted ['cold','cold'] while seating tracked
-    // content, which is what a first-time visitor's screen of dead hardware
-    // looked like from here.
-    const { container } = render(<MainMenu onStart={noop} onResume={noop} onSaved={noop} />)
-    const states = [...container.querySelectorAll('[data-contacts]')].map((el) =>
-      el.getAttribute('data-contacts'),
-    )
-    expect(states).toEqual(['live', 'live'])
+  it('states the benchmark coverage from the games list', () => {
+    render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
+    expect(screen.getByText(`${perfGames.length}`).closest('span')).toHaveTextContent(`[ ${perfGames.length} games benchmarked ]`)
   })
 })

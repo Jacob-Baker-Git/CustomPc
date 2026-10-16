@@ -44,7 +44,7 @@ export default function PartPage({ partId, onNavigate }) {
   if (!part) {
     return (
       <div>
-        <h1 className="text-3xl font-bold mb-2">Part not found</h1>
+        <h1 className="font-wide text-3xl font-extrabold mb-2">Part not found</h1>
         <p className="text-muted text-sm mb-6">
           Nothing in the catalogue has the id <span className="font-mono text-ink">{partId}</span>.
           It may have been renamed or withdrawn.
@@ -75,7 +75,7 @@ export default function PartPage({ partId, onNavigate }) {
         <span className="capitalize">{CATEGORY_LABEL[part.category] ?? part.category}</span>
       </nav>
 
-      <h1 className="text-3xl font-bold mb-1">{part.name}</h1>
+      <h1 className="font-wide text-3xl font-extrabold mb-1">{part.name}</h1>
       <p className="text-muted text-sm">
         {CATEGORY_LABEL[part.category] ?? part.category} · {part.brand}
         {part.legacy && (
@@ -117,7 +117,7 @@ export default function PartPage({ partId, onNavigate }) {
         <Section title="What it works with">
           <dl className="space-y-2">
             {notes.map(({ label, detail }) => (
-              <div key={label} className="border border-line rounded-lg px-3 py-2">
+              <div key={label} className="border-t border-line py-2">
                 <dt className="text-xs uppercase tracking-wide text-muted">{label}</dt>
                 <dd className="text-sm text-ink mt-0.5">{detail}</dd>
               </div>
@@ -173,7 +173,7 @@ export default function PartPage({ partId, onNavigate }) {
                     makes 540 pages worth having rather than 540 orphans. */}
                 <a
                   href={partPath(p)}
-                  className="flex items-center justify-between gap-3 border border-line rounded-lg px-3 py-2 hover:border-brass transition-colors group"
+                  className="flex items-center justify-between gap-3 border-t border-line py-2 hover:border-brass transition-colors group"
                 >
                   <span className="min-w-0">
                     <span className="block text-sm text-ink truncate group-hover:text-brass">{p.name}</span>

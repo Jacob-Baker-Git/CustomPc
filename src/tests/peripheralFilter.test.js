@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import peripheralsData from '../data/peripheralsData.json'
 import {
   filterPeripherals, specValues, specLabel, SORTS,
-  brandValues, refreshBandsFor, inRefreshBand, REFRESH_BANDS,
+  brandValues, refreshBandsFor, inRefreshBand, REFRESH_BANDS, firstFew,
 } from '../lib/peripheralFilter'
 import { priceBands } from '../lib/priceBands'
 
@@ -144,5 +144,33 @@ describe('advanced peripheral filters', () => {
     // the brand filter — a good check that the clauses AND rather than fight.
     const brandOnly = filterPeripherals(monitors, { category: 'monitor', brands: [brand] })
     expect(out.map((p) => p.id)).toEqual(brandOnly.map((p) => p.id))
+  })
+})
+
+// Configurator redesign (spec 2026-10-16): a category shows its first four, the
+// rest one tap away. A picked item and an active search are never hidden.
+describe('firstFew', () => {
+  const items = Array.from({ length: 36 }, (_, i) => ({ id: `m${i}` }))
+
+  it('shows four and counts the rest', () => {
+    const { visible, hidden } = firstFew(items, { capped: true })
+    expect(visible.map((p) => p.id)).toEqual(['m0', 'm1', 'm2', 'm3'])
+    expect(hidden).toBe(32)
+  })
+
+  it('keeps the picked item visible even outside the first four', () => {
+    const { visible, hidden } = firstFew(items, { capped: true, pickedId: 'm20' })
+    expect(visible.map((p) => p.id)).toEqual(['m0', 'm1', 'm2', 'm3', 'm20'])
+    expect(hidden).toBe(31)
+  })
+
+  it('shows everything when not capped', () => {
+    const { visible, hidden } = firstFew(items, { capped: false })
+    expect(visible).toHaveLength(36)
+    expect(hidden).toBe(0)
+  })
+
+  it('does not count a short list as hidden', () => {
+    expect(firstFew(items.slice(0, 3), { capped: true })).toEqual({ visible: items.slice(0, 3), hidden: 0 })
   })
 })

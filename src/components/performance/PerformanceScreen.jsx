@@ -10,7 +10,6 @@ import perfModel from '../../data/perfModel.json'
 import perfGames from '../../data/perfGames.json'
 import gpuSpecs from '../../../data/specs/gpuSpecs.json'
 import cpuSpecs from '../../../data/specs/cpuSpecs.json'
-import { ELEV_GROUP } from '../../lib/uiTokens'
 import { PERF_CAVEAT } from '../../lib/siteContent'
 import StatPanel from './StatPanel'
 import StatRow from './StatRow'
@@ -19,6 +18,9 @@ import ResolutionPicker from './ResolutionPicker'
 import Section from './Section'
 import SummaryStrip from './SummaryStrip'
 import BasisBar from './BasisBar'
+import GameEstimate from './GameEstimate'
+import Fold from '../ui/Fold'
+import { perfFoldSummaries } from '../../lib/perfFoldSummaries'
 
 // One grid definition for every band, so the panels line up across sections
 // rather than each group inventing its own rhythm.
@@ -140,20 +142,221 @@ export default function PerformanceScreen() {
     return [...seen.values()]
   }, [allGameRows, report])
 
+  const folds = perfFoldSummaries({
+    report, power, memory,
+    answered: allGameRows.length,
+    total: report?.coverage?.gamesTotal ?? games.length,
+  })
+
   return (
     <div className="w-full max-w-2xl lg:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-3 pb-12">
-      {/* On its own surface for the same reason the sections are: this screen
-          has no scrim, so a bare heading sits directly on the board. */}
-      <header className={`mb-4 rounded-xl ${ELEV_GROUP} p-4 sm:p-5`}>
-        <h2 className="text-lg text-ink">Performance</h2>
-        <p className="mt-1 max-w-[80ch] text-xs text-muted leading-relaxed">
-          How this build behaves under load: what it draws, what it can shed, and
-          what it renders. Everything except the frame rates is computed from the
-          parts themselves.
-        </p>
-      </header>
+      {/* The game estimate leads the tab and carries its heading; the
+          tab-wide readouts follow. (A separate "Performance" header panel used
+          to sit above it, repeating what the tab bar already says.) */}
+      <GameEstimate />
 
-      <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+
+      <Fold title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
+            summary={folds.holding}>
+        <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract.</p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <StatPanel
+            title="Bottleneck"
+            subtitle={selectedGame
+              ? `${selectedGame.name} at ${selectedGame.preset}.`
+              : report?.bottleneck
+                ? report.bottleneck.verdict
+                : 'Needs benchmark data before it can say anything.'}
+            // The build-wide upgrade advice is drawn from every game with a
+            // split, so it does not belong under one game's heading.
+            footnote={selectedGame ? undefined : report?.bottleneck?.nextUpgrade?.reason}
+          >
+            {selectedRow ? (
+              <>
+                <StatRow label="Limited by"
+                         value={selectedRow.limitedBy === 'cpu' ? 'processor'
+                           : selectedRow.limitedBy === 'gpu' ? 'graphics' : 'balanced'}
+                         tone={selectedRow.limitedBy === 'cpu' ? 'bad' : 'good'} />
+                <StatRow label="Card could do" value={selectedRow.gpuOnlyFps} unit="fps" />
+                <StatRow label="Chip could feed" value={selectedRow.cpuOnlyFps} unit="fps" />
+              </>
+            ) : selectedGame ? (
+              // ⚠️ The normal case — 54 of 56 rows have no attribution, because
+              // a split needs a fitted CPU constant and almost no game has one.
+              // Falling through to the build-wide figure here would put another
+              // game's measurement under this game's name.
+              <StatRow label="Status" value="split not modelled for this game"
+                       hint="No review has measured processor performance in this game, so there is nothing to attribute the frame to." />
+            ) : report?.bottleneck ? (
+              <>
+                <StatRow label="Leaning"
+                         value={report.bottleneck.leaning === 'cpu' ? 'processor'
+                           : report.bottleneck.leaning === 'gpu' ? 'graphics' : 'balanced'}
+                         tone={report.bottleneck.leaning === 'cpu' ? 'bad' : 'good'} />
+                <StatRow label="Processor-limited" value={report.bottleneck.cpuLedGames}
+                         unit={`of ${report.bottleneck.gamesConsidered}`} />
+                <StatRow label="Graphics-limited" value={report.bottleneck.gpuLedGames}
+                         unit={`of ${report.bottleneck.gamesConsidered}`} />
+                <StatRow label="Worst case" value={report.bottleneck.worstCase.name} />
+                <StatRow label="Lost to the weaker part"
+                         value={report.bottleneck.worstCase.lostToWeakerSide} unit="%"
+                         hint={`${report.bottleneck.worstCase.name}: card could do ${report.bottleneck.worstCase.gpuOnlyFps}, chip could feed ${report.bottleneck.worstCase.cpuOnlyFps}`}
+                         tone={report.bottleneck.worstCase.lostToWeakerSide > 25 ? 'bad' : 'ok'} />
+                <StatRow label="Upgrade next"
+                         value={report.bottleneck.nextUpgrade.category === 'cpu' ? 'processor' : 'graphics card'} />
+              </>
+            ) : (
+              <StatRow label="Status" value="needs benchmark data" />
+            )}
+          </StatPanel>
+
+          <StatPanel title="The parts that decide it">
+            <StatRow label="Processor" value={cpu?.name} />
+            <StatRow label="Cores" value={cpu?.specs?.cores} />
+            <StatRow label="Boost clock" value={cpu?.specs?.boostClock} unit="GHz" />
+            <StatRow label="Graphics" value={gpu?.name} />
+            <StatRow label="VRAM" value={gpu?.specs?.vram} unit="GB" />
+            <StatRow label="Storage" value={selectedParts.storage?.storageType} />
+          </StatPanel>
+        </div>
+      </Fold>
+
+      <Fold title="Power and cooling" summary={folds.power}>
+        <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the build draws, whether the supply has room for it, and whether the cooler can shed it.</p>
+      <div className={GRID}>
+        <StatPanel
+          title="Power"
+          subtitle={hasCore
+            ? 'Gaming draw is weighted by which part is setting the pace: a CPU-limited frame leaves the graphics card waiting, and a waiting card draws less.'
+            : 'Add a CPU and graphics card for a load-weighted figure.'}
+          footnote="Estimated from each part's rated draw. Real consumption varies with the game, the settings and the silicon."
+        >
+          <StatRow label="Idle" value={power.idleW} unit="W" />
+          <StatRow label="Gaming" value={power.gamingW} unit="W" />
+          <StatRow label="Peak" value={power.peakW} unit="W"
+                   hint="What a transient spike can reach" />
+          <StatRow label="From the wall" value={power.fromWallW} unit="W"
+                   hint={power.efficiencyTier ? `at 80+ ${power.efficiencyTier}` : 'assuming an unrated supply'} />
+        </StatPanel>
+
+        <StatPanel
+          title="Power supply"
+          subtitle={power.psuWattage
+            ? 'Headroom matters less for average draw than for the split-second spikes a graphics card pulls, and those are what trip a supply into shutting down.'
+            : 'No power supply selected yet.'}
+        >
+          <StatRow label="Fitted" value={power.psuWattage} unit="W" />
+          <StatRow label="Recommended" value={power.recommendedPsuW} unit="W"
+                   hint="Peak plus 35% for transients" />
+          <StatRow
+            label="Headroom over peak"
+            value={power.psuHeadroomPct == null ? null : `${power.psuHeadroomPct > 0 ? '+' : ''}${power.psuHeadroomPct}`}
+            unit="%"
+            tone={power.psuHeadroomPct == null ? 'ink'
+              : power.psuHeadroomPct < 15 ? 'bad' : power.psuHeadroomPct < 30 ? 'ok' : 'good'}
+          />
+          <StatRow label="Load while gaming" value={power.loadPointPct} unit="%"
+                   hint="Supplies are quietest and most efficient near half load" />
+        </StatPanel>
+
+        <StatPanel
+          title="Cooling"
+          subtitle={thermals.headroomPct == null
+            ? 'Needs a CPU and a cooler with a known size.'
+            : 'Nothing gets damaged when a cooler is undersized: the CPU drops its clocks to stay in range, so you lose boost speed during long loads and gain fan noise.'}
+        >
+          <StatRow label="CPU heat output" value={thermals.cpuHeatW} unit="W" hint="at full boost" />
+          <StatRow label="Cooler capacity" value={thermals.capacityW} unit="W" />
+          <StatRow
+            label="Headroom"
+            value={thermals.headroomPct == null ? null : `${thermals.headroomPct > 0 ? '+' : ''}${thermals.headroomPct}`}
+            unit="%"
+            tone={thermals.headroomPct == null ? 'ink'
+              : thermals.headroomPct < 0 ? 'bad' : thermals.headroomPct < 40 ? 'ok' : 'good'}
+          />
+          <StatRow label="Verdict" value={thermals.verdict} />
+        </StatPanel>
+      </div>
+      </Fold>
+
+      <Fold title="The hardware" summary={folds.hardware}>
+        <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the parts can do on paper. Computed from published specifications, so this half works whether or not anyone has benchmarked your exact combination.</p>
+      <div className={GRID}>
+        <StatPanel
+          title="Memory"
+          subtitle={memory
+            ? 'Memory speed and channel count act on the CPU side of a frame, so they show up in the 1% lows more than the average.'
+            : 'No memory selected yet.'}
+        >
+          <StatRow label="Capacity" value={memory?.capacityGb ? capacity(memory.capacityGb) : null} />
+          <StatRow label="Type" value={memory?.type} />
+          <StatRow label="Speed" value={memory?.speed} unit="MT/s" />
+          <StatRow
+            label="Channels"
+            value={memory?.channels}
+            tone={memory?.channels === 'single' ? 'bad' : memory?.channels === 'dual' ? 'good' : 'ink'}
+          />
+          <StatRow label="Platform sweet spot" value={memory?.baseline} unit="MT/s" />
+          {memory?.notes?.map((n) => (
+            <p key={n.text} className={`mt-2 text-[11px] leading-relaxed ${n.severity === 'bad' ? 'text-bad' : 'text-muted'}`}>
+              <strong className="font-normal">{n.text}.</strong> {n.detail}
+            </p>
+          ))}
+        </StatPanel>
+
+        <StatPanel
+          title="Graphics capability"
+          subtitle={gpuCap.basis === 'spec-derived'
+            ? `Computed from published specifications, indexed against an RTX 4090 at 100.`
+            : 'No published specifications transcribed for this card yet.'}
+          footnote={gpuCap.basis !== 'spec-derived'
+            ? undefined
+            : gpuCap.archCalibrated
+              // The vendors still count different things; what has changed is that
+              // the corpus now says by how much, so the figure is corrected rather
+              // than merely caveated. The spread is quoted because the correction
+              // is an average over cards that do not all agree — on some
+              // architectures it is wide enough to matter.
+              ? `Calibrated across architectures from ${gpuCap.archParts} measured ${gpuCap.architecture} cards, so this is comparable with a rival brand. The correction (x${gpuCap.archEfficiency}) is a fitted average and those cards spread ${gpuCap.archSpreadPct}% around it, so read a gap narrower than that as noise, not a ranking.`
+              : `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures: ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things. Fewer than three ${gpuCap.architecture} cards have been measured, so comparing this figure with a rival brand still needs data we do not have.`}
+        >
+          <StatRow label="Capability index" value={gpuCap.index}
+                   hint={gpuCap.archCalibrated ? 'comparable across brands' : gpuCap.architecture ? `vs other ${gpuCap.architecture} cards` : undefined} />
+          <StatRow label="Compute" value={gpuCap.tflops} unit="TFLOPS"
+                   hint="Theoretical FP32 peak" />
+          <StatRow label="Memory bandwidth" value={gpuCap.bandwidthGbs} unit="GB/s" />
+          <StatRow label={gpuCap.shaderUnit ? gpuCap.shaderUnit.replace(/^./, (m) => m.toUpperCase()) : 'Shaders'}
+                   value={gpuSpecs.gpus?.[gpu?.id]?.shaders} />
+          <StatRow label="Architecture" value={gpuCap.architecture} />
+        </StatPanel>
+
+        <StatPanel
+          title="Processor capability"
+          subtitle={cpuCap.basis === 'spec-derived'
+            ? 'Clock leads, cores saturate at eight because games cannot use more, and cache counts for more than its size suggests.'
+            : 'No published specifications transcribed for this processor yet.'}
+          footnote={cpuCap.cacheBasis === 'single-sourced'
+            ? 'The cache figure comes from a single source with nothing to corroborate it, unlike the boost clock, which matches the catalogue independently.'
+            : undefined}
+        >
+          <StatRow label="Capability index" value={cpuCap.index} />
+          <StatRow label="Boost clock" value={cpuCap.boostGhz} unit="GHz" />
+          <StatRow label="Cores" value={cpuCap.cores}
+                   hint={cpuCap.cores > 8 ? 'games use about eight' : undefined} />
+          {/* The reachable figure, not the package total. On a multi-chiplet
+              part those differ and the spec sheet quotes the larger one, so
+              say which this is rather than look like a typo. */}
+          <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB"
+                   hint={cpuCap.l3PackageMb > cpuCap.l3Mb
+                     ? `per chiplet, of ${cpuCap.l3PackageMb} MB total, and L3 is not shared between chiplets`
+                     : undefined} />
+        </StatPanel>
+      </div>
+      </Fold>
+      <Fold title="Every game at once" summary={folds.games}>
+      <div className="mt-6">
+        <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
+      </div>
 
       <div className="mt-3">
         <BasisBar rows={allGameRows} realOnly={realOnly} onRealOnlyChange={setRealOnly} />
@@ -224,214 +427,7 @@ export default function PerformanceScreen() {
           {hasCore && ` · ${gameRows.length} game${gameRows.length === 1 ? '' : 's'} shown`}
         </p>
       </Section>
-
-      <Section
-        title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
-        blurb="Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract."
-      >
-        <div className="grid gap-3 sm:grid-cols-2">
-          <StatPanel
-            title="Bottleneck"
-            subtitle={selectedGame
-              ? `${selectedGame.name} at ${selectedGame.preset}.`
-              : report?.bottleneck
-                ? report.bottleneck.verdict
-                : 'Needs benchmark data before it can say anything.'}
-            // The build-wide upgrade advice is drawn from every game with a
-            // split, so it does not belong under one game's heading.
-            footnote={selectedGame ? undefined : report?.bottleneck?.nextUpgrade?.reason}
-          >
-            {selectedRow ? (
-              <>
-                <StatRow label="Limited by"
-                         value={selectedRow.limitedBy === 'cpu' ? 'processor'
-                           : selectedRow.limitedBy === 'gpu' ? 'graphics' : 'balanced'}
-                         tone={selectedRow.limitedBy === 'cpu' ? 'bad' : 'good'} />
-                <StatRow label="Card could do" value={selectedRow.gpuOnlyFps} unit="fps" />
-                <StatRow label="Chip could feed" value={selectedRow.cpuOnlyFps} unit="fps" />
-              </>
-            ) : selectedGame ? (
-              // ⚠️ The normal case — 54 of 56 rows have no attribution, because
-              // a split needs a fitted CPU constant and almost no game has one.
-              // Falling through to the build-wide figure here would put another
-              // game's measurement under this game's name.
-              <StatRow label="Status" value="split not modelled for this game"
-                       hint="No review has measured processor performance in this game, so there is nothing to attribute the frame to." />
-            ) : report?.bottleneck ? (
-              <>
-                <StatRow label="Leaning"
-                         value={report.bottleneck.leaning === 'cpu' ? 'processor'
-                           : report.bottleneck.leaning === 'gpu' ? 'graphics' : 'balanced'}
-                         tone={report.bottleneck.leaning === 'cpu' ? 'bad' : 'good'} />
-                <StatRow label="Processor-limited" value={report.bottleneck.cpuLedGames}
-                         unit={`of ${report.bottleneck.gamesConsidered}`} />
-                <StatRow label="Graphics-limited" value={report.bottleneck.gpuLedGames}
-                         unit={`of ${report.bottleneck.gamesConsidered}`} />
-                <StatRow label="Worst case" value={report.bottleneck.worstCase.name} />
-                <StatRow label="Lost to the weaker part"
-                         value={report.bottleneck.worstCase.lostToWeakerSide} unit="%"
-                         hint={`${report.bottleneck.worstCase.name}: card could do ${report.bottleneck.worstCase.gpuOnlyFps}, chip could feed ${report.bottleneck.worstCase.cpuOnlyFps}`}
-                         tone={report.bottleneck.worstCase.lostToWeakerSide > 25 ? 'bad' : 'ok'} />
-                <StatRow label="Upgrade next"
-                         value={report.bottleneck.nextUpgrade.category === 'cpu' ? 'processor' : 'graphics card'} />
-              </>
-            ) : (
-              <StatRow label="Status" value="needs benchmark data" />
-            )}
-          </StatPanel>
-
-          <StatPanel title="The parts that decide it">
-            <StatRow label="Processor" value={cpu?.name} />
-            <StatRow label="Cores" value={cpu?.specs?.cores} />
-            <StatRow label="Boost clock" value={cpu?.specs?.boostClock} unit="GHz" />
-            <StatRow label="Graphics" value={gpu?.name} />
-            <StatRow label="VRAM" value={gpu?.specs?.vram} unit="GB" />
-            <StatRow label="Storage" value={selectedParts.storage?.storageType} />
-          </StatPanel>
-        </div>
-      </Section>
-
-      <Section
-        title="Power and cooling"
-        blurb="What the build draws, whether the supply has room for it, and whether the cooler can shed it."
-      >
-      <div className={GRID}>
-        <StatPanel
-          title="Power"
-          subtitle={hasCore
-            ? 'Gaming draw is weighted by which part is setting the pace: a CPU-limited frame leaves the graphics card waiting, and a waiting card draws less.'
-            : 'Add a CPU and graphics card for a load-weighted figure.'}
-          footnote="Estimated from each part's rated draw. Real consumption varies with the game, the settings and the silicon."
-        >
-          <StatRow label="Idle" value={power.idleW} unit="W" />
-          <StatRow label="Gaming" value={power.gamingW} unit="W" />
-          <StatRow label="Peak" value={power.peakW} unit="W"
-                   hint="What a transient spike can reach" />
-          <StatRow label="From the wall" value={power.fromWallW} unit="W"
-                   hint={power.efficiencyTier ? `at 80+ ${power.efficiencyTier}` : 'assuming an unrated supply'} />
-        </StatPanel>
-
-        <StatPanel
-          title="Power supply"
-          designator="ATX_PWR"
-          subtitle={power.psuWattage
-            ? 'Headroom matters less for average draw than for the split-second spikes a graphics card pulls, and those are what trip a supply into shutting down.'
-            : 'No power supply selected yet.'}
-        >
-          <StatRow label="Fitted" value={power.psuWattage} unit="W" />
-          <StatRow label="Recommended" value={power.recommendedPsuW} unit="W"
-                   hint="Peak plus 35% for transients" />
-          <StatRow
-            label="Headroom over peak"
-            value={power.psuHeadroomPct == null ? null : `${power.psuHeadroomPct > 0 ? '+' : ''}${power.psuHeadroomPct}`}
-            unit="%"
-            tone={power.psuHeadroomPct == null ? 'ink'
-              : power.psuHeadroomPct < 15 ? 'bad' : power.psuHeadroomPct < 30 ? 'ok' : 'good'}
-          />
-          <StatRow label="Load while gaming" value={power.loadPointPct} unit="%"
-                   hint="Supplies are quietest and most efficient near half load" />
-        </StatPanel>
-
-        <StatPanel
-          title="Cooling"
-          designator="CPU_FAN"
-          subtitle={thermals.headroomPct == null
-            ? 'Needs a CPU and a cooler with a known size.'
-            : 'Nothing gets damaged when a cooler is undersized: the CPU drops its clocks to stay in range, so you lose boost speed during long loads and gain fan noise.'}
-        >
-          <StatRow label="CPU heat output" value={thermals.cpuHeatW} unit="W" hint="at full boost" />
-          <StatRow label="Cooler capacity" value={thermals.capacityW} unit="W" />
-          <StatRow
-            label="Headroom"
-            value={thermals.headroomPct == null ? null : `${thermals.headroomPct > 0 ? '+' : ''}${thermals.headroomPct}`}
-            unit="%"
-            tone={thermals.headroomPct == null ? 'ink'
-              : thermals.headroomPct < 0 ? 'bad' : thermals.headroomPct < 40 ? 'ok' : 'good'}
-          />
-          <StatRow label="Verdict" value={thermals.verdict} />
-        </StatPanel>
-      </div>
-      </Section>
-
-      <Section
-        title="The hardware"
-        blurb="What the parts can do on paper. Computed from published specifications, so this half works whether or not anyone has benchmarked your exact combination."
-      >
-      <div className={GRID}>
-        <StatPanel
-          title="Memory"
-          designator="DIMM_A2"
-          subtitle={memory
-            ? 'Memory speed and channel count act on the CPU side of a frame, so they show up in the 1% lows more than the average.'
-            : 'No memory selected yet.'}
-        >
-          <StatRow label="Capacity" value={memory?.capacityGb ? capacity(memory.capacityGb) : null} />
-          <StatRow label="Type" value={memory?.type} />
-          <StatRow label="Speed" value={memory?.speed} unit="MT/s" />
-          <StatRow
-            label="Channels"
-            value={memory?.channels}
-            tone={memory?.channels === 'single' ? 'bad' : memory?.channels === 'dual' ? 'good' : 'ink'}
-          />
-          <StatRow label="Platform sweet spot" value={memory?.baseline} unit="MT/s" />
-          {memory?.notes?.map((n) => (
-            <p key={n.text} className={`mt-2 text-[11px] leading-relaxed ${n.severity === 'bad' ? 'text-bad' : 'text-muted'}`}>
-              <strong className="font-normal">{n.text}.</strong> {n.detail}
-            </p>
-          ))}
-        </StatPanel>
-
-        <StatPanel
-          title="Graphics capability"
-          designator="PCIEX16_1"
-          subtitle={gpuCap.basis === 'spec-derived'
-            ? `Computed from published specifications, indexed against an RTX 4090 at 100.`
-            : 'No published specifications transcribed for this card yet.'}
-          footnote={gpuCap.basis !== 'spec-derived'
-            ? undefined
-            : gpuCap.archCalibrated
-              // The vendors still count different things; what has changed is that
-              // the corpus now says by how much, so the figure is corrected rather
-              // than merely caveated. The spread is quoted because the correction
-              // is an average over cards that do not all agree — on some
-              // architectures it is wide enough to matter.
-              ? `Calibrated across architectures from ${gpuCap.archParts} measured ${gpuCap.architecture} cards, so this is comparable with a rival brand. The correction (x${gpuCap.archEfficiency}) is a fitted average and those cards spread ${gpuCap.archSpreadPct}% around it, so read a gap narrower than that as noise, not a ranking.`
-              : `Trustworthy against other ${gpuCap.architecture} cards. NOT yet calibrated across architectures: ${gpuCap.vendor === 'nvidia' ? 'NVIDIA counts CUDA cores' : gpuCap.vendor === 'amd' ? 'AMD counts stream processors' : 'Intel counts Xe vector engines'}, and the vendors count different things. Fewer than three ${gpuCap.architecture} cards have been measured, so comparing this figure with a rival brand still needs data we do not have.`}
-        >
-          <StatRow label="Capability index" value={gpuCap.index}
-                   hint={gpuCap.archCalibrated ? 'comparable across brands' : gpuCap.architecture ? `vs other ${gpuCap.architecture} cards` : undefined} />
-          <StatRow label="Compute" value={gpuCap.tflops} unit="TFLOPS"
-                   hint="Theoretical FP32 peak" />
-          <StatRow label="Memory bandwidth" value={gpuCap.bandwidthGbs} unit="GB/s" />
-          <StatRow label={gpuCap.shaderUnit ? gpuCap.shaderUnit.replace(/^./, (m) => m.toUpperCase()) : 'Shaders'}
-                   value={gpuSpecs.gpus?.[gpu?.id]?.shaders} />
-          <StatRow label="Architecture" value={gpuCap.architecture} />
-        </StatPanel>
-
-        <StatPanel
-          title="Processor capability"
-          designator="CPU_1"
-          subtitle={cpuCap.basis === 'spec-derived'
-            ? 'Clock leads, cores saturate at eight because games cannot use more, and cache counts for more than its size suggests.'
-            : 'No published specifications transcribed for this processor yet.'}
-          footnote={cpuCap.cacheBasis === 'single-sourced'
-            ? 'The cache figure comes from a single source with nothing to corroborate it, unlike the boost clock, which matches the catalogue independently.'
-            : undefined}
-        >
-          <StatRow label="Capability index" value={cpuCap.index} />
-          <StatRow label="Boost clock" value={cpuCap.boostGhz} unit="GHz" />
-          <StatRow label="Cores" value={cpuCap.cores}
-                   hint={cpuCap.cores > 8 ? 'games use about eight' : undefined} />
-          {/* The reachable figure, not the package total. On a multi-chiplet
-              part those differ and the spec sheet quotes the larger one, so
-              say which this is rather than look like a typo. */}
-          <StatRow label="L3 cache" value={cpuCap.l3Mb} unit="MB"
-                   hint={cpuCap.l3PackageMb > cpuCap.l3Mb
-                     ? `per chiplet, of ${cpuCap.l3PackageMb} MB total, and L3 is not shared between chiplets`
-                     : undefined} />
-        </StatPanel>
-      </div>
-      </Section>
+      </Fold>
     </div>
   )
 }

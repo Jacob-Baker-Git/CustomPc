@@ -73,14 +73,21 @@ describe('shareLink', () => {
       expect(useSavedStore.getState().saved).toHaveLength(1)
     })
 
-    it('lands the visitor in the builder', () => {
+    it('lands the visitor in the builder, on Summary', () => {
       open({ gpu })
       expect(useBuilderStore.getState().flow).toBe('builder')
+      expect(window.location.hash).toBe('#summary')
     })
   })
 
   it('returns false when there is no build param', () => {
     expect(applyShareLinkFromUrl()).toBe(false)
+  })
+
+  it('a link that does not decode adds no #summary', () => {
+    window.history.pushState({}, '', '/?build=not-a-build')
+    expect(applyShareLinkFromUrl()).toBe(false)
+    expect(window.location.hash).toBe('')
   })
 
   it('shareUrlFromCode builds a ?build= url from a code', () => {

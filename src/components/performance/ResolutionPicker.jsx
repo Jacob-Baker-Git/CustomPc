@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { RESOLUTIONS } from '../../lib/perfEngine/gameRows'
 
 const LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
@@ -12,12 +13,14 @@ const LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 // It is a real radiogroup rather than three buttons because the choice is
 // exclusive and arrow keys should move between the options.
 export default function ResolutionPicker({ value, onChange }) {
+  // Unique per instance: the Performance tab shows two of these at once.
+  const labelId = useId()
   return (
     <div className="flex items-center gap-1.5">
-      <span id="res-picker-label" className="text-[10px] uppercase tracking-wider text-muted">
+      <span id={labelId} className="text-[10px] uppercase tracking-wider text-muted">
         Building for
       </span>
-      <div role="radiogroup" aria-labelledby="res-picker-label" className="flex rounded-lg border border-line">
+      <div role="radiogroup" aria-labelledby={labelId} className="flex rounded-lg border border-line">
         {RESOLUTIONS.map((res) => {
           const active = res === value
           return (

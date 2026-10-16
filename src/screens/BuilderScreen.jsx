@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import TopBar from '../components/TopBar'
 const BuildCanvas = lazy(() => import('../components/BuildCanvas'))
-import BoardBackground from '../components/BoardBackground'
 import SiteFooter from '../components/SiteFooter'
 import PartSelector from '../components/PartSelector'
 import CaseToggle from '../components/CaseToggle'
@@ -19,15 +18,15 @@ import BuildSummary from '../components/BuildSummary'
 // chunk that is fetched when the tab is opened.
 const PerformanceScreen = lazy(() => import('../components/performance/PerformanceScreen'))
 import BuildWarnings from '../components/BuildWarnings'
-import AutoBuildButton from '../components/AutoBuildButton'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
 import Deferred3D from '../components/Deferred3D'
-import ViewTabs from '../components/ViewTabs'
+import StepHeader from '../components/StepHeader'
+import Dock from '../components/Dock'
 import { useHashView } from '../hooks/useHashView'
+import { useChromeHeight } from '../hooks/useChromeHeight'
 import useBuilderStore from '../store/useBuilderStore'
-import { PANEL } from '../lib/uiTokens'
 
 // A finger means mobile data, and the 3D view is 11 MB of it. Read once at
 // mount rather than as a media query, because this decides whether a component
@@ -56,8 +55,13 @@ export default function BuilderScreen() {
   // a fresh visit on mobile data should be asked again, not charged again.
   const [show3D, setShow3D] = useState(() => !wantsDeferred3D())
   const scrollRef = useRef(null)
+  const chromeRef = useRef(null)
 
-  // Fresh views (and the first landing after setup) start at the top.
+  // The header is sticky inside the scroller, so nothing has to pad for a
+  // hard-coded height; its live height goes to the folds below as --chrome-h.
+  useChromeHeight(chromeRef, scrollRef)
+
+  // Fresh views (and the first landing in the builder) start at the top.
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 })
   }, [view])
@@ -69,18 +73,12 @@ export default function BuilderScreen() {
 
   return (
     <div className="relative min-h-screen">
-      {/* No column, so no scrim: this screen covers its viewport in opaque
-          panels and has no prose to protect. Dimming the board here would cost
-          the artwork and buy nothing. */}
-      <BoardBackground />
-      <TopBar view={view} onViewChange={setView} />
-      {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
-          top padding below `wide` clears the header's second row of meters,
-          which is taller from `md` up because the header's own padding grows
-          there. Measured against the real header: 76px below md, 84px at md–lg,
-          90px at lg–wide, 63px above it — so 84 / 96 / 64 of padding clears
-          each band. e2e/topBar.spec.js fails if they ever drift apart. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 wide:pt-16 pb-16 lg:pb-0">
+      {/* pb clears the phone Dock below lg; from lg there is no dock. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pb-28 lg:pb-0">
+        <div ref={chromeRef} className="sticky top-0 z-50">
+          <TopBar />
+          <StepHeader view={view} onChange={setView} />
+        </div>
         {/* The builder had no landmark at all — a screen reader's region menu
             skipped straight past it. A plain, unstyled <main> wraps the tab
             content (its h1 and every panel) while the nav header, the board
@@ -101,6 +99,32 @@ export default function BuilderScreen() {
             renamed itself under the reader would be the noisier choice. */}
         <h1 className="sr-only">Your PC build</h1>
         {view === 'build' ? (
+          <div className="relative z-10 w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12 flex flex-col gap-3">
+            <SelectedPartsPanel
+              selectedParts={selectedParts}
+              onSelectCategory={setActiveCategory}
+              onDeselect={removePart}
+            />
+            <BuildWarnings />
+          </div>
+        ) : view === 'peripherals' ? (
+          <PeripheralsPanel />
+        ) : view === 'performance' ? (
+          /* The fallback needs its own surface for the same reason every panel
+             on this screen does — there is no scrim here, so bare text sits on
+             the board. Easy to miss because it is only on screen while the
+             chunk loads: e2e/builderLegibility.spec.js caught it under
+             full-suite load, having never seen it when run alone. */
+          <Suspense fallback={
+            <div className="mx-4 my-3 rounded-xl bg-surface p-6 text-sm text-muted motion-safe:animate-pulse sm:mx-6 lg:mx-10">
+              Working out frame rates…
+            </div>
+          }>
+            <PerformanceScreen />
+          </Suspense>
+        ) : (
+          // Summary: the 3D view, the CustomPC score with its use-case chips, and
+          // the parts list (spec 2026-10-13 — the only tab that mounts the 3D).
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which
           // wasted most of a wide display.
@@ -117,8 +141,13 @@ export default function BuilderScreen() {
                   page stops scrolling and the model starts — they scroll, the
                   build spins, and it reads as a bug. The frame plus the hint
                   below say "this rectangle is the 3D toy, everything outside
-                  it is the page". */}
-              <div className={`area-viz ${PANEL} relative h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px] hover:border-line-strong transition-colors overflow-hidden`}>
+                  it is the page".
+
+                  The configurator look (spec 2026-10-16) wanted the render
+                  edge-to-edge with a fade. The EDGE stays for the reason above;
+                  only the filled box goes, so the PC sits on the page itself
+                  inside a hairline. */}
+              <div className="area-viz relative h-[42vh] overflow-hidden border border-line transition-colors hover:border-line-strong md:h-[48vh] lg:h-auto lg:min-h-[520px]">
                 {show3D ? (
                   <>
                     <CanvasErrorBoundary>
@@ -213,55 +242,27 @@ export default function BuilderScreen() {
                 <div className="area-rating"><BuildRatingPanel /></div>
               </div>
               <div className="area-banner"><GeneratedBanner /></div>
-              <div className="area-parts">
-                <SelectedPartsPanel
-                  selectedParts={selectedParts}
-                  onSelectCategory={setActiveCategory}
-                  onDeselect={removePart}
-                />
-              </div>
+              <div className="area-parts"><BuildSummary /></div>
               <div className="area-warnings"><BuildWarnings /></div>
-              <div className="area-autobuild"><AutoBuildButton /></div>
             </div>
           </div>
-        ) : view === 'peripherals' ? (
-          <PeripheralsPanel />
-        ) : view === 'performance' ? (
-          /* The fallback needs its own surface for the same reason every panel
-             on this screen does — there is no scrim here, so bare text sits on
-             the board. Easy to miss because it is only on screen while the
-             chunk loads: e2e/builderLegibility.spec.js caught it under
-             full-suite load, having never seen it when run alone. */
-          <Suspense fallback={
-            <div className="mx-4 my-3 rounded-xl bg-surface p-6 text-sm text-muted motion-safe:animate-pulse sm:mx-6 lg:mx-10">
-              Working out frame rates…
-            </div>
-          }>
-            <PerformanceScreen />
-          </Suspense>
-        ) : (
-          <BuildSummary />
         )}
+        <Dock view={view} onChange={setView} inline />
         </main>
 
         {/* Inside the scroller, not beside it: this screen's scroll container is
             the h-screen div, so a footer outside it would sit off the bottom of
-            the viewport and never be reachable. The container's own pb-16
-            already clears the fixed tab bar below lg.
+            the viewport and never be reachable. The container's own bottom
+            padding already clears the phone Dock below lg.
 
             It sits AFTER </main>, not inside it: SiteFooter renders a <footer>,
             and a <footer> nested in <main> stops being the page's contentinfo
-            landmark. Kept a sibling, it stays one — same as SiteChrome.
-
-            FULL WIDTH on purpose — this is the one screen with no scrim, so the
-            footer's own ground band is what protects its text from the board.
-            Cropping it to a text column would leave the edge-pinned hardware
-            layers, and their solid gold, showing on either side of it. */}
+            landmark. Kept a sibling, it stays one — same as SiteChrome. */}
         <div className="relative z-10">
           <SiteFooter />
         </div>
       </div>
-      <ViewTabs view={view} onChange={setView} variant="bar" />
+      <Dock view={view} onChange={setView} />
       {activeCategory && (
         <PartSelector
           category={activeCategory}

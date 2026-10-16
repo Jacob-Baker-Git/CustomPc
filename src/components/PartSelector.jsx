@@ -74,7 +74,9 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
           {visible.map(({ part, compatible, reason }) => {
             // Swapping replaces the current part, so credit its price back.
             const swapBudget = remainingBudget + (current?.price ?? 0)
-            const overBudget = ignoreBudget ? false : part.price > swapBudget
+            // `budget` is 0 when there is none (or ignoreBudget is set), as in
+            // filterParts — nothing is over a budget that does not exist.
+            const overBudget = budget > 0 && part.price > swapBudget
             const locked     = !compatible || overBudget
             const lockReason = !compatible ? reason : 'Over remaining budget'
             return (

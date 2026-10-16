@@ -18,38 +18,3 @@ describe('TopBar back button', () => {
     expect(useBuilderStore.getState().selectedParts.cpu).toBeDefined()
   })
 })
-
-describe('TopBar view tabs', () => {
-  it('renders one tab per builder view and marks the current one', () => {
-    render(<TopBar view="summary" onViewChange={() => {}} />)
-    for (const label of ['build', 'peripherals', 'summary']) {
-      expect(screen.getByRole('button', { name: new RegExp(`^${label}$`, 'i') })).toBeInTheDocument()
-    }
-    expect(screen.getByRole('button', { name: /^summary$/i })).toHaveAttribute('aria-current', 'page')
-  })
-
-  it('reports the tab the user picked', () => {
-    const onViewChange = vi.fn()
-    render(<TopBar view="build" onViewChange={onViewChange} />)
-    fireEvent.click(screen.getByRole('button', { name: /^peripherals$/i }))
-    expect(onViewChange).toHaveBeenCalledWith('peripherals')
-  })
-
-  it('has no saved tab — saved builds live on the hub', () => {
-    render(<TopBar view="build" onViewChange={() => {}} />)
-    expect(screen.queryByRole('button', { name: /^saved$/i })).toBeNull()
-  })
-
-  it('renders the desktop tabs as one segmented group', () => {
-    const { container } = render(<TopBar view="build" onViewChange={() => {}} />)
-    const group = container.querySelector('.lg\\:inline-flex')
-    expect(group).toHaveClass('bg-ground')
-  })
-
-  // Icons must not leak into the accessible name, or every name-based query
-  // in this file and in the E2E spec breaks.
-  it('keeps the accessible name to the label alone', () => {
-    render(<TopBar view="build" onViewChange={() => {}} />)
-    expect(screen.getByRole('button', { name: /^build$/i })).toBeInTheDocument()
-  })
-})

@@ -15,8 +15,7 @@ const OPTIONAL_NOTE = 'Optional: most coolers ship with paste applied'
 // writing to a store field nobody reads — see PartModel.
 //
 // `emphasiseMissing` is the Build tab's louder treatment: unfilled essentials go
-// red and tagged. SetupFlow renders the same list for "the PC I already own",
-// where an empty slot means "I don't have one" — so it stays off by default.
+// red and tagged. Off by default, so a list shown anywhere else stays quiet.
 //
 // The rows are drawn by PartSlot, which turns each one into the connector its
 // part plugs into. This list keeps deciding WHICH slots are urgent — a slot

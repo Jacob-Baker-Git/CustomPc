@@ -7,8 +7,8 @@ describe('builder store flow field', () => {
   })
 
   it('setFlow updates the flow', () => {
-    useBuilderStore.getState().setFlow('setup')
-    expect(useBuilderStore.getState().flow).toBe('setup')
+    useBuilderStore.getState().setFlow('target')
+    expect(useBuilderStore.getState().flow).toBe('target')
     useBuilderStore.getState().setFlow('hub')
   })
 
@@ -33,7 +33,7 @@ describe('persist migration v1 -> v2', () => {
 
   it('leaves already-migrated state alone', () => {
     const state = { budget: 1500, flow: 'hub' }
-    expect(migrate(state, 2)).toBe(state)
+    expect(migrate(state, 3)).toBe(state)
   })
 
   it('keeps the rest of the persisted state intact', () => {
@@ -55,9 +55,9 @@ describe('flow and browser history', () => {
 
   it('setFlow adds a history entry carrying the flow', () => {
     const before = window.history.length
-    useBuilderStore.getState().setFlow('setup')
+    useBuilderStore.getState().setFlow('target')
     expect(window.history.length).toBe(before + 1)
-    expect(window.history.state).toEqual({ flow: 'setup' })
+    expect(window.history.state).toEqual({ flow: 'target' })
   })
 
   it('entering the builder always opens the Build tab', () => {
@@ -77,8 +77,8 @@ describe('flow and browser history', () => {
   it('Back restores the flow recorded on the entry', () => {
     initFlowHistory()
     useBuilderStore.setState({ flow: 'builder' })
-    window.dispatchEvent(new PopStateEvent('popstate', { state: { flow: 'setup' } }))
-    expect(useBuilderStore.getState().flow).toBe('setup')
+    window.dispatchEvent(new PopStateEvent('popstate', { state: { flow: 'target' } }))
+    expect(useBuilderStore.getState().flow).toBe('target')
   })
 
   it('an entry with no recorded flow leaves the flow alone', () => {
@@ -93,5 +93,63 @@ describe('flow and browser history', () => {
     useBuilderStore.setState({ flow: 'saved' })
     initFlowHistory()
     expect(window.history.state).toEqual({ flow: 'saved' })
+  })
+})
+
+describe('setFlow into the builder', () => {
+  beforeEach(() => {
+    useBuilderStore.setState({ flow: 'hub' })
+    window.history.replaceState({ flow: 'hub' }, '', '/')
+  })
+
+  it('opens the Build tab by default', () => {
+    useBuilderStore.getState().setFlow('builder')
+    expect(window.location.hash).toBe('#build')
+  })
+
+  it('opens the tab it is asked for', () => {
+    useBuilderStore.getState().setFlow('builder', 'summary')
+    expect(window.location.hash).toBe('#summary')
+  })
+})
+
+describe('path and target', () => {
+  it('defaults to the parts path and no game', () => {
+    const s = useBuilderStore.getState()
+    expect(s.path).toBe('parts')
+    expect(s.target).toEqual({ gameId: null, presetKey: null, fps: 60 })
+  })
+
+  it('setTarget merges rather than replaces', () => {
+    useBuilderStore.getState().setTarget({ gameId: 'fortnite' })
+    useBuilderStore.getState().setTarget({ fps: 144 })
+    expect(useBuilderStore.getState().target).toEqual({ gameId: 'fortnite', presetKey: null, fps: 144 })
+    useBuilderStore.setState({ target: { gameId: null, presetKey: null, fps: 60 } })
+  })
+
+  it('persists path and target', () => {
+    const saved = useBuilderStore.persist.getOptions().partialize(useBuilderStore.getState())
+    expect(saved).toHaveProperty('path')
+    expect(saved).toHaveProperty('target')
+  })
+})
+
+describe('persist migration -> v3', () => {
+  const migrate = useBuilderStore.persist.getOptions().migrate
+
+  it('is version 3', () => {
+    expect(useBuilderStore.persist.getOptions().version).toBe(3)
+  })
+
+  it('sends a stored setup screen to the hub', () => {
+    expect(migrate({ budget: 900, flow: 'setup' }, 2).flow).toBe('hub')
+  })
+
+  it('leaves other v2 flows alone', () => {
+    expect(migrate({ budget: 900, flow: 'builder' }, 2).flow).toBe('builder')
+  })
+
+  it('still migrates v1 all the way', () => {
+    expect(migrate({ budget: 1500, selectedParts: {} }, 1).flow).toBe('builder')
   })
 })

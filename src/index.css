@@ -117,7 +117,7 @@ body {
   .chip-pick { animation: none; }
 }
 
-/* Desktop-only Build-tab layout: 3D on the right, the rating panel on the left,
+/* Summary-tab layout: 3D on the right, the rating panel on the left,
    everything else full-width below. Below lg it is a plain flex column, so the
    child DOM order IS the (unchanged) mobile order. Every child sits above the
    WebGL canvas child to avoid the known compositing gotcha where content paints
@@ -135,9 +135,10 @@ body {
 .build-grid .area-usecase,
 .build-grid .area-rating { position: relative; z-index: 1; }
 
-/* The phone's reading order: what you picked, what it looks like, what it
-   scores — then the inputs and the checks. The user's words: "pick your parts
-   3d view then score".
+/* The phone's reading order on Summary (spec 2026-10-16): the answer first —
+   the score and the use case it is rated for — then the parts list, then the
+   3D view, which on a phone is opt-in anyway. The share notice, when there is
+   one, leads.
 
    `order` and not a JSX reshuffle, so the source keeps resembling the desktop
    grid-template-areas that a reader checks. Safe above lg because every
@@ -145,13 +146,12 @@ body {
    ignores order (only AUTO-placement consumes it). Paint order does still
    follow `order`, which is why the z-index rules above are load-bearing rather
    than decorative. */
-.build-grid > .area-parts     { order: 1; }
-.build-grid > .area-viz       { order: 2; }
-.build-grid .area-rating      { order: 3; }
-.build-grid .area-usecase     { order: 4; }
-.build-grid > .area-banner    { order: 5; }
-.build-grid > .area-warnings  { order: 6; }
-.build-grid > .area-autobuild { order: 7; }
+.build-grid > .area-banner    { order: 0; }
+.build-grid .area-rating      { order: 1; }
+.build-grid .area-usecase     { order: 2; }
+.build-grid > .area-parts     { order: 3; }
+.build-grid > .area-viz       { order: 4; }
+.build-grid > .area-warnings  { order: 5; }
 
 /* Give the vertical axis back to the page on touch devices.
 
@@ -206,8 +206,7 @@ body {
       "left      viz"
       "banner    banner"
       "parts     parts"
-      "warnings  warnings"
-      "autobuild autobuild";
+      "warnings  warnings";
     align-items: start;
     gap: 1rem;
   }
@@ -238,5 +237,4 @@ body {
   .build-grid > .area-banner    { grid-area: banner; }
   .build-grid > .area-parts     { grid-area: parts; }
   .build-grid > .area-warnings  { grid-area: warnings; }
-  .build-grid > .area-autobuild { grid-area: autobuild; }
 }

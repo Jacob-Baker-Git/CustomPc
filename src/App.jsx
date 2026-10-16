@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import SetupFlow from './components/SetupFlow'
+import { useEffect, lazy, Suspense } from 'react'
 import BuilderScreen from './screens/BuilderScreen'
 import MainMenu from './components/MainMenu'
 import SavedBuilds from './components/SavedBuilds'
@@ -10,6 +9,8 @@ import GlossaryPage from './components/GlossaryPage'
 import FeedbackPage from './components/FeedbackPage'
 import { PrivacyPage, TermsPage } from './components/LegalPage'
 import PartPage from './components/PartPage'
+// Lazy: it pulls in perfModel.json, which the hub must not download.
+const TargetScreen = lazy(() => import('./screens/TargetScreen'))
 import useBuilderStore from './store/useBuilderStore'
 import useCatalogStore, { loadCatalog } from './store/useCatalogStore'
 import { usePageRoute } from './hooks/usePageRoute'
@@ -77,7 +78,7 @@ export default function App() {
   if (notFound) {
     return (
       <SiteChrome onBack={() => navigate(null)}>
-        <h1 className="text-3xl font-bold mb-2">Page not found</h1>
+        <h1 className="font-wide text-3xl font-extrabold mb-2">Page not found</h1>
         <p className="text-muted text-sm mb-6">There is nothing at this address. The link may be mistyped or out of date.</p>
         <a href="/" className="text-brass text-sm hover:underline">Go to the home page →</a>
       </SiteChrome>
@@ -90,18 +91,31 @@ export default function App() {
   }
 
   if (flow === 'builder') return <BuilderScreen />
-  if (flow === 'setup')   return <SetupFlow onBack={() => setFlow('hub')} />
+  if (flow === 'target') {
+    return (
+      <SiteChrome onBack={() => setFlow('hub')}>
+        <Suspense fallback={<p className="text-sm text-muted">Loading…</p>}><TargetScreen /></Suspense>
+      </SiteChrome>
+    )
+  }
   if (flow === 'saved') {
     return (
       <SiteChrome onBack={() => setFlow('hub')}>
-        <SavedBuilds onLoaded={() => setFlow('builder')} />
+        <SavedBuilds onLoaded={() => setFlow('builder', 'summary')} />
       </SiteChrome>
     )
   }
   return (
     <MainMenu
-      onStart={() => setFlow('setup')}
-      onResume={() => setFlow('builder')}
+      onExplore={() => {
+        // Entering your own parts has no budget; one left by Build-for-a-game
+        // would hide and lock parts here.
+        const s = useBuilderStore.getState()
+        s.setPath('parts')
+        s.setBudget(0)
+        setFlow('builder', 'build')
+      }}
+      onTarget={() => setFlow('target')}
       onSaved={() => setFlow('saved')}
     />
   )

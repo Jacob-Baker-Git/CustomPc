@@ -24,21 +24,33 @@ describe('App routing', () => {
     window.history.replaceState(null, '', '/no-such-page')
     render(<App />)
     expect(screen.getByRole('heading', { name: /page not found/i })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /start a build/i })).toBeNull()
+    expect(screen.queryByRole('button', { name: /build for a game/i })).toBeNull()
     expect(document.title).toMatch(/not found/i)
     window.history.replaceState(null, '', '/')
   })
 
   it('shows the hub by default', () => {
     render(<App />)
-    expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /build for a game/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /saved builds/i })).toBeInTheDocument()
   })
 
-  it('routes to setup', () => {
+  it('routes to Build for a game', async () => {
     render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: /start a build/i }))
-    expect(screen.getByText(/where are you starting from/i)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /build for a game/i }))
+    expect(await screen.findByRole('heading', { name: /build for a game/i })).toBeInTheDocument()
+  })
+
+  it('routes "What will my build get?" to the Build tab on the parts path', () => {
+    // A budget left by Build-for-a-game (or the old wizard) would hide and lock
+    // parts on a path that has no budget at all — final review, Important #3.
+    useBuilderStore.setState({ path: 'game', budget: 1000 })
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /what will my build get/i }))
+    expect(useBuilderStore.getState().flow).toBe('builder')
+    expect(useBuilderStore.getState().path).toBe('parts')
+    expect(useBuilderStore.getState().budget).toBe(0)
+    expect(window.location.hash).toBe('#build')
   })
 
   it('routes to saved builds', () => {
@@ -52,21 +64,14 @@ describe('App routing', () => {
   it('shows the builder when flow says so, whatever the budget', () => {
     useBuilderStore.setState({ flow: 'builder', budget: 0 })
     render(<App />)
-    // Two sets of tabs render: the header row and the mobile bottom bar. Only
-    // one is visible at a time, but jsdom applies no CSS so both are present.
-    expect(screen.getAllByRole('button', { name: /^peripherals$/i })).toHaveLength(2)
+    // One step header at every width (spec 2026-10-16).
+    expect(screen.getByRole('navigation', { name: 'Steps' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /peripherals$/i })).toBeInTheDocument()
   })
 
   it('stays on the hub when a budget is set but flow is hub', () => {
     useBuilderStore.setState({ flow: 'hub', budget: 1500 })
     render(<App />)
-    expect(screen.getByRole('button', { name: /start a build/i })).toBeInTheDocument()
-  })
-
-  it('offers to carry on when a build is already in progress', () => {
-    useBuilderStore.setState({ selectedParts: { cpu: { id: 'c', price: 200 } }, budget: 900 })
-    render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: /carry on building/i }))
-    expect(useBuilderStore.getState().flow).toBe('builder')
+    expect(screen.getByRole('button', { name: /build for a game/i })).toBeInTheDocument()
   })
 })

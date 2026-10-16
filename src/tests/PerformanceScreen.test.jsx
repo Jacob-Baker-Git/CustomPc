@@ -108,15 +108,15 @@ describe('PerformanceScreen', () => {
   it('asks for a CPU and a GPU before estimating frame rates', () => {
     useBuilderStore.setState({ selectedParts: { cpu } })
     render(<PerformanceScreen />)
-    expect(screen.getByText(/pick a cpu and a graphics card/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/pick a cpu and a graphics card/i).length).toBeGreaterThan(0)
     // Power still works off the one part that is present.
     expect(screen.getByText('Power')).toBeInTheDocument()
   })
 
   it('renders nothing misleading with an entirely empty build', () => {
     render(<PerformanceScreen />)
-    expect(screen.getByText('Performance')).toBeInTheDocument()
-    expect(screen.getByText(/pick a cpu and a graphics card/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /what will this build get/i })).toBeInTheDocument()
+    expect(screen.getAllByText(/pick a cpu and a graphics card/i).length).toBeGreaterThan(0)
   })
 
   it('carries the engine caveat, not the legacy one', async () => {
@@ -179,7 +179,7 @@ describe('PerformanceScreen', () => {
 
   it('changes the build’s resolution from the picker beside the heading', async () => {
     // The complaint that started this: "you can't select that res is shown".
-    // setResolution had exactly one caller, in SetupFlow, with no UI after.
+    // setResolution had exactly one caller, in the old setup wizard, with no UI after.
     //
     // The control moved off the column headers when they took up sorting — two
     // jobs on one hit area meant neither could be discovered from the other.
@@ -187,15 +187,28 @@ describe('PerformanceScreen', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1440p' })
     render(<PerformanceScreen />)
     expect(useBuilderStore.getState().resolution).toBe('1440p')
-    await user.click(screen.getByRole('radio', { name: /^4K$/i }))
-    expect(useBuilderStore.getState().resolution).toBe('4k')
+    // Two pickers now (the game estimator's and the all-games table's), both
+    // driving the one stored resolution.
+    for (const radio of screen.getAllByRole('radio', { name: /^4K$/i })) {
+      useBuilderStore.setState({ resolution: '1440p' })
+      await user.click(radio)
+      expect(useBuilderStore.getState().resolution).toBe('4k')
+    }
   })
 
   it('marks the picker with the resolution the build is actually for', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu }, resolution: '1080p' })
     render(<PerformanceScreen />)
-    expect(screen.getByRole('radio', { name: /1080p/i })).toBeChecked()
-    expect(screen.getByRole('radio', { name: /1440p/i })).not.toBeChecked()
+    for (const r of screen.getAllByRole('radio', { name: /1080p/i })) expect(r).toBeChecked()
+    for (const r of screen.getAllByRole('radio', { name: /1440p/i })) expect(r).not.toBeChecked()
+  })
+
+  it('gives each resolution picker its own label id', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    render(<PerformanceScreen />)
+    const ids = [...document.querySelectorAll('[role="radiogroup"]')].map((g) => g.getAttribute('aria-labelledby'))
+    expect(ids.length).toBeGreaterThan(1)
+    expect(new Set(ids).size).toBe(ids.length)
   })
 })
 
@@ -424,5 +437,30 @@ describe('PerformanceScreen — the real-data filter wiring', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<PerformanceScreen />)
     expect(screen.getByRole('checkbox', { name: /only show real data/i })).not.toBeChecked()
+  })
+})
+
+// Configurator redesign (spec 2026-10-16): the estimate answers first, and
+// every other section folds away with its headline numbers still showing.
+describe('PerformanceScreen — folded sections', () => {
+  beforeEach(() => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu, psu, cooler }, resolution: '1440p' })
+  })
+
+  it('folds every section under the estimate', () => {
+    const { container } = render(<PerformanceScreen />)
+    const summaries = [...container.querySelectorAll('details > summary')].map((s) => s.textContent)
+    expect(summaries).toHaveLength(4)
+    expect(summaries[0]).toMatch(/what's holding it back/i)
+    expect(summaries[1]).toMatch(/power and cooling.*W gaming/i)
+    expect(summaries[2]).toMatch(/the hardware.*(GB|no memory chosen)/i)
+    expect(summaries[3]).toMatch(/every game at once.*games answered/i)
+  })
+
+  it('shows the estimate before any fold', () => {
+    const { container } = render(<PerformanceScreen />)
+    const heading = screen.getByRole('heading', { name: /what will this build get/i })
+    const firstFold = container.querySelector('details')
+    expect(heading.compareDocumentPosition(firstFold) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 })
