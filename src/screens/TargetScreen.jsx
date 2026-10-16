@@ -5,21 +5,32 @@ import perfModel from '../data/perfModel.json'
 import { buildForGame, findPreset, gameById, presetKey } from '../lib/gameTargetBuilder'
 import GameSettingsFields from '../components/GameSettingsFields'
 import { CATEGORIES } from '../lib/categories'
-import { BTN_PRIMARY, PANEL, TELEMETRY } from '../lib/uiTokens'
+import { BTN_PRIMARY } from '../lib/uiTokens'
 
 const fpsText = (o) => `${o.bound === 'upper' ? 'up to ' : ''}${o.fps} fps`
 
+// One answer: the frame rate, the price and the button together at the top,
+// so the choice is made on one screen; the parts that make it up fold
+// underneath (spec 2026-10-16).
 function BuildOption({ title, option, onUse }) {
+  const parts = CATEGORIES.filter((c) => option.parts[c.id])
   return (
-    <section className={`${PANEL} p-4`}>
-      <h2 className="text-base text-ink">{title}</h2>
-      <p className={`${TELEMETRY} text-2xl text-ink`}>{fpsText(option)} · £{option.total.toFixed(0)}</p>
-      <ul className="mt-2 text-xs text-muted">
-        {CATEGORIES.filter((c) => option.parts[c.id]).map((c) => (
-          <li key={c.id}>{c.label}: {option.parts[c.id].name}</li>
-        ))}
-      </ul>
-      <button onClick={onUse} className={`mt-3 ${BTN_PRIMARY} text-sm px-4 py-2 rounded-lg`}>Use this build</button>
+    <section className="border-t border-line pt-4">
+      <h2 className="text-sm text-muted">{title}</h2>
+      <div className="mt-1 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+        <p className="font-wide text-2xl font-extrabold text-ink">
+          {fpsText(option)} <span className="text-muted">·</span> £{option.total.toFixed(0)}
+        </p>
+        <button onClick={onUse} className={`${BTN_PRIMARY} min-h-11 rounded-xl px-4 text-sm`}>Use this build</button>
+      </div>
+      <details className="mt-2">
+        <summary className="cursor-pointer py-2 text-sm text-brass">{parts.length} parts</summary>
+        <ul className="pb-2 text-[13px] text-muted">
+          {parts.map((c) => (
+            <li key={c.id} className="border-t border-line py-1.5">{c.label}: <span className="text-ink">{option.parts[c.id].name}</span></li>
+          ))}
+        </ul>
+      </details>
     </section>
   )
 }
@@ -62,7 +73,7 @@ export default function TargetScreen() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">Build for a game</h1>
+      <h1 className="mb-4 font-wide text-3xl font-extrabold">Build for a game</h1>
       <GameSettingsFields />
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label className="flex flex-col gap-1 text-xs text-muted">

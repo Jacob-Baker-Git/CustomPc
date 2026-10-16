@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import MainMenu from '../components/MainMenu'
+import perfGames from '../data/perfGames.json'
 import useBuilderStore from '../store/useBuilderStore'
 
 const noop = () => {}
@@ -78,3 +79,19 @@ describe('MainMenu', () => {
   })
 })
 
+
+// Configurator redesign (spec 2026-10-16): the PC is the picture, and the
+// benchmark coverage is the one bracket tag.
+describe('the Welcome screen in the configurator look', () => {
+  it('shows the PC picture', () => {
+    const { container } = render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
+    const img = container.querySelector('img[src="/img/welcome-pc.webp"]')
+    expect(img).not.toBeNull()
+    expect(img).toHaveAttribute('alt', '')
+  })
+
+  it('states the benchmark coverage from the games list', () => {
+    render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
+    expect(screen.getByText(`${perfGames.length}`).closest('span')).toHaveTextContent(`[ ${perfGames.length} games benchmarked ]`)
+  })
+})

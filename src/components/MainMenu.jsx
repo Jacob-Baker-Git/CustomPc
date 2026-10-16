@@ -1,117 +1,72 @@
-import { Cpu, Gamepad2, ArrowRight, Bookmark } from 'lucide-react'
-import Block from './ui/Block'
+import { ArrowRight } from 'lucide-react'
 import SiteFooter from './SiteFooter'
+import Tag from './ui/Tag'
 import useSavedStore from '../store/useSavedStore'
+import perfGames from '../data/perfGames.json'
 
-// The app's home: the Welcome screen's three paths (spec 2026-10-13) — enter
-// your parts and see what they get, build for a game, or open a saved build.
+// The app's home: the Welcome screen's three paths (spec 2026-10-13) in the
+// configurator look (spec 2026-10-16) — a PC as the picture, a wide headline,
+// and the paths as plain hairline rows rather than boxes.
 // Parts/glossary/help/feedback are deliberately footer-only: they were
 // briefly promoted to a row of tiles, which said the same four things twice on
 // one screen and gave secondary pages the same visual weight as the actions
 // this page exists for.
+function PathRow({ title, line, onClick, small = false }) {
+  return (
+    <button onClick={onClick} className="group flex w-full min-h-11 items-center justify-between gap-4 border-t border-line py-4 text-left">
+      <span className="min-w-0">
+        <span className={`block font-bold text-ink transition-colors group-hover:text-brass ${small ? 'text-[15px]' : 'text-lg'}`}>{title}</span>
+        <span className="block text-sm text-muted">{line}</span>
+      </span>
+      <ArrowRight size={small ? 16 : 20} className="shrink-0 text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
+    </button>
+  )
+}
+
 export default function MainMenu({ onExplore, onTarget, onSaved }) {
   const savedCount = useSavedStore((s) => s.saved.length)
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center text-ink py-12">
-      <div className="relative z-10 flex flex-col items-center px-4 w-full max-w-2xl">
-        {/* The hub had no landmark either — a screen reader's region menu had
-            nothing to jump to. A flex-column <main> reproduces this wrapper's
-            own centering (its children were direct flex items of it), so the
-            layout does not shift; the footer stays a sibling below, outside
-            main, so its <footer> keeps its contentinfo. landmarks.test.jsx
-            guards both. */}
-        <main className="flex flex-col items-center w-full">
-        {/* Two visible lines, both inside the h1. The heading used to be the
-            wordmark alone — "PC Builder" — which told a reader nothing the logo
-            had not already said and gave the root URL, the one page with no path
-            to describe it, no heading worth indexing. The second line is the same
-            promise index.html's <title> and description already make, so the
-            page and its metadata finally agree. Deliberately NOT an sr-only
-            span: if it is worth telling a crawler it is worth showing a reader. */}
-        <h1 className="rise font-display mb-3 text-ink tracking-tight text-center">
-          {/* The brand orange lives here, in TopBar, SiteChrome and
-              ErrorBoundary, and nowhere else — accentIsBrandOnly.test.js.
-              @wordmark */}
-          <span className="block text-5xl font-extrabold">Custom PC <span className="text-accent">Builder</span></span>
-          <span className="block mt-2 text-lg font-semibold text-muted">Build and price a gaming PC in 3D</span>
-        </h1>
-        <p className="rise text-muted mb-1">Pick parts that actually work together.</p>
-        {/* "Free · no sign-up" is the footer's line, and the footer is on this
-            screen too — saying it twice within one viewport spends the only
-            line here that could carry something new. This says the other half
-            of the same promise, in the same words HelpPage and the Privacy
-            page already use for it. */}
-        <p className="rise text-faint text-xs mb-10">Nothing to install · your builds stay in your own browser</p>
-
-        {/* A bank of RAM, all of it seated, and hovering lifts a stick out of
-            its slot: clips rock outward, the contacts lose the gold, and the
-            socket underneath comes into view.
-
-            ⚠️ These are seated UNCONDITIONALLY, and that is a reversal. They
-            briefly tracked content instead — carry-on seated, saved-builds only
-            once something was in it, start-a-build a permanently empty slot —
-            which encoded real state but left a first-time visitor looking at a
-            screen of dead hardware. A box that is RAM is seated; the hover is
-            what the state language does here now.
-
-            So the empty/seated distinction still means something everywhere
-            else, but it is NOT what this screen is for. If you are about to
-            wire `seated` back to savedCount, that was tried.
-
-            No designators. The rule is that a designator names a real slot
-            holding one swappable part — these are navigation, and the first
-            migration's invented ones (BUILD_1, SETUP_1) were rejected for
-            exactly this reason. The silhouette carries the identity. */}
-        <div className="rise rise-2 w-full flex flex-col gap-3">
-          <button onClick={onExplore} className="w-full text-left transition group hover:brightness-110">
-            <Block>
-              <div className="flex items-center gap-3">
-                <Cpu size={24} className="text-brass shrink-0" aria-hidden="true" />
-                <div className="flex-1">
-                  <div className="text-xl font-semibold text-brass">What will my build get?</div>
-                  <div className="text-sm text-muted mt-0.5">Enter your PC parts and see the frame rates they get in a game.</div>
-                </div>
-                <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </div>
-            </Block>
-          </button>
-
-          <button onClick={onTarget} className="w-full text-left transition group hover:brightness-110">
-            <Block>
-              <div className="flex items-center gap-3">
-                <Gamepad2 size={24} className="text-brass shrink-0" aria-hidden="true" />
-                <div className="flex-1">
-                  <div className="text-xl font-semibold text-brass">Build for a game</div>
-                  <div className="text-sm text-muted mt-0.5">Pick a game, a frame rate and a budget, and get the build that hits it.</div>
-                </div>
-                <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </div>
-            </Block>
-          </button>
-
-          <button onClick={onSaved} className="w-full text-left transition group hover:brightness-110">
-            <Block>
-              <div className="flex items-center gap-3">
-                <Bookmark size={20} className="text-brass shrink-0" aria-hidden="true" />
-                <div className="flex-1">
-                  <div className="text-base font-semibold text-ink group-hover:text-brass">Saved builds</div>
-                  <div className="text-sm text-muted mt-0.5">
-                    {savedCount === 0
-                      ? 'Nothing saved yet'
-                      : `${savedCount} saved · load one, or compare two side by side`}
-                  </div>
-                </div>
-                <ArrowRight size={16} className="text-muted transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </div>
-            </Block>
-          </button>
+    <div className="relative flex min-h-screen flex-col text-ink">
+      {/* The hub's landmark: a <main>, with the footer a sibling below it so its
+          <footer> keeps its contentinfo. landmarks.test.jsx guards both. */}
+      <main className="mx-auto w-full max-w-2xl flex-1 px-5">
+        {/* A PC as the picture: a still render of an example build from the
+            site's own 3D view (scripts/capture-welcome-render.mjs). A still,
+            not the live view, because the live one is ~11 MB and phones never
+            download it unasked. Decorative, so alt="". */}
+        {/* Feathered left and right so the picture melts into the page where the
+            column is narrower than the window, instead of ending in a hard edge. */}
+        <div className="relative -mx-5 h-[280px] overflow-hidden sm:h-[360px] sm:[mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)]">
+          <img src="/img/welcome-pc.webp" alt="" width="1200" height="800"
+               className="absolute inset-0 h-full w-full object-cover object-[50%_62%]" />
+          <div aria-hidden="true" className="absolute inset-0"
+               style={{ background: 'linear-gradient(180deg, var(--ground) 0%, transparent 25%, transparent 60%, var(--ground) 100%)' }} />
         </div>
 
-        </main>
+        {/* Two visible lines, both inside the h1: the wordmark, then the same
+            promise index.html's <title> and description make, so the page and
+            its metadata agree. Not sr-only: if it is worth telling a crawler it
+            is worth showing a reader. The brand orange lives here, in TopBar,
+            SiteChrome and ErrorBoundary, and nowhere else —
+            accentIsBrandOnly.test.js. @wordmark */}
+        <h1 className="rise -mt-6 relative">
+          <span className="block font-display text-lg font-extrabold tracking-tight">Custom PC <span className="text-accent">Builder</span></span>
+          <span className="mt-2 block font-wide text-[32px] font-extrabold leading-[1.05] text-ink sm:text-[40px]">Build and price a gaming PC in 3D</span>
+        </h1>
+        <p className="rise mt-3"><Tag><b>{perfGames.length}</b> games benchmarked</Tag></p>
+        <p className="rise mt-2 mb-8 text-sm text-muted">Pick parts that actually work together. Nothing to install, and your builds stay in your own browser.</p>
 
-        <div className="rise rise-3 w-full"><SiteFooter /></div>
-      </div>
+        <div className="rise rise-2 border-b border-line">
+          <PathRow title="What will my build get?" line="Enter your parts and see the frame rate in a game." onClick={onExplore} />
+          <PathRow title="Build for a game" line="A game, a frame rate and a budget in; a PC out." onClick={onTarget} />
+          <PathRow small title="Saved builds"
+                   line={savedCount === 0 ? 'Nothing saved yet' : `${savedCount} saved · load one, or compare two side by side`}
+                   onClick={onSaved} />
+        </div>
+      </main>
+
+      <div className="rise rise-3 w-full"><SiteFooter /></div>
     </div>
   )
 }

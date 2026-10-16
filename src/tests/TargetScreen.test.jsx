@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react'
+import { render, screen, act, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, beforeEach } from 'vitest'
 import TargetScreen from '../screens/TargetScreen'
@@ -69,5 +69,17 @@ describe('TargetScreen', () => {
     render(<TargetScreen />)
     await userEvent.click(find())
     expect(screen.getByText(/no complete build fits £100/i)).toBeInTheDocument()
+  })
+})
+
+describe('TargetScreen — each option leads with its answer', () => {
+  it('puts fps, price and the button before the parts list', async () => {
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    const option = screen.getByText(/best build within/i).closest('section')
+    const button = within(option).getByRole('button', { name: /use this build/i })
+    const parts = option.querySelector('details')
+    expect(parts).not.toBeNull()
+    expect(button.compareDocumentPosition(parts) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 })
