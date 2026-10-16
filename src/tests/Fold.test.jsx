@@ -41,6 +41,6 @@ describe('Fold', () => {
   it('pins its header while open', () => {
     const { container } = mount()
     expect(container.querySelector('summary').className).toMatch(/\bsticky\b/)
-    expect(container.querySelector('summary').className).toMatch(/\btop-0\b/)
+    expect(container.querySelector('summary').className).toContain('top-[var(--chrome-h,0px)]')
   })
 })

@@ -25,6 +25,7 @@ import Deferred3D from '../components/Deferred3D'
 import StepHeader from '../components/StepHeader'
 import Dock from '../components/Dock'
 import { useHashView } from '../hooks/useHashView'
+import { useChromeHeight } from '../hooks/useChromeHeight'
 import useBuilderStore from '../store/useBuilderStore'
 
 // A finger means mobile data, and the 3D view is 11 MB of it. Read once at
@@ -57,17 +58,8 @@ export default function BuilderScreen() {
   const chromeRef = useRef(null)
 
   // The header is sticky inside the scroller, so nothing has to pad for a
-  // hard-coded height. Its live height is published as --chrome-h for the
-  // folds below, whose own headers pin just underneath it.
-  useEffect(() => {
-    const chrome = chromeRef.current
-    if (!chrome || typeof ResizeObserver === 'undefined') return
-    const ro = new ResizeObserver(() => {
-      scrollRef.current?.style.setProperty('--chrome-h', `${chrome.offsetHeight}px`)
-    })
-    ro.observe(chrome)
-    return () => ro.disconnect()
-  }, [])
+  // hard-coded height; its live height goes to the folds below as --chrome-h.
+  useChromeHeight(chromeRef, scrollRef)
 
   // Fresh views (and the first landing in the builder) start at the top.
   useEffect(() => {

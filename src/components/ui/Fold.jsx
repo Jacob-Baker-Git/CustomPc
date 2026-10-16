@@ -10,13 +10,20 @@ import { useIsDesktop } from '../../hooks/useIsDesktop'
 //
 // Opening does not scroll the page, and the header stays pinned while the
 // fold is open so it can be shut without scrolling back up to it.
-export default function Fold({ title, summary, openOnDesktop = true, id, className = '', stickyTop = 'top-0', children }) {
+// The title is a real heading (`level`, h3 by default), so a screen reader's
+// heading list still shows each section even while it is folded.
+//
+// The header pins below the page's own sticky header, whose height its scroll
+// container publishes as --chrome-h (useChromeHeight); without one it pins at
+// the top.
+export default function Fold({ title, summary, openOnDesktop = true, id, className = '', level = 3, children }) {
   const desktop = useIsDesktop()
+  const Heading = `h${level}`
   return (
     <details id={id} open={openOnDesktop && desktop} className={`group border-t border-line ${className}`}>
-      <summary className={`sticky ${stickyTop} z-10 flex cursor-pointer list-none items-baseline justify-between gap-4 bg-ground py-3.5 [&::-webkit-details-marker]:hidden`}>
+      <summary className={`sticky top-[var(--chrome-h,0px)] z-10 flex cursor-pointer list-none items-baseline justify-between gap-4 bg-ground py-3.5 [&::-webkit-details-marker]:hidden`}>
         <span className="min-w-0">
-          <span className="block font-semibold text-ink">{title}</span>
+          <Heading className="block text-base font-semibold text-ink">{title}</Heading>
           {summary && <span className="block text-[13px] text-muted">{summary}</span>}
         </span>
         <span aria-hidden="true" className="font-mono text-muted group-open:hidden">+</span>

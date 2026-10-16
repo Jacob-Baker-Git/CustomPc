@@ -29,7 +29,10 @@ function verdictFor(avg, low) {
 export function refreshFit(avg, low, { ceiling = false } = {}) {
   // Room above the average so the bar never touches the end of its own scale.
   const scaleMax = REFRESH_TIERS.find((t) => t >= avg * 1.1) ?? REFRESH_TIERS[REFRESH_TIERS.length - 1]
-  const ticks = REFRESH_TIERS.filter((t) => t <= scaleMax)
+  // A tick within a fifth of the scale of the next one would print its label
+  // on top of it (120 and 144 Hz on a 144 scale), so the lower one goes.
+  const ticks = REFRESH_TIERS.filter((t, i, all) => t <= scaleMax
+    && !(all[i + 1] <= scaleMax && (all[i + 1] - t) / scaleMax < 0.2))
   const verdict = verdictFor(avg, low)
   return {
     scaleMax,

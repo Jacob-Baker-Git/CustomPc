@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selPeakDraw } from '../store/useBuilderStore'
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
@@ -268,8 +269,10 @@ export default function BuildSummary() {
         </Block>
       </div>
 
-      {saveOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+      {/* Portalled for the same reason as ConfirmDialog: this column is
+          transformed, which would trap a fixed overlay inside it. */}
+      {saveOpen && createPortal(
+        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
           <div role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
             <h3 className="text-ink text-sm font-semibold mb-3">Save this build</h3>
             <label htmlFor="save-name" className="block text-xs text-muted mb-1">Build name</label>
@@ -289,7 +292,8 @@ export default function BuildSummary() {
               <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
 
       {clearOpen && (

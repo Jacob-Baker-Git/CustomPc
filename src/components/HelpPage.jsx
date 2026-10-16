@@ -26,7 +26,7 @@ export default function HelpPage() {
       {/* Questions, so every answer starts shut, on desktop too. */}
       <div className="border-b border-line">
         {FAQS.map((f) => (
-          <Fold key={f.q} title={f.q} openOnDesktop={false}>
+          <Fold key={f.q} title={f.q} level={2} openOnDesktop={false}>
             <p className="max-w-[68ch] text-sm leading-relaxed text-muted">{f.a}</p>
           </Fold>
         ))}

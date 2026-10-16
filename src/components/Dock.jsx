@@ -37,6 +37,9 @@ export default function Dock({ view, onChange, inline = false }) {
   )
 
   if (inline) {
+    // Summary has its own Save and Share; doubling them here offered two of
+    // each that behaved differently.
+    if (!action) return null
     return <div className="hidden justify-end px-4 pb-8 sm:px-6 lg:flex lg:px-10">{actions}</div>
   }
 

@@ -9,12 +9,15 @@ export function useBuildActions() {
   const { budget, resolution, selectedParts, selectedPeripherals } = useBuilderStore()
   const total = useBuilderStore(selTotalSpent) + useBuilderStore(selPeripheralsTotal)
   const saveBuild = useSavedStore((s) => s.saveBuild)
+  const saved = useSavedStore((s) => s.saved)
   const canSave = Object.keys(selectedParts).length + Object.keys(selectedPeripherals).length > 0
   const fallbackName = `Build · £${total.toFixed(0)}`
 
   function save(name) {
     if (!canSave) return
     const code = encodeBuild({ budget, resolution, parts: selectedParts, peripherals: selectedPeripherals })
+    // The same build saved twice is two identical entries to tell apart later.
+    if (saved.some((b) => b.code === code)) return
     saveBuild(name?.trim() || fallbackName, code)
   }
 

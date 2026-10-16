@@ -1,10 +1,17 @@
+import { useRef } from 'react'
+import { useChromeHeight } from '../hooks/useChromeHeight'
 import { ArrowLeft } from 'lucide-react'
 import SiteFooter from './SiteFooter'
 
+// The sticky header's height goes to the page as --chrome-h, so a Fold's
+// pinned header (the Help FAQ) sits below it rather than under it.
 export default function SiteChrome({ onBack, children }) {
+  const rootRef = useRef(null)
+  const headerRef = useRef(null)
+  useChromeHeight(headerRef, rootRef)
   return (
-    <div className="relative min-h-screen text-ink">
-      <header className="sticky top-0 z-40 flex items-center gap-3 border-b border-line bg-ground px-4 py-2">
+    <div ref={rootRef} className="relative min-h-screen text-ink">
+      <header ref={headerRef} className="sticky top-0 z-40 flex items-center gap-3 border-b border-line bg-ground px-4 py-2">
         <button
           onClick={onBack}
           aria-label="Back"

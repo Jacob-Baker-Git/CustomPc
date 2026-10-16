@@ -26,10 +26,6 @@ import { perfFoldSummaries } from '../../lib/perfFoldSummaries'
 // rather than each group inventing its own rhythm.
 const GRID = 'grid gap-3 sm:grid-cols-2 xl:grid-cols-3'
 
-// Fold headers pin just under the builder's sticky top bar and step row,
-// whose live height BuilderScreen publishes as --chrome-h.
-const STICKY = 'top-[var(--chrome-h,0px)]'
-
 const capacity = (gb) => (gb >= 1000 && gb % 1000 === 0 ? `${gb / 1000}TB` : `${gb}GB`)
 
 export default function PerformanceScreen() {
@@ -161,7 +157,7 @@ export default function PerformanceScreen() {
 
 
       <Fold title={selectedGame ? `What's holding back ${selectedGame.name}` : "What's holding it back"}
-            summary={folds.holding} stickyTop={STICKY}>
+            summary={folds.holding}>
         <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">Which part is the limit differs per game, so it is worked out from the frame rates rather than by comparing the two parts in the abstract.</p>
         <div className="grid gap-3 sm:grid-cols-2">
           <StatPanel
@@ -225,7 +221,7 @@ export default function PerformanceScreen() {
         </div>
       </Fold>
 
-      <Fold title="Power and cooling" summary={folds.power} stickyTop={STICKY}>
+      <Fold title="Power and cooling" summary={folds.power}>
         <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the build draws, whether the supply has room for it, and whether the cooler can shed it.</p>
       <div className={GRID}>
         <StatPanel
@@ -283,7 +279,7 @@ export default function PerformanceScreen() {
       </div>
       </Fold>
 
-      <Fold title="The hardware" summary={folds.hardware} stickyTop={STICKY}>
+      <Fold title="The hardware" summary={folds.hardware}>
         <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the parts can do on paper. Computed from published specifications, so this half works whether or not anyone has benchmarked your exact combination.</p>
       <div className={GRID}>
         <StatPanel
@@ -357,7 +353,7 @@ export default function PerformanceScreen() {
         </StatPanel>
       </div>
       </Fold>
-      <Fold title="Every game at once" summary={folds.games} stickyTop={STICKY}>
+      <Fold title="Every game at once" summary={folds.games}>
       <div className="mt-6">
         <SummaryStrip hasCore={hasCore} report={report} power={power} resolution={resolution} />
       </div>

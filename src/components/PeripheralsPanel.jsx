@@ -14,10 +14,10 @@ import {
 } from '../lib/peripheralFilter'
 
 const CATEGORIES = [
-  { id: 'monitor',  label: 'Monitor',  icon: Monitor,    blurb: 'The one part you actually look at' },
-  { id: 'keyboard', label: 'Keyboard', icon: Keyboard,   blurb: 'Membrane is fine; mechanical lasts' },
-  { id: 'mouse',    label: 'Mouse',    icon: Mouse,      blurb: 'Shape matters more than DPI' },
-  { id: 'headset',  label: 'Headset',  icon: Headphones, blurb: 'Wired sounds better per pound' },
+  { id: 'monitor',  label: 'Monitor',  plural: 'monitors', icon: Monitor,    blurb: 'The one part you actually look at' },
+  { id: 'keyboard', label: 'Keyboard', plural: 'keyboards', icon: Keyboard,   blurb: 'Membrane is fine; mechanical lasts' },
+  { id: 'mouse',    label: 'Mouse',    plural: 'mice', icon: Mouse,      blurb: 'Shape matters more than DPI' },
+  { id: 'headset',  label: 'Headset',  plural: 'headsets', icon: Headphones, blurb: 'Wired sounds better per pound' },
 ]
 
 function specLine(p) {
@@ -170,7 +170,7 @@ export default function PeripheralsPanel() {
         </div>
 
         <div className="space-y-8">
-          {CATEGORIES.map(({ id, label, icon: Icon, blurb }) => {
+          {CATEGORIES.map(({ id, label, plural, icon: Icon, blurb }) => {
             const { all } = byCategory[id] ?? { all: [] }
             // Price bands and the single spec chip row used to live inline here,
             // one set per category. They are in the Filters panel now — four
@@ -216,7 +216,7 @@ export default function PeripheralsPanel() {
                       onClick={() => setExpanded((e) => ({ ...e, [id]: true }))}
                       className="mt-2 min-h-11 text-sm font-semibold text-brass hover:underline"
                     >
-                      Show all {shown.length} {label.toLowerCase()}s
+                      Show all {shown.length} {plural}
                     </button>
                   )}
                   </>
