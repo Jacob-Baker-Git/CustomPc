@@ -23,6 +23,8 @@ export default {
       fontFamily: {
         sans: ['Hanken Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['Archivo', 'Hanken Grotesk', 'ui-sans-serif', 'sans-serif'],
+        // Headings in the configurator look: a static width-125% instance (fonts.css).
+        wide: ['Archivo Wide', 'Archivo', 'Hanken Grotesk', 'ui-sans-serif', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       colors: {
