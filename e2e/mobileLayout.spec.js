@@ -415,18 +415,20 @@ test.describe('the frame-rate table fits the box it is in', () => {
 // .build-grid, so their order is NOT inert above lg and is reset explicitly.
 // That reset is what the desktop test defends. Measured before it existed:
 // rating top=76, usecase top=1437, i.e. the chips flipped below the score.
-test.describe('the build tab reads in the right order', () => {
+test.describe('the Summary tab reads in the right order', () => {
   const topsOf = (page, selectors) =>
     page.evaluate(
       (sels) => sels.map((s) => document.querySelector(s)?.getBoundingClientRect().top ?? null),
       selectors,
     )
 
-  test('on a phone: parts, then the 3D view, then the score', async ({ page }) => {
+  // Spec 2026-10-16: on a phone Summary answers first (score, then the use
+  // case it is rated for), then the parts list, then the 3D view last.
+  test('on a phone: the score, the use case, the parts, then the 3D view', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await generateBuild(page)
 
-    const order = ['.area-parts', '.area-viz', '.area-rating', '.area-usecase']
+    const order = ['.area-rating', '.area-usecase', '.area-parts', '.area-viz']
     const tops = await topsOf(page, order)
 
     expect(tops, 'every ordered panel is on the page').not.toContain(null)

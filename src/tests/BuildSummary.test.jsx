@@ -30,13 +30,6 @@ describe('BuildSummary', () => {
     expect(clear.className).toMatch(/text-muted/)
   })
 
-  it('rails the score block in the colour of the score itself', () => {
-    // The rail and the figure must agree about the same build, so the
-    // thresholds mirror scoreText rather than being picked again.
-    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
-    const { container } = render(<BuildSummary />)
-    expect(container.innerHTML).toMatch(/inset_2px_0_0_0_var\(--(good|ok|bad)\)/)
-  })
   it('keeps the retailer link reachable without a pointer', () => {
     // Revealed on hover AND focus. Hover-only would put ten links behind a
     // gesture a keyboard cannot make.
@@ -59,40 +52,10 @@ describe('BuildSummary', () => {
 
   // This tab used to open with a 22-row frame-rate table whatever the PC was
   // for, which disagreed with the score shown everywhere else.
-  describe('CustomPC score block', () => {
-    it('leads with the score and the use case it was rated for', () => {
-      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'programming' })
-      render(<BuildSummary />)
-      expect(screen.getByText(/custompc score/i)).toBeInTheDocument()
-      expect(screen.getByText(/rated for/i)).toHaveTextContent('Programming')
-      expect(screen.getByText(/for programming$/i)).toBeInTheDocument()
-    })
-
-    it('names the weakest links', () => {
-      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'gaming' })
-      render(<BuildSummary />)
-      expect(screen.getByText(/weakest links/i)).toBeInTheDocument()
-    })
-
-    it('keeps frame rates behind a toggle instead of dumping the table', () => {
-      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'gaming' })
-      render(<BuildSummary />)
-      const toggle = screen.getByRole('button', { name: /frame rates/i })
-      expect(toggle).toHaveAttribute('aria-expanded', 'false')
-      fireEvent.click(toggle)
-      expect(toggle).toHaveAttribute('aria-expanded', 'true')
-    })
-
-    it('offers no frame rates at all for a use case nobody measures in fps', () => {
-      useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'office' })
-      render(<BuildSummary />)
-      expect(screen.queryByRole('button', { name: /frame rates/i })).toBeNull()
-    })
-  })
-
   it('flags unpicked core categories as visibly missing', () => {
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     render(<BuildSummary />)
+    fireEvent.click(screen.getByRole('button', { name: /more parts$/ }))
     // 9 essentials, 2 picked → 7 flagged. Paste is optional, as on the Build tab.
     expect(screen.getAllByText(/not selected/i)).toHaveLength(7)
     expect(screen.getByText(/7 parts missing/i)).toBeInTheDocument()
@@ -106,6 +69,7 @@ describe('BuildSummary', () => {
     }
     useBuilderStore.setState({ selectedParts: full })
     render(<BuildSummary />)
+    fireEvent.click(screen.getByRole('button', { name: /more parts$/ }))
     expect(screen.queryByText(/missing/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/not selected/i)).not.toBeInTheDocument()
     expect(screen.getByText(/optional/i)).toBeInTheDocument()
@@ -159,3 +123,23 @@ describe('BuildSummary', () => {
   })
 })
 
+
+// Configurator redesign (spec 2026-10-16): on a phone the parts list shows its
+// first four rows, the rest one tap away. (jsdom has no matchMedia, so this
+// renders as a phone.)
+describe('BuildSummary — parts list on a phone', () => {
+  const firstOf = (cat) => partsData.find((p) => p.category === cat && !p.legacy)
+  const nine = Object.fromEntries(
+    ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans'].map((c) => [c, firstOf(c)]),
+  )
+
+  it('shows four rows and offers the rest', () => {
+    useBuilderStore.setState({ selectedParts: nine })
+    const { container } = render(<BuildSummary />)
+    const rows = () => container.querySelectorAll('[data-row], [data-missing-row]')
+    expect(rows()).toHaveLength(4)
+    const more = screen.getByRole('button', { name: /^\+\d+ more parts$/ })
+    fireEvent.click(more)
+    expect(container.querySelectorAll('[data-row]')).toHaveLength(9)
+  })
+})

@@ -39,6 +39,11 @@ describe('the 3D view lives on Summary only (spec 2026-10-13)', () => {
     expect(screen.queryByText('/100')).toBeNull()
   })
 
+  it('shows the score once on Summary', () => {
+    openOn('summary')
+    expect(screen.getAllByText('/100')).toHaveLength(1)
+  })
+
   it('offers the next step of the path', () => {
     openOn('build')
     // The phone dock and the desktop inline button both render; CSS shows one.

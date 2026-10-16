@@ -1,13 +1,14 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selPeakDraw } from '../store/useBuilderStore'
-import useCatalogStore from '../store/useCatalogStore'
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { useBuildActions } from '../hooks/useBuildActions'
+import { useIsDesktop } from '../hooks/useIsDesktop'
+
+const PHONE_ROWS = 4
 import { buildMarkdown } from '../lib/buildMarkdown'
-import { rateBuild } from '../lib/partRatings'
-import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
-import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
+import { BUILD_PROFILES } from '../lib/buildProfiles'
+import { PANEL_STRONG } from '../lib/uiTokens'
 import Block from './ui/Block'
 import GamePerformanceList from './GamePerformanceList'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
@@ -18,23 +19,6 @@ import { countEssentials, isOptional } from '../lib/recommendedOrder'
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
-const CAT_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
-const scoreText = (s) => (s >= 80 ? 'text-good' : s >= 50 ? 'text-ok' : 'text-bad')
-
-// The score's rail, in the score's own colour, so the block says what the
-// number says before the number is read.
-//
-// ⚠️ Thresholds MIRROR scoreText above. If they drift, the rail and the figure
-// beside it disagree about the same build, which is worse than no rail.
-//
-// An inset shadow rather than border-l: a border changes the box and shifts its
-// contents 2px out of line. It also sidesteps the opacity trap, since it names
-// the CSS var directly rather than reaching for an alpha modifier.
-const scoreRail = (s) =>
-  s >= 80 ? 'shadow-[inset_2px_0_0_0_var(--good)]'
-    : s >= 50 ? 'shadow-[inset_2px_0_0_0_var(--ok)]'
-      : 'shadow-[inset_2px_0_0_0_var(--bad)]'
-
 function Row({ label, name, brand, price }) {
   return (
     <div data-row className="group flex items-center py-1.5 border-t border-line">
@@ -62,7 +46,7 @@ function Row({ label, name, brand, price }) {
 
 function MissingRow({ label, optional }) {
   return (
-    <div className="flex items-center py-1.5 border-t border-line">
+    <div data-missing-row className="flex items-center py-1.5 border-t border-line">
       <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
         {label}
       </span>
@@ -91,21 +75,14 @@ export default function BuildSummary() {
   const power = useBuilderStore(selPeakDraw)
   const resolution = useBuilderStore((s) => s.resolution)
   const useCase = useBuilderStore((s) => s.useCase)
-  const partsData = useCatalogStore((s) => s.parts)
   const [copied, setCopied] = useState(false)
   const [showFps, setShowFps] = useState(false)
+  // A phone shows the first few rows of the parts list; desktop shows them all
+  // (spec 2026-10-16). Read once at mount, like every fold's default.
+  const desktop = useIsDesktop()
+  const [allRows, setAllRows] = useState(false)
+  const capList = !desktop && !allRows
 
-  // The same rating the Build tab shows. This tab used to open with a 22-row
-  // frame-rate table, which answered a question only gamers had asked and
-  // disagreed with the score everywhere else on the site.
-  const rating = useMemo(
-    () => rateBuild(selectedParts, useCase, partsData),
-    [selectedParts, useCase, partsData],
-  )
-  const weakest = useMemo(
-    () => Object.entries(rating.parts).sort((a, b) => a[1].score - b[1].score).filter(([, i]) => i.isWeakLink).slice(0, 3),
-    [rating],
-  )
   const framePaced = Boolean(BUILD_PROFILES[useCase]?.cpuGpuPaced)
 
   const buildRows = CATEGORIES.map((c) => ({ key: c.id, label: c.label, part: selectedParts[c.id] })).filter((r) => r.part)
@@ -168,30 +145,6 @@ export default function BuildSummary() {
             <p className="text-sm text-muted py-6 text-center">No parts selected yet. Head to the Build tab.</p>
           ) : (
             <>
-              {rating.overall > 0 && (
-                <div className={`mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3 ${scoreRail(rating.overall)}`}>
-                  <div className="flex items-baseline gap-2">
-                    <span className={`font-display text-3xl font-extrabold tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
-                    <span className="text-xs text-faint">/100</span>
-                    <span className="text-[11px] text-muted ml-1">CustomPC score</span>
-                    <span className={`text-xs font-semibold ml-auto ${scoreText(rating.overall)}`}>{rating.verdict}</span>
-                  </div>
-                  <p className="text-[11px] text-faint mt-1.5">
-                    Rated for <span className="text-muted">{USE_CASE_LABEL[useCase] ?? useCase}</span>. Change that on the Build tab.
-                  </p>
-                  {weakest.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-2.5">
-                      {weakest.map(([cat, info]) => (
-                        <span key={cat} className="text-[10px] px-1.5 py-0.5 rounded-md border border-line text-muted">
-                          {CAT_LABEL[cat] ?? cat} <span className={`${TELEMETRY} ${scoreText(info.score)}`}>{info.score}</span>
-                        </span>
-                      ))}
-                      <span className="text-[10px] text-faint self-center">weakest links</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
               {buildRows.length > 0 && (
                 <>
                   <div className="mt-4 mb-1 flex items-baseline justify-between">
@@ -200,12 +153,21 @@ export default function BuildSummary() {
                       <span className="text-[11px] text-ok">{missingCount} part{missingCount === 1 ? '' : 's'} missing</span>
                     )}
                   </div>
-                  {CATEGORIES.map((c) => {
+                  {(capList ? CATEGORIES.slice(0, PHONE_ROWS) : CATEGORIES).map((c) => {
                     const part = selectedParts[c.id]
                     return part
                       ? <Row key={c.id} label={c.label} name={part.name} brand={part.brand} price={part.price} />
                       : <MissingRow key={c.id} label={c.label} optional={isOptional(c.id)} />
                   })}
+                  {capList && (
+                    <button
+                      type="button"
+                      onClick={() => setAllRows(true)}
+                      className="mt-1 min-h-11 w-full border-t border-line text-left text-sm font-semibold text-brass hover:underline"
+                    >
+                      +{CATEGORIES.length - PHONE_ROWS} more parts
+                    </button>
+                  )}
                 </>
               )}
               {periphRows.length > 0 && (

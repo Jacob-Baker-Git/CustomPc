@@ -26,7 +26,6 @@ import StepHeader from '../components/StepHeader'
 import Dock from '../components/Dock'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
-import { PANEL } from '../lib/uiTokens'
 
 // A finger means mobile data, and the 3D view is 11 MB of it. Read once at
 // mount rather than as a media query, because this decides whether a component
@@ -150,8 +149,13 @@ export default function BuilderScreen() {
                   page stops scrolling and the model starts — they scroll, the
                   build spins, and it reads as a bug. The frame plus the hint
                   below say "this rectangle is the 3D toy, everything outside
-                  it is the page". */}
-              <div className={`area-viz ${PANEL} relative h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px] hover:border-line-strong transition-colors overflow-hidden`}>
+                  it is the page".
+
+                  The configurator look (spec 2026-10-16) wanted the render
+                  edge-to-edge with a fade. The EDGE stays for the reason above;
+                  only the filled box goes, so the PC sits on the page itself
+                  inside a hairline. */}
+              <div className="area-viz relative h-[42vh] overflow-hidden border border-line transition-colors hover:border-line-strong md:h-[48vh] lg:h-auto lg:min-h-[520px]">
                 {show3D ? (
                   <>
                     <CanvasErrorBoundary>

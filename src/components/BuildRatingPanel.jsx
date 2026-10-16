@@ -6,6 +6,7 @@ import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRa
 import ScoreInfo from './ScoreInfo'
 import { TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
 import Block from './ui/Block'
+import Fold from './ui/Fold'
 import PartThumb from './art/PartThumb'
 import { FPS_CAVEAT } from '../lib/siteContent'
 
@@ -61,6 +62,11 @@ export default function BuildRatingPanel() {
     [rating, optionsByCat, budget, spent],
   )
 
+  const weakestRow = rows.reduce((w, r) => (w && w[1].score <= r[1].score ? w : r), null)
+  const breakdownSummary = weakestRow
+    ? `${rows.length} parts rated · weakest: ${CAT_LABEL[weakestRow[0]] ?? weakestRow[0]} at ${weakestRow[1].score}`
+    : 'No parts rated yet'
+
   function chooseUpgrade(cat, partId) {
     const opt = (optionsByCat[cat] ?? []).find((o) => o.toPart.id === partId)
     if (opt) addPart(cat, opt.toPart)
@@ -78,7 +84,7 @@ export default function BuildRatingPanel() {
       ) : (
         <>
           <div className="flex items-baseline gap-2 mb-4">
-            <span className={`font-display text-4xl font-extrabold tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
+            <span className={`font-wide text-5xl font-black tabular-nums leading-none ${scoreText(rating.overall)}`}>{rating.overall}</span>
             <span className="text-xs text-faint">/100</span>
             <span className={`text-xs font-semibold ml-auto ${scoreText(rating.overall)}`}>{rating.verdict}</span>
           </div>
@@ -105,13 +111,14 @@ export default function BuildRatingPanel() {
             </div>
           )}
 
-          <div className="space-y-2">
+          <Fold title="Score by part" summary={breakdownSummary}>
+          <div>
             {rows.map(([cat, info]) => {
               const opts = optionsByCat[cat] ?? []
               const label = CAT_LABEL[cat] ?? cat
               const open = openWhy === cat
               return (
-                <div key={cat} className="flex gap-3 border border-line rounded-lg px-3 py-2.5">
+                <div key={cat} className="flex gap-3 border-t border-line py-3">
                   {/* The picture anchors the row. Without it every row opened
                       with a 10px grey word, so nine rows read as nine
                       identical paragraphs and the eye had nothing to catch on. */}
@@ -184,6 +191,7 @@ export default function BuildRatingPanel() {
           </div>
           {/* The "+N fps" gains above are modelled, same as the frame-rate list. */}
           <p className="mt-3 text-[11px] text-muted leading-relaxed">{FPS_CAVEAT}</p>
+          </Fold>
         </>
       )}
     </Block>
