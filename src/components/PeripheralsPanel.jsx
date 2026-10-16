@@ -181,10 +181,7 @@ export default function PeripheralsPanel() {
             const { visible, hidden } = firstFew(shown, { pickedId: picked?.id, capped: !anyFilter && !expanded[id] })
             return (
               <section key={id}>
-                {/* On a surface: this header sits outside the product cards, so
-                    without one its label, blurb and count sit on bare board.
-                    e2e/builderLegibility.spec.js counted three of them here. */}
-                <div className="flex items-baseline gap-2 mb-3 rounded-lg bg-surface px-3 py-2">
+                <div className="mb-1 flex items-baseline gap-2 pt-2">
                   <Icon size={15} className="text-brass shrink-0 self-center" aria-hidden="true" />
                   <h3 className="text-sm font-semibold text-ink">{label}</h3>
                   <span className="text-[11px] text-faint hidden sm:inline">{blurb}</span>
@@ -200,7 +197,7 @@ export default function PeripheralsPanel() {
                   </p>
                 ) : (
                   <>
-                  <div className="grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 lg:grid-cols-3">
                     {visible.map((p) => {
                       const isSelected = picked?.id === p.id
                       return (
