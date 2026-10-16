@@ -6,10 +6,11 @@ import SpecSheet from './SpecSheet'
 import PeripheralFilterPanel from './PeripheralFilterPanel'
 import { TELEMETRY } from '../lib/uiTokens'
 import Block from './ui/Block'
+import Tag from './ui/Tag'
 import {
   filterPeripherals, specValues, SORTS, DEFAULT_SORT,
   brandValues, refreshBandsFor, toFilterOptions,
-  EMPTY_FILTERS, activeFilterCount,
+  EMPTY_FILTERS, activeFilterCount, firstFew,
 } from '../lib/peripheralFilter'
 
 const CATEGORIES = [
@@ -32,8 +33,8 @@ function PeripheralCard({ p, isSelected, onToggle }) {
 
   return (
     <div
-      className={`relative rounded-xl border p-4 flex flex-col gap-2 transition-colors
-        ${isSelected ? 'border-gold bg-gold-soft' : 'border-line bg-surface hover:border-line-strong'}`}
+      className={`relative flex flex-col gap-2 border-t py-3 transition-colors
+        ${isSelected ? 'border-gold' : 'border-line'}`}
     >
       {isSelected && (
         <span className="absolute top-2 right-2 flex items-center gap-1 text-gold text-[10px] font-semibold">
@@ -74,6 +75,9 @@ export default function PeripheralsPanel() {
   const [filterOpen, setFilterOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState(DEFAULT_SORT)
+  // Which categories the reader asked to see in full. Each shows its first four
+  // until then (spec 2026-10-16); a search, filter or re-sort lifts the cap.
+  const [expanded, setExpanded] = useState({})
 
   const byCategory = useMemo(() => {
     const map = {}
@@ -111,23 +115,12 @@ export default function PeripheralsPanel() {
       <div className="max-w-5xl mx-auto">
         {/* A running total and a progress line, so the tab says how far along you
             are rather than just listing four unrelated grids. */}
-        <Block className="mb-6">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <div>
-              <h2 className="font-display text-xl font-bold text-ink">Peripherals</h2>
-              <p className="text-xs text-muted mt-0.5">Optional: they are counted separately from the build budget.</p>
-            </div>
-            <div className="ml-auto flex items-center gap-6">
-              <div className="text-right">
-                <div className="text-[10px] uppercase tracking-wide text-faint">Chosen</div>
-                <div className={`${TELEMETRY} text-sm text-ink`}>{pickedCount} / {CATEGORIES.length}</div>
-              </div>
-              <div className="text-right">
-                <div className="text-[10px] uppercase tracking-wide text-faint">Subtotal</div>
-                <div className={`${TELEMETRY} text-sm font-semibold text-tech`}>£{total.toFixed(2)}</div>
-              </div>
-            </div>
-          </div>
+        <Block
+          className="mb-6 border-t-0 pt-0"
+          title="Peripherals"
+          aside={<Tag><b>{pickedCount}</b> of {CATEGORIES.length} chosen · £{total.toFixed(0)}</Tag>}
+        >
+          <p className="text-[13px] text-muted">Optional, and counted apart from the build budget.</p>
         </Block>
 
         {/* Search and sort apply across all four groups — with ~120 items and no
@@ -185,6 +178,7 @@ export default function PeripheralsPanel() {
             // multi-select does not fit a radiogroup.
             const shown = filterPeripherals(all, toFilterOptions(id, filters, { query, sort }))
             const picked = selected[id]
+            const { visible, hidden } = firstFew(shown, { pickedId: picked?.id, capped: !anyFilter && !expanded[id] })
             return (
               <section key={id}>
                 {/* On a surface: this header sits outside the product cards, so
@@ -205,8 +199,9 @@ export default function PeripheralsPanel() {
                     Nothing matches here. <button onClick={clearAll} className="text-brass hover:underline">Clear filters</button>
                   </p>
                 ) : (
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                    {shown.map((p) => {
+                  <>
+                  <div className="grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {visible.map((p) => {
                       const isSelected = picked?.id === p.id
                       return (
                         <PeripheralCard
@@ -218,6 +213,16 @@ export default function PeripheralsPanel() {
                       )
                     })}
                   </div>
+                  {hidden > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setExpanded((e) => ({ ...e, [id]: true }))}
+                      className="mt-2 min-h-11 text-sm font-semibold text-brass hover:underline"
+                    >
+                      Show all {shown.length} {label.toLowerCase()}s
+                    </button>
+                  )}
+                  </>
                 )}
               </section>
             )
