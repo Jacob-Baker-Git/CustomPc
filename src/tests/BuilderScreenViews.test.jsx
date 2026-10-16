@@ -41,6 +41,7 @@ describe('the 3D view lives on Summary only (spec 2026-10-13)', () => {
 
   it('offers the next step of the path', () => {
     openOn('build')
-    expect(screen.getByRole('button', { name: /next: performance/i })).toBeInTheDocument()
+    // The phone dock and the desktop inline button both render; CSS shows one.
+    expect(screen.getAllByRole('button', { name: /next: performance/i }).length).toBeGreaterThan(0)
   })
 })

@@ -74,23 +74,18 @@ test.describe('the top bar', () => {
   }
 
   for (const width of WIDTHS) {
-    test(`clears the content it is fixed on top of at ${width}px`, async ({ page }) => {
+    test(`keeps the page below the header and steps at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
       await page.waitForTimeout(700)
 
-      // The header is `fixed` and opaque, so the scroll container's top padding
-      // is the only thing keeping it off the page. That padding is a constant
-      // per breakpoint while the header's height depends on whether its meter
-      // row wrapped — so the two drift apart silently, and the failure looks
-      // like a heading with its top sliced off rather than like a layout bug.
-      const { headerBottom, contentTop } = await page.evaluate(() => {
-        const header = document.querySelector('header')
-        const scroller = document.querySelector('.h-screen.overflow-y-auto')
-        return {
-          headerBottom: header.getBoundingClientRect().bottom,
-          contentTop: scroller.firstElementChild.getBoundingClientRect().top,
-        }
-      })
+      // The header and the step row are sticky at the top of the scroller
+      // (spec 2026-10-16), so at the top of the page they must sit ABOVE the
+      // content, never on it. A fixed header with padding sized per breakpoint
+      // used to drift from its real height; this is the guard either way.
+      const { headerBottom, contentTop } = await page.evaluate(() => ({
+        headerBottom: document.querySelector('nav[aria-label="Steps"]').getBoundingClientRect().bottom,
+        contentTop: document.querySelector('main').getBoundingClientRect().top,
+      }))
 
       expect(Math.round(headerBottom), `the header paints over the page at ${width}px`)
         .toBeLessThanOrEqual(Math.round(contentTop))

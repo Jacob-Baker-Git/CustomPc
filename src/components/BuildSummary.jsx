@@ -3,12 +3,10 @@ import useBuilderStore, { selTotalSpent, selPeripheralsTotal, selPeakDraw } from
 import useCatalogStore from '../store/useCatalogStore'
 import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
-import { buildShareUrl } from '../lib/shareLink'
+import { useBuildActions } from '../hooks/useBuildActions'
 import { buildMarkdown } from '../lib/buildMarkdown'
-import { encodeBuild } from '../lib/buildCodec'
 import { rateBuild } from '../lib/partRatings'
 import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
-import useSavedStore from '../store/useSavedStore'
 import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
 import RamBox from './RamBox'
 import GamePerformanceList from './GamePerformanceList'
@@ -105,7 +103,7 @@ export default function BuildSummary() {
   const budget = useBuilderStore((s) => s.budget)
   const clearBuild = useBuilderStore((s) => s.clearBuild)
   const setFlow = useBuilderStore((s) => s.setFlow)
-  const saveBuild = useSavedStore((s) => s.saveBuild)
+  const { save, share, fallbackName } = useBuildActions()
   const buildTotal = useBuilderStore(selTotalSpent)
   const periphTotal = useBuilderStore(selPeripheralsTotal)
   const power = useBuilderStore(selPeakDraw)
@@ -136,11 +134,10 @@ export default function BuildSummary() {
   const overBudget = budget > 0 && buildTotal > budget
 
   async function copyShareLink() {
-    try {
-      await navigator.clipboard.writeText(buildShareUrl())
+    if (await share()) {
       setCopied(true)
       setTimeout(() => setCopied(false), 1800)
-    } catch { /* clipboard unavailable */ }
+    }
   }
 
   function copyMarkdown() {
@@ -151,7 +148,6 @@ export default function BuildSummary() {
   const [saveOpen, setSaveOpen] = useState(false)
   const [clearOpen, setClearOpen] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
-  const fallbackName = `Build · £${grandTotal.toFixed(0)}`
 
   function handleSave() {
     setNameDraft(fallbackName)
@@ -159,8 +155,7 @@ export default function BuildSummary() {
   }
 
   function confirmSave() {
-    const code = encodeBuild({ budget, resolution, parts: selectedParts, peripherals: selectedPeripherals })
-    saveBuild(nameDraft.trim() || fallbackName, code)
+    save(nameDraft)
     setSaveOpen(false)
   }
 

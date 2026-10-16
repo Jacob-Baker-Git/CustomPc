@@ -64,9 +64,9 @@ describe('App routing', () => {
   it('shows the builder when flow says so, whatever the budget', () => {
     useBuilderStore.setState({ flow: 'builder', budget: 0 })
     render(<App />)
-    // Two sets of tabs render: the header row and the mobile bottom bar. Only
-    // one is visible at a time, but jsdom applies no CSS so both are present.
-    expect(screen.getAllByRole('button', { name: /^peripherals$/i })).toHaveLength(2)
+    // One step header at every width (spec 2026-10-16).
+    expect(screen.getByRole('navigation', { name: 'Steps' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /peripherals$/i })).toBeInTheDocument()
   })
 
   it('stays on the hub when a budget is set but flow is hub', () => {

@@ -22,8 +22,8 @@ import SelectedPartsPanel from '../components/SelectedPartsPanel'
 import GeneratedBanner from '../components/GeneratedBanner'
 import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
 import Deferred3D from '../components/Deferred3D'
-import ViewTabs from '../components/ViewTabs'
-import NextStep from '../components/NextStep'
+import StepHeader from '../components/StepHeader'
+import Dock from '../components/Dock'
 import { useHashView } from '../hooks/useHashView'
 import useBuilderStore from '../store/useBuilderStore'
 import { PANEL } from '../lib/uiTokens'
@@ -55,6 +55,20 @@ export default function BuilderScreen() {
   // a fresh visit on mobile data should be asked again, not charged again.
   const [show3D, setShow3D] = useState(() => !wantsDeferred3D())
   const scrollRef = useRef(null)
+  const chromeRef = useRef(null)
+
+  // The header is sticky inside the scroller, so nothing has to pad for a
+  // hard-coded height. Its live height is published as --chrome-h for the
+  // folds below, whose own headers pin just underneath it.
+  useEffect(() => {
+    const chrome = chromeRef.current
+    if (!chrome || typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(() => {
+      scrollRef.current?.style.setProperty('--chrome-h', `${chrome.offsetHeight}px`)
+    })
+    ro.observe(chrome)
+    return () => ro.disconnect()
+  }, [])
 
   // Fresh views (and the first landing in the builder) start at the top.
   useEffect(() => {
@@ -68,14 +82,12 @@ export default function BuilderScreen() {
 
   return (
     <div className="relative min-h-screen">
-      <TopBar view={view} onViewChange={setView} />
-      {/* pb-16 clears the fixed bottom tab bar wherever it is showing; the extra
-          top padding below `wide` clears the header's second row of meters,
-          which is taller from `md` up because the header's own padding grows
-          there. Measured against the real header: 76px below md, 84px at md–lg,
-          90px at lg–wide, 63px above it — so 84 / 96 / 64 of padding clears
-          each band. e2e/topBar.spec.js fails if they ever drift apart. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pt-[5.25rem] md:pt-24 wide:pt-16 pb-16 lg:pb-0">
+      {/* pb clears the phone Dock below lg; from lg there is no dock. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto pb-28 lg:pb-0">
+        <div ref={chromeRef} className="sticky top-0 z-50">
+          <TopBar />
+          <StepHeader view={view} onChange={setView} />
+        </div>
         {/* The builder had no landmark at all — a screen reader's region menu
             skipped straight past it. A plain, unstyled <main> wraps the tab
             content (its h1 and every panel) while the nav header, the board
@@ -239,27 +251,22 @@ export default function BuilderScreen() {
             </div>
           </div>
         )}
-        <NextStep view={view} onChange={setView} />
+        <Dock view={view} onChange={setView} inline />
         </main>
 
         {/* Inside the scroller, not beside it: this screen's scroll container is
             the h-screen div, so a footer outside it would sit off the bottom of
-            the viewport and never be reachable. The container's own pb-16
-            already clears the fixed tab bar below lg.
+            the viewport and never be reachable. The container's own bottom
+            padding already clears the phone Dock below lg.
 
             It sits AFTER </main>, not inside it: SiteFooter renders a <footer>,
             and a <footer> nested in <main> stops being the page's contentinfo
-            landmark. Kept a sibling, it stays one — same as SiteChrome.
-
-            FULL WIDTH on purpose — this is the one screen with no scrim, so the
-            footer's own ground band is what protects its text from the board.
-            Cropping it to a text column would leave the edge-pinned hardware
-            layers, and their solid gold, showing on either side of it. */}
+            landmark. Kept a sibling, it stays one — same as SiteChrome. */}
         <div className="relative z-10">
           <SiteFooter />
         </div>
       </div>
-      <ViewTabs view={view} onChange={setView} variant="bar" />
+      <Dock view={view} onChange={setView} />
       {activeCategory && (
         <PartSelector
           category={activeCategory}
