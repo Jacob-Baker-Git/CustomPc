@@ -1,5 +1,5 @@
 import { Cpu, Gamepad2, ArrowRight, Bookmark } from 'lucide-react'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 import SiteFooter from './SiteFooter'
 import useSavedStore from '../store/useSavedStore'
 
@@ -65,7 +65,7 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
             exactly this reason. The silhouette carries the identity. */}
         <div className="rise rise-2 w-full flex flex-col gap-3">
           <button onClick={onExplore} className="w-full text-left transition group hover:brightness-110">
-            <RamBox seated liftOnHover>
+            <Block>
               <div className="flex items-center gap-3">
                 <Cpu size={24} className="text-brass shrink-0" aria-hidden="true" />
                 <div className="flex-1">
@@ -74,11 +74,11 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
                 </div>
                 <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </div>
-            </RamBox>
+            </Block>
           </button>
 
           <button onClick={onTarget} className="w-full text-left transition group hover:brightness-110">
-            <RamBox seated liftOnHover>
+            <Block>
               <div className="flex items-center gap-3">
                 <Gamepad2 size={24} className="text-brass shrink-0" aria-hidden="true" />
                 <div className="flex-1">
@@ -87,11 +87,11 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
                 </div>
                 <ArrowRight size={20} className="text-brass transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </div>
-            </RamBox>
+            </Block>
           </button>
 
           <button onClick={onSaved} className="w-full text-left transition group hover:brightness-110">
-            <RamBox seated liftOnHover>
+            <Block>
               <div className="flex items-center gap-3">
                 <Bookmark size={20} className="text-brass shrink-0" aria-hidden="true" />
                 <div className="flex-1">
@@ -104,7 +104,7 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
                 </div>
                 <ArrowRight size={16} className="text-muted transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </div>
-            </RamBox>
+            </Block>
           </button>
         </div>
 

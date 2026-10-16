@@ -5,7 +5,7 @@ import useCatalogStore from '../store/useCatalogStore'
 import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRatings'
 import ScoreInfo from './ScoreInfo'
 import { TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 import PartThumb from './art/PartThumb'
 import { FPS_CAVEAT } from '../lib/siteContent'
 
@@ -67,7 +67,7 @@ export default function BuildRatingPanel() {
   }
 
   return (
-    <RamBox seated={hasCore} open={openWhy !== null}>
+    <Block>
       <span className="flex items-center gap-2 text-ink text-sm font-semibold mb-3">
         Your CustomPC score
         <ScoreInfo />
@@ -186,6 +186,6 @@ export default function BuildRatingPanel() {
           <p className="mt-3 text-[11px] text-muted leading-relaxed">{FPS_CAVEAT}</p>
         </>
       )}
-    </RamBox>
+    </Block>
   )
 }

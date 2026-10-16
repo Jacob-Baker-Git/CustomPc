@@ -6,16 +6,9 @@
 // Solid card surface for anything that is NOT a seated part: friendly rounded
 // corners, 1px hairline, real contrast.
 //
-// ⚠️ All ten part-shaped panels are RamBoxes now — the last three
-// (BuildRatingPanel, BuildSummary, SavedBuilds) migrated on 2026-08-25, having
-// shipped as plain panels beside seven DIMMs. The rule for the next one:
-// RamBox when the thing on screen stands for hardware that plugs in, PANEL when
-// it does not. PANEL_STRONG stays a plain panel for exactly that reason — a
-// floating menu is not a seated part, and giving it contacts would be
-// decoration pretending to be structure.
-//
-// Which leaves ONE caller: the 3D viewport frame in BuilderScreen. That frame
-// is a window onto the build, not a component of it.
+// Most sections are plain hairline Blocks now (configurator look, spec
+// 2026-10-16); PANEL is for the few things that genuinely float, such as menus
+// and dialogs.
 export const PANEL = 'bg-surface border border-line rounded-xl'
 
 // Raised variant for popovers / floating menus that sit over busy content.

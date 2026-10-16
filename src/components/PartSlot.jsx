@@ -1,22 +1,11 @@
-import { ELEV_GROUP, RAIL_ACTIVE, TELEMETRY } from '../lib/uiTokens'
+import { TELEMETRY } from '../lib/uiTokens'
 
-// A part slot drawn as the connector the part actually plugs into.
-//
-// An empty slot reads as a hole in the build rather than as another grey row,
-// and the designator teaches WHERE the part goes — which is information a
-// beginner genuinely needs, so the label is structure rather than decoration.
+// One part slot: a hairline-divided row (configurator look, spec 2026-10-16).
+// An empty slot keeps its dashed outline so it still reads as a gap in the
+// build rather than as another row.
 //
 // ⚠️ No `/NN` opacity modifiers on these tokens. `bg-gold/60` emits no CSS at
 // all on this palette; tokenOpacity.test.js fails the build for it.
-const CONNECTOR = {
-  cpu: { designator: 'CPU_1', notch: 'square' },
-  cooler: { designator: 'CPU_FAN', notch: 'square' },
-  ram: { designator: 'DIMM_A2', notch: 'edge' },
-  gpu: { designator: 'PCIEX16_1', notch: 'edge' },
-  storage: { designator: 'M2_1', notch: 'edge' },
-  psu: { designator: 'ATX_PWR', notch: 'pins' },
-  motherboard: { designator: 'BOARD', notch: 'square' },
-}
 
 // `tone` is decided by the caller. A slot knows how to draw itself; it does not
 // know whether the build needs it next.
@@ -32,27 +21,6 @@ const TONE = {
   empty: 'border border-dashed border-line-strong text-muted hover:border-brass hover:text-brass',
 }
 
-// The contact pad. `edge` cuts the keying notch that stops a DIMM or a PCIe card
-// going in backwards — the one detail that makes the shape read as a socket
-// rather than a progress bar.
-//
-// ⚠️ Hidden below `sm`. At 375px the pad + its gap cost 60px that the part NAME
-// needs far more: measured, a seated name got 55px and "Intel Core i7-14700KF"
-// needs 137, so the row showed "Inte…". The pad is aria-hidden decoration whose
-// meaning (seated) the rail already carries and whose placement the designator
-// label above still teaches, so the phone drops it and the desktop keeps it.
-function Pad({ seated, notch }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`relative hidden sm:block h-3 w-12 shrink-0 rounded-sm ${seated ? 'bg-gold' : 'bg-surface-2'}`}
-    >
-      {notch === 'edge' && <i className="absolute inset-y-0 left-[34%] w-[3px] bg-ground" />}
-      {notch === 'pins' && <i className="absolute inset-y-0 left-1/2 w-px bg-ground" />}
-    </span>
-  )
-}
-
 export default function PartSlot({
   category,
   label,
@@ -65,20 +33,10 @@ export default function PartSlot({
   onClick,
   onRemove,
 }) {
-  const connector = CONNECTOR[category]
   const seated = Boolean(part)
 
   return (
-    <div className={`rounded-lg ${ELEV_GROUP} ${seated ? RAIL_ACTIVE : ''}`}>
-      {/* Two spans, not one string. Testing Library's getByText matches the
-          whole normalised text of an element, so "PCIEX16_1" and "— empty"
-          concatenated into one span makes BOTH assertions unfindable. */}
-      {connector && (
-        <span className="block px-3 pt-2 font-mono text-[9px] uppercase tracking-[0.12em] text-tech">
-          <span>{connector.designator}</span>
-          {!seated && <span className="text-faint"> empty</span>}
-        </span>
-      )}
+    <div className="border-t border-line">
       <div className="flex items-center">
         <button
           type="button"
@@ -92,11 +50,6 @@ export default function PartSlot({
             </span>
           )}
           {icon}
-          {/* Only where there IS a connector. A case does not plug into
-              anything, so drawing it a contact pad would be decoration
-              pretending to be structure — the one thing the designators are
-              here to avoid. Seatedness is already carried by the rail. */}
-          {connector && <Pad seated={seated} notch={connector.notch} />}
           <span className="min-w-0 flex-1">
             {seated && label && (
               <span className="block text-[10px] uppercase leading-none tracking-wide text-faint">{label}</span>

@@ -4,7 +4,7 @@ import ConfirmDialog from './ConfirmDialog'
 import useBuilderStore from '../store/useBuilderStore'
 import { countEssentials } from '../lib/recommendedOrder'
 import { TELEMETRY } from '../lib/uiTokens'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 
 // The Build tab's framing for CategoryList: the completeness counter and the
 // spend, kept out of CategoryList so the list itself stays plain.
@@ -29,10 +29,9 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
   // empties both — reusing it here lit the parts panel gold when the only thing
   // picked was a monitor on another tab, which is a different domain's state
   // driving this box's metal.
-  const hasParts = Object.values(selectedParts).some(Boolean)
 
   return (
-    <RamBox seated={hasParts}>
+    <Block>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
         <h2 className="font-display text-base font-bold text-ink">Your parts</h2>
         <span className="text-xs text-muted">{chosen} of {total} essentials chosen</span>
@@ -74,6 +73,6 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
           onCancel={() => setClearOpen(false)}
         />
       )}
-    </RamBox>
+    </Block>
   )
 }

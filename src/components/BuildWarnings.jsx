@@ -1,6 +1,6 @@
 import useBuilderStore from '../store/useBuilderStore'
 import { getBuildWarnings } from '../lib/buildWarnings'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 
 export default function BuildWarnings() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
@@ -10,7 +10,7 @@ export default function BuildWarnings() {
   return (
     // Never renders without warnings (see the early return above), so whenever
     // this is on screen it has content — always seated.
-    <RamBox seated>
+    <Block>
       <div className="text-[11px] uppercase tracking-wider text-muted mb-2">Build checks</div>
       <ul className="space-y-1.5">
         {warnings.map((w, i) => (
@@ -20,6 +20,6 @@ export default function BuildWarnings() {
           </li>
         ))}
       </ul>
-    </RamBox>
+    </Block>
   )
 }

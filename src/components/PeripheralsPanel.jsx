@@ -5,7 +5,7 @@ import useCatalogStore from '../store/useCatalogStore'
 import SpecSheet from './SpecSheet'
 import PeripheralFilterPanel from './PeripheralFilterPanel'
 import { TELEMETRY } from '../lib/uiTokens'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 import {
   filterPeripherals, specValues, SORTS, DEFAULT_SORT,
   brandValues, refreshBandsFor, toFilterOptions,
@@ -111,7 +111,7 @@ export default function PeripheralsPanel() {
       <div className="max-w-5xl mx-auto">
         {/* A running total and a progress line, so the tab says how far along you
             are rather than just listing four unrelated grids. */}
-        <RamBox seated={pickedCount > 0} className="mb-6">
+        <Block className="mb-6">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div>
               <h2 className="font-display text-xl font-bold text-ink">Peripherals</h2>
@@ -128,7 +128,7 @@ export default function PeripheralsPanel() {
               </div>
             </div>
           </div>
-        </RamBox>
+        </Block>
 
         {/* Search and sort apply across all four groups — with ~120 items and no
             way to look one up, price bands alone were doing too much work. */}

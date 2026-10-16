@@ -8,7 +8,7 @@ import { buildMarkdown } from '../lib/buildMarkdown'
 import { rateBuild } from '../lib/partRatings'
 import { USE_CASE_LABEL, BUILD_PROFILES } from '../lib/buildProfiles'
 import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 import GamePerformanceList from './GamePerformanceList'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
@@ -35,29 +35,11 @@ const scoreRail = (s) =>
     : s >= 50 ? 'shadow-[inset_2px_0_0_0_var(--ok)]'
       : 'shadow-[inset_2px_0_0_0_var(--bad)]'
 
-// The same vocabulary PartSlot uses, so a part is named the same way on the
-// Build tab and here.
-//
-// Keyed by the `label` values in src/lib/categories.js, which is what Row
-// receives. Case, Case Fans and Thermal Paste are absent on purpose: they do
-// not seat in a board connector, and PartSlot's CONNECTOR map has no entry for
-// them either. Peripherals plug into a port rather than the board, so they fall
-// through to their label too.
-const DESIGNATOR = {
-  CPU: 'CPU_1',
-  'CPU Cooler': 'CPU_FAN',
-  RAM: 'DIMM_A2',
-  GPU: 'PCIEX16_1',
-  Storage: 'M2_1',
-  PSU: 'ATX_PWR',
-  Motherboard: 'BOARD',
-}
-
 function Row({ label, name, brand, price }) {
   return (
     <div data-row className="group flex items-center py-1.5 border-t border-line">
       <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
-        {DESIGNATOR[label] ?? label}
+        {label}
       </span>
       <span className="flex-1 text-sm text-ink truncate">{name}</span>
       <span className="font-mono text-sm text-muted w-20 text-right">£{price.toFixed(2)}</span>
@@ -82,7 +64,7 @@ function MissingRow({ label, optional }) {
   return (
     <div className="flex items-center py-1.5 border-t border-line">
       <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
-        {DESIGNATOR[label] ?? label}
+        {label}
       </span>
       {optional ? (
         <span className="flex-1 text-sm text-muted">Optional</span>
@@ -171,7 +153,7 @@ export default function BuildSummary() {
   return (
     <div>
       <div className="max-w-2xl mx-auto px-4 pt-2 pb-12">
-        <RamBox seated={!isEmpty} open={showFps}>
+        <Block>
           <div className="flex items-baseline justify-between mb-1">
             <h2 className="text-lg text-ink">Your build</h2>
             <span className="font-mono text-base text-tech">
@@ -321,7 +303,7 @@ export default function BuildSummary() {
               Clear build
             </button>
           </div>
-        </RamBox>
+        </Block>
       </div>
 
       {saveOpen && (

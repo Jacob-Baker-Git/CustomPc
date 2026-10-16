@@ -3,19 +3,10 @@ import { generateBuild } from './helpers.js'
 
 // Phone-width layout guards.
 //
-// ⚠️ Every existing width sweep in this suite stops at the desktop grid:
-// ramBox.spec.js measures "the body never outgrows the stick" at 1440/1366/
-// 1280/1024 only, because that is where the three-column grid is live. Below
-// 1024 the grid collapses to one column and NOTHING measured it — which is
-// exactly where these two regressions were sitting.
-//
 // jsdom computes no layout, so none of this is reachable from the unit suite.
 const PHONES = [320, 360, 375, 390, 414]
 
-// ⚠️ The band nothing owned. ramBox.spec.js starts at 1024 ("at and above
-// 1024px the grid is live"); topBar.spec.js is the only other sweep and it
-// measures the header alone. So 768–1023 — every tablet in portrait, and a
-// large phone in landscape — had no structural guard on the build page at all.
+// 768–1023: every tablet in portrait, and a large phone in landscape.
 const TABLETS = [768, 834, 1024]
 
 // ⚠️ On a coarse pointer the 3D panel does not load until it is asked to —
@@ -187,49 +178,6 @@ test.describe('the zoom hint names the gesture the device actually has', () => {
 
     expect(touch.sentence).toBe('Drag to rotate · pinch to zoom')
     expect(mouse.sentence).toBe('Drag to rotate · scroll to zoom')
-  })
-})
-
-test.describe('the body never outgrows the stick below the desktop grid', () => {
-  // ramBox.spec.js proves this at 1440/1366/1280/1024, where the three-column
-  // grid is live and the left column is 1fr of three. Below 1024 the grid
-  // collapses to one column — a different layout, and one that had never been
-  // measured. Same invariant, the other side of the breakpoint.
-  test('keeps body, fins and contacts the same width at tablet and phone widths', async ({ page }) => {
-    test.setTimeout(120_000)
-    await generateBuild(page)
-
-    const seen = []
-    for (const width of [...TABLETS, ...PHONES]) {
-      await page.setViewportSize({ width, height: 900 })
-
-      const measured = await page.locator('[data-ram-box]').evaluateAll((boxes) =>
-        boxes.map((box) => {
-          const finRow = box.querySelector('[data-blade]')?.offsetParent
-          const contacts = box.querySelector('[data-contacts]')
-          const body = contacts?.previousElementSibling?.querySelector('.flex-1')
-          const w = (el) => (el ? Math.round(el.getBoundingClientRect().width) : null)
-          return {
-            label: (box.textContent || '').trim().slice(0, 18),
-            fins: w(finRow),
-            contacts: w(contacts),
-            body: w(body),
-          }
-        }),
-      )
-
-      expect(measured.length, `boxes rendered at ${width}px`).toBeGreaterThan(0)
-      for (const m of measured) {
-        expect(m.body, `body vs contacts on "${m.label}" at ${width}px`).toBe(m.contacts)
-        expect(m.body, `body vs fins on "${m.label}" at ${width}px`).toBe(m.fins)
-      }
-      seen.push(measured[0].body)
-    }
-
-    // ⚠️ The sweep's own premise, the same one ramBox.spec.js asserts: if the
-    // column were pinned, this would be one width measured eight times and
-    // would still report green.
-    expect(new Set(seen).size, `distinct box widths exercised (saw ${seen.join(', ')})`).toBeGreaterThanOrEqual(3)
   })
 })
 

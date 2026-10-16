@@ -22,4 +22,12 @@ describe('no hardware motifs', () => {
   it('has no circuit-board background', () => {
     expect(offenders(/BoardBackground|data-board/)).toEqual([])
   })
+
+  it('has no RAM-stick panels', () => {
+    expect(offenders(/RamBox|ramBoxGeometry/)).toEqual([])
+  })
+
+  it('has no motherboard designators', () => {
+    expect(offenders(/data-designator|DIMM_A2|PCIEX16|CPU_FAN/)).toEqual([])
+  })
 })

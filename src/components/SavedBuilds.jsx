@@ -7,7 +7,7 @@ import { estimateFps } from '../lib/fpsEstimate'
 import { CATEGORIES } from '../lib/categories'
 import { peakDrawW } from '../lib/partSynergy'
 import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
-import RamBox from './RamBox'
+import Block from './ui/Block'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const totalOf = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.price ?? 0), 0)
@@ -105,7 +105,7 @@ export default function SavedBuilds({ onLoaded }) {
   return (
     <div>
       <div className="max-w-2xl mx-auto px-4 pt-2 pb-12">
-        <RamBox seated={saved.length > 0} open={pair.length === 2}>
+        <Block>
           <div className="flex items-baseline justify-between mb-3">
             {/* h1, not h2: this component is a whole screen (App renders it as
                 the `saved` flow, nowhere else), so this line is the screen's
@@ -146,7 +146,7 @@ export default function SavedBuilds({ onLoaded }) {
             </div>
           )}
           {pair.length === 2 && <CompareTable a={pair[0]} b={pair[1]} />}
-        </RamBox>
+        </Block>
       </div>
 
       {pendingDelete && (
