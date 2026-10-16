@@ -5,10 +5,10 @@ import { PRIVACY, TERMS, LAST_UPDATED, OPERATOR } from '../lib/legalContent'
 function Policy({ title, subtitle, doc }) {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-1">{title}</h1>
+      <h1 className="font-wide text-3xl font-extrabold mb-1">{title}</h1>
       <p className="text-muted text-sm mb-6">{subtitle}</p>
 
-      <p className="text-sm text-ink leading-relaxed border border-line rounded-lg px-4 py-3 mb-8">
+      <p className="mb-8 border-l-2 border-brass pl-4 text-sm leading-relaxed text-ink">
         {doc.intro}
       </p>
 

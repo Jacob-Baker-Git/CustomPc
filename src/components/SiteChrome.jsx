@@ -4,7 +4,7 @@ import SiteFooter from './SiteFooter'
 export default function SiteChrome({ onBack, children }) {
   return (
     <div className="relative min-h-screen text-ink">
-      <header className="sticky top-0 z-40 bg-surface border-b border-line px-4 py-3 flex items-center gap-3">
+      <header className="sticky top-0 z-40 flex items-center gap-3 border-b border-line bg-ground px-4 py-2">
         <button
           onClick={onBack}
           aria-label="Back"

@@ -112,7 +112,7 @@ export default function SavedBuilds({ onLoaded }) {
                 title and the only heading above the rows. As an h2 it left the
                 screen with no top level at all. Size is unchanged — the tag
                 carries the outline, `text-lg` carries the look. */}
-            <h1 className="text-lg text-ink">Saved builds</h1>
+            <h1 className="font-wide text-2xl font-extrabold text-ink">Saved builds</h1>
             {saved.length > 1 && (
               <span className="text-[11px] text-muted">tick two builds to compare</span>
             )}

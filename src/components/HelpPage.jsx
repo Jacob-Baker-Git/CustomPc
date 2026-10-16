@@ -1,3 +1,4 @@
+import Fold from './ui/Fold'
 import { MODEL_CREDITS, PRICE_SNAPSHOT, FPS_CAVEAT } from '../lib/siteContent'
 
 // These answers name what the buttons actually say: the Welcome screen's
@@ -20,22 +21,19 @@ const FAQS = [
 export default function HelpPage() {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-1">Help &amp; FAQ</h1>
-      <p className="text-muted text-sm mb-6">How the builder and upgrade tools work.</p>
-      <div className="space-y-3">
+      <h1 className="font-wide text-3xl font-extrabold mb-1">Help &amp; FAQ</h1>
+      <p className="text-muted text-sm mb-6">How the two paths, the score and the frame rates work.</p>
+      {/* Questions, so every answer starts shut, on desktop too. */}
+      <div className="border-b border-line">
         {FAQS.map((f) => (
-          <details key={f.q} className="group border border-line rounded-lg px-4 py-3">
-            <summary className="cursor-pointer text-ink font-medium list-none flex justify-between items-center">
-              {f.q}
-              <span className="text-muted group-open:rotate-180 transition-transform">⌄</span>
-            </summary>
-            <p className="text-sm text-muted mt-2 leading-relaxed">{f.a}</p>
-          </details>
+          <Fold key={f.q} title={f.q} openOnDesktop={false}>
+            <p className="max-w-[68ch] text-sm leading-relaxed text-muted">{f.a}</p>
+          </Fold>
         ))}
       </div>
 
       <section id="model-credits" className="mt-10 border-t border-line pt-6">
-        <h2 className="text-lg font-semibold mb-1">3D model credits</h2>
+        <h2 className="mb-1 font-wide text-lg font-extrabold">3D model credits</h2>
         <p className="text-sm text-muted mb-3">
           The parts in the 3D view use these models from Sketchfab, licensed under{' '}
           <a

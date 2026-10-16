@@ -78,7 +78,7 @@ export default function App() {
   if (notFound) {
     return (
       <SiteChrome onBack={() => navigate(null)}>
-        <h1 className="text-3xl font-bold mb-2">Page not found</h1>
+        <h1 className="font-wide text-3xl font-extrabold mb-2">Page not found</h1>
         <p className="text-muted text-sm mb-6">There is nothing at this address. The link may be mistyped or out of date.</p>
         <a href="/" className="text-brass text-sm hover:underline">Go to the home page →</a>
       </SiteChrome>
