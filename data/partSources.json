@@ -3709,42 +3709,42 @@
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/615211/10th-generation-intel-core-processors-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (615211-008), Table 5-6 'Package Turbo Specifications (S-Processor Lines)', row '6-Core GT2/GT0 65W: PL2 134 W'. The F part has no graphics (GT0), which the row covers." }
   },
   "cpu-i7-10700k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/615211/10th-generation-intel-core-processors-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (615211-008), Table 5-6 'Package Turbo Specifications (S-Processor Lines)', row '8-Core 125W: PL2 229 W'. Tom's Hardware's report of the same datasheet revision agrees (229 W)." }
   },
   "cpu-i9-10900k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/615211/10th-generation-intel-core-processors-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (615211-008), Table 5-6 'Package Turbo Specifications (S-Processor Lines)', row '10-Core 125W: PL2 250 W'. Tom's Hardware's report of the same datasheet revision agrees (250 W)." }
   },
   "cpu-i5-11400f": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/634648/11th-generation-intel-core-processor-desktop-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (634648-004), Table 5-3 'Package Turbo Specifications', p. 102, row '8/6 Core 65W: PL2 - 6 Core 154 W'." }
   },
   "cpu-i7-11700k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/634648/11th-generation-intel-core-processor-desktop-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (634648-004), Table 5-3 'Package Turbo Specifications', p. 102, row '8/6 Core 125W: PL2 251 W'." }
   },
   "cpu-i9-11900k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/634648/11th-generation-intel-core-processor-desktop-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (634648-004), Table 5-3 'Package Turbo Specifications', p. 102, row '8/6 Core 125W: PL2 251 W'." }
   },
   "fans-arctic-p12-single": {
     "size": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05" },

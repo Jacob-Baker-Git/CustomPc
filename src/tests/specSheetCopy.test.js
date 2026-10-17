@@ -143,10 +143,13 @@ describe('a paste spec sheet shows its tube size', () => {
 })
 
 // Base power is not what a CPU draws flat out; full-boost power is researched
-// for 73 of 79 CPUs and the copy says so, falling back where it is not.
+// for all 79 CPUs and the copy says so; `old` strips it to test the fallback.
 describe('CPU full-boost power copy', () => {
   const k = partsData.find((p) => p.id === 'cpu-i7-14700kf')
-  const old = partsData.find((p) => p.id === 'cpu-i9-10900k')
+  const real = partsData.find((p) => p.id === 'cpu-i9-10900k')
+  const oldSpecs = { ...real.specs }
+  delete oldSpecs.maxPowerW
+  const old = { ...real, specs: oldSpecs }
 
   it('names base and full-boost power in the blurb', () => {
     expect(insight(k)).toMatch(/125W base power, up to 253W at full boost/)

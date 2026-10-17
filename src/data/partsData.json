@@ -9643,7 +9643,8 @@
     "legacy": true,
     "specs": {
       "cores": 6,
-      "boostClock": 4.3
+      "boostClock": 4.3,
+      "maxPowerW": 134
     }
   },
   {
@@ -9658,7 +9659,8 @@
     "legacy": true,
     "specs": {
       "cores": 8,
-      "boostClock": 5.1
+      "boostClock": 5.1,
+      "maxPowerW": 229
     }
   },
   {
@@ -9673,7 +9675,8 @@
     "legacy": true,
     "specs": {
       "cores": 10,
-      "boostClock": 5.3
+      "boostClock": 5.3,
+      "maxPowerW": 250
     }
   },
   {
@@ -9688,7 +9691,8 @@
     "legacy": true,
     "specs": {
       "cores": 6,
-      "boostClock": 4.4
+      "boostClock": 4.4,
+      "maxPowerW": 154
     }
   },
   {
@@ -9703,7 +9707,8 @@
     "legacy": true,
     "specs": {
       "cores": 8,
-      "boostClock": 5
+      "boostClock": 5,
+      "maxPowerW": 251
     }
   },
   {
@@ -9718,7 +9723,8 @@
     "legacy": true,
     "specs": {
       "cores": 8,
-      "boostClock": 5.3
+      "boostClock": 5.3,
+      "maxPowerW": 251
     }
   },
   {
