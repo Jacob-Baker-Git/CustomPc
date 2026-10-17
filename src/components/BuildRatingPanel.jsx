@@ -78,7 +78,7 @@ export default function BuildRatingPanel() {
                 <Zap size={13} className="text-brass shrink-0" aria-hidden="true" />
                 <span className="text-xs font-semibold text-brass">Best next move</span>
               </div>
-              <p className="text-[11px] text-muted leading-relaxed">
+              <p className="text-[12px] text-muted leading-relaxed">
                 Your weakest part is the <span className="uppercase">{CAT_LABEL[tip.category] ?? tip.category}</span>.
                 {' '}Swapping it for <span className="text-ink font-semibold">{tip.toPart.name}</span> takes it from{' '}
                 <span className={TELEMETRY}>{tip.fromScore}</span> to <span className={`${TELEMETRY} text-good font-semibold`}>{tip.toScore}</span>
@@ -95,10 +95,10 @@ export default function BuildRatingPanel() {
 
           {heldBack.length > 0 && (
             <div className="mb-4">
-              <span className="text-[11px] uppercase tracking-wider text-muted">Holding the score back</span>
+              <span className="text-[12px] uppercase tracking-wider text-muted">Holding the score back</span>
               <ul className="mt-1">
                 {heldBack.map(([cat, p]) => (
-                  <li key={cat} className="flex gap-2 border-t border-line py-1.5 text-[11px] leading-relaxed">
+                  <li key={cat} className="flex gap-2 border-t border-line py-1.5 text-[12px] leading-relaxed">
                     <span className={`${TELEMETRY} w-7 shrink-0 font-bold ${scoreText(p.score)}`}>{p.score}</span>
                     <span className="text-muted"><span className="uppercase text-ink">{CAT_LABEL[cat] ?? cat}</span> · {p.reason}</span>
                   </li>

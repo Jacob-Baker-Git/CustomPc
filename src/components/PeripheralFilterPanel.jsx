@@ -24,7 +24,7 @@ function Chip({ on, onClick, children }) {
       type="button"
       aria-pressed={on}
       onClick={onClick}
-      className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition-colors active:scale-95
+      className={`rounded-lg border px-2.5 py-1 text-[12px] font-semibold transition-colors active:scale-95
         ${on
           ? 'border-gold bg-gold text-accent-ink'
           : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
@@ -37,7 +37,7 @@ function Chip({ on, onClick, children }) {
 function Group({ label, children }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wide text-faint mb-1.5">{label}</div>
+      <div className="text-[12px] uppercase tracking-wide text-faint mb-1.5">{label}</div>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   )
@@ -68,7 +68,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
 
         <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
           <div>
-            <div className="text-[11px] uppercase tracking-wide text-faint mb-1.5">Price</div>
+            <div className="text-[12px] uppercase tracking-wide text-faint mb-1.5">Price</div>
             <div className="flex items-center gap-2">
               <input
                 type="number" min="0" inputMode="numeric" placeholder="Min"

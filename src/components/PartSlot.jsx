@@ -45,14 +45,14 @@ export default function PartSlot({
             ${TONE[seated ? 'seated' : (tone ?? 'empty')]}`}
         >
           {index != null && (
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-surface-2 font-mono text-[11px] text-muted">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-surface-2 font-mono text-[12px] text-muted">
               {index}
             </span>
           )}
           {icon}
           <span className="min-w-0 flex-1">
             {seated && label && (
-              <span className="block text-[11px] uppercase leading-none tracking-wide text-faint">{label}</span>
+              <span className="block text-[12px] uppercase leading-none tracking-wide text-faint">{label}</span>
             )}
             {/* On a phone the row is a full-width list item, so the name wraps
                 to two lines rather than losing its meaningful tail — "i7-14700KF"

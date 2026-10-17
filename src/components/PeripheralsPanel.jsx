@@ -37,7 +37,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         ${isSelected ? 'border-gold' : 'border-line'}`}
     >
       {isSelected && (
-        <span className="absolute top-2 right-2 flex items-center gap-1 text-gold text-[11px] font-semibold">
+        <span className="absolute top-2 right-2 flex items-center gap-1 text-gold text-[12px] font-semibold">
           <Check size={11} aria-hidden="true" /> Picked
         </span>
       )}
@@ -56,7 +56,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         aria-label={`More info about ${p.name}`}
         aria-expanded={showInfo}
         onClick={() => setShowInfo((v) => !v)}
-        className="self-start text-[11px] text-muted hover:text-brass border border-line hover:border-brass rounded-lg px-2 py-0.5 transition-colors"
+        className="self-start min-h-6 text-[12px] text-muted hover:text-brass border border-line hover:border-brass rounded-lg px-2 py-0.5 transition-colors"
       >
         {showInfo ? 'Hide info' : 'Info'}
       </button>
@@ -154,7 +154,7 @@ export default function PeripheralsPanel() {
             <SlidersHorizontal size={13} aria-hidden="true" />
             Filters
             {filterCount > 0 && (
-              <span className={`${TELEMETRY} rounded-full bg-gold text-accent-ink px-1.5 text-[11px] font-bold`}>
+              <span className={`${TELEMETRY} rounded-full bg-gold text-accent-ink px-1.5 text-[12px] font-bold`}>
                 {filterCount}
               </span>
             )}
@@ -184,8 +184,8 @@ export default function PeripheralsPanel() {
                 <div className="mb-1 flex items-baseline gap-2 pt-2">
                   <Icon size={15} className="text-brass shrink-0 self-center" aria-hidden="true" />
                   <h3 className="text-sm font-semibold text-ink">{label}</h3>
-                  <span className="text-[11px] text-faint hidden sm:inline">{blurb}</span>
-                  <span className="ml-auto text-[11px] text-muted">
+                  <span className="text-[12px] text-faint hidden sm:inline">{blurb}</span>
+                  <span className="ml-auto text-[12px] text-muted">
                     {picked
                       ? <>Picked · <span className={TELEMETRY}>£{picked.price.toFixed(2)}</span></>
                       : `${shown.length} option${shown.length === 1 ? '' : 's'}`}

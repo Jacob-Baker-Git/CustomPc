@@ -28,7 +28,7 @@ describe('InfoBadge', () => {
     expect(classesOf(inline.container)).not.toContain('bg-surface')
     expect(classesOf(over.container)).toContain('bg-surface')
     expect(classesOf(over.container)).toContain('w-7')
-    expect(classesOf(inline.container)).toContain('w-5')
+    expect(classesOf(inline.container)).toContain('w-6')
   })
 })
 

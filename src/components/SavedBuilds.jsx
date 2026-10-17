@@ -43,7 +43,7 @@ function CompareTable({ a, b }) {
         <tbody>
           {summaryRows.map(([label, va, vb]) => (
             <tr key={label} className="border-t border-line">
-              <td className="py-1.5 pr-2 text-muted uppercase text-[11px] font-mono">{label}</td>
+              <td className="py-1.5 pr-2 text-muted uppercase text-[12px] font-mono">{label}</td>
               <td className={`py-1.5 pr-2 ${TELEMETRY} text-ink`}>{va}</td>
               <td className={`py-1.5 ${TELEMETRY} text-ink`}>{vb}</td>
             </tr>
@@ -55,7 +55,7 @@ function CompareTable({ a, b }) {
             const differs = pa?.id !== pb?.id
             return (
               <tr key={cat.id} className="border-t border-line">
-                <td className="py-1.5 pr-2 text-muted uppercase text-[11px] font-mono">{cat.label}</td>
+                <td className="py-1.5 pr-2 text-muted uppercase text-[12px] font-mono">{cat.label}</td>
                 <td className={`py-1.5 pr-2 ${differs ? 'text-ink' : 'text-muted'}`}>{pa?.name ?? '—'}</td>
                 <td className={`py-1.5 ${differs ? 'text-ink' : 'text-muted'}`}>{pb?.name ?? '—'}</td>
               </tr>
@@ -115,7 +115,7 @@ export default function SavedBuilds({ onLoaded }) {
                 carries the outline, `text-lg` carries the look. */}
             <h1 className="font-wide text-2xl font-extrabold text-ink">Saved builds</h1>
             {saved.length > 1 && (
-              <span className="text-[11px] text-muted">tick two builds to compare</span>
+              <span className="text-[12px] text-muted">tick two builds to compare</span>
             )}
           </div>
           {saved.length === 0 ? (
@@ -136,7 +136,7 @@ export default function SavedBuilds({ onLoaded }) {
                     />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-ink truncate">{b.name}</div>
-                      <div className="text-[11px] text-muted font-mono">{b.savedAt ? new Date(b.savedAt).toLocaleDateString() : ''}</div>
+                      <div className="text-[12px] text-muted font-mono">{b.savedAt ? new Date(b.savedAt).toLocaleDateString() : ''}</div>
                     </div>
                     <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Load</button>
                     <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-lg border border-line text-ink hover:border-line-strong transition-colors">Copy link</button>

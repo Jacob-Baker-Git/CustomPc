@@ -22,7 +22,7 @@ export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
   return (
     <div className="rounded-xl border border-line bg-surface px-3.5 py-2.5">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <p className="text-[11px] text-muted">
+        <p className="text-[12px] text-muted">
           <span className="text-good">{mix.measured} benchmarked</span>
           {' · '}{mix.modelled} backed by real data
           {' · '}{mix.estimated} estimated
@@ -32,12 +32,12 @@ export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
           type="button"
           onClick={() => setShowHelp((v) => !v)}
           aria-expanded={showHelp}
-          className="text-[11px] text-muted underline decoration-dotted"
+          className="text-[12px] text-muted underline decoration-dotted"
         >
           How is this worked out?
         </button>
 
-        <label className="ml-auto flex items-center gap-2 text-[11px] text-muted">
+        <label className="ml-auto flex items-center gap-2 text-[12px] text-muted">
           <input
             type="checkbox"
             checked={realOnly}
@@ -49,7 +49,7 @@ export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
       </div>
 
       {showHelp && (
-        <dl className="mt-2.5 space-y-1.5 border-t border-line pt-2.5 text-[11px] leading-snug text-muted">
+        <dl className="mt-2.5 space-y-1.5 border-t border-line pt-2.5 text-[12px] leading-snug text-muted">
           <div><dt className="inline text-ink">Benchmarked</dt>{' — '}
             <dd className="inline">a reviewer ran this exact processor, graphics card, game and settings.</dd></div>
           <div><dt className="inline text-ink">Backed by real data</dt>{' — '}

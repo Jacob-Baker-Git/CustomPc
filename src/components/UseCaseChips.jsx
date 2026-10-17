@@ -13,7 +13,7 @@ export default function UseCaseChips() {
     // A hairline section like ui/Block, not a filled panel: the configurator
     // look separates with rules, not boxes. The chips stay real controls.
     <div className="border-t border-line pt-4">
-      <span className="block text-[11px] uppercase tracking-wide text-faint mb-2">Building this PC for</span>
+      <span className="block text-[12px] uppercase tracking-wide text-faint mb-2">Building this PC for</span>
       <div role="radiogroup" aria-label="Rate this build for" className="flex flex-wrap gap-1.5">
         {USE_CASES.map((u) => {
           const on = u.id === useCase

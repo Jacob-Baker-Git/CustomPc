@@ -37,7 +37,7 @@ function PartName({ part }) {
             own; the retailer link will mostly find used or third-party stock at
             whatever price it likes. */}
         {part.legacy && (
-          <span className="shrink-0 text-[11px] uppercase tracking-wide text-muted border border-line rounded-sm px-1.5 py-0.5">
+          <span className="shrink-0 text-[12px] uppercase tracking-wide text-muted border border-line rounded-sm px-1.5 py-0.5">
             Discontinued
           </span>
         )}
@@ -124,7 +124,7 @@ export default function PartsBrowser() {
             <PartName part={p} />
             <div className="flex items-center gap-3 shrink-0">
               <span className="font-mono text-sm text-tech">£{p.price.toFixed(2)}</span>
-              <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="text-muted hover:text-brass" aria-label={`Search ${p.name} on Amazon`}>
+              <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="-m-1.5 inline-flex p-1.5 text-muted hover:text-brass" aria-label={`Search ${p.name} on Amazon`}>
                 <ExternalLink size={15} />
               </a>
             </div>

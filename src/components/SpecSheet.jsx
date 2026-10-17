@@ -10,18 +10,18 @@ export default function SpecSheet({ part }) {
   const derived = derivedStats(part)
   return (
     <div className="border-t border-line pt-2 mt-1">
-      {note && <p className="text-[11px] leading-relaxed text-muted mb-2">{note}</p>}
+      {note && <p className="text-[12px] leading-relaxed text-muted mb-2">{note}</p>}
       {part.category === 'gpu' && part.perfScore > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-2">
           {gpuResChips(part).map(({ res, fps }) => (
-            <span key={res} className="text-[11px] font-mono px-1.5 py-0.5 rounded-md border border-line text-muted">
+            <span key={res} className="text-[12px] font-mono px-1.5 py-0.5 rounded-md border border-line text-muted">
               ~{fps} fps @ {res.split(' ')[0]}
             </span>
           ))}
         </div>
       )}
       {derived.length > 0 && (
-        <dl className="text-[11px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 mb-2 pb-2 border-b border-line">
+        <dl className="text-[12px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 mb-2 pb-2 border-b border-line">
           {derived.map(({ label, value, unit, hint }) => (
             <div key={label} className="contents">
               <dt className="text-muted" title={hint || undefined}>{label}</dt>
@@ -30,7 +30,7 @@ export default function SpecSheet({ part }) {
           ))}
         </dl>
       )}
-      <dl className="text-[11px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
+      <dl className="text-[12px] leading-relaxed grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
         {specRows(part).map(([label, value]) => (
           <div key={label} className="contents">
             <dt className="text-muted">{label}</dt>

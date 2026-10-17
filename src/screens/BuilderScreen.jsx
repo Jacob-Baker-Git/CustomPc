@@ -218,7 +218,7 @@ export default function BuilderScreen() {
                         all, and a variant that emits nothing fails open, showing
                         BOTH verbs. Guarded by e2e/mobileLayout.spec.js, which
                         drives a real touch device and asserts exactly one. */}
-                    <div data-viewport-hint className="rounded-lg border border-line bg-surface px-2.5 py-1 text-[11px] text-muted">
+                    <div data-viewport-hint className="rounded-lg border border-line bg-surface px-2.5 py-1 text-[12px] text-muted">
                       Drag to rotate ·{' '}
                       <span data-zoom-verb="scroll" className="[@media(pointer:coarse)]:hidden">scroll</span>
                       <span data-zoom-verb="pinch" className="hidden [@media(pointer:coarse)]:inline">pinch</span>

@@ -50,7 +50,7 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
           type="button"
           onClick={() => setClearOpen(true)}
           disabled={isEmpty}
-          className="text-[11px] px-2.5 py-1 rounded-lg bg-surface-2 border border-bad text-bad hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          className="text-[12px] px-2.5 py-1 rounded-lg bg-surface-2 border border-bad text-bad hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
           Clear all
         </button>

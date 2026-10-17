@@ -17,11 +17,11 @@ function Tile({ label, value, sub, tone = 'ink' }) {
 
   return (
     <div className="px-3.5 py-3">
-      <div className="text-[11px] uppercase tracking-wide text-muted">{label}</div>
+      <div className="text-[12px] uppercase tracking-wide text-muted">{label}</div>
       <div className={`mt-1 font-mono text-xl leading-none tabular-nums ${toneClass}`}>
         {value ?? '—'}
       </div>
-      {sub && <div className="mt-1 text-[11px] text-muted leading-tight">{sub}</div>}
+      {sub && <div className="mt-1 text-[12px] text-muted leading-tight">{sub}</div>}
     </div>
   )
 }

@@ -35,7 +35,7 @@ export default function StepHeader({ view, onChange, path = 'parts' }) {
               className={`min-h-11 shrink-0 whitespace-nowrap border-b-2 py-2.5 text-[13px] transition-colors
                 ${on ? 'border-brass font-bold text-ink' : `border-transparent hover:text-ink ${steps.indexOf(v) > -1 && steps.indexOf(v) < current ? 'text-muted' : 'text-faint'}`}`}
             >
-              <span aria-hidden="true" className="mr-1.5 font-mono text-[11px]">{String(i + 1).padStart(2, '0')}</span>
+              <span aria-hidden="true" className="mr-1.5 font-mono text-[12px]">{String(i + 1).padStart(2, '0')}</span>
               {LABEL[v]}
             </button>
           )

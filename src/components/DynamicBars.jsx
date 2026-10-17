@@ -31,9 +31,9 @@ export default function DynamicBars({ value, max, label, unit, compact = false }
           : 'flex flex-col gap-0.5 rounded-lg border border-line bg-surface-2 px-2.5 py-1 min-w-[136px]'
       }
     >
-      <div className={`flex items-baseline justify-between gap-2 ${compact ? 'text-[11px] text-muted' : 'text-[11px] leading-none'}`}>
+      <div className={`flex items-baseline justify-between gap-2 ${compact ? 'text-[12px] text-muted' : 'text-[12px] leading-none'}`}>
         <span className={compact ? '' : 'uppercase tracking-wide text-faint'}>{label}</span>
-        <span className={`font-mono tabular-nums truncate ${compact ? 'text-ink' : 'text-[11px] text-ink'}`}>{display}</span>
+        <span className={`font-mono tabular-nums truncate ${compact ? 'text-ink' : 'text-[12px] text-ink'}`}>{display}</span>
       </div>
       <div className={`rounded-full overflow-hidden ${compact ? 'h-1.5 bg-surface-2' : 'h-1 bg-ground'}`}>
         <div

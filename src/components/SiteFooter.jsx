@@ -22,9 +22,9 @@ export default function SiteFooter() {
       className="mt-16 border-t border-line py-6 text-center text-xs text-muted"
     >
       <div className="mx-auto w-full max-w-3xl px-4">
-        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-brass transition-colors">{l.label}</a>
+            <a key={l.href} href={l.href} className="inline-block py-1 hover:text-brass transition-colors">{l.label}</a>
           ))}
         </nav>
         <p className="mt-4">Prices are curated estimates ({PRICE_SNAPSHOT}). Free · no sign-up.</p>

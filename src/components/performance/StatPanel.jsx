@@ -12,11 +12,11 @@ export default function StatPanel({ title, subtitle, children, footnote }) {
         <div className="flex items-baseline justify-between gap-3">
           <h3 className="text-sm text-ink">{title}</h3>
         </div>
-        {subtitle && <p className="mt-0.5 text-[11px] text-muted leading-relaxed">{subtitle}</p>}
+        {subtitle && <p className="mt-0.5 text-[12px] text-muted leading-relaxed">{subtitle}</p>}
       </header>
       {children}
       {footnote && (
-        <p className="mt-2.5 border-t border-line pt-2 text-[11px] text-muted leading-relaxed">
+        <p className="mt-2.5 border-t border-line pt-2 text-[12px] text-muted leading-relaxed">
           {footnote}
         </p>
       )}

@@ -21,7 +21,7 @@ import { Info } from 'lucide-react'
 export default function InfoBadge({ label, align = 'left', floating = false, width = 'w-72', children }) {
   const [open, setOpen] = useState(false)
 
-  const box = floating ? 'w-7 h-7 bg-surface' : 'w-5 h-5'
+  const box = floating ? 'w-7 h-7 bg-surface' : 'w-6 h-6'
   const icon = floating ? 14 : 11
   const side = align === 'right' ? 'right-0' : 'left-0'
 

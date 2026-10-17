@@ -29,7 +29,7 @@ export default function Section({ title, blurb, children, className = '', action
         <div>
           <h3 className="text-sm text-ink">{title}</h3>
           {blurb && (
-            <p className="mt-0.5 max-w-[68ch] text-[11px] text-muted leading-relaxed">{blurb}</p>
+            <p className="mt-0.5 max-w-[68ch] text-[12px] text-muted leading-relaxed">{blurb}</p>
           )}
         </div>
         {action}
