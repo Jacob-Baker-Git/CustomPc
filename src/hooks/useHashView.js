@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 // The builder's own views. "saved" is deliberately absent — saved builds are a
 // library spanning every build, not a view of the current one, so they live on
@@ -30,12 +30,14 @@ export function useHashView(defaultView = 'build') {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const set = (v) => {
+  // Stable, so a listener that switches views (BuilderScreen's number keys)
+  // subscribes once rather than on every render.
+  const set = useCallback((v) => {
     // pushState rather than location.hash so the entry records that it belongs
     // to the builder (see flowHistory.js); Back still fires hashchange.
     window.history.pushState({ flow: 'builder' }, '', `#${v}`)
     setView(v)
-  }
+  }, [])
 
   return [view, set]
 }
