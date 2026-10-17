@@ -347,6 +347,11 @@
       "slug": "mafia-the-old-country",
       "genre": "action-adventure"
     },
+    "marvel-rivals": {
+      "name": "Marvel Rivals",
+      "slug": "marvel-rivals",
+      "genre": "shooter"
+    },
     "mechwarrior-5-clans": {
       "name": "MechWarrior 5: Clans",
       "slug": "mechwarrior-5-clans",

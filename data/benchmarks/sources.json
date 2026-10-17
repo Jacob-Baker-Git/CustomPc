@@ -1355,5 +1355,28 @@
       "gpuDriver": "AMD Adrenalin 23.9.3 (23.9.2 on GCN); NVIDIA GeForce 537.42; Intel Arc 4826"
     },
     "notes": ""
+  },
+  {
+    "id": "src-techspot-2025-03-05-amd-radeon-rx-9070-xt-re",
+    "outlet": "TechSpot",
+    "title": "AMD Radeon RX 9070 XT Review",
+    "url": "https://www.techspot.com/review/2961-amd-radeon-9070-xt/",
+    "published": "2025-03-05",
+    "accessed": "2026-10-17",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": null,
+        "sticks": null
+      },
+      "os": "Windows 11 24H2",
+      "gpuDriver": "Nvidia GeForce Game Ready 572.60; AMD Radeon Adrenalin 24.12.1 / 24.30.31.03"
+    },
+    "notes": "Test system from the article's Test System Specs table: MSI MPG X870E Carbon WiFi (BIOS 7E49v1A23, ReBAR enabled), G.Skill Trident Z5 RGB DDR5-6000 CL30-38-38-96; RAM capacity and stick count not stated. Figures read off chart data labels (average and 1% low). RTX 3080 omitted: 10/12 GB variant not stated."
   }
 ]
