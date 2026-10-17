@@ -5,7 +5,9 @@ import SiteFooter from './SiteFooter'
 
 // The sticky header's height goes to the page as --chrome-h, so a Fold's
 // pinned header (the Help FAQ) sits below it rather than under it.
-export default function SiteChrome({ onBack, children }) {
+// `wide`: a page laid out for the desktop width (Build for a game), not a
+// reading column.
+export default function SiteChrome({ onBack, children, wide = false }) {
   const rootRef = useRef(null)
   const headerRef = useRef(null)
   useChromeHeight(headerRef, rootRef)
@@ -22,7 +24,7 @@ export default function SiteChrome({ onBack, children }) {
         {/* @wordmark — see accentIsBrandOnly.test.js */}
         <span className="font-display font-extrabold text-lg tracking-tight">PC <span className="text-accent">Builder</span></span>
       </header>
-      <main className="max-w-3xl mx-auto px-4 py-8">{children}</main>
+      <main className={`max-w-3xl mx-auto px-4 py-8 ${wide ? 'lg:max-w-6xl lg:px-8' : ''}`}>{children}</main>
       <SiteFooter />
     </div>
   )

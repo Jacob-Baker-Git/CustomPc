@@ -1,6 +1,6 @@
 import { render, screen, act, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import TargetScreen from '../screens/TargetScreen'
 import useBuilderStore from '../store/useBuilderStore'
 
@@ -33,7 +33,7 @@ describe('TargetScreen', () => {
   it('finds a build and hands it to the builder at Peripherals', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    expect(screen.getByText(/best build within £1600/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
     await userEvent.click(screen.getAllByRole('button', { name: /use this build/i })[0])
     const s = useBuilderStore.getState()
     expect(s.flow).toBe('builder')
@@ -46,9 +46,9 @@ describe('TargetScreen', () => {
   it('drops results once an input changes', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    expect(screen.getByText(/best build within £1600/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
     act(() => useBuilderStore.setState({ resolution: '4k' }))
-    expect(screen.queryByText(/best build within/i)).toBeNull()
+    expect(screen.queryByText(/best within/i)).toBeNull()
   })
 
   it('names the settings the results are for', async () => {
@@ -76,10 +76,48 @@ describe('TargetScreen — each option leads with its answer', () => {
   it('puts fps, price and the button before the parts list', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    const option = screen.getByText(/best build within/i).closest('section')
+    const option = screen.getByText(/^best within/i).closest('section')
     const button = within(option).getByRole('button', { name: /use this build/i })
     const parts = option.querySelector('details')
     expect(parts).not.toBeNull()
     expect(button.compareDocumentPosition(parts) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+})
+
+describe('TargetScreen — three answers', () => {
+  const original = window.matchMedia
+  afterEach(() => { window.matchMedia = original })
+
+  it('shows the cheapest build that hits as well as the best', async () => {
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/^cheapest that hits 60 fps$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /use this build/i }).length).toBeGreaterThanOrEqual(2)
+  })
+
+  it('on desktop the parts lists start open and changed parts are marked', async () => {
+    window.matchMedia = () => ({ matches: true })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    for (const d of document.querySelectorAll('details')) expect(d.open).toBe(true)
+    expect(document.querySelectorAll('[data-changed="true"]').length).toBeGreaterThan(0)
+  })
+
+  it('marks a build that costs more than the budget', async () => {
+    useBuilderStore.setState({ budget: 400 })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/^over budget$/i)).toBeInTheDocument()
+  })
+
+  it('says when nothing above the cheapest is worth it', async () => {
+    // Fortnite 1440p Epic, 250 fps, £1,600: the cheapest hit is £994 at 277 fps
+    // and nothing between it and the best (£1,599, 318 fps) clears VALUE_BAR.
+    useBuilderStore.setState({ target: { gameId: 'fortnite', presetKey: null, fps: 250 } })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText('Nothing above the cheapest build is worth the extra money.')).toBeInTheDocument()
+    expect(screen.queryByText(/^best value$/i)).toBeNull()
   })
 })

@@ -7,7 +7,8 @@ import ResolutionPicker from './performance/ResolutionPicker'
 
 // A native <datalist>: the browser does the searching and the list, and a typed
 // name only counts once it matches a game exactly — partial text selects nothing.
-export default function GameSettingsFields() {
+// `stack`: one field per row from lg, for a narrow sidebar.
+export default function GameSettingsFields({ stack = false }) {
   const target = useBuilderStore((s) => s.target)
   const setTarget = useBuilderStore((s) => s.setTarget)
   const resolution = useBuilderStore((s) => s.resolution)
@@ -22,7 +23,7 @@ export default function GameSettingsFields() {
   }
 
   return (
-    <div className="flex flex-wrap items-end gap-3">
+    <div className={`flex flex-wrap items-end gap-3 ${stack ? 'lg:flex-col lg:items-stretch' : ''}`}>
       <label className="flex flex-col gap-1 text-xs text-muted">
         Game
         <input
