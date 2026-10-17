@@ -24,7 +24,7 @@ export default function SiteChrome({ onBack, children, wide = false }) {
         {/* @wordmark — see accentIsBrandOnly.test.js */}
         <span className="font-display font-extrabold text-lg tracking-tight">PC <span className="text-accent">Builder</span></span>
       </header>
-      <main className={`max-w-3xl mx-auto px-4 py-8 ${wide ? 'lg:max-w-6xl lg:px-8' : ''}`}>{children}</main>
+      <main className={`max-w-3xl mx-auto px-4 py-8${wide ? ' lg:max-w-6xl lg:px-8' : ''}`}>{children}</main>
       <SiteFooter />
     </div>
   )
