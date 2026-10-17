@@ -81,6 +81,12 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
         role="dialog"
         aria-modal="true"
         aria-label={`Select ${category}`}
+        onKeyDown={(e) => {
+          // "/" jumps to search, as on most catalogue sites; not while typing.
+          if (e.key !== '/' || e.target.closest?.('input, textarea, select')) return
+          e.preventDefault()
+          ref.current?.querySelector('input')?.focus()
+        }}
         className={`bg-surface rounded-xl w-full flex flex-col border border-line shadow-2xl ${desktop ? 'max-w-6xl max-h-[88vh]' : 'max-w-4xl max-h-[80vh]'}`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-line gap-4">

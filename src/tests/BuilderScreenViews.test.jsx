@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import BuilderScreen from '../screens/BuilderScreen'
 import useBuilderStore from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
@@ -48,5 +48,39 @@ describe('the 3D view lives on Summary only (spec 2026-10-13)', () => {
     openOn('build')
     // The phone dock and the desktop inline button both render; CSS shows one.
     expect(screen.getAllByRole('button', { name: /next: performance/i }).length).toBeGreaterThan(0)
+  })
+})
+
+describe('number keys switch the step tabs', () => {
+  const press = (key, init = {}) => act(() => { fireEvent.keyDown(document.activeElement ?? document.body, { key, ...init }) })
+
+  it('on the parts path, 1-4 are Build, Performance, Peripherals, Summary', () => {
+    openOn('build')
+    press('2'); expect(window.location.hash).toBe('#performance')
+    press('4'); expect(window.location.hash).toBe('#summary')
+    press('1'); expect(window.location.hash).toBe('#build')
+  })
+
+  it('on the game path, the keys number the two steps shown', () => {
+    useBuilderStore.setState({ path: 'game' })
+    openOn('summary')
+    press('1'); expect(window.location.hash).toBe('#peripherals')
+    press('3'); expect(window.location.hash).toBe('#peripherals')
+  })
+
+  it('typing a number into a field does not switch tabs', () => {
+    openOn('build')
+    const input = document.createElement('input')
+    document.body.appendChild(input)
+    input.focus()
+    press('2')
+    expect(window.location.hash).toBe('#build')
+    input.remove()
+  })
+
+  it('a key with a modifier held does nothing', () => {
+    openOn('build')
+    press('2', { ctrlKey: true })
+    expect(window.location.hash).toBe('#build')
   })
 })

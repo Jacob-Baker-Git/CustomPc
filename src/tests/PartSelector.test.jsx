@@ -146,3 +146,14 @@ describe('PartSelector on desktop', () => {
     expect(onSelect).toHaveBeenCalledTimes(1)
   })
 })
+
+describe('PartSelector search key', () => {
+  it('/ jumps to the search box without typing a slash', () => {
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    const dialog = screen.getByRole('dialog')
+    const ev = fireEvent.keyDown(dialog, { key: '/' })
+    const search = screen.getByPlaceholderText(/search gpu/i)
+    expect(document.activeElement).toBe(search)
+    expect(ev).toBe(false) // default prevented
+  })
+})
