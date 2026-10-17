@@ -5,8 +5,9 @@ import perfGames from '../data/perfGames.json'
 import { getBuildWarnings } from '../lib/buildWarnings'
 import { computeBottleneck } from '../lib/bottleneck'
 import {
-  presetKey, findPreset, fpsFor, completeBuild, buildForGame,
+  presetKey, findPreset, fpsFor, completeBuild, buildForGame, compareFastFirst,
 } from '../lib/gameTargetBuilder'
+import { coolerCapacityW } from '../lib/partSynergy'
 
 const game = perfGames.find((g) => g.id === 'fortnite')
 const preset = findPreset(game, 'epic|native')
@@ -57,6 +58,28 @@ describe('completeBuild', () => {
     expect(b.ram.specs.sticks).toBeGreaterThanOrEqual(2)
     const bad = getBuildWarnings(b).filter((w) => w.level !== 'note')
     expect(bad).toEqual([])
+  })
+})
+
+describe('completeBuild cooler', () => {
+  it('picks a cooler with capacity for the chip base power', () => {
+    const hot = partsData.filter((p) => p.category === 'cpu' && !p.legacy).sort((a, b) => b.tdp - a.tdp)[0]
+    // Every catalogue cooler today is rated above every chip's base power, so a
+    // cheapest-of-all low-profile cooler (80 W by coolerCapacityW) is planted to
+    // prove the filter actually reads a capacity.
+    const lowProfile = { id: 'test-low-profile', category: 'cooler', name: 'Low profile', price: 1,
+                         sockets: [hot.socket], tdp: 0, specs: { type: 'Air', height: 50 } }
+    const b = completeBuild(hot, gpus[0], [...partsData, lowProfile], RES)
+    expect(b.cooler.id).not.toBe('test-low-profile')
+    expect(coolerCapacityW(b.cooler)).toBeGreaterThanOrEqual(hot.tdp)
+  })
+})
+
+describe('ranking', () => {
+  it('on equal fps a measured row beats an "up to" ceiling', () => {
+    const measured = { row: { avgFps: 100, bound: undefined }, cpu: { perfScore: 1, id: 'a' }, gpu: { id: 'g' }, core: 500 }
+    const ceiling  = { row: { avgFps: 100, bound: 'upper' }, cpu: { perfScore: 99, id: 'b' }, gpu: { id: 'g' }, core: 100 }
+    expect([ceiling, measured].sort(compareFastFirst)[0]).toBe(measured)
   })
 })
 

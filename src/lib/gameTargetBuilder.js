@@ -3,12 +3,24 @@ import { autoBuild } from './autoBuilder'
 import { presetsFor } from './gamePresets'
 import { BUILD_PROFILES } from './buildProfiles'
 import { computeBottleneck } from './bottleneck'
+import { coolerCapacityW } from './partSynergy'
 import perfGames from '../data/perfGames.json'
 
 const ESSENTIAL = ['cpu', 'gpu', 'motherboard', 'ram', 'cooler', 'case', 'storage', 'psu']
 const NEEDS = BUILD_PROFILES.gaming.needs
 const sumPrice = (sel) => Object.values(sel).reduce((s, p) => s + (p?.price ?? 0), 0)
 const byId = (a, b) => (a < b ? -1 : a > b ? 1 : 0)
+// A measured row before an "up to" ceiling of the same frame rate: the ceiling
+// cannot see the CPU, the measurement can.
+const measuredFirst = (a, b) => (a.row.bound === 'upper') - (b.row.bound === 'upper')
+
+// Fastest first. On equal FPS a measurement beats a ceiling, then the stronger
+// CPU wins: most answers are graphics-card ceilings that cannot see the CPU,
+// and spending spare budget on the chip is the sensible tie-break. Then
+// cheaper, then ids.
+export const compareFastFirst = (a, b) =>
+  (b.row.avgFps - a.row.avgFps) || measuredFirst(a, b) || ((b.cpu.perfScore ?? 0) - (a.cpu.perfScore ?? 0)) ||
+  (a.core - b.core) || byId(a.cpu.id, b.cpu.id) || byId(a.gpu.id, b.gpu.id)
 
 // The engine's game list, not the catalogue's — see PerformanceScreen. A stored
 // id the list no longer has is no game at all.
@@ -35,17 +47,29 @@ export function fpsFor(parts, game, resolution, preset, model) {
   return r?.games.find((x) => x.presetId === preset.id && x.upscaling === preset.upscaling) ?? null
 }
 
-// The cheapest SENSIBLE complete build around a CPU and GPU: enough memory (as
-// two sticks, so it runs dual-channel) and SSD storage (an HDD boot drive was
-// the cheapest 1TB part, so it got picked for a £1,500 gaming PC) and a cooler
-// rated for the chip, so nothing in it trips a build warning. autoBuild with a zero budget fills every empty
-// category with its cheapest compatible part and sizes the PSU to the peak.
-export function completeBuild(cpu, gpu, parts, resolution) {
-  const catalog = parts.filter((p) =>
+// What a sensible game build is made from: enough memory (as two sticks, so it
+// runs dual-channel), SSD storage (an HDD boot drive was the cheapest 1TB part,
+// so it got picked for a £1,500 gaming PC) and a cooler with the capacity for
+// the chip's base power. No catalogue cooler carries a published rating, so
+// capacity is coolerCapacityW's estimate — the one the Performance tab's
+// Cooling verdict uses. Base power, not full boost: the estimate caps air
+// coolers at 220 W, so full boost would force a 360mm AIO onto every build with
+// a 250 W chip. Coolers of unknown capacity are kept only if nothing known fits.
+export function sensibleCatalog(cpu, parts) {
+  const coolers = parts.filter((p) => p.category === 'cooler')
+  const known = coolers.filter((p) => coolerCapacityW(p) >= (cpu.tdp ?? 0))
+  const okCooler = new Set(known.length > 0 ? known : coolers.filter((p) => coolerCapacityW(p) === 0))
+  return parts.filter((p) =>
     (p.category !== 'ram' || ((p.capacityGb ?? 0) >= NEEDS.ramGb && (p.specs?.sticks ?? 1) >= 2)) &&
     (p.category !== 'storage' || ((p.capacityGb ?? 0) >= NEEDS.storageGb && p.storageType !== 'HDD')) &&
-    (p.category !== 'cooler' || typeof p.specs?.ratedTdpW !== 'number' || p.specs.ratedTdpW >= (cpu.tdp ?? 0)))
-  const build = autoBuild({ cpu, gpu }, 0, catalog, resolution)
+    (p.category !== 'cooler' || okCooler.has(p)))
+}
+
+// The cheapest SENSIBLE complete build around a CPU and GPU, so nothing in it
+// trips a build warning. autoBuild with a zero budget fills every empty
+// category with its cheapest compatible part and sizes the PSU to the peak.
+export function completeBuild(cpu, gpu, parts, resolution) {
+  const build = autoBuild({ cpu, gpu }, 0, sensibleCatalog(cpu, parts), resolution)
   return ESSENTIAL.every((c) => build[c]) ? build : null
 }
 
@@ -81,12 +105,7 @@ export function buildForGame({ game, preset, resolution, targetFps, budget, part
     return memo.get(k)
   }
 
-  // Fastest first. On equal FPS the stronger CPU wins: most answers are
-  // graphics-card ceilings that cannot see the CPU, and spending spare budget
-  // on the chip is the sensible tie-break. Then cheaper, then ids.
-  const fastFirst = [...pairs].sort((a, b) =>
-    (b.row.avgFps - a.row.avgFps) || ((b.cpu.perfScore ?? 0) - (a.cpu.perfScore ?? 0)) ||
-    (a.core - b.core) || byId(a.cpu.id, b.cpu.id) || byId(a.gpu.id, b.gpu.id))
+  const fastFirst = [...pairs].sort(compareFastFirst)
 
   let fastest = null
   for (const p of fastFirst) {
@@ -109,7 +128,7 @@ export function buildForGame({ game, preset, resolution, targetFps, budget, part
   let cheapestHit = null
   if (!unreachable && !(best && best.fps >= targetFps)) {
     const cheapFirst = pairs.filter((p) => p.row.avgFps >= targetFps).sort((a, b) =>
-      (a.core - b.core) || (b.row.avgFps - a.row.avgFps) || byId(a.cpu.id, b.cpu.id) || byId(a.gpu.id, b.gpu.id))
+      (a.core - b.core) || (b.row.avgFps - a.row.avgFps) || measuredFirst(a, b) || byId(a.cpu.id, b.cpu.id) || byId(a.gpu.id, b.gpu.id))
     for (const p of cheapFirst) {
       // CPU + GPU alone already costs more than the cheapest whole build found.
       if (cheapestHit && p.core >= cheapestHit.total) break
