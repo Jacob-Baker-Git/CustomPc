@@ -147,7 +147,12 @@ export default function BuilderScreen() {
                   edge-to-edge with a fade. The EDGE stays for the reason above;
                   only the filled box goes, so the PC sits on the page itself
                   inside a hairline. */}
-              <div className="area-viz relative h-[42vh] overflow-hidden border border-line transition-colors hover:border-line-strong md:h-[48vh] lg:h-auto lg:min-h-[520px]">
+              {/* The cell stretches to the left column; the PANEL inside it is
+                  sticky (index.css), so the PC stays in view while the build
+                  list scrolls. Sticky on the cell itself sized the row to the
+                  window and left dead space below a shorter column. */}
+              <div className="area-viz h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px]">
+              <div className="viz-panel relative h-full overflow-hidden border border-line transition-colors hover:border-line-strong">
                 {show3D ? (
                   <>
                     <CanvasErrorBoundary>
@@ -224,6 +229,7 @@ export default function BuilderScreen() {
                   </div>
                 )}
               </div>
+              </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}
               {/* ⚠️ `display: contents` on mobile (index.css) dissolves this
@@ -240,10 +246,12 @@ export default function BuilderScreen() {
               <div className="area-left flex flex-col gap-3">
                 <div className="area-usecase"><UseCaseChips /></div>
                 <div className="area-rating"><BuildRatingPanel /></div>
+                {/* The build list sits under the score, beside the 3D view
+                    (user, 2026-10-17) — where the per-part score list was. */}
+                <div className="area-parts"><BuildSummary /></div>
+                <div className="area-banner"><GeneratedBanner /></div>
+                <div className="area-warnings"><BuildWarnings /></div>
               </div>
-              <div className="area-banner"><GeneratedBanner /></div>
-              <div className="area-parts"><BuildSummary /></div>
-              <div className="area-warnings"><BuildWarnings /></div>
             </div>
           </div>
         )}

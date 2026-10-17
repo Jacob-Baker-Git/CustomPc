@@ -109,15 +109,15 @@ describe('BuildSummary', () => {
     expect(useSavedStore.getState().saved.some((b) => b.name === 'Test Rig')).toBe(true)
   })
 
-  it('keeps its own frame-rate list, and does not carry the performance tab', () => {
+  it('links to the Performance tab for frame rates rather than guessing them here', () => {
     // useCase is set explicitly (not left to the store default) because the
     // frame-rate block only renders for paced use cases, and this store is a
     // persisted singleton — an earlier test in this file leaves it on 'office'.
     useBuilderStore.setState({ selectedParts: { cpu, gpu }, useCase: 'gaming' })
     render(<BuildSummary />)
-    // The old list stays here. It quotes the old model, which still drives the
-    // CustomPC score — the two engines coexist until a later phase migrates it.
-    expect(screen.getByRole('button', { name: /frame rates @/i })).toBeInTheDocument()
+    // The guessed per-game table went with the old 22-game list (2026-10-17);
+    // measured frame rates live on the Performance tab, one link away.
+    expect(screen.getByRole('link', { name: /frame rates @/i })).toHaveAttribute('href', '#performance')
     // The engine moved out to its own tab; nothing of it should be left behind.
     expect(screen.queryByRole('button', { name: /run performance test/i })).not.toBeInTheDocument()
   })

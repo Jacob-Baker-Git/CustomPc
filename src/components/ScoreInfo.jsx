@@ -18,6 +18,11 @@ export default function ScoreInfo() {
         fast GPU behind a slow CPU, too little RAM, a PSU with no headroom.
       </p>
       <p className="mt-2">
+        Each use case has its own needs. Streaming and programming want 32GB of RAM and
+        8+ CPU cores, content creation 12+ cores and 16GB of VRAM, gaming 16GB and a GPU
+        first. The same PC can score differently when you switch use case.
+      </p>
+      <p className="mt-2">
         Anything we have no data for never counts against you, and hitting the target for
         your use case scores highly rather than perfectly. The top of the scale is
         reserved for genuinely overspecified builds.

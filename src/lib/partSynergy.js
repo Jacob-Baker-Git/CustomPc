@@ -65,6 +65,15 @@ export const recommendedPsuW = (peakW) => (peakW > 0 ? Math.ceil((peakW * 1.35) 
 
 const OK = { balance: 100, reason: null, detail: null }
 
+// What each use case actually spreads across cores, for the CPU's "why?".
+const CORE_WORK = {
+  gaming: 'modern games schedule physics, audio and streaming assets on separate threads',
+  office: 'a browser full of tabs alongside calls and documents',
+  creation: 'video exports, renders and photo batches use every core they are given',
+  programming: 'compiles, containers and VMs run in parallel',
+  streaming: 'the game, the encoder, OBS and chat all run at once',
+}
+
 // How well `category` pairs with the rest of the build for `useCase`.
 // Returns { balance 0-100, reason string|null, detail string|null } for the six
 // pairwise-scored categories, or null for categories with no strong partner
@@ -96,6 +105,15 @@ export function partSynergy(parts, category, useCase) {
       detail = category === 'cpu'
         ? `At ${res} the ${parts.gpu?.name ?? 'graphics card'} can draw frames faster than this CPU can prepare them, so in busy scenes you lose frames the card could otherwise deliver. Nothing is broken: a quicker CPU is simply where the next gain is.`
         : `At ${res} this card has capacity to spare and the ${parts.cpu?.name ?? 'CPU'} decides the frame rate. The card is not the part to change here; a stronger CPU is what unlocks it.`
+    }
+    if (category === 'cpu' && part.specs?.cores > 0 && needs.cores) {
+      // Softened like the bottleneck: fewer cores is slower, never broken.
+      const c = soften(ratioPct(part.specs.cores, needs.cores))
+      if (c < balance) {
+        balance = c
+        reason = `${part.specs.cores} cores, and ${label} likes ${needs.cores}+`
+        detail = `${label} runs work that spreads across cores — ${CORE_WORK[useCase] ?? 'several heavy jobs at once'}. A chip with fewer cores still does it, just slower, and it is the part that decides how long you wait rather than whether it works. A higher-core CPU on the same socket is a drop-in swap.`
+      }
     }
     if (category === 'gpu' && typeof part.specs?.vram === 'number' && needs.vram) {
       const v = ratioPct(part.specs.vram, needs.vram)

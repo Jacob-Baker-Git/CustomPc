@@ -73,8 +73,8 @@ test('the left column stays tight to the 3D preview at any viewport height', asy
     const gaps = await page.evaluate(() => {
       const grid = document.querySelector('.build-grid')
       const left = grid.querySelector('.area-left')
-      const chips = left ? left.firstElementChild : grid.querySelector('.area-usecase')
-      const score = left ? left.lastElementChild : grid.querySelector('.area-rating')
+      const chips = grid.querySelector('.area-usecase')
+      const score = grid.querySelector('.area-rating')
       const column = left ?? grid.querySelector('.area-rating')
       const viz = grid.querySelector('.area-viz')
       return {

@@ -127,13 +127,12 @@ body {
 .build-grid > .area-viz { z-index: 0; }
 
 /* ⚠️ `display: contents` generates NO BOX, so the rule above does not reach
-   these two — selectors match the DOM tree, not the box tree, and they are
-   still grandchildren. Without this they lose `z-index: 1` and paint UNDER the
-   WebGL canvas, which is the compositing gotcha described at the top of this
-   block. Give them the same two properties explicitly. */
+   the left column's panels — selectors match the DOM tree, not the box tree,
+   and they are still grandchildren. Without this they lose `z-index: 1` and
+   paint UNDER the WebGL canvas, which is the compositing gotcha described at
+   the top of this block. Give them the same two properties explicitly. */
 .build-grid > .area-left { display: contents; }
-.build-grid .area-usecase,
-.build-grid .area-rating { position: relative; z-index: 1; }
+.build-grid .area-left > * { position: relative; z-index: 1; }
 
 /* The phone's reading order on Summary (spec 2026-10-16): the answer first —
    the score and the use case it is rated for — then the parts list, then the
@@ -146,12 +145,12 @@ body {
    ignores order (only AUTO-placement consumes it). Paint order does still
    follow `order`, which is why the z-index rules above are load-bearing rather
    than decorative. */
-.build-grid > .area-banner    { order: 0; }
+.build-grid .area-banner      { order: 0; }
 .build-grid .area-rating      { order: 1; }
 .build-grid .area-usecase     { order: 2; }
-.build-grid > .area-parts     { order: 3; }
+.build-grid .area-parts       { order: 3; }
 .build-grid > .area-viz       { order: 4; }
-.build-grid > .area-warnings  { order: 5; }
+.build-grid .area-warnings    { order: 5; }
 
 /* Give the vertical axis back to the page on touch devices.
 
@@ -192,9 +191,9 @@ body {
 @media (min-width: 1024px) {
   .build-grid {
     display: grid;
-    /* The 3D preview earns the larger share: it is the thing people came for,
-       and the left column is text that reads fine narrow. */
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    /* The 3D preview earns the larger share: it is the thing people came for.
+       The left column holds the parts list now, which needs room for names. */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     /* One left-hand area, not two rows.
        .area-viz used to span "usecase" and "rating", and Grid splits a spanning
        item's excess height EQUALLY across the rows it spans — so half of the
@@ -202,20 +201,22 @@ body {
        without limit as you zoomed out (47px at 1900px tall, 213px at 2400px).
        With one row there is no excess to distribute. Do not split this back
        apart. */
-    grid-template-areas:
-      "left      viz"
-      "banner    banner"
-      "parts     parts"
-      "warnings  warnings";
+    grid-template-areas: "left viz";
     align-items: start;
     gap: 1rem;
   }
-  /* Stretch, not height:100%. The grid is align-items:start, and a percentage
-     height on a start-aligned item is a spec grey area — it only resolves
-     against the row if the browser sizes the row first, so it can come out as
-     `auto` and let the 3D panel hang below the column beside it. align-self
-     pins the two to the same bottom edge by definition. */
-  .build-grid > .area-viz       { grid-area: viz; align-self: stretch; }
+  /* The cell stretches to the left column (align-self, not height:100% — a
+     percentage height on a start-aligned item can resolve to auto). The panel
+     inside is sticky and capped at the window, so with the long build list in
+     the left column (2026-10-17) the PC stays in view as the list scrolls past.
+     The cap is a min() with 100%, so a column shorter than the window never
+     gets a panel taller than itself. */
+  .build-grid > .area-viz { grid-area: viz; align-self: stretch; }
+  .build-grid .viz-panel {
+    position: sticky;
+    top: calc(var(--chrome-h, 0px) + 0.75rem);
+    height: min(100%, calc(100vh - var(--chrome-h, 0px) - 1.5rem));
+  }
   /* Back from `display: contents` — above lg this is a real flex column in the
      left cell again, and the two panels inside it are laid out by IT, not by
      the grid. Their mobile `order` is NOT inert here and is reset just below —
@@ -232,9 +233,5 @@ body {
      The selectors must stay DESCENDANT rather than `>`: `display: contents`
      does not change the DOM, so .area-rating's parent is always .area-left and
      a child combinator from .build-grid would never match at any width. */
-  .build-grid .area-usecase,
-  .build-grid .area-rating { order: 0; }
-  .build-grid > .area-banner    { grid-area: banner; }
-  .build-grid > .area-parts     { grid-area: parts; }
-  .build-grid > .area-warnings  { grid-area: warnings; }
+  .build-grid .area-left > * { order: 0; }
 }
