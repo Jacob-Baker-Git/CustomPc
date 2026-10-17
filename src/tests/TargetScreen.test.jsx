@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import TargetScreen from '../screens/TargetScreen'
 import useBuilderStore from '../store/useBuilderStore'
+import useCatalogStore from '../store/useCatalogStore'
+import partsData from '../data/partsData.json'
 
 beforeEach(() => {
   useBuilderStore.setState({
@@ -119,5 +121,20 @@ describe('TargetScreen — three answers', () => {
     await userEvent.click(find())
     expect(screen.getByText('Nothing above the cheapest build is worth the extra money.')).toBeInTheDocument()
     expect(screen.queryByText(/^best value$/i)).toBeNull()
+  })
+})
+
+describe('TargetScreen — nothing can be completed', () => {
+  afterEach(() => { useCatalogStore.setState({ parts: partsData }) })
+
+  it('says no build reaches the target without naming a fastest build that does not exist', async () => {
+    // Frame rates exist for every CPU + GPU pair, but with no boards, memory or
+    // cases no pair becomes a whole PC, so there is no fastest build either.
+    useCatalogStore.setState({ parts: partsData.filter((p) => p.category === 'cpu' || p.category === 'gpu') })
+    useBuilderStore.setState({ target: { gameId: 'fortnite', presetKey: null, fps: 100000 } })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/no build in the catalogue reaches/i)).toBeInTheDocument()
+    expect(screen.queryByText(/the fastest manages/i)).toBeNull()
   })
 })

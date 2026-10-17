@@ -142,7 +142,8 @@ export default function TargetScreen() {
               {shown.unreachable && (
                 <p className="text-sm text-muted">
                   No build in the catalogue reaches {shown.fps} fps in {shown.game.name} at these settings.
-                  The fastest manages {fpsText(shown.fastest)} for £{shown.fastest.total.toFixed(0)}.
+                  {/* No fastest when no pair could be made into a whole PC. */}
+                  {shown.fastest && <> The fastest manages {fpsText(shown.fastest)} for £{shown.fastest.total.toFixed(0)}.</>}
                 </p>
               )}
             </>
