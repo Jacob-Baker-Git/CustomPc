@@ -30,7 +30,7 @@ export const OPERATOR = {
   location: 'the United Kingdom',
 }
 
-export const LAST_UPDATED = '1 August 2026'
+export const LAST_UPDATED = '26 August 2026'
 
 // There is deliberately no AFFILIATE_DISCLOSURE here. The site has no affiliate
 // relationship with anyone and earns nothing from the outbound links, so there

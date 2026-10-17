@@ -91,6 +91,9 @@ export default function TargetScreen() {
           Find builds
         </button>
       </div>
+      {game && !ready && (
+        <p className="mt-2 text-xs text-muted">Enter a frame rate and a budget above zero.</p>
+      )}
 
       {shown && (
         <div className="mt-6 flex flex-col gap-3">

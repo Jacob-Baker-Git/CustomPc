@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { VIEWS, stepsFor } from '../hooks/useHashView'
 
 const LABEL = { build: 'Build', performance: 'Performance', peripherals: 'Peripherals', summary: 'Summary' }
@@ -13,9 +14,16 @@ const LABEL = { build: 'Build', performance: 'Performance', peripherals: 'Periph
 export default function StepHeader({ view, onChange, path = 'parts' }) {
   const steps = stepsFor(path)
   const current = steps.indexOf(view)
+  // On a phone the four steps overflow the row; keep the current one in view
+  // (Summary sat cut off at the right edge).
+  const row = useRef(null)
+  useEffect(() => {
+    const el = row.current?.querySelector('[aria-current]')
+    if (el) row.current.scrollLeft = Math.max(0, el.offsetLeft + el.offsetWidth - row.current.clientWidth + 16)
+  }, [view])
   return (
     <nav aria-label="Steps" className="border-b border-line bg-ground">
-      <div className="flex gap-5 overflow-x-auto px-4 sm:px-6 lg:px-10 [scrollbar-width:none]">
+      <div ref={row} className="flex gap-5 overflow-x-auto px-4 sm:px-6 lg:px-10 [scrollbar-width:none]">
         {VIEWS.map((v, i) => {
           const on = v === view
           return (

@@ -136,7 +136,7 @@ export default function SavedBuilds({ onLoaded }) {
                     />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-ink truncate">{b.name}</div>
-                      <div className="text-[11px] text-muted font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
+                      <div className="text-[11px] text-muted font-mono">{b.savedAt ? new Date(b.savedAt).toLocaleDateString() : ''}</div>
                     </div>
                     <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Load</button>
                     <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-lg border border-line text-ink hover:border-line-strong transition-colors">Copy link</button>
