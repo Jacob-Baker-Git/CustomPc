@@ -73,6 +73,9 @@ const RESEARCHED_KEYS = [
   'maxPowerW',
   // GPUs only, and only where the maker states a card has NO encoder.
   'videoEncoder',
+  // Cases only: fans that ship in the box. 56 of 59 sourced, three recorded
+  // unverifiable (conflicting or unreachable sources).
+  'includedFans',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
