@@ -84,6 +84,9 @@ const CORE_WORK = {
 // answer to "why?" behind the row's disclosure — it names the mechanism and
 // what would actually change it, because "underpowered" on its own tells
 // nobody what to buy.
+// Streaming without a hardware encoder still works, on the CPU, at a real cost.
+const ENCODERLESS_BALANCE = 50
+
 export function partSynergy(parts, category, useCase) {
   const part = parts[category]
   if (!part) return OK
@@ -122,6 +125,13 @@ export function partSynergy(parts, category, useCase) {
         reason = `${part.specs.vram}GB of VRAM is tight for ${label}`
         detail = `VRAM is the memory on the graphics card itself, and ${label} generally wants ${needs.vram}GB or more. Work that does not fit spills into system memory, which shows up as sudden stutter rather than a steadily lower speed. Dropping texture or preview quality one step is the usual workaround, and it is not something a faster card without more VRAM would fix.`
       }
+    }
+    // Only a researched `false` costs anything: absent means unknown, and an
+    // unknown never penalises (the RX 6500 XT is the one sourced `false`).
+    if (category === 'gpu' && needs.videoEncoder && part.specs?.videoEncoder === false && ENCODERLESS_BALANCE < balance) {
+      balance = ENCODERLESS_BALANCE
+      reason = 'No hardware video encoder'
+      detail = `This card cannot encode video itself, so OBS falls back to encoding on the CPU. It works, but the encoder then competes with the game for the same cores and both lose frames. Almost any other current card has an encoder built in.`
     }
     return { balance, reason, detail }
   }

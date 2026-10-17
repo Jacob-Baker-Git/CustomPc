@@ -5688,7 +5688,8 @@
       "memType": "GDDR6",
       "slotsThick": 2,
       "pcieGen": 4,
-      "powerConnectors": { "pcie6": 1 }
+      "powerConnectors": { "pcie6": 1 },
+      "videoEncoder": false
     }
   },
   {

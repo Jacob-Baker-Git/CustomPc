@@ -71,6 +71,8 @@ const RESEARCHED_KEYS = [
   // all 79 CPUs accounted for: 73 sourced, six 10th/11th-gen Intel recorded
   // unverifiable. Safe globally: only CPUs carry specs.maxPowerW.
   'maxPowerW',
+  // GPUs only, and only where the maker states a card has NO encoder.
+  'videoEncoder',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.
