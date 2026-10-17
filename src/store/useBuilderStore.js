@@ -4,7 +4,8 @@ import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
 import { peakDrawW } from '../lib/partSynergy'
 
 // Swap each selected part for the catalogue's copy of the same id, dropping any
-// the catalogue no longer has. Returns `selection` itself when nothing changed.
+// the catalogue no longer has or that sit in a slot of another category (a
+// hand-edited store). Returns `selection` itself when nothing changed.
 // ponytail: a dropped part disappears silently; add a notice if removals become common.
 function resolveById(selection, catalog) {
   const byId = new Map(catalog.map((p) => [p.id, p]))
@@ -12,7 +13,7 @@ function resolveById(selection, catalog) {
   const next = {}
   for (const [cat, part] of Object.entries(selection)) {
     const fresh = byId.get(part?.id)
-    if (fresh) next[cat] = fresh
+    if (fresh?.category === cat) next[cat] = fresh
     if (fresh !== part) changed = true
   }
   return changed ? next : selection
