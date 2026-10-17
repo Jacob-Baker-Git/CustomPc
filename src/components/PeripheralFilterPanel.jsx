@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useDialog from '../hooks/useDialog'
 import { PANEL_STRONG } from '../lib/uiTokens'
 import { specLabel, EMPTY_FILTERS } from '../lib/peripheralFilter'
 
@@ -45,11 +46,7 @@ function Group({ label, children }) {
 export default function PeripheralFilterPanel({ initial, options, onApply, onCancel }) {
   const [draft, setDraft] = useState(initial)
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onCancel() }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onCancel])
+  const ref = useDialog(onCancel)
 
   const set = (key, value) => setDraft((d) => ({ ...d, [key]: value }))
   const chips = (key, values) =>
@@ -60,6 +57,8 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start sm:items-center justify-center p-4 sm:p-6 overflow-y-auto">
       <div
+        ref={ref}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-label="Filter peripherals"

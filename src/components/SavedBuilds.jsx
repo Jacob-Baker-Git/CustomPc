@@ -6,8 +6,9 @@ import { shareUrlFromCode } from '../lib/shareLink'
 import { estimateFps } from '../lib/fpsEstimate'
 import { CATEGORIES } from '../lib/categories'
 import { peakDrawW } from '../lib/partSynergy'
-import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
+import { TELEMETRY } from '../lib/uiTokens'
 import Block from './ui/Block'
+import ConfirmDialog from './ConfirmDialog'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const totalOf = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.price ?? 0), 0)
@@ -150,16 +151,14 @@ export default function SavedBuilds({ onLoaded }) {
       </div>
 
       {pendingDelete && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
-          <div role="dialog" aria-modal="true" aria-label="Delete saved build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-ink text-sm font-semibold mb-2">Delete "{pendingDelete.name}"?</h3>
-            <p className="text-xs text-muted">This permanently removes the saved build. It can't be undone.</p>
-            <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setPendingDelete(null)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmDelete} className="text-xs px-3.5 py-2 rounded-lg border border-bad text-bad hover:brightness-110 transition-colors">Delete</button>
-            </div>
-          </div>
-        </div>
+        <ConfirmDialog
+          title={`Delete "${pendingDelete.name}"?`}
+          ariaLabel="Delete saved build"
+          body="This permanently removes the saved build. It can't be undone."
+          confirmLabel="Delete"
+          onConfirm={confirmDelete}
+          onCancel={() => setPendingDelete(null)}
+        />
       )}
     </div>
   )

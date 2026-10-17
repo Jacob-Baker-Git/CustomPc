@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { PANEL_STRONG } from '../lib/uiTokens'
+import useDialog from '../hooks/useDialog'
 
 // The app's one destructive-action confirm. Extracted when the Build tab grew
 // its own "Clear all" next to Your parts: two hand-maintained copies of a modal
@@ -11,18 +11,14 @@ import { PANEL_STRONG } from '../lib/uiTokens'
 export default function ConfirmDialog({ title, ariaLabel, body, confirmLabel, onConfirm, onCancel }) {
   // Escape closes it. A destructive dialog you cannot dismiss by reflex is a
   // dialog people dismiss by hitting the red button instead.
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onCancel() }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onCancel])
+  const ref = useDialog(onCancel)
 
   // Portalled to <body>: inside a transformed ancestor a `fixed` overlay is
   // trapped in that ancestor's box and stacking context, so it would neither
   // cover the page nor sit above the sticky header and the phone dock.
   return createPortal(
     <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
-      <div role="dialog" aria-modal="true" aria-label={ariaLabel ?? title} className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
+      <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={ariaLabel ?? title} className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
         <h3 className="text-ink text-sm font-semibold mb-2">{title}</h3>
         <p className="text-xs text-muted">{body}</p>
         <div className="flex justify-end gap-2 mt-4">

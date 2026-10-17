@@ -14,6 +14,7 @@ import Block from './ui/Block'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
 import ConfirmDialog from './ConfirmDialog'
+import useDialog from '../hooks/useDialog'
 import { countEssentials, isOptional } from '../lib/recommendedOrder'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
@@ -43,6 +44,33 @@ function Row({ label, name, brand, price }) {
         ↗
       </a>
     </div>
+  )
+}
+
+// Portalled for the same reason as ConfirmDialog: the summary column is
+// transformed, which would trap a fixed overlay inside it.
+function SaveDialog({ name, setName, onSave, onCancel }) {
+  const ref = useDialog(onCancel)
+  return createPortal(
+    <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
+      <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
+        <h3 className="text-ink text-sm font-semibold mb-3">Save this build</h3>
+        <label htmlFor="save-name" className="block text-xs text-muted mb-1">Build name</label>
+        <input
+          id="save-name"
+          autoFocus
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') onSave() }}
+          className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-hidden focus:border-brass"
+        />
+        <div className="flex justify-end gap-2 mt-4">
+          <button onClick={onCancel} className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
+          <button onClick={onSave} className="min-h-11 text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
+        </div>
+      </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -264,31 +292,8 @@ export default function BuildSummary() {
         </Block>
       </div>
 
-      {/* Portalled for the same reason as ConfirmDialog: this column is
-          transformed, which would trap a fixed overlay inside it. */}
-      {saveOpen && createPortal(
-        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
-          <div role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-ink text-sm font-semibold mb-3">Save this build</h3>
-            <label htmlFor="save-name" className="block text-xs text-muted mb-1">Build name</label>
-            <input
-              id="save-name"
-              autoFocus
-              value={nameDraft}
-              onChange={(e) => setNameDraft(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') confirmSave()
-                if (e.key === 'Escape') setSaveOpen(false)
-              }}
-              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-hidden focus:border-brass"
-            />
-            <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setSaveOpen(false)} className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmSave} className="min-h-11 text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
-            </div>
-          </div>
-        </div>,
-        document.body,
+      {saveOpen && (
+        <SaveDialog name={nameDraft} setName={setNameDraft} onSave={confirmSave} onCancel={() => setSaveOpen(false)} />
       )}
 
       {clearOpen && (
