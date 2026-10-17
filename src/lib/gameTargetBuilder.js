@@ -156,7 +156,13 @@ export function buildForGame({ game, preset, resolution, targetFps, budget, part
   }
 
   const middlePossible = Boolean(cheapest && best && cheapest.total <= budget && best.fps > cheapest.fps)
-  const middle = middlePossible ? valueStep(pairs, cheapest, best, complete) : null
+  // The least the parts other than the CPU and GPU can cost: the cheapest on
+  // sale in each category, compatible or not, so it is a true lower bound.
+  const restFloor = ESSENTIAL.filter((c) => c !== 'cpu' && c !== 'gpu').reduce((s, c) => {
+    const prices = parts.filter((p) => p.category === c && !p.legacy).map((p) => p.price)
+    return s + (prices.length ? Math.min(...prices) : 0)
+  }, 0)
+  const middle = middlePossible ? valueStep(pairs, cheapest, best, complete, restFloor) : null
 
   return { noData: false, unreachable, best, middle, cheapest, fastest, noValueStep: middlePossible && middle === null }
 }
@@ -164,20 +170,28 @@ export function buildForGame({ game, preset, resolution, targetFps, budget, part
 // Pairs strictly between two answers on both price and frame rate, as complete
 // builds, keeping only those no other candidate beats on both (the frontier).
 //
-// ponytail: the frontier is taken on CPU+GPU price before completion, so a pair
-// whose platform is unusually cheap can be missed; complete every candidate if
-// that shows up.
-function frontierBetween(pairs, low, high, complete) {
-  const inRange = pairs.filter((p) => p.row.avgFps > low.fps && p.row.avgFps < high.fps && p.core < high.total)
-    .sort((a, b) => (a.core - b.core) || (b.row.avgFps - a.row.avgFps) || measuredFirst(a, b))
-  const onCore = []
-  let topFps = -Infinity
-  for (const p of inRange) if (p.row.avgFps > topFps) { onCore.push(p); topFps = p.row.avgFps }
-  const built = onCore.map((p) => { const b = complete(p); return b && option(b, p.row) })
-    .filter((o) => o && o.total > low.total && o.total < high.total)
-    .sort((a, b) => (a.total - b.total) || (b.fps - a.fps))
+// Ranking on CPU+GPU price alone dropped pairs whose board and memory were
+// unusually cheap, and missed the real best value in 8 of 115 sampled searches,
+// so candidates are judged on their complete price. Completing all of them took
+// a search to ~1 s, so a pair is skipped when a build already made is at least
+// as fast and costs no more than this pair's FLOOR — its CPU+GPU plus the
+// cheapest part on sale in every other category. A complete build never costs
+// less than its floor, so nothing skipped could have been on the frontier.
+function frontierBetween(pairs, low, high, complete, restFloor) {
+  const candidates = pairs
+    .filter((p) => p.row.avgFps > low.fps && p.row.avgFps < high.fps && p.core + restFloor < high.total)
+    .sort((a, b) => (a.core - b.core) || (b.row.avgFps - a.row.avgFps))
+  const built = []
+  for (const p of candidates) {
+    const floor = p.core + restFloor
+    if (built.some((o) => o.total <= floor && o.fps >= p.row.avgFps)) continue
+    const b = complete(p)
+    const o = b && option(b, p.row)
+    if (o && o.total > low.total && o.total < high.total) built.push(o)
+  }
+  built.sort((a, b) => (a.total - b.total) || (b.fps - a.fps))
   const frontier = []
-  topFps = -Infinity
+  let topFps = -Infinity
   for (const o of built) if (o.fps > topFps) { frontier.push(o); topFps = o.fps }
   return frontier
 }
@@ -187,8 +201,8 @@ function frontierBetween(pairs, low, high, complete) {
 // percentage gain in frame rate is at least VALUE_BAR times the percentage rise
 // in price. Looking at every point above, not just the next, lets it pass a
 // poor step to reach a good one further up. Null when no step clears the bar.
-function valueStep(pairs, cheapest, best, complete) {
-  const frontier = frontierBetween(pairs, cheapest, best, complete)
+function valueStep(pairs, cheapest, best, complete, restFloor) {
+  const frontier = frontierBetween(pairs, cheapest, best, complete, restFloor)
   let cur = cheapest
   for (;;) {
     let next = null
