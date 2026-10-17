@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import TargetScreen from '../screens/TargetScreen'
 import useBuilderStore from '../store/useBuilderStore'
+import useCatalogStore from '../store/useCatalogStore'
+import partsData from '../data/partsData.json'
 
 beforeEach(() => {
   useBuilderStore.setState({
@@ -33,7 +35,7 @@ describe('TargetScreen', () => {
   it('finds a build and hands it to the builder at Peripherals', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1,600$/i)).toBeInTheDocument()
     await userEvent.click(screen.getAllByRole('button', { name: /use this build/i })[0])
     const s = useBuilderStore.getState()
     expect(s.flow).toBe('builder')
@@ -46,7 +48,7 @@ describe('TargetScreen', () => {
   it('drops results once an input changes', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1,600$/i)).toBeInTheDocument()
     act(() => useBuilderStore.setState({ resolution: '4k' }))
     expect(screen.queryByText(/best within/i)).toBeNull()
   })
@@ -92,7 +94,7 @@ describe('TargetScreen — three answers', () => {
     render(<TargetScreen />)
     await userEvent.click(find())
     expect(screen.getByText(/^cheapest that hits 60 fps$/i)).toBeInTheDocument()
-    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1,600$/i)).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: /use this build/i }).length).toBeGreaterThanOrEqual(2)
   })
 
@@ -119,5 +121,20 @@ describe('TargetScreen — three answers', () => {
     await userEvent.click(find())
     expect(screen.getByText('Nothing above the cheapest build is worth the extra money.')).toBeInTheDocument()
     expect(screen.queryByText(/^best value$/i)).toBeNull()
+  })
+})
+
+describe('TargetScreen — nothing can be completed', () => {
+  afterEach(() => { useCatalogStore.setState({ parts: partsData }) })
+
+  it('says no build reaches the target without naming a fastest build that does not exist', async () => {
+    // Frame rates exist for every CPU + GPU pair, but with no boards, memory or
+    // cases no pair becomes a whole PC, so there is no fastest build either.
+    useCatalogStore.setState({ parts: partsData.filter((p) => p.category === 'cpu' || p.category === 'gpu') })
+    useBuilderStore.setState({ target: { gameId: 'fortnite', presetKey: null, fps: 100000 } })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/no build in the catalogue reaches/i)).toBeInTheDocument()
+    expect(screen.queryByText(/the fastest manages/i)).toBeNull()
   })
 })

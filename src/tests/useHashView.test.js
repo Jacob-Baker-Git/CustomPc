@@ -40,3 +40,12 @@ it('records the builder flow on each tab entry, so Back into a tab reopens the b
   act(() => result.current[1]('summary'))
   expect(window.history.state).toEqual({ flow: 'builder' })
 })
+
+describe('useHashView setter', () => {
+  it('is the same function on every render, so listeners need not re-subscribe', () => {
+    const { result, rerender } = renderHook(() => useHashView('build'))
+    const first = result.current[1]
+    rerender()
+    expect(result.current[1]).toBe(first)
+  })
+})

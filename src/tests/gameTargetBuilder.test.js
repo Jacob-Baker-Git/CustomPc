@@ -184,3 +184,57 @@ it('falls back to a native preset for every game that has one at its top tier', 
     if (hasNative) expect(p.upscaling, g.id).toBe('native')
   }
 })
+
+// The Middle answer climbs a price/fps frontier of COMPLETE builds. Taking the
+// frontier on CPU+GPU price first (before completion) can drop a pair whose
+// platform is unusually cheap, so this holds the answer to a brute force over
+// every complete build in range.
+describe('the best-value climb sees every complete build', () => {
+  // [game, resolution, preset key (null = heaviest), target, budget]. The
+  // Helldivers 2 and Palworld rows are real misses the CPU+GPU pre-filter made.
+  const cases = [
+    ['helldivers2', '1440p', null, 60, 1200],
+    ['palworld', '1440p', null, 120, 1600],
+    ['fortnite', '1080p', 'epic|native', 240, 1000],
+    ['fortnite', '1440p', 'epic|native', 60, 1600],
+    ['fortnite', '1440p', 'epic|native', 250, 3000],
+    ['fortnite', '4k', 'epic|native', 60, 2000],
+  ]
+  it.each(cases)('%s %s %s %i fps £%i', (gameId, res, key, targetFps, budget) => {
+    const game = perfGames.find((g) => g.id === gameId)
+    const p = findPreset(game, key)
+    const r = buildForGame({ game, preset: p, resolution: res, targetFps, budget, parts: partsData, model: perfModel })
+    if (!r.cheapest || !r.best || r.cheapest.total > budget || r.best.fps <= r.cheapest.fps) return
+    // Brute force: every pair, completed, strictly inside (cheapest, best).
+    const all = []
+    for (const cpu of partsData.filter((x) => x.category === 'cpu' && !x.legacy)) {
+      for (const gpu of partsData.filter((x) => x.category === 'gpu' && !x.legacy)) {
+        const row = fpsFor({ cpu, gpu }, game, res, p, perfModel)
+        if (row?.avgFps == null || row.avgFps <= r.cheapest.fps || row.avgFps >= r.best.fps) continue
+        if (row.limitedBy == null && computeBottleneck(cpu, gpu, res)?.limitedBy === 'cpu') continue
+        const b = completeBuild(cpu, gpu, partsData, res)
+        if (!b) continue
+        const t = total(b)
+        if (t > r.cheapest.total && t < r.best.total) all.push({ total: t, fps: row.avgFps })
+      }
+    }
+    let cur = { total: r.cheapest.total, fps: r.cheapest.fps }
+    for (;;) {
+      let next = null
+      let bestRatio = VALUE_BAR
+      for (const c of all) {
+        if (c.total <= cur.total || c.fps <= cur.fps) continue
+        const ratio = ((c.fps - cur.fps) / cur.fps) / ((c.total - cur.total) / cur.total)
+        if (ratio > bestRatio || (ratio === bestRatio && next && c.total < next.total) || (ratio === bestRatio && !next)) { bestRatio = ratio; next = c }
+      }
+      if (!next) break
+      cur = next
+    }
+    const expected = cur.total === r.cheapest.total ? null : cur
+    if (expected === null) expect(r.middle).toBeNull()
+    else {
+      expect(r.middle?.fps).toBe(expected.fps)
+      expect(r.middle?.total).toBeCloseTo(expected.total, 2)
+    }
+  }, 60000)
+})

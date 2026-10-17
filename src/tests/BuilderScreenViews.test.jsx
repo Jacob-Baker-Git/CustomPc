@@ -84,3 +84,11 @@ describe('number keys switch the step tabs', () => {
     expect(window.location.hash).toBe('#build')
   })
 })
+
+describe('number keys and text composition', () => {
+  it('a key pressed while composing text (IME) does not switch tabs', () => {
+    openOn('build')
+    act(() => { fireEvent.keyDown(document.body, { key: '2', isComposing: true }) })
+    expect(window.location.hash).toBe('#build')
+  })
+})

@@ -72,7 +72,7 @@ export default function BuilderScreen() {
   // typing, with a modifier held, or under an open dialog.
   useEffect(() => {
     const onKey = (e) => {
-      if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return
+      if (e.isComposing || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return
       const el = e.target
       if (el?.closest?.('input, textarea, select, [contenteditable="true"]')) return
       if (document.querySelector('[role="dialog"]')) return
