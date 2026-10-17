@@ -157,3 +157,30 @@ describe('syncWithCatalog', () => {
     expect(useBuilderStore.getState().selectedParts).toBe(selectedParts)
   })
 })
+
+describe('budget and stored-state guards', () => {
+  it('clamps a budget to the share-link cap and zeroes nonsense', () => {
+    const { setBudget } = useBuilderStore.getState()
+    setBudget(1e300); expect(useBuilderStore.getState().budget).toBe(1e7)
+    setBudget(-50); expect(useBuilderStore.getState().budget).toBe(0)
+    setBudget(NaN); expect(useBuilderStore.getState().budget).toBe(0)
+    setBudget(1500); expect(useBuilderStore.getState().budget).toBe(1500)
+  })
+
+  it('rehydrates a hand-edited store without crashing or odd budgets', async () => {
+    localStorage.setItem('custompc-builder-v1', JSON.stringify({
+      state: { budget: -50, selectedParts: null, selectedPeripherals: 'x', flow: 'builder' }, version: 3,
+    }))
+    await useBuilderStore.persist.rehydrate()
+    const s = useBuilderStore.getState()
+    expect(s.budget).toBe(0)
+    expect(s.selectedParts).toEqual({})
+    expect(s.selectedPeripherals).toEqual({})
+  })
+
+  it('drops a stored part that sits in another category slot', () => {
+    useBuilderStore.setState({ selectedParts: { cpu: gpu, gpu } })
+    useBuilderStore.getState().syncWithCatalog(partsData, [])
+    expect(Object.keys(useBuilderStore.getState().selectedParts)).toEqual(['gpu'])
+  })
+})
