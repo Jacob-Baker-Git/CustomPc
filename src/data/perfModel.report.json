@@ -1,8 +1,8 @@
 {
-  "fittedAt": "2026-10-17T00:17:41.444Z",
+  "fittedAt": "2026-10-17T01:07:37.088Z",
   "warnings": [
-    "ComputerBase supplies 53.7% of the corpus (1830 of 3410 entries, from 9 reviews) — 5,740 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
-    "Notebookcheck supplies 45.0% of the corpus (1536 of 3410 entries, from 49 reviews) — 4,270 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
+    "ComputerBase supplies 53.2% of the corpus (1830 of 3442 entries, from 9 reviews) — 5,708 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
+    "Notebookcheck supplies 44.6% of the corpus (1536 of 3442 entries, from 49 reviews) — 4,238 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
     "architectures with fewer than 3 measured parts stay uncalibrated at 1.0: RDNA, RDNA 4, Xe2 Battlemage"
   ],
   "gpuFit": {
@@ -14,12 +14,12 @@
     "1440p": {
       "iterations": 120,
       "converged": true,
-      "parts": 49
+      "parts": 50
     },
     "4k": {
       "iterations": 131,
       "converged": true,
-      "parts": 38
+      "parts": 40
     }
   },
   "cpuFit": {
@@ -30,32 +30,38 @@
   "droppedGpuBound": [],
   "droppedDisconnected": [],
   "coverage": {
-    "gpusMeasured": 52,
+    "gpusMeasured": 53,
     "gpusTotal": 79,
     "cpusMeasured": 24,
     "cpusTotal": 79
   },
   "sourceConcentration": {
-    "total": 3410,
+    "total": 3442,
     "topOutlet": "ComputerBase",
-    "topOutletShare": 0.5367,
+    "topOutletShare": 0.5317,
     "byOutlet": [
       {
         "outlet": "ComputerBase",
         "entries": 1830,
-        "share": 0.5367,
+        "share": 0.5317,
         "reviews": 9
       },
       {
         "outlet": "Notebookcheck",
         "entries": 1536,
-        "share": 0.4504,
+        "share": 0.4463,
         "reviews": 49
       },
       {
         "outlet": "PC Games Hardware",
         "entries": 44,
-        "share": 0.0129,
+        "share": 0.0128,
+        "reviews": 1
+      },
+      {
+        "outlet": "TechSpot",
+        "entries": 32,
+        "share": 0.0093,
         "reviews": 1
       }
     ]

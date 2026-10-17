@@ -1249,6 +1249,20 @@
     ]
   },
   {
+    "id": "marvel-rivals",
+    "name": "Marvel Rivals",
+    "slug": "marvel-rivals",
+    "genre": "shooter",
+    "presets": [
+      {
+        "id": "ultra",
+        "label": "Ultra",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
     "id": "mechwarrior-5-clans",
     "name": "MechWarrior 5: Clans",
     "slug": "mechwarrior-5-clans",

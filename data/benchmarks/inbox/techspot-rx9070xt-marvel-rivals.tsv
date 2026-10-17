@@ -1,0 +1,64 @@
+# TechSpot — AMD Radeon RX 9070 XT Review, Marvel Rivals charts (MR.png, MR-4K.png).
+# Transcribed by hand on 2026-10-17 from the data labels printed on each bar.
+# Chart subtitle: "[1440p] Ultra Quality, Lumen" / "[4K] Ultra Quality, Lumen".
+#
+# Test system — the article's own "Test System Specs" table:
+#   CPU AMD Ryzen 7 9800X3D; MSI MPG X870E Carbon WiFi (BIOS 7E49v1A23, ReBAR on);
+#   G.Skill Trident Z5 RGB DDR5-6000 CL30-38-38-96 (capacity and stick count NOT
+#   stated, so they stay blank rather than guessed); Windows 11 24H2;
+#   Nvidia GeForce Game Ready 572.60, AMD Radeon Adrenalin 24.12.1 / 24.30.31.03.
+#
+# Upscaling: TechSpot names upscaling in the chart subtitle when it is on (this
+# review's RT charts read "Q Upscaling"). The Marvel Rivals subtitles name none,
+# so these are native.
+#
+# Rows deliberately absent: GeForce RTX 3080 — sold in 10 GB and 12 GB forms and
+# the chart does not say which. Every other card name exists in one VRAM size.
+# Weight 0.5: charts only, no published table.
+
+outlet:    TechSpot
+title:     AMD Radeon RX 9070 XT Review
+url:       https://www.techspot.com/review/2961-amd-radeon-9070-xt/
+published: 2025-03-05
+kind:      gpu-scaling
+cpu:       cpu-ryzen-7-9800x3d
+ram:       DDR5 6000
+os:        Windows 11 24H2
+driver:    Nvidia GeForce Game Ready 572.60; AMD Radeon Adrenalin 24.12.1 / 24.30.31.03
+scene:     Ultra Quality preset with Lumen global illumination (chart subtitle); test scene not described in the article
+weight:    0.5
+notes:     Test system from the article's Test System Specs table: MSI MPG X870E Carbon WiFi (BIOS 7E49v1A23, ReBAR enabled), G.Skill Trident Z5 RGB DDR5-6000 CL30-38-38-96; RAM capacity and stick count not stated. Figures read off chart data labels (average and 1% low). RTX 3080 omitted: 10/12 GB variant not stated.
+
+game           res     preset  up      part                   avg   low
+marvel-rivals  1440p   ultra   native  gpu-rtx-5080           108   70
+marvel-rivals  1440p   ultra   native  gpu-rx-7900xtx         100   71
+marvel-rivals  1440p   ultra   native  gpu-rtx-5070ti         95    61
+marvel-rivals  1440p   ultra   native  gpu-rtx-4080-super     95    60
+marvel-rivals  1440p   ultra   native  gpu-rtx-4080           93    59
+marvel-rivals  1440p   ultra   native  gpu-rx-9070xt          88    62
+marvel-rivals  1440p   ultra   native  gpu-rx-7900xt          83    59
+marvel-rivals  1440p   ultra   native  gpu-rtx-4070ti-super   81    50
+marvel-rivals  1440p   ultra   native  gpu-rtx-4070ti         79    49
+marvel-rivals  1440p   ultra   native  gpu-rtx-5070           78    52
+marvel-rivals  1440p   ultra   native  gpu-rtx-4070-super     76    48
+marvel-rivals  1440p   ultra   native  gpu-rx-7900-gre        69    51
+marvel-rivals  1440p   ultra   native  gpu-rtx-4070           68    45
+marvel-rivals  1440p   ultra   native  gpu-rx-7800xt          67    49
+marvel-rivals  1440p   ultra   native  gpu-rx-7700xt          56    43
+marvel-rivals  1440p   ultra   native  gpu-rtx-3070           50    34
+marvel-rivals  4k      ultra   native  gpu-rtx-5080           65    41
+marvel-rivals  4k      ultra   native  gpu-rx-7900xtx         58    44
+marvel-rivals  4k      ultra   native  gpu-rtx-5070ti         57    39
+marvel-rivals  4k      ultra   native  gpu-rtx-4080-super     56    39
+marvel-rivals  4k      ultra   native  gpu-rtx-4080           55    38
+marvel-rivals  4k      ultra   native  gpu-rx-9070xt          51    40
+marvel-rivals  4k      ultra   native  gpu-rtx-4070ti-super   48    32
+marvel-rivals  4k      ultra   native  gpu-rx-7900xt          47    36
+marvel-rivals  4k      ultra   native  gpu-rtx-4070ti         46    31
+marvel-rivals  4k      ultra   native  gpu-rtx-5070           44    30
+marvel-rivals  4k      ultra   native  gpu-rtx-4070-super     43    30
+marvel-rivals  4k      ultra   native  gpu-rx-7900-gre        39    30
+marvel-rivals  4k      ultra   native  gpu-rtx-4070           38    27
+marvel-rivals  4k      ultra   native  gpu-rx-7800xt          37    29
+marvel-rivals  4k      ultra   native  gpu-rx-7700xt          29    21
+marvel-rivals  4k      ultra   native  gpu-rtx-3070           24    5
