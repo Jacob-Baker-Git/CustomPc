@@ -2,7 +2,7 @@
 // live site actually serves.
 //
 // ⚠️ WHY THIS EXISTS. src/data/partsData.json is NOT what users see. App.jsx
-// calls loadCatalog() on mount, which fetches parts/peripherals/games from
+// calls loadCatalog() on mount, which fetches parts/peripherals from
 // Supabase and swaps them in over the bundled snapshot. Nothing kept the two in
 // step and nothing noticed when they diverged, so a correction committed here
 // could reach nobody — which is exactly what happened to the RTX 4090's length.

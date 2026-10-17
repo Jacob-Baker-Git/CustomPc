@@ -40,7 +40,7 @@ export const BUILD_PROFILES = {
   streaming: {
     weights:      { cpu: .24, gpu: .28, motherboard: .10, ram: .12, storage: .08, psu: .07, case: .04, cooler: .06, fans: .03 },
     expect:       { cpu: 68,  gpu: 70,  motherboard: 35,  ram: 50,  storage: 45,  psu: 50,  case: 30,  cooler: 50,  fans: 30 },
-    needs:        { ramGb: 32, storageGb: 1000, vram: 8, cores: 8 },
+    needs:        { ramGb: 32, storageGb: 1000, vram: 8, cores: 8, videoEncoder: true },
     upgradeOrder: ['gpu', 'cpu', 'ram', 'storage'], resolution: '1440p', cpuGpuPaced: true,
   },
 }

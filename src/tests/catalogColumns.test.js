@@ -18,12 +18,6 @@ describe('upsert payload', () => {
     expect(row.data).toEqual(p)
   })
 
-  it('mirrors only name for games, which has no category or price column', () => {
-    const game = { id: 'lol', name: 'League of Legends', slug: 'league-of-legends' }
-    const [row] = upsertPayload('games', [game], new Date('2026-08-30T12:00:00Z'))
-    expect(row).toEqual({ id: 'lol', name: 'League of Legends', data: game, updated_at: '2026-08-30T12:00:00.000Z' })
-  })
-
   it('mirrors category, name and price for peripherals', () => {
     const [row] = upsertPayload('peripherals', [{ id: 'mon-a', category: 'monitor', name: 'Monitor A', price: 200 }])
     expect(row).toMatchObject({ id: 'mon-a', category: 'monitor', name: 'Monitor A', price: 200 })
@@ -67,6 +61,6 @@ describe('upsert payload', () => {
 
   it('states the mirrored columns per table', () => {
     expect(mirroredColumns('parts')).toEqual(['category', 'name', 'price'])
-    expect(mirroredColumns('games')).toEqual(['name'])
+    expect(() => mirroredColumns('games')).toThrow(/games/)
   })
 })

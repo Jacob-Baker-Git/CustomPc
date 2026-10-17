@@ -42,7 +42,7 @@ function CompareTable({ a, b }) {
         <tbody>
           {summaryRows.map(([label, va, vb]) => (
             <tr key={label} className="border-t border-line">
-              <td className="py-1.5 pr-2 text-muted uppercase text-[10px] font-mono">{label}</td>
+              <td className="py-1.5 pr-2 text-muted uppercase text-[11px] font-mono">{label}</td>
               <td className={`py-1.5 pr-2 ${TELEMETRY} text-ink`}>{va}</td>
               <td className={`py-1.5 ${TELEMETRY} text-ink`}>{vb}</td>
             </tr>
@@ -54,7 +54,7 @@ function CompareTable({ a, b }) {
             const differs = pa?.id !== pb?.id
             return (
               <tr key={cat.id} className="border-t border-line">
-                <td className="py-1.5 pr-2 text-muted uppercase text-[10px] font-mono">{cat.label}</td>
+                <td className="py-1.5 pr-2 text-muted uppercase text-[11px] font-mono">{cat.label}</td>
                 <td className={`py-1.5 pr-2 ${differs ? 'text-ink' : 'text-muted'}`}>{pa?.name ?? '—'}</td>
                 <td className={`py-1.5 ${differs ? 'text-ink' : 'text-muted'}`}>{pb?.name ?? '—'}</td>
               </tr>

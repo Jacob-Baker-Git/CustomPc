@@ -37,7 +37,7 @@ function PartName({ part }) {
             own; the retailer link will mostly find used or third-party stock at
             whatever price it likes. */}
         {part.legacy && (
-          <span className="shrink-0 text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
+          <span className="shrink-0 text-[11px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
             Discontinued
           </span>
         )}

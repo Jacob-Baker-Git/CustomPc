@@ -34,12 +34,12 @@ export default function TopBar() {
   }
 
   return (
-    <header className="flex items-center gap-x-3 border-b border-line bg-ground px-3 py-2 md:gap-x-6 md:px-6">
+    <header className="flex items-center gap-x-3 border-b border-line bg-ground px-3 py-1 md:gap-x-6 md:px-6">
       <button
         onClick={() => setFlow('hub')}
         aria-label="Back to menu"
         title="Back to the main menu"
-        className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-line-strong hover:text-ink"
+        className="flex h-11 w-11 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-line-strong hover:text-ink"
       >
         <ArrowLeft size={15} aria-hidden="true" />
       </button>
@@ -66,7 +66,7 @@ export default function TopBar() {
           <button
             onClick={startEdit}
             title="Click to edit your budget"
-            className="border-b border-dashed border-line-strong font-mono font-semibold tabular-nums text-ink transition-colors hover:border-brass hover:text-brass"
+            className="min-h-11 border-b border-dashed border-line-strong font-mono font-semibold tabular-nums text-ink transition-colors hover:border-brass hover:text-brass"
           >
             £{budget.toFixed(0)}
           </button>
@@ -78,7 +78,7 @@ export default function TopBar() {
         <span className="hidden text-faint wide:inline">left</span>
       </div>
       <div className="flex flex-1 items-center justify-end gap-4">
-        <a href="/feedback" className="text-xs text-muted transition-colors hover:text-brass">Feedback</a>
+        <a href="/feedback" className="inline-flex min-h-11 items-center text-xs text-muted transition-colors hover:text-brass">Feedback</a>
         <div className="hidden gap-3 lg:flex">
           <DynamicBars value={totalSpent} max={budget} label="Budget" unit="£" />
           <DynamicBars value={totalPower} max={psuwattage} label="Power" unit="W" />

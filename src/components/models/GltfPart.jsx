@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
+import { loadGzippedGlb } from '../../lib/gzipGlb'
 
 // Loads a GLTF/GLB part and normalises it: the model is re-centred on the origin
 // and scaled so it lands at a predictable size in the assembly, whatever its
@@ -25,8 +26,9 @@ export default function GltfPart({ url, targetSize = 2, position = [0, 0, 0], hi
   // would fail in PRODUCTION ONLY, because dev serves no CSP at all.
   //
   // Meshopt stays on (drei's default), and is load-bearing: every model in
-  // public/models is EXT_meshopt_compression now.
-  const { scene } = useGLTF(url, false)
+  // public/models is EXT_meshopt_compression now. The build gzips the files
+  // and loadGzippedGlb unpacks them — see src/lib/gzipGlb.js.
+  const { scene } = useGLTF(url, false, true, loadGzippedGlb)
 
   const { object, scale } = useMemo(() => {
     const obj = scene.clone(true)

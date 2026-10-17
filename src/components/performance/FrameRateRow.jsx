@@ -116,7 +116,7 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
             aria-expanded={isOpen}
             className="flex w-full min-w-0 items-center gap-1.5 text-left text-sm text-ink"
           >
-            <span aria-hidden="true" className="shrink-0 text-[10px] text-muted">{isOpen ? '⌄' : '›'}</span>
+            <span aria-hidden="true" className="shrink-0 text-[11px] text-muted">{isOpen ? '⌄' : '›'}</span>
             {/* Sixty rows of plain text is the table people scroll past. The
                 plate gives each row something the eye can recognise on the way
                 back up, which is what a cover does in any games list. */}
@@ -129,11 +129,11 @@ export default function FrameRateRow({ game, target, onSelect, expanded, onToggl
             header and its column hidden at different breakpoints shifts every
             figure one column sideways, and every number is still real, just
             under the wrong heading. FrameRateTable's tests assert the pair. */}
-        <td className="hidden px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted sm:table-cell">{game.preset}</td>
+        <td className="hidden px-2 py-1.5 text-[11px] uppercase tracking-wider text-muted sm:table-cell">{game.preset}</td>
         {RESOLUTIONS.map((res) => (
           <Cell key={res} row={game.cells[res]} isTarget={res === target} />
         ))}
-        <td className="px-2 py-1.5 text-right text-[10px] uppercase tracking-wider">
+        <td className="px-2 py-1.5 text-right text-[11px] uppercase tracking-wider">
           <span className={game.basis === 'measured' ? 'text-good' : 'text-muted'}>
             {BASIS_LABEL[game.basis] ?? game.basis}
             {game.errorPct != null && ` ±${Math.round(game.errorPct)}%`}

@@ -84,3 +84,21 @@ describe('CPU cores per use case', () => {
     expect(partSynergy({ cpu: twelve }, 'cpu', 'creation').balance).toBe(100)
   })
 })
+
+describe('hardware video encoder (streaming)', () => {
+  const card = (specs) => ({ id: 'g', category: 'gpu', perfScore: 16, tdp: 107, specs: { vram: 8, ...specs } })
+
+  it('docks a card with a researched "no encoder" for streaming', () => {
+    const s = partSynergy({ gpu: card({ videoEncoder: false }) }, 'gpu', 'streaming')
+    expect(s.balance).toBe(50)
+    expect(s.reason).toMatch(/encoder/i)
+  })
+
+  it('does not dock it for gaming, which never encodes', () => {
+    expect(partSynergy({ gpu: card({ videoEncoder: false }) }, 'gpu', 'gaming').reason ?? '').not.toMatch(/encoder/i)
+  })
+
+  it('never penalises an unknown (no field)', () => {
+    expect(partSynergy({ gpu: card({}) }, 'gpu', 'streaming').reason ?? '').not.toMatch(/encoder/i)
+  })
+})

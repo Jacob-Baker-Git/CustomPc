@@ -28,7 +28,7 @@ import { useHashView } from '../hooks/useHashView'
 import { useChromeHeight } from '../hooks/useChromeHeight'
 import useBuilderStore from '../store/useBuilderStore'
 
-// A finger means mobile data, and the 3D view is 11 MB of it. Read once at
+// A finger means mobile data, and the 3D view is ~6 MB of it. Read once at
 // mount rather than as a media query, because this decides whether a component
 // MOUNTS — BuildCanvas is lazy(), so not rendering it is what actually keeps
 // the chunk and every model off the wire. A CSS rule could only hide them
@@ -48,6 +48,7 @@ export default function BuilderScreen() {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const addPart       = useBuilderStore((s) => s.addPart)
   const removePart    = useBuilderStore((s) => s.removePart)
+  const path          = useBuilderStore((s) => s.path)
   const [activeCategory, setActiveCategory] = useState(null)
   const [view, setView] = useHashView('build')
   // Opt-in survives tab switches because BuilderScreen itself stays mounted —
@@ -77,7 +78,7 @@ export default function BuilderScreen() {
       <div ref={scrollRef} className="relative h-screen overflow-y-auto pb-28 lg:pb-0">
         <div ref={chromeRef} className="sticky top-0 z-50">
           <TopBar />
-          <StepHeader view={view} onChange={setView} />
+          <StepHeader view={view} onChange={setView} path={path} />
         </div>
         {/* The builder had no landmark at all — a screen reader's region menu
             skipped straight past it. A plain, unstyled <main> wraps the tab

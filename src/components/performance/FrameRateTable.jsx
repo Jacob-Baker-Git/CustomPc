@@ -64,7 +64,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
     <>
       <table className="w-full border-collapse text-left">
         <thead>
-          <tr className="border-b border-line text-[10px] uppercase tracking-wider text-muted">
+          <tr className="border-b border-line text-[11px] uppercase tracking-wider text-muted">
             {COLUMNS.map(({ key, label, align, res, phoneHidden }) => {
               const sorted = sort?.key === key
               return (
@@ -118,7 +118,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                     aria-expanded={isOpen}
                     className="flex w-full items-baseline gap-2 text-left text-xs text-ink"
                   >
-                    <span aria-hidden="true" className="text-[10px] text-muted">{isOpen ? '⌄' : '›'}</span>
+                    <span aria-hidden="true" className="text-[11px] text-muted">{isOpen ? '⌄' : '›'}</span>
                     <span>{group.label}</span>
                     {/* A shut bar is all a reader has to go on, so it carries
                         enough to decide whether opening it is worth it. */}
@@ -161,7 +161,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
             {uncovered.map((u) => (
               <li key={u.gameId} className="text-xs sm:flex sm:items-baseline sm:justify-between sm:gap-2">
                 <span className="text-muted">{u.name}</span>
-                <span className="block text-[10px] uppercase tracking-wider text-faint sm:shrink-0">
+                <span className="block text-[11px] uppercase tracking-wider text-faint sm:shrink-0">
                   {u.presets.join(' · ')}
                 </span>
               </li>

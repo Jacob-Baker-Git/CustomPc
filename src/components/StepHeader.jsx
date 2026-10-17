@@ -6,8 +6,15 @@ const LABEL = { build: 'Build', performance: 'Performance', peripherals: 'Periph
 // 2026-10-16). It replaces both the desktop tab row and the phone bottom bar.
 // Every step stays reachable whatever path the build came from; the order is
 // the parts path, which is the one people walk end to end.
-export default function StepHeader({ view, onChange }) {
-  const current = VIEWS.indexOf(view)
+//
+// "Done" (muted rather than faint) means a step this path actually walked
+// before the current one: a game-target build starts at Peripherals, so its
+// Build and Performance were never visited and must not read as done.
+const PATH_STEPS = { parts: VIEWS, game: ['peripherals', 'summary'] }
+
+export default function StepHeader({ view, onChange, path = 'parts' }) {
+  const steps = PATH_STEPS[path] ?? VIEWS
+  const current = steps.indexOf(view)
   return (
     <nav aria-label="Steps" className="border-b border-line bg-ground">
       <div className="flex gap-5 overflow-x-auto px-4 sm:px-6 lg:px-10 [scrollbar-width:none]">
@@ -18,9 +25,9 @@ export default function StepHeader({ view, onChange }) {
               key={v}
               type="button"
               onClick={() => onChange(v)}
-              aria-current={on ? 'page' : undefined}
+              aria-current={on ? 'step' : undefined}
               className={`min-h-11 shrink-0 whitespace-nowrap border-b-2 py-2.5 text-[13px] transition-colors
-                ${on ? 'border-brass font-bold text-ink' : `border-transparent hover:text-ink ${i < current ? 'text-muted' : 'text-faint'}`}`}
+                ${on ? 'border-brass font-bold text-ink' : `border-transparent hover:text-ink ${steps.indexOf(v) > -1 && steps.indexOf(v) < current ? 'text-muted' : 'text-faint'}`}`}
             >
               <span aria-hidden="true" className="mr-1.5 font-mono text-[11px]">{String(i + 1).padStart(2, '0')}</span>
               {LABEL[v]}

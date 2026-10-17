@@ -36,7 +36,7 @@ function Chip({ on, onClick, children }) {
 function Group({ label, children }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wide text-faint mb-1.5">{label}</div>
+      <div className="text-[11px] uppercase tracking-wide text-faint mb-1.5">{label}</div>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   )
@@ -69,7 +69,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
 
         <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
           <div>
-            <div className="text-[10px] uppercase tracking-wide text-faint mb-1.5">Price</div>
+            <div className="text-[11px] uppercase tracking-wide text-faint mb-1.5">Price</div>
             <div className="flex items-center gap-2">
               <input
                 type="number" min="0" inputMode="numeric" placeholder="Min"
