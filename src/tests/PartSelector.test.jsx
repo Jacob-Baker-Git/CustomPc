@@ -1,5 +1,5 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import PartSelector from '../components/PartSelector'
 import useBuilderStore from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
@@ -103,5 +103,46 @@ describe('PartSelector modal behaviour', () => {
     expect(screen.queryByTitle('Over remaining budget')).toBeNull()
     fireEvent.click(screen.getByText(priciest.name))
     expect(onSelect).toHaveBeenCalled()
+  })
+})
+
+describe('PartSelector on desktop', () => {
+  const original = window.matchMedia
+  beforeEach(() => { window.matchMedia = () => ({ matches: true }) })
+  afterEach(() => { window.matchMedia = original })
+  const gpus = () => partsData.filter((p) => p.category === 'gpu')
+  const firstRowName = () => within(screen.getByRole('table')).getAllByRole('row')[1].querySelector('[data-name]').textContent
+
+  it('shows a table, not the sort dropdown', () => {
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    expect(screen.getByRole('table')).toBeInTheDocument()
+    expect(screen.queryByLabelText(/sort parts/i)).toBeNull()
+  })
+
+  it('sorts by a column header, then reverses', () => {
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    const header = screen.getByRole('button', { name: /^price/i })
+    fireEvent.click(header)
+    const prices = gpus().map((p) => p.price)
+    expect(firstRowName()).toBe(gpus().find((p) => p.price === Math.min(...prices)).name)
+    fireEvent.click(header)
+    expect(firstRowName()).toBe(gpus().find((p) => p.price === Math.max(...prices)).name)
+  })
+
+  it('keeps a part that does not fit, dimmed, with the reason', () => {
+    useBuilderStore.setState({ selectedParts: { motherboard: partsData.find((p) => p.category === 'motherboard' && p.socket === 'AM5') } })
+    render(<PartSelector category="cpu" onSelect={() => {}} onClose={() => {}} />)
+    const intel = partsData.find((p) => p.category === 'cpu' && p.socket !== 'AM5' && !p.legacy)
+    const row = screen.getByText(intel.name).closest('tr')
+    expect(row.getAttribute('aria-disabled')).toBe('true')
+    expect(within(row).getByText(/socket/i)).toBeInTheDocument()
+  })
+
+  it('Enter on a row selects it', () => {
+    const onSelect = vi.fn()
+    render(<PartSelector category="gpu" onSelect={onSelect} onClose={() => {}} />)
+    const row = screen.getAllByRole('row').find((r) => r.getAttribute('aria-disabled') !== 'true' && r.tabIndex === 0)
+    fireEvent.keyDown(row, { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
   })
 })
