@@ -102,7 +102,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
           >
             {SORT_OPTIONS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
           </select>}
-          <button onClick={onClose} aria-label="Close" className="text-muted hover:text-ink text-2xl leading-none">&times;</button>
+          <button onClick={onClose} aria-label="Close" className="min-h-6 min-w-6 text-muted hover:text-ink text-2xl leading-none">&times;</button>
         </div>
         <div className={desktop ? 'overflow-y-auto px-6 pb-6' : 'overflow-y-auto p-6 grid grid-cols-2 sm:grid-cols-3 gap-4'}>
           {visible.length === 0 && (

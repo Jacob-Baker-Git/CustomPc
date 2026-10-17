@@ -10,7 +10,7 @@ export default function PartTable({ rows, columns, sort, onSort, onPick, current
     <th key={key} scope="col" aria-sort={ariaSort(key)}
         className={`sticky top-0 z-10 bg-surface px-3 py-2 font-normal ${numeric ? 'text-right' : 'text-left'}`}>
       <button onClick={() => onSort(key)}
-              className="min-h-6 text-[12px] uppercase tracking-wide text-faint transition-colors hover:text-brass">
+              className="min-h-6 min-w-6 text-[12px] uppercase tracking-wide text-faint transition-colors hover:text-brass">
         {label}{arrow(key)}
       </button>
     </th>

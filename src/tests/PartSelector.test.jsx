@@ -157,3 +157,14 @@ describe('PartSelector search key', () => {
     expect(ev).toBe(false) // default prevented
   })
 })
+
+describe('PartSelector tap targets', () => {
+  const original = window.matchMedia
+  afterEach(() => { window.matchMedia = original })
+  it('the close button and every header button are at least 24px wide', () => {
+    window.matchMedia = () => ({ matches: true })
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    const buttons = [screen.getByRole('button', { name: /close/i }), ...within(screen.getByRole('table').querySelector('thead')).getAllByRole('button')]
+    for (const b of buttons) expect(b.className).toMatch(/\bmin-w-6\b/)
+  })
+})
