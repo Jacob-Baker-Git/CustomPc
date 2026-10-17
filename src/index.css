@@ -2,9 +2,16 @@
    the families are known before anything resolves font-family against them. */
 @import './fonts.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config '../tailwind.config.js';
+
+/* Tailwind 4 changed three base defaults. These restore what v3 did, so the
+   migration moves no pixels (scratch/style-diff.mjs compared every element). */
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: #e5e7eb; }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+  input::placeholder, textarea::placeholder { color: #9ca3af; }
+}
 
 /* ============================================================
    Board design system — a matte-black board substrate, replacing

@@ -267,7 +267,7 @@ export default function BuildSummary() {
       {/* Portalled for the same reason as ConfirmDialog: this column is
           transformed, which would trap a fixed overlay inside it. */}
       {saveOpen && createPortal(
-        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
           <div role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
             <h3 className="text-ink text-sm font-semibold mb-3">Save this build</h3>
             <label htmlFor="save-name" className="block text-xs text-muted mb-1">Build name</label>
@@ -280,7 +280,7 @@ export default function BuildSummary() {
                 if (e.key === 'Enter') confirmSave()
                 if (e.key === 'Escape') setSaveOpen(false)
               }}
-              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-brass"
+              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-hidden focus:border-brass"
             />
             <div className="flex justify-end gap-2 mt-4">
               <button onClick={() => setSaveOpen(false)} className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>

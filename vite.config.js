@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 // Explicit, because eslint.config.js gives every .js file browser globals and
 // only exempts src/tests. Importing it here beats widening that config for the
 // whole repo to satisfy one line.
 import process from 'node:process'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   server: {
     // The port lives here rather than as a --port flag in .claude/launch.json so
     // the harness can hand us a free one via PORT when another session already

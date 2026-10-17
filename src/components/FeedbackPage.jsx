@@ -95,7 +95,7 @@ export default function FeedbackPage() {
             maxLength={2000}
             onChange={(e) => setMessage(e.target.value)}
             rows={5}
-            className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-brass"
+            className="w-full bg-surface-2 border border-line rounded-lg px-3 py-2 text-ink focus:outline-hidden focus:border-brass"
           />
           {/* Counter floats below-right: it must never add a row or the even
               spacing between groups breaks (see the spec's spacing rules). */}

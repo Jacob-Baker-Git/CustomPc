@@ -37,7 +37,7 @@ function PartName({ part }) {
             own; the retailer link will mostly find used or third-party stock at
             whatever price it likes. */}
         {part.legacy && (
-          <span className="shrink-0 text-[11px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
+          <span className="shrink-0 text-[11px] uppercase tracking-wide text-muted border border-line rounded-sm px-1.5 py-0.5">
             Discontinued
           </span>
         )}
@@ -90,13 +90,13 @@ export default function PartsBrowser() {
           placeholder="Search name or brand…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
+          className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-hidden focus:border-brass"
         />
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           aria-label="Sort by"
-          className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
+          className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-hidden focus:border-brass"
         >
           {SORTS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
         </select>
