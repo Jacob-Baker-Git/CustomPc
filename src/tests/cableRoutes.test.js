@@ -1,5 +1,6 @@
 import * as THREE from 'three'
-import { cableRoutes, atxConnector, pcieConnector } from '../lib/cableRoutes'
+import { cableRoutes, atxConnector, epsConnector, pcieConnector } from '../lib/cableRoutes'
+import { loomFrames } from '../lib/cableLoom'
 import { partBox, boardFaceZ, caseInterior } from '../lib/assemblyGeometry'
 import { FAN_MOUNTS } from '../lib/fanMounts'
 import { mm, FAN_MM } from '../lib/pcScale'
@@ -39,7 +40,7 @@ describe('cableRoutes', () => {
 
   it('omits the PCIe lead when there is no card to power', () => {
     const ids = cableRoutes({ motherboard: {}, psu: {} }).map((r) => r.id)
-    expect(ids).toEqual(['atx'])
+    expect(ids).toEqual(['atx', 'eps'])
   })
 })
 
@@ -101,7 +102,7 @@ describe('no cable runs through a part', () => {
   // The cooler is excluded for the same reason assemblyNoOverlap excludes it:
   // it is an L of pump block, tubes and radiator, so its bounding box encloses
   // a large volume of air. The 24-pin connector itself lies inside that box.
-  for (const id of ['atx', 'pcie']) {
+  for (const id of ['atx', 'eps', 'pcie']) {
     it(`${id} clears the graphics card`, () => {
       const gpu = partBox('gpu')
       const inlet = new THREE.Vector3(...pcieConnector())
@@ -149,6 +150,75 @@ describe('no cable runs through a part', () => {
           expect(v).toBeLessThanOrEqual(inner.max[i] + 1e-6)
         }
       }
+    })
+  }
+})
+
+describe('the loom is drawn as real wires into real connectors', () => {
+  it('routes a CPU 8-pin to the top of the board', () => {
+    const board = partBox('motherboard')
+    const [x, y, z] = epsConnector()
+    expect(y).toBeGreaterThan(board.max[1] - mm(15))
+    // Between the VRM heatsink (ends +40 mm) and the RAM (starts +67 mm).
+    expect(x).toBeGreaterThan(mm(40))
+    expect(x).toBeLessThan(partBox('ram').min[0])
+    expect(z).toBeGreaterThan(boardFaceZ())
+    const end = sample(routeById('eps')).at(-1)
+    expect(end.distanceTo(new THREE.Vector3(x, y, z))).toBeLessThan(mm(1))
+  })
+
+  it('every route carries a wire layout and a connector body', () => {
+    for (const r of cableRoutes(FULL)) {
+      expect(r.loom.cols * r.loom.rows, r.id).toBe({ atx: 24, eps: 8, pcie: 12 }[r.id])
+      expect(r.loom.plug.wid, r.id).toBeGreaterThanOrEqual(r.loom.cols * r.loom.pitchMm)
+    }
+  })
+
+  it('lays the ribbon flat along the socket at the connector, without flipping', () => {
+    const route = routeById('atx')
+    const pts = sample(route, 96)
+    const { widths, heights, tangents } = loomFrames(pts, route.widthAxis)
+    expect(Math.abs(widths.at(-1).y)).toBeGreaterThan(0.99)
+    for (let i = 1; i < widths.length; i++) {
+      expect(widths[i].dot(widths[i - 1]), `frame flips at ${i}`).toBeGreaterThan(0.8)
+      expect(Math.abs(widths[i].dot(tangents[i]))).toBeLessThan(1e-6)
+      expect(Math.abs(heights[i].dot(tangents[i]))).toBeLessThan(1e-6)
+    }
+  })
+
+  it('runs the 24-pin and CPU 8-pin up BEHIND the board, not across the open case', () => {
+    const board = partBox('motherboard')
+    for (const [id, top] of [['atx', atxConnector()[1]], ['eps', epsConnector()[1]]]) {
+      const climb = sample(routeById(id)).filter((p) => p.y > board.min[1] + mm(30) && p.y < top - mm(45))
+      expect(climb.length, id).toBeGreaterThan(20)
+      for (const p of climb) expect(p.z, `${id} in front of the board at y=${p.y}`).toBeLessThan(board.min[2])
+    }
+  })
+})
+
+// The centreline tests above cannot see a ribbon standing on its edge: the
+// 24-pin once arrived behind the board on edge and its outer wires went 9.6 mm
+// through the tray, showing outside the case as a stray line.
+describe('every wire of every loom stays inside the case', () => {
+  for (const id of ['atx', 'eps', 'pcie']) {
+    it(id, () => {
+      const route = routeById(id)
+      const inner = caseInterior()
+      const pts = sample(route, 96)
+      const { widths, heights } = loomFrames(pts, route.widthAxis)
+      const { cols, rows, pitchMm, wireMm } = route.loom
+      const r = mm(wireMm) / 2
+      pts.forEach((p, i) => {
+        for (const a of [-(cols - 1) / 2, (cols - 1) / 2]) {
+          for (const b of [-(rows - 1) / 2, (rows - 1) / 2]) {
+            const q = p.clone().addScaledVector(widths[i], mm(a * pitchMm)).addScaledVector(heights[i], mm(b * pitchMm))
+            ;[q.x, q.y, q.z].forEach((v, k) => {
+              expect(v - r, `${id} wire under the case at sample ${i}`).toBeGreaterThanOrEqual(inner.min[k] - mm(0.05))
+              expect(v + r, `${id} wire over the case at sample ${i}`).toBeLessThanOrEqual(inner.max[k] + mm(0.05))
+            })
+          }
+        }
+      })
     })
   }
 })

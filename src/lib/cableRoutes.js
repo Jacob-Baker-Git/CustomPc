@@ -7,53 +7,81 @@
 // PCIe lead stopped 34 mm short of it, plugged into nothing. Deriving the
 // endpoints from partBox() means a longer card or a re-seated board takes its
 // cables with it.
-import { mm, FAN_MM } from './pcScale'
+//
+// 2026-10-17: each cable is a flat ribbon of individual wires ending in a real
+// connector body (`loom`), not one thick tube between two black boxes — the
+// user's "just black blocks, not actually connecting". The 24-pin and the CPU
+// 8-pin now run BEHIND the board, in the standoff gap, and come round its edge
+// into their sockets, which is how a real build reads through the glass. The
+// old front-lane 24-pin looped across the open case like a hose.
+import { mm } from './pcScale'
 import { partBox, partCentre, boardFaceZ, caseInterior, modelScaleAxes, rotateVector } from './assemblyGeometry'
-import { FAN_MOUNTS, FAN_HALF_DEPTH } from './fanMounts'
 import { PART_SPECS } from './partSpecs'
 import { sizeOverrides } from './partOverrides'
 
-// Offsets are millimetres from the part's own box, measured off a real ATX
-// board and a real dual-8-pin card.
-const ATX = {
-  edgeInsetMm: 7,       // socket body sits this far in from the board's front edge
-  heightMm: 20,         // up from board centre — mid-right, clear of the cooler
-  plugMm: [13, 58, 16], // 24-pin socket: long axis runs up the board's edge
+// A connector's real shape. `cols` x `rows` wires on `pitchMm`; `plug` is the
+// connector body in its own frame: `len` along the cable where it enters,
+// `wid` across the wire columns, `hei` across the rows. Mini-Fit Jr (ATX, EPS)
+// is a 4.2 mm pitch; 12V-2x6 is 3.0 mm. Wires are drawn on ~3 mm centres — a
+// sleeved 18 AWG lead — so the run reads as separate wires, not a slab.
+const LOOMS = {
+  atx:  { cols: 12, rows: 2, pitchMm: 2.7, wireMm: 2.5, plug: { len: 16, wid: 52, hei: 11 } },
+  eps:  { cols: 4,  rows: 2, pitchMm: 2.7, wireMm: 2.5, plug: { len: 16, wid: 19, hei: 10 } },
+  pcie: { cols: 6,  rows: 2, pitchMm: 3, wireMm: 2.4, plug: { len: 14, wid: 20, hei: 8 } },
 }
 
-// The card's own power socket, measured from the mesh (PART_SPECS.gpu.powerInlet).
-// Its plug body matches the node's size: 10 x 19 x 10 mm in world axes.
-const PCIE = { plugMm: [12, 21, 12] }
+// Half the ribbon's widest extent: the radius the clearance tests treat the
+// cable as. A flat 12-wide ribbon is 36 mm across, not the old 18 mm tube.
+const halfWidthMm = (loom) => (loom.cols * loom.pitchMm) / 2
+
+// 24-pin: on the front edge. Read off a face-on render of the board mesh with a
+// 10 mm ladder beside it (2026-10-17): the drawn socket spans +24..+76 mm, 9 mm
+// wide against the edge. The old guess (20 mm up, 7 in) plugged the cable in
+// 30 mm below the socket the board actually draws.
+const ATX = { edgeInsetMm: 5, heightMm: 50 }
+// CPU 8-pin (EPS): on the top edge. This mesh draws no EPS socket, and the
+// usual corner is filled by the I/O shroud and the VRM heatsink (both tall
+// enough to bury a plug), so it sits on the open strip between the heatsink's
+// end (+40 mm) and the RAM (+67 mm), measured off the face-on render.
+const EPS = { xFromRearMm: 172, topInsetMm: 8 }
 
 // The PSU's modular sockets are on the face opposite the IEC inlet. The spec
 // rotation aims the inlet at world -X (see partSpecs), so the sockets face +X.
 //
-// The cable begins INSIDE the unit and a socket body straddles the face it
-// comes out of, so the loom is unambiguously attached however the mesh sits in
-// its box. Starting it exactly on the face left a hairline between tube and
-// PSU; starting it inside with no socket read as a cable merely passing by.
-const PSU_OUTLET = { insetMm: 26, dropMm: 22, plugMm: [26, 30, 34] }
-
-const CABLE = {
-  atxRadiusMm: 9,       // a 24-pin loom is a thick flat bundle, not a wire
-  pcieRadiusMm: 6,
+// MEASURED off an orthographic render of that face at 5 px/mm (2026-10-17) —
+// the mesh draws a labelled panel: "18M M/B" and "10P M/B" (the two halves of a
+// modular 24-pin), a CPU socket, and a row of PCIe/peripheral sockets. Plugging
+// into blank face beside them is what the user saw as "not connecting to the
+// PSU". `z` is mm from the unit's tray-side face, `y` mm down from its top;
+// `wid` runs along the face (world Z), `hei` up it.
+const PSU_SOCKETS = {
+  m18:  { z: 124.4, y: 31,   wid: 36, hei: 14 },
+  m10:  { z: 128.2, y: 55.2, wid: 30, hei: 10 },
+  cpu:  { z: 77.8,  y: 31,   wid: 16, hei: 14 },
+  pcie: { z: 40.0,  y: 31,   wid: 17, hei: 14 },
 }
+// Where the wires leave the unit: just inside the socket, so every wire starts
+// in the PSU however the mesh sits in its box.
+const INSIDE_MM = 6
 
-// How far a CatmullRom bows forward of its control points on these routes,
-// measured off the sampled curve rather than assumed. Already the reason the
-// front lane hugs the parts at a third of the channel instead of running down
-// its centre; named here because the clamp below needs the same figure.
-const BOW_MM = 16
-
-// (the front cable lane is derived from the parts and the fan wall — see below)
+// In the gap between the board and the tray (BOARD.standoffMm = 8), where a
+// ribbon two wires thick (6 mm) lies flat against the back of the board. 3 mm
+// off the board rather than mid-gap: the curve bows toward the tray coming up
+// out of the basement, and mid-gap let it poke ~2 mm through the tray.
+const behindBoardZ = () => partBox('motherboard').min[2] - mm(3)
 
 // A connector body sits ON the surface it plugs into, so its centre stands half
-// its own depth proud of that surface.
-const atxProud = () => mm(ATX.plugMm[2]) / 2
+// its own length proud of that surface.
+const proud = (loom) => mm(loom.plug.len) / 2
 
 export function atxConnector() {
   const board = partBox('motherboard')
-  return [board.max[0] - mm(ATX.edgeInsetMm), mm(ATX.heightMm), boardFaceZ() + atxProud()]
+  return [board.max[0] - mm(ATX.edgeInsetMm), mm(ATX.heightMm), boardFaceZ() + proud(LOOMS.atx)]
+}
+
+export function epsConnector() {
+  const board = partBox('motherboard')
+  return [board.min[0] + mm(EPS.xFromRearMm), board.max[1] - mm(EPS.topInsetMm), boardFaceZ() + proud(LOOMS.eps)]
 }
 
 // The card's power socket, derived from the measured mesh node rather than
@@ -71,100 +99,47 @@ export function pcieConnector(overrides) {
   return partCentre('gpu', overrides).map((c, i) => c + offset[i])
 }
 
-function psuOutlet(zFromTrayMm) {
+// A PSU-end plug: its socket on the face, and how many of the ribbon's wire
+// columns it takes (a 24-pin leaves the unit as an 18-pin plus a 10-pin).
+function psuPlug(key, cols) {
   const psu = partBox('psu')
+  const sock = PSU_SOCKETS[key]
+  return { position: [psu.max[0], psu.max[1] - mm(sock.y), psu.min[2] + mm(sock.z)], cols, wid: sock.wid, hei: sock.hei }
+}
+
+// The ribbon's own start: inside the unit, behind the middle of its plugs.
+function outletOf(plugs) {
+  const avg = (k) => plugs.reduce((a, p) => a + p.position[k], 0) / plugs.length
+  return [plugs[0].position[0] - mm(INSIDE_MM), avg(1), avg(2)]
+}
+
+// Leaves the PSU face heading forward, then rises in front of the unit and slips
+// into the gap behind the board's lower edge. The PSU tops out 2 mm under the
+// board, so the only way up is in front of it.
+function upBehindBoard(outlet, riseX) {
+  const psu = partBox('psu')
+  const board = partBox('motherboard')
+  const z = behindBoardZ()
   return [
-    psu.max[0] - mm(PSU_OUTLET.insetMm),
-    psu.max[1] - mm(PSU_OUTLET.dropMm),
-    psu.min[2] + mm(zFromTrayMm),
+    outlet,
+    [psu.max[0] + mm(18), outlet[1], outlet[2]],
+    // Across the basement floor toward the tray first, then up: a cable leaving
+    // the glass-side 24-pin sockets and rising in one move twists hard enough
+    // to put its outer wires through the tray.
+    [(psu.max[0] + mm(18) + riseX) / 2, outlet[1] - mm(4), (outlet[2] + z) / 2],
+    [riseX, board.min[1] - mm(30), z + mm(8)],
+    // Already behind the board BEFORE passing its lower edge, or the spline
+    // cuts through the PCB corner on the way in.
+    [riseX, board.min[1] - mm(6), z],
+    [riseX, board.min[1] + mm(25), z],
   ]
 }
 
-// The lane cables climb, in the channel between whatever reaches furthest
-// forward and the intake fans.
-//
-// A connector on top of the graphics card cannot be reached by climbing beside
-// the board: the card spans the whole width from the PCB face to well past
-// halfway across the case, so anything rising there passes through it — which
-// is exactly what the old harness did. Real builds either go behind the tray
-// (invisible here, and the standoff gap is 8 mm) or up the front of the case.
-// This takes the front, which stays clear of the side window so the loom never
-// hangs between the camera and the build.
-// Sits midway between whatever reaches furthest forward and the intake fans'
-// inner face, so the channel stays centred however either end moves. A fixed
-// gap ahead of the parts did not: re-measuring the CPU socket pushed the AIO
-// radiator 34 mm forward and squeezed the lane to within a millimetre of the
-// fan blades.
-function frontLaneX(overrides) {
-  // Only the card constrains it. The AIO radiator reaches further forward, but
-  // it lives above Y=25 and the loom never climbs past the 24-pin at Y=20 —
-  // including it squeezed the lane to within a millimetre of the fan blades,
-  // because a CatmullRom bows well past its control points.
-  const furthest = partBox('gpu', overrides).max[0]
-  const front = FAN_MOUNTS.filter((m) => m.wall === 'front')
-  const fanFace = front.length
-    ? Math.min(...front.map((m) => m.position[0])) - FAN_HALF_DEPTH
-    : caseInterior().max[0]
-  // A third of the way across, not half: the tube bows forward of its control
-  // points, so a lane on the centreline puts the cable itself into the blades.
-  // Hug the parts and let the bow take up the rest of the channel.
-  const lane = furthest + (fanFace - furthest) / 3
-  // Never past the last position whose TUBE clears the blades. A 336 mm card
-  // leaves a 29 mm channel, and a third of it is still inside an 18 mm bundle's
-  // own bow — so the lane has to be capped, not scaled.
-  return Math.min(lane, fanFace - mm(CABLE.atxRadiusMm) - mm(BOW_MM))
-}
-
-// Whether the channel ahead of the card can actually take the 24-pin bundle.
-//
-// It cannot for the longest cards in the catalogue: a 357 mm card stops 27 mm
-// short of the front wall, the intake fans take 18 mm of that, and what is left
-// is thinner than the cable. Capping the lane then puts it INSIDE the card,
-// which is worse than the problem — a loom lying on a card is realistic, a loom
-// running through one is the exact defect cableRoutes was written to end.
-function frontChannelFits(overrides) {
-  return frontLaneX(overrides) > partBox('gpu', overrides).max[0] + mm(CABLE.atxRadiusMm)
-}
-
-// The Z the loom climbs at. Normally just off the board, where it is tucked
-// behind the card and away from the side window.
-//
-// When a very long card shuts the front channel it climbs OUTBOARD instead,
-// past the card's outer edge and past the intake fans' span, then crosses back
-// over the card's top edge to reach the socket. That is further toward the glass
-// than this scene likes — the front lane was chosen precisely so the loom never
-// hangs between the camera and the build — but it is the only way round a card
-// that fills the case, and it is what the cable does in a real cramped build.
-function climbZ(overrides) {
-  const near = boardFaceZ() + mm(35)
-  if (frontChannelFits(overrides)) return near
-  const fanSpan = Math.max(...FAN_MOUNTS.filter((m) => m.wall === 'front').map((m) => m.position[2])) + mm(FAN_MM) / 2
-  const outboard = Math.max(
-    partBox('gpu', overrides).max[2] + mm(CABLE.atxRadiusMm) + mm(BOW_MM),
-    fanSpan + mm(CABLE.atxRadiusMm) + mm(BOW_MM),
-  )
-  // Never through the side panel, whatever the card does.
-  return Math.min(outboard, caseInterior().max[2] - mm(CABLE.atxRadiusMm) - mm(BOW_MM))
-}
-
-// Threads the gap between the top of the PSU and the bottom edge of the board,
-// which is where a basement loom actually emerges.
-function basementExitY() {
-  const psu = partBox('psu')
-  const board = partBox('motherboard')
-  return (psu.max[1] + board.min[1]) / 2
-}
-
-// A socket body straddling the PSU's own face, so the loom visibly comes OUT of
-// the unit rather than appearing beside it.
-const psuSocket = (outlet) => ({
-  position: [partBox('psu').max[0], outlet[1], outlet[2]],
-  size: PSU_OUTLET.plugMm.map(mm),
-})
-
-// One route per cable. `points` are CatmullRom control points; `plug` is the
-// connector body drawn where the cable lands and `socket` the one it leaves
-// from — a bare tube ending near a part reads as passing it, not plugged in.
+// One route per cable. `points` are CatmullRom control points running PSU →
+// part; `plug` is where the cable lands, `psuPlugs` the PSU socket(s) it leaves
+// from (`socket` is the first of them);
+// `loom` is how the renderer draws the wires and both connector bodies, and
+// `widthAxis` the world direction the plug's long side lies along.
 export function cableRoutes(selectedParts = {}) {
   if (!selectedParts.motherboard || !selectedParts.psu) return []
 
@@ -173,48 +148,83 @@ export function cableRoutes(selectedParts = {}) {
   const overrides = sizeOverrides(selectedParts)
 
   const board = partBox('motherboard')
-  const gpu = partBox('gpu', overrides)
   const psu = partBox('psu')
-  const lane = frontLaneX(overrides)
-  const climb = climbZ(overrides)
-  const exitY = basementExitY()
+  const z = behindBoardZ()
+  const face = boardFaceZ()
   const routes = []
 
+  // 24-pin: up behind the board, out round its front edge, down into the socket.
   const atx = atxConnector()
+  const atxPlugs = [psuPlug('m18', 7), psuPlug('m10', 5)]
+  const atxOut = outletOf(atxPlugs)
   routes.push({
     id: 'atx',
-    radiusMm: CABLE.atxRadiusMm,
+    radiusMm: halfWidthMm(LOOMS.atx),
+    loom: LOOMS.atx,
+    widthAxis: [0, 1, 0], // the socket's long side runs up the board edge
     points: [
-      psuOutlet(60),
-      [psu.max[0] + mm(40), exitY, psuOutlet(60)[2]],
-      [lane, gpu.min[1] - mm(30), climb],
-      [lane + mm(5), atx[1], climb],
-      [board.max[0] + mm(25), atx[1], boardFaceZ() + mm(20)],
+      ...upBehindBoard(atxOut, psu.max[0] + mm(42)),
+      [board.max[0] - mm(30), atx[1] - mm(25), z],
+      // Clear of the board's edge while still behind it, THEN forward — a
+      // spline straight from behind to in front cuts through the PCB corner.
+      [board.max[0] + mm(10), atx[1] - mm(8), z],
+      [board.max[0] + mm(14), atx[1], face + mm(6)],
+      [atx[0] + mm(4), atx[1], atx[2] + mm(26)],
       atx,
     ],
-    plug: { position: atx, size: ATX.plugMm.map(mm) },
-    socket: psuSocket(psuOutlet(60)),
+    plug: { position: atx },
+    socket: atxPlugs[0],
+    psuPlugs: atxPlugs,
+  })
+
+  // CPU 8-pin: up behind the board to its top edge, over it, down into the socket.
+  const eps = epsConnector()
+  const epsPlugs = [psuPlug('cpu', 4)]
+  const epsOut = outletOf(epsPlugs)
+  routes.push({
+    id: 'eps',
+    radiusMm: halfWidthMm(LOOMS.eps),
+    loom: LOOMS.eps,
+    widthAxis: [1, 0, 0], // along the top edge
+    points: [
+      ...upBehindBoard(epsOut, psu.max[0] + mm(12)),
+      [eps[0] + mm(12), board.max[1] - mm(40), z],
+      [eps[0] + mm(4), board.max[1] + mm(8), z + mm(2)],
+      [eps[0], board.max[1] + mm(12), face + mm(6)],
+      [eps[0], eps[1] + mm(2), eps[2] + mm(24)],
+      eps,
+    ],
+    plug: { position: eps },
+    socket: epsPlugs[0],
+    psuPlugs: epsPlugs,
   })
 
   if (selectedParts.gpu) {
+    const gpu = partBox('gpu', overrides)
     const pcie = pcieConnector(overrides)
     // The inlet is on the card's OUTER edge, so the lead comes up the gap
     // between that edge and the side window and drops straight onto it — which
     // is how a 12-pin actually plugs into this card. Approaching from anywhere
     // else means crossing the card.
-    const outside = gpu.max[2] + mm(28)
+    const outside = Math.min(gpu.max[2] + mm(28), caseInterior().max[2] - mm(halfWidthMm(LOOMS.pcie)))
+    const exitY = (psu.max[1] + board.min[1]) / 2
+    const pciePlugs = [psuPlug('pcie', 6)]
+    const pcieOut = outletOf(pciePlugs)
     routes.push({
       id: 'pcie',
-      radiusMm: CABLE.pcieRadiusMm,
+      radiusMm: halfWidthMm(LOOMS.pcie),
+      loom: LOOMS.pcie,
+      widthAxis: [1, 0, 0], // along the card's length
       points: [
-        psuOutlet(105),
-        [psu.max[0] + mm(40), exitY, psuOutlet(105)[2]],
+        pcieOut,
+        [psu.max[0] + mm(40), exitY, pcieOut[2]],
         [pcie[0] - mm(55), gpu.min[1] - mm(15), outside],
         [pcie[0] - mm(15), pcie[1], outside],
         pcie,
       ],
-      plug: { position: pcie, size: PCIE.plugMm.map(mm) },
-      socket: psuSocket(psuOutlet(105)),
+      plug: { position: pcie },
+      socket: pciePlugs[0],
+      psuPlugs: pciePlugs,
     })
   }
 

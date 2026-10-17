@@ -83,7 +83,13 @@ export const MOUNTS = {
   // slotYMm -31 (from the ATX-derived -36.7): the card was rendering with its
   // connector below the slot, so it was lifted ~6 mm. slotYMm is the height the
   // PCB seats at, so less-negative raises the whole card.
-  gpu: { pcbRearMm: -120, slotYMm: -31 },
+  //
+  // `slot` is the x16 slot's own body along the board, read off a face-on
+  // render at 3.3 px/mm (2026-10-17): -81 to +10 mm along the board, the latch
+// beyond it, and -25.5 to -35.2 mm up it — its top rim is 1 mm ABOVE the top
+// of this card's shroud at the board, which is why the rim showed. The
+  // card's PCB edge fills it — see slotSeatBox.
+  gpu: { pcbRearMm: -120, slotYMm: -31, slot: { fromMm: -81, toMm: 10, topMm: -25, bottomMm: -35.5, heightMm: 13.5 } },
   // M.2_1, between the socket and the primary x16 — measured from the mesh's
   // own heatsink node (`Material.004`, 141 x 23 mm centred at -32, -10). The old
   // guess sat 10 mm lower and collided with the card once the GPU was seated on
