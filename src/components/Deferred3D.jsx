@@ -5,7 +5,7 @@ import { MODEL_PAYLOAD_MB } from '../lib/modelPayload'
 // The 3D view, not loaded yet, on a device where that is a real cost.
 //
 // Opening the builder pulls the lazy BuildCanvas chunk plus every model for the
-// selected parts — 11 MB of GLB, 7.7 of it the motherboard alone. On a desktop
+// selected parts — ~6 MB of gzipped GLB, 3.5 of it the motherboard alone. On a desktop
 // that is invisible. On a phone on mobile data it is the single largest thing
 // the site does, and it happens before the person has asked for it.
 //
@@ -17,8 +17,9 @@ import { MODEL_PAYLOAD_MB } from '../lib/modelPayload'
 //
 // Shrinking the payload instead was investigated and declined: motherboard.glb
 // is a triangle soup that floors at 57% of its triangles under decimation, and
-// its textures are only 7% of the file. The lever that remains is WHEN it
-// loads, not how big it is.
+// its textures are only 7% of the file. Gzipping it in transit (gzipGlb.js)
+// halved it without touching the geometry; beyond that the lever is WHEN it
+// loads.
 export default function Deferred3D({ onLoad }) {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">

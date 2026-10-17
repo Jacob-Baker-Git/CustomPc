@@ -33,7 +33,7 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
       <main className="mx-auto w-full max-w-2xl flex-1 px-5">
         {/* A PC as the picture: a still render of an example build from the
             site's own 3D view (scripts/capture-welcome-render.mjs). A still,
-            not the live view, because the live one is ~11 MB and phones never
+            not the live view, because the live one is ~6 MB and phones never
             download it unasked. Decorative, so alt="". */}
         {/* Feathered left and right so the picture melts into the page where the
             column is narrower than the window, instead of ending in a hard edge. */}

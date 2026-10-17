@@ -28,7 +28,7 @@ import { useHashView } from '../hooks/useHashView'
 import { useChromeHeight } from '../hooks/useChromeHeight'
 import useBuilderStore from '../store/useBuilderStore'
 
-// A finger means mobile data, and the 3D view is 11 MB of it. Read once at
+// A finger means mobile data, and the 3D view is ~6 MB of it. Read once at
 // mount rather than as a media query, because this decides whether a component
 // MOUNTS — BuildCanvas is lazy(), so not rendering it is what actually keeps
 // the chunk and every model off the wire. A CSS rule could only hide them

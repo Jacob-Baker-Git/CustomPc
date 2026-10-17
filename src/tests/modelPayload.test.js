@@ -1,4 +1,5 @@
-import { readdirSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
+import { gzipSync, constants } from 'node:zlib'
 import { resolve } from 'node:path'
 import { describe, it, expect } from 'vitest'
 import { MODEL_PAYLOAD_MB } from '../lib/modelPayload'
@@ -10,15 +11,17 @@ import { MODEL_PAYLOAD_MB } from '../lib/modelPayload'
 describe('the stated 3D download size', () => {
   const dir = resolve(process.cwd(), 'public/models')
   const files = readdirSync(dir).filter((f) => f.endsWith('.glb'))
-  const totalMb = files.reduce((sum, f) => sum + statSync(resolve(dir, f)).size, 0) / 1024 ** 2
+  // Gzipped as scripts/gzip-models.mjs ships them — that is the wire cost.
+  const gz = (f) => gzipSync(readFileSync(resolve(dir, f)), { level: constants.Z_BEST_COMPRESSION }).length
+  const totalMb = files.reduce((sum, f) => sum + gz(f), 0) / 1024 ** 2
 
   it('has models to measure in the first place', () => {
-    // Without this the sum is 0 and "within 1 MB of 11" would simply be false,
+    // Without this the sum is 0 and "within half a MB" would simply be false,
     // but a future glob change could make it vacuously pass some other way.
     expect(files.length).toBeGreaterThan(0)
   })
 
-  it(`matches what public/models actually weighs (${totalMb.toFixed(2)} MB)`, () => {
+  it(`matches what public/models weighs on the wire (${totalMb.toFixed(2)} MB)`, () => {
     // Rounded to a whole MB in the copy, so allow half a MB either way and no
     // more — enough for a re-export that barely moves, not enough to let the
     // number drift into a lie.
