@@ -40,3 +40,6 @@ playwright-report
 *.njsproj
 *.sln
 *.sw?
+
+# Design-hook cache (regenerated)
+.impeccable/hook.cache.json

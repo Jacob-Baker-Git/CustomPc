@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/tests/buildCodec.test.js"
+        ],
+        "createdAt": "2026-10-17T03:10:14.154Z",
+        "reason": "Claude: L64 is a hostile-input test string, not markup"
+      }
+    ]
+  }
+}

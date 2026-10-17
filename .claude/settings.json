@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Roblox_Studio__screen_capture",
+      "mcp__Roblox_Studio__get_console_output",
+      "mcp__Roblox_Studio__script_read",
+      "mcp__Roblox_Studio__script_grep",
+      "mcp__Roblox_Studio__get_studio_state",
+      "mcp__Roblox_Studio__search_game_tree",
+      "mcp__Roblox_Studio__list_roblox_studios",
+      "mcp__Roblox_Studio__inspect_instance",
+      "mcp__Roblox_Studio__script_search",
+      "mcp__Claude_Browser__read_page",
+      "mcp__Claude_Browser__get_page_text",
+      "mcp__Claude_Browser__find",
+      "mcp__Claude_Browser__read_console_messages",
+      "mcp__Claude_Browser__read_network_requests",
+      "mcp__Claude_Browser__preview_logs",
+      "Bash(npm run lint)",
+      "Bash(npm run test:run)",
+      "Bash(npx vitest run)",
+      "Bash(npm run catalog:check)",
+      "Bash(npm run catalog:coverage *)"
+    ]
+  }
+}
