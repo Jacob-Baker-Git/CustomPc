@@ -60,15 +60,14 @@ describe('buildPerfGames', () => {
     expect(games[0].presets[0].label).toBe('Ultra, all details')
   })
 
-  it('carries fpsCap across from the legacy list where the id matches', () => {
-    const { games } = buildPerfGames({
-      meta: META, entries: [entry()], legacy: [{ id: 'alpha', fpsCap: 60 }],
-    })
+  it("carries a game's fpsCap across from its gameMeta row", () => {
+    const meta = { ...META, games: { ...META.games, alpha: { ...META.games.alpha, fpsCap: 60 } } }
+    const { games } = buildPerfGames({ meta, entries: [entry()] })
     expect(games[0].fpsCap).toBe(60)
   })
 
-  it('omits fpsCap entirely when the legacy list has none', () => {
-    const { games } = buildPerfGames({ meta: META, entries: [entry()], legacy: [{ id: 'alpha' }] })
+  it('omits fpsCap entirely when gameMeta has none', () => {
+    const { games } = buildPerfGames({ meta: META, entries: [entry()] })
     expect(games[0]).not.toHaveProperty('fpsCap')
   })
 

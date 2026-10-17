@@ -3,11 +3,10 @@ import useCatalogStore, { loadCatalog } from '../store/useCatalogStore'
 import useBuilderStore from '../store/useBuilderStore'
 import partsData from '../data/partsData.json'
 import peripheralsData from '../data/peripheralsData.json'
-import gamesData from '../data/gamesData.json'
 
 afterEach(() => {
   vi.unstubAllGlobals()
-  useCatalogStore.setState({ parts: partsData, peripherals: peripheralsData, games: gamesData, source: 'bundled' })
+  useCatalogStore.setState({ parts: partsData, peripherals: peripheralsData, source: 'bundled' })
 })
 
 const dbRows = (items) => items.map((data) => ({ data }))
@@ -18,20 +17,18 @@ describe('useCatalogStore', () => {
     expect(s.source).toBe('bundled')
     expect(s.parts.length).toBeGreaterThan(200)
     expect(s.peripherals.length).toBeGreaterThan(20)
-    expect(s.games.length).toBeGreaterThan(15)
   })
 
   it('swaps to the Supabase catalog when the fetch succeeds', async () => {
     const dbParts = [{ id: 'cpu-db', category: 'cpu', name: 'DB CPU', price: 100 }]
     const dbPeripherals = [{ id: 'mon-db', category: 'monitor', name: 'DB Monitor', price: 200 }]
-    const dbGames = [{ id: 'game-db', name: 'DB Game', fpsFactor: 1 }]
     vi.stubGlobal('fetch', vi.fn(async (url) => ({
       ok: true,
       json: async () => {
         const u = String(url)
         if (u.includes('rest/v1/parts')) return dbRows(dbParts)
         if (u.includes('rest/v1/peripherals')) return dbRows(dbPeripherals)
-        return dbRows(dbGames)
+        throw new Error('unexpected table ' + u)
       },
     })))
 
@@ -40,7 +37,8 @@ describe('useCatalogStore', () => {
     expect(s.source).toBe('supabase')
     expect(s.parts[0].id).toBe('cpu-db')
     expect(s.peripherals[0].id).toBe('mon-db')
-    expect(s.games[0].id).toBe('game-db')
+    // The retired games table is no longer read at all.
+    expect(s.games).toBeUndefined()
   })
 
   it('refreshes the in-progress build against the fetched catalogue', async () => {

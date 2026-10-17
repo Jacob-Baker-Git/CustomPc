@@ -1,6 +1,10 @@
 {
-  "_comment": "Editorial metadata for the performance corpus. This is the set of game ids the corpus is ALLOWED to hold, and it is a SUPERSET of what ships: the importer validates against it, and build-perf-games.mjs emits perfGames.json for the subset that has measurements. Every id any reader maps needs a row here, measured or not, because a mapped title can start producing rows at any import and the builder will not invent a display name. Display names belong to the id and are shared by every outlet; an outlet's own spelling belongs in that outlet's reader (GAME_IDS in notebookcheck.js).",
+  "_comment": "Editorial metadata for the performance corpus. This is the set of game ids the corpus is ALLOWED to hold, and it is a SUPERSET of what ships: the importer validates against it, and build-perf-games.mjs emits perfGames.json for the subset that has measurements. Every id any reader maps needs a row here, measured or not, because a mapped title can start producing rows at any import and the builder will not invent a display name. Display names belong to the id and are shared by every outlet; an outlet's own spelling belongs in that outlet's reader (GAME_IDS in notebookcheck.js). `fpsCap` is an engine frame-rate lock, a property of the game (moved here 2026-10-17 when the old 22-game gamesData.json was retired).",
   "presets": {
+    "badass": {
+      "label": "Badass",
+      "tier": 4
+    },
     "epic": {
       "label": "Epic",
       "tier": 4
@@ -13,8 +17,16 @@
       "label": "Extreme",
       "tier": 4
     },
+    "extrem-hoch": {
+      "label": "Extreme high",
+      "tier": 4
+    },
     "grafik-priorisieren": {
       "label": "Graphics priority",
+      "tier": 4
+    },
+    "hemmungslos": {
+      "label": "Overkill",
       "tier": 4
     },
     "high": {
@@ -41,11 +53,19 @@
       "label": "Max. details",
       "tier": 4
     },
+    "maximal": {
+      "label": "Maximum",
+      "tier": 4
+    },
     "maximale-grafikdetails": {
       "label": "Maximum graphics detail",
       "tier": 4
     },
     "medium": {
+      "label": "Medium",
+      "tier": 2
+    },
+    "mittel": {
       "label": "Medium",
       "tier": 2
     },
@@ -81,6 +101,11 @@
       "slug": "alan-wake-2",
       "genre": "horror"
     },
+    "anno-117": {
+      "name": "Anno 117: Pax Romana",
+      "slug": "anno-117",
+      "genre": "strategy-sim"
+    },
     "anno-1800": {
       "name": "Anno 1800",
       "slug": "anno-1800",
@@ -89,11 +114,22 @@
     "apex": {
       "name": "Apex Legends",
       "slug": "apex-legends",
+      "genre": "shooter",
+      "fpsCap": 300
+    },
+    "arc-raiders": {
+      "name": "ARC Raiders",
+      "slug": "arc-raiders",
       "genre": "shooter"
     },
     "armored-core-6": {
       "name": "Armored Core VI: Fires of Rubicon",
       "slug": "armored-core-6",
+      "genre": "action-adventure"
+    },
+    "assassins-creed-shadows": {
+      "name": "Assassin's Creed Shadows",
+      "slug": "assassins-creed-shadows",
       "genre": "action-adventure"
     },
     "atomic-heart": {
@@ -111,6 +147,11 @@
       "slug": "avowed",
       "genre": "rpg"
     },
+    "battlefield-6": {
+      "name": "Battlefield 6",
+      "slug": "battlefield-6",
+      "genre": "shooter"
+    },
     "bg3": {
       "name": "Baldur's Gate 3",
       "slug": "baldurs-gate-3",
@@ -121,6 +162,11 @@
       "slug": "black-myth-wukong",
       "genre": "rpg"
     },
+    "borderlands-4": {
+      "name": "Borderlands 4",
+      "slug": "borderlands-4",
+      "genre": "shooter"
+    },
     "cities-skylines-2": {
       "name": "Cities: Skylines II",
       "slug": "cities-skylines-2",
@@ -129,6 +175,11 @@
     "cod-black-ops-6": {
       "name": "Call of Duty: Black Ops 6",
       "slug": "call-of-duty-black-ops-6",
+      "genre": "shooter"
+    },
+    "cod-black-ops-7": {
+      "name": "Call of Duty: Black Ops 7",
+      "slug": "cod-black-ops-7",
       "genre": "shooter"
     },
     "cs2": {
@@ -150,6 +201,11 @@
       "name": "Dead Space (2023)",
       "slug": "dead-space-remake",
       "genre": "horror"
+    },
+    "death-stranding-2": {
+      "name": "Death Stranding 2: On the Beach",
+      "slug": "death-stranding-2",
+      "genre": "action-adventure"
     },
     "diablo-4": {
       "name": "Diablo IV",
@@ -187,7 +243,8 @@
     "elden-ring": {
       "name": "Elden Ring",
       "slug": "elden-ring",
-      "genre": "rpg"
+      "genre": "rpg",
+      "fpsCap": 60
     },
     "empire-of-the-ants": {
       "name": "Empire of the Ants",
@@ -197,6 +254,11 @@
     "f1-24": {
       "name": "F1 24",
       "slug": "f1-24",
+      "genre": "racing"
+    },
+    "f1-25": {
+      "name": "F1 25",
+      "slug": "f1-25",
       "genre": "racing"
     },
     "final-fantasy-16": {
@@ -237,7 +299,8 @@
     "gta5": {
       "name": "GTA V",
       "slug": "gta-v",
-      "genre": "action-adventure"
+      "genre": "action-adventure",
+      "fpsCap": 180
     },
     "hellblade-2": {
       "name": "Senua's Saga: Hellblade II",
@@ -279,10 +342,20 @@
       "slug": "lords-of-the-fallen",
       "genre": "rpg"
     },
+    "mafia-the-old-country": {
+      "name": "Mafia: The Old Country",
+      "slug": "mafia-the-old-country",
+      "genre": "action-adventure"
+    },
     "mechwarrior-5-clans": {
       "name": "MechWarrior 5: Clans",
       "slug": "mechwarrior-5-clans",
       "genre": "shooter"
+    },
+    "oblivion-remastered": {
+      "name": "The Elder Scrolls IV: Oblivion Remastered",
+      "slug": "oblivion-remastered",
+      "genre": "rpg"
     },
     "outcast-2": {
       "name": "Outcast: A New Beginning",
@@ -308,6 +381,11 @@
       "name": "Ready or Not",
       "slug": "ready-or-not",
       "genre": "shooter"
+    },
+    "resident-evil-requiem": {
+      "name": "Resident Evil Requiem",
+      "slug": "resident-evil-requiem",
+      "genre": "horror"
     },
     "satisfactory": {
       "name": "Satisfactory",
@@ -363,6 +441,16 @@
       "name": "The Last of Us Part I",
       "slug": "the-last-of-us-part-i",
       "genre": "action-adventure"
+    },
+    "the-last-of-us-part-2": {
+      "name": "The Last of Us Part II",
+      "slug": "the-last-of-us-part-2",
+      "genre": "action-adventure"
+    },
+    "the-outer-worlds-2": {
+      "name": "The Outer Worlds 2",
+      "slug": "the-outer-worlds-2",
+      "genre": "rpg"
     },
     "watch-dogs-legion": {
       "name": "Watch Dogs: Legion",

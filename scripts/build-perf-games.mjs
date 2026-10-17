@@ -16,9 +16,8 @@ const read = (rel) => JSON.parse(readFileSync(path(rel), 'utf8'))
 
 const meta = read('../data/games/gameMeta.json')
 const entries = read('../data/benchmarks/entries.json')
-const legacy = read('../src/data/gamesData.json')
 
-const { games, problems } = buildPerfGames({ meta, entries, legacy })
+const { games, problems } = buildPerfGames({ meta, entries })
 
 if (problems.length) {
   console.error('Refusing to write the game list:\n')

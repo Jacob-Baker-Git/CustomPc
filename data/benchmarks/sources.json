@@ -1286,5 +1286,74 @@
       "gpuDriver": "GeForce 572.42"
     },
     "notes": ""
+  },
+  {
+    "id": "src-computerbase-2026-05-06-gaming-grafikkarten-2026",
+    "outlet": "ComputerBase",
+    "title": "Gaming-Grafikkarten 2026 im Test: GeForce-, Radeon- & Arc-Benchmarks im neuen Testparcours",
+    "url": "https://www.computerbase.de/artikel/grafikkarten/nvidia-geforce-amd-radeon-benchmark-test-2026.97097/",
+    "published": "2026-05-06",
+    "accessed": "2026-10-17",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 48,
+        "sticks": 2
+      },
+      "os": "Windows 11 25H2",
+      "gpuDriver": "AMD Adrenalin 26.3.1; NVIDIA GeForce 596.21; Intel Arc 8629"
+    },
+    "notes": ""
+  },
+  {
+    "id": "src-computerbase-2024-04-19-fortnite-benchmarks-2024",
+    "outlet": "ComputerBase",
+    "title": "Fortnite-Benchmarks (2024): 28 GPUs von AMD, Intel & Nvidia in FHD, WQHD & UHD im Test",
+    "url": "https://www.computerbase.de/artikel/gaming/fortnite-benchmark-test.87822/",
+    "published": "2024-04-19",
+    "accessed": "2026-10-17",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x3d",
+      "cpuId": "cpu-ryzen-9-7950x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 48,
+        "sticks": 2
+      },
+      "os": "Windows 11 23H2",
+      "gpuDriver": "AMD Adrenalin 24.3.1; NVIDIA GeForce 552.12; Intel Arc 5382"
+    },
+    "notes": ""
+  },
+  {
+    "id": "src-computerbase-2023-09-28-counter-strike-2-im-test",
+    "outlet": "ComputerBase",
+    "title": "Counter-Strike 2 im Test: 22 Grafikkarten im CS:GO-Nachfolger im Benchmark",
+    "url": "https://www.computerbase.de/artikel/gaming/counter-strike-2-benchmark-test.85654/seite-2/",
+    "published": "2023-09-28",
+    "accessed": "2026-10-17",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-9-7950x3d",
+      "cpuId": "cpu-ryzen-9-7950x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 32,
+        "sticks": 2
+      },
+      "os": "Windows 11 22H2",
+      "gpuDriver": "AMD Adrenalin 23.9.3 (23.9.2 on GCN); NVIDIA GeForce 537.42; Intel Arc 4826"
+    },
+    "notes": ""
   }
 ]

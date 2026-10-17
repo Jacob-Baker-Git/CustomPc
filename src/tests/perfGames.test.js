@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { buildPerfGames } from '../lib/perfEngine/perfGamesList'
 import perfGames from '../data/perfGames.json'
-import legacyGames from '../data/gamesData.json'
 import meta from '../../data/games/gameMeta.json'
 import entries from '../../data/benchmarks/entries.json'
 
@@ -10,7 +9,7 @@ import entries from '../../data/benchmarks/entries.json'
 // which is what happens when somebody imports measurements and forgets to
 // regenerate, exactly as sitemap.test.js guards `npm run sitemap`.
 describe('perfGames.json is derived from the corpus', () => {
-  const built = buildPerfGames({ meta, entries, legacy: legacyGames })
+  const built = buildPerfGames({ meta, entries })
 
   it('builds without problems against the real corpus', () => {
     expect(built.problems).toEqual([])
@@ -72,14 +71,4 @@ describe('perfGames.json is derived from the corpus', () => {
     expect(new Set(perfGames.map((g) => g.id)).size).toBe(perfGames.length)
   })
 
-  it('never contradicts the legacy list about a shared id', () => {
-    // cs2, cyberpunk, bg3 and friends exist in both. Two different display names
-    // for one id would show a reader two different games depending on which
-    // screen they are on.
-    const legacyById = new Map(legacyGames.map((g) => [g.id, g]))
-    const clashes = perfGames
-      .filter((g) => legacyById.has(g.id) && legacyById.get(g.id).name !== g.name)
-      .map((g) => `${g.id}: "${g.name}" vs "${legacyById.get(g.id).name}"`)
-    expect(clashes).toEqual([])
-  })
 })

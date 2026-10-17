@@ -28,7 +28,6 @@ const APPLY = process.argv.includes('--apply')
 const TABLES = [
   ['parts', 'src/data/partsData.json'],
   ['peripherals', 'src/data/peripheralsData.json'],
-  ['games', 'src/data/gamesData.json'],
 ]
 
 const local = (path) => JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'))

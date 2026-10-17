@@ -1,20 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { auditCorpus, validateSource, validateEntry, RESOLUTIONS, UPSCALING } from '../lib/benchSchema'
 import partsData from '../data/partsData.json'
-import legacyGames from '../data/gamesData.json'
 import gameMeta from '../../data/games/gameMeta.json'
 import perfModel from '../data/perfModel.json'
 
 // The corpus may cite any PERMITTED game id, so the audit resolves against
-// gameMeta plus the legacy catalogue — the same union the curation scripts use.
-// Not perfGames.json: that is derived from the corpus, so auditing the corpus
-// against it would be circular, and auditing against the legacy 22 alone would
-// reject every real entry, because modern GPU roundups benchmark almost none of
-// them.
-const gamesData = [
-  ...Object.keys(gameMeta.games).map((id) => ({ id })),
-  ...legacyGames,
-]
+// gameMeta — the set the curation scripts use. Not perfGames.json: that is
+// derived from the corpus, so auditing the corpus against it would be circular.
+const gamesData = Object.keys(gameMeta.games).map((id) => ({ id }))
 import sources from '../../data/benchmarks/sources.json'
 import entries from '../../data/benchmarks/entries.json'
 import validation from '../../data/benchmarks/validation.json'

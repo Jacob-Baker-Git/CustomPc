@@ -32,13 +32,10 @@ const UPSCALING_LABELS = {
   'ultra-performance': 'DLSS/FSR Ultra Performance',
 }
 
-export function buildPerfGames({ meta, entries, legacy = [] }) {
+export function buildPerfGames({ meta, entries }) {
   const problems = []
   const live = entries.filter((e) => !e.supersededBy)
 
-  const fpsCapById = new Map(
-    legacy.filter((g) => g.fpsCap != null).map((g) => [g.id, g.fpsCap]),
-  )
 
   // gameId -> "presetId|upscaling" -> how many live entries use it
   const seen = new Map()
@@ -107,10 +104,8 @@ export function buildPerfGames({ meta, entries, legacy = [] }) {
       presets: presets.map(({ id, label, tier, upscaling }) => ({ id, label, tier, upscaling })),
     }
     // An engine cap floors the frame rate and the 1% low alike. It is a property
-    // of the GAME, so it is carried across from the legacy list rather than
-    // restated — one hard-locked title, one place it is recorded.
-    const cap = fpsCapById.get(gameId)
-    if (cap != null) game.fpsCap = cap
+    // of the GAME, recorded once in gameMeta.json.
+    if (gameMeta.fpsCap != null) game.fpsCap = gameMeta.fpsCap
 
     games.push(game)
   }
