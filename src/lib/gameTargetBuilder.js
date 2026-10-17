@@ -35,14 +35,15 @@ export function fpsFor(parts, game, resolution, preset, model) {
   return r?.games.find((x) => x.presetId === preset.id && x.upscaling === preset.upscaling) ?? null
 }
 
-// The cheapest SENSIBLE complete build around a CPU and GPU: enough memory and
-// storage for a gaming profile, and a cooler rated for the chip, so nothing in
-// it trips a build warning. autoBuild with a zero budget fills every empty
+// The cheapest SENSIBLE complete build around a CPU and GPU: enough memory (as
+// two sticks, so it runs dual-channel) and SSD storage (an HDD boot drive was
+// the cheapest 1TB part, so it got picked for a £1,500 gaming PC) and a cooler
+// rated for the chip, so nothing in it trips a build warning. autoBuild with a zero budget fills every empty
 // category with its cheapest compatible part and sizes the PSU to the peak.
 export function completeBuild(cpu, gpu, parts, resolution) {
   const catalog = parts.filter((p) =>
-    (p.category !== 'ram' || (p.capacityGb ?? 0) >= NEEDS.ramGb) &&
-    (p.category !== 'storage' || (p.capacityGb ?? 0) >= NEEDS.storageGb) &&
+    (p.category !== 'ram' || ((p.capacityGb ?? 0) >= NEEDS.ramGb && (p.specs?.sticks ?? 1) >= 2)) &&
+    (p.category !== 'storage' || ((p.capacityGb ?? 0) >= NEEDS.storageGb && p.storageType !== 'HDD')) &&
     (p.category !== 'cooler' || typeof p.specs?.ratedTdpW !== 'number' || p.specs.ratedTdpW >= (cpu.tdp ?? 0)))
   const build = autoBuild({ cpu, gpu }, 0, catalog, resolution)
   return ESSENTIAL.every((c) => build[c]) ? build : null

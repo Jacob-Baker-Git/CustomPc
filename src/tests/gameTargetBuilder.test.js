@@ -53,6 +53,8 @@ describe('completeBuild', () => {
   it('is sensible: enough memory and storage for gaming, nothing the app would warn about', () => {
     expect(b.ram.capacityGb).toBeGreaterThanOrEqual(16)
     expect(b.storage.capacityGb).toBeGreaterThanOrEqual(1000)
+    expect(b.storage.storageType).not.toBe('HDD')
+    expect(b.ram.specs.sticks).toBeGreaterThanOrEqual(2)
     const bad = getBuildWarnings(b).filter((w) => w.level !== 'note')
     expect(bad).toEqual([])
   })
