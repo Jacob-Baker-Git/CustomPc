@@ -6,7 +6,12 @@ import { buildShareUrl } from '../lib/shareLink'
 // Save and Share for the current build, shared by the Summary page and the
 // phone dock so both do exactly the same thing.
 export function useBuildActions() {
-  const { budget, resolution, selectedParts, selectedPeripherals } = useBuilderStore()
+  // One selector per field: a bare useBuilderStore() re-rendered the Dock and
+  // Summary on every store change (hover, fold, flow), not just these four.
+  const budget = useBuilderStore((s) => s.budget)
+  const resolution = useBuilderStore((s) => s.resolution)
+  const selectedParts = useBuilderStore((s) => s.selectedParts)
+  const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
   const total = useBuilderStore(selTotalSpent) + useBuilderStore(selPeripheralsTotal)
   const saveBuild = useSavedStore((s) => s.saveBuild)
   const saved = useSavedStore((s) => s.saved)

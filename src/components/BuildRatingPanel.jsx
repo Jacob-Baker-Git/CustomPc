@@ -71,7 +71,9 @@ export default function BuildRatingPanel() {
           </div>
 
           {tip && (
-            <div className="mb-4 rounded-lg border border-brass bg-gold-soft px-3 py-2.5">
+            // A brass rule down the left, not a filled box: the one accent marks
+            // it, the hairline look stays.
+            <div className="mb-4 border-l-2 border-brass py-1 pl-3">
               <div className="flex items-center gap-1.5 mb-1">
                 <Zap size={13} className="text-brass shrink-0" aria-hidden="true" />
                 <span className="text-xs font-semibold text-brass">Best next move</span>

@@ -13,11 +13,6 @@ export const VIEWS = ['build', 'performance', 'peripherals', 'summary']
 // reachable from the tab bar.
 export const stepsFor = (path) => (path === 'game' ? ['peripherals', 'summary'] : VIEWS)
 
-// Views still visibly under construction. The Performance tab answers from a
-// benchmark corpus that is still being filled — plenty of builds still get "no
-// benchmark data yet" — so it says so rather than looking finished and thin.
-export const BETA_VIEWS = new Set(['performance'])
-
 // Tab state synced to the URL hash so views are deep-linkable and the
 // browser back button works between tabs.
 export function useHashView(defaultView = 'build') {

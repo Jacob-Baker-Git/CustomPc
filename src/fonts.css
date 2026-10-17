@@ -15,8 +15,8 @@
  * ⚠️ WEIGHT AXIS ONLY. Archivo also has a WIDTH axis, and the design brief
  * asked for "condensed" section labels — but shipping wdth 62.5..125 costs
  * 176,344 bytes against this pair's 67,536, i.e. +108 KB, more than the whole
- * Bricolage payload it replaces. Measured, not assumed. The silkscreen voice
- * the labels actually use is uppercase + letter-spacing + size, none of which
+ * Bricolage payload it replaces. Measured, not assumed. The label voice
+ * actually used is uppercase + letter-spacing + size, none of which
  * needs the axis. If real condensed widths are ever wanted, that is the price.
  */
 @font-face {
