@@ -1791,6 +1791,20 @@
     ]
   },
   {
+    "id": "valorant",
+    "name": "Valorant",
+    "slug": "valorant",
+    "genre": "shooter",
+    "presets": [
+      {
+        "id": "maximal",
+        "label": "Maximum",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
     "id": "watch-dogs-legion",
     "name": "Watch Dogs: Legion",
     "slug": "watch-dogs-legion",

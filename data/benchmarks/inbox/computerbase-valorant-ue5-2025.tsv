@@ -1,0 +1,60 @@
+# ComputerBase — Valorant mit Unreal Engine 5 im Benchmark-Test (page 2).
+#
+# Imported 2026-10-17. Figures from each bar's data-value attribute via
+# src/lib/perfEngine/computerbase.js (the WQHD and UHD charts; average FPS and
+# the "1% Perzentil" lows).
+#
+# Settings, from the article's own table: "Maximale Grafikdetails, 4×MSAA" at
+# 2.560 × 1.440 and 3.840 × 2.160, native (the game has no upscaler). The scene
+# is a 20-second sequence on Icebox, which the article says runs at about the
+# lowest frame rates in the game.
+#
+# Test system, from "Das Testsystem und die Benchmark-Szene": Ryzen 7 9800X3D
+# at stock on an Asus ROG Crosshair X670E Hero (BIOS 2506); 48 GB G.Skill
+# TridentZ Neo, 2 × 24 GB DDR5-6000 CL30-38-38-96; Windows 11 24H2 with HVCI on;
+# ReBAR on. Drivers: AMD Adrenalin 25.6.3, Nvidia GeForce 577.00, Intel Arc 6972.
+#
+# NOT imported: GeForce RTX 3060 and Arc A770 (memory size not stated; the
+# catalogue holds both variants of the 3060, and the A770 was sold as 8 GB and
+# 16 GB), and the UWQHD chart (no ultrawide resolution in the model).
+
+outlet:    ComputerBase
+title:     Valorant mit Unreal Engine 5 im Benchmark-Test: Benchmarks (WQHD, UWQHD & UHD), Frametimes und VRAM
+url:       https://www.computerbase.de/artikel/gaming/valorant-unreal-engine-5-benchmark-test.93727/seite-2
+published: 2025-08-05
+kind:      gpu-scaling
+cpu:       cpu-ryzen-7-9800x3d
+ram:       DDR5 6000 48 2
+os:        Windows 11 24H2
+driver:    AMD Adrenalin 25.6.3; NVIDIA GeForce 577.00; Intel Arc 6972
+scene:     20-second sequence on the Icebox map (described in the article)
+
+game	res	preset	up	part	avg	low
+valorant	1440p	maximal	native	gpu-rtx-5090	1146.9	740.9
+valorant	1440p	maximal	native	gpu-rx-7900xtx	856	621.5
+valorant	1440p	maximal	native	gpu-rtx-5070ti	845.6	554.6
+valorant	1440p	maximal	native	gpu-rtx-4080-super	833.7	551.2
+valorant	1440p	maximal	native	gpu-rx-9070xt	771.4	573.1
+valorant	1440p	maximal	native	gpu-rx-7800xt	629.9	537.6
+valorant	1440p	maximal	native	gpu-rtx-5060ti	548	430.5
+valorant	1440p	maximal	native	gpu-rtx-5060	462.5	375.3
+valorant	1440p	maximal	native	gpu-rx-9060xt	416.8	361.8
+valorant	1440p	maximal	native	gpu-rx-6650xt	367	313.2
+valorant	1440p	maximal	native	gpu-rtx-4060	366.6	320.5
+valorant	1440p	maximal	native	gpu-intel-arc-b580	364.6	329.5
+valorant	1440p	maximal	native	gpu-rtx-5050	364.4	319.8
+valorant	1440p	maximal	native	gpu-rx-7600	337.7	300
+valorant	4k	maximal	native	gpu-rtx-5090	881	695.7
+valorant	4k	maximal	native	gpu-rtx-5070ti	516	402.6
+valorant	4k	maximal	native	gpu-rx-7900xtx	497.9	433.6
+valorant	4k	maximal	native	gpu-rtx-4080-super	496	407.8
+valorant	4k	maximal	native	gpu-rx-9070xt	395.6	358.7
+valorant	4k	maximal	native	gpu-rx-7800xt	290.3	262.7
+valorant	4k	maximal	native	gpu-rtx-5060ti	258.6	195
+valorant	4k	maximal	native	gpu-rtx-5060	217	171
+valorant	4k	maximal	native	gpu-rx-9060xt	195.2	180.3
+valorant	4k	maximal	native	gpu-intel-arc-b580	186.3	176.2
+valorant	4k	maximal	native	gpu-rtx-5050	176.9	152.9
+valorant	4k	maximal	native	gpu-rx-6650xt	176.7	157.1
+valorant	4k	maximal	native	gpu-rtx-4060	175.5	154
+valorant	4k	maximal	native	gpu-rx-7600	158.3	145.3
