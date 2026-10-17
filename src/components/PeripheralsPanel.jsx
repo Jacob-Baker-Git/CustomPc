@@ -132,13 +132,13 @@ export default function PeripheralsPanel() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search peripherals…"
             aria-label="Search peripherals by name or brand"
-            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
+            className="flex-1 min-w-48 bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-hidden focus:border-brass"
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
             aria-label="Sort peripherals"
-            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-brass"
+            className="bg-surface-2 border border-line rounded-lg px-3 py-2 text-sm text-ink focus:outline-hidden focus:border-brass"
           >
             {Object.entries(SORTS).map(([id, s]) => <option key={id} value={id}>{s.label}</option>)}
           </select>

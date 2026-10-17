@@ -3,7 +3,12 @@ import { resolve, join } from 'node:path'
 import { describe, it, expect } from 'vitest'
 import tailwindConfig from '../../tailwind.config.js'
 
-// Tailwind can only compose an opacity modifier onto a colour it can take apart
+// ⚠️ Since the Tailwind 4 migration (2026-10-17) the mechanism below is
+// history: v4 composes `/NN` onto any colour with color-mix(), so a modifier
+// now WORKS. The guard stays as a design rule — the palette is whole tokens
+// (that is why gold.soft exists) — and the history explains the rule.
+//
+// Tailwind 3 could only compose an opacity modifier onto a colour it can take apart
 // into channels. Every semantic colour here resolves to a bare `var(--x)` whose
 // var holds a hex string, so `bg-surface/85` is not a translucent surface — it
 // is NOTHING. Tailwind drops the utility silently: no error, no warning, no

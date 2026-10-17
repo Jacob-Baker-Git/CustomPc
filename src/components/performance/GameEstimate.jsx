@@ -97,7 +97,7 @@ export default function GameEstimate() {
                 </p>
                 {row.lowFps != null && (
                   <p className="mt-2 text-sm text-muted">
-                    <span aria-hidden="true" className="mr-1.5 inline-block h-2.5 w-1 rounded-sm bg-gold align-middle" />
+                    <span aria-hidden="true" className="mr-1.5 inline-block h-2.5 w-1 rounded-xs bg-gold align-middle" />
                     1% lows <span className={`${TELEMETRY} text-ink`}>{row.lowFps} fps</span>
                   </p>
                 )}

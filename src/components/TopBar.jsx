@@ -59,7 +59,7 @@ export default function TopBar() {
               onChange={(e) => setDraft(e.target.value)}
               onBlur={commit}
               onKeyDown={(e) => { if (e.key === 'Enter') commit() }}
-              className="w-24 rounded-lg border border-brass bg-surface-2 px-2 py-0.5 font-mono tabular-nums text-ink focus:outline-none"
+              className="w-24 rounded-lg border border-brass bg-surface-2 px-2 py-0.5 font-mono tabular-nums text-ink focus:outline-hidden"
             />
           </span>
         ) : (

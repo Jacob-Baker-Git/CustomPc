@@ -1,7 +1,6 @@
-import { readdirSync, readFileSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
-import { tmpdir } from 'node:os'
-import { execFileSync } from 'node:child_process'
+import { compile } from '@tailwindcss/node'
 import { describe, it, expect, beforeAll } from 'vitest'
 
 // The blind spot in tokenOpacity.test.js, closed.
@@ -25,8 +24,6 @@ import { describe, it, expect, beforeAll } from 'vitest'
 // is the only question with an authoritative answer — a hand-written list of
 // which suffixes are colours and which are sizes would rot against both
 // Tailwind's palette and this repo's.
-const TAILWIND_CLI = resolve(process.cwd(), 'node_modules/tailwindcss/lib/cli.js')
-
 // Matches the prefix list in tokenOpacity.test.js. Arbitrary values (`text-[11px]`)
 // and opacity modifiers (`bg-surface/85`) are excluded by the trailing lookahead:
 // the first always resolve, and the second are the other guard's job.
@@ -84,29 +81,20 @@ const DEAD_CONTROL = 'bg-accent-soft'
 let css = ''
 let classes = new Map()
 
-beforeAll(() => {
+beforeAll(async () => {
   classes = collectClasses()
-  const dir = mkdtempSync(join(tmpdir(), 'custompc-tw-'))
-  try {
-    const probe = join(dir, 'probe.html')
-    const input = join(dir, 'in.css')
-    const output = join(dir, 'out.css')
-    writeFileSync(
-      probe,
-      `<div class="${[...classes.keys(), LIVE_CONTROL, DEAD_CONTROL].join(' ')}"></div>`,
-    )
-    // Utilities only. The base/components layers would drag in preflight and
-    // every rule in index.css, and a match against those would be a false pass.
-    writeFileSync(input, '@tailwind utilities;')
-    execFileSync(
-      process.execPath,
-      [TAILWIND_CLI, '-c', 'tailwind.config.js', '-i', input, '-o', output, '--content', probe],
-      { stdio: 'pipe', cwd: process.cwd() },
-    )
-    css = readFileSync(output, 'utf8')
-  } finally {
-    rmSync(dir, { recursive: true, force: true })
-  }
+  // Tailwind 4's own compiler, in-process, with the repo's config. Theme +
+  // utilities only: preflight and index.css would add rules a match could
+  // falsely hit. build() takes the candidate classes directly.
+  const compiler = await compile(
+    [
+      "@import 'tailwindcss/theme' layer(theme);",
+      "@import 'tailwindcss/utilities' layer(utilities);",
+      "@config './tailwind.config.js';",
+    ].join('\n'),
+    { base: process.cwd(), onDependency: () => {} },
+  )
+  css = compiler.build([...classes.keys(), LIVE_CONTROL, DEAD_CONTROL])
 }, 120000)
 
 describe('every colour class in src resolves to a live token', () => {
@@ -114,7 +102,7 @@ describe('every colour class in src resolves to a live token', () => {
     // Without this pair the scan below can pass by finding nothing and by
     // matching nothing — the two failure modes that make a guard worse than no
     // guard, because it reports "clean".
-    expect(css.length, 'the Tailwind CLI produced no CSS at all').toBeGreaterThan(0)
+    expect(css.length, 'the Tailwind compiler produced no CSS at all').toBeGreaterThan(0)
     expect(emits(css, LIVE_CONTROL), `${LIVE_CONTROL} is a live token and must emit`).toBe(true)
     expect(emits(css, DEAD_CONTROL), `${DEAD_CONTROL} names a removed token and must NOT emit`).toBe(false)
   })

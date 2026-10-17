@@ -150,7 +150,7 @@ export default function SavedBuilds({ onLoaded }) {
       </div>
 
       {pendingDelete && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
           <div role="dialog" aria-modal="true" aria-label="Delete saved build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
             <h3 className="text-ink text-sm font-semibold mb-2">Delete "{pendingDelete.name}"?</h3>
             <p className="text-xs text-muted">This permanently removes the saved build. It can't be undone.</p>

@@ -21,7 +21,7 @@ export default function ConfirmDialog({ title, ariaLabel, body, confirmLabel, on
   // trapped in that ancestor's box and stacking context, so it would neither
   // cover the page nor sit above the sticky header and the phone dock.
   return createPortal(
-    <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+    <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
       <div role="dialog" aria-modal="true" aria-label={ariaLabel ?? title} className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
         <h3 className="text-ink text-sm font-semibold mb-2">{title}</h3>
         <p className="text-xs text-muted">{body}</p>

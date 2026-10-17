@@ -45,7 +45,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
   }, [sorted, selectedParts, query, showAll, visible])
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
       <div
         role="dialog"
         aria-modal="true"
@@ -61,7 +61,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value)}
             aria-label="Sort parts"
-            className="bg-surface-2 border border-line rounded-lg text-xs text-ink px-2 py-2 focus:outline-none focus:border-brass"
+            className="bg-surface-2 border border-line rounded-lg text-xs text-ink px-2 py-2 focus:outline-hidden focus:border-brass"
           >
             {SORT_OPTIONS.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
           </select>

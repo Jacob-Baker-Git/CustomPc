@@ -58,7 +58,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
     ))
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start sm:items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start sm:items-center justify-center p-4 sm:p-6 overflow-y-auto">
       <div
         role="dialog"
         aria-modal="true"
@@ -76,7 +76,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
                 aria-label="Minimum price"
                 value={draft.priceMin}
                 onChange={(e) => set('priceMin', e.target.value)}
-                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-none focus:border-brass"
+                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-hidden focus:border-brass"
               />
               <span className="text-xs text-faint">to</span>
               <input
@@ -84,7 +84,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
                 aria-label="Maximum price"
                 value={draft.priceMax}
                 onChange={(e) => set('priceMax', e.target.value)}
-                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-none focus:border-brass"
+                className="w-24 bg-surface-2 border border-line rounded-lg px-2.5 py-1.5 text-sm text-ink font-mono tabular-nums focus:outline-hidden focus:border-brass"
               />
             </div>
           </div>
