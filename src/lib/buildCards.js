@@ -17,7 +17,7 @@ export function buildCards(result, { budget, fps }) {
   const titles = {
     cheapest: `Cheapest that hits ${fps} fps`,
     middle: 'Best value',
-    best: `Best within £${budget}`,
+    best: `Best within £${budget.toLocaleString('en-GB')}`,
   }
   const cards = []
   for (const kind of ORDER) {

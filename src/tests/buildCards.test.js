@@ -18,7 +18,7 @@ describe('buildCards', () => {
       best: opt({ ...base, cpu: 'c3', gpu: 'g3' }, 999, 364),
     }), ctx)
     expect(cards.map((c) => c.kind)).toEqual(['cheapest', 'middle', 'best'])
-    expect(cards.map((c) => c.title)).toEqual(['Cheapest that hits 240 fps', 'Best value', 'Best within £1000'])
+    expect(cards.map((c) => c.title)).toEqual(['Cheapest that hits 240 fps', 'Best value', 'Best within £1,000'])
     expect(cards.map((c) => c.step)).toEqual([null, '+£105 · +64 fps over Cheapest', '+£150 · +51 fps over Best value'])
     expect([...cards[1].changed]).toEqual(['gpu'])
     expect([...cards[2].changed].sort()).toEqual(['cpu', 'gpu'])
@@ -30,7 +30,7 @@ describe('buildCards', () => {
     const cards = buildCards(result({ cheapest: same, best: opt(base, 900, 250) }), ctx)
     expect(cards).toHaveLength(1)
     expect(cards[0].kind).toBe('cheapest')
-    expect(cards[0].also).toBe('also best within £1000')
+    expect(cards[0].also).toBe('also best within £1,000')
   })
 
   it('same CPU and GPU with better other parts: same fps, better parts', () => {

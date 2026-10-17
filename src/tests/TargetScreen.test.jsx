@@ -33,7 +33,7 @@ describe('TargetScreen', () => {
   it('finds a build and hands it to the builder at Peripherals', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1,600$/i)).toBeInTheDocument()
     await userEvent.click(screen.getAllByRole('button', { name: /use this build/i })[0])
     const s = useBuilderStore.getState()
     expect(s.flow).toBe('builder')
@@ -46,7 +46,7 @@ describe('TargetScreen', () => {
   it('drops results once an input changes', async () => {
     render(<TargetScreen />)
     await userEvent.click(find())
-    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1,600$/i)).toBeInTheDocument()
     act(() => useBuilderStore.setState({ resolution: '4k' }))
     expect(screen.queryByText(/best within/i)).toBeNull()
   })
@@ -92,7 +92,7 @@ describe('TargetScreen — three answers', () => {
     render(<TargetScreen />)
     await userEvent.click(find())
     expect(screen.getByText(/^cheapest that hits 60 fps$/i)).toBeInTheDocument()
-    expect(screen.getByText(/^best within £1600$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^best within £1,600$/i)).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: /use this build/i }).length).toBeGreaterThanOrEqual(2)
   })
 

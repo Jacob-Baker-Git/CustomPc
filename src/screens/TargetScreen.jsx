@@ -138,7 +138,7 @@ export default function TargetScreen() {
                   ),
                 ])}
               </div>
-              {!shown.best && <p className="text-sm text-muted">No complete build fits £{shown.budget}.</p>}
+              {!shown.best && <p className="text-sm text-muted">No complete build fits £{shown.budget.toLocaleString('en-GB')}.</p>}
               {shown.unreachable && (
                 <p className="text-sm text-muted">
                   No build in the catalogue reaches {shown.fps} fps in {shown.game.name} at these settings.
