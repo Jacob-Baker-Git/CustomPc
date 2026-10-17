@@ -2,9 +2,16 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { BUILDER_STORAGE_KEY } from '../lib/storageKey'
 import { peakDrawW } from '../lib/partSynergy'
+import { MAX_BUDGET } from '../lib/buildCodec'
+
+// Every budget the store takes: 0 for nonsense, capped like a share link. The
+// top bar's editor once accepted 1e300 and rendered "£1e+300".
+const clampBudget = (n) => (Number.isFinite(n) && n > 0 ? Math.min(n, MAX_BUDGET) : 0)
+const isMap = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
 
 // Swap each selected part for the catalogue's copy of the same id, dropping any
-// the catalogue no longer has. Returns `selection` itself when nothing changed.
+// the catalogue no longer has or that sit in a slot of another category (a
+// hand-edited store). Returns `selection` itself when nothing changed.
 // ponytail: a dropped part disappears silently; add a notice if removals become common.
 function resolveById(selection, catalog) {
   const byId = new Map(catalog.map((p) => [p.id, p]))
@@ -12,8 +19,8 @@ function resolveById(selection, catalog) {
   const next = {}
   for (const [cat, part] of Object.entries(selection)) {
     const fresh = byId.get(part?.id)
-    if (fresh) next[cat] = fresh
-    if (fresh !== part) changed = true
+    if (fresh?.category === cat) next[cat] = fresh
+    if (next[cat] !== part) changed = true
   }
   return changed ? next : selection
 }
@@ -22,7 +29,7 @@ const useBuilderStore = create(persist((set, get) => ({
   budget: 0,
   selectedParts: {},
 
-  setBudget: (amount) => set({ budget: amount }),
+  setBudget: (amount) => set({ budget: clampBudget(amount) }),
 
   // Which screen the app is on: 'hub' | 'target' | 'saved' | 'builder'.
   // Persisted, so a refresh returns you where you were. This used to be
@@ -122,6 +129,15 @@ const useBuilderStore = create(persist((set, get) => ({
     if (s.flow === 'setup') s = { ...s, flow: 'hub' }
     return s
   },
+  // A hand-edited or half-written store must not reach the UI: a null parts
+  // map threw on load, a negative budget rendered as "1486.41£".
+  merge: (persisted, current) => ({
+    ...current,
+    ...persisted,
+    budget: clampBudget(persisted?.budget),
+    selectedParts: isMap(persisted?.selectedParts) ? persisted.selectedParts : {},
+    selectedPeripherals: isMap(persisted?.selectedPeripherals) ? persisted.selectedPeripherals : {},
+  }),
   partialize: (s) => ({
     budget: s.budget,
     selectedParts: s.selectedParts,

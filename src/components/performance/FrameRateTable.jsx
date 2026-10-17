@@ -64,7 +64,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
     <>
       <table className="w-full border-collapse text-left">
         <thead>
-          <tr className="border-b border-line text-[11px] uppercase tracking-wider text-muted">
+          <tr className="border-b border-line text-[12px] uppercase tracking-wider text-muted">
             {COLUMNS.map(({ key, label, align, res, phoneHidden }) => {
               const sorted = sort?.key === key
               return (
@@ -84,7 +84,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                     type="button"
                     onClick={() => clickHeader(key)}
                     aria-label={`Sort by ${label}`}
-                    className="uppercase tracking-wider hover:text-ink"
+                    className="min-h-6 uppercase tracking-wider hover:text-ink"
                   >
                     {label}
                     <span aria-hidden="true" className={sorted ? 'ml-1 text-ink' : 'ml-1 text-faint'}>
@@ -118,11 +118,11 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                     aria-expanded={isOpen}
                     className="flex w-full items-baseline gap-2 text-left text-xs text-ink"
                   >
-                    <span aria-hidden="true" className="text-[11px] text-muted">{isOpen ? '⌄' : '›'}</span>
+                    <span aria-hidden="true" className="text-[12px] text-muted">{isOpen ? '⌄' : '›'}</span>
                     <span>{group.label}</span>
                     {/* A shut bar is all a reader has to go on, so it carries
                         enough to decide whether opening it is worth it. */}
-                    <span className="text-[11px] text-muted">
+                    <span className="text-[12px] text-muted">
                       {group.count} game{group.count === 1 ? '' : 's'}
                       {group.fastest != null && (
                         group.fastest === group.slowest
@@ -154,14 +154,14 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
           {/* Named, not dropped. A game silently missing reads as a bug, and an
               honest statement of what the corpus does not cover is the point.
               The count comes off the list it heads so the two cannot drift. */}
-          <h4 className="text-[11px] uppercase tracking-wider text-muted">
+          <h4 className="text-[12px] uppercase tracking-wider text-muted">
             No benchmark data yet: {uncovered.length} game{uncovered.length === 1 ? '' : 's'}
           </h4>
           <ul className="mt-1.5 grid gap-x-5 gap-y-1 sm:grid-cols-2 xl:grid-cols-3">
             {uncovered.map((u) => (
               <li key={u.gameId} className="text-xs sm:flex sm:items-baseline sm:justify-between sm:gap-2">
                 <span className="text-muted">{u.name}</span>
-                <span className="block text-[11px] uppercase tracking-wider text-faint sm:shrink-0">
+                <span className="block text-[12px] uppercase tracking-wider text-faint sm:shrink-0">
                   {u.presets.join(' · ')}
                 </span>
               </li>

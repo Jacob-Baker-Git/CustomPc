@@ -57,7 +57,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
           <span className="text-sm font-semibold text-ink leading-tight pr-6">{part.name}</span>
           <span className={`${TELEMETRY} font-bold text-tech`}>£{part.price.toFixed(2)}</span>
           {part.perfScore > 0 && (
-            <span className="text-[11px] text-muted">
+            <span className="text-[12px] text-muted">
               <span className={`${TELEMETRY} text-ink`}>{valuePerPound(part).toFixed(1)}</span> perf/£100
             </span>
           )}
@@ -67,7 +67,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
       {chips.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {chips.map((c) => (
-            <span key={c} className="text-[11px] text-muted border border-line rounded-md px-1.5 py-0.5 whitespace-nowrap">
+            <span key={c} className="text-[12px] text-muted border border-line rounded-md px-1.5 py-0.5 whitespace-nowrap">
               {c}
             </span>
           ))}
@@ -75,14 +75,14 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
       )}
 
       {locked && lockReason && (
-        <div className="text-[11px] text-bad leading-snug">{lockReason}</div>
+        <div className="text-[12px] text-bad leading-snug">{lockReason}</div>
       )}
       <button
         type="button"
         aria-label={`More info about ${part.name}`}
         aria-expanded={showInfo}
         onClick={() => setShowInfo((v) => !v)}
-        className="self-start text-[11px] text-muted hover:text-brass border border-line hover:border-brass rounded-lg px-2 py-0.5 transition-colors"
+        className="self-start text-[12px] text-muted hover:text-brass border border-line hover:border-brass rounded-lg px-2 py-0.5 transition-colors"
       >
         {showInfo ? 'Hide info' : 'Info'}
       </button>
@@ -93,7 +93,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         </div>
       )}
       {selected && !locked && (
-        <div className="absolute top-2 right-2 text-[11px] uppercase tracking-wider text-gold border border-gold rounded-md px-1.5 py-0.5">
+        <div className="absolute top-2 right-2 text-[12px] uppercase tracking-wider text-gold border border-gold rounded-md px-1.5 py-0.5">
           Selected
         </div>
       )}

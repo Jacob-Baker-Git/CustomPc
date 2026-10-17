@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
+import useDialog from '../hooks/useDialog'
 import useBuilderStore, { selRemainingBudget } from '../store/useBuilderStore'
 import { filterParts } from '../lib/partFilter'
 import { categoryLabel } from '../lib/categories'
@@ -20,11 +21,7 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
 
   const current = selectedParts[category]
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
+  const ref = useDialog(onClose)
 
   const parts = useMemo(
     () => partsData.filter((p) => p.category === category),
@@ -47,6 +44,8 @@ export default function PartSelector({ category, onSelect, onClose, contextParts
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
       <div
+        ref={ref}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-label={`Select ${category}`}

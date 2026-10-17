@@ -108,6 +108,12 @@ describe('buildCodec', () => {
       expect(out.peripherals.monitor.id).toBe(mon.id)
     })
 
+    it('drops a part sent in a slot it does not belong to', () => {
+      const out = decodeBuild(codeFor({ b: 100, r: '1440p', p: { gpu: cpu.id, cpu: cpu.id }, x: { headset: mon.id, monitor: mon.id } }))
+      expect(Object.keys(out.parts)).toEqual(['cpu'])
+      expect(Object.keys(out.peripherals)).toEqual(['monitor'])
+    })
+
     it('survives p/x being the wrong type', () => {
       const out = decodeBuild(codeFor({ b: 100, r: '1440p', p: 'not-an-object', x: 42 }))
       expect(out.parts).toEqual({})

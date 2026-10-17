@@ -62,13 +62,13 @@ export function decodeBuild(code) {
   for (const [cat, id] of Object.entries(payload.p || {})) {
     if (!PART_CATEGORIES.has(cat)) continue
     const part = partById(id)
-    if (part) parts[cat] = part
+    if (part?.category === cat) parts[cat] = part
   }
   const peripherals = {}
   for (const [cat, id] of Object.entries(payload.x || {})) {
     if (!PERIPHERAL_CATEGORIES.has(cat)) continue
     const part = peripheralById(id)
-    if (part) peripherals[cat] = part
+    if (part?.category === cat) peripherals[cat] = part
   }
   const budget = Number(payload.b)
   return {

@@ -43,7 +43,7 @@ function RefreshMeter({ row }) {
         </div>
         {fit.ticks.map((t, i) => (
           <span key={t} aria-hidden="true"
-                className={`absolute bottom-0 ${TELEMETRY} text-[11px] text-faint ${i === fit.ticks.length - 1 && t === fit.scaleMax ? '-translate-x-full' : '-translate-x-1/2'}`}
+                className={`absolute bottom-0 ${TELEMETRY} text-[12px] text-faint ${i === fit.ticks.length - 1 && t === fit.scaleMax ? '-translate-x-full' : '-translate-x-1/2'}`}
                 style={{ left: `${(100 * t) / fit.scaleMax}%` }}>
             {fit.tickLabels[i]}
           </span>

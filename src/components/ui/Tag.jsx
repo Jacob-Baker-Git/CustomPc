@@ -3,7 +3,7 @@
 // it picks out the figure in brass.
 export default function Tag({ children, className = '' }) {
   return (
-    <span className={`font-mono text-[11.5px] tracking-[0.02em] text-muted [&_b]:font-semibold [&_b]:text-brass ${className}`}>
+    <span className={`font-mono text-[12px] tracking-[0.02em] text-muted [&_b]:font-semibold [&_b]:text-brass ${className}`}>
       [ {children} ]
     </span>
   )

@@ -14,6 +14,7 @@ import Block from './ui/Block'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
 import ConfirmDialog from './ConfirmDialog'
+import useDialog from '../hooks/useDialog'
 import { countEssentials, isOptional } from '../lib/recommendedOrder'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
@@ -22,7 +23,7 @@ const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 function Row({ label, name, brand, price }) {
   return (
     <div data-row className="group flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[11px] uppercase text-muted w-24 shrink-0 pr-2">
+      <span className="font-mono text-[12px] uppercase text-muted w-24 shrink-0 pr-2">
         {label}
       </span>
       <span className="flex-1 text-sm text-ink truncate">{name}</span>
@@ -46,10 +47,37 @@ function Row({ label, name, brand, price }) {
   )
 }
 
+// Portalled for the same reason as ConfirmDialog: the summary column is
+// transformed, which would trap a fixed overlay inside it.
+function SaveDialog({ name, setName, onSave, onCancel }) {
+  const ref = useDialog(onCancel)
+  return createPortal(
+    <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
+      <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
+        <h3 className="text-ink text-sm font-semibold mb-3">Save this build</h3>
+        <label htmlFor="save-name" className="block text-xs text-muted mb-1">Build name</label>
+        <input
+          id="save-name"
+          autoFocus
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') onSave() }}
+          className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-hidden focus:border-brass"
+        />
+        <div className="flex justify-end gap-2 mt-4">
+          <button onClick={onCancel} className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
+          <button onClick={onSave} className="min-h-11 text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
+        </div>
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
 function MissingRow({ label, optional }) {
   return (
     <div data-missing-row className="flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[11px] uppercase text-muted w-24 shrink-0 pr-2">
+      <span className="font-mono text-[12px] uppercase text-muted w-24 shrink-0 pr-2">
         {label}
       </span>
       {optional ? (
@@ -149,9 +177,9 @@ export default function BuildSummary() {
               {buildRows.length > 0 && (
                 <>
                   <div className="mt-4 mb-1 flex items-baseline justify-between">
-                    <span className="text-[11px] uppercase tracking-wider text-muted">Core build</span>
+                    <span className="text-[12px] uppercase tracking-wider text-muted">Core build</span>
                     {missingCount > 0 && (
-                      <span className="text-[11px] text-ok">{missingCount} part{missingCount === 1 ? '' : 's'} missing</span>
+                      <span className="text-[12px] text-ok">{missingCount} part{missingCount === 1 ? '' : 's'} missing</span>
                     )}
                   </div>
                   {(capList ? CATEGORIES.slice(0, PHONE_ROWS) : CATEGORIES).map((c) => {
@@ -173,7 +201,7 @@ export default function BuildSummary() {
               )}
               {periphRows.length > 0 && (
                 <>
-                  <div className="mt-5 mb-1 text-[11px] uppercase tracking-wider text-muted">Peripherals</div>
+                  <div className="mt-5 mb-1 text-[12px] uppercase tracking-wider text-muted">Peripherals</div>
                   {periphRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} brand={r.part.brand} price={r.part.price} />)}
                 </>
               )}
@@ -192,19 +220,19 @@ export default function BuildSummary() {
               {framePaced && selectedParts.cpu && selectedParts.gpu && (
                 <a
                   href="#performance"
-                  className="mt-5 inline-block text-[11px] uppercase tracking-wider text-muted hover:text-brass transition-colors"
+                  className="mt-5 inline-block py-1 text-[12px] uppercase tracking-wider text-muted hover:text-brass transition-colors"
                 >
                   Frame rates @ {RES_LABEL[resolution] ?? resolution} →
                 </a>
               )}
               <div className="mt-5">
-                <div className="text-[11px] uppercase tracking-wider text-muted mb-1">Physical dimensions</div>
+                <div className="text-[12px] uppercase tracking-wider text-muted mb-1">Physical dimensions</div>
                 <DimensionsChecklist />
               </div>
             </>
           )}
 
-          <p className="mt-4 text-[11px] text-muted leading-relaxed">
+          <p className="mt-4 text-[12px] text-muted leading-relaxed">
             Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data. Hover a part and use its ↗ link for current prices.
           </p>
 
@@ -264,31 +292,8 @@ export default function BuildSummary() {
         </Block>
       </div>
 
-      {/* Portalled for the same reason as ConfirmDialog: this column is
-          transformed, which would trap a fixed overlay inside it. */}
-      {saveOpen && createPortal(
-        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
-          <div role="dialog" aria-modal="true" aria-label="Save build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-ink text-sm font-semibold mb-3">Save this build</h3>
-            <label htmlFor="save-name" className="block text-xs text-muted mb-1">Build name</label>
-            <input
-              id="save-name"
-              autoFocus
-              value={nameDraft}
-              onChange={(e) => setNameDraft(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') confirmSave()
-                if (e.key === 'Escape') setSaveOpen(false)
-              }}
-              className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-hidden focus:border-brass"
-            />
-            <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setSaveOpen(false)} className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmSave} className="min-h-11 text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
-            </div>
-          </div>
-        </div>,
-        document.body,
+      {saveOpen && (
+        <SaveDialog name={nameDraft} setName={setNameDraft} onSave={confirmSave} onCancel={() => setSaveOpen(false)} />
       )}
 
       {clearOpen && (

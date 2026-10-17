@@ -87,18 +87,18 @@ export default function CategoryList({
             // down to "T…" instead. `xl` because the two-column layout leaves
             // no room for it below that.
             note={explained && (
-              <span className="hidden min-w-0 truncate text-[11px] text-faint xl:inline">{OPTIONAL_NOTE}</span>
+              <span className="hidden min-w-0 truncate text-[12px] text-faint xl:inline">{OPTIONAL_NOTE}</span>
             )}
             tag={
               <>
                 {explained && (
-                  <span className="shrink-0 rounded-full border border-line-strong px-2 py-0.5 text-[11px] font-semibold">
+                  <span className="shrink-0 rounded-full border border-line-strong px-2 py-0.5 text-[12px] font-semibold">
                     Optional · Add
                   </span>
                 )}
-                {flagged && <span className="shrink-0 text-[11px] font-semibold text-bad">Missing</span>}
+                {flagged && <span className="shrink-0 text-[12px] font-semibold text-bad">Missing</span>}
                 {isNext && (
-                  <span className="shrink-0 rounded-full bg-brass px-2 py-0.5 text-[11px] font-semibold text-accent-ink">
+                  <span className="shrink-0 rounded-full bg-brass px-2 py-0.5 text-[12px] font-semibold text-accent-ink">
                     Pick one
                   </span>
                 )}

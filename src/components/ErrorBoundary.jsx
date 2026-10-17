@@ -105,7 +105,7 @@ export default class ErrorBoundary extends Component {
               {showDetail ? 'Hide technical detail' : 'Show technical detail'}
             </button>
             {showDetail && (
-              <pre className="mt-2 p-3 bg-ground border border-line rounded-lg text-[11px] text-muted whitespace-pre-wrap break-words max-h-48 overflow-auto">
+              <pre className="mt-2 p-3 bg-ground border border-line rounded-lg text-[12px] text-muted whitespace-pre-wrap break-words max-h-48 overflow-auto">
                 {String(error?.message ?? error)}
               </pre>
             )}

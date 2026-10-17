@@ -235,3 +235,16 @@ describe('CPU page cooling note', () => {
     expect(note.detail).toMatch(/^125 W base power, up to 253 W at full boost\./)
   })
 })
+
+describe('PSU advice on a card page', () => {
+  // NVIDIA's required system power, checked on nvidia.com 2026-10-17. The page
+  // used to say ~350 W for the 4070 and ~750 W for the 4090.
+  const psuAdvice = (id) => {
+    const note = compatibilityNotes(parts.find((p) => p.id === id), parts).find((n) => n.label === 'Power supply')
+    return Number(/about (\d+) W/.exec(note.detail)[1])
+  }
+  it('sizes the whole build, not the card alone', () => {
+    expect(psuAdvice('gpu-rtx-4070')).toBeGreaterThanOrEqual(600)
+    expect(psuAdvice('gpu-rtx-4090')).toBeGreaterThanOrEqual(850)
+  })
+})

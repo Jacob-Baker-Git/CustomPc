@@ -205,6 +205,10 @@ export function rateBuild(parts, useCase, catalog) {
 //
 // Pure and separate from rateBuild so it can be tested on hand-written input,
 // and so the caller pays for partUpgradeOptions exactly once.
+// A move must lift the part by this many points: per-pound value alone once
+// recommended one 1TB HDD for another, 50 -> 51 for £3.
+export const MIN_RECOMMENDATION_GAIN = 5
+
 export function pickRecommendation(rating, optionsByCategory, headroom = Infinity) {
   const cats = Object.keys(rating.parts ?? {})
   const worstFirst = cats.sort((a, b) => rating.parts[a].score - rating.parts[b].score)
@@ -212,7 +216,7 @@ export function pickRecommendation(rating, optionsByCategory, headroom = Infinit
   for (const category of worstFirst) {
     const from = rating.parts[category]
     const affordable = (optionsByCategory[category] ?? [])
-      .filter((o) => o.extraCost <= headroom && o.newScore > from.score)
+      .filter((o) => o.extraCost <= headroom && o.newScore >= from.score + MIN_RECOMMENDATION_GAIN)
     if (affordable.length === 0) continue
 
     // Most score per pound. A free or cheaper swap wins outright; the bigger

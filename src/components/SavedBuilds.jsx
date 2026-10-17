@@ -6,8 +6,9 @@ import { shareUrlFromCode } from '../lib/shareLink'
 import { estimateFps } from '../lib/fpsEstimate'
 import { CATEGORIES } from '../lib/categories'
 import { peakDrawW } from '../lib/partSynergy'
-import { PANEL_STRONG, TELEMETRY } from '../lib/uiTokens'
+import { TELEMETRY } from '../lib/uiTokens'
 import Block from './ui/Block'
+import ConfirmDialog from './ConfirmDialog'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const totalOf = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.price ?? 0), 0)
@@ -42,7 +43,7 @@ function CompareTable({ a, b }) {
         <tbody>
           {summaryRows.map(([label, va, vb]) => (
             <tr key={label} className="border-t border-line">
-              <td className="py-1.5 pr-2 text-muted uppercase text-[11px] font-mono">{label}</td>
+              <td className="py-1.5 pr-2 text-muted uppercase text-[12px] font-mono">{label}</td>
               <td className={`py-1.5 pr-2 ${TELEMETRY} text-ink`}>{va}</td>
               <td className={`py-1.5 ${TELEMETRY} text-ink`}>{vb}</td>
             </tr>
@@ -54,7 +55,7 @@ function CompareTable({ a, b }) {
             const differs = pa?.id !== pb?.id
             return (
               <tr key={cat.id} className="border-t border-line">
-                <td className="py-1.5 pr-2 text-muted uppercase text-[11px] font-mono">{cat.label}</td>
+                <td className="py-1.5 pr-2 text-muted uppercase text-[12px] font-mono">{cat.label}</td>
                 <td className={`py-1.5 pr-2 ${differs ? 'text-ink' : 'text-muted'}`}>{pa?.name ?? '—'}</td>
                 <td className={`py-1.5 ${differs ? 'text-ink' : 'text-muted'}`}>{pb?.name ?? '—'}</td>
               </tr>
@@ -114,7 +115,7 @@ export default function SavedBuilds({ onLoaded }) {
                 carries the outline, `text-lg` carries the look. */}
             <h1 className="font-wide text-2xl font-extrabold text-ink">Saved builds</h1>
             {saved.length > 1 && (
-              <span className="text-[11px] text-muted">tick two builds to compare</span>
+              <span className="text-[12px] text-muted">tick two builds to compare</span>
             )}
           </div>
           {saved.length === 0 ? (
@@ -135,7 +136,7 @@ export default function SavedBuilds({ onLoaded }) {
                     />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-ink truncate">{b.name}</div>
-                      <div className="text-[11px] text-muted font-mono">{new Date(b.savedAt).toLocaleDateString()}</div>
+                      <div className="text-[12px] text-muted font-mono">{b.savedAt ? new Date(b.savedAt).toLocaleDateString() : ''}</div>
                     </div>
                     <button onClick={() => load(b.code)} className="text-xs px-3 py-1.5 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Load</button>
                     <button onClick={() => copyLink(b.code)} className="text-xs px-3 py-1.5 rounded-lg border border-line text-ink hover:border-line-strong transition-colors">Copy link</button>
@@ -150,16 +151,14 @@ export default function SavedBuilds({ onLoaded }) {
       </div>
 
       {pendingDelete && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-6">
-          <div role="dialog" aria-modal="true" aria-label="Delete saved build" className={`${PANEL_STRONG} w-full max-w-sm p-5`}>
-            <h3 className="text-ink text-sm font-semibold mb-2">Delete "{pendingDelete.name}"?</h3>
-            <p className="text-xs text-muted">This permanently removes the saved build. It can't be undone.</p>
-            <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setPendingDelete(null)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmDelete} className="text-xs px-3.5 py-2 rounded-lg border border-bad text-bad hover:brightness-110 transition-colors">Delete</button>
-            </div>
-          </div>
-        </div>
+        <ConfirmDialog
+          title={`Delete "${pendingDelete.name}"?`}
+          ariaLabel="Delete saved build"
+          body="This permanently removes the saved build. It can't be undone."
+          confirmLabel="Delete"
+          onConfirm={confirmDelete}
+          onCancel={() => setPendingDelete(null)}
+        />
       )}
     </div>
   )

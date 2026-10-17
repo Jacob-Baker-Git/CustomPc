@@ -298,7 +298,7 @@ export default function PerformanceScreen() {
           />
           <StatRow label="Platform sweet spot" value={memory?.baseline} unit="MT/s" />
           {memory?.notes?.map((n) => (
-            <p key={n.text} className={`mt-2 text-[11px] leading-relaxed ${n.severity === 'bad' ? 'text-bad' : 'text-muted'}`}>
+            <p key={n.text} className={`mt-2 text-[12px] leading-relaxed ${n.severity === 'bad' ? 'text-bad' : 'text-muted'}`}>
               <strong className="font-normal">{n.text}.</strong> {n.detail}
             </p>
           ))}
@@ -400,9 +400,9 @@ export default function PerformanceScreen() {
           />
         )}
 
-        <p className="mt-3 max-w-[80ch] text-[11px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
+        <p className="mt-3 max-w-[80ch] text-[12px] text-muted leading-relaxed">{PERF_CAVEAT}</p>
         {report?.coverage?.gpuResolutionCopied && (
-          <p className="mt-1.5 max-w-[80ch] text-[11px] text-ok leading-relaxed">
+          <p className="mt-1.5 max-w-[80ch] text-[12px] text-ok leading-relaxed">
             No measurements exist for this card at {resolution}, so its index was carried
             over from 1440p. Treat these as the shape of the result rather than the figure.
           </p>
@@ -415,7 +415,7 @@ export default function PerformanceScreen() {
 
             Coverage is answered at ANY of the three resolutions, matching what
             the table actually lists rather than the target column alone. */}
-        <p className="mt-1.5 text-[11px] text-muted">
+        <p className="mt-1.5 text-[12px] text-muted">
           Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
           {hasCore && ` · ${allGameRows.length} of ${report.coverage.gamesTotal} games answered`}
           {/* Counted off the SHOWN rows, unlike BasisBar's mix line directly

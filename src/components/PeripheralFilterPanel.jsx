@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useDialog from '../hooks/useDialog'
 import { PANEL_STRONG } from '../lib/uiTokens'
 import { specLabel, EMPTY_FILTERS } from '../lib/peripheralFilter'
 
@@ -23,7 +24,7 @@ function Chip({ on, onClick, children }) {
       type="button"
       aria-pressed={on}
       onClick={onClick}
-      className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition-colors active:scale-95
+      className={`rounded-lg border px-2.5 py-1 text-[12px] font-semibold transition-colors active:scale-95
         ${on
           ? 'border-gold bg-gold text-accent-ink'
           : 'border-line bg-surface text-muted hover:text-ink hover:border-line-strong'}`}
@@ -36,7 +37,7 @@ function Chip({ on, onClick, children }) {
 function Group({ label, children }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wide text-faint mb-1.5">{label}</div>
+      <div className="text-[12px] uppercase tracking-wide text-faint mb-1.5">{label}</div>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   )
@@ -45,11 +46,7 @@ function Group({ label, children }) {
 export default function PeripheralFilterPanel({ initial, options, onApply, onCancel }) {
   const [draft, setDraft] = useState(initial)
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onCancel() }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onCancel])
+  const ref = useDialog(onCancel)
 
   const set = (key, value) => setDraft((d) => ({ ...d, [key]: value }))
   const chips = (key, values) =>
@@ -60,6 +57,8 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start sm:items-center justify-center p-4 sm:p-6 overflow-y-auto">
       <div
+        ref={ref}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-label="Filter peripherals"
@@ -69,7 +68,7 @@ export default function PeripheralFilterPanel({ initial, options, onApply, onCan
 
         <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
           <div>
-            <div className="text-[11px] uppercase tracking-wide text-faint mb-1.5">Price</div>
+            <div className="text-[12px] uppercase tracking-wide text-faint mb-1.5">Price</div>
             <div className="flex items-center gap-2">
               <input
                 type="number" min="0" inputMode="numeric" placeholder="Min"

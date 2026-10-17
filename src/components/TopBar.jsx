@@ -58,7 +58,7 @@ export default function TopBar() {
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               onBlur={commit}
-              onKeyDown={(e) => { if (e.key === 'Enter') commit() }}
+              onKeyDown={(e) => { if (e.key === 'Enter') commit(); if (e.key === 'Escape') setEditing(false) }}
               className="w-24 rounded-lg border border-brass bg-surface-2 px-2 py-0.5 font-mono tabular-nums text-ink focus:outline-hidden"
             />
           </span>

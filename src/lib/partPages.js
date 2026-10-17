@@ -9,6 +9,7 @@
 // than written by hand. Nothing is invented, same rule as partStats.js.
 
 import { partStats } from './partStats'
+import { cpuPeakW, recommendedPsuW } from './partSynergy'
 
 // Thermal paste is deliberately absent. Those 15 rows carry id, name, brand and
 // price and nothing else — there is no honest page to build from that, and a thin
@@ -90,10 +91,16 @@ export function partPageMeta(part) {
 
 const of = (parts, category) => parts.filter((p) => p.category === category)
 
-// Recommended PSU headroom over a part's own draw. Matches the ~1.5x rule the
-// builder's own PSU check uses so a page cannot advise something the app warns
-// about.
-const psuFor = (watts) => Math.ceil((watts * 1.6) / 50) * 50
+// The rest of a typical gaming build at full boost (a mid-range CPU's peak plus
+// board, RAM, drives and fans). A card's page used to size the supply on the
+// card alone, x1.6, and told an RTX 4070 buyer "about 350 W" where NVIDIA asks
+// for 650 W.
+const REST_OF_BUILD_W = 225
+const OTHER_PARTS_W = 75
+
+// The supply a whole build around this card needs, by the builder's own rule
+// (recommendedPsuW), so a page cannot advise something the app warns about.
+const psuFor = (gpuW) => recommendedPsuW(gpuW + REST_OF_BUILD_W)
 
 // What a part works with, counted off the catalogue. Each note is
 // { label, detail } — the label names the constraint, the detail answers it with
@@ -165,14 +172,15 @@ export function compatibilityNotes(part, parts = []) {
     case 'psu': {
       const cpus = of(parts, 'cpu')
       const gpus = of(parts, 'gpu')
-      // How many CPU+GPU pairings this unit covers at the same 1.6x headroom the
-      // builder applies. A real number beats "plenty of power for most builds".
+      // How many CPU+GPU pairings this unit covers by the builder's own rule
+      // (recommendedPsuW over the CPU at full boost, the card and the rest). A
+      // real number beats "plenty of power for most builds".
       //
       // Counted by inverting psuFor rather than by nesting the two lists: the
-      // pair fits when cpu.tdp + gpu.tdp is within the budget below, so sorting
+      // pair fits when its peak draw is within the budget below, so sorting
       // the cards once and walking a pointer answers it in n log n. The nested
       // version was 6,320 iterations on every render of a power supply's page.
-      const budget = (Math.floor(part.wattage / 50) * 50) / 1.6
+      const budget = part.wattage / 1.35 - OTHER_PARTS_W
       const gpuDraws = gpus.map((g) => g.tdp).sort((a, b) => a - b)
       let covered = 0
       for (const c of cpus) {
@@ -181,7 +189,7 @@ export function compatibilityNotes(part, parts = []) {
         let hi = gpuDraws.length
         while (lo < hi) {
           const mid = (lo + hi) >> 1
-          if (c.tdp + gpuDraws[mid] <= budget) lo = mid + 1
+          if (cpuPeakW(c) + gpuDraws[mid] <= budget) lo = mid + 1
           else hi = mid
         }
         covered += lo
