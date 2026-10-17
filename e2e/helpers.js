@@ -33,7 +33,10 @@ export async function generateBuild(page, { budget = '1600' } = {}) {
   await page.getByRole('spinbutton', { name: /target fps/i }).fill('60')
   await page.getByRole('spinbutton', { name: /budget/i }).fill(budget)
   await page.getByRole('button', { name: /find builds/i }).click()
-  await page.getByRole('button', { name: /use this build/i }).first().click()
+  // The Best answer: the cheapest one comes first since 2026-10-17, and the
+  // specs here were written against the build that spends the budget.
+  await page.locator('section', { hasText: /best within £/i })
+    .getByRole('button', { name: /use this build/i }).click()
   await expect(page).toHaveURL(/#peripherals/)
   await openTab(page, 'summary')
   // The rating only renders once a build exists, so it doubles as the signal

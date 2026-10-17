@@ -29,15 +29,18 @@ export default function PartTable({ rows, columns, sort, onSort, onPick, current
           const current = part.id === currentId
           const pick = () => { if (!locked) onPick(part) }
           return (
+            // The whole row is the target for a mouse; the name is a real button
+            // so the keyboard and screen readers get one control per part (a
+            // click on it bubbles to the row, so it selects once).
             <tr key={part.id}
-                tabIndex={locked ? -1 : 0}
                 aria-disabled={locked ? 'true' : undefined}
-                aria-selected={current || undefined}
                 onClick={pick}
-                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); pick() } }}
-                className={`h-10 border-b border-line transition-colors ${locked ? 'opacity-50' : 'cursor-pointer hover:bg-surface-2 focus:bg-surface-2 focus:outline-hidden'} ${current ? 'shadow-[inset_2px_0_0_var(--brass)]' : ''}`}>
+                className={`h-10 border-b border-line transition-colors ${locked ? 'opacity-50' : 'cursor-pointer hover:bg-surface-2 focus-within:bg-surface-2'} ${current ? 'shadow-[inset_2px_0_0_var(--brass)]' : ''}`}>
               <td className="px-3 py-1.5">
-                <span data-name className="text-ink">{part.name}</span>
+                <button type="button" disabled={locked} aria-current={current || undefined}
+                        className="min-h-6 text-left text-ink focus:outline-hidden disabled:cursor-not-allowed">
+                  <span data-name>{part.name}</span>
+                </button>
                 {locked && lockReason && <span className="block text-[12px] text-muted">{lockReason}</span>}
               </td>
               {columns.map((c) => (

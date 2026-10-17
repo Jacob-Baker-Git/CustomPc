@@ -138,11 +138,11 @@ describe('PartSelector on desktop', () => {
     expect(within(row).getByText(/socket/i)).toBeInTheDocument()
   })
 
-  it('Enter on a row selects it', () => {
+  it('each part name is a button that selects it once', () => {
     const onSelect = vi.fn()
     render(<PartSelector category="gpu" onSelect={onSelect} onClose={() => {}} />)
-    const row = screen.getAllByRole('row').find((r) => r.getAttribute('aria-disabled') !== 'true' && r.tabIndex === 0)
-    fireEvent.keyDown(row, { key: 'Enter' })
+    const row = screen.getAllByRole('row').find((r) => r.querySelector('button:not([disabled])') && r.closest('tbody'))
+    fireEvent.click(within(row).getByRole('button'))
     expect(onSelect).toHaveBeenCalledTimes(1)
   })
 })

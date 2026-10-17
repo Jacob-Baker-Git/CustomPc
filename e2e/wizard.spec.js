@@ -20,8 +20,10 @@ test('path 1: enter parts, then estimate a game on Performance', async ({ page }
   await expect(page).toHaveURL(/#build/)
   for (const cat of ['CPU', 'GPU']) {
     await page.getByRole('button', { name: new RegExp(`\\b${cat}\\b`) }).first().click()
+    // Desktop shows the picker as a table: the first part that fits is the
+    // first enabled name button in its body.
     await page.getByRole('dialog', { name: new RegExp(`select ${cat}`, 'i') })
-      .getByRole('button').filter({ hasText: '£' }).first().click()
+      .locator('tbody button:not([disabled])').first().click()
   }
   await page.getByRole('button', { name: /next: performance/i }).click()
   await page.getByRole('combobox', { name: 'Game' }).fill('Fortnite')
