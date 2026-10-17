@@ -71,11 +71,17 @@ export default function TopBar() {
             £{budget.toFixed(0)}
           </button>
         )}
-        <span className="mx-1 hidden text-line-strong wide:inline">|</span>
-        <span className={`hidden font-mono font-semibold tabular-nums wide:inline ${remaining < 0 ? 'text-bad' : 'text-good'}`}>
-          £{remaining.toFixed(0)}
-        </span>
-        <span className="hidden text-faint wide:inline">left</span>
+        {/* No budget (the "What will my build get?" path) means nothing is
+            "left" of it — the figure would just be the spend, negated. */}
+        {budget > 0 && (
+          <>
+            <span className="mx-1 hidden text-line-strong wide:inline">|</span>
+            <span className={`hidden font-mono font-semibold tabular-nums wide:inline ${remaining < 0 ? 'text-bad' : 'text-good'}`}>
+              £{remaining.toFixed(0)}
+            </span>
+            <span className="hidden text-faint wide:inline">left</span>
+          </>
+        )}
       </div>
       <div className="flex flex-1 items-center justify-end gap-4">
         <a href="/feedback" className="inline-flex min-h-11 items-center text-xs text-muted transition-colors hover:text-brass">Feedback</a>

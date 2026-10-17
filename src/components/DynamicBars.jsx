@@ -12,7 +12,7 @@ export default function DynamicBars({ value, max, label, unit, compact = false }
   // Until a capacity is known (e.g. no PSU selected yet) show only the live draw,
   // not a misleading "0 / 750" against a default that isn't really there.
   const display = !hasMax
-    ? `${value}${unit}`
+    ? (unit === '£' ? `£${value.toFixed(0)}` : `${value}${unit}`)
     : unit === '£'
       ? `£${value.toFixed(0)} / £${max.toFixed(0)}`
       : `${value}${unit} / ${max}${unit}`

@@ -33,3 +33,10 @@ describe('DynamicBars', () => {
     expect(over.querySelector('.bg-bad')).toBeTruthy()
   })
 })
+
+describe('DynamicBars with no budget', () => {
+  it('shows whole pounds, pound sign first', () => {
+    render(<DynamicBars value={999.41000000000001} max={0} label="Budget" unit="£" />)
+    expect(screen.getByText('£999')).toBeInTheDocument()
+  })
+})

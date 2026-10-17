@@ -112,7 +112,7 @@ export default function PeripheralsPanel() {
 
   return (
     <div className="w-full p-4 sm:p-6 pb-12">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto lg:max-w-6xl">
         {/* A running total and a progress line, so the tab says how far along you
             are rather than just listing four unrelated grids. */}
         <Block
@@ -197,7 +197,7 @@ export default function PeripheralsPanel() {
                   </p>
                 ) : (
                   <>
-                  <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 lg:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 lg:grid-cols-4">
                     {visible.map((p) => {
                       const isSelected = picked?.id === p.id
                       return (

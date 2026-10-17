@@ -190,3 +190,10 @@ describe('PeripheralsPanel — first four per category', () => {
     expect(within(section).queryByRole('button', { name: /^Show all/ })).toBeNull()
   })
 })
+
+describe('PeripheralsPanel on desktop', () => {
+  it('lays four to a row from lg', () => {
+    const { container } = render(<PeripheralsPanel />)
+    expect(container.querySelector('.lg\\:grid-cols-4')).not.toBeNull()
+  })
+})
