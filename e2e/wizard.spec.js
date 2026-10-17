@@ -23,7 +23,7 @@ test('path 1: enter parts, then estimate a game on Performance', async ({ page }
     // Desktop shows the picker as a table: the first part that fits is the
     // first enabled name button in its body.
     await page.getByRole('dialog', { name: new RegExp(`select ${cat}`, 'i') })
-      .locator('tbody button:not([disabled])').first().click()
+      .locator('tbody button:not([aria-disabled])').first().click()
   }
   await page.getByRole('button', { name: /next: performance/i }).click()
   await page.getByRole('combobox', { name: 'Game' }).fill('Fortnite')

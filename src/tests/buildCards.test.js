@@ -46,6 +46,8 @@ describe('buildCards', () => {
     const cards = buildCards(result({ cheapest: opt(base, 1200, 250), best: opt({ ...base, gpu: 'g0' }, 990, 200) }), ctx)
     expect(cards.find((c) => c.kind === 'cheapest').overBudget).toBe(true)
     expect(cards.find((c) => c.kind === 'best').overBudget).toBe(false)
+    // Best is the cheaper, slower card here: say so, never "+£-210".
+    expect(cards.find((c) => c.kind === 'best').step).toBe('£210 less · 50 fps fewer than Cheapest')
   })
 
   it('skips answers that do not exist', () => {

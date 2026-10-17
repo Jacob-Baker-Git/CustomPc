@@ -35,9 +35,13 @@ export function buildCards(result, { budget, fps }) {
     if (prev) {
       const pounds = Math.round(option.total - prev.option.total)
       const gain = Math.round(option.fps - prev.option.fps)
-      step = gain === 0
-        ? `+£${pounds} · same fps, better parts`
-        : `+£${pounds} · +${gain} fps over ${SHORT[prev.kind]}`
+      // Best can be the cheaper, slower card when hitting the target costs more
+      // than the budget, so a step can run downhill.
+      step = pounds < 0
+        ? `£${-pounds} less · ${-gain} fps fewer than ${SHORT[prev.kind]}`
+        : gain === 0
+          ? `+£${pounds} · same fps, better parts`
+          : `+£${pounds} · +${gain} fps over ${SHORT[prev.kind]}`
       const a = idsOf(prev.option)
       const b = idsOf(option)
       for (const c of new Set([...Object.keys(a), ...Object.keys(b)])) if (a[c] !== b[c]) changed.add(c)

@@ -138,10 +138,23 @@ describe('PartSelector on desktop', () => {
     expect(within(row).getByText(/socket/i)).toBeInTheDocument()
   })
 
+  it('a locked part stays reachable by keyboard and says why', () => {
+    const onSelect = vi.fn()
+    useBuilderStore.setState({ selectedParts: { motherboard: partsData.find((p) => p.category === 'motherboard' && p.socket === 'AM5') } })
+    render(<PartSelector category="cpu" onSelect={onSelect} onClose={() => {}} />)
+    const intel = partsData.find((p) => p.category === 'cpu' && p.socket !== 'AM5' && !p.legacy)
+    const button = within(screen.getByText(intel.name).closest('tr')).getByRole('button')
+    expect(button).not.toBeDisabled()
+    expect(button.getAttribute('aria-disabled')).toBe('true')
+    expect(button).toHaveAccessibleDescription(/socket/i)
+    fireEvent.click(button)
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
   it('each part name is a button that selects it once', () => {
     const onSelect = vi.fn()
     render(<PartSelector category="gpu" onSelect={onSelect} onClose={() => {}} />)
-    const row = screen.getAllByRole('row').find((r) => r.querySelector('button:not([disabled])') && r.closest('tbody'))
+    const row = screen.getAllByRole('row').find((r) => r.querySelector('button:not([aria-disabled])') && r.closest('tbody'))
     fireEvent.click(within(row).getByRole('button'))
     expect(onSelect).toHaveBeenCalledTimes(1)
   })

@@ -37,11 +37,15 @@ export default function PartTable({ rows, columns, sort, onSort, onPick, current
                 onClick={pick}
                 className={`h-10 border-b border-line transition-colors ${locked ? 'opacity-50' : 'cursor-pointer hover:bg-surface-2 focus-within:bg-surface-2'} ${current ? 'shadow-[inset_2px_0_0_var(--brass)]' : ''}`}>
               <td className="px-3 py-1.5">
-                <button type="button" disabled={locked} aria-current={current || undefined}
-                        className="min-h-6 text-left text-ink focus:outline-hidden disabled:cursor-not-allowed">
+                {/* aria-disabled, not disabled: a locked part stays reachable by
+                    keyboard and reads its reason out; the row ignores the click. */}
+                <button type="button" aria-disabled={locked ? 'true' : undefined}
+                        aria-describedby={locked && lockReason ? `why-${part.id}` : undefined}
+                        aria-current={current || undefined}
+                        className={`min-h-6 text-left text-ink focus:outline-hidden ${locked ? 'cursor-not-allowed' : ''}`}>
                   <span data-name>{part.name}</span>
                 </button>
-                {locked && lockReason && <span className="block text-[12px] text-muted">{lockReason}</span>}
+                {locked && lockReason && <span id={`why-${part.id}`} className="block text-[12px] text-muted">{lockReason}</span>}
               </td>
               {columns.map((c) => (
                 <td key={c.key} className={`px-3 py-1.5 tabular-nums ${c.numeric ? 'text-right font-mono' : ''} ${c.key === 'price' ? 'text-brass' : 'text-muted'}`}>
