@@ -18,3 +18,11 @@ describe('TopBar back button', () => {
     expect(useBuilderStore.getState().selectedParts.cpu).toBeDefined()
   })
 })
+
+describe('TopBar with no budget', () => {
+  it('does not claim money left of a budget that does not exist', () => {
+    useBuilderStore.setState({ budget: 0, selectedParts: { cpu: { id: 'x', price: 999.41 } } })
+    render(<TopBar view="build" onViewChange={() => {}} />)
+    expect(screen.queryByText(/left/)).toBeNull()
+  })
+})

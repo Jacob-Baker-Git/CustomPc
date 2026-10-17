@@ -1,5 +1,5 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import PartSelector from '../components/PartSelector'
 import useBuilderStore from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
@@ -103,5 +103,81 @@ describe('PartSelector modal behaviour', () => {
     expect(screen.queryByTitle('Over remaining budget')).toBeNull()
     fireEvent.click(screen.getByText(priciest.name))
     expect(onSelect).toHaveBeenCalled()
+  })
+})
+
+describe('PartSelector on desktop', () => {
+  const original = window.matchMedia
+  beforeEach(() => { window.matchMedia = () => ({ matches: true }) })
+  afterEach(() => { window.matchMedia = original })
+  const gpus = () => partsData.filter((p) => p.category === 'gpu')
+  const firstRowName = () => within(screen.getByRole('table')).getAllByRole('row')[1].querySelector('[data-name]').textContent
+
+  it('shows a table, not the sort dropdown', () => {
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    expect(screen.getByRole('table')).toBeInTheDocument()
+    expect(screen.queryByLabelText(/sort parts/i)).toBeNull()
+  })
+
+  it('sorts by a column header, then reverses', () => {
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    const header = screen.getByRole('button', { name: /^price/i })
+    fireEvent.click(header)
+    const prices = gpus().map((p) => p.price)
+    expect(firstRowName()).toBe(gpus().find((p) => p.price === Math.min(...prices)).name)
+    fireEvent.click(header)
+    expect(firstRowName()).toBe(gpus().find((p) => p.price === Math.max(...prices)).name)
+  })
+
+  it('keeps a part that does not fit, dimmed, with the reason', () => {
+    useBuilderStore.setState({ selectedParts: { motherboard: partsData.find((p) => p.category === 'motherboard' && p.socket === 'AM5') } })
+    render(<PartSelector category="cpu" onSelect={() => {}} onClose={() => {}} />)
+    const intel = partsData.find((p) => p.category === 'cpu' && p.socket !== 'AM5' && !p.legacy)
+    const row = screen.getByText(intel.name).closest('tr')
+    expect(row.getAttribute('aria-disabled')).toBe('true')
+    expect(within(row).getByText(/socket/i)).toBeInTheDocument()
+  })
+
+  it('a locked part stays reachable by keyboard and says why', () => {
+    const onSelect = vi.fn()
+    useBuilderStore.setState({ selectedParts: { motherboard: partsData.find((p) => p.category === 'motherboard' && p.socket === 'AM5') } })
+    render(<PartSelector category="cpu" onSelect={onSelect} onClose={() => {}} />)
+    const intel = partsData.find((p) => p.category === 'cpu' && p.socket !== 'AM5' && !p.legacy)
+    const button = within(screen.getByText(intel.name).closest('tr')).getByRole('button')
+    expect(button).not.toBeDisabled()
+    expect(button.getAttribute('aria-disabled')).toBe('true')
+    expect(button).toHaveAccessibleDescription(/socket/i)
+    fireEvent.click(button)
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it('each part name is a button that selects it once', () => {
+    const onSelect = vi.fn()
+    render(<PartSelector category="gpu" onSelect={onSelect} onClose={() => {}} />)
+    const row = screen.getAllByRole('row').find((r) => r.querySelector('button:not([aria-disabled])') && r.closest('tbody'))
+    fireEvent.click(within(row).getByRole('button'))
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('PartSelector search key', () => {
+  it('/ jumps to the search box without typing a slash', () => {
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    const dialog = screen.getByRole('dialog')
+    const ev = fireEvent.keyDown(dialog, { key: '/' })
+    const search = screen.getByPlaceholderText(/search gpu/i)
+    expect(document.activeElement).toBe(search)
+    expect(ev).toBe(false) // default prevented
+  })
+})
+
+describe('PartSelector tap targets', () => {
+  const original = window.matchMedia
+  afterEach(() => { window.matchMedia = original })
+  it('the close button and every header button are at least 24px wide', () => {
+    window.matchMedia = () => ({ matches: true })
+    render(<PartSelector category="gpu" onSelect={() => {}} onClose={() => {}} />)
+    const buttons = [screen.getByRole('button', { name: /close/i }), ...within(screen.getByRole('table').querySelector('thead')).getAllByRole('button')]
+    for (const b of buttons) expect(b.className).toMatch(/\bmin-w-6\b/)
   })
 })

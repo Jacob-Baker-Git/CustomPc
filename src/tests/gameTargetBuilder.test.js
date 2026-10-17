@@ -5,8 +5,9 @@ import perfGames from '../data/perfGames.json'
 import { getBuildWarnings } from '../lib/buildWarnings'
 import { computeBottleneck } from '../lib/bottleneck'
 import {
-  presetKey, findPreset, fpsFor, completeBuild, buildForGame,
+  presetKey, findPreset, fpsFor, completeBuild, buildForGame, compareFastFirst, VALUE_BAR,
 } from '../lib/gameTargetBuilder'
+import { coolerCapacityW } from '../lib/partSynergy'
 
 const game = perfGames.find((g) => g.id === 'fortnite')
 const preset = findPreset(game, 'epic|native')
@@ -60,6 +61,28 @@ describe('completeBuild', () => {
   })
 })
 
+describe('completeBuild cooler', () => {
+  it('picks a cooler with capacity for the chip base power', () => {
+    const hot = partsData.filter((p) => p.category === 'cpu' && !p.legacy).sort((a, b) => b.tdp - a.tdp)[0]
+    // Every catalogue cooler today is rated above every chip's base power, so a
+    // cheapest-of-all low-profile cooler (80 W by coolerCapacityW) is planted to
+    // prove the filter actually reads a capacity.
+    const lowProfile = { id: 'test-low-profile', category: 'cooler', name: 'Low profile', price: 1,
+                         sockets: [hot.socket], tdp: 0, specs: { type: 'Air', height: 50 } }
+    const b = completeBuild(hot, gpus[0], [...partsData, lowProfile], RES)
+    expect(b.cooler.id).not.toBe('test-low-profile')
+    expect(coolerCapacityW(b.cooler)).toBeGreaterThanOrEqual(hot.tdp)
+  })
+})
+
+describe('ranking', () => {
+  it('on equal fps a measured row beats an "up to" ceiling', () => {
+    const measured = { row: { avgFps: 100, bound: undefined }, cpu: { perfScore: 1, id: 'a' }, gpu: { id: 'g' }, core: 500 }
+    const ceiling  = { row: { avgFps: 100, bound: 'upper' }, cpu: { perfScore: 99, id: 'b' }, gpu: { id: 'g' }, core: 100 }
+    expect([ceiling, measured].sort(compareFastFirst)[0]).toBe(measured)
+  })
+})
+
 describe('buildForGame', () => {
   const r = run()
 
@@ -77,21 +100,52 @@ describe('buildForGame', () => {
   it('reports the cheapest build that hits a target the budget misses', () => {
     const hard = run({ budget: 700, targetFps: r.fastest.fps })
     expect(hard.best === null || hard.best.fps < r.fastest.fps).toBe(true)
-    expect(hard.cheapestHit.fps).toBeGreaterThanOrEqual(r.fastest.fps)
+    expect(hard.cheapest.fps).toBeGreaterThanOrEqual(r.fastest.fps)
     for (const s of sample.filter((x) => x.fps >= r.fastest.fps)) {
-      expect(hard.cheapestHit.total).toBeLessThanOrEqual(s.total)
+      expect(hard.cheapest.total).toBeLessThanOrEqual(s.total)
     }
-  })
-  it('skips the cheapest-hit search when the best build already hits', () => {
-    const easy = run({ targetFps: 1 })
-    expect(easy.cheapestHit).toBeNull()
-    expect(easy.unreachable).toBe(false)
   })
   it('says when no build can reach the target, and gives the fastest', () => {
     const r2 = run({ targetFps: 100000 })
-    expect(r2.unreachable).toBe(true)
-    expect(r2.cheapestHit).toBeNull()
+    expect([r2.unreachable, r2.cheapest, r2.middle]).toEqual([true, null, null])
     expect(r2.fastest.fps).toBeGreaterThan(0)
+  })
+  it('best spends the budget on the other parts too', () => {
+    const plain = completeBuild(r.best.parts.cpu, r.best.parts.gpu, partsData, RES)
+    expect(r.best.total).toBeGreaterThanOrEqual(total(plain))
+    expect(r.best.total).toBeLessThanOrEqual(1600)
+    expect(r.best.parts.cpu.id).toBe(plain.cpu.id)
+    expect(r.best.parts.gpu.id).toBe(plain.gpu.id)
+  })
+  it('with money to spare after the fastest pair, best spends it', () => {
+    const rich = run({ budget: 20000 })
+    const plain = completeBuild(rich.best.parts.cpu, rich.best.parts.gpu, partsData, RES)
+    expect(rich.best.total).toBeGreaterThan(total(plain))
+  })
+  it('always reports the cheapest build that hits, even when best hits', () => {
+    expect(r.cheapest.fps).toBeGreaterThanOrEqual(60)
+    for (const s of sample.filter((x) => x.fps >= 60)) expect(r.cheapest.total).toBeLessThanOrEqual(s.total)
+  })
+  it('middle sits strictly between cheapest and best and clears VALUE_BAR', () => {
+    const m = r.middle
+    if (!m) { expect(r.noValueStep).toBe(true); return }
+    expect(m.total).toBeGreaterThan(r.cheapest.total)
+    expect(m.total).toBeLessThan(r.best.total)
+    expect(m.fps).toBeGreaterThan(r.cheapest.fps)
+    expect(m.fps).toBeLessThan(r.best.fps)
+    const ratio = ((m.fps - r.cheapest.fps) / r.cheapest.fps) / ((m.total - r.cheapest.total) / r.cheapest.total)
+    expect(ratio).toBeGreaterThanOrEqual(VALUE_BAR)
+  })
+  it('no middle when cheapest is over budget', () => {
+    const hard = run({ budget: 700, targetFps: r.fastest.fps })
+    expect(hard.cheapest.total).toBeGreaterThan(700)
+    expect(hard.middle).toBeNull()
+  })
+  it('budget below every build: best null, cheapest still found, no middle', () => {
+    const r4 = run({ budget: 100 })
+    expect(r4.best).toBeNull()
+    expect(r4.cheapest).not.toBeNull()
+    expect(r4.middle).toBeNull()
   })
   it('returns no best build when the budget buys nothing complete', () => {
     expect(run({ budget: 100 }).best).toBeNull()
@@ -99,7 +153,7 @@ describe('buildForGame', () => {
   it('reports noData for a cell the corpus does not cover', () => {
     const ghost = { id: 'no-such-game', name: 'Ghost', presets: [{ id: 'high', label: 'High', tier: 3, upscaling: 'native' }] }
     const r3 = run({ game: ghost, preset: ghost.presets[0] })
-    expect(r3).toEqual({ noData: true, unreachable: false, best: null, cheapestHit: null, fastest: null })
+    expect(r3).toEqual({ noData: true, unreachable: false, best: null, middle: null, cheapest: null, fastest: null, noValueStep: false })
   })
 })
 
@@ -115,7 +169,7 @@ describe('ceilings never buy a CPU-bottlenecked pair', () => {
     const g = perfGames.find((x) => x.id === id)
     const r = buildForGame({ game: g, preset: findPreset(g, null), resolution: RES, targetFps: 120,
       budget: 600, parts: partsData, model: perfModel })
-    for (const o of [r.best, r.cheapestHit, r.fastest]) expect(unbalanced(o), JSON.stringify(o && [o.parts.cpu.id, o.parts.gpu.id])).toBe(false)
+    for (const o of [r.best, r.cheapest, r.middle, r.fastest]) expect(unbalanced(o), JSON.stringify(o && [o.parts.cpu.id, o.parts.gpu.id])).toBe(false)
   })
 })
 

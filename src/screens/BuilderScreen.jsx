@@ -24,7 +24,7 @@ import CanvasErrorBoundary from '../components/CanvasErrorBoundary'
 import Deferred3D from '../components/Deferred3D'
 import StepHeader from '../components/StepHeader'
 import Dock from '../components/Dock'
-import { useHashView } from '../hooks/useHashView'
+import { useHashView, stepsFor } from '../hooks/useHashView'
 import { useChromeHeight } from '../hooks/useChromeHeight'
 import useBuilderStore from '../store/useBuilderStore'
 
@@ -66,6 +66,22 @@ export default function BuilderScreen() {
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 })
   }, [view])
+
+  // Number keys pick the step tabs, numbered as the step row shows them — so on
+  // the game path, which has two steps, only 1 and 2 do anything. Never while
+  // typing, with a modifier held, or under an open dialog.
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return
+      const el = e.target
+      if (el?.closest?.('input, textarea, select, [contenteditable="true"]')) return
+      if (document.querySelector('[role="dialog"]')) return
+      const step = stepsFor(path)[Number(e.key) - 1]
+      if (step && /^[1-9]$/.test(e.key)) setView(step)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [path, setView])
 
   function handlePartSelect(part) {
     addPart(part.category, part)

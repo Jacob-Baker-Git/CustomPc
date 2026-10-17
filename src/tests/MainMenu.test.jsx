@@ -95,3 +95,12 @@ describe('the Welcome screen in the configurator look', () => {
     expect(screen.getByText(`${perfGames.length}`).closest('span')).toHaveTextContent(`[ ${perfGames.length} games benchmarked ]`)
   })
 })
+
+describe('MainMenu on desktop', () => {
+  it('lays the words and the picture out as two columns from lg', () => {
+    const { container } = render(<MainMenu onExplore={() => {}} onTarget={() => {}} onSaved={() => {}} />)
+    expect(container.querySelector('main').className).toMatch(/lg:max-w-6xl/)
+    expect(container.querySelector('main').className).toMatch(/lg:grid-cols-2/)
+    expect(container.querySelector('img').parentElement.className).toMatch(/lg:order-2/)
+  })
+})

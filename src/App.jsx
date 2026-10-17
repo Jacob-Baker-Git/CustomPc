@@ -93,7 +93,7 @@ export default function App() {
   if (flow === 'builder') return <BuilderScreen />
   if (flow === 'target') {
     return (
-      <SiteChrome onBack={() => setFlow('hub')}>
+      <SiteChrome wide onBack={() => setFlow('hub')}>
         <Suspense fallback={<p className="text-sm text-muted">Loading…</p>}><TargetScreen /></Suspense>
       </SiteChrome>
     )
