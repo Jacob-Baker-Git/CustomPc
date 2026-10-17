@@ -1,25 +1,25 @@
 {
-  "fittedAt": "2026-08-25T00:07:39.871Z",
+  "fittedAt": "2026-10-17T00:17:41.444Z",
   "warnings": [
-    "Notebookcheck supplies 53.8% of the corpus (1536 of 2855 entries, from 49 reviews) — 4,825 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
-    "ComputerBase supplies 44.7% of the corpus (1275 of 2855 entries, from 6 reviews) — 3,520 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
-    "architectures with fewer than 3 measured parts stay uncalibrated at 1.0: RDNA, Xe2 Battlemage"
+    "ComputerBase supplies 53.7% of the corpus (1830 of 3410 entries, from 9 reviews) — 5,740 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
+    "Notebookcheck supplies 45.0% of the corpus (1536 of 3410 entries, from 49 reviews) — 4,270 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
+    "architectures with fewer than 3 measured parts stay uncalibrated at 1.0: RDNA, RDNA 4, Xe2 Battlemage"
   ],
   "gpuFit": {
     "1080p": {
-      "iterations": 18,
+      "iterations": 105,
       "converged": true,
-      "parts": 11
+      "parts": 37
     },
     "1440p": {
-      "iterations": 134,
+      "iterations": 120,
       "converged": true,
-      "parts": 40
+      "parts": 49
     },
     "4k": {
-      "iterations": 143,
+      "iterations": 131,
       "converged": true,
-      "parts": 25
+      "parts": 38
     }
   },
   "cpuFit": {
@@ -30,32 +30,32 @@
   "droppedGpuBound": [],
   "droppedDisconnected": [],
   "coverage": {
-    "gpusMeasured": 41,
+    "gpusMeasured": 52,
     "gpusTotal": 79,
     "cpusMeasured": 24,
-    "cpusTotal": 80
+    "cpusTotal": 79
   },
   "sourceConcentration": {
-    "total": 2855,
-    "topOutlet": "Notebookcheck",
-    "topOutletShare": 0.538,
+    "total": 3410,
+    "topOutlet": "ComputerBase",
+    "topOutletShare": 0.5367,
     "byOutlet": [
+      {
+        "outlet": "ComputerBase",
+        "entries": 1830,
+        "share": 0.5367,
+        "reviews": 9
+      },
       {
         "outlet": "Notebookcheck",
         "entries": 1536,
-        "share": 0.538,
+        "share": 0.4504,
         "reviews": 49
-      },
-      {
-        "outlet": "ComputerBase",
-        "entries": 1275,
-        "share": 0.4466,
-        "reviews": 6
       },
       {
         "outlet": "PC Games Hardware",
         "entries": 44,
-        "share": 0.0154,
+        "share": 0.0129,
         "reviews": 1
       }
     ]

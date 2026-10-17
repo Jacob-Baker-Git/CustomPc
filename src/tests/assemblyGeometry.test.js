@@ -1,4 +1,4 @@
-import { partSize, partLocalSize, rotateExtents, unrotateExtents, rotateVector, partCentre, partBox, pcbBox, boardFaceZ, caseInterior, CASE } from '../lib/assemblyGeometry'
+import { partSize, partLocalSize, rotateExtents, unrotateExtents, rotateVector, partCentre, partBox, pcbBox, boardFaceZ, caseInterior, CASE, slotSeatBox } from '../lib/assemblyGeometry'
 import { mm, WU_PER_MM, FAN_MM } from '../lib/pcScale'
 import { MOUNTS, BOARD } from '../lib/mountPoints'
 import { PART_SPECS } from '../lib/partSpecs'
@@ -417,5 +417,21 @@ describe('case fans', () => {
   it('uses a real 120mm fan', () => {
     expect(FAN_MM).toBe(120)
     expect(mm(FAN_MM)).toBeCloseTo(0.98, 2)
+  })
+})
+
+describe('the card edge fills its slot', () => {
+  it('sits in the measured x16 slot, on the card PCB plane, under the shroud', () => {
+    const seat = slotSeatBox()
+    const pcb = pcbBox('gpu')
+    const gpu = partBox('gpu')
+    // On the card's own PCB plane, within its length.
+    expect(seat.min[1]).toBeLessThan(pcb.min[1])
+    expect(seat.max[1]).toBeGreaterThan(pcb.max[1])
+    expect(seat.min[0]).toBeGreaterThanOrEqual(pcb.min[0])
+    expect(seat.max[0]).toBeLessThanOrEqual(pcb.max[0])
+    // From just off the board face up to where the shroud begins, not into it.
+    expect(seat.min[2]).toBeGreaterThan(boardFaceZ())
+    expect(seat.max[2]).toBeLessThan(gpu.max[2])
   })
 })

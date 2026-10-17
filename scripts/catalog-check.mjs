@@ -17,7 +17,6 @@ const KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? 'sb_publishable_Iu7O2Gu
 const TABLES = [
   ['parts', 'src/data/partsData.json'],
   ['peripherals', 'src/data/peripheralsData.json'],
-  ['games', 'src/data/gamesData.json'],
 ]
 
 const local = (path) => JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'))

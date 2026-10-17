@@ -1,11 +1,9 @@
 import { partQuality } from './partQuality'
 import { checkCompatibility } from './compatibility'
-import { gameFps } from './gameFps'
 import { partSynergy } from './partSynergy'
 import { BUILD_PROFILES, USE_CASE_LABEL, usefulRamGb } from './buildProfiles'
 
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n))
-const FPS_USES = new Set(['gaming', 'streaming'])
 
 // Nothing on sale today is worthless. The cheapest current part in a category
 // still boots, still games at *some* setting, and calling it a 0 was the single
@@ -235,23 +233,20 @@ export function pickRecommendation(rating, optionsByCategory, headroom = Infinit
       extraCost: best.extraCost,
       fromScore: from.score,
       toScore: best.newScore,
-      fpsGain: best.fpsGain ?? null,
     }
   }
   return null
 }
 
 // Better-in-category swaps that would raise this part's score. Cheapest first,
-// capped to `limit`. gaming/streaming cpu/gpu also carry an fps gain when a
-// representative `game` is supplied.
-export function partUpgradeOptions(parts, useCase, category, catalog, { game = null, limit = 5 } = {}) {
+// capped to `limit`. (No fps gain any more: it came from the guessed per-game
+// multipliers of the retired 22-game list. Measured frame rates live on the
+// Performance tab.)
+export function partUpgradeOptions(parts, useCase, category, catalog, { limit = 5 } = {}) {
   const current = parts[category]
   if (!current) return []
-  const profile = BUILD_PROFILES[useCase] ?? BUILD_PROFILES.gaming
   const curLevel = partLevel(current, catalog)
   const curScore = rateBuild(parts, useCase, catalog).parts[category]?.score ?? 0
-  const showFps = Boolean(game) && FPS_USES.has(useCase) && (category === 'cpu' || category === 'gpu')
-  const baseFps = showFps ? gameFps(parts.cpu, parts.gpu, profile.resolution, game, 'high') : 0
 
   const out = []
   for (const cand of catalog) {
@@ -264,9 +259,7 @@ export function partUpgradeOptions(parts, useCase, category, catalog, { game = n
     const next = { ...parts, [category]: cand }
     const newScore = rateBuild(next, useCase, catalog).parts[category]?.score ?? 0
     if (newScore <= curScore) continue
-    const opt = { toPart: cand, extraCost: cand.price - current.price, newScore }
-    if (showFps) opt.fpsGain = gameFps(next.cpu, next.gpu, profile.resolution, game, 'high') - baseFps
-    out.push(opt)
+    out.push({ toPart: cand, extraCost: cand.price - current.price, newScore })
   }
   return out.sort((a, b) => a.extraCost - b.extraCost).slice(0, limit)
 }

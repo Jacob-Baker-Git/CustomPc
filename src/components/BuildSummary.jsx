@@ -11,7 +11,6 @@ import { buildMarkdown } from '../lib/buildMarkdown'
 import { BUILD_PROFILES } from '../lib/buildProfiles'
 import { PANEL_STRONG } from '../lib/uiTokens'
 import Block from './ui/Block'
-import GamePerformanceList from './GamePerformanceList'
 import { PRICE_SNAPSHOT } from '../lib/siteContent'
 import DimensionsChecklist from './DimensionsChecklist'
 import ConfirmDialog from './ConfirmDialog'
@@ -23,7 +22,7 @@ const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 function Row({ label, name, brand, price }) {
   return (
     <div data-row className="group flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
+      <span className="font-mono text-[11px] uppercase text-muted w-24 shrink-0 pr-2">
         {label}
       </span>
       <span className="flex-1 text-sm text-ink truncate">{name}</span>
@@ -37,9 +36,11 @@ function Row({ label, name, brand, price }) {
         href={searchUrl(name, brand)}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-28 text-right text-xs text-brass hover:brightness-110 whitespace-nowrap opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
+        aria-label={`Find best price for ${name}`}
+        title="Find best price"
+        className="w-7 text-right text-sm text-brass hover:brightness-110 opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
       >
-        Find Best Price ↗
+        ↗
       </a>
     </div>
   )
@@ -48,7 +49,7 @@ function Row({ label, name, brand, price }) {
 function MissingRow({ label, optional }) {
   return (
     <div data-missing-row className="flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[11px] uppercase text-muted w-28 shrink-0 pr-2">
+      <span className="font-mono text-[11px] uppercase text-muted w-24 shrink-0 pr-2">
         {label}
       </span>
       {optional ? (
@@ -59,7 +60,7 @@ function MissingRow({ label, optional }) {
         </span>
       )}
       <span className="font-mono text-sm text-faint w-20 text-right">—</span>
-      <span className="w-28" />
+      <span className="w-7" />
     </div>
   )
 }
@@ -77,7 +78,6 @@ export default function BuildSummary() {
   const resolution = useBuilderStore((s) => s.resolution)
   const useCase = useBuilderStore((s) => s.useCase)
   const [copied, setCopied] = useState(false)
-  const [showFps, setShowFps] = useState(false)
   // A phone shows the first few rows of the parts list; desktop shows them all
   // (spec 2026-10-16). Read once at mount, like every fold's default.
   const desktop = useIsDesktop()
@@ -130,7 +130,7 @@ export default function BuildSummary() {
 
   return (
     <div>
-      <div className="max-w-2xl mx-auto px-4 pt-2 pb-12">
+      <div>
         <Block>
           <div className="flex items-baseline justify-between mb-1">
             <h2 className="text-lg text-ink">Your build</h2>
@@ -185,22 +185,17 @@ export default function BuildSummary() {
                 <span>Total <span className="font-mono text-ink">£{grandTotal.toFixed(2)}</span></span>
               </div>
 
-              {/* Frame rates are now a detail behind a toggle, and only for the
-                  use cases where they mean anything — not the headline table
-                  this tab opened with regardless of what the PC was for. */}
+              {/* Frame rates live on the Performance tab, from measured
+                  benchmarks. This used to be a table built from the guessed
+                  per-game multipliers of the old 22-game list (retired
+                  2026-10-17). */}
               {framePaced && selectedParts.cpu && selectedParts.gpu && (
-                <div className="mt-5">
-                  <button
-                    onClick={() => setShowFps((v) => !v)}
-                    aria-expanded={showFps}
-                    className="text-[11px] uppercase tracking-wider text-muted hover:text-brass transition-colors"
-                  >
-                    Frame rates @ {RES_LABEL[resolution] ?? resolution} {showFps ? '−' : '+'}
-                  </button>
-                  {showFps && (
-                    <GamePerformanceList cpu={selectedParts.cpu} gpu={selectedParts.gpu} resolution={resolution} limit={8} />
-                  )}
-                </div>
+                <a
+                  href="#performance"
+                  className="mt-5 inline-block text-[11px] uppercase tracking-wider text-muted hover:text-brass transition-colors"
+                >
+                  Frame rates @ {RES_LABEL[resolution] ?? resolution} →
+                </a>
               )}
               <div className="mt-5">
                 <div className="text-[11px] uppercase tracking-wider text-muted mb-1">Physical dimensions</div>
@@ -210,7 +205,7 @@ export default function BuildSummary() {
           )}
 
           <p className="mt-4 text-[11px] text-muted leading-relaxed">
-            Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data. Use Find Best Price for current prices.
+            Prices are curated estimates ({PRICE_SNAPSHOT}), not live retail data. Hover a part and use its ↗ link for current prices.
           </p>
 
           <div className="flex flex-wrap gap-2 mt-5">

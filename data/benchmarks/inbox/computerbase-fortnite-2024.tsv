@@ -1,0 +1,109 @@
+# ComputerBase — Fortnite-Benchmarks (2024): 28 GPUs von AMD, Intel & Nvidia in FHD, WQHD & UHD.
+#
+# Imported 2026-10-17: Fortnite is the default game of "Build for a game" and had
+# 4 measured rows. This is the one multi-GPU Fortnite test with a stated bench.
+#
+# Figures from each bar's data-value attribute via src/lib/perfEngine/computerbase.js.
+# The article's chart titles ("Fortnite – 1.920 × 1.080 + DLSS/TSR Hoch Quality")
+# are not in the shape parseChartTitle reads, so they were restated 1:1 into it
+# before extraction — the resolution, the mode and the preset are the article's.
+# "DLSS/TSR <mode>": DLSS on GeForce, TSR (quality "Hoch") on the rest, at the
+# SAME named render scale, so one `up` per chart.
+#
+# Presets: "Hoch" for the three main charts, "Mittel" for the reduced-detail
+# Full HD chart — the article's own words, both DX12.
+#
+# NOT imported: GeForce RTX 3060 and Arc A770 (the article's card list names the
+# 8 GB variant of the RTX 4060 Ti and RTX 3050 but gives no memory size for
+# these two, and the catalogue holds both variants of each); GTX 1650 Super (no
+# catalogue part).
+
+outlet:    ComputerBase
+title:     Fortnite-Benchmarks (2024): 28 GPUs von AMD, Intel & Nvidia in FHD, WQHD & UHD im Test
+url:       https://www.computerbase.de/artikel/gaming/fortnite-benchmark-test.87822/
+published: 2024-04-19
+kind:      gpu-scaling
+cpu:       cpu-ryzen-9-7950x3d
+ram:       DDR5 6000 48 2
+os:        Windows 11 23H2
+driver:    AMD Adrenalin 24.3.1; NVIDIA GeForce 552.12; Intel Arc 5382
+scene:     ComputerBase Battle Royale test run (described in the article)
+
+game	res	preset	up	part	avg	low
+fortnite	1080p	hoch	quality	gpu-rx-7900xtx	184.5	132.8
+fortnite	1080p	hoch	quality	gpu-rx-7900xt	174	124.8
+fortnite	1080p	hoch	quality	gpu-rtx-4090	173.8	130.5
+fortnite	1080p	hoch	quality	gpu-rtx-4080-super	164.4	121
+fortnite	1080p	hoch	quality	gpu-rtx-4070ti-super	161.5	111.1
+fortnite	1080p	hoch	quality	gpu-rx-7900-gre	149.2	112.3
+fortnite	1080p	hoch	quality	gpu-rtx-4070-super	147.9	100.1
+fortnite	1080p	hoch	quality	gpu-rx-7800xt	145.7	110.2
+fortnite	1080p	hoch	quality	gpu-rx-6800-xt	140.2	110.5
+fortnite	1080p	hoch	quality	gpu-rtx-4070	137.8	96.3
+fortnite	1080p	hoch	quality	gpu-rx-7700xt	130.2	101.7
+fortnite	1080p	hoch	quality	gpu-rtx-3080	125.5	90.8
+fortnite	1080p	hoch	quality	gpu-rx-6700-xt	112	92.3
+fortnite	1080p	hoch	quality	gpu-rtx-4060ti	109.3	82.3
+fortnite	1080p	hoch	quality	gpu-rx-7600xt	99.6	79.6
+fortnite	1080p	hoch	quality	gpu-rx-7600	99.4	77.3
+fortnite	1080p	hoch	quality	gpu-rtx-3060-ti	98.9	74.4
+fortnite	1080p	hoch	quality	gpu-rtx-4060	94.9	71.6
+fortnite	1080p	hoch	quality	gpu-rx-6650xt	92.3	76.6
+fortnite	1080p	hoch	quality	gpu-rx-6600	78	67.1
+fortnite	1080p	hoch	quality	gpu-rtx-3050	62.2	52.1
+fortnite	1080p	hoch	quality	gpu-arc-a750	53.7	45.1
+fortnite	1080p	hoch	quality	gpu-gtx-1660s	49.2	41.5
+fortnite	1080p	hoch	quality	gpu-rx-6500xt	42	36
+fortnite	1080p	hoch	quality	gpu-arc-a380	28.9	24.9
+fortnite	1440p	hoch	balanced	gpu-rx-7900xtx	167.3	124.4
+fortnite	1440p	hoch	balanced	gpu-rtx-4090	165.2	122.3
+fortnite	1440p	hoch	balanced	gpu-rx-7900xt	153.3	115.9
+fortnite	1440p	hoch	balanced	gpu-rtx-4080-super	151.4	111.4
+fortnite	1440p	hoch	balanced	gpu-rtx-4070ti-super	145.5	105.2
+fortnite	1440p	hoch	balanced	gpu-rx-7900-gre	133.1	102.2
+fortnite	1440p	hoch	balanced	gpu-rtx-4070-super	129.1	96
+fortnite	1440p	hoch	balanced	gpu-rx-7800xt	127.8	100.1
+fortnite	1440p	hoch	balanced	gpu-rx-6800-xt	119.9	97.2
+fortnite	1440p	hoch	balanced	gpu-rtx-4070	116.1	86.5
+fortnite	1440p	hoch	balanced	gpu-rx-7700xt	110.8	89.6
+fortnite	1440p	hoch	balanced	gpu-rtx-3080	109	82.8
+fortnite	1440p	hoch	balanced	gpu-rx-6700-xt	95.5	82.3
+fortnite	1440p	hoch	balanced	gpu-rtx-4060ti	92.7	73.8
+fortnite	1440p	hoch	balanced	gpu-rtx-3060-ti	84	67
+fortnite	1440p	hoch	balanced	gpu-rx-7600xt	81.4	70.4
+fortnite	1440p	hoch	balanced	gpu-rx-7600	80.9	69.3
+fortnite	1440p	hoch	balanced	gpu-rtx-4060	77.8	64.8
+fortnite	1440p	hoch	balanced	gpu-rx-6650xt	75.2	66.8
+fortnite	1440p	hoch	balanced	gpu-rx-6600	64.3	56.8
+fortnite	1440p	hoch	balanced	gpu-rtx-3050	51	44.1
+fortnite	1440p	hoch	balanced	gpu-arc-a750	47.8	41.7
+fortnite	4k	hoch	performance	gpu-rtx-4090	142.4	101.6
+fortnite	4k	hoch	performance	gpu-rx-7900xtx	129.1	100
+fortnite	4k	hoch	performance	gpu-rtx-4080-super	116.5	87.4
+fortnite	4k	hoch	performance	gpu-rx-7900xt	115.6	94.2
+fortnite	4k	hoch	performance	gpu-rtx-4070ti-super	106.2	80.7
+fortnite	4k	hoch	performance	gpu-rx-7900-gre	97.4	82.4
+fortnite	4k	hoch	performance	gpu-rtx-4070-super	94.7	76.1
+fortnite	4k	hoch	performance	gpu-rx-7800xt	93.3	80.1
+fortnite	4k	hoch	performance	gpu-rx-6800-xt	91	77.2
+fortnite	4k	hoch	performance	gpu-rtx-3080	84.7	70.6
+fortnite	4k	hoch	performance	gpu-rtx-4070	84.3	68.9
+fortnite	4k	hoch	performance	gpu-rx-7700xt	82.2	71.7
+fortnite	4k	hoch	performance	gpu-rx-6700-xt	67.9	60.3
+fortnite	4k	hoch	performance	gpu-rtx-4060ti	65.1	55
+fortnite	4k	hoch	performance	gpu-rtx-3060-ti	61.1	51.8
+fortnite	4k	hoch	performance	gpu-rx-7600xt	55.9	49.6
+fortnite	4k	hoch	performance	gpu-rx-7600	55.5	49.3
+fortnite	4k	hoch	performance	gpu-rtx-4060	53.6	46.5
+fortnite	4k	hoch	performance	gpu-rx-6650xt	52.4	47
+fortnite	4k	hoch	performance	gpu-arc-a750	37.8	33.6
+fortnite	1080p	mittel	quality	gpu-rtx-4060	269.2	186
+fortnite	1080p	mittel	quality	gpu-rx-7600xt	239.3	173.2
+fortnite	1080p	mittel	quality	gpu-rx-7600	239.1	171.1
+fortnite	1080p	mittel	quality	gpu-rx-6650xt	216.4	165.8
+fortnite	1080p	mittel	quality	gpu-rx-6600	190.9	142.4
+fortnite	1080p	mittel	quality	gpu-rtx-3050	169.5	128.7
+fortnite	1080p	mittel	quality	gpu-gtx-1660s	148	117.3
+fortnite	1080p	mittel	quality	gpu-rx-6500xt	147.9	123.2
+fortnite	1080p	mittel	quality	gpu-arc-a750	71.6	62.7
+fortnite	1080p	mittel	quality	gpu-arc-a380	39.2	34.9

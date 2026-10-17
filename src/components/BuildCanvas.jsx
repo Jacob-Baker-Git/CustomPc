@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
 import PartModel from './PartModel'
 import CableHarness from './models/CableHarness'
+import SlotSeat from './models/SlotSeat'
 import FanSystem from './FanSystem'
 import { caseInterior } from '../lib/assemblyGeometry'
 
@@ -104,6 +105,7 @@ export default function BuildCanvas({ selectedParts }) {
           <PartModel key={part.id} part={part} />
         ))}
         <CableHarness selectedParts={selectedParts} />
+        {selectedParts.gpu && selectedParts.motherboard && <SlotSeat selectedParts={selectedParts} />}
         {/* Fans render at their mount points whenever fans are selected, case or
             not. With a case but no fans, the empty slot outlines show where they
             go — the outlines belong to the case, which is the thing with the

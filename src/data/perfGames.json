@@ -54,6 +54,26 @@
         "label": "High",
         "tier": 3,
         "upscaling": "native"
+      },
+      {
+        "id": "maximale-grafikdetails",
+        "label": "Maximum graphics detail (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
+    "id": "anno-117",
+    "name": "Anno 117: Pax Romana",
+    "slug": "anno-117",
+    "genre": "strategy-sim",
+    "presets": [
+      {
+        "id": "ultrahoch",
+        "label": "Ultra-high (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },
@@ -99,6 +119,20 @@
     "fpsCap": 300
   },
   {
+    "id": "arc-raiders",
+    "name": "ARC Raiders",
+    "slug": "arc-raiders",
+    "genre": "shooter",
+    "presets": [
+      {
+        "id": "episch",
+        "label": "Epic",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
     "id": "armored-core-6",
     "name": "Armored Core VI: Fires of Rubicon",
     "slug": "armored-core-6",
@@ -127,6 +161,20 @@
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "assassins-creed-shadows",
+    "name": "Assassin's Creed Shadows",
+    "slug": "assassins-creed-shadows",
+    "genre": "action-adventure",
+    "presets": [
+      {
+        "id": "extrem-hoch",
+        "label": "Extreme high (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },
@@ -181,6 +229,20 @@
         "label": "Epic (DLSS/FSR Performance)",
         "tier": 4,
         "upscaling": "performance"
+      }
+    ]
+  },
+  {
+    "id": "battlefield-6",
+    "name": "Battlefield 6",
+    "slug": "battlefield-6",
+    "genre": "shooter",
+    "presets": [
+      {
+        "id": "hemmungslos",
+        "label": "Overkill",
+        "tier": 4,
+        "upscaling": "native"
       }
     ]
   },
@@ -249,6 +311,20 @@
     ]
   },
   {
+    "id": "borderlands-4",
+    "name": "Borderlands 4",
+    "slug": "borderlands-4",
+    "genre": "shooter",
+    "presets": [
+      {
+        "id": "badass",
+        "label": "Badass (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
     "id": "cities-skylines-2",
     "name": "Cities: Skylines II",
     "slug": "cities-skylines-2",
@@ -283,6 +359,20 @@
     ]
   },
   {
+    "id": "cod-black-ops-7",
+    "name": "Call of Duty: Black Ops 7",
+    "slug": "cod-black-ops-7",
+    "genre": "shooter",
+    "presets": [
+      {
+        "id": "extrem",
+        "label": "Extreme (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
     "id": "cs2",
     "name": "Counter-Strike 2",
     "slug": "counter-strike-2",
@@ -304,6 +394,12 @@
         "id": "high",
         "label": "High",
         "tier": 3,
+        "upscaling": "native"
+      },
+      {
+        "id": "sehr-hoch",
+        "label": "Very high",
+        "tier": 4,
         "upscaling": "native"
       },
       {
@@ -337,6 +433,12 @@
         "label": "High",
         "tier": 3,
         "upscaling": "native"
+      },
+      {
+        "id": "ultra",
+        "label": "Ultra (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       },
       {
         "id": "ultra",
@@ -395,6 +497,20 @@
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "death-stranding-2",
+    "name": "Death Stranding 2: On the Beach",
+    "slug": "death-stranding-2",
+    "genre": "action-adventure",
+    "presets": [
+      {
+        "id": "sehr-hoch",
+        "label": "Very high (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },
@@ -604,6 +720,20 @@
     ]
   },
   {
+    "id": "f1-25",
+    "name": "F1 25",
+    "slug": "f1-25",
+    "genre": "racing",
+    "presets": [
+      {
+        "id": "ultrahoch",
+        "label": "Ultra-high (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
     "id": "final-fantasy-16",
     "name": "Final Fantasy XVI",
     "slug": "final-fantasy-xvi",
@@ -647,6 +777,30 @@
     "slug": "fortnite",
     "genre": "shooter",
     "presets": [
+      {
+        "id": "mittel",
+        "label": "Medium (DLSS/FSR Quality)",
+        "tier": 2,
+        "upscaling": "quality"
+      },
+      {
+        "id": "hoch",
+        "label": "High (DLSS/FSR Quality)",
+        "tier": 3,
+        "upscaling": "quality"
+      },
+      {
+        "id": "hoch",
+        "label": "High (DLSS/FSR Balanced)",
+        "tier": 3,
+        "upscaling": "balanced"
+      },
+      {
+        "id": "hoch",
+        "label": "High (DLSS/FSR Performance)",
+        "tier": 3,
+        "upscaling": "performance"
+      },
       {
         "id": "high",
         "label": "High",
@@ -908,6 +1062,12 @@
       },
       {
         "id": "ultra",
+        "label": "Ultra (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      },
+      {
+        "id": "ultra",
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
@@ -1075,6 +1235,20 @@
     ]
   },
   {
+    "id": "mafia-the-old-country",
+    "name": "Mafia: The Old Country",
+    "slug": "mafia-the-old-country",
+    "genre": "action-adventure",
+    "presets": [
+      {
+        "id": "episch",
+        "label": "Epic (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
+      }
+    ]
+  },
+  {
     "id": "mechwarrior-5-clans",
     "name": "MechWarrior 5: Clans",
     "slug": "mechwarrior-5-clans",
@@ -1085,6 +1259,20 @@
         "label": "Maximum graphics detail",
         "tier": 4,
         "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "oblivion-remastered",
+    "name": "The Elder Scrolls IV: Oblivion Remastered",
+    "slug": "oblivion-remastered",
+    "genre": "rpg",
+    "presets": [
+      {
+        "id": "extrem",
+        "label": "Extreme (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },
@@ -1227,6 +1415,20 @@
         "label": "Epic",
         "tier": 4,
         "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "resident-evil-requiem",
+    "name": "Resident Evil Requiem",
+    "slug": "resident-evil-requiem",
+    "genre": "horror",
+    "presets": [
+      {
+        "id": "maximal",
+        "label": "Maximum (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },
@@ -1543,6 +1745,34 @@
         "label": "Ultra",
         "tier": 4,
         "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "the-last-of-us-part-2",
+    "name": "The Last of Us Part II",
+    "slug": "the-last-of-us-part-2",
+    "genre": "action-adventure",
+    "presets": [
+      {
+        "id": "sehr-hoch",
+        "label": "Very high",
+        "tier": 4,
+        "upscaling": "native"
+      }
+    ]
+  },
+  {
+    "id": "the-outer-worlds-2",
+    "name": "The Outer Worlds 2",
+    "slug": "the-outer-worlds-2",
+    "genre": "rpg",
+    "presets": [
+      {
+        "id": "sehr-hoch",
+        "label": "Very high (DLSS/FSR Quality)",
+        "tier": 4,
+        "upscaling": "quality"
       }
     ]
   },

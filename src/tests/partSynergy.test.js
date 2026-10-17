@@ -67,3 +67,20 @@ it('rates PSU headroom against full-boost peak, the same size the Performance ta
   expect(partSynergy({ cpu, gpu, psu: { category: 'psu', wattage: 650 } }, 'psu', 'gaming').balance).toBeLessThan(100)
   expect(partSynergy({ cpu, gpu, psu: { category: 'psu', wattage: 750 } }, 'psu', 'gaming').balance).toBe(100)
 })
+
+describe('CPU cores per use case', () => {
+  const six = { id: 'c6', category: 'cpu', name: 'Six', perfScore: 90, tdp: 65, specs: { cores: 6 } }
+  const twelve = { ...six, id: 'c12', name: 'Twelve', specs: { cores: 12 } }
+
+  it('docks a 6-core for streaming and creation, not for gaming', () => {
+    expect(partSynergy({ cpu: six }, 'cpu', 'gaming').balance).toBe(100)
+    const s = partSynergy({ cpu: six }, 'cpu', 'streaming')
+    expect(s.balance).toBeLessThan(100)
+    expect(s.reason).toMatch(/6 cores.*8\+/)
+    expect(partSynergy({ cpu: six }, 'cpu', 'creation').balance).toBeLessThan(s.balance)
+  })
+
+  it('a chip that meets the need is not docked', () => {
+    expect(partSynergy({ cpu: twelve }, 'cpu', 'creation').balance).toBe(100)
+  })
+})

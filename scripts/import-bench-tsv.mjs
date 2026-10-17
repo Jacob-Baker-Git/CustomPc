@@ -57,13 +57,9 @@ const parts = read('../src/data/partsData.json')
 // derived from what has been imported, so validating against it would make a
 // new title unimportable: absent from the list until imported, refused at
 // import because it is absent from the list. gameMeta.json is the editorial
-// list of ids the corpus may hold; gamesData.json stays in the union so any
-// legacy id that does turn up in a review is still importable.
+// list of ids the corpus may hold.
 const meta = read('../data/games/gameMeta.json')
-const games = [
-  ...Object.keys(meta.games).map((id) => ({ id })),
-  ...read('../src/data/gamesData.json'),
-]
+const games = Object.keys(meta.games).map((id) => ({ id }))
 const sources = read('../data/benchmarks/sources.json')
 const entries = read('../data/benchmarks/entries.json')
 const validation = read('../data/benchmarks/validation.json')

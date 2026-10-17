@@ -44,7 +44,7 @@ export function resolvePreset(game, presetId) {
   // ⚠️ On an exact tie the FIRST entry in the array wins. That is unreachable
   // on the canonical ladder, whose tiers are unique — an exact id match always
   // fires before this. It goes live the moment a game gets its own `presets`
-  // in gamesData.json, and at that point the order you write them in silently
+  // in perfGames.json, and at that point the order you write them in silently
   // decides ties. Write them lowest tier first.
   const nearest = presets.reduce(
     (best, p) => (Math.abs(p.tier - wantedTier) < Math.abs(best.tier - wantedTier) ? p : best),

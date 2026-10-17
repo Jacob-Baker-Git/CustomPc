@@ -22,10 +22,11 @@ async function fetchTable(table) {
 }
 
 export async function fetchCatalog() {
-  const [parts, peripherals, games] = await Promise.all([
+  // No 'games' table read: the old guessed 22-game list was retired 2026-10-17;
+  // the measured game list ships as src/data/perfGames.json.
+  const [parts, peripherals] = await Promise.all([
     fetchTable('parts'),
     fetchTable('peripherals'),
-    fetchTable('games'),
   ])
-  return { parts, peripherals, games }
+  return { parts, peripherals }
 }

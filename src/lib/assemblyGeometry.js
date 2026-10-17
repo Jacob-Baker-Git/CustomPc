@@ -482,3 +482,21 @@ export function caseInterior() {
     max: [rearX + mm(CASE.depthMm), floorY + mm(CASE.heightMm), rearZ + mm(CASE.widthMm)],
   }
 }
+
+// The card's edge where it sits IN the x16 slot. The board mesh draws its slot
+// as an open channel with bright contacts, and this card mesh's PCB is a 1 mm
+// sheet — so seen from above, a correctly seated card still showed an empty
+// white slot above it (the user's "not properly seated", 2026-10-17). A real
+// slot never shows its contacts with a card in it: the card's edge fills the
+// opening. This is that edge and the slot body around it: the slot's measured
+// extent, from just off the board up to the slot's top where the shroud
+// begins. Null with no card.
+export function slotSeatBox(overrides) {
+  const pcb = pcbBox('gpu', overrides)
+  const slot = MOUNTS.gpu.slot
+  if (!pcb || !slot) return null
+  return {
+    min: [mm(slot.fromMm), mm(slot.bottomMm), boardFaceZ() + mm(1)],
+    max: [mm(slot.toMm), mm(slot.topMm), boardFaceZ() + mm(slot.heightMm)],
+  }
+}

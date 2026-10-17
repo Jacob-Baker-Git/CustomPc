@@ -1,6 +1,5 @@
 import { extractRows, NBC_GPU_PAGES, GAME_IDS, gameIdFor, cpuIdFor, presetIdFor, upscalingFor, toRows } from '../lib/perfEngine/notebookcheck'
 import parts from '../data/partsData.json'
-import legacyGames from '../data/gamesData.json'
 import gameMeta from '../../data/games/gameMeta.json'
 
 const row = (over = {}) => ({
@@ -47,10 +46,7 @@ describe('the GPU page map is explicit, never fuzzy', () => {
 // stops covering the mappings added after it, and this one already had.
 describe('the game map resolves against the permitted ids', () => {
   it('every mapped id is a permitted game', () => {
-    const ids = new Set([
-      ...Object.keys(gameMeta.games),
-      ...legacyGames.map((g) => g.id),
-    ])
+    const ids = new Set(Object.keys(gameMeta.games))
     const unknown = Object.entries(GAME_IDS)
       .filter(([, id]) => !ids.has(id))
       .map(([title, id]) => `"${title}" -> ${id}`)
@@ -114,7 +110,7 @@ describe('game names map to catalogue ids', () => {
   })
 
   it("maps the outlet's own spelling for titles the catalogue already has", () => {
-    // Both ids predate the performance engine and live in gamesData.json. The
+    // Both ids predate the performance engine (and gameMeta.json holds them). The
     // reader knew neither spelling, so their rows were refused as "game not in
     // the catalogue" while the id sat in the list all along.
     expect(gameIdFor('GTA V')).toBe('gta5')

@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import bundledParts from '../data/partsData.json'
 import bundledPeripherals from '../data/peripheralsData.json'
-import bundledGames from '../data/gamesData.json'
 import { fetchCatalog } from '../lib/supabaseCatalog'
 import useBuilderStore from './useBuilderStore'
 
@@ -11,15 +10,14 @@ import useBuilderStore from './useBuilderStore'
 const useCatalogStore = create(() => ({
   parts: bundledParts,
   peripherals: bundledPeripherals,
-  games: bundledGames,
   source: 'bundled',
 }))
 
 export async function loadCatalog() {
   try {
-    const { parts, peripherals, games } = await fetchCatalog()
-    if (parts.length > 0 && peripherals.length > 0 && games.length > 0) {
-      useCatalogStore.setState({ parts, peripherals, games, source: 'supabase' })
+    const { parts, peripherals } = await fetchCatalog()
+    if (parts.length > 0 && peripherals.length > 0) {
+      useCatalogStore.setState({ parts, peripherals, source: 'supabase' })
       syncBuildWithCatalog()
     }
   } catch {

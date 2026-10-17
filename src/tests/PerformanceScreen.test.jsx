@@ -7,6 +7,7 @@ import partsData from '../data/partsData.json'
 import perfModel from '../data/perfModel.json'
 import { PERF_CAVEAT } from '../lib/siteContent'
 import { estimateBuildPerformance } from '../lib/perfEngine'
+import perfGames from '../data/perfGames.json'
 
 // A spy that calls through to the real engine by default, so the tests above
 // keep exercising the live corpus untouched. Only the two tests below override
@@ -161,8 +162,8 @@ describe('PerformanceScreen', () => {
       await user.click(bar)
     }
     const table = screen.getByRole('table')
-    // The old grid produced 60 cards for this build at 1440p; the games behind
-    // them number far fewer.
+    // At most one row per listed game, however many presets each was measured
+    // at.
     //
     // `tr[data-game]` counts SUMMARY rows only. Plain `tbody tr` would also
     // count expansion rows, so the assertion would drift the moment a row
@@ -170,7 +171,7 @@ describe('PerformanceScreen', () => {
     // something else added rows.
     const bodyRows = table.querySelectorAll('tbody tr[data-game]')
     expect(bodyRows.length).toBeGreaterThan(10)
-    expect(bodyRows.length).toBeLessThan(60)
+    expect(bodyRows.length).toBeLessThanOrEqual(perfGames.length)
     // One row per DISTINCT game — the actual claim. Without this the bounds
     // above pass for any row count in range, including duplicated games.
     const ids = [...bodyRows].map((r) => r.dataset.game)
