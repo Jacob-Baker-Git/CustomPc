@@ -1,8 +1,8 @@
 {
-  "fittedAt": "2026-10-17T01:07:37.088Z",
+  "fittedAt": "2026-10-17T01:25:22.777Z",
   "warnings": [
-    "ComputerBase supplies 53.2% of the corpus (1830 of 3442 entries, from 9 reviews) — 5,708 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
-    "Notebookcheck supplies 44.6% of the corpus (1536 of 3442 entries, from 49 reviews) — 4,238 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
+    "ComputerBase supplies 53.5% of the corpus (1858 of 3470 entries, from 10 reviews) — 5,820 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
+    "Notebookcheck supplies 44.3% of the corpus (1536 of 3470 entries, from 49 reviews) — 4,210 more entries from OTHER outlets would bring it under 20%; dilute when data allows",
     "architectures with fewer than 3 measured parts stay uncalibrated at 1.0: RDNA, RDNA 4, Xe2 Battlemage"
   ],
   "gpuFit": {
@@ -14,12 +14,12 @@
     "1440p": {
       "iterations": 120,
       "converged": true,
-      "parts": 50
+      "parts": 52
     },
     "4k": {
-      "iterations": 131,
+      "iterations": 133,
       "converged": true,
-      "parts": 40
+      "parts": 45
     }
   },
   "cpuFit": {
@@ -30,38 +30,38 @@
   "droppedGpuBound": [],
   "droppedDisconnected": [],
   "coverage": {
-    "gpusMeasured": 53,
+    "gpusMeasured": 55,
     "gpusTotal": 79,
     "cpusMeasured": 24,
     "cpusTotal": 79
   },
   "sourceConcentration": {
-    "total": 3442,
+    "total": 3470,
     "topOutlet": "ComputerBase",
-    "topOutletShare": 0.5317,
+    "topOutletShare": 0.5354,
     "byOutlet": [
       {
         "outlet": "ComputerBase",
-        "entries": 1830,
-        "share": 0.5317,
-        "reviews": 9
+        "entries": 1858,
+        "share": 0.5354,
+        "reviews": 10
       },
       {
         "outlet": "Notebookcheck",
         "entries": 1536,
-        "share": 0.4463,
+        "share": 0.4427,
         "reviews": 49
       },
       {
         "outlet": "PC Games Hardware",
         "entries": 44,
-        "share": 0.0128,
+        "share": 0.0127,
         "reviews": 1
       },
       {
         "outlet": "TechSpot",
         "entries": 32,
-        "share": 0.0093,
+        "share": 0.0092,
         "reviews": 1
       }
     ]

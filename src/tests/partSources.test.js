@@ -68,11 +68,14 @@ const RESEARCHED_KEYS = [
   // whole enforcement. Do not "finish the pattern" by adding them.
   'size', 'rgb', 'amountG',
   // CPU peak package power (Intel Maximum Turbo Power / AMD PPT). It joined with
-  // all 79 CPUs accounted for: 73 sourced, six 10th/11th-gen Intel recorded
-  // unverifiable. Safe globally: only CPUs carry specs.maxPowerW.
+  // all 79 CPUs accounted for; since 2026-10-17 all 79 are sourced (the six
+  // 10th/11th-gen Intel from the desktop datasheets). Safe globally: only CPUs carry specs.maxPowerW.
   'maxPowerW',
   // GPUs only, and only where the maker states a card has NO encoder.
   'videoEncoder',
+  // Cases only: fans that ship in the box. 56 of 59 sourced, three recorded
+  // unverifiable (conflicting or unreachable sources).
+  'includedFans',
 ]
 
 // Researched specs whose key is NOT globally unambiguous.

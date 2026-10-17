@@ -457,6 +457,11 @@
       "slug": "the-outer-worlds-2",
       "genre": "rpg"
     },
+    "valorant": {
+      "name": "Valorant",
+      "slug": "valorant",
+      "genre": "shooter"
+    },
     "watch-dogs-legion": {
       "name": "Watch Dogs: Legion",
       "slug": "watch-dogs-legion",

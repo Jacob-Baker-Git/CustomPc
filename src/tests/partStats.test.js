@@ -159,6 +159,10 @@ describe('CPU max power row', () => {
   const row = (part) => partStats(part).find((s) => s.label === 'Max power')
   it('shows full-boost power where it is researched, and nothing where it is not', () => {
     expect(row(byId('cpu-i7-14700kf'))?.value).toBe(253)
-    expect(row(byId('cpu-i9-10900k'))).toBeUndefined()
+    // All 79 CPUs are researched now, so the fallback needs a synthetic one.
+    const specs = { ...byId('cpu-i9-10900k').specs }
+    delete specs.maxPowerW
+    expect(row(byId('cpu-i9-10900k'))?.value).toBe(250)
+    expect(row({ ...byId('cpu-i9-10900k'), specs })).toBeUndefined()
   })
 })

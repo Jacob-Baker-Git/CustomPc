@@ -143,10 +143,13 @@ describe('a paste spec sheet shows its tube size', () => {
 })
 
 // Base power is not what a CPU draws flat out; full-boost power is researched
-// for 73 of 79 CPUs and the copy says so, falling back where it is not.
+// for all 79 CPUs and the copy says so; `old` strips it to test the fallback.
 describe('CPU full-boost power copy', () => {
   const k = partsData.find((p) => p.id === 'cpu-i7-14700kf')
-  const old = partsData.find((p) => p.id === 'cpu-i9-10900k')
+  const real = partsData.find((p) => p.id === 'cpu-i9-10900k')
+  const oldSpecs = { ...real.specs }
+  delete oldSpecs.maxPowerW
+  const old = { ...real, specs: oldSpecs }
 
   it('names base and full-boost power in the blurb', () => {
     expect(insight(k)).toMatch(/125W base power, up to 253W at full boost/)
@@ -156,5 +159,16 @@ describe('CPU full-boost power copy', () => {
   it('labels the max power row on the spec sheet', () => {
     expect(specRows(k)).toContainEqual(['Max power at full boost (W)', '253'])
     expect(specRows(old).some(([label]) => /Max power/.test(label))).toBe(false)
+  })
+})
+
+describe('researched case fans and GPU encoder rows', () => {
+  const byId = (id) => partsData.find((p) => p.id === id)
+  it('shows a fanless case as 0 fans in the box, not as a missing row', () => {
+    expect(specRows(byId('case-lian-li-o11'))).toContainEqual(['Fans in the box', '0'])
+    expect(specRows(byId('case-kolink-observatory-lite'))).toContainEqual(['Fans in the box', '4'])
+  })
+  it('labels the RX 6500 XT as having no hardware video encoder', () => {
+    expect(specRows(byId('gpu-rx-6500xt'))).toContainEqual(['Hardware video encoder', 'No'])
   })
 })

@@ -1378,5 +1378,28 @@
       "gpuDriver": "Nvidia GeForce Game Ready 572.60; AMD Radeon Adrenalin 24.12.1 / 24.30.31.03"
     },
     "notes": "Test system from the article's Test System Specs table: MSI MPG X870E Carbon WiFi (BIOS 7E49v1A23, ReBAR enabled), G.Skill Trident Z5 RGB DDR5-6000 CL30-38-38-96; RAM capacity and stick count not stated. Figures read off chart data labels (average and 1% low). RTX 3080 omitted: 10/12 GB variant not stated."
+  },
+  {
+    "id": "src-computerbase-2025-08-05-valorant-mit-unreal-engi",
+    "outlet": "ComputerBase",
+    "title": "Valorant mit Unreal Engine 5 im Benchmark-Test: Benchmarks (WQHD, UWQHD & UHD), Frametimes und VRAM",
+    "url": "https://www.computerbase.de/artikel/gaming/valorant-unreal-engine-5-benchmark-test.93727/seite-2",
+    "published": "2025-08-05",
+    "accessed": "2026-10-17",
+    "kind": "gpu-scaling",
+    "testSystem": {
+      "cpu": "cpu-ryzen-7-9800x3d",
+      "cpuId": "cpu-ryzen-7-9800x3d",
+      "gpu": "varies — one per entry",
+      "ram": {
+        "type": "DDR5",
+        "speed": 6000,
+        "capacityGb": 48,
+        "sticks": 2
+      },
+      "os": "Windows 11 24H2",
+      "gpuDriver": "AMD Adrenalin 25.6.3; NVIDIA GeForce 577.00; Intel Arc 6972"
+    },
+    "notes": ""
   }
 ]

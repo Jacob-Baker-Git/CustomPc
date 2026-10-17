@@ -37,6 +37,8 @@ const SPEC_LABELS = {
   size: 'Fan size',
   sizeMm: 'Fan size (mm)',
   count: 'Fans in pack',
+  includedFans: 'Fans in the box',
+  videoEncoder: 'Hardware video encoder',
   pack: 'Fans in pack',
   rpm: 'Max RPM',
   rgb: 'RGB',

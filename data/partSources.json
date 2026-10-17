@@ -736,413 +736,472 @@
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/torrent-series/torrent/torrent-black-solid/", "checkedOn": "2026-10-17", "note": "Fractal: 'Dynamic X2 PWM or Prisma RGB PWM fans pre-installed (3x 140 mm and 2x 180 mm)'" }
   },
   "case-fractal-north": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30", "note": "Up to 300 mm with a 360 mm front radiator fitted" },
     "maxCoolerHeight": { "url": "https://support.fractal-design.com/support/solutions/articles/4000189455-north", "checkedOn": "2026-08-30", "note": "Chassis maximum; 145 mm with the side fan bracket in the top or middle position. The product spec table publishes the 145 mm figure" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/north-series/north/north-charcoal-black-tg-light/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: 2x Aspect 14 PWM (front)'" }
   },
   "case-fractal-meshify-2": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2/meshify-2-black-light-tg/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: 2x Dynamic X2 GP-14 (Front), 1x Dynamic X2 GP-14 (Rear)'" }
   },
   "case-fractal-pop-air": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-rgb-orange-core-tg-clear-tint/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: 2x Aspect 12 (front), 1x Aspect 12 (rear)'" }
   },
   "case-fractal-terra": {
     "maxGpuLength": { "url": "https://support.fractal-design.com/support/solutions/articles/4000194849-terra-cpu-cooler-gpu-support", "checkedOn": "2026-08-30", "note": "200 mm if a 120 mm radiator is installed" },
     "maxCoolerHeight": { "url": "https://support.fractal-design.com/support/solutions/articles/4000194849-terra-cpu-cooler-gpu-support", "checkedOn": "2026-08-30", "note": "Spine position 1 of 7 (the tallest-cooler setting); falls to 48 mm at position 7, which is the figure the product spec table publishes. The spine trades CPU height against GPU thickness, so this and the GPU maximum are not simultaneously achievable" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/terra/terra/terra-jade/", "checkedOn": "2026-10-17", "note": "Fractal's spec table lists fan mounts (bottom 1x 120mm) and no 'Fans included' row, which its other case pages carry. Cross-checked: GamersNexus review 'Included Fans: None', https://gamersnexus.net/cases/fractal-terra-mini-itx-case-review-build-quality-thermals-acoustics-cable-management" }
   },
   "case-fractal-define-7": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/define-series/define-7/black/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: 2x Dynamic X2 GP-14 (Front), 1x Dynamic X2 GP-14 (Rear)'" }
   },
   "case-meshify-2-compact": {
     "maxGpuLength": { "url": "https://support.fractal-design.com/support/solutions/articles/4000174759-meshify-2-compact", "checkedOn": "2026-08-30", "note": "With the 25 mm front fan mounted, which is how the case ships. Fractal publishes no fan-removed figure" },
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/meshify-series/meshify-2-compact/meshify-2-compact-black-dark-tg/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: Dynamic X2 GP-12 (front), 1x Dynamic X2 GP-12 (rear)' (front count not printed). Cross-checked: Legit Reviews, 2x GP-14 front + 1x GP-12 rear, https://www.legitreviews.com/fractal-design-meshify-2-compact-case-review_225884/2" }
   },
   "case-fractal-north-xl": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://support.fractal-design.com/support/solutions/articles/4000203875-north-xl", "checkedOn": "2026-08-30", "note": "Chassis maximum; 155 mm with the side fan bracket in the upper position on the Mesh version" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/north-series/north-xl/north-xl-chalk-white-mesh/", "checkedOn": "2026-10-17", "note": "Fractal spec table for this variant 'Fans included: 3x Aspect 14 PWM (front)'" }
   },
   "case-fractal-pop-mini-air": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/pop-series/pop-mini-air/pop-mini-air-rgb-black-tg-clear-tint/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: 2x Aspect 12 (front), 1x Aspect 12 (rear)'" }
   },
   "case-fractal-ridge": {
     "maxGpuLength": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.fractal-design.com/products/cases/ridge-series/ridge/ridge-pcie-4-0-white/", "checkedOn": "2026-10-17", "note": "Fractal spec table 'Fans included: 2x Aspect 14 PWM (side)'" }
   },
   "case-lian-li-o11": {
     "maxGpuLength": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/o11-dynamic-evo/", "checkedOn": "2026-10-17", "note": "Lian Li's spec table lists FAN SUPPORT and no included fans. Cross-checked: Guru3D review says fans must be bought separately, https://www.guru3d.com/review/lian-li-o11-dynamic-evo-chassis-review/" }
   },
   "case-lian-li-a4-h2o": {
     "maxGpuLength": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30", "note": "Lian Li states \"Max 55mm\". The case is built around a 240 mm AIO in the top; two independent sources give the same 55 mm" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/a4h2o/", "checkedOn": "2026-10-17", "note": "Lian Li's spec table lists FAN SUPPORT (top 2x 120mm) and no included fans. Cross-checked: LDLC listing 'Fan(s) included: No', https://ldlc.com/en/product/PB00552640.html" }
   },
   "case-lian-li-o11-mini": {
     "maxGpuLength": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30", "note": "Lian Li publishes \"7 or 5 (depends on the back panel)\"; the 7-slot panel is the maximum" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/o11-air-mini/", "checkedOn": "2026-10-17", "note": "Lian Li: 'comes with 2 x 140mm PWM front fans and 1 x 120mm PWM rear fan pre-installed'" }
   },
   "case-lianli-lancool-216": {
     "maxGpuLength": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30", "note": "Lian Li states 180.5 mm (max); the catalogue had it rounded to 180" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/lancool-216/", "checkedOn": "2026-10-17", "note": "Lian Li: 'includes 2 x 160mm and 1 x 140mm pre-installed PWM fans'" }
   },
   "case-lianli-lancool-207": {
     "maxGpuLength": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/lancool-207/", "checkedOn": "2026-10-17", "note": "Lian Li: 'Includes 2 x 140mm ARGB fans at the front and 2 x 120mm PWM fans above the PSU shroud'" }
   },
   "case-lianli-o11-evo-xl": {
     "maxGpuLength": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/o11-dynamic-evo-xl/", "checkedOn": "2026-10-17", "note": "Lian Li's spec table lists FAN SUPPORT and no included fans. Cross-checked: TweakTown review con 'No fans are included', https://www.tweaktown.com/reviews/10623/lian-li-o11-dynamic-evo-xl-full-tower-case/index.html" }
   },
   "case-lianli-o11-vision": {
     "maxGpuLength": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30", "note": "Lian Li states 430 mm (Max.) for O11VX/O11VW/O11VC. Retailer copy widely repeats 455 mm and a 167 mm cooler, which are the O11 Dynamic EVO XL and EVO figures; the maker's own table is taken as authoritative" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30", "note": "Lian Li states 174 mm (Max.). See the maxGpuLength note on the 455/167 figures circulating in retailer copy" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30", "note": "Lian Li publishes \"6+1\"" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/o11-vision/", "checkedOn": "2026-10-17", "note": "Lian Li's spec table lists FAN SUPPORT and no included fans. Cross-checked: Tom's Hardware review con 'No included fans', https://tomshardware.com/pc-components/pc-cases/lian-li-o11-vision-review" }
   },
   "case-lianli-lancool-217": {
     "maxGpuLength": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30", "note": "Lian Li states 380 mm (Max.), confirmed by four independent listings. The catalogue held 392 mm, which is the Lancool 216 figure" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/lancool-217/", "checkedOn": "2026-10-17", "note": "Lian Li: 'Comes pre-installed with 5 high-performance fans'" }
   },
   "case-lianli-lancool-3": {
     "maxGpuLength": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://lian-li.com/product/lancool-iii/", "checkedOn": "2026-10-17", "note": "Lian Li: 'including 4 pre-installed 140mm PWM fans'" }
   },
   "case-lianli-q58": {
     "maxGpuLength": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30", "note": "Depends on PSU mode: SFX mode takes a 240/280 top radiator, ATX mode only 120 mm top. Bottom is 120 mm in both" }
+    "radiatorSupport": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-08-30", "note": "Depends on PSU mode: SFX mode takes a 240/280 top radiator, ATX mode only 120 mm top. Bottom is 120 mm in both" },
+    "includedFans": { "url": "https://lian-li.com/product/q58/", "checkedOn": "2026-10-17", "note": "Lian Li's spec table lists FAN SUPPORT and no included fans. Cross-checked: Tom's Hardware review says it does not ship with any fans, https://www.tomshardware.com/reviews/lian-li-q58-review" }
   },
   "case-nzxt-h510": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30", "note": "NZXT states \"Up to 381 mm (w/o front fans or radiator)\" - already the unobstructed figure" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/37464879064347-H510-Series-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H510 column: front None, top 1x Aer F 120mm, rear 1x Aer F 120mm" }
   },
   "case-nzxt-h7-flow": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "H7 Flow (2024), the revision NZXT currently sells. The catalogue held 400 mm, which is the 2022/2023 model" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/40379376386203-H7-Flow-2024-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H7 Flow column: front 3x F120Q Airflow (no other rows)" }
   },
   "case-nzxt-h9-flow": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30", "note": "H9 Flow (2025), the revision NZXT currently sells; 410 mm with a 56 mm-thick 420 mm AIO and fans at the front. The catalogue held 435 mm, which is the 2023 model" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/37159688790171-H9-Flow-2025-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H9 Flow column: front 3x F140Q Airflow, bottom None, rear 1x F120Q Airflow" }
   },
   "case-nzxt-h5-flow-2024": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "H5 Flow (2024), matching this row's name. The catalogue held 365 mm, which is the H5 (2022) figure" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "Top 280 mm is 240 mm-base and needs low-profile memory" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-08-30", "note": "Top 280 mm is 240 mm-base and needs low-profile memory" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/40225168535451-H5-Flow-2024-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H5 Flow column: front 1x F120Q Airflow, rear 1x F120Q Airflow" }
   },
   "case-nzxt-h6-flow": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://nzxt.com/products/h6-flow", "checkedOn": "2026-08-30", "note": "NZXT lists ATX, Micro-ATX, Mini-ITX - no E-ATX on this model" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/40183529624347-H6-Flow-2023-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H6 Flow column: front 3x F120Q Airflow" }
   },
   "case-nzxt-h5-elite": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30", "note": "H5 Elite (2022), CC-H51EB-01. NZXT states \"Up to 365 mm (w/o front fans or radiator)\"" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/37734705208347-H5-2022-Series-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H5 Elite (2022) column: front 2x F140 RGB, top None, rear None, bottom 1x F120Q Airflow" }
   },
   "case-nzxt-h210": {
     "maxGpuLength": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30", "note": "NZXT states \"Up to 325 mm (w/o front fans or radiator)\"" },
     "maxCoolerHeight": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://support.nzxt.com/hc/en-us/articles/37508079588251-H210-Series-Specs", "checkedOn": "2026-10-17", "note": "NZXT spec table 'Included Fans', H210 column: top 1x Aer F 120mm, rear 1x Aer F 120mm" }
   },
   "case-hyte-y60": {
     "maxGpuLength": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30", "note": "HYTE states \"375mm length, 75mm width (60mm or less recommended for best cooling)\"" },
     "maxCoolerHeight": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30", "note": "HYTE publishes \"3 + 7 half-height\"; 3 is the full-height count the GPU occupies. The Y60 mounts the card vertically on an included PCIe 4.0 x16 riser" },
-    "radiatorSupport": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://hyte.com/store/y60/cs-hyte-y60-bw", "checkedOn": "2026-10-17", "note": "HYTE: 'The three pre-installed Flow FE12 fans'" }
   },
   "case-corsair-4000d": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/x", "checkedOn": "2026-10-17", "note": "Corsair: 'Equipped with two CORSAIR 120mm AirGuide fans'" }
   },
   "case-corsair-3000d": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/NcRwrH/corsair-3000d-airflow-atx-mid-tower-case-cc-9011251-ww", "checkedOn": "2026-08-30", "note": "Corsair publishes NO motherboard form-factor row for the 3000D AIRFLOW - not on the black, white or RGB SKU, nor the UK region page. PCPartPicker lists ATX/EATX/Micro ATX/Mini ITX for CC-9011251-WW, and independently agrees with Corsair on the 360 mm GPU length and 7 slots" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011252-ww/x", "checkedOn": "2026-10-17", "note": "Corsair: 'Includes 2x SP120 fans'" }
   },
   "case-corsair-5000d": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011210-ww/x", "checkedOn": "2026-10-17", "note": "Corsair: 'two included CORSAIR AirGuide fans'" }
   },
   "case-corsair-6500x": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"8 horizontal (+4 vertical with Vertical Mount Accessory)\"" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011257-ww/x", "checkedOn": "2026-10-17", "note": "Corsair's page names no included fans (RX120s ship only in bundles). Cross-checked: HWBusters review, 'Pre-installed fans: None (RX120 fans included only in bundles)', https://hwbusters.com/chassis/corsair-6500x-case-review-thermal-noise-damping-output-evaluation/" }
   },
   "case-corsair-2500x": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"4 horizontal (4 vertical with accessory)\"" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" },
+    "includedFans": { "result": "unverifiable", "checkedOn": "2026-10-17", "note": "Corsair's page names no included fans; retailers disagree (LDLC: none, Direct Computers: 2x 120mm), so the base 2500X's count is not settled." }
   },
   "case-corsair-4000d-rs": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30", "note": "Re-pointed: Corsair has no \"4000D Airflow RS\". The row now models the FRAME 4000D RS ARGB (CC-9011296-WW), which it was named after; it had been carrying the plain 4000D Airflow's 360 mm" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"7 Horizontal or 3 Vertical\"" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-10-17", "note": "Corsair: 'Three pre-installed RS120 ARGB fans'" }
   },
   "case-corsair-icue-2500x": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"4 horizontal (4 vertical with accessory)\"" },
-    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" }
+    "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" },
+    "includedFans": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011268-ww/x", "checkedOn": "2026-10-17", "note": "Corsair: 'with two pre-installed RX120 RGB fans'" }
   },
   "case-cm-q300l": {
     "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30", "note": "Cooler Master states \"Clearance - GFX 360mm\". The catalogue held 270 mm; 360 mm is confirmed by several independent listings" },
     "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.coolermaster.com/en-global/products/masterbox-q300l/", "checkedOn": "2026-10-17", "note": "Cooler Master spec table 'Pre-installed Fans - Rear: 1x 120mm' (no other pre-installed rows)" }
   },
   "case-cm-nr200": {
     "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30", "note": "Cooler Master states \"L: 330mm (incl. power connector)\"" },
     "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30", "note": "Chassis maximum with the vented steel side panel; 153 mm with the tempered glass panel, and 76 mm with the GPU mounted vertically" },
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.coolermaster.com/en-global/products/masterbox-nr200p/", "checkedOn": "2026-10-17", "note": "Cooler Master: 'Two 120mm Sickleflow fan are included'" }
   },
   "case-cm-nr200-max": {
     "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30", "note": "The NR200P MAX ships with a built-in 280 mm AIO, so air-cooler clearance is only 67 mm. The catalogue held 155 mm, which is the plain NR200P figure" },
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.coolermaster.com/en-global/products/nr200p-max/", "checkedOn": "2026-10-17", "note": "Cooler Master: 'two pre-installed SickleFlow PWM 140mm fans' — on the bundled 280mm AIO radiator, the only fans in the box" }
   },
   "case-cm-td500-mesh": {
     "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.coolermaster.com/en-global/products/masterbox-td500-mesh-v2/", "checkedOn": "2026-10-17", "note": "Cooler Master: 'THREE CF120 ARGB FANS INCLUDED'; spec table front 3x 120mm CF120 ARGB" }
   },
   "case-cm-td300-mesh": {
     "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.coolermaster.com/en-global/products/td300-mesh/", "checkedOn": "2026-10-17", "note": "Cooler Master spec table 'Pre-installed Fans - Front: 2x 120mm CF120 ARGB Fan'; top/rear/bottom N/A" }
   },
   "case-cm-haf-500": {
     "maxGpuLength": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.coolermaster.com/en-global/products/haf-500/", "checkedOn": "2026-10-17", "note": "Cooler Master spec table: front 2x 200mm ARGB, rear 1x 120mm SickleFlow PWM ARGB, top on HDD cage 1x 120mm SickleFlow PWM" }
   },
   "case-phanteks-g360a": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/phanteks-eclipse-g360a", "checkedOn": "2026-08-30", "note": "Phanteks has delisted this case; Noctua's Compatibility Centre gives the manufacturer-specified clearance" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/pqzhP6/phanteks-eclipse-g360a-atx-mid-tower-case-ph-ec360atg_dbk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://legacy.phanteks.com/Eclipse-G360A.html", "checkedOn": "2026-10-17", "note": "Phanteks: 'Three Digital-RGB 120mm fans are pre-installed'" }
   },
   "case-phanteks-p400a": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/phanteks-eclipse-p400a", "checkedOn": "2026-08-30", "note": "Phanteks has delisted this case; Noctua's Compatibility Centre gives 160 mm where the row held 161 mm" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "result": "unverifiable", "checkedOn": "2026-10-17", "note": "Phanteks' current site has no P400A page and the legacy page renders empty; Tom's Hardware reviewed the RGB variant (3 fans) and nothing reachable states the count for the non-RGB SKU this row models." }
   },
   "case-phanteks-nv5": {
     "maxGpuLength": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-10-17", "note": "Phanteks lists 8x 120mm fan positions and no included fans. Cross-checked: KitGuru review spec 'Included fans: None'" }
   },
   "case-phanteks-xt-pro-ultra": {
     "maxGpuLength": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://phanteks.com/product/xt-pro-ultra-black/", "checkedOn": "2026-10-17", "note": "Phanteks: 'Powerful and cool with 4x D-RGB 140mm fans build in'" }
   },
   "case-phanteks-g500a": {
     "maxGpuLength": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://phanteks.com/product/eclipse-g500a-drgb-black/", "checkedOn": "2026-10-17", "note": "Phanteks: '3x M25-140 mm D-RGB PWM fans included'" }
   },
   "case-phanteks-shift-2": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/phanteks-evolv-shift-2", "checkedOn": "2026-08-30", "note": "Phanteks has delisted this case; Noctua's Compatibility Centre gives 85 mm where the row held 82 mm" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker states 2 full-height slots; the row had none recorded" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "result": "unverifiable", "checkedOn": "2026-10-17", "note": "Phanteks' legacy Evolv Shift 2 page renders empty; reviews give 1x 140mm for the Shift 2 Air, a different SKU, so the glass model's count is not stated by a reachable maker source." }
   },
   "case-montech-air-903": {
     "maxGpuLength": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-10-17", "note": "Montech spec table 'Pre-installed Fan(s)': front 140mm*3 (HP140 ARGB PWM), rear 140mm*1" }
   },
   "case-montech-sky-two": {
     "maxGpuLength": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.montechpc.com/sky-two", "checkedOn": "2026-10-17", "note": "Montech spec table 'Pre-installed Fan(s)': side 120mm*2, PSU shroud 120mm*1, rear 120mm*1" }
   },
   "case-montech-king-95-pro": {
     "maxGpuLength": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30", "note": "Montech states 420 mm. The row held 400 mm, one of the four Montech rows the plan flagged as a suspicious cluster" },
     "maxCoolerHeight": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.montechpc.com/king-95-pro", "checkedOn": "2026-10-17", "note": "Montech: 'Includes 2 RX140 PWM ARGB side fans, 3 RX120 PWM ARGB bottom fans, 1 AX120 PWM ARGB rear fan'" }
   },
   "case-montech-xr": {
     "maxGpuLength": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30", "note": "Montech states 420 mm; the row held 400 mm" },
     "maxCoolerHeight": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
     "supportedFormFactors": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" }
+    "radiatorSupport": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-08-30" },
+    "includedFans": { "url": "https://www.montechpc.com/xr", "checkedOn": "2026-10-17", "note": "Montech spec table 'Pre-installed Fan(s)': side 120mm*2, rear 120mm*1" }
   },
   "case-bequiet-pb500": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-pure-base-500", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 190 mm the row already held" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/XCLwrH/be-quiet-pure-base-500-atx-mid-tower-case-bg034", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://www.bequiet.com/en/case/1720", "checkedOn": "2026-10-17", "note": "be quiet!: '2 preinstalled Pure Wings 2 140mm fans'" }
   },
   "case-bequiet-silentbase-802": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-silent-base-802", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. ⚠️ UNRESOLVED: Noctua gives 180.5 mm while be quiet! marketing copy quoted by retailers says 185 mm, which is what the row held. be quiet! renders its own spec table client-side and it could not be read here, so the lower figure is taken and the disagreement recorded rather than hidden" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/TVJmP6/be-quiet-silent-base-802-atx-mid-tower-case-bgw39", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://www.bequiet.com/en/case/2049", "checkedOn": "2026-10-17", "note": "be quiet!: '3 preinstalled Pure Wings 2 140mm fans'" }
   },
   "case-thermaltake-versa-h18": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/thermaltake-versa-h18", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 155 mm the row already held" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/dgndnQ/thermaltake-versa-h18-microatx-mini-tower-case-ca-1j4-00s1wn-01", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://www.thermaltake.com/versa-h18.html", "checkedOn": "2026-10-17", "note": "Thermaltake: 'One standard 120mm rear fan is included'" }
   },
   "case-thermaltake-view-270": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30", "note": "⚠️ PCPartPicker only carries the View 270 PLUS TG ARGB, not the plain TG ARGB this row models. Thermaltake's own product copy gives BOTH as 420 mm GPU and 180 mm cooler, so the figures transfer - but the linked page is the Plus" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/thermaltake-view-270-tg-argb", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer, for the plain TG ARGB. The row held 165 mm" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30", "note": "From the View 270 Plus TG ARGB entry; see the maxGpuLength note" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/3nTFf7/thermaltake-view-270-plus-tg-argb-atx-mid-tower-case-ca-1y7-00m1wn-01", "checkedOn": "2026-08-30", "note": "From the View 270 Plus TG ARGB entry; see the maxGpuLength note" },
+    "includedFans": { "url": "https://www.thermaltake.com/view-270-tg-argb-mid-tower-chassis.html", "checkedOn": "2026-10-17", "note": "Thermaltake (P/N CA-1Y7-00M1WN-00): 'One CT140 ARGB Sync PC Cooling Fan Pre-installed'. ⚠️ The older PCPartPicker source points at the View 270 Plus (3 fans); the catalogue name is the non-Plus case" }
   },
   "case-kolink-observatory-lite": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/kolink-observatory-lite", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 160 mm the row already held" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/ztTzK8/kolink-observatory-lite-mesh-rgb-atx-mid-tower-case-observatory-lite-mesh", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://kolink.eu/Home/case-1/midi-tower-2/observatory-series/observatory-lite-mesh.html", "checkedOn": "2026-10-17", "note": "Kolink (Observatory Lite Mesh, the SKU the older source names): 'The digitally addressable RGB-LED fans, 4 of which are preinstalled'" }
   },
   "case-aerocool-cylon": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/aerocool-cylon", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Agrees with the 155 mm the row already held" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/VFPKHx/aerocool-cylon-atx-mid-tower-case-cylon-rgb", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://aerocool.io/product/cylon/", "checkedOn": "2026-10-17", "note": "Aerocool spec: 'Rear: 120mm x 1 (Includes 120mm Fan)'" }
   },
   "case-antec-c8": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30", "note": "Antec's own compatibility copy states \"GPU max length <= 440mm\"; the row held 450 mm" },
     "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/antec-constellation-c8", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. The C8 is published as the Constellation C8. Agrees with the 175 mm the row already held" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30" },
-    "radiatorSupport": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" }
+    "radiatorSupport": { "url": "https://pcpartpicker.com/product/yxdG3C/antec-c8-atx-mid-tower-case-c8", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
+    "includedFans": { "url": "https://www.antec.com/product/case/c8", "checkedOn": "2026-10-17", "note": "Antec's C8 page lists fan support only (the C8 ARGB is the fan bundle). Cross-checked: GamersNexus says the C8 has fan-less models, https://gamersnexus.net/cases/surprisingly-good-antec-c8-argb-case-review-thermals-cable-management-noise" }
   },
   "case-bequiet-pure-base-501": {
     "maxGpuLength": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30", "note": "PCPartPicker states 368 mm, corroborated by a second listing. The row held 430 mm, which is far out" },
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
     "radiatorSupport": { "url": "https://pcpartpicker.com/product/gGvD4D/be-quiet-pure-base-501-airflow-atx-mid-tower-case-bg074", "checkedOn": "2026-08-30" },
-    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-pure-base-501-airflow", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Its slug is the Airflow variant, matching the PCPartPicker entry the other four fields come from. The row held 190 mm" }
+    "maxCoolerHeight": { "url": "https://www.noctua.at/en/compatibility/by-components/cases/be-quiet%21-pure-base-501-airflow", "checkedOn": "2026-08-30", "note": "Noctua's Compatibility Centre, which publishes the clearance specified by the chassis manufacturer. Its slug is the Airflow variant, matching the PCPartPicker entry the other four fields come from. The row held 190 mm" },
+    "includedFans": { "url": "https://www.bequiet.com/en/case/5322", "checkedOn": "2026-10-17", "note": "be quiet! (Pure Base 501 Airflow): '2 preinstalled Pure Wings 3 140mm PWM fans'" }
   },
   "psu-corsair-rm1000x": {
     "wattage": { "url": "https://www.corsair.com/us/en/p/psu/cp-9020271-na/x", "checkedOn": "2026-08-30" },
@@ -3709,42 +3768,42 @@
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199278.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/615211/10th-generation-intel-core-processors-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (615211-008), Table 5-6 'Package Turbo Specifications (S-Processor Lines)', row '6-Core GT2/GT0 65W: PL2 134 W'. The F part has no graphics (GT0), which the row covers." }
   },
   "cpu-i7-10700k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199335.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/615211/10th-generation-intel-core-processors-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (615211-008), Table 5-6 'Package Turbo Specifications (S-Processor Lines)', row '8-Core 125W: PL2 229 W'. Tom's Hardware's report of the same datasheet revision agrees (229 W)." }
   },
   "cpu-i9-10900k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/199332.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/615211/10th-generation-intel-core-processors-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (615211-008), Table 5-6 'Package Turbo Specifications (S-Processor Lines)', row '10-Core 125W: PL2 250 W'. Tom's Hardware's report of the same datasheet revision agrees (250 W)." }
   },
   "cpu-i5-11400f": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212271.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/634648/11th-generation-intel-core-processor-desktop-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (634648-004), Table 5-3 'Package Turbo Specifications', p. 102, row '8/6 Core 65W: PL2 - 6 Core 154 W'." }
   },
   "cpu-i7-11700k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212047.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/634648/11th-generation-intel-core-processor-desktop-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (634648-004), Table 5-3 'Package Turbo Specifications', p. 102, row '8/6 Core 125W: PL2 251 W'." }
   },
   "cpu-i9-11900k": {
     "socket": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
     "tdp": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Processor Base Power / TDP (base)" },
     "cores": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03" },
     "boostClock": { "url": "https://ark.intel.com/content/www/us/en/ark/products/212325.html", "checkedOn": "2026-09-03", "note": "Max Turbo Frequency, GHz" },
-    "maxPowerW": { "checkedOn": "2026-10-10", "result": "unverifiable", "note": "Intel's spec page for 10th/11th gen lists TDP only, no Maximum Turbo Power. PL2 is in the desktop datasheet Vol. 1 PDF (615211 for 10th gen, 634648 for 11th), not yet read; falls back to tdp" }
+    "maxPowerW": { "url": "https://www.intel.com/content/www/us/en/content-details/634648/11th-generation-intel-core-processor-desktop-datasheet-volume-1-of-2.html", "checkedOn": "2026-10-17", "note": "Intel's hardware-default PL2 (Maximum Turbo Power) from Datasheet Vol. 1 (634648-004), Table 5-3 'Package Turbo Specifications', p. 102, row '8/6 Core 125W: PL2 251 W'." }
   },
   "fans-arctic-p12-single": {
     "size": { "url": "https://www.arctic.de/en/P12-PWM/ACFAN00119A", "checkedOn": "2026-09-05" },

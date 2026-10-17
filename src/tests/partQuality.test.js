@@ -41,3 +41,13 @@ describe('partQuality', () => {
     expect(partQuality(null)).toBe(0)
   })
 })
+
+// Included fans are the researched airflow signal: same room, more fans ranks
+// higher; an unknown count earns nothing rather than a guess.
+describe('case included fans', () => {
+  const c = (specs) => ({ category: 'case', maxGpuLength: 400, maxCoolerHeight: 170, specs })
+  it('ranks a case with more fans in the box higher', () => {
+    expect(partQuality(c({ includedFans: 3 }))).toBeGreaterThan(partQuality(c({ includedFans: 0 })))
+    expect(partQuality(c({}))).toBe(partQuality(c({ includedFans: 0 })))
+  })
+})

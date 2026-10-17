@@ -1,12 +1,12 @@
 {
   "modelVersion": "1.0.0",
   "datasetVersion": "2026-10-17",
-  "fittedAt": "2026-10-17T01:07:37.088Z",
-  "entryCount": 3442,
-  "sourceCount": 60,
+  "fittedAt": "2026-10-17T01:25:22.777Z",
+  "entryCount": 3470,
+  "sourceCount": 61,
   "rejectedNotGpuBound": 29,
   "rejectedByResidual": 110,
-  "gpuRowsConsidered": 2966,
+  "gpuRowsConsidered": 2994,
   "blendK": 5.1,
   "blendKBasis": "default",
   "resCpuScale": {
@@ -28,7 +28,7 @@
       "basis": "measured",
       "anchors": 37,
       "1080p": 20.63,
-      "1440p": 19.93,
+      "1440p": 19.94,
       "4k": 19.99
     },
     "gpu-gtx-1660": {
@@ -43,14 +43,14 @@
       "anchors": 198,
       "1080p": 34.27,
       "1440p": 32.37,
-      "4k": 28.95
+      "4k": 28.94
     },
     "gpu-rtx-2060-super": {
       "basis": "measured",
       "anchors": 209,
       "1080p": 47.03,
       "1440p": 47.77,
-      "4k": 49.29
+      "4k": 49.28
     },
     "gpu-rtx-4070": {
       "basis": "measured",
@@ -63,155 +63,155 @@
       "basis": "measured",
       "anchors": 70,
       "1080p": 110.28,
-      "1440p": 114.09,
-      "4k": 113.62
+      "1440p": 114.1,
+      "4k": 113.63
     },
     "gpu-rx-5500-xt": {
       "basis": "measured",
       "anchors": 174,
       "1080p": 28.28,
       "1440p": 27.07,
-      "4k": 26.56
+      "4k": 26.55
     },
     "gpu-rx-5600-xt": {
       "basis": "measured",
       "anchors": 166,
       "1080p": 40.54,
-      "1440p": 38.7,
+      "1440p": 38.71,
       "4k": 37.54
     },
     "gpu-rx-6800": {
       "basis": "measured",
       "anchors": 152,
       "1080p": 79.18,
-      "1440p": 83.59,
-      "4k": 85.24
+      "1440p": 83.6,
+      "4k": 85.23
     },
     "gpu-rx-6800-xt": {
       "basis": "measured",
       "anchors": 48,
       "1080p": 88.85,
-      "1440p": 90.59,
-      "4k": 93.92
+      "1440p": 90.62,
+      "4k": 93.82
     },
     "gpu-rx-7900xtx": {
       "basis": "measured",
-      "anchors": 50,
+      "anchors": 52,
       "1080p": 129,
-      "1440p": 142.93,
-      "4k": 151.83
+      "1440p": 142.97,
+      "4k": 152.15
     },
     "gpu-rx-7900xt": {
       "basis": "measured",
       "anchors": 47,
       "1080p": 118.29,
-      "1440p": 126.92,
-      "4k": 129.56
+      "1440p": 126.93,
+      "4k": 129.58
     },
     "gpu-rtx-4090": {
       "basis": "measured",
       "anchors": 79,
       "1080p": 118.16,
-      "1440p": 184.48,
-      "4k": 205.89
+      "1440p": 184.45,
+      "4k": 205.92
     },
     "gpu-rtx-4080-super": {
       "basis": "measured",
-      "anchors": 47,
+      "anchors": 49,
       "1080p": 111.77,
-      "1440p": 150.09,
-      "4k": 156.15
+      "1440p": 149.62,
+      "4k": 156.31
     },
     "gpu-rtx-4070ti-super": {
       "basis": "measured",
       "anchors": 45,
       "1080p": 109.79,
-      "1440p": 132.09,
-      "4k": 136.08
+      "1440p": 132.1,
+      "4k": 136.11
     },
     "gpu-rx-7900-gre": {
       "basis": "measured",
       "anchors": 47,
       "1080p": 101.43,
       "1440p": 102.76,
-      "4k": 106.88
+      "4k": 106.89
     },
     "gpu-rx-7800xt": {
       "basis": "measured",
-      "anchors": 84,
+      "anchors": 86,
       "1080p": 93.5,
-      "1440p": 97.23,
-      "4k": 99.09
+      "1440p": 97.41,
+      "4k": 98.95
     },
     "gpu-rx-7700xt": {
       "basis": "measured",
       "anchors": 25,
       "1080p": 88.52,
       "1440p": 81.64,
-      "4k": 88.94
+      "4k": 88.76
     },
     "gpu-rtx-3080": {
       "basis": "measured",
       "anchors": 27,
       "1080p": 95.02,
-      "1440p": 99.11,
-      "4k": 90.99
+      "1440p": 99.14,
+      "4k": 90.75
     },
     "gpu-rx-6700-xt": {
       "basis": "measured",
       "anchors": 27,
       "1080p": 67.97,
-      "1440p": 63.93,
-      "4k": 69.21
+      "1440p": 63.95,
+      "4k": 68.94
     },
     "gpu-rtx-4060ti": {
       "basis": "measured",
       "anchors": 24,
       "1080p": 74.31,
       "1440p": 70.15,
-      "4k": 74.36
+      "4k": 74.13
     },
     "gpu-rx-7600xt": {
       "basis": "measured",
       "anchors": 5,
       "1080p": 64.65,
-      "1440p": 59.47,
-      "4k": 63.85
+      "1440p": 59.58,
+      "4k": 63.65
     },
     "gpu-rx-7600": {
       "basis": "measured",
-      "anchors": 44,
+      "anchors": 46,
       "1080p": 64.56,
-      "1440p": 49.24,
-      "4k": 54.05
+      "1440p": 49.4,
+      "4k": 52.83
     },
     "gpu-rtx-3060-ti": {
       "basis": "measured",
       "anchors": 26,
       "1080p": 70,
-      "1440p": 64.95,
-      "4k": 72.7
+      "1440p": 64.97,
+      "4k": 72.42
     },
     "gpu-rtx-4060": {
       "basis": "measured",
-      "anchors": 44,
+      "anchors": 46,
       "1080p": 65.22,
-      "1440p": 57.55,
-      "4k": 62.28
+      "1440p": 57.63,
+      "4k": 60.1
     },
     "gpu-rx-6650xt": {
       "basis": "measured",
-      "anchors": 6,
+      "anchors": 8,
       "1080p": 59.18,
-      "1440p": 52.38,
-      "4k": 53.26
+      "1440p": 55.35,
+      "4k": 54.27
     },
     "gpu-rx-6600": {
       "basis": "measured",
       "anchors": 4,
       "1080p": 51.1,
-      "1440p": 34,
-      "4k": 34,
+      "1440p": 34.06,
+      "4k": 34.06,
       "copiedResolutions": [
         "4k"
       ]
@@ -220,8 +220,8 @@
       "basis": "measured",
       "anchors": 3,
       "1080p": 43,
-      "1440p": 40.11,
-      "4k": 40.11,
+      "1440p": 40.24,
+      "4k": 40.24,
       "copiedResolutions": [
         "4k"
       ]
@@ -230,8 +230,8 @@
       "basis": "measured",
       "anchors": 6,
       "1080p": 39.13,
-      "1440p": 40.39,
-      "4k": 45.55
+      "1440p": 40.56,
+      "4k": 45.37
     },
     "gpu-rx-6500xt": {
       "basis": "measured",
@@ -242,22 +242,22 @@
       "basis": "measured",
       "anchors": 5,
       "1080p": 149.3,
-      "1440p": 149.43,
-      "4k": 161.79
+      "1440p": 149.96,
+      "4k": 161.26
     },
     "gpu-rtx-2070-super": {
       "basis": "measured",
       "anchors": 3,
       "1080p": 64.65,
-      "1440p": 64.69,
-      "4k": 64.67
+      "1440p": 65.03,
+      "4k": 64.36
     },
     "gpu-gtx-1080": {
       "basis": "measured",
       "anchors": 2,
       "1080p": 49.53,
-      "1440p": 49.04,
-      "4k": 49.04,
+      "1440p": 49.3,
+      "4k": 49.3,
       "copiedResolutions": [
         "4k"
       ]
@@ -266,15 +266,15 @@
       "basis": "measured",
       "anchors": 3,
       "1080p": 49.34,
-      "1440p": 49.09,
-      "4k": 50.68
+      "1440p": 49.36,
+      "4k": 50.44
     },
     "gpu-rtx-2060": {
       "basis": "measured",
       "anchors": 3,
       "1080p": 47.13,
-      "1440p": 37.44,
-      "4k": 37.44,
+      "1440p": 37.54,
+      "4k": 37.54,
       "copiedResolutions": [
         "4k"
       ]
@@ -286,10 +286,10 @@
     },
     "gpu-rtx-5090": {
       "basis": "measured",
-      "anchors": 76,
-      "1440p": 218.48,
-      "4k": 258.66,
-      "1080p": 218.48,
+      "anchors": 78,
+      "1440p": 217.69,
+      "4k": 259.32,
+      "1080p": 217.69,
       "copiedResolutions": [
         "1080p"
       ]
@@ -297,29 +297,29 @@
     "gpu-rtx-5080": {
       "basis": "measured",
       "anchors": 78,
-      "1440p": 160.18,
-      "4k": 174.14,
-      "1080p": 160.18,
+      "1440p": 160.14,
+      "4k": 174.19,
+      "1080p": 160.14,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rx-9070xt": {
       "basis": "measured",
-      "anchors": 78,
-      "1440p": 139.72,
-      "4k": 144.87,
-      "1080p": 139.72,
+      "anchors": 80,
+      "1440p": 139.4,
+      "4k": 144.43,
+      "1080p": 139.4,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rtx-5070ti": {
       "basis": "measured",
-      "anchors": 78,
-      "1440p": 143.5,
-      "4k": 152.14,
-      "1080p": 143.5,
+      "anchors": 80,
+      "1440p": 143.4,
+      "4k": 152.51,
+      "1080p": 143.4,
       "copiedResolutions": [
         "1080p"
       ]
@@ -327,9 +327,9 @@
     "gpu-rx-9070": {
       "basis": "measured",
       "anchors": 76,
-      "1440p": 124.92,
-      "4k": 128.22,
-      "1080p": 124.92,
+      "1440p": 124.89,
+      "4k": 128.26,
+      "1080p": 124.89,
       "copiedResolutions": [
         "1080p"
       ]
@@ -337,30 +337,29 @@
     "gpu-rtx-5070": {
       "basis": "measured",
       "anchors": 78,
-      "1440p": 116.46,
-      "4k": 118.23,
-      "1080p": 116.46,
+      "1440p": 116.43,
+      "4k": 118.25,
+      "1080p": 116.43,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-intel-arc-b580": {
       "basis": "measured",
-      "anchors": 38,
-      "1440p": 59.92,
-      "1080p": 59.92,
-      "4k": 59.92,
+      "anchors": 40,
+      "1440p": 59.93,
+      "4k": 59.88,
+      "1080p": 59.93,
       "copiedResolutions": [
-        "1080p",
-        "4k"
+        "1080p"
       ]
     },
     "gpu-intel-arc-a770": {
       "basis": "measured",
       "anchors": 21,
-      "1440p": 53.85,
-      "1080p": 53.85,
-      "4k": 53.85,
+      "1440p": 53.84,
+      "1080p": 53.84,
+      "4k": 53.84,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -369,9 +368,9 @@
     "gpu-rtx-3090-ti": {
       "basis": "measured",
       "anchors": 2,
-      "1440p": 132.09,
-      "4k": 138.03,
-      "1080p": 132.09,
+      "1440p": 132.12,
+      "4k": 138.04,
+      "1080p": 132.12,
       "copiedResolutions": [
         "1080p"
       ]
@@ -379,30 +378,29 @@
     "gpu-rtx-3070": {
       "basis": "measured",
       "anchors": 3,
-      "1440p": 71.97,
-      "4k": 66.06,
-      "1080p": 71.97,
+      "1440p": 71.98,
+      "4k": 66.05,
+      "1080p": 71.98,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rtx-5060ti": {
       "basis": "measured",
-      "anchors": 19,
-      "1440p": 85.31,
-      "1080p": 85.31,
-      "4k": 85.31,
+      "anchors": 21,
+      "1440p": 85.57,
+      "4k": 83.11,
+      "1080p": 85.57,
       "copiedResolutions": [
-        "1080p",
-        "4k"
+        "1080p"
       ]
     },
     "gpu-rtx-2080-ti": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 77.48,
-      "1080p": 77.48,
-      "4k": 77.48,
+      "1440p": 77.49,
+      "1080p": 77.49,
+      "4k": 77.49,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -411,9 +409,9 @@
     "gpu-rtx-4060ti-16gb": {
       "basis": "measured",
       "anchors": 1,
-      "1440p": 80.65,
-      "1080p": 80.65,
-      "4k": 80.65,
+      "1440p": 80.67,
+      "1080p": 80.67,
+      "4k": 80.67,
       "copiedResolutions": [
         "1080p",
         "4k"
@@ -422,30 +420,49 @@
     "gpu-rx-9070-gre": {
       "basis": "measured",
       "anchors": 36,
-      "1440p": 107.43,
-      "4k": 105.75,
-      "1080p": 107.43,
+      "1440p": 107.37,
+      "4k": 105.76,
+      "1080p": 107.37,
       "copiedResolutions": [
         "1080p"
       ]
     },
     "gpu-rx-9060xt": {
       "basis": "measured",
-      "anchors": 18,
-      "1440p": 82.45,
-      "1080p": 82.45,
-      "4k": 82.45,
+      "anchors": 20,
+      "1440p": 81.68,
+      "4k": 62.74,
+      "1080p": 81.68,
       "copiedResolutions": [
-        "1080p",
-        "4k"
+        "1080p"
       ]
     },
     "gpu-rtx-4070ti": {
       "basis": "measured",
       "anchors": 2,
-      "1440p": 119.25,
-      "4k": 126.62,
-      "1080p": 119.25,
+      "1440p": 119.24,
+      "4k": 126.59,
+      "1080p": 119.24,
+      "copiedResolutions": [
+        "1080p"
+      ]
+    },
+    "gpu-rtx-5060": {
+      "basis": "measured",
+      "anchors": 2,
+      "1440p": 77.24,
+      "4k": 69.74,
+      "1080p": 77.24,
+      "copiedResolutions": [
+        "1080p"
+      ]
+    },
+    "gpu-rtx-5050": {
+      "basis": "measured",
+      "anchors": 2,
+      "1440p": 60.85,
+      "4k": 56.86,
+      "1080p": 60.85,
       "copiedResolutions": [
         "1080p"
       ]
@@ -589,14 +606,14 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1465.74,
+          "A": 1465.81,
           "sources": 2,
           "cv": 0.6457,
           "lowBase": 1.2388,
           "lowSources": 2
         },
         "ultrahoch|native": {
-          "A": 574.71,
+          "A": 574.66,
           "sources": 1,
           "cv": 0.3599,
           "lowBase": 1.1972,
@@ -606,14 +623,14 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 3830.26,
+          "A": 3829.95,
           "sources": 2,
           "cv": 0.2746,
           "lowBase": 1.4241,
           "lowSources": 2
         },
         "ultrahoch|native": {
-          "A": 1019.92,
+          "A": 1020.26,
           "sources": 1,
           "cv": 0.2899,
           "lowBase": 1.1806,
@@ -651,14 +668,14 @@
       },
       "1440p": {
         "high|native": {
-          "A": 2661.48,
+          "A": 2661.83,
           "sources": 5,
           "cv": 0.7253,
           "lowBase": 1.1032,
           "lowSources": 5
         },
         "hoch|quality": {
-          "A": 1523.36,
+          "A": 1523.23,
           "sources": 1,
           "cv": 0.3461,
           "lowBase": 1.2993,
@@ -670,14 +687,14 @@
       },
       "4k": {
         "high|native": {
-          "A": 4123.22,
+          "A": 4123,
           "sources": 3,
           "cv": 0.4366,
           "lowBase": 1.0509,
           "lowSources": 3
         },
         "hoch|quality": {
-          "A": 2505.78,
+          "A": 2506.62,
           "sources": 1,
           "cv": 0.2527,
           "lowBase": 1.2797,
@@ -724,7 +741,7 @@
       },
       "1440p": {
         "sehr-hoch|native": {
-          "A": 1661.98,
+          "A": 1661.82,
           "sources": 1,
           "cv": 0.3955,
           "lowBase": 1.0753,
@@ -732,7 +749,7 @@
           "B": 460.7
         },
         "very-high|native": {
-          "A": 1147.05,
+          "A": 1147.2,
           "sources": 5,
           "cv": 0.4541,
           "lowBase": 1.226,
@@ -741,7 +758,7 @@
       },
       "4k": {
         "sehr-hoch|native": {
-          "A": 2745.03,
+          "A": 2745.95,
           "sources": 1,
           "cv": 0.3175,
           "lowBase": 1.0657,
@@ -749,7 +766,7 @@
           "B": 460.7
         },
         "very-high|native": {
-          "A": 2194.98,
+          "A": 2194.81,
           "sources": 5,
           "cv": 0.6103,
           "lowBase": 1.2167,
@@ -793,14 +810,14 @@
       },
       "1440p": {
         "very-high|native": {
-          "A": 1177.65,
+          "A": 1177.8,
           "sources": 7,
           "cv": 0.5419,
           "lowBase": 1.3904,
           "lowSources": 7
         },
         "sehr-hoch|native": {
-          "A": 1361.52,
+          "A": 1361.4,
           "sources": 1,
           "cv": 0.3919,
           "lowBase": 1.1433,
@@ -810,14 +827,14 @@
       },
       "4k": {
         "very-high|native": {
-          "A": 2094.15,
+          "A": 2093.98,
           "sources": 7,
           "cv": 0.6322,
           "lowBase": 1.2812,
           "lowSources": 7
         },
         "sehr-hoch|native": {
-          "A": 2322.33,
+          "A": 2323.1,
           "sources": 1,
           "cv": 0.2985,
           "lowBase": 1.1059,
@@ -848,14 +865,14 @@
       },
       "1440p": {
         "high|native": {
-          "A": 1090.86,
+          "A": 1091.02,
           "sources": 6,
           "cv": 0.4532,
           "lowBase": 1.2201,
           "lowSources": 6
         },
         "grafik-priorisieren|native": {
-          "A": 1636.23,
+          "A": 1636.08,
           "sources": 1,
           "cv": 0.4225,
           "lowBase": 1.1223,
@@ -867,14 +884,14 @@
       },
       "4k": {
         "high|native": {
-          "A": 1846.76,
+          "A": 1846.58,
           "sources": 6,
           "cv": 0.5036,
           "lowBase": 1.255,
           "lowSources": 6
         },
         "grafik-priorisieren|native": {
-          "A": 2497.96,
+          "A": 2498.8,
           "sources": 1,
           "cv": 0.3155,
           "lowBase": 1.0883,
@@ -918,7 +935,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 895.69,
+          "A": 895.81,
           "sources": 7,
           "cv": 0.5751,
           "lowBase": 1.1292,
@@ -927,7 +944,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1758.69,
+          "A": 1758.55,
           "sources": 7,
           "cv": 0.6385,
           "lowBase": 1.1503,
@@ -975,14 +992,14 @@
       },
       "1440p": {
         "very-high|native": {
-          "A": 482.5,
+          "A": 482.57,
           "sources": 6,
           "cv": 0.4945,
           "lowBase": 1.5901,
           "lowSources": 6
         },
         "sehr-hoch|native": {
-          "A": 564.95,
+          "A": 567.95,
           "sources": 1,
           "cv": 0.4704,
           "lowBase": 1.457,
@@ -991,14 +1008,14 @@
       },
       "4k": {
         "very-high|native": {
-          "A": 951.41,
+          "A": 951.32,
           "sources": 6,
           "cv": 0.5487,
           "lowBase": 1.656,
           "lowSources": 6
         },
         "sehr-hoch|native": {
-          "A": 938.53,
+          "A": 934.05,
           "sources": 1,
           "cv": 0.4637,
           "lowBase": 1.5156,
@@ -1031,12 +1048,12 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1253.75,
+          "A": 1253.92,
           "sources": 7,
           "cv": 0.587
         },
         "ultra|quality": {
-          "A": 1106.33,
+          "A": 1105.76,
           "sources": 1,
           "cv": 0.3996,
           "lowBase": 1.1755,
@@ -1045,12 +1062,12 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2920.25,
+          "A": 2920.07,
           "sources": 8,
           "cv": 0.5552
         },
         "ultra|quality": {
-          "A": 2318.29,
+          "A": 2318.64,
           "sources": 1,
           "cv": 0.343,
           "lowBase": 1.1237,
@@ -1092,7 +1109,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 923.41,
+          "A": 923.52,
           "sources": 8,
           "cv": 0.6533,
           "lowBase": 1.1294,
@@ -1102,7 +1119,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1712.05,
+          "A": 1711.94,
           "sources": 8,
           "cv": 0.6402,
           "lowBase": 1.1474,
@@ -1145,7 +1162,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1460.5,
+          "A": 1460.69,
           "sources": 7,
           "cv": 0.686,
           "lowBase": 1.1578,
@@ -1155,7 +1172,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2288.7,
+          "A": 2288.51,
           "sources": 7,
           "cv": 0.7583,
           "lowBase": 1.2069,
@@ -1197,14 +1214,14 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1752.93,
+          "A": 1752.2,
           "sources": 4,
           "cv": 0.4923,
           "lowBase": 1.1075,
           "lowSources": 18
         },
         "ultra|quality": {
-          "A": 1354.54,
+          "A": 1354.42,
           "sources": 1,
           "cv": 0.4308,
           "lowBase": 1.131,
@@ -1213,14 +1230,14 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 3207.58,
+          "A": 3207.91,
           "sources": 4,
           "cv": 0.5104,
           "lowBase": 1.0624,
           "lowSources": 13
         },
         "ultra|quality": {
-          "A": 2156.06,
+          "A": 2156.78,
           "sources": 1,
           "cv": 0.3263,
           "lowBase": 1.0628,
@@ -1238,7 +1255,7 @@
       },
       "1440p": {
         "extrem|native": {
-          "A": 1415.42,
+          "A": 1415.29,
           "sources": 1,
           "cv": 0.3966,
           "lowBase": 1.1973,
@@ -1247,7 +1264,7 @@
       },
       "4k": {
         "extrem|native": {
-          "A": 2746.58,
+          "A": 2747.5,
           "sources": 1,
           "cv": 0.2961,
           "lowBase": 1.1515,
@@ -1288,14 +1305,14 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1579.07,
+          "A": 1579.14,
           "sources": 2,
           "cv": 0.4815,
           "lowBase": 1.3515,
           "lowSources": 2
         },
         "ultra|quality": {
-          "A": 1916.24,
+          "A": 1916.06,
           "sources": 1,
           "cv": 0.3808,
           "lowBase": 1.3027,
@@ -1311,7 +1328,7 @@
           "lowSources": 1
         },
         "ultra|quality": {
-          "A": 2873.83,
+          "A": 2874.79,
           "sources": 1,
           "cv": 0.2698,
           "lowBase": 1.2532,
@@ -1355,7 +1372,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1517.26,
+          "A": 1516.83,
           "sources": 5,
           "cv": 0.4676,
           "lowBase": 1.121,
@@ -1367,7 +1384,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2856.85,
+          "A": 2857.66,
           "sources": 4,
           "cv": 0.3964,
           "lowBase": 1.1316,
@@ -1398,7 +1415,7 @@
       },
       "1440p": {
         "kino|quality": {
-          "A": 2931.69,
+          "A": 2931.42,
           "sources": 1,
           "cv": 0.3916,
           "lowBase": 1.1577,
@@ -1407,7 +1424,7 @@
       },
       "4k": {
         "kino|quality": {
-          "A": 4142.45,
+          "A": 4143.84,
           "sources": 1,
           "cv": 0.2929,
           "lowBase": 1.1526,
@@ -1441,14 +1458,14 @@
       },
       "1440p": {
         "high|native": {
-          "A": 1660.66,
+          "A": 1660.86,
           "sources": 8,
           "cv": 0.6544,
           "lowBase": 1.3003,
           "lowSources": 7
         },
         "maximale-grafikdetails|quality": {
-          "A": 1683.47,
+          "A": 1682.61,
           "sources": 1,
           "cv": 0.4331,
           "lowBase": 1.4058,
@@ -1457,14 +1474,14 @@
       },
       "4k": {
         "high|native": {
-          "A": 3067.04,
+          "A": 3066.86,
           "sources": 8,
           "cv": 0.6585,
           "lowBase": 1.3462,
           "lowSources": 7
         },
         "maximale-grafikdetails|quality": {
-          "A": 2790.77,
+          "A": 2791.19,
           "sources": 1,
           "cv": 0.3685,
           "lowBase": 1.315,
@@ -1498,14 +1515,14 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1138.51,
+          "A": 1138.65,
           "sources": 7,
           "cv": 0.4629,
           "lowBase": 1.2329,
           "lowSources": 7
         },
         "ultra|quality": {
-          "A": 1175.07,
+          "A": 1174.47,
           "sources": 1,
           "cv": 0.3373,
           "lowBase": 1.2005,
@@ -1514,14 +1531,14 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2174.07,
+          "A": 2173.86,
           "sources": 6,
           "cv": 0.4487,
           "lowBase": 1.1667,
           "lowSources": 6
         },
         "ultra|quality": {
-          "A": 1816.4,
+          "A": 1816.67,
           "sources": 1,
           "cv": 0.2896,
           "lowBase": 1.198,
@@ -1562,7 +1579,7 @@
       },
       "1440p": {
         "epic|native": {
-          "A": 1713.1,
+          "A": 1712.96,
           "sources": 3,
           "cv": 0.3958,
           "lowBase": 1.2274,
@@ -1571,7 +1588,7 @@
       },
       "4k": {
         "epic|native": {
-          "A": 3074.41,
+          "A": 3075.38,
           "sources": 2,
           "cv": 0.3117,
           "lowBase": 1.1715,
@@ -1612,7 +1629,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1237.28,
+          "A": 1237.19,
           "sources": 4,
           "cv": 0.464,
           "lowBase": 1.2039,
@@ -1621,7 +1638,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2021.38,
+          "A": 2021.97,
           "sources": 3,
           "cv": 0.3601,
           "lowBase": 1.15,
@@ -1665,7 +1682,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 2420.85,
+          "A": 2420.96,
           "sources": 2,
           "cv": 0.6996,
           "lowBase": 1.2276,
@@ -1746,7 +1763,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 460.03,
+          "A": 459.94,
           "sources": 9,
           "cv": 0.4382
         }
@@ -1778,7 +1795,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1169.78,
+          "A": 1169.98,
           "sources": 7,
           "cv": 0.6222,
           "lowBase": 1.3418,
@@ -1787,7 +1804,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1796.8,
+          "A": 1796.21,
           "sources": 4,
           "cv": 0.576,
           "lowBase": 1.2089,
@@ -1821,7 +1838,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 447.73,
+          "A": 447.82,
           "sources": 5,
           "cv": 0.3311,
           "lowBase": 1.1095,
@@ -1830,7 +1847,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 706.44,
+          "A": 706.25,
           "sources": 6,
           "cv": 0.656,
           "lowBase": 1.1237,
@@ -1857,7 +1874,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 730.38,
+          "A": 730.5,
           "sources": 6,
           "cv": 0.2046,
           "lowBase": 1.2111,
@@ -1866,7 +1883,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1072.7,
+          "A": 1072.59,
           "sources": 6,
           "cv": 0.4481,
           "lowBase": 1.1971,
@@ -1903,12 +1920,12 @@
       },
       "1440p": {
         "epic|native": {
-          "A": 502.81,
+          "A": 502.85,
           "sources": 1,
           "cv": null
         },
         "hoch|balanced": {
-          "A": 786.49,
+          "A": 789.05,
           "sources": 1,
           "cv": 0.3315,
           "lowBase": 1.2531,
@@ -1917,12 +1934,12 @@
       },
       "4k": {
         "epic|native": {
-          "A": 1057.62,
+          "A": 1057.55,
           "sources": 1,
           "cv": null
         },
         "hoch|performance": {
-          "A": 1142.19,
+          "A": 1138.73,
           "sources": 1,
           "cv": 0.3356,
           "lowBase": 1.2021,
@@ -1942,7 +1959,7 @@
       },
       "1440p": {
         "high|native": {
-          "A": 700.99,
+          "A": 701.08,
           "sources": 5,
           "cv": 0.3835,
           "lowBase": 1.6498,
@@ -1951,7 +1968,7 @@
       },
       "4k": {
         "high|native": {
-          "A": 698.34,
+          "A": 698.16,
           "sources": 4,
           "cv": 0.1367,
           "lowBase": 1.6943,
@@ -1992,7 +2009,7 @@
       },
       "1440p": {
         "epic|native": {
-          "A": 931.86,
+          "A": 932,
           "sources": 6,
           "cv": 0.4635,
           "lowBase": 1.3961,
@@ -2001,7 +2018,7 @@
       },
       "4k": {
         "epic|native": {
-          "A": 1750.85,
+          "A": 1750.68,
           "sources": 6,
           "cv": 0.4892,
           "lowBase": 1.6374,
@@ -2042,7 +2059,7 @@
       },
       "1440p": {
         "epic|native": {
-          "A": 788.39,
+          "A": 788.5,
           "sources": 6,
           "cv": 0.5483,
           "lowBase": 1.9295,
@@ -2051,7 +2068,7 @@
       },
       "4k": {
         "epic|native": {
-          "A": 2059.07,
+          "A": 2058.88,
           "sources": 6,
           "cv": 0.6818,
           "lowBase": 2.0441,
@@ -2092,7 +2109,7 @@
       },
       "1440p": {
         "epic|native": {
-          "A": 734.25,
+          "A": 734.34,
           "sources": 7,
           "cv": 0.5442,
           "lowBase": 1.2907,
@@ -2101,7 +2118,7 @@
       },
       "4k": {
         "epic|native": {
-          "A": 1613.13,
+          "A": 1613,
           "sources": 7,
           "cv": 0.5867,
           "lowBase": 1.306,
@@ -2142,7 +2159,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 2220.24,
+          "A": 2220.52,
           "sources": 7,
           "cv": 0.8003,
           "lowBase": 1.171,
@@ -2151,7 +2168,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 4713.13,
+          "A": 4712.75,
           "sources": 7,
           "cv": 0.9132,
           "lowBase": 1.2341,
@@ -2217,7 +2234,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 697.48,
+          "A": 697.58,
           "sources": 6,
           "cv": 0.3218,
           "lowBase": 1.1908,
@@ -2226,7 +2243,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1364.51,
+          "A": 1364.38,
           "sources": 6,
           "cv": 0.4947,
           "lowBase": 1.1778,
@@ -2267,7 +2284,7 @@
       },
       "1440p": {
         "very-high|native": {
-          "A": 1309.62,
+          "A": 1309.81,
           "sources": 6,
           "cv": 0.579,
           "lowBase": 1.4294,
@@ -2276,7 +2293,7 @@
       },
       "4k": {
         "very-high|native": {
-          "A": 1996.67,
+          "A": 1996.48,
           "sources": 6,
           "cv": 0.6028,
           "lowBase": 1.4827,
@@ -2317,7 +2334,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 513.51,
+          "A": 513.57,
           "sources": 7,
           "cv": 0.5634,
           "lowBase": 1.2509,
@@ -2326,7 +2343,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 968.24,
+          "A": 968.16,
           "sources": 7,
           "cv": 0.5643,
           "lowBase": 1.3444,
@@ -2367,7 +2384,7 @@
       },
       "1440p": {
         "epic|native": {
-          "A": 1338.02,
+          "A": 1338.19,
           "sources": 7,
           "cv": 0.5259,
           "lowBase": 1.2929,
@@ -2376,7 +2393,7 @@
       },
       "4k": {
         "epic|native": {
-          "A": 2739.28,
+          "A": 2739.06,
           "sources": 7,
           "cv": 0.5461,
           "lowBase": 1.2747,
@@ -2403,7 +2420,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 676.43,
+          "A": 676.52,
           "sources": 7,
           "cv": 0.6282,
           "lowBase": 1.8208,
@@ -2412,7 +2429,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1354.12,
+          "A": 1354.01,
           "sources": 7,
           "cv": 0.6388,
           "lowBase": 1.9839,
@@ -2453,7 +2470,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1486.27,
+          "A": 1486.46,
           "sources": 7,
           "cv": 0.6129,
           "lowBase": 1.2494,
@@ -2462,7 +2479,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 4019.15,
+          "A": 4018.84,
           "sources": 6,
           "cv": 0.809,
           "lowBase": 1.7527,
@@ -2528,7 +2545,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1097.15,
+          "A": 1097.29,
           "sources": 7,
           "cv": 0.5206,
           "lowBase": 1.2582,
@@ -2537,7 +2554,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2276.2,
+          "A": 2276.02,
           "sources": 6,
           "cv": 0.564,
           "lowBase": 1.2337,
@@ -2578,7 +2595,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 731.97,
+          "A": 732.07,
           "sources": 7,
           "cv": 0.4057,
           "lowBase": 1.1658,
@@ -2587,7 +2604,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1313.41,
+          "A": 1313.31,
           "sources": 7,
           "cv": 0.4093,
           "lowBase": 1.1463,
@@ -2628,7 +2645,7 @@
       },
       "1440p": {
         "very-high|native": {
-          "A": 770.05,
+          "A": 770.15,
           "sources": 7,
           "cv": 0.5093,
           "lowBase": 1.3297,
@@ -2637,7 +2654,7 @@
       },
       "4k": {
         "very-high|native": {
-          "A": 1469.52,
+          "A": 1469.4,
           "sources": 7,
           "cv": 0.6039,
           "lowBase": 1.3389,
@@ -2678,7 +2695,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1548.3,
+          "A": 1548.5,
           "sources": 7,
           "cv": 0.5159,
           "lowBase": 1.1296,
@@ -2687,7 +2704,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2719.15,
+          "A": 2718.93,
           "sources": 7,
           "cv": 0.5421,
           "lowBase": 1.1092,
@@ -2714,7 +2731,7 @@
       },
       "1440p": {
         "high|native": {
-          "A": 585.31,
+          "A": 585.38,
           "sources": 8,
           "cv": 0.5736,
           "lowBase": 1.7073,
@@ -2723,7 +2740,7 @@
       },
       "4k": {
         "high|native": {
-          "A": 1220.36,
+          "A": 1220.29,
           "sources": 8,
           "cv": 0.569,
           "lowBase": 1.8841,
@@ -2757,7 +2774,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1060.37,
+          "A": 1060.5,
           "sources": 7,
           "cv": 0.5495,
           "lowBase": 1.1455,
@@ -2766,7 +2783,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 1547.26,
+          "A": 1547.14,
           "sources": 6,
           "cv": 0.6108,
           "lowBase": 1.1255,
@@ -2800,7 +2817,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 1243.67,
+          "A": 1243.84,
           "sources": 10,
           "cv": 0.6959,
           "lowBase": 1.3413,
@@ -2809,7 +2826,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2176.17,
+          "A": 2175.8,
           "sources": 10,
           "cv": 0.7061,
           "lowBase": 1.2883,
@@ -2843,7 +2860,7 @@
       },
       "1440p": {
         "ultra|native": {
-          "A": 393.72,
+          "A": 393.79,
           "sources": 7,
           "cv": 0.7124,
           "lowBase": 1.3051,
@@ -2852,7 +2869,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 851.18,
+          "A": 850.97,
           "sources": 7,
           "cv": 0.8745,
           "lowBase": 1.2558,
@@ -2863,7 +2880,7 @@
     "doom-the-dark-ages": {
       "1440p": {
         "max-details|native": {
-          "A": 2116.89,
+          "A": 2117.33,
           "sources": 1,
           "cv": 0.5014,
           "lowBase": 1.0949,
@@ -2872,7 +2889,7 @@
       },
       "4k": {
         "max-details|native": {
-          "A": 3761.06,
+          "A": 3761.38,
           "sources": 1,
           "cv": 0.3564,
           "lowBase": 1.1082,
@@ -2883,7 +2900,7 @@
     "dragon-age-veilguard": {
       "1440p": {
         "ultra|quality": {
-          "A": 2047.58,
+          "A": 2047.4,
           "sources": 1,
           "cv": 0.5624,
           "lowBase": 1.2084,
@@ -2892,7 +2909,7 @@
       },
       "4k": {
         "ultra|quality": {
-          "A": 2670.2,
+          "A": 2671.09,
           "sources": 1,
           "cv": 0.3377,
           "lowBase": 1.1617,
@@ -2903,7 +2920,7 @@
     "empire-of-the-ants": {
       "1440p": {
         "hoch|ultra-quality": {
-          "A": 1504.64,
+          "A": 1504.5,
           "sources": 1,
           "cv": 0.3706,
           "lowBase": 1.1359,
@@ -2912,7 +2929,7 @@
       },
       "4k": {
         "hoch|ultra-quality": {
-          "A": 2877.65,
+          "A": 2878.61,
           "sources": 1,
           "cv": 0.2802,
           "lowBase": 1.1182,
@@ -2923,7 +2940,7 @@
     "frostpunk-2": {
       "1440p": {
         "ultra-high|native": {
-          "A": 2257.43,
+          "A": 2257.23,
           "sources": 1,
           "cv": 0.4012,
           "lowBase": 1.147,
@@ -2935,7 +2952,7 @@
       },
       "4k": {
         "ultra-high|native": {
-          "A": 4359.57,
+          "A": 4361.03,
           "sources": 1,
           "cv": 0.3295,
           "lowBase": 1.1016,
@@ -2954,7 +2971,7 @@
     "mechwarrior-5-clans": {
       "1440p": {
         "maximale-grafikdetails|native": {
-          "A": 2218.99,
+          "A": 2218.79,
           "sources": 1,
           "cv": 0.4079,
           "lowBase": 1.2972,
@@ -2963,7 +2980,7 @@
       },
       "4k": {
         "maximale-grafikdetails|native": {
-          "A": 3850.23,
+          "A": 3851.52,
           "sources": 1,
           "cv": 0.2972,
           "lowBase": 1.2619,
@@ -2974,7 +2991,7 @@
     "outcast-2": {
       "1440p": {
         "ultra|native": {
-          "A": 1210.1,
+          "A": 1209.99,
           "sources": 1,
           "cv": 0.4181,
           "lowBase": 1.5455,
@@ -2986,7 +3003,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2149.79,
+          "A": 2150.51,
           "sources": 1,
           "cv": 0.3756,
           "lowBase": 1.6284,
@@ -3005,7 +3022,7 @@
     "satisfactory": {
       "1440p": {
         "ultra|native": {
-          "A": 1533.38,
+          "A": 1533.25,
           "sources": 1,
           "cv": 0.3907,
           "lowBase": 1.2419,
@@ -3014,7 +3031,7 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2843.6,
+          "A": 2844.55,
           "sources": 1,
           "cv": 0.3336,
           "lowBase": 1.1923,
@@ -3025,7 +3042,7 @@
     "silent-hill-2": {
       "1440p": {
         "episch|quality": {
-          "A": 1224.14,
+          "A": 1224.03,
           "sources": 1,
           "cv": 0.3445,
           "lowBase": 1.4249,
@@ -3034,7 +3051,7 @@
       },
       "4k": {
         "episch|quality": {
-          "A": 2137.96,
+          "A": 2138.67,
           "sources": 1,
           "cv": 0.2579,
           "lowBase": 1.3475,
@@ -3045,7 +3062,7 @@
     "spider-man-2": {
       "1440p": {
         "sehr-hoch|native": {
-          "A": 1642.83,
+          "A": 1642.66,
           "sources": 1,
           "cv": 0.4834,
           "lowBase": 1.5287,
@@ -3057,7 +3074,7 @@
       },
       "4k": {
         "sehr-hoch|native": {
-          "A": 2559.22,
+          "A": 2560.08,
           "sources": 1,
           "cv": 0.3082,
           "lowBase": 1.5767,
@@ -3076,7 +3093,7 @@
     "anno-117": {
       "1440p": {
         "ultrahoch|quality": {
-          "A": 1498.52,
+          "A": 1497.75,
           "sources": 1,
           "cv": 0.4381,
           "lowBase": 1.0477,
@@ -3085,7 +3102,7 @@
       },
       "4k": {
         "ultrahoch|quality": {
-          "A": 2331.67,
+          "A": 2332.02,
           "sources": 1,
           "cv": 0.3598,
           "lowBase": 1.0559,
@@ -3096,7 +3113,7 @@
     "arc-raiders": {
       "1440p": {
         "episch|native": {
-          "A": 1153.13,
+          "A": 1152.54,
           "sources": 1,
           "cv": 0.4308,
           "lowBase": 1.1544,
@@ -3105,7 +3122,7 @@
       },
       "4k": {
         "episch|native": {
-          "A": 2190.35,
+          "A": 2190.68,
           "sources": 1,
           "cv": 0.4059,
           "lowBase": 1.14,
@@ -3116,7 +3133,7 @@
     "assassins-creed-shadows": {
       "1440p": {
         "extrem-hoch|quality": {
-          "A": 1937.48,
+          "A": 1936.48,
           "sources": 1,
           "cv": 0.3725,
           "lowBase": 1.173,
@@ -3125,7 +3142,7 @@
       },
       "4k": {
         "extrem-hoch|quality": {
-          "A": 2538.7,
+          "A": 2539.08,
           "sources": 1,
           "cv": 0.2716,
           "lowBase": 1.1478,
@@ -3136,7 +3153,7 @@
     "battlefield-6": {
       "1440p": {
         "hemmungslos|native": {
-          "A": 1597.2,
+          "A": 1596.38,
           "sources": 1,
           "cv": 0.4456,
           "lowBase": 1.105,
@@ -3145,7 +3162,7 @@
       },
       "4k": {
         "hemmungslos|native": {
-          "A": 2894.28,
+          "A": 2894.71,
           "sources": 1,
           "cv": 0.3807,
           "lowBase": 1.0722,
@@ -3156,7 +3173,7 @@
     "borderlands-4": {
       "1440p": {
         "badass|quality": {
-          "A": 1751.2,
+          "A": 1750.31,
           "sources": 1,
           "cv": 0.3912,
           "lowBase": 1.1975,
@@ -3165,7 +3182,7 @@
       },
       "4k": {
         "badass|quality": {
-          "A": 2886.51,
+          "A": 2886.94,
           "sources": 1,
           "cv": 0.3191,
           "lowBase": 1.1427,
@@ -3176,7 +3193,7 @@
     "cod-black-ops-7": {
       "1440p": {
         "extrem|quality": {
-          "A": 809.98,
+          "A": 809.56,
           "sources": 1,
           "cv": 0.3598,
           "lowBase": 1.219,
@@ -3185,7 +3202,7 @@
       },
       "4k": {
         "extrem|quality": {
-          "A": 1494.89,
+          "A": 1495.12,
           "sources": 1,
           "cv": 0.2965,
           "lowBase": 1.1863,
@@ -3196,7 +3213,7 @@
     "death-stranding-2": {
       "1440p": {
         "sehr-hoch|quality": {
-          "A": 1311.68,
+          "A": 1311.01,
           "sources": 1,
           "cv": 0.389,
           "lowBase": 1.1683,
@@ -3205,7 +3222,7 @@
       },
       "4k": {
         "sehr-hoch|quality": {
-          "A": 1844.92,
+          "A": 1845.2,
           "sources": 1,
           "cv": 0.3156,
           "lowBase": 1.1291,
@@ -3216,7 +3233,7 @@
     "f1-25": {
       "1440p": {
         "ultrahoch|quality": {
-          "A": 757.36,
+          "A": 756.98,
           "sources": 1,
           "cv": 0.3663,
           "lowBase": 1.1486,
@@ -3225,7 +3242,7 @@
       },
       "4k": {
         "ultrahoch|quality": {
-          "A": 1192.47,
+          "A": 1192.65,
           "sources": 1,
           "cv": 0.286,
           "lowBase": 1.1228,
@@ -3236,7 +3253,7 @@
     "mafia-the-old-country": {
       "1440p": {
         "episch|quality": {
-          "A": 2364.59,
+          "A": 2363.38,
           "sources": 1,
           "cv": 0.3819,
           "lowBase": 1.1252,
@@ -3245,7 +3262,7 @@
       },
       "4k": {
         "episch|quality": {
-          "A": 4079.54,
+          "A": 4080.15,
           "sources": 1,
           "cv": 0.3137,
           "lowBase": 1.0967,
@@ -3256,7 +3273,7 @@
     "resident-evil-requiem": {
       "1440p": {
         "maximal|quality": {
-          "A": 874.29,
+          "A": 873.84,
           "sources": 1,
           "cv": 0.4103,
           "lowBase": 1.1698,
@@ -3265,7 +3282,7 @@
       },
       "4k": {
         "maximal|quality": {
-          "A": 1431,
+          "A": 1431.21,
           "sources": 1,
           "cv": 0.3407,
           "lowBase": 1.1426,
@@ -3276,7 +3293,7 @@
     "oblivion-remastered": {
       "1440p": {
         "extrem|quality": {
-          "A": 2199.03,
+          "A": 2197.91,
           "sources": 1,
           "cv": 0.4489,
           "lowBase": 1.4025,
@@ -3285,7 +3302,7 @@
       },
       "4k": {
         "extrem|quality": {
-          "A": 3718.1,
+          "A": 3718.65,
           "sources": 1,
           "cv": 0.3683,
           "lowBase": 1.3758,
@@ -3296,7 +3313,7 @@
     "the-last-of-us-part-2": {
       "1440p": {
         "sehr-hoch|native": {
-          "A": 1530.67,
+          "A": 1529.89,
           "sources": 1,
           "cv": 0.5203,
           "lowBase": 1.0837,
@@ -3305,7 +3322,7 @@
       },
       "4k": {
         "sehr-hoch|native": {
-          "A": 2473.5,
+          "A": 2473.87,
           "sources": 1,
           "cv": 0.4141,
           "lowBase": 1.0704,
@@ -3316,7 +3333,7 @@
     "the-outer-worlds-2": {
       "1440p": {
         "sehr-hoch|quality": {
-          "A": 1899.96,
+          "A": 1898.98,
           "sources": 1,
           "cv": 0.3402,
           "lowBase": 1.2261,
@@ -3325,7 +3342,7 @@
       },
       "4k": {
         "sehr-hoch|quality": {
-          "A": 3329.55,
+          "A": 3330.05,
           "sources": 1,
           "cv": 0.3026,
           "lowBase": 1.1928,
@@ -3336,7 +3353,7 @@
     "marvel-rivals": {
       "1440p": {
         "ultra|native": {
-          "A": 1509.44,
+          "A": 1509.38,
           "sources": 1,
           "cv": 0.1982,
           "lowBase": 1.4884,
@@ -3345,11 +3362,31 @@
       },
       "4k": {
         "ultra|native": {
-          "A": 2752.61,
+          "A": 2751.96,
           "sources": 1,
           "cv": 0.2389,
           "lowBase": 1.6173,
           "lowSources": 16
+        }
+      }
+    },
+    "valorant": {
+      "1440p": {
+        "maximal|native": {
+          "A": 167,
+          "sources": 1,
+          "cv": 0.4315,
+          "lowBase": 1.2732,
+          "lowSources": 14
+        }
+      },
+      "4k": {
+        "maximal|native": {
+          "A": 321.4,
+          "sources": 1,
+          "cv": 0.627,
+          "lowBase": 1.169,
+          "lowSources": 14
         }
       }
     },
@@ -20592,6 +20629,146 @@
       "frameTimeMs": 41.6667,
       "sources": 1,
       "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|valorant|1440p|maximal|native": {
+      "frameTimeMs": 0.8719,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7900xtx|valorant|1440p|maximal|native": {
+      "frameTimeMs": 1.1682,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5070ti|valorant|1440p|maximal|native": {
+      "frameTimeMs": 1.1826,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4080-super|valorant|1440p|maximal|native": {
+      "frameTimeMs": 1.1995,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-9070xt|valorant|1440p|maximal|native": {
+      "frameTimeMs": 1.2963,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7800xt|valorant|1440p|maximal|native": {
+      "frameTimeMs": 1.5876,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5060ti|valorant|1440p|maximal|native": {
+      "frameTimeMs": 1.8248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5060|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.1622,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-9060xt|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.3992,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-6650xt|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.7248,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4060|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.7278,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-intel-arc-b580|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.7427,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5050|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.7442,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7600|valorant|1440p|maximal|native": {
+      "frameTimeMs": 2.9612,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5090|valorant|4k|maximal|native": {
+      "frameTimeMs": 1.1351,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5070ti|valorant|4k|maximal|native": {
+      "frameTimeMs": 1.938,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7900xtx|valorant|4k|maximal|native": {
+      "frameTimeMs": 2.0084,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4080-super|valorant|4k|maximal|native": {
+      "frameTimeMs": 2.0161,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-9070xt|valorant|4k|maximal|native": {
+      "frameTimeMs": 2.5278,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7800xt|valorant|4k|maximal|native": {
+      "frameTimeMs": 3.4447,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5060ti|valorant|4k|maximal|native": {
+      "frameTimeMs": 3.867,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5060|valorant|4k|maximal|native": {
+      "frameTimeMs": 4.6083,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-9060xt|valorant|4k|maximal|native": {
+      "frameTimeMs": 5.123,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-intel-arc-b580|valorant|4k|maximal|native": {
+      "frameTimeMs": 5.3677,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-5050|valorant|4k|maximal|native": {
+      "frameTimeMs": 5.6529,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-6650xt|valorant|4k|maximal|native": {
+      "frameTimeMs": 5.6593,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rtx-4060|valorant|4k|maximal|native": {
+      "frameTimeMs": 5.698,
+      "sources": 1,
+      "entries": 1
+    },
+    "cpu-ryzen-7-9800x3d|gpu-rx-7600|valorant|4k|maximal|native": {
+      "frameTimeMs": 6.3171,
+      "sources": 1,
+      "entries": 1
     }
   },
   "prior": {
@@ -20667,9 +20844,9 @@
       },
       "1440p": {
         "form": "loglog",
-        "slope": 1.12142,
-        "intercept": -0.05709,
-        "n": 50,
+        "slope": 1.11579,
+        "intercept": -0.02978,
+        "n": 52,
         "domain": [
           15,
           132
@@ -20679,37 +20856,37 @@
             "minPerfScore": 0,
             "maxPerfScore": 25,
             "parts": 4,
-            "looMedianPct": 12.1,
-            "looP90Pct": 21.1
+            "looMedianPct": 10.9,
+            "looP90Pct": 20.1
           },
           {
             "minPerfScore": 25,
             "maxPerfScore": 40,
-            "parts": 9,
-            "looMedianPct": 6.8,
-            "looP90Pct": 31.1
+            "parts": 10,
+            "looMedianPct": 7.8,
+            "looP90Pct": 31.5
           },
           {
             "minPerfScore": 40,
             "maxPerfScore": 60,
-            "parts": 16,
-            "looMedianPct": 5.7,
-            "looP90Pct": 22.7
+            "parts": 17,
+            "looMedianPct": 6.2,
+            "looP90Pct": 23.5
           },
           {
             "minPerfScore": 60,
             "maxPerfScore": null,
             "parts": 21,
-            "looMedianPct": 6.1,
-            "looP90Pct": 8.8
+            "looMedianPct": 5.7,
+            "looP90Pct": 8.4
           }
         ]
       },
       "4k": {
         "form": "loglog",
-        "slope": 1.17184,
-        "intercept": -0.2178,
-        "n": 40,
+        "slope": 1.17514,
+        "intercept": -0.2431,
+        "n": 45,
         "domain": [
           15,
           132
@@ -20719,29 +20896,29 @@
             "minPerfScore": 0,
             "maxPerfScore": 25,
             "parts": 4,
-            "looMedianPct": 12,
-            "looP90Pct": 16.8
+            "looMedianPct": 13.5,
+            "looP90Pct": 18.1
           },
           {
             "minPerfScore": 25,
             "maxPerfScore": 40,
-            "parts": 5,
-            "looMedianPct": 2.7,
-            "looP90Pct": 18.5
+            "parts": 6,
+            "looMedianPct": 4,
+            "looP90Pct": 17.2
           },
           {
             "minPerfScore": 40,
             "maxPerfScore": 60,
-            "parts": 10,
-            "looMedianPct": 6.4,
-            "looP90Pct": 19.4
+            "parts": 14,
+            "looMedianPct": 7,
+            "looP90Pct": 20.6
           },
           {
             "minPerfScore": 60,
             "maxPerfScore": null,
             "parts": 21,
-            "looMedianPct": 5.9,
-            "looP90Pct": 9.8
+            "looMedianPct": 6.7,
+            "looP90Pct": 10.5
           }
         ]
       }
@@ -20756,49 +20933,49 @@
       "Ada Lovelace": {
         "efficiency": 1,
         "parts": 10,
-        "spreadPct": 44.9,
+        "spreadPct": 45,
         "calibrated": true
       },
       "Ampere": {
-        "efficiency": 0.977,
+        "efficiency": 0.9777,
         "parts": 5,
-        "spreadPct": 30.6,
+        "spreadPct": 31,
         "calibrated": true
       },
       "Blackwell": {
-        "efficiency": 0.8601,
+        "efficiency": 0.8591,
         "parts": 4,
-        "spreadPct": 48.3,
+        "spreadPct": 48.6,
         "calibrated": true
       },
       "RDNA": {
         "efficiency": 1,
         "parts": 2,
-        "spreadPct": 5.7,
+        "spreadPct": 5.1,
         "calibrated": false
       },
       "RDNA 2": {
-        "efficiency": 1.1779,
+        "efficiency": 1.196,
         "parts": 4,
-        "spreadPct": 22,
+        "spreadPct": 27.5,
         "calibrated": true
       },
       "RDNA 3": {
-        "efficiency": 1.191,
+        "efficiency": 1.192,
         "parts": 5,
-        "spreadPct": 8.9,
+        "spreadPct": 9,
         "calibrated": true
       },
       "RDNA 4": {
         "efficiency": 1,
         "parts": 2,
-        "spreadPct": 2.9,
+        "spreadPct": 2,
         "calibrated": false
       },
       "Turing": {
-        "efficiency": 1.2399,
+        "efficiency": 1.2407,
         "parts": 3,
-        "spreadPct": 13.2,
+        "spreadPct": 13,
         "calibrated": true
       },
       "Xe2 Battlemage": {
