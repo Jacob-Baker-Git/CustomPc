@@ -14,8 +14,8 @@
 }
 
 /* ============================================================
-   Board design system — a matte-black board substrate, replacing
-   the near-black ground and single bright accent that came before.
+   Design system (the configurator look, 2026-10-16) — a matte-black
+   ground, replacing the near-black + single bright accent before it.
    METALS carry state (brass = action, gold = seated, straw = data);
    only genuine interruptions are saturated (good / ok / bad);
    orange is the wordmark and nothing else.
@@ -26,13 +26,13 @@
    text-gold, border-line, text-muted, …).
    ============================================================ */
 :root {
-  /* ---- Board ------------------------------------------------------------
-     Matte-black board substrate. The previous ground was #0F1114 — a neutral
+  /* ---- Ground -----------------------------------------------------------
+     Matte-black ground. The previous ground was #0F1114 — a neutral
      near-black with one bright accent, which is one of the three looks
      AI-generated design defaults to. The palette below is deliberately not
      that: state is carried by desaturated METALS, and only genuine
      interruptions are saturated. */
-  --ground: #0E0F11;       /* app background — board substrate */
+  --ground: #0E0F11;       /* app background */
   --surface: #17191D;      /* cards / panels — a group */
   --surface-2: #22262D;    /* the ACTIVE thing — open group, target column */
   --line: #2A2E35;         /* hairline borders */
@@ -76,7 +76,7 @@
   --brass: #E0A93B;        /* action — primary buttons, the live tab */
   --gold: #C9A86B;         /* seated / active — filled slots, the active rail */
   --gold-soft: #2A2416;    /* the selected wash */
-  --tech: #E8D49A;         /* straw: data — prices, designators, telemetry */
+  --tech: #E8D49A;         /* straw: data — prices, telemetry */
   --steel: #5E6672;        /* neutral secondary meter / muted bar */
 
   /* ---- Signals: saturated, they INTERRUPT -------------------------------

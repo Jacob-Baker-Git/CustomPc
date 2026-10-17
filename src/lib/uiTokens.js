@@ -49,7 +49,7 @@ export const BTN_PRIMARY = 'bg-brass hover:brightness-110 text-accent-ink font-s
 // The page itself is the third step and has no token, because nothing composes
 // it: `html { background: var(--ground) }` in index.css paints it once. An
 // `ELEV_PAGE = 'bg-ground'` sat here unimported by anything — the live
-// `bg-ground` classes are wells, notches and the board substrate, none of which
+// `bg-ground` classes are wells and notches, none of which
 // is "the page".
 //
 // They were used ad hoc before this. Two days of de-bordering the Performance

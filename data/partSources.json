@@ -993,7 +993,7 @@
     "supportedFormFactors": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "Corsair states \"4 horizontal (4 vertical with accessory)\"" },
     "radiatorSupport": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011266-ww/x", "checkedOn": "2026-08-30", "note": "The front is a glass panel and takes no radiator" },
-    "includedFans": { "result": "unverifiable", "checkedOn": "2026-10-17", "note": "Corsair's page names no included fans; retailers disagree (LDLC: none, Direct Computers: 2x 120mm), so the base 2500X's count is not settled." }
+    "includedFans": { "url": "https://www.laptopoutlet.co.uk/corsair-2500x-micro-cc-9011266-ww.html", "checkedOn": "2026-10-17", "note": "Corsair's page names no included fans (the 'iCUE LINK RX Series' field in its embedded data is the iCUE LINK 2500X bundle). Laptop Outlet for CC-9011266-WW: 'Fans Included: None'; B&H lists 'Fans Included: No' for the same SKU." }
   },
   "case-corsair-4000d-rs": {
     "maxGpuLength": { "url": "https://www.corsair.com/us/en/p/pc-cases/cc-9011296-ww/x", "checkedOn": "2026-08-30", "note": "Re-pointed: Corsair has no \"4000D Airflow RS\". The row now models the FRAME 4000D RS ARGB (CC-9011296-WW), which it was named after; it had been carrying the plain 4000D Airflow's 360 mm" },
@@ -1073,7 +1073,7 @@
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30" },
     "radiatorSupport": { "url": "https://pcpartpicker.com/product/3RJmP6/phanteks-eclipse-p400a-atx-mid-tower-case-ph-ec400atg_bk", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
-    "includedFans": { "result": "unverifiable", "checkedOn": "2026-10-17", "note": "Phanteks' current site has no P400A page and the legacy page renders empty; Tom's Hardware reviewed the RGB variant (3 fans) and nothing reachable states the count for the non-RGB SKU this row models." }
+    "includedFans": { "url": "https://www.atxcases.us/products/phanteks-eclipse-p400a-ph-ec400atgbk01-black-steel.html", "checkedOn": "2026-10-17", "note": "Phanteks' own pages are gone (current site has no P400A; archived 2019-2022 snapshots truncate the spec table). Retailer copy of Phanteks' spec for PH-EC400ATG_BK01 (the non-RGB SKU this row models): 'Front: 3 x 120mm (2 x 120mm black fan included)'. Agrees with Newegg's '2x pre-installed 9 bladed fans'. The Digital/D-RGB SKUs ship 3." }
   },
   "case-phanteks-nv5": {
     "maxGpuLength": { "url": "https://phanteks.com/product/nv5-black/", "checkedOn": "2026-08-30" },
@@ -1105,7 +1105,7 @@
     "supportedFormFactors": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30" },
     "expansionSlots": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker states 2 full-height slots; the row had none recorded" },
     "radiatorSupport": { "url": "https://pcpartpicker.com/product/MCsnTW/phanteks-evolv-shift-2-mini-itx-tower-case-ph-es217e_bk02", "checkedOn": "2026-08-30", "note": "PCPartPicker publishes a flat list of supported radiator sizes rather than a per-mount breakdown, so this is recorded under a single key" },
-    "includedFans": { "result": "unverifiable", "checkedOn": "2026-10-17", "note": "Phanteks' legacy Evolv Shift 2 page renders empty; reviews give 1x 140mm for the Shift 2 Air, a different SKU, so the glass model's count is not stated by a reachable maker source." }
+    "includedFans": { "url": "https://www.pccasegear.com/products/52681/phanteks-enthoo-evolv-shift-2-itx-case-satin-black", "checkedOn": "2026-10-17", "note": "Phanteks' legacy page renders empty (archived snapshots truncate the spec table). PCCaseGear's listing for PH-ES217E_BK02 carries Phanteks' spec: '1 x pre-installed SK 140mm D-RGB PWM fan'; rear fan row '2 x 120mm / 2 x 140mm (1 x SK 140mm D-RGB PWM fan included)'." }
   },
   "case-montech-air-903": {
     "maxGpuLength": { "url": "https://www.montechpc.com/air-903-max", "checkedOn": "2026-08-30" },

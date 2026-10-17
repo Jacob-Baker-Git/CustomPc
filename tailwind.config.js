@@ -46,7 +46,7 @@ export default {
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       colors: {
-        // Board design system. Values live as CSS vars in src/index.css so they
+        // Design system colours. Values live as CSS vars in src/index.css so they
         // can be tuned in one place.
         //
         // Every one of these is a bare var() holding a hex. Under Tailwind 3

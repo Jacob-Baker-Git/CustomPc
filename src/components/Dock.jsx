@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import useBuilderStore, { selTotalSpent, selPeripheralsTotal } from '../store/useBuilderStore'
 import { dockTotalLabel, dockAction } from '../lib/dock'
@@ -16,7 +16,15 @@ export default function Dock({ view, onChange, inline = false }) {
   const [note, setNote] = useState(null)
   const action = dockAction({ view, path })
 
-  const flash = (text) => { setNote(text); setTimeout(() => setNote(null), 1800) }
+  // One timer at a time, cleared on unmount: a second tap restarts it, and
+  // leaving the screen mid-flash no longer sets state on an unmounted Dock.
+  const timer = useRef(null)
+  useEffect(() => () => clearTimeout(timer.current), [])
+  const flash = (text) => {
+    setNote(text)
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => setNote(null), 1800)
+  }
 
   const actions = action ? (
     <button type="button" onClick={() => onChange(action.to)}

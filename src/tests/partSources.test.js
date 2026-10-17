@@ -73,8 +73,8 @@ const RESEARCHED_KEYS = [
   'maxPowerW',
   // GPUs only, and only where the maker states a card has NO encoder.
   'videoEncoder',
-  // Cases only: fans that ship in the box. 56 of 59 sourced, three recorded
-  // unverifiable (conflicting or unreachable sources).
+  // Cases only: fans that ship in the box. All 59 sourced (three from retailer
+  // copy of the maker's spec where the maker's page is gone).
   'includedFans',
 ]
 

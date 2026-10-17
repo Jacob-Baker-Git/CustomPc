@@ -54,8 +54,8 @@ export function partQuality(part) {
       // with, the one researched signal of out-of-the-box airflow (and money a
       // fanless case leaves to spend). 4 per fan puts 0-6 fans on a 24-point
       // span, under the ~35 the room term covers: heavier (6) made a 4-fan £45
-      // case "enough" and stopped £3,800 builds upgrading it. Unknown
-      // (three cases) earns no credit rather than a guess.
+      // case "enough" and stopped £3,800 builds upgrading it. All 59 cases
+      // are sourced; an unknown would earn no credit rather than a guess.
       return (part.maxGpuLength ?? 0) * 0.15 + (part.maxCoolerHeight ?? 0) * 0.25 + (s.includedFans ?? 0) * 4
     case 'fans':
       // Swept AREA, not diameter: airflow goes with the square of the radius, so

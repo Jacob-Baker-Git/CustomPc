@@ -1,4 +1,4 @@
-import { VIEWS } from '../hooks/useHashView'
+import { VIEWS, stepsFor } from '../hooks/useHashView'
 
 const LABEL = { build: 'Build', performance: 'Performance', peripherals: 'Peripherals', summary: 'Summary' }
 
@@ -10,10 +10,8 @@ const LABEL = { build: 'Build', performance: 'Performance', peripherals: 'Periph
 // "Done" (muted rather than faint) means a step this path actually walked
 // before the current one: a game-target build starts at Peripherals, so its
 // Build and Performance were never visited and must not read as done.
-const PATH_STEPS = { parts: VIEWS, game: ['peripherals', 'summary'] }
-
 export default function StepHeader({ view, onChange, path = 'parts' }) {
-  const steps = PATH_STEPS[path] ?? VIEWS
+  const steps = stepsFor(path)
   const current = steps.indexOf(view)
   return (
     <nav aria-label="Steps" className="border-b border-line bg-ground">

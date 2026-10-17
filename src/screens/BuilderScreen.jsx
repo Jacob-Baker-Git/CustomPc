@@ -74,8 +74,9 @@ export default function BuilderScreen() {
 
   return (
     <div className="relative min-h-screen">
-      {/* pb clears the phone Dock below lg; from lg there is no dock. */}
-      <div ref={scrollRef} className="relative h-screen overflow-y-auto pb-28 lg:pb-0">
+      {/* pb clears the phone Dock below lg; from lg there is no dock. scroll-pt
+          keeps anchor jumps and focus scrolls clear of the sticky header. */}
+      <div ref={scrollRef} className="relative h-screen overflow-y-auto scroll-pt-[var(--chrome-h,0px)] pb-28 lg:pb-0">
         <div ref={chromeRef} className="sticky top-0 z-50">
           <TopBar />
           <StepHeader view={view} onChange={setView} path={path} />
