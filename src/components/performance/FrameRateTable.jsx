@@ -84,7 +84,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                     type="button"
                     onClick={() => clickHeader(key)}
                     aria-label={`Sort by ${label}`}
-                    className="uppercase tracking-wider hover:text-ink"
+                    className="min-h-6 uppercase tracking-wider hover:text-ink"
                   >
                     {label}
                     <span aria-hidden="true" className={sorted ? 'ml-1 text-ink' : 'ml-1 text-faint'}>

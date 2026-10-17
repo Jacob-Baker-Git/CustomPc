@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'
 
@@ -11,11 +11,13 @@ const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:n
 // re-run the effect, which would steal focus back to the first control.
 export default function useDialog(onClose) {
   const ref = useRef(null)
+  // Read on the first render: by the time an effect runs, an autoFocus control
+  // inside the dialog already holds focus and would be mistaken for the opener.
+  const [opener] = useState(() => document.activeElement)
   const close = useRef(onClose)
   useEffect(() => { close.current = onClose })
 
   useEffect(() => {
-    const opener = document.activeElement
     const box = ref.current
     if (box && !box.contains(document.activeElement)) {
       ;(box.querySelector(FOCUSABLE) ?? box).focus()
@@ -36,7 +38,7 @@ export default function useDialog(onClose) {
       window.removeEventListener('keydown', onKey)
       if (opener?.isConnected) opener.focus()
     }
-  }, [])
+  }, [opener])
 
   return ref
 }

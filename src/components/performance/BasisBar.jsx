@@ -32,17 +32,17 @@ export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
           type="button"
           onClick={() => setShowHelp((v) => !v)}
           aria-expanded={showHelp}
-          className="text-[12px] text-muted underline decoration-dotted"
+          className="min-h-6 text-[12px] text-muted underline decoration-dotted"
         >
           How is this worked out?
         </button>
 
-        <label className="ml-auto flex items-center gap-2 text-[12px] text-muted">
+        <label className="ml-auto flex min-h-6 items-center gap-2 text-[12px] text-muted">
           <input
             type="checkbox"
             checked={realOnly}
             onChange={(e) => onRealOnlyChange(e.target.checked)}
-            className="accent-accent"
+            className="size-4 accent-accent"
           />
           Only show real data
         </label>
