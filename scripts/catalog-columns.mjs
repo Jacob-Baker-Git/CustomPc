@@ -5,7 +5,6 @@
 // is NOT NULL:
 //
 //   parts, peripherals : id, category, name, price, data, updated_at
-//   games              : id, name, data, updated_at
 //
 // An upsert is an INSERT carrying ON CONFLICT DO UPDATE, so PostgREST validates
 // the INSERT path even when every row already exists and nothing will actually
@@ -22,7 +21,6 @@
 const MIRRORED = {
   parts: ['category', 'name', 'price'],
   peripherals: ['category', 'name', 'price'],
-  games: ['name'],
 }
 
 export function mirroredColumns(table) {
