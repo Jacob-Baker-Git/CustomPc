@@ -161,3 +161,14 @@ describe('CPU full-boost power copy', () => {
     expect(specRows(old).some(([label]) => /Max power/.test(label))).toBe(false)
   })
 })
+
+describe('researched case fans and GPU encoder rows', () => {
+  const byId = (id) => partsData.find((p) => p.id === id)
+  it('shows a fanless case as 0 fans in the box, not as a missing row', () => {
+    expect(specRows(byId('case-lian-li-o11'))).toContainEqual(['Fans in the box', '0'])
+    expect(specRows(byId('case-kolink-observatory-lite'))).toContainEqual(['Fans in the box', '4'])
+  })
+  it('labels the RX 6500 XT as having no hardware video encoder', () => {
+    expect(specRows(byId('gpu-rx-6500xt'))).toContainEqual(['Hardware video encoder', 'No'])
+  })
+})
