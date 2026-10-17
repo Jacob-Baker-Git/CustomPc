@@ -67,7 +67,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
       {chips.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {chips.map((c) => (
-            <span key={c} className="text-[10px] text-muted border border-line rounded-md px-1.5 py-0.5 whitespace-nowrap">
+            <span key={c} className="text-[11px] text-muted border border-line rounded-md px-1.5 py-0.5 whitespace-nowrap">
               {c}
             </span>
           ))}
@@ -93,7 +93,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
         </div>
       )}
       {selected && !locked && (
-        <div className="absolute top-2 right-2 text-[10px] uppercase tracking-wider text-gold border border-gold rounded-md px-1.5 py-0.5">
+        <div className="absolute top-2 right-2 text-[11px] uppercase tracking-wider text-gold border border-gold rounded-md px-1.5 py-0.5">
           Selected
         </div>
       )}

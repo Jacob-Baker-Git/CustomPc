@@ -17,7 +17,7 @@ export default function ResolutionPicker({ value, onChange }) {
   const labelId = useId()
   return (
     <div className="flex items-center gap-1.5">
-      <span id={labelId} className="text-[10px] uppercase tracking-wider text-muted">
+      <span id={labelId} className="text-[11px] uppercase tracking-wider text-muted">
         Building for
       </span>
       <div role="radiogroup" aria-labelledby={labelId} className="flex rounded-lg border border-line">

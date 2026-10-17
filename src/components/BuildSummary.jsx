@@ -212,28 +212,28 @@ export default function BuildSummary() {
             <button
               onClick={handleSave}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-brass text-brass hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-brass text-brass hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Save PC
             </button>
             <button
               onClick={copyShareLink}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="min-h-11 text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               {copied ? 'Copied!' : 'Copy share link'}
             </button>
             <button
               onClick={() => window.print()}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-line text-ink hover:border-line-strong disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-ink hover:border-line-strong disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Print
             </button>
             <button
               onClick={copyMarkdown}
               disabled={isEmpty}
-              className="text-xs px-3.5 py-2 rounded-lg border border-line text-ink hover:border-line-strong disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-ink hover:border-line-strong disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Copy as Markdown
             </button>
@@ -249,14 +249,14 @@ export default function BuildSummary() {
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <button
               onClick={() => setFlow('saved')}
-              className="text-xs text-muted hover:text-brass transition-colors"
+              className="min-h-11 text-xs text-muted hover:text-brass transition-colors"
             >
               View your saved builds →
             </button>
             <button
               onClick={handleClear}
               disabled={isEmpty}
-              className="text-xs text-muted hover:text-bad disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="min-h-11 text-xs text-muted hover:text-bad disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Clear build
             </button>
@@ -283,8 +283,8 @@ export default function BuildSummary() {
               className="w-full bg-surface-2 text-ink text-sm px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-brass"
             />
             <div className="flex justify-end gap-2 mt-4">
-              <button onClick={() => setSaveOpen(false)} className="text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
-              <button onClick={confirmSave} className="text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
+              <button onClick={() => setSaveOpen(false)} className="min-h-11 text-xs px-3.5 py-2 rounded-lg border border-line text-muted hover:border-line-strong transition-colors">Cancel</button>
+              <button onClick={confirmSave} className="min-h-11 text-xs px-3.5 py-2 rounded-lg bg-brass hover:brightness-110 text-accent-ink transition-colors">Save</button>
             </div>
           </div>
         </div>,

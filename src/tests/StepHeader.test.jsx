@@ -10,8 +10,19 @@ describe('StepHeader', () => {
 
   it('marks the current step', () => {
     render(<StepHeader view="performance" onChange={() => {}} />)
-    expect(screen.getByRole('button', { name: /performance/i })).toHaveAttribute('aria-current', 'page')
+    expect(screen.getByRole('button', { name: /performance/i })).toHaveAttribute('aria-current', 'step')
     expect(screen.getByRole('button', { name: /build/i })).not.toHaveAttribute('aria-current')
+  })
+
+  // A game-target build starts at Peripherals: Build and Performance were
+  // never visited, so they must not read as done (muted).
+  it('marks only the steps a path walked as done', () => {
+    const { rerender } = render(<StepHeader view="summary" onChange={() => {}} path="game" />)
+    expect(screen.getByRole('button', { name: /build/i })).toHaveClass('text-faint')
+    expect(screen.getByRole('button', { name: /performance/i })).toHaveClass('text-faint')
+    expect(screen.getByRole('button', { name: /peripherals/i })).toHaveClass('text-muted')
+    rerender(<StepHeader view="summary" onChange={() => {}} path="parts" />)
+    expect(screen.getByRole('button', { name: /build/i })).toHaveClass('text-muted')
   })
 
   it('moves to the step clicked', () => {

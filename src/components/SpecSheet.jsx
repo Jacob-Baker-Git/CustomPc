@@ -14,7 +14,7 @@ export default function SpecSheet({ part }) {
       {part.category === 'gpu' && part.perfScore > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-2">
           {gpuResChips(part).map(({ res, fps }) => (
-            <span key={res} className="text-[10px] font-mono px-1.5 py-0.5 rounded-md border border-line text-muted">
+            <span key={res} className="text-[11px] font-mono px-1.5 py-0.5 rounded-md border border-line text-muted">
               ~{fps} fps @ {res.split(' ')[0]}
             </span>
           ))}

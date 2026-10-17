@@ -16,7 +16,7 @@ export default function StatPanel({ title, subtitle, children, footnote }) {
       </header>
       {children}
       {footnote && (
-        <p className="mt-2.5 border-t border-line pt-2 text-[10px] text-muted leading-relaxed">
+        <p className="mt-2.5 border-t border-line pt-2 text-[11px] text-muted leading-relaxed">
           {footnote}
         </p>
       )}

@@ -38,7 +38,7 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
         {/* Feathered left and right so the picture melts into the page where the
             column is narrower than the window, instead of ending in a hard edge. */}
         <div className="relative -mx-5 h-[280px] overflow-hidden sm:h-[360px] sm:[mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)]">
-          <img src="/img/welcome-pc.webp" alt="" width="1200" height="800"
+          <img src="/img/welcome-pc.webp" alt="" width="1200" height="1362" fetchPriority="high"
                className="absolute inset-0 h-full w-full object-cover object-[50%_62%]" />
           <div aria-hidden="true" className="absolute inset-0"
                style={{ background: 'linear-gradient(180deg, var(--ground) 0%, transparent 25%, transparent 60%, var(--ground) 100%)' }} />

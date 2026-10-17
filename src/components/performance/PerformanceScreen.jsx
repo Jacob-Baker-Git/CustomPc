@@ -415,7 +415,7 @@ export default function PerformanceScreen() {
 
             Coverage is answered at ANY of the three resolutions, matching what
             the table actually lists rather than the target column alone. */}
-        <p className="mt-1.5 text-[10px] text-muted">
+        <p className="mt-1.5 text-[11px] text-muted">
           Model {perfModel.modelVersion} · data as of {perfModel.datasetVersion}
           {hasCore && ` · ${allGameRows.length} of ${report.coverage.gamesTotal} games answered`}
           {/* Counted off the SHOWN rows, unlike BasisBar's mix line directly

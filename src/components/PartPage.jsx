@@ -79,7 +79,7 @@ export default function PartPage({ partId, onNavigate }) {
       <p className="text-muted text-sm">
         {CATEGORY_LABEL[part.category] ?? part.category} · {part.brand}
         {part.legacy && (
-          <span className="ml-2 align-middle text-[10px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
+          <span className="ml-2 align-middle text-[11px] uppercase tracking-wide text-muted border border-line rounded px-1.5 py-0.5">
             Discontinued
           </span>
         )}

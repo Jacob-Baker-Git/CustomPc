@@ -37,7 +37,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         ${isSelected ? 'border-gold' : 'border-line'}`}
     >
       {isSelected && (
-        <span className="absolute top-2 right-2 flex items-center gap-1 text-gold text-[10px] font-semibold">
+        <span className="absolute top-2 right-2 flex items-center gap-1 text-gold text-[11px] font-semibold">
           <Check size={11} aria-hidden="true" /> Picked
         </span>
       )}
@@ -154,7 +154,7 @@ export default function PeripheralsPanel() {
             <SlidersHorizontal size={13} aria-hidden="true" />
             Filters
             {filterCount > 0 && (
-              <span className={`${TELEMETRY} rounded-full bg-gold text-accent-ink px-1.5 text-[10px] font-bold`}>
+              <span className={`${TELEMETRY} rounded-full bg-gold text-accent-ink px-1.5 text-[11px] font-bold`}>
                 {filterCount}
               </span>
             )}

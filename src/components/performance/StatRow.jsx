@@ -12,11 +12,11 @@ export default function StatRow({ label, value, unit, hint, tone = 'ink' }) {
     <div className="flex items-baseline justify-between gap-3 py-1.5 border-t border-line first:border-t-0">
       <span className="text-xs text-muted">
         {label}
-        {hint && <span className="block text-[10px] text-muted leading-tight">{hint}</span>}
+        {hint && <span className="block text-[11px] text-muted leading-tight">{hint}</span>}
       </span>
       <span className="shrink-0 font-mono text-sm tabular-nums">
         <span className={toneClass}>{shown}</span>
-        {unit && shown !== '—' && <span className="ml-1 text-[10px] text-muted">{unit}</span>}
+        {unit && shown !== '—' && <span className="ml-1 text-[11px] text-muted">{unit}</span>}
       </span>
     </div>
   )
