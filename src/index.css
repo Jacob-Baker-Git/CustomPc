@@ -141,10 +141,10 @@ body {
 .build-grid > .area-left { display: contents; }
 .build-grid .area-left > * { position: relative; z-index: 1; }
 
-/* The phone's reading order on Summary (spec 2026-10-16): the answer first —
-   the score and the use case it is rated for — then the parts list, then the
-   3D view, which on a phone is opt-in anyway. The share notice, when there is
-   one, leads.
+/* The phone's reading order on Summary (spec 2026-10-20): the answer first —
+   the score and the use case it is rated for — then the labelled 3D with its
+   tap strip, the spec stack, the build table, and the build checks. The share
+   notice, when there is one, leads.
 
    `order` and not a JSX reshuffle, so the source keeps resembling the desktop
    grid-template-areas that a reader checks. Safe above lg because every
@@ -155,9 +155,35 @@ body {
 .build-grid .area-banner      { order: 0; }
 .build-grid .area-rating      { order: 1; }
 .build-grid .area-usecase     { order: 2; }
-.build-grid .area-parts       { order: 3; }
-.build-grid > .area-viz       { order: 4; }
-.build-grid .area-warnings    { order: 5; }
+.build-grid > .area-viz       { order: 3; }
+.build-grid .area-spec        { order: 4; }
+.build-grid .area-parts       { order: 5; }
+.build-grid .area-warnings    { order: 6; }
+
+/* One line of Summary's build table. A phone puts type, share % and price on
+   one line with the name full width under them — the mockup's narrow name
+   column wrapped nearly every name to two lines, and the phone height budget
+   (spec 2026-10-20) has no room for that — then the share bar. Desktop is one
+   row of columns, as in the mockup. Children are placed with [grid-area:…] in
+   BuildSummary. */
+.part-row {
+  display: grid;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.125rem;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto auto 1.75rem;
+  grid-template-areas:
+    "icon type pct  price link"
+    "icon name name name  link"
+    "bar  bar  bar  bar   bar";
+}
+@media (min-width: 1024px) {
+  .part-row {
+    column-gap: 1rem;
+    grid-template-columns: 1.75rem 8rem minmax(0, 1fr) minmax(0, 16rem) 3.5rem 6rem 1.75rem;
+    grid-template-areas: "icon type name bar pct price link";
+  }
+}
 
 /* Give the vertical axis back to the page on touch devices.
 
@@ -198,9 +224,10 @@ body {
 @media (min-width: 1024px) {
   .build-grid {
     display: grid;
-    /* The 3D preview earns the larger share: it is the thing people came for.
-       The left column holds the parts list now, which needs room for names. */
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    /* Score | labelled 3D | spec stack, then the build table, the share notice
+       and the build checks full width (spec 2026-10-20, from the mockup). The
+       3D takes whatever the two fixed-ish side columns leave. */
+    grid-template-columns: minmax(17rem, 22rem) minmax(0, 1fr) minmax(11rem, 15rem);
     /* One left-hand area, not two rows.
        .area-viz used to span "usecase" and "rating", and Grid splits a spanning
        item's excess height EQUALLY across the rows it spans — so half of the
@@ -208,14 +235,24 @@ body {
        without limit as you zoomed out (47px at 1900px tall, 213px at 2400px).
        With one row there is no excess to distribute. Do not split this back
        apart. */
-    grid-template-areas: "left viz";
+    grid-template-areas:
+      "left     viz      spec"
+      "parts    parts    parts"
+      "banner   banner   banner"
+      "warnings warnings warnings";
     align-items: start;
-    gap: 1rem;
+    column-gap: 2rem;
+    row-gap: 1rem;
   }
+  .build-grid > .area-spec     { grid-area: spec; align-self: stretch; }
+  .build-grid > .area-parts    { grid-area: parts; }
+  .build-grid > .area-banner   { grid-area: banner; }
+  .build-grid > .area-warnings { grid-area: warnings; }
   /* The cell stretches to the left column (align-self, not height:100% — a
      percentage height on a start-aligned item can resolve to auto). The panel
-     inside is sticky and capped at the window, so with the long build list in
-     the left column (2026-10-17) the PC stays in view as the list scrolls past.
+     inside is sticky and capped at the window, so if the score column ever
+     grows past the window the PC stays in view as it scrolls past. (The build
+     list that made that the common case moved full width below, 2026-10-20.)
      The cap is a min() with 100%, so a column shorter than the window never
      gets a panel taller than itself. */
   .build-grid > .area-viz { grid-area: viz; align-self: stretch; }

@@ -29,6 +29,7 @@ import { useChromeHeight } from '../hooks/useChromeHeight'
 import { useIsDesktop } from '../hooks/useIsDesktop'
 import ShowroomOverlay from '../components/showroom/ShowroomOverlay'
 import ShowroomTapStrip from '../components/showroom/ShowroomTapStrip'
+import SpecStack from '../components/showroom/SpecStack'
 import useBuilderStore from '../store/useBuilderStore'
 
 // A finger means mobile data, and the 3D view is ~6 MB of it. Read once at
@@ -152,8 +153,8 @@ export default function BuilderScreen() {
             <PerformanceScreen />
           </Suspense>
         ) : (
-          // Summary: the 3D view, the CustomPC score with its use-case chips, and
-          // the parts list (spec 2026-10-13 — the only tab that mounts the 3D).
+          // Summary: score + use case | labelled 3D | spec stack, then the build
+          // table full width (spec 2026-10-20; the only tab that mounts the 3D).
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which
           // wasted most of a wide display.
@@ -180,12 +181,18 @@ export default function BuilderScreen() {
                   sticky (index.css), so the PC stays in view while the build
                   list scrolls. Sticky on the cell itself sized the row to the
                   window and left dead space below a shorter column. */}
-              <div className="area-viz flex flex-col lg:block h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px]">
-              <div className="viz-panel relative flex h-full min-h-0 flex-1 flex-col overflow-hidden border border-line transition-colors hover:border-line-strong">
+              {/* Below lg the 3D BOX has the height, not the cell: the controls
+                  row and the tap strip sit under it in flow, and when all three
+                  shared a fixed 42vh cell the model was squeezed to ~200px at
+                  390 wide, where the CPU, GPU and cooler dots touched. */}
+              <div className="area-viz lg:min-h-[520px]">
+              <div className="viz-panel relative flex flex-col overflow-hidden border border-line transition-colors hover:border-line-strong">
                 {/* The 3D box. Below lg the controls row sits UNDER it in flow
                     rather than over it, so a tap dot (a part low in the case,
                     like the PSU) can never land beneath the drag hint. */}
-                <div className="relative min-h-0 flex-1">
+                {/* The opt-in card before it is tapped needs only its own
+                    height, not the model's (phone height budget, 2026-10-20). */}
+                <div className={`relative ${show3D ? 'h-[min(88vw,56vh)]' : 'h-60'} lg:h-auto lg:min-h-0 lg:flex-1`}>
                 {show3D ? (
                   <>
                     <CanvasErrorBoundary>
@@ -271,9 +278,8 @@ export default function BuilderScreen() {
               {/* ⚠️ `display: contents` on mobile (index.css) dissolves this
                   wrapper so the two panels become flex items of .build-grid
                   itself and can be ordered independently — the phone wants the
-                  SCORE directly under the 3D view, with the use-case chips
-                  after it. On desktop the wrapper returns to a flex column in
-                  grid-area `left`, exactly as before.
+                  SCORE first, with the use-case chips after it. On desktop the
+                  wrapper returns to a flex column in grid-area `left`.
 
                   Do NOT "simplify" this by giving both children
                   `grid-area: left`. Two items in one named grid area OVERLAP —
@@ -282,12 +288,13 @@ export default function BuilderScreen() {
               <div className="area-left flex flex-col gap-3">
                 <div className="area-usecase"><UseCaseChips /></div>
                 <div className="area-rating"><BuildRatingPanel /></div>
-                {/* The build list sits under the score, beside the 3D view
-                    (user, 2026-10-17) — where the per-part score list was. */}
-                <div className="area-parts"><BuildSummary /></div>
-                <div className="area-banner"><GeneratedBanner /></div>
-                <div className="area-warnings"><BuildWarnings /></div>
               </div>
+              <div className="area-spec"><SpecStack layout={desktop ? 'column' : 'grid'} /></div>
+              {/* The build table runs full width under the three columns
+                  (spec 2026-10-20); hovering a row lights its 3D label. */}
+              <div className="area-parts"><BuildSummary hot={hot} onHot={setHot} /></div>
+              <div className="area-banner"><GeneratedBanner /></div>
+              <div className="area-warnings"><BuildWarnings /></div>
             </div>
           </div>
         )}

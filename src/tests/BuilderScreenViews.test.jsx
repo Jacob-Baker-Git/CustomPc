@@ -39,6 +39,19 @@ describe('the 3D view lives on Summary only (spec 2026-10-13)', () => {
     expect(screen.queryByText('/100')).toBeNull()
   })
 
+  // Spec 2026-10-20: score | 3D | spec stack, with the build table full width
+  // below — so the table is no longer inside the score column.
+  it('lays Summary out as three columns over a full-width build table', () => {
+    const { container } = openOn('summary')
+    expect(screen.getByRole('region', { name: 'Spec' })).toBeInTheDocument()
+    expect(screen.getByText('Peak power')).toBeInTheDocument()
+    const grid = container.querySelector('.build-grid')
+    for (const area of ['area-left', 'area-viz', 'area-spec', 'area-parts', 'area-banner', 'area-warnings']) {
+      expect(grid.querySelector(`:scope > .${area}`), area).not.toBeNull()
+    }
+    expect(grid.querySelector('.area-left .area-parts')).toBeNull()
+  })
+
   it('shows the score once on Summary', () => {
     openOn('summary')
     expect(screen.getAllByText('/100')).toHaveLength(1)

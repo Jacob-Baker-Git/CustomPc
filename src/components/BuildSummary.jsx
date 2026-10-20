@@ -5,6 +5,8 @@ import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { useBuildActions } from '../hooks/useBuildActions'
 import { useIsDesktop } from '../hooks/useIsDesktop'
+import { priceShares } from '../lib/showroom'
+import PartPictogram from './showroom/PartPictogram'
 
 const PHONE_ROWS = 4
 import { buildMarkdown } from '../lib/buildMarkdown'
@@ -20,14 +22,29 @@ import { countEssentials, isOptional } from '../lib/recommendedOrder'
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
-function Row({ label, name, brand, price }) {
+// One line of the build table (spec 2026-10-20). The grid areas live in
+// index.css (.part-row): a phone puts type, % and price on one line, the name
+// full width under them and the share bar under that; desktop is one line.
+function Row({ id, label, name, brand, price, pct, hot, onHot }) {
   return (
-    <div data-row className="group flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[12px] uppercase text-muted w-24 shrink-0 pr-2">
+    <div
+      data-row
+      onMouseEnter={onHot && (() => onHot(id))}
+      onMouseLeave={onHot && (() => onHot(null))}
+      className={`part-row group border-t border-line px-1 py-1.5 transition-colors ${hot === id ? 'bg-surface-2' : ''}`}
+    >
+      <span className="[grid-area:icon]"><PartPictogram id={id} className={hot === id ? 'text-brass' : ''} /></span>
+      <span className={`[grid-area:type] font-mono text-[12px] uppercase tracking-wider ${hot === id ? 'text-brass' : 'text-muted'}`}>
         {label}
       </span>
-      <span className="flex-1 text-sm text-ink truncate">{name}</span>
-      <span className="font-mono text-sm text-muted w-20 text-right">£{price.toFixed(2)}</span>
+      <span className="[grid-area:name] min-w-0 break-words text-sm text-ink">{name}</span>
+      {pct != null && (
+        <>
+          <span className="[grid-area:bar] mt-1 h-1 bg-surface-2 lg:mt-0"><span data-share-bar className="block h-1 bg-brass" style={{ width: `${pct}%` }} /></span>
+          <span className="[grid-area:pct] text-right font-mono text-[12px] text-muted">{pct.toFixed(1)}%</span>
+        </>
+      )}
+      <span className="[grid-area:price] text-right font-mono text-sm text-ink">£{price.toFixed(2)}</span>
       {/* Revealed on hover or keyboard focus. Ten always-visible links down the
           right-hand edge were the loudest thing on a page whose job is to be
           read; group-focus-within is what keeps them reachable without a
@@ -39,7 +56,7 @@ function Row({ label, name, brand, price }) {
         rel="noopener noreferrer"
         aria-label={`Find best price for ${name}`}
         title="Find best price"
-        className="w-7 text-right text-sm text-brass hover:brightness-110 opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
+        className="[grid-area:link] text-right text-sm text-brass hover:brightness-110 opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
       >
         ↗
       </a>
@@ -74,26 +91,26 @@ function SaveDialog({ name, setName, onSave, onCancel }) {
   )
 }
 
-function MissingRow({ label, optional }) {
+function MissingRow({ id, label, optional }) {
   return (
-    <div data-missing-row className="flex items-center py-1.5 border-t border-line">
-      <span className="font-mono text-[12px] uppercase text-muted w-24 shrink-0 pr-2">
+    <div data-missing-row className="part-row border-t border-line px-1 py-1.5">
+      <span className="[grid-area:icon] opacity-40"><PartPictogram id={id} /></span>
+      <span className="[grid-area:type] font-mono text-[12px] uppercase tracking-wider text-muted">
         {label}
       </span>
       {optional ? (
-        <span className="flex-1 text-sm text-muted">Optional</span>
+        <span className="[grid-area:name] text-sm text-muted">Optional</span>
       ) : (
-        <span className="flex-1 text-sm text-ok">
+        <span className="[grid-area:name] text-sm text-ok">
           <span aria-hidden="true" className="mr-1.5">⚠</span>Not selected
         </span>
       )}
-      <span className="font-mono text-sm text-faint w-20 text-right">—</span>
-      <span className="w-7" />
+      <span className="[grid-area:price] text-right font-mono text-sm text-faint">—</span>
     </div>
   )
 }
 
-export default function BuildSummary() {
+export default function BuildSummary({ hot = null, onHot } = {}) {
   const selectedParts = useBuilderStore((s) => s.selectedParts)
   const selectedPeripherals = useBuilderStore((s) => s.selectedPeripherals)
   const budget = useBuilderStore((s) => s.budget)
@@ -114,6 +131,7 @@ export default function BuildSummary() {
 
   const framePaced = Boolean(BUILD_PROFILES[useCase]?.cpuGpuPaced)
 
+  const shares = Object.fromEntries(priceShares(selectedParts).map((r) => [r.id, r.pct]))
   const buildRows = CATEGORIES.map((c) => ({ key: c.id, label: c.label, part: selectedParts[c.id] })).filter((r) => r.part)
   const missingCount = countEssentials(selectedParts).missing.length
   const periphRows = PERIPHERAL_ORDER.map((id) => ({ key: id, label: PERIPHERAL_LABELS[id], part: selectedPeripherals[id] })).filter((r) => r.part)
@@ -185,8 +203,8 @@ export default function BuildSummary() {
                   {(capList ? CATEGORIES.slice(0, PHONE_ROWS) : CATEGORIES).map((c) => {
                     const part = selectedParts[c.id]
                     return part
-                      ? <Row key={c.id} label={c.label} name={part.name} brand={part.brand} price={part.price} />
-                      : <MissingRow key={c.id} label={c.label} optional={isOptional(c.id)} />
+                      ? <Row key={c.id} id={c.id} label={c.label} name={part.name} brand={part.brand} price={part.price} pct={shares[c.id]} hot={hot} onHot={onHot} />
+                      : <MissingRow key={c.id} id={c.id} label={c.label} optional={isOptional(c.id)} />
                   })}
                   {capList && (
                     <button
@@ -202,7 +220,7 @@ export default function BuildSummary() {
               {periphRows.length > 0 && (
                 <>
                   <div className="mt-5 mb-1 text-[12px] uppercase tracking-wider text-muted">Peripherals</div>
-                  {periphRows.map((r) => <Row key={r.key} label={r.label} name={r.part.name} brand={r.part.brand} price={r.part.price} />)}
+                  {periphRows.map((r) => <Row key={r.key} id={r.key} label={r.label} name={r.part.name} brand={r.part.brand} price={r.part.price} />)}
                 </>
               )}
 
