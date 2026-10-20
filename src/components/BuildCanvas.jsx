@@ -6,6 +6,7 @@ import PartModel from './PartModel'
 import CableHarness from './models/CableHarness'
 import SlotSeat from './models/SlotSeat'
 import FanSystem from './FanSystem'
+import AnchorProjector from './showroom/AnchorProjector'
 import { caseInterior } from '../lib/assemblyGeometry'
 
 // The case is anchored to the board's REAR edge, not centred on the origin, so
@@ -32,7 +33,7 @@ const FLOOR_Y = interior.min[1]
 const isCoarse = () =>
   typeof window !== 'undefined' && Boolean(window.matchMedia?.('(pointer: coarse)').matches)
 
-export default function BuildCanvas({ selectedParts }) {
+export default function BuildCanvas({ selectedParts, overlayRef }) {
   const parts = Object.values(selectedParts).filter(Boolean)
   // Read once per mount, not once per render.
   const [coarse] = useState(isCoarse)
@@ -143,6 +144,8 @@ export default function BuildCanvas({ selectedParts }) {
         {/* 2.2–16 rather than 3–9: close enough to inspect one part, far enough
             to see the whole build in its room. WU_PER_MM was originally chosen
             so the old clamps still worked — widening them is deliberate. */}
+        {overlayRef && <AnchorProjector overlayRef={overlayRef} parts={selectedParts} />}
+
         <OrbitControls
           target={[CENTRE_X, -0.1, 0.05]}
           enablePan={false}

@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import { CATEGORIES } from './categories'
+import { partCentre } from './assemblyGeometry'
+import { sizeOverrides } from './partOverrides'
 
 export const SHOWROOM_SLOTS = [
   ...['cooler', 'motherboard', 'storage', 'psu'].map((id) => ({ id, side: 'l' })),
@@ -44,4 +46,20 @@ export function projectAnchor(world, camera) {
   const x = (v.x * 0.5 + 0.5) * 100
   const y = (-v.y * 0.5 + 0.5) * 100
   return { x, y, visible: v.z <= 1 && x >= 0 && x <= 100 && y >= 0 && y <= 100 }
+}
+
+// World-unit nudges from partCentre onto a face the camera can see (1 wu =
+// 122 mm). The bbox centre of these three sits somewhere you cannot point at:
+// the AIO's box spans pump to roof radiator, so its centre is empty air; the
+// card's and the PSU's centres are buried mid-body. Picked by eye in the
+// browser from the default and orbited views — see the Task 4 report.
+export const ANCHOR_OFFSET = {
+  cooler: [0, 0.55, 0],
+  gpu: [0, 0, 0.4],
+  psu: [0, 0, 0.55],
+}
+
+export function anchorWorldPoint(id, parts) {
+  const off = ANCHOR_OFFSET[id] ?? [0, 0, 0]
+  return partCentre(id, sizeOverrides(parts)).map((v, i) => v + off[i])
 }

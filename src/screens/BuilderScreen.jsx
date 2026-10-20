@@ -26,6 +26,9 @@ import StepHeader from '../components/StepHeader'
 import Dock from '../components/Dock'
 import { useHashView, stepsFor } from '../hooks/useHashView'
 import { useChromeHeight } from '../hooks/useChromeHeight'
+import { useIsDesktop } from '../hooks/useIsDesktop'
+import ShowroomOverlay from '../components/showroom/ShowroomOverlay'
+import ShowroomTapStrip from '../components/showroom/ShowroomTapStrip'
 import useBuilderStore from '../store/useBuilderStore'
 
 // A finger means mobile data, and the 3D view is ~6 MB of it. Read once at
@@ -57,6 +60,11 @@ export default function BuilderScreen() {
   const [show3D, setShow3D] = useState(() => !wantsDeferred3D())
   const scrollRef = useRef(null)
   const chromeRef = useRef(null)
+  // Summary's labelled 3D: the overlay is fed positions by BuildCanvas through
+  // this ref, and `hot` links a label to its dot.
+  const overlayRef = useRef(null)
+  const [hot, setHot] = useState(null)
+  const desktop = useIsDesktop()
 
   // The header is sticky inside the scroller, so nothing has to pad for a
   // hard-coded height; its live height goes to the folds below as --chrome-h.
@@ -169,20 +177,26 @@ export default function BuilderScreen() {
                   sticky (index.css), so the PC stays in view while the build
                   list scrolls. Sticky on the cell itself sized the row to the
                   window and left dead space below a shorter column. */}
-              <div className="area-viz h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px]">
-              <div className="viz-panel relative h-full overflow-hidden border border-line transition-colors hover:border-line-strong">
+              <div className="area-viz flex flex-col lg:block h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px]">
+              <div className="viz-panel relative flex h-full min-h-0 flex-1 flex-col overflow-hidden border border-line transition-colors hover:border-line-strong">
+                {/* The 3D box. Below lg the controls row sits UNDER it in flow
+                    rather than over it, so a tap dot (a part low in the case,
+                    like the PSU) can never land beneath the drag hint. */}
+                <div className="relative min-h-0 flex-1">
                 {show3D ? (
                   <>
                     <CanvasErrorBoundary>
                       <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
-                        <BuildCanvas selectedParts={selectedParts} />
+                        <BuildCanvas selectedParts={selectedParts} overlayRef={overlayRef} />
                       </Suspense>
                     </CanvasErrorBoundary>
+                    <ShowroomOverlay ref={overlayRef} parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} />
                     <InfoDisclaimer />
                   </>
                 ) : (
                   <Deferred3D onLoad={() => setShow3D(true)} />
                 )}
+                </div>
                 {/* ⚠️ ONE row, not two independently-pinned corners.
 
                     The hint and the toggle used to be separate absolutely-
@@ -209,7 +223,7 @@ export default function BuilderScreen() {
                     see-through-case toggle floating over an empty panel are
                     chrome for something that is not there yet. */}
                 {show3D && (
-                  <div className="pointer-events-none absolute inset-x-3 bottom-3 z-30 flex flex-wrap items-end justify-between gap-2">
+                  <div className={`${desktop ? 'pointer-events-none absolute inset-x-3 bottom-3 z-30' : 'px-3 py-2'} flex flex-wrap items-end justify-between gap-2`}>
                     {/* ⚠️ The VERB is per-input, and the whole reason this hint
                         exists is a mouse problem: the canvas swallows the scroll
                         wheel, so without a frame and a label people scroll, the
@@ -247,6 +261,7 @@ export default function BuilderScreen() {
                   </div>
                 )}
               </div>
+              {show3D && !desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}
