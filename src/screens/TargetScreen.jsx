@@ -20,6 +20,31 @@ const LABEL = 'text-[12px] uppercase tracking-wider text-muted'
 // Card 1 shows the whole build; each later card zooms on the part type that
 // changed most against the card to its left (spec 2026-10-20, "show what
 // changed"). Parts without an anchor in the still get the whole picture.
+// Phones get the same callout as a line of text: the stills nearly doubled the
+// results page on a phone (1294 -> 2468 px).
+function CardLine({ card, prevCard }) {
+  const { parts } = card.option
+  if (!prevCard) {
+    return <p className="mt-1 text-sm font-semibold text-ink">{`Base build · ${[parts.cpu?.name, parts.gpu?.name].filter(Boolean).join(' + ')}`}</p>
+  }
+  const f = focusChange(prevCard.option, card.option, card.changed)
+  if (!f) return null
+  return (
+    <div className="mt-1 flex items-start gap-2">
+      <PartPictogram id={f.id} className="text-brass" />
+      <div className="min-w-0">
+        <div className="text-sm font-semibold text-ink">
+          {`${categoryLabel(f.id)} · ${f.part?.name ?? 'removed'} · `}
+          <span className="whitespace-nowrap">{formatDelta(f.delta)}</span>
+        </div>
+        {f.others.length > 0 && (
+          <div className="font-mono text-[12px] text-muted">{`${f.others.map(categoryLabel).join(', ')} also changed`}</div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function CardShow({ card, prevCard, chip }) {
   const { parts } = card.option
   if (!prevCard) {
@@ -52,15 +77,26 @@ function CardShow({ card, prevCard, chip }) {
 // differs from the answer to its left is marked with a brass dot, so the
 // columns say what the extra money buys (spec 2026-10-17). The Best value
 // card is the recommended one (spec 2026-10-20).
-function BuildOption({ card, prevCard, index, count, maxFps, open, onUse }) {
+function BuildOption({ card, prevCard, index, count, maxFps, desktop, onUse }) {
   const { option } = card
   const parts = CATEGORIES.filter((c) => option.parts[c.id])
   const rec = card.kind === 'middle'
+  // On a phone the button joins the fps/price row instead of a row of its own.
+  const buttonEl = (cls) => (
+    <button
+      onClick={onUse}
+      className={`${cls} min-h-11 px-4 text-sm ${rec ? BTN_PRIMARY : 'border border-line font-semibold text-ink hover:border-brass'}`}
+    >
+      Use this build
+    </button>
+  )
   return (
-    <section className={`py-6 ${rec ? 'relative z-10 border border-brass bg-surface px-4 lg:-translate-y-2 lg:px-6' : 'border-b border-line lg:border-b-0'}`}>
-      <CropFrame className="mb-5">
-        <CardShow card={card} prevCard={prevCard} chip={`0${index + 1} / 0${count}`} />
-      </CropFrame>
+    <section className={`py-4 lg:py-6 ${rec ? 'relative z-10 border border-brass bg-surface px-4 lg:-translate-y-2 lg:px-6' : 'border-b border-line lg:border-b-0'}`}>
+      {desktop && (
+        <CropFrame className="mb-5">
+          <CardShow card={card} prevCard={prevCard} chip={`0${index + 1} / 0${count}`} />
+        </CropFrame>
+      )}
       <div className="flex items-center justify-between gap-2">
         <h2 className="text-sm">
           <span className="font-semibold text-ink">{card.title}</span>
@@ -68,28 +104,25 @@ function BuildOption({ card, prevCard, index, count, maxFps, open, onUse }) {
         </h2>
         {rec && <span className="bg-brass px-2 py-0.5 font-mono text-[12px] text-accent-ink">Recommended</span>}
       </div>
-      <div className="mt-4 flex items-baseline gap-6">
+      {!desktop && <CardLine card={card} prevCard={prevCard} />}
+      <div className="mt-2 flex items-baseline gap-4 lg:mt-4 lg:gap-6">
         <div>
           <div className={LABEL}>{option.bound === 'upper' ? 'up to' : 'frame rate'}</div>
-          <div className="font-mono text-5xl font-bold text-ink">
+          <div className="font-mono text-3xl font-bold text-ink lg:text-5xl">
             {option.fps}<span className="ml-1 text-base text-muted">fps</span>
           </div>
         </div>
-        <div className="ml-auto text-right">
+        <div className={desktop ? 'ml-auto text-right' : ''}>
           <div className={LABEL}>price</div>
-          <div className="font-mono text-4xl font-bold text-ink">£{Math.round(option.total).toLocaleString('en-GB')}</div>
+          <div className="font-mono text-2xl font-bold text-ink lg:text-4xl">£{Math.round(option.total).toLocaleString('en-GB')}</div>
         </div>
+        {!desktop && buttonEl('ml-auto self-center')}
       </div>
-      <div className="mt-3 h-1 bg-surface-2"><div className="h-1 bg-brass" style={{ width: `${Math.min(100, (option.fps / maxFps) * 100)}%` }} /></div>
+      <div className="mt-3 hidden h-1 bg-surface-2 lg:block"><div className="h-1 bg-brass" style={{ width: `${Math.min(100, (option.fps / maxFps) * 100)}%` }} /></div>
       {card.step && <p className="mt-3 font-mono text-[12px] text-brass">{card.step}</p>}
       {card.overBudget && <p className="mt-1 text-[13px] text-bad">over budget</p>}
-      <button
-        onClick={onUse}
-        className={`mt-4 min-h-11 px-4 text-sm ${rec ? BTN_PRIMARY : 'border border-line font-semibold text-ink hover:border-brass'}`}
-      >
-        Use this build
-      </button>
-      <details className="mt-5" open={open}>
+      {desktop && buttonEl('mt-4')}
+      <details className="mt-2 lg:mt-5" open={desktop}>
         <summary className={`${LABEL} cursor-pointer py-2 hover:text-ink`}>{parts.length} parts</summary>
         <ul className="mt-1 text-sm">
           {parts.map((c) => {
@@ -194,7 +227,7 @@ export default function TargetScreen() {
                 {/* The no-value line stands where the Middle answer would. */}
                 {cards.flatMap((card, i) => [
                   <BuildOption key={card.kind} card={card} prevCard={cards[i - 1]} index={i} count={cards.length}
-                               maxFps={maxFps} open={desktop} onUse={() => use(card.option)} />,
+                               maxFps={maxFps} desktop={desktop} onUse={() => use(card.option)} />,
                   card.kind === 'cheapest' && shown.noValueStep && (
                     <p key="no-value" className="border-b border-line py-6 text-sm text-muted lg:border-b-0">
                       Nothing above the cheapest build is worth the extra money.

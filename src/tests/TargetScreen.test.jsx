@@ -156,7 +156,11 @@ describe('TargetScreen — cards show what changed', () => {
   const middle = opt({ ...cheapest.parts, cpu: p('c2', 'CPU Two', 110), gpu: p('g2', 'GPU Two', 494.99) }, 775, 90)
   const best = opt({ ...middle.parts, case: p('k2', 'Case Two', 60) }, 785, 90)
 
-  it('recommends the middle card, zooms on the biggest change and names the rest', async () => {
+  const original = window.matchMedia
+  afterEach(() => { window.matchMedia = original })
+
+  it('desktop: recommends the middle card, zooms on the biggest change and names the rest', async () => {
+    window.matchMedia = () => ({ matches: true })
     buildForGame.mockReturnValueOnce({ cheapest, middle, best })
     render(<TargetScreen />)
     await userEvent.click(find())
@@ -181,6 +185,21 @@ describe('TargetScreen — cards show what changed', () => {
     // The case has no anchor: the whole still, and the label names the case.
     expect(within(three).getByText(line('Case · Case Two · +£10'))).toBeInTheDocument()
     expect(three.querySelector('[data-still-box]').style.transform).toBe('')
+  })
+
+  // A phone gets the callout as a line of text: the stills nearly doubled the page.
+  it('phone: says what changed in a line of text, with no still', async () => {
+    buildForGame.mockReturnValueOnce({ cheapest, middle, best })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    const [one, two, three] = [...document.querySelectorAll('section')]
+    expect(document.querySelector('section img')).toBeNull()
+    expect(document.querySelector('[data-still-box]')).toBeNull()
+    expect(within(one).getByText('Base build · CPU One + GPU One')).toBeInTheDocument()
+    expect(within(two).getByText(line('GPU · GPU Two · +£95'))).toBeInTheDocument()
+    expect(within(two).getByText('CPU also changed')).toBeInTheDocument()
+    expect(within(three).getByText(line('Case · Case Two · +£10'))).toBeInTheDocument()
+    expect(within(two).getByRole('button', { name: /use this build/i })).toBeInTheDocument()
   })
 
   it('recommends nothing when there is no middle card', async () => {
