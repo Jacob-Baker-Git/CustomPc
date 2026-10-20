@@ -77,7 +77,7 @@ function BuildOption({ card, prevCard, index, count, maxFps, open, onUse }) {
         </div>
         <div className="ml-auto text-right">
           <div className={LABEL}>price</div>
-          <div className="font-mono text-4xl font-bold text-ink">£{option.total.toFixed(0)}</div>
+          <div className="font-mono text-4xl font-bold text-ink">£{Math.round(option.total).toLocaleString('en-GB')}</div>
         </div>
       </div>
       <div className="mt-3 h-1 bg-surface-2"><div className="h-1 bg-brass" style={{ width: `${Math.min(100, (option.fps / maxFps) * 100)}%` }} /></div>
@@ -207,7 +207,7 @@ export default function TargetScreen() {
                 <p className="text-sm text-muted">
                   No build in the catalogue reaches {shown.fps} fps in {shown.game.name} at these settings.
                   {/* No fastest when no pair could be made into a whole PC. */}
-                  {shown.fastest && <> The fastest manages {fpsText(shown.fastest)} for £{shown.fastest.total.toFixed(0)}.</>}
+                  {shown.fastest && <> The fastest manages {fpsText(shown.fastest)} for £{Math.round(shown.fastest.total).toLocaleString('en-GB')}.</>}
                 </p>
               )}
             </>

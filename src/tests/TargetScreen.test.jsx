@@ -191,6 +191,16 @@ describe('TargetScreen — cards show what changed', () => {
     expect(screen.getByText('Nothing above the cheapest build is worth the extra money.')).toBeInTheDocument()
   })
 
+  it('writes four-figure prices with a thousands comma', async () => {
+    buildForGame.mockReturnValueOnce({
+      cheapest: opt(cheapest.parts, 1599.4, 60), unreachable: true, fastest: opt(cheapest.parts, 1234.5, 50),
+    })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText('£1,599')).toBeInTheDocument()
+    expect(screen.getByText(/the fastest manages 50 fps for £1,235./i)).toBeInTheDocument()
+  })
+
   it('still says when there is no benchmark data', async () => {
     buildForGame.mockReturnValueOnce({ noData: true })
     render(<TargetScreen />)

@@ -64,7 +64,7 @@ export default function ShowroomStill({
       )}
 
       {children && (
-        <div className={`absolute left-[4%] max-w-[75%] border bg-surface px-2 py-1.5 ${focus ? 'border-brass' : 'border-line'} ${top ? 'bottom-[6%]' : 'top-[6%]'}`}>
+        <div className={`absolute left-[4%] max-w-[60%] border bg-surface px-2 py-1.5 ${focus ? 'border-brass' : 'border-line'} ${top ? 'bottom-[6%]' : 'top-[6%]'}`}>
           {children}
         </div>
       )}

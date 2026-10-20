@@ -30,6 +30,20 @@ describe('ShowroomStill', () => {
     expect(getByText('GPU callout')).toBeTruthy()
   })
 
+  it('zoomed: the dot lands where the anchor ends up, inside the frame', () => {
+    // Cooler anchor (55.9%, 9.5%) at 2.2x in a 4:3 frame: centred across, and
+    // pushed down to 2.2 x 9.5 = 20.9% so the picture still covers the top.
+    const { container } = render(
+      <ShowroomStill parts={{ cooler: { name: 'AIO', price: 90 } }} zoom={{ id: 'cooler', scale: 2.2 }} frame="4 / 3" />,
+    )
+    const dot = container.querySelector('[data-focus-dot]')
+    const left = parseFloat(dot.style.left)
+    const top = parseFloat(dot.style.top)
+    expect(left).toBeCloseTo(50, 5)
+    expect(top).toBeCloseTo(20.9, 5)
+    for (const v of [left, top]) { expect(v).toBeGreaterThanOrEqual(0); expect(v).toBeLessThanOrEqual(100) }
+  })
+
   it('unzoomed card frame fits the whole case, centred', () => {
     const { container } = render(<ShowroomStill parts={parts} ids={[]} frame="4 / 3">Base</ShowroomStill>)
     const box = container.querySelector('[data-still-box]')
