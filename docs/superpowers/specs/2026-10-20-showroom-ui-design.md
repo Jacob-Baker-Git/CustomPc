@@ -101,10 +101,14 @@ wide display type) and adds to the current site rather than removing from it.
   ("GPU · RX 9070 GRE · +£95"; a cheaper swap reads "−£40") and lists any
   other changed types ("CPU also changed"). `buildCards` already gives the
   `changed` set and both options' parts, so the deltas are exact.
-- Pictures are **still images**, one per part type plus one whole-build shot,
-  captured from the site's own 3D model by a script in the style of
-  `scripts/capture-welcome-render.mjs`, saved as small WebP in `public/img/`
-  (target ≤ 40 KB each). No live 3D on this screen.
+- Pictures are **one still image** of the whole build, captured from the
+  site's own labelled 3D view by a script in the style of
+  `scripts/capture-welcome-render.mjs` (WebP in `public/img/`, ≤ 160 KB),
+  plus the anchor positions of each part in that image (read from the live
+  overlay's dots at capture time). A close-up is that still zoomed (CSS
+  transform) on the focus part's anchor, as the mockup does. *(my call: one
+  file instead of one per type — fewer bytes, one capture.)* No live 3D on
+  this screen.
 - A merged twin card (buildCards' "also …") is unchanged in behaviour.
 - The Best value card is visually dominant: slightly raised, brass outline,
   a "Recommended" tag, filled primary button; the others use ghost buttons.
