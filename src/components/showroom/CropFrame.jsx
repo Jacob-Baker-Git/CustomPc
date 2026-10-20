@@ -1,4 +1,4 @@
-const MARK = 'absolute h-4 w-4 border-line-strong'
+const MARK = 'pointer-events-none absolute h-4 w-4 border-line-strong'
 
 export default function CropFrame({ children, className = '' }) {
   return (
