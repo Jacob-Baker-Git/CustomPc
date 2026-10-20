@@ -4,6 +4,7 @@ import useBuilderStore, {
   selTotalSpent, selPeakDraw, selPsuWattage
 } from '../store/useBuilderStore'
 import DynamicBars from './DynamicBars'
+import { gbp } from '../lib/money'
 
 // One row at every width (configurator redesign, spec 2026-10-16): back to the
 // Welcome screen, the wordmark and the editable budget. The steps moved to
@@ -66,18 +67,19 @@ export default function TopBar() {
           <button
             onClick={startEdit}
             title="Click to edit your budget"
-            className="min-h-11 border-b border-dashed border-line-strong font-mono font-semibold tabular-nums text-ink transition-colors hover:border-brass hover:text-brass"
+            aria-label={`Budget ${budget > 0 ? gbp(budget) : 'not set'}, edit`}
+            className="min-h-11 min-w-11 border-b border-dashed border-line-strong font-mono font-semibold tabular-nums text-ink transition-colors hover:border-brass hover:text-brass"
           >
-            £{budget.toFixed(0)}
+            {gbp(budget)}
           </button>
         )}
         {/* No budget (the "What will my build get?" path) means nothing is
             "left" of it — the figure would just be the spend, negated. */}
         {budget > 0 && (
           <>
-            <span className="mx-1 hidden text-line-strong wide:inline">|</span>
+            <span aria-hidden="true" className="mx-1 hidden text-line-strong wide:inline">|</span>
             <span className={`hidden font-mono font-semibold tabular-nums wide:inline ${remaining < 0 ? 'text-bad' : 'text-good'}`}>
-              £{remaining.toFixed(0)}
+              {gbp(remaining)}
             </span>
             <span className="hidden text-faint wide:inline">left</span>
           </>

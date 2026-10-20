@@ -1,3 +1,4 @@
+import { gbp } from '../lib/money'
 import { render, screen } from '@testing-library/react'
 import SpecStack from '../components/showroom/SpecStack'
 import useBuilderStore from '../store/useBuilderStore'
@@ -19,7 +20,7 @@ describe('SpecStack', () => {
     const total = Object.values(build).reduce((s, p) => s + p.price, 0)
     const signed = (n) => `${n > 0 ? '+' : ''}${n}%`
 
-    expect(valueOf('Price')).toBe(`£${total.toFixed(0)} / £1500`)
+    expect(valueOf('Price')).toBe(`${gbp(total)} / £1,500`)
     expect(valueOf('Peak power')).toBe(`${power.peakW} W`)
     expect(valueOf('PSU')).toBe(`${build.psu.wattage} W`)
     expect(valueOf('PSU headroom')).toBe(signed(power.psuHeadroomPct))

@@ -6,6 +6,7 @@ import { partStats } from '../lib/partStats'
 import { insight, gpuResChips, specRows } from '../lib/specSheetContent'
 import { searchUrl } from '../lib/retailerLinks'
 import { PRICE_SNAPSHOT, FPS_CAVEAT } from '../lib/siteContent'
+import { gbp2 } from '../lib/money'
 
 const CATEGORY_LABEL = {
   cpu: 'Processor',
@@ -86,7 +87,7 @@ export default function PartPage({ partId, onNavigate }) {
       </p>
 
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mt-4">
-        <span className="font-mono text-2xl text-tech">£{part.price.toFixed(2)}</span>
+        <span className="font-mono text-2xl text-tech">{gbp2(part.price)}</span>
         {/* Never "price". These are curated estimates and the terms page says so;
             a page generated 540 times over is the last place to blur that. */}
         <span className="text-xs text-muted">curated estimate, {PRICE_SNAPSHOT}</span>
@@ -179,7 +180,7 @@ export default function PartPage({ partId, onNavigate }) {
                     <span className="block text-sm text-ink truncate group-hover:text-brass">{p.name}</span>
                     <span className="block text-xs text-muted">{why}</span>
                   </span>
-                  <span className="font-mono text-sm text-tech shrink-0">£{p.price.toFixed(2)}</span>
+                  <span className="font-mono text-sm text-tech shrink-0">{gbp2(p.price)}</span>
                 </a>
               </li>
             ))}

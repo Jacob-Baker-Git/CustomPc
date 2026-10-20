@@ -6,6 +6,7 @@ import { rateBuild, partUpgradeOptions, pickRecommendation } from '../lib/partRa
 import ScoreInfo from './ScoreInfo'
 import { TELEMETRY, BTN_PRIMARY } from '../lib/uiTokens'
 import Block from './ui/Block'
+import { gbp } from '../lib/money'
 
 const CAT_LABEL = {
   cpu: 'CPU', gpu: 'GPU', ram: 'RAM', storage: 'Storage', psu: 'PSU',
@@ -82,7 +83,7 @@ export default function BuildRatingPanel() {
                 Your weakest part is the <span className="uppercase">{CAT_LABEL[tip.category] ?? tip.category}</span>.
                 {' '}Swapping it for <span className="text-ink font-semibold">{tip.toPart.name}</span> takes it from{' '}
                 <span className={TELEMETRY}>{tip.fromScore}</span> to <span className={`${TELEMETRY} text-good font-semibold`}>{tip.toScore}</span>
-                {' '}for <span className={TELEMETRY}>{tip.extraCost <= 0 ? 'no extra cost' : `+£${tip.extraCost.toFixed(0)}`}</span>.
+                {' '}for <span className={TELEMETRY}>{tip.extraCost <= 0 ? 'no extra cost' : `+${gbp(tip.extraCost)}`}</span>.
               </p>
               <button
                 onClick={() => addPart(tip.category, tip.toPart)}

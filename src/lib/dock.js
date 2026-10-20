@@ -8,7 +8,7 @@ const pounds = (n) => `£${Math.round(n).toLocaleString('en-GB')}`
 // play rather than silently added to, or left out of, the build's price.
 export function dockTotalLabel({ view, build, desk }) {
   const showDesk = view === 'peripherals' || (view === 'summary' && desk > 0)
-  return showDesk ? `Build ${pounds(build)} + desk ${pounds(desk)}` : `Build ${pounds(build)}`
+  return showDesk ? `Build ${pounds(build)} + peripherals ${pounds(desk)}` : `Build ${pounds(build)}`
 }
 
 // The dock's primary action: the next step of the build's path. Summary is the

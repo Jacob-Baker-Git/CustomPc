@@ -7,6 +7,7 @@ import PeripheralFilterPanel from './PeripheralFilterPanel'
 import { TELEMETRY } from '../lib/uiTokens'
 import Block from './ui/Block'
 import Tag from './ui/Tag'
+import { gbp, gbp2 } from '../lib/money'
 import {
   filterPeripherals, specValues, SORTS, DEFAULT_SORT,
   brandValues, refreshBandsFor, toFilterOptions,
@@ -48,7 +49,7 @@ function PeripheralCard({ p, isSelected, onToggle }) {
         className="text-left flex flex-col cursor-pointer focus-visible:outline-brass"
       >
         <div className="text-sm font-semibold text-ink leading-tight pr-14">{p.name}</div>
-        <div className={`${TELEMETRY} font-bold text-tech mt-1`}>£{p.price.toFixed(2)}</div>
+        <div className={`${TELEMETRY} font-bold text-tech mt-1`}>{gbp2(p.price)}</div>
         <div className="text-xs text-muted mt-1">{specLine(p)}</div>
       </button>
       <button
@@ -118,7 +119,7 @@ export default function PeripheralsPanel() {
         <Block
           className="mb-6 border-t-0 pt-0"
           title="Peripherals"
-          aside={<Tag><b>{pickedCount}</b> of {CATEGORIES.length} chosen · £{total.toFixed(0)}</Tag>}
+          aside={<Tag><b>{pickedCount}</b> of {CATEGORIES.length} chosen · {gbp(total)}</Tag>}
         >
           <p className="text-[13px] text-muted">Optional, and counted apart from the build budget.</p>
         </Block>
@@ -187,7 +188,7 @@ export default function PeripheralsPanel() {
                   <span className="text-[12px] text-faint hidden sm:inline">{blurb}</span>
                   <span className="ml-auto text-[12px] text-muted">
                     {picked
-                      ? <>Picked · <span className={TELEMETRY}>£{picked.price.toFixed(2)}</span></>
+                      ? <>Picked · <span className={TELEMETRY}>{gbp2(picked.price)}</span></>
                       : `${shown.length} option${shown.length === 1 ? '' : 's'}`}
                   </span>
                 </div>

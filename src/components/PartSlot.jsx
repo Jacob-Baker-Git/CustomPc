@@ -1,4 +1,5 @@
 import { TELEMETRY } from '../lib/uiTokens'
+import { gbp } from '../lib/money'
 
 // One part slot: a hairline-divided row (configurator look, spec 2026-10-16).
 // An empty slot keeps its dashed outline so it still reads as a gap in the
@@ -38,7 +39,7 @@ export default function PartSlot({
   const seated = Boolean(part)
   // A seated row lights its label on the showroom still (spec 2026-10-20).
   const link = seated && onHot
-  const price = seated && part.price != null ? `£${part.price.toFixed(0)}` : null
+  const price = seated && part.price != null ? gbp(part.price) : null
 
   return (
     <div

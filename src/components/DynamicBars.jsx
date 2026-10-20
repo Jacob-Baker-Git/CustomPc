@@ -1,3 +1,4 @@
+import { gbp } from '../lib/money'
 export default function DynamicBars({ value, max, label, unit, compact = false }) {
   const hasMax = typeof max === 'number' && max > 0
   const pct = hasMax ? Math.min((value / max) * 100, 100) : 0
@@ -12,9 +13,9 @@ export default function DynamicBars({ value, max, label, unit, compact = false }
   // Until a capacity is known (e.g. no PSU selected yet) show only the live draw,
   // not a misleading "0 / 750" against a default that isn't really there.
   const display = !hasMax
-    ? (unit === '£' ? `£${value.toFixed(0)}` : `${value}${unit}`)
+    ? (unit === '£' ? gbp(value) : `${value}${unit}`)
     : unit === '£'
-      ? `£${value.toFixed(0)} / £${max.toFixed(0)}`
+      ? `${gbp(value)} / ${gbp(max)}`
       : `${value}${unit} / ${max}${unit}`
 
   // Full size is a bordered chip so the meter groups with the tab control beside

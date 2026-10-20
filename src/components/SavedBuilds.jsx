@@ -9,6 +9,7 @@ import { peakDrawW } from '../lib/partSynergy'
 import { TELEMETRY } from '../lib/uiTokens'
 import Block from './ui/Block'
 import ConfirmDialog from './ConfirmDialog'
+import { gbp } from '../lib/money'
 
 const RES_LABEL = { '1080p': '1080p', '1440p': '1440p', '4k': '4K' }
 const totalOf = (d) => Object.values(d.parts).reduce((s, p) => s + (p?.price ?? 0), 0)
@@ -20,7 +21,7 @@ function CompareTable({ a, b }) {
   if (!da || !db) return null
 
   const summaryRows = [
-    ['Total', `£${totalOf(da).toFixed(0)}`, `£${totalOf(db).toFixed(0)}`],
+    ['Total', gbp(totalOf(da)), gbp(totalOf(db))],
     ['Peak draw', `${drawOf(da)}W`, `${drawOf(db)}W`],
     [
       'Est. FPS',
@@ -132,7 +133,7 @@ export default function SavedBuilds({ onLoaded }) {
                       checked={ticked}
                       disabled={!ticked && compareIds.length >= 2}
                       onChange={() => toggleCompare(b.id)}
-                      className="accent-accent disabled:opacity-30"
+                      className="size-6 accent-brass disabled:opacity-30"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-ink truncate">{b.name}</div>

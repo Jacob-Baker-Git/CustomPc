@@ -4,6 +4,7 @@ import { valuePerPound } from '../lib/valueScore'
 import { TELEMETRY } from '../lib/uiTokens'
 import SpecSheet from './SpecSheet'
 import PartThumb from './art/PartThumb'
+import { gbp2 } from '../lib/money'
 
 // The specs a shopper actually compares, as chips rather than a stacked list.
 //
@@ -55,7 +56,7 @@ export default function PartCard({ part, locked, lockReason, selected = false, o
           {/* pr-6 keeps the name clear of the Locked / Selected badge pinned to
               the card's top-right corner. */}
           <span className="text-sm font-semibold text-ink leading-tight pr-6">{part.name}</span>
-          <span className={`${TELEMETRY} font-bold text-tech`}>£{part.price.toFixed(2)}</span>
+          <span className={`${TELEMETRY} font-bold text-tech`}>{gbp2(part.price)}</span>
           {part.perfScore > 0 && (
             <span className="text-[12px] text-muted">
               <span className={`${TELEMETRY} text-ink`}>{valuePerPound(part).toFixed(1)}</span> perf/£100
