@@ -21,6 +21,12 @@ import BasisBar from './BasisBar'
 import GameEstimate from './GameEstimate'
 import Fold from '../ui/Fold'
 import { perfFoldSummaries } from '../../lib/perfFoldSummaries'
+import { useIsDesktop } from '../../hooks/useIsDesktop'
+import ShowroomStill from '../showroom/ShowroomStill'
+import ShowroomTapStrip from '../showroom/ShowroomTapStrip'
+import CropFrame from '../showroom/CropFrame'
+
+const STILL_IDS = ['cpu', 'gpu'] // the bottleneck pair
 
 // One grid definition for every band, so the panels line up across sections
 // rather than each group inventing its own rhythm.
@@ -142,6 +148,17 @@ export default function PerformanceScreen() {
     return [...seen.values()]
   }, [allGameRows, report])
 
+  const desktop = useIsDesktop()
+  const [hot, setHot] = useState(null)
+  const still = (
+    <>
+      <CropFrame>
+        <ShowroomStill parts={selectedParts} ids={STILL_IDS} hot={hot} setHot={setHot} compact={!desktop} frame={desktop ? undefined : '16 / 9'} />
+      </CropFrame>
+      {!desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
+    </>
+  )
+
   const folds = perfFoldSummaries({
     report, power, memory,
     answered: allGameRows.length,
@@ -153,6 +170,13 @@ export default function PerformanceScreen() {
       {/* The game estimate leads the tab and carries its heading; the
           tab-wide readouts follow. (A separate "Performance" header panel used
           to sit above it, repeating what the tab bar already says.) */}
+      {/* From lg the still of the build, with only the bottleneck pair
+          labelled, rides beside the estimate and bottleneck (spec 2026-10-20).
+          On phones it goes inside the bottleneck fold, after its panels: that
+          fold starts shut there, so the picture costs no page length until
+          someone opens the section it belongs to. */}
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-10">
+      <div className="min-w-0">
       <GameEstimate />
 
 
@@ -219,7 +243,11 @@ export default function PerformanceScreen() {
             <StatRow label="Storage" value={selectedParts.storage?.storageType} />
           </StatPanel>
         </div>
+        {!desktop && <div className="mt-4">{still}</div>}
       </Fold>
+      </div>
+      {desktop && <div className="sticky top-[calc(var(--chrome-h,0px)+0.75rem)] self-start pt-3">{still}</div>}
+      </div>
 
       <Fold title="Power and cooling" summary={folds.power}>
         <p className="mb-3 max-w-[68ch] text-[13px] leading-relaxed text-muted">What the build draws, whether the supply has room for it, and whether the cooler can shed it.</p>

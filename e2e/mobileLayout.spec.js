@@ -422,13 +422,14 @@ test.describe('the Summary tab reads in the right order', () => {
       selectors,
     )
 
-  // Spec 2026-10-16: on a phone Summary answers first (score, then the use
-  // case it is rated for), then the parts list, then the 3D view last.
-  test('on a phone: the score, the use case, the parts, then the 3D view', async ({ page }) => {
+  // Spec 2026-10-20: on a phone Summary answers first (score, then the use
+  // case it is rated for), then the labelled 3D, the spec stack, and the build
+  // table. (Spec 2026-10-16 had the parts list before the 3D.)
+  test('on a phone: the score, the use case, the 3D view, the spec, then the parts', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await generateBuild(page)
 
-    const order = ['.area-rating', '.area-usecase', '.area-parts', '.area-viz']
+    const order = ['.area-rating', '.area-usecase', '.area-viz', '.area-spec', '.area-parts']
     const tops = await topsOf(page, order)
 
     expect(tops, 'every ordered panel is on the page').not.toContain(null)

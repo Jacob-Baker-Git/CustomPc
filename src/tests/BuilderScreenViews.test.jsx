@@ -39,6 +39,19 @@ describe('the 3D view lives on Summary only (spec 2026-10-13)', () => {
     expect(screen.queryByText('/100')).toBeNull()
   })
 
+  // Spec 2026-10-20: score | 3D | spec stack, with the build table full width
+  // below — so the table is no longer inside the score column.
+  it('lays Summary out as three columns over a full-width build table', () => {
+    const { container } = openOn('summary')
+    expect(screen.getByRole('region', { name: 'Spec' })).toBeInTheDocument()
+    expect(screen.getByText('Peak power')).toBeInTheDocument()
+    const grid = container.querySelector('.build-grid')
+    for (const area of ['area-left', 'area-viz', 'area-spec', 'area-parts', 'area-banner', 'area-warnings']) {
+      expect(grid.querySelector(`:scope > .${area}`), area).not.toBeNull()
+    }
+    expect(grid.querySelector('.area-left .area-parts')).toBeNull()
+  })
+
   it('shows the score once on Summary', () => {
     openOn('summary')
     expect(screen.getAllByText('/100')).toHaveLength(1)
@@ -90,5 +103,42 @@ describe('number keys and text composition', () => {
     openOn('build')
     act(() => { fireEvent.keyDown(document.body, { key: '2', isComposing: true }) })
     expect(window.location.hash).toBe('#build')
+  })
+})
+
+describe('the Build tab shows the labelled still beside the list (spec 2026-10-20)', () => {
+  afterEach(() => { window.matchMedia = undefined })
+
+  it('desktop: labels only for the picked parts, no live-build chip on a fixed picture', () => {
+    window.matchMedia = (q) => ({ matches: q.includes('min-width'), addEventListener() {}, removeEventListener() {} })
+    openOn('build')
+    const labels = [...document.querySelectorAll('[data-label]')].map((l) => l.dataset.label).sort()
+    expect(labels).toEqual(['cpu', 'gpu'])
+    expect(screen.queryByText('[ live build ]')).toBeNull()
+    expect(document.querySelector('[data-tap-strip]')).toBeNull()
+  })
+
+  it('hovering a row lights its label', () => {
+    window.matchMedia = (q) => ({ matches: q.includes('min-width'), addEventListener() {}, removeEventListener() {} })
+    openOn('build')
+    fireEvent.mouseEnter(document.querySelector('[data-part-row="cpu"]'))
+    expect(document.querySelector('[data-label="cpu"]').className).toMatch(/bg-brass/)
+  })
+
+  it('phone: tap dots and the tap strip, no labels', () => {
+    openOn('build')
+    expect(document.querySelector('[data-label]')).toBeNull()
+    expect(document.querySelectorAll('[data-dot]').length).toBe(2)
+    expect(document.querySelector('[data-tap-strip]')).not.toBeNull()
+  })
+
+  // Build and Summary share hot, and a tap sends no mouseleave to clear it.
+  it('a part tapped on Build is not still lit on Summary', () => {
+    openOn('build')
+    fireEvent.click(screen.getByRole('button', { name: 'Show CPU' }))
+    expect(screen.getByRole('button', { name: 'Show CPU' })).toHaveAttribute('aria-pressed', 'true')
+    act(() => { fireEvent.keyDown(document.body, { key: '4' }) }) // Summary
+    act(() => { fireEvent.keyDown(document.body, { key: '1' }) }) // back to Build
+    expect(screen.getByRole('button', { name: 'Show CPU' })).toHaveAttribute('aria-pressed', 'false')
   })
 })

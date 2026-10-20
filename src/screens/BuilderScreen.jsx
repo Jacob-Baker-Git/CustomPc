@@ -26,6 +26,12 @@ import StepHeader from '../components/StepHeader'
 import Dock from '../components/Dock'
 import { useHashView, stepsFor } from '../hooks/useHashView'
 import { useChromeHeight } from '../hooks/useChromeHeight'
+import { useIsDesktop } from '../hooks/useIsDesktop'
+import ShowroomOverlay from '../components/showroom/ShowroomOverlay'
+import ShowroomTapStrip from '../components/showroom/ShowroomTapStrip'
+import SpecStack from '../components/showroom/SpecStack'
+import ShowroomStill from '../components/showroom/ShowroomStill'
+import CropFrame from '../components/showroom/CropFrame'
 import useBuilderStore from '../store/useBuilderStore'
 
 // A finger means mobile data, and the 3D view is ~6 MB of it. Read once at
@@ -57,6 +63,20 @@ export default function BuilderScreen() {
   const [show3D, setShow3D] = useState(() => !wantsDeferred3D())
   const scrollRef = useRef(null)
   const chromeRef = useRef(null)
+  // Summary's labelled 3D: the overlay is fed positions by BuildCanvas through
+  // this ref, and `hot` links a label to its dot.
+  const overlayRef = useRef(null)
+  // Build and Summary share it, and a phone tap never sends a mouseleave, so
+  // a lit part is remembered with its view and cleared when the view changes
+  // (set during render, React's pattern for state that follows a prop).
+  const [lit, setLit] = useState(null)
+  if (lit && lit.view !== view) setLit(null)
+  const hot = lit?.view === view ? lit.id : null
+  const setHot = (id) => setLit({ view, id })
+  // True only while a canvas has rendered a frame (see AnchorProjector): no
+  // labels over a loading or failed 3D view.
+  const [canvasReady, setCanvasReady] = useState(false)
+  const desktop = useIsDesktop()
 
   // The header is sticky inside the scroller, so nothing has to pad for a
   // hard-coded height; its live height goes to the folds below as --chrome-h.
@@ -117,13 +137,29 @@ export default function BuilderScreen() {
             renamed itself under the reader would be the noisier choice. */}
         <h1 className="sr-only">Your PC build</h1>
         {view === 'build' ? (
-          <div className="relative z-10 w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12 flex flex-col gap-3">
-            <SelectedPartsPanel
-              selectedParts={selectedParts}
-              onSelectCategory={setActiveCategory}
-              onDeselect={removePart}
-            />
-            <BuildWarnings />
+          // Parts: one-column list | the labelled still, sticky on the right from
+          // lg and above the list below it (spec 2026-10-20). The still, not
+          // live 3D: the 3D stays on Summary. Sticky under the sticky header —
+          // this screen scrolls the inner div, so top is the chrome height.
+          <div className="relative z-10 w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-10">
+            <div className="lg:order-last lg:sticky lg:top-[calc(var(--chrome-h,0px)+0.75rem)] lg:self-start">
+              {/* Phones get a 16:9 frame, not the tall portrait: the still
+                  would otherwise add most of a screen above the list. */}
+              <CropFrame>
+                <ShowroomStill parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} frame={desktop ? undefined : '16 / 9'} />
+              </CropFrame>
+              {!desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
+            </div>
+            <div className="flex min-w-0 flex-col gap-3">
+              <SelectedPartsPanel
+                selectedParts={selectedParts}
+                onSelectCategory={setActiveCategory}
+                onDeselect={removePart}
+                hot={hot}
+                onHot={setHot}
+              />
+              <BuildWarnings />
+            </div>
           </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />
@@ -141,8 +177,8 @@ export default function BuilderScreen() {
             <PerformanceScreen />
           </Suspense>
         ) : (
-          // Summary: the 3D view, the CustomPC score with its use-case chips, and
-          // the parts list (spec 2026-10-13 — the only tab that mounts the 3D).
+          // Summary: score + use case | labelled 3D | spec stack, then the build
+          // table full width (spec 2026-10-20; the only tab that mounts the 3D).
           // Gutters grow with the window so the panels never sit flush against
           // the screen edge, but stay far smaller than the old max-w-6xl, which
           // wasted most of a wide display.
@@ -169,13 +205,24 @@ export default function BuilderScreen() {
                   sticky (index.css), so the PC stays in view while the build
                   list scrolls. Sticky on the cell itself sized the row to the
                   window and left dead space below a shorter column. */}
-              <div className="area-viz h-[42vh] md:h-[48vh] lg:h-auto lg:min-h-[520px]">
-              <div className="viz-panel relative h-full overflow-hidden border border-line transition-colors hover:border-line-strong">
+              {/* Below lg the 3D BOX has the height, not the cell: the controls
+                  row and the tap strip sit under it in flow, and when all three
+                  shared a fixed 42vh cell the model was squeezed to ~200px at
+                  390 wide, where the CPU, GPU and cooler dots touched. */}
+              <div className="area-viz lg:min-h-[520px]">
+              <div className="viz-panel relative flex flex-col overflow-hidden border border-line transition-colors hover:border-line-strong">
+                {/* The 3D box. Below lg the controls row sits UNDER it in flow
+                    rather than over it, so a tap dot (a part low in the case,
+                    like the PSU) can never land beneath the drag hint. */}
+                {/* The opt-in card before it is tapped needs only its own
+                    height, not the model's (phone height budget, 2026-10-20). */}
+                <div className={`relative ${show3D ? 'h-[min(88vw,56vh)]' : 'h-60'} lg:h-auto lg:min-h-0 lg:flex-1`}>
                 {show3D ? (
                   <>
                     <CanvasErrorBoundary>
                       <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
-                        <BuildCanvas selectedParts={selectedParts} />
+                        <BuildCanvas selectedParts={selectedParts} overlayRef={overlayRef} onReady={setCanvasReady} ready={canvasReady} />
+                        {canvasReady && <ShowroomOverlay ref={overlayRef} parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} />}
                       </Suspense>
                     </CanvasErrorBoundary>
                     <InfoDisclaimer />
@@ -183,6 +230,7 @@ export default function BuilderScreen() {
                 ) : (
                   <Deferred3D onLoad={() => setShow3D(true)} />
                 )}
+                </div>
                 {/* ⚠️ ONE row, not two independently-pinned corners.
 
                     The hint and the toggle used to be separate absolutely-
@@ -209,7 +257,7 @@ export default function BuilderScreen() {
                     see-through-case toggle floating over an empty panel are
                     chrome for something that is not there yet. */}
                 {show3D && (
-                  <div className="pointer-events-none absolute inset-x-3 bottom-3 z-30 flex flex-wrap items-end justify-between gap-2">
+                  <div className={`${desktop ? 'pointer-events-none absolute inset-x-3 bottom-3 z-30' : 'px-3 py-2'} flex flex-wrap items-end justify-between gap-2`}>
                     {/* ⚠️ The VERB is per-input, and the whole reason this hint
                         exists is a mouse problem: the canvas swallows the scroll
                         wheel, so without a frame and a label people scroll, the
@@ -247,15 +295,15 @@ export default function BuilderScreen() {
                   </div>
                 )}
               </div>
+              {show3D && canvasReady && !desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}
               {/* ⚠️ `display: contents` on mobile (index.css) dissolves this
                   wrapper so the two panels become flex items of .build-grid
                   itself and can be ordered independently — the phone wants the
-                  SCORE directly under the 3D view, with the use-case chips
-                  after it. On desktop the wrapper returns to a flex column in
-                  grid-area `left`, exactly as before.
+                  SCORE first, with the use-case chips after it. On desktop the
+                  wrapper returns to a flex column in grid-area `left`.
 
                   Do NOT "simplify" this by giving both children
                   `grid-area: left`. Two items in one named grid area OVERLAP —
@@ -264,12 +312,13 @@ export default function BuilderScreen() {
               <div className="area-left flex flex-col gap-3">
                 <div className="area-usecase"><UseCaseChips /></div>
                 <div className="area-rating"><BuildRatingPanel /></div>
-                {/* The build list sits under the score, beside the 3D view
-                    (user, 2026-10-17) — where the per-part score list was. */}
-                <div className="area-parts"><BuildSummary /></div>
-                <div className="area-banner"><GeneratedBanner /></div>
-                <div className="area-warnings"><BuildWarnings /></div>
               </div>
+              <div className="area-spec"><SpecStack layout={desktop ? 'column' : 'grid'} /></div>
+              {/* The build table runs full width under the three columns
+                  (spec 2026-10-20); hovering a row lights its 3D label. */}
+              <div className="area-parts"><BuildSummary hot={hot} onHot={setHot} /></div>
+              <div className="area-banner"><GeneratedBanner /></div>
+              <div className="area-warnings"><BuildWarnings /></div>
             </div>
           </div>
         )}

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import { render, screen, within, fireEvent } from '@testing-library/react'
 import PartSlot from '../components/PartSlot'
 
 describe('PartSlot', () => {
@@ -39,21 +39,33 @@ describe('PartSlot', () => {
     expect(within(empty).queryByRole('button', { name: /remove ram/i })).toBeNull()
   })
 
-  it('keeps a phone from crushing the part name: it wraps', () => {
-    // At 375px the row is a full-width list item, and the flex button's fixed
-    // children (thumbnail, socket pad, price) left the flex-1 name just 55px —
-    // "Intel Core i7-14700KF" (needs 137) rendered as "Inte…". The pad is
-    // aria-hidden decoration whose meaning the rail already carries, so it is
-    // hidden below `sm` (freeing ~60px) and the name wraps to two lines there
-    // instead of truncating; from `sm` up both revert. jsdom computes no
-    // layout, so this pins the responsive classes that produce that behaviour —
-    // the widths themselves were verified in a browser.
+  it('never cuts the part name short: it wraps at every width', () => {
+    // A truncated name loses its meaningful tail ("i7-14700KF" → "Inte…").
+    // The showroom list is one column, so the name wraps instead (spec
+    // 2026-10-20). jsdom computes no layout, so this pins the classes.
     const { container } = render(
       <PartSlot category="ram" label="RAM" part={{ name: 'TeamGroup T-Force Vulcan DDR4-3600 32GB' }} />,
     )
     const name = within(container).getByText('TeamGroup T-Force Vulcan DDR4-3600 32GB')
-    expect(name.className).toMatch(/line-clamp-2/) // wraps on a phone
-    expect(name.className).toMatch(/sm:truncate/) // one line on desktop
+    expect(name.className).not.toMatch(/truncate|line-clamp/)
+  })
+
+  it('on a phone the price moves under the type, beside the label', () => {
+    const { container } = render(<PartSlot category="ram" label="RAM" part={{ name: 'X', price: 89.99 }} />)
+    const prices = within(container).getAllByText('£90')
+    const [phone, wide] = prices.map((p) => p.className.split(/\s+/))
+    expect(phone).toContain('sm:hidden') // beside the type label below sm
+    expect(wide).toEqual(expect.arrayContaining(['hidden', 'sm:inline'])) // its own column from sm
+  })
+
+  it('a seated row reports hover and focus so its label can light', () => {
+    const onHot = vi.fn()
+    const { container } = render(<PartSlot category="gpu" label="GPU" part={{ name: 'X' }} hot="gpu" onHot={onHot} />)
+    const row = container.querySelector('[data-part-row="gpu"]')
+    expect(row.className).toMatch(/bg-surface-2/)
+    fireEvent.mouseEnter(row); expect(onHot).toHaveBeenLastCalledWith('gpu')
+    fireEvent.mouseLeave(row); expect(onHot).toHaveBeenLastCalledWith(null)
+    fireEvent.focus(row.querySelector('button')); expect(onHot).toHaveBeenLastCalledWith('gpu')
   })
 
   it('falls back to the category when a connector is unknown', () => {

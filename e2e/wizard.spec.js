@@ -85,8 +85,12 @@ test('the left column stays tight to the 3D preview at any viewport height', asy
         // than the text column needs, the 3D outruns it and the difference IS
         // the dead space. Measuring this rather than the distance to the next
         // panel keeps the generated-build banner out of the number.
-        vizOverrunsColumn:
-          viz.getBoundingClientRect().bottom - column.getBoundingClientRect().bottom,
+        // Since 2026-10-20 the parts list runs full width below, so the text
+        // column can be shorter than the 3D's 520px pixel floor. The row may
+        // then be set by that floor — but never by anything that grows with
+        // the viewport, which is the leak this test exists for.
+        vizOverrunsColumn: viz.getBoundingClientRect().height
+          - Math.max(column.getBoundingClientRect().height, 520),
       }
     })
 
@@ -94,9 +98,7 @@ test('the left column stays tight to the 3D preview at any viewport height', asy
     expect(gaps.chipsToScore, `chips->score @ ${height}`).toBeLessThanOrEqual(13)
     expect(gaps.chipsToScore, `chips->score @ ${height}`).toBeGreaterThanOrEqual(0)
 
-    // With a full build the text column is always the taller of the two, so the
-    // 3D should stretch to exactly meet it. (An empty build legitimately hits
-    // the pixel floor instead — this test always generates a full rig.)
+    // The 3D stretches to exactly the taller of the text column and its floor.
     expect(gaps.vizOverrunsColumn, `viz overrun @ ${height}`).toBeLessThanOrEqual(2)
   }
 })

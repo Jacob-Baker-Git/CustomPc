@@ -87,3 +87,33 @@ describe('SelectedPartsPanel clear all', () => {
     expect(useBuilderStore.getState().selectedParts.cpu).toBeDefined()
   })
 })
+
+// Showroom (spec 2026-10-20): the rows light their label on the still.
+describe('SelectedPartsPanel showroom rows', () => {
+  it('hovering a picked row lights its part; leaving clears it', () => {
+    const onHot = vi.fn()
+    render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} onHot={onHot} />)
+    const row = document.querySelector('[data-part-row="gpu"]')
+    fireEvent.mouseEnter(row)
+    expect(onHot).toHaveBeenLastCalledWith('gpu')
+    fireEvent.mouseLeave(row)
+    expect(onHot).toHaveBeenLastCalledWith(null)
+  })
+
+  it('is one column, and names never truncate', () => {
+    const { container } = render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} />)
+    expect(container.querySelector('[class*="lg:grid-cols-2"]')).toBeNull()
+    const name = screen.getByText(gpu.name)
+    expect(name.className).not.toMatch(/truncate|line-clamp/)
+  })
+
+  it('still picks and removes through the existing callbacks', () => {
+    const pick = vi.fn()
+    const remove = vi.fn()
+    render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={pick} onDeselect={remove} />)
+    fireEvent.click(screen.getByText(gpu.name))
+    expect(pick).toHaveBeenCalledWith('gpu')
+    fireEvent.click(screen.getByRole('button', { name: /remove gpu/i }))
+    expect(remove).toHaveBeenCalledWith('gpu')
+  })
+})
