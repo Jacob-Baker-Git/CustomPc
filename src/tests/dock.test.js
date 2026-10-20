@@ -6,13 +6,13 @@ describe('dockTotalLabel', () => {
     expect(dockTotalLabel({ view: 'build', build: 1576, desk: 0 })).toBe('Build £1,576')
   })
   it('names the peripherals separately on the Peripherals tab', () => {
-    expect(dockTotalLabel({ view: 'peripherals', build: 1576, desk: 120 })).toBe('Build £1,576 + desk £120')
+    expect(dockTotalLabel({ view: 'peripherals', build: 1576, desk: 120 })).toBe('Build £1,576 + peripherals £120')
   })
   it('leaves the desk out of Summary when nothing is chosen there', () => {
     expect(dockTotalLabel({ view: 'summary', build: 1576, desk: 0 })).toBe('Build £1,576')
   })
   it('names the desk on Summary once something is chosen', () => {
-    expect(dockTotalLabel({ view: 'summary', build: 1576, desk: 120 })).toBe('Build £1,576 + desk £120')
+    expect(dockTotalLabel({ view: 'summary', build: 1576, desk: 120 })).toBe('Build £1,576 + peripherals £120')
   })
   it('rounds to whole pounds', () => {
     expect(dockTotalLabel({ view: 'build', build: 1575.97, desk: 0 })).toBe('Build £1,576')

@@ -18,9 +18,12 @@ const DRAWINGS = {
 
 export default function PartPictogram({ id, className = '' }) {
   const drawing = DRAWINGS[id]
-  if (!drawing) return <CategoryIcon id={id} size={28} className={`text-muted ${className}`} />
+  // A caller colour replaces the muted default rather than competing with it
+  // in the same class list, where CSS order would pick the winner.
+  const tone = /(^| )text-/.test(className) ? '' : 'text-muted'
+  if (!drawing) return <CategoryIcon id={id} size={28} className={`${tone} ${className}`} />
   return (
-    <svg viewBox="0 0 32 32" className={`h-7 w-7 shrink-0 text-muted ${className}`} aria-hidden="true">
+    <svg viewBox="0 0 32 32" className={`h-7 w-7 shrink-0 ${tone} ${className}`} aria-hidden="true">
       {drawing}
     </svg>
   )

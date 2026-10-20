@@ -42,7 +42,7 @@ export default function BasisBar({ rows = [], realOnly, onRealOnlyChange }) {
             type="checkbox"
             checked={realOnly}
             onChange={(e) => onRealOnlyChange(e.target.checked)}
-            className="size-4 accent-accent"
+            className="size-4 accent-brass"
           />
           Only show real data
         </label>

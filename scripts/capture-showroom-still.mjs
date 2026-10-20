@@ -1,6 +1,6 @@
 // Captures the Showroom's still picture of the PC plus the label anchors.
 //   node scripts/capture-showroom-still.mjs [http://localhost:5173]
-// Same build as capture-welcome-render.mjs (Cyberpunk 2077, 1600 GBP) so all 7
+// Builds Cyberpunk 2077 at 1600 GBP through Build for a game so all 7
 // slots are picked. Writes public/img/showroom-pc.webp and
 // src/data/showroomAnchors.json (anchors = percent of the cropped image).
 // Needs a real GPU for WebGL, hence the ANGLE flags.

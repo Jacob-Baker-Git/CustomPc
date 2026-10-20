@@ -2,6 +2,7 @@ import useBuilderStore, { selTotalSpent, selPeripheralsTotal } from '../store/us
 import useSavedStore from '../store/useSavedStore'
 import { encodeBuild } from '../lib/buildCodec'
 import { buildShareUrl } from '../lib/shareLink'
+import { gbp } from '../lib/money'
 
 // Save and Share for the current build, shared by the Summary page and the
 // phone dock so both do exactly the same thing.
@@ -16,7 +17,7 @@ export function useBuildActions() {
   const saveBuild = useSavedStore((s) => s.saveBuild)
   const saved = useSavedStore((s) => s.saved)
   const canSave = Object.keys(selectedParts).length + Object.keys(selectedPeripherals).length > 0
-  const fallbackName = `Build · £${total.toFixed(0)}`
+  const fallbackName = `Build · ${gbp(total)}`
 
   function save(name) {
     if (!canSave) return

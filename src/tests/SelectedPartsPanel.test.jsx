@@ -1,3 +1,4 @@
+import { gbp } from '../lib/money'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, beforeEach } from 'vitest'
 import SelectedPartsPanel from '../components/SelectedPartsPanel'
@@ -38,7 +39,7 @@ describe('SelectedPartsPanel', () => {
 
   it('shows the running spend', () => {
     render(<SelectedPartsPanel selectedParts={{ cpu, gpu }} onSelectCategory={noop} onDeselect={noop} />)
-    expect(screen.getByText(`£${(cpu.price + gpu.price).toFixed(0)}`)).toBeInTheDocument()
+    expect(screen.getByText(gbp(cpu.price + gpu.price))).toBeInTheDocument()
   })
 
   it('turns the loud missing treatment on for its list', () => {

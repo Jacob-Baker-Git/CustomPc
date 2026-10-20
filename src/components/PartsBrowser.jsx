@@ -6,6 +6,7 @@ import { searchUrl } from '../lib/retailerLinks'
 import { hasPartPage, partPath } from '../lib/partPages'
 import PartThumb from './art/PartThumb'
 import { categoryLabel } from '../lib/categories'
+import { gbp2 } from '../lib/money'
 
 const CATEGORIES = ['all', 'cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler', 'fans', 'paste']
 const SORTS = [
@@ -123,7 +124,7 @@ export default function PartsBrowser() {
             <PartThumb category={p.category} seed={p.id} size="md" />
             <PartName part={p} />
             <div className="flex items-center gap-3 shrink-0">
-              <span className="font-mono text-sm text-tech">£{p.price.toFixed(2)}</span>
+              <span className="font-mono text-sm text-tech">{gbp2(p.price)}</span>
               <a href={searchUrl(p.name, p.brand)} target="_blank" rel="noreferrer" className="-m-1.5 inline-flex p-1.5 text-muted hover:text-brass" aria-label={`Search ${p.name} on Amazon`}>
                 <ExternalLink size={15} />
               </a>

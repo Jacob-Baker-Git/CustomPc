@@ -83,11 +83,13 @@ describe('MainMenu', () => {
 // Configurator redesign (spec 2026-10-16): the PC is the picture, and the
 // benchmark coverage is the one bracket tag.
 describe('the Welcome screen in the configurator look', () => {
-  it('shows the PC picture', () => {
+  it('shows the PC picture, sharp, in the showroom crop frame', () => {
     const { container } = render(<MainMenu onExplore={noop} onTarget={noop} onSaved={noop} />)
-    const img = container.querySelector('img[src="/img/welcome-pc.webp"]')
+    const img = container.querySelector('img[src="/img/showroom-pc.webp"]')
     expect(img).not.toBeNull()
     expect(img).toHaveAttribute('alt', '')
+    expect(img.parentElement.querySelectorAll('[data-crop-mark]')).toHaveLength(4)
+    expect(container.innerHTML).not.toMatch(/mask-image|radial-gradient/)
   })
 
   it('states the benchmark coverage from the games list', () => {

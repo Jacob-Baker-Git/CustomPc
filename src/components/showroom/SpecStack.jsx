@@ -2,6 +2,7 @@ import useBuilderStore, { selTotalSpent } from '../../store/useBuilderStore'
 // power.js directly, not the perfEngine index: power.js needs only catalogue
 // fields, and Summary must never pull perfModel.json (506 kB) into its bundle.
 import { estimatePower, estimateThermals } from '../../lib/perfEngine/power'
+import { gbp } from '../../lib/money'
 
 const signed = (n) => (n == null ? null : `${n > 0 ? '+' : ''}${n}%`)
 const watts = (n) => (n ? `${n} W` : null)
@@ -16,21 +17,27 @@ export default function SpecStack({ layout = 'column' }) {
   const power = estimatePower(parts)
   const thermals = estimateThermals(parts)
 
+  // The budget rides small beside the total: "£1,599 / £1,600" at full size
+  // does not fit the 240px column once it has its thousands commas.
+  const grid = layout === 'grid'
+  const price = <>{gbp(total)}{budget > 0 && <span className={`text-muted ${grid ? 'text-[12px]' : 'text-lg'}`}> / {gbp(budget)}</span>}</>
+  // A cooler working hard is the one figure here that is a problem, not a
+  // fact — say so in colour, as the Performance tab's verdict does.
+  const coolTone = thermals.verdict === 'working hard' ? 'text-bad' : thermals.verdict === 'adequate' ? 'text-ok' : ''
   const fields = [
-    ['Price', `£${total.toFixed(0)}${budget > 0 ? ` / £${budget.toFixed(0)}` : ''}`],
+    ['Price', price],
     ['Peak power', watts(power.peakW)],
     ['PSU', watts(power.psuWattage)],
     ['PSU headroom', signed(power.psuHeadroomPct)],
-    ['Cooling margin', signed(thermals.headroomPct)],
+    ['Cooling margin', signed(thermals.headroomPct), coolTone],
   ]
 
-  const grid = layout === 'grid'
   return (
     <section aria-label="Spec" className={grid ? 'grid grid-cols-3 border-l border-t border-line' : 'flex h-full flex-col'}>
       {!grid && <h2 className="pb-2 font-mono text-[12px] uppercase tracking-wider text-muted">Spec</h2>}
       {/* On the grid Price spans two cells: "£1594 / £1600" does not fit one
           third of a phone, and five figures in three columns leave a hole. */}
-      {fields.map(([label, value], i) => (
+      {fields.map(([label, value, tone = ''], i) => (
         <div
           key={label}
           className={grid
@@ -38,7 +45,7 @@ export default function SpecStack({ layout = 'column' }) {
             : 'flex flex-1 flex-col justify-center border-t border-line py-3'}
         >
           <div className={`whitespace-nowrap font-mono text-[12px] uppercase text-muted ${grid ? '' : 'tracking-wider'}`}>{label}</div>
-          <div className={`font-mono font-bold text-ink ${grid ? 'text-base leading-snug' : 'text-3xl'}`}>{value ?? '—'}</div>
+          <div className={`font-mono font-bold ${tone || 'text-ink'} ${grid ? 'text-base leading-snug' : 'text-3xl'}`}>{value ?? '—'}</div>
         </div>
       ))}
     </section>

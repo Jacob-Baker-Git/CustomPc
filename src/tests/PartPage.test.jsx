@@ -1,3 +1,4 @@
+import { gbp2 } from '../lib/money'
 import { render, screen, fireEvent } from '@testing-library/react'
 import PartPage from '../components/PartPage'
 import useBuilderStore from '../store/useBuilderStore'
@@ -119,7 +120,7 @@ describe('every part in the catalogue renders a usable page', () => {
       // getAllByText, not getByText: a suggested partner can legitimately cost
       // exactly the same as the part itself, and two identical prices on the page
       // is not a defect.
-      expect(screen.getAllByText(`£${part.price.toFixed(2)}`).length, part.id).toBeGreaterThan(0)
+      expect(screen.getAllByText(gbp2(part.price)).length, part.id).toBeGreaterThan(0)
       expect(screen.queryByRole('heading', { name: /what it works with/i }), part.id).not.toBeNull()
       unmount()
     }

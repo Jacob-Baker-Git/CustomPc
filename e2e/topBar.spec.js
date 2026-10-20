@@ -126,7 +126,7 @@ test.describe('the top bar', () => {
     // Pressing Enter commits to the store; the header re-renders from it a tick
     // later, and the meter chips resize from that. Not the cause of the
     // timeout above, but the right way to wait for a number regardless.
-    await expect(page.getByTitle('Click to edit your budget')).toHaveText('£10000')
+    await expect(page.getByTitle('Click to edit your budget')).toHaveText('£10,000')
 
     for (const width of WIDTHS) {
       await page.setViewportSize({ width, height: 900 })

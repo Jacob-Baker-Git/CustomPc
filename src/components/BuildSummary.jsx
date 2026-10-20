@@ -18,6 +18,7 @@ import DimensionsChecklist from './DimensionsChecklist'
 import ConfirmDialog from './ConfirmDialog'
 import useDialog from '../hooks/useDialog'
 import { countEssentials, isOptional } from '../lib/recommendedOrder'
+import { gbp, gbp2 } from '../lib/money'
 
 const PERIPHERAL_LABELS = { monitor: 'Monitor', keyboard: 'Keyboard', mouse: 'Mouse', headset: 'Headset' }
 const PERIPHERAL_ORDER = ['monitor', 'keyboard', 'mouse', 'headset']
@@ -48,7 +49,7 @@ function Row({ id, label, name, brand, price, pct, hot, onHot }) {
           <span className="[grid-area:pct] text-right font-mono text-[12px] text-muted">{pct.toFixed(1)}%</span>
         </>
       )}
-      <span className="[grid-area:price] text-right font-mono text-sm text-ink">£{price.toFixed(2)}</span>
+      <span className="[grid-area:price] text-right font-mono text-sm text-ink">{gbp2(price)}</span>
       {/* Revealed on hover or keyboard focus. Ten always-visible links down the
           right-hand edge were the loudest thing on a page whose job is to be
           read; group-focus-within is what keeps them reachable without a
@@ -185,9 +186,9 @@ export default function BuildSummary({ hot = null, onHot } = {}) {
           <div className="flex items-baseline justify-between mb-1">
             <h2 className="text-lg text-ink">Your build</h2>
             <span className="font-mono text-base text-tech">
-              £{buildTotal.toFixed(0)}
+              {gbp(buildTotal)}
               {budget > 0 && (
-                <span className={`text-sm ${overBudget ? 'text-bad' : 'text-muted'}`}> / £{budget.toFixed(0)}</span>
+                <span className={`text-sm ${overBudget ? 'text-bad' : 'text-muted'}`}> / {gbp(budget)}</span>
               )}
             </span>
           </div>
@@ -229,10 +230,10 @@ export default function BuildSummary({ hot = null, onHot } = {}) {
               )}
 
               <div className="flex flex-wrap gap-x-5 gap-y-1 mt-4 pt-3 border-t border-line text-xs text-muted">
-                <span>Build <span className="font-mono text-muted">£{buildTotal.toFixed(2)}</span></span>
-                <span>Peripherals <span className="font-mono text-muted">£{periphTotal.toFixed(2)}</span></span>
+                <span>Build <span className="font-mono text-muted">{gbp2(buildTotal)}</span></span>
+                <span>Peripherals <span className="font-mono text-muted">{gbp2(periphTotal)}</span></span>
                 <span>Peak draw <span className="font-mono text-ok">{power}W</span></span>
-                <span>Total <span className="font-mono text-ink">£{grandTotal.toFixed(2)}</span></span>
+                <span>Total <span className="font-mono text-ink">{gbp2(grandTotal)}</span></span>
               </div>
 
               {/* Frame rates live on the Performance tab, from measured

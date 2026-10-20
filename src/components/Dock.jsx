@@ -54,7 +54,7 @@ export default function Dock({ view, onChange, inline = false }) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-line bg-ground px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 lg:hidden">
       <div className="min-w-0 flex-1">
-        <div className="truncate font-wide text-[15px] font-extrabold text-ink">{dockTotalLabel({ view, build, desk })}</div>
+        <div className="font-wide text-[15px] font-extrabold leading-tight text-ink">{dockTotalLabel({ view, build, desk })}</div>
         <div role="status" className="text-[12px] text-muted">{note ?? '\u00a0'}</div>
       </div>
       {actions}

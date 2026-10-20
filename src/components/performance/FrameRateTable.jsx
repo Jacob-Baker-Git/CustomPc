@@ -116,7 +116,7 @@ export default function FrameRateTable({ rows, target, uncovered, onSelect }) {
                     type="button"
                     onClick={() => toggleGenre(group.genre)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-baseline gap-2 text-left text-xs text-ink"
+                    className="flex min-h-6 w-full items-center gap-2 text-left text-[12px] text-ink"
                   >
                     <span aria-hidden="true" className="text-[12px] text-muted">{isOpen ? '⌄' : '›'}</span>
                     <span>{group.label}</span>
