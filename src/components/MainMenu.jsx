@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import SiteFooter from './SiteFooter'
 import Tag from './ui/Tag'
+import CropFrame from './showroom/CropFrame'
 import useSavedStore from '../store/useSavedStore'
 import perfGames from '../data/perfGames.json'
 
@@ -33,19 +34,17 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
       {/* From lg the words and the picture sit side by side (spec 2026-10-17):
           the phone column, stretched, left the PC a strip and the page empty. */}
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 lg:grid lg:max-w-6xl lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-12">
-        {/* A PC as the picture: a still render of an example build from the
-            site's own 3D view (scripts/capture-welcome-render.mjs). A still,
-            not the live view, because the live one is ~6 MB and phones never
-            download it unasked. Decorative, so alt="". */}
-        {/* Feathered left and right so the picture melts into the page where the
-            column is narrower than the window, instead of ending in a hard edge;
-            from lg, feathered all round, as the right-hand column. */}
-        <div className="relative -mx-5 h-[280px] overflow-hidden sm:h-[360px] sm:[mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)] lg:order-2 lg:mx-0 lg:h-[640px] lg:[mask-image:radial-gradient(ellipse_at_center,#000_38%,transparent_72%)]">
-          <img src="/img/welcome-pc.webp" alt="" width="1200" height="1362" fetchPriority="high"
-               className="absolute inset-0 h-full w-full object-cover object-[50%_62%]" />
-          <div aria-hidden="true" className="absolute inset-0"
-               style={{ background: 'linear-gradient(180deg, var(--ground) 0%, transparent 25%, transparent 60%, var(--ground) 100%)' }} />
-        </div>
+        {/* A PC as the picture: the showroom still (scripts/capture-showroom-
+            still.mjs), the same one the results cards and Build tab use. A
+            still, not the live view, because the live one is ~6 MB and phones
+            never download it unasked. Decorative, so alt="". Sharp and inside
+            crop marks — it used to be feathered into a radial blur, which read
+            as a faded circle (user, 2026-10-20). Phones frame it 4:3 so the
+            paths stay near the top; from lg it is the whole portrait. */}
+        <CropFrame className="mb-6 lg:order-2 lg:mb-0">
+          <img src="/img/showroom-pc.webp" alt="" width="1700" height="2007" fetchPriority="high"
+               className="aspect-[4/3] w-full object-contain lg:aspect-[1700/2007] lg:max-h-[640px]" />
+        </CropFrame>
 
         <div className="lg:order-1">
           {/* Two visible lines, both inside the h1: the wordmark, then the same
@@ -54,7 +53,7 @@ export default function MainMenu({ onExplore, onTarget, onSaved }) {
               is worth showing a reader. The brand orange lives here, in TopBar,
               SiteChrome and ErrorBoundary, and nowhere else —
               accentIsBrandOnly.test.js. @wordmark */}
-          <h1 className="rise -mt-6 relative lg:mt-0">
+          <h1 className="rise relative">
             <span className="block font-display text-lg font-extrabold tracking-tight">Custom PC <span className="text-accent">Builder</span></span>
             <span className="mt-2 block font-wide text-[32px] font-extrabold leading-[1.05] text-ink sm:text-[40px] lg:text-[52px]">Build and price a gaming PC in 3D</span>
           </h1>
