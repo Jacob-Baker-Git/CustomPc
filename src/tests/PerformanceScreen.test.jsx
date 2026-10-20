@@ -465,3 +465,32 @@ describe('PerformanceScreen — folded sections', () => {
     expect(heading.compareDocumentPosition(firstFold) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 })
+
+// Showroom (spec 2026-10-20): the still with the bottleneck pair labelled.
+describe('PerformanceScreen — the labelled still', () => {
+  const ram = partsData.find((p) => p.category === 'ram')
+  beforeEach(() => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu, psu, cooler, ram }, resolution: '1440p' })
+  })
+  afterEach(() => { window.matchMedia = undefined })
+
+  it('desktop: labels the processor and graphics card only, beside the folds', () => {
+    window.matchMedia = (q) => ({ matches: q.includes('min-width'), addEventListener() {}, removeEventListener() {} })
+    const { container } = render(<PerformanceScreen />)
+    const labels = [...container.querySelectorAll('[data-label]')].map((l) => l.dataset.label).sort()
+    expect(labels).toEqual(['cpu', 'gpu'])
+    expect(container.querySelector('details [data-still-box]')).toBeNull()
+    for (const name of [/what will this build get/i, /what's holding it back/i, /power and cooling/i, /the hardware/i, /every game at once/i]) {
+      expect(screen.getByRole('heading', { name })).toBeInTheDocument()
+    }
+  })
+
+  it('phone: two tap dots and the tap strip, after the bottleneck, before power', () => {
+    const { container } = render(<PerformanceScreen />)
+    expect(container.querySelector('[data-label]')).toBeNull()
+    expect([...container.querySelectorAll('[data-dot]')].map((d) => d.dataset.dot).sort()).toEqual(['cpu', 'gpu'])
+    expect(container.querySelector('[data-tap-strip]')).not.toBeNull()
+    const folds = container.querySelectorAll('details')
+    expect(folds[0].querySelector('[data-still-box]')).not.toBeNull()
+  })
+})
