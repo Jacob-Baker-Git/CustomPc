@@ -33,14 +33,6 @@ describe('CategoryList', () => {
     expect(container.firstChild).toHaveClass('flex-col')
   })
 
-  it('renders a grid when columns=2 (desktop parts area)', () => {
-    const { container } = render(
-      <CategoryList selectedParts={{}} onSelectCategory={() => {}} onDeselect={() => {}} columns={2} />
-    )
-    expect(container.firstChild).toHaveClass('grid')
-    expect(container.firstChild).toHaveClass('lg:grid-cols-2')
-  })
-
   // The 3D hover highlight was removed on request, and the hover reporting that
   // fed it went with it. This holds that removal in place: reinstating handlers
   // that write to a store field nobody reads is how the last dead branch grew.

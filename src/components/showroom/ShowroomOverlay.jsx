@@ -1,12 +1,11 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
-import { SHOWROOM_SLOTS, COMPACT_IDS } from '../../lib/showroomSlots.js'
+import { SHOWROOM_SLOTS, COMPACT_IDS, gbp } from '../../lib/showroomSlots.js'
 import { categoryLabel } from '../../lib/categories.js'
 
 const ALL_IDS = SHOWROOM_SLOTS.map((s) => s.id)
 const SIDE = Object.fromEntries(SHOWROOM_SLOTS.map((s) => [s.id, s.side]))
 // Label column edges (% of the frame): left 3 + width 33, right 3 + width 33.
 const EDGE = { l: 36, r: 64 }
-const gbp = (n) => `£${Number(n ?? 0).toLocaleString('en-GB')}`
 
 const ShowroomOverlay = forwardRef(function ShowroomOverlay(
   { parts, ids = ALL_IDS, anchors, hot, setHot, compact, chip },
@@ -61,7 +60,9 @@ const ShowroomOverlay = forwardRef(function ShowroomOverlay(
     `absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-brass ${hot === id ? 'bg-brass' : 'bg-surface'}`
 
   return (
-    <div className="pointer-events-none absolute inset-0">
+    // Desktop labels repeat the parts table beside them, so screen readers skip
+    // them; the compact tap dots are the phone's only way in and stay exposed.
+    <div className="pointer-events-none absolute inset-0" aria-hidden={compact ? undefined : true}>
       {!compact && (
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
           {picked.map((id) => (
@@ -85,7 +86,8 @@ const ShowroomOverlay = forwardRef(function ShowroomOverlay(
             key={id}
             type="button"
             data-dot={id}
-            aria-label={categoryLabel(id)}
+            aria-label={`Show ${categoryLabel(id)}`}
+            aria-pressed={hot === id}
             ref={(el) => { dots.current[id] = el }}
             onClick={() => setHot(id)}
             className="pointer-events-auto absolute grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center"

@@ -66,7 +66,13 @@ export default function BuilderScreen() {
   // Summary's labelled 3D: the overlay is fed positions by BuildCanvas through
   // this ref, and `hot` links a label to its dot.
   const overlayRef = useRef(null)
-  const [hot, setHot] = useState(null)
+  // Build and Summary share it, and a phone tap never sends a mouseleave, so
+  // a lit part is remembered with its view and cleared when the view changes
+  // (set during render, React's pattern for state that follows a prop).
+  const [lit, setLit] = useState(null)
+  if (lit && lit.view !== view) setLit(null)
+  const hot = lit?.view === view ? lit.id : null
+  const setHot = (id) => setLit({ view, id })
   // True only while a canvas has rendered a frame (see AnchorProjector): no
   // labels over a loading or failed 3D view.
   const [canvasReady, setCanvasReady] = useState(false)
@@ -140,7 +146,7 @@ export default function BuilderScreen() {
               {/* Phones get a 16:9 frame, not the tall portrait: the still
                   would otherwise add most of a screen above the list. */}
               <CropFrame>
-                <ShowroomStill parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} chip="[ live build ]" frame={desktop ? undefined : '16 / 9'} />
+                <ShowroomStill parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} frame={desktop ? undefined : '16 / 9'} />
               </CropFrame>
               {!desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
             </div>

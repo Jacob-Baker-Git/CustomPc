@@ -23,17 +23,14 @@ export default function CategoryList({
   selectedParts,
   onSelectCategory,
   onDeselect,
-  columns = 1,
   emphasiseMissing = false,
   hot = null,
   onHot,
 }) {
   const next = nextRecommended(selectedParts)
   // One column: hairline rows, no gaps between them (showroom list, spec 2026-10-20).
-  const wrap = columns === 2 ? 'grid grid-cols-1 lg:grid-cols-2 gap-2' : 'flex flex-col'
-
   return (
-    <div className={wrap}>
+    <div className="flex flex-col">
       {ORDERED.map((cat, i) => {
         const part = selectedParts[cat.id]
 
@@ -44,10 +41,9 @@ export default function CategoryList({
               category={cat.id}
               label={cat.label}
               part={part}
-              // A seated slot shows the PART, so it gets the drawing. An empty
-              // one below keeps the category icon, because there is nothing yet
-              // to draw and a picture of a generic GPU in an empty GPU slot
-              // would read as though something were already in it.
+              // A seated slot gets the showroom pictogram, brass while its
+              // label on the still is lit. Empty slots below keep the plain
+              // category icon, tinted by how urgent the gap is.
               icon={<PartPictogram id={cat.id} className={hot === cat.id ? 'text-brass' : ''} />}
               onClick={() => onSelectCategory(cat.id)}
               onRemove={() => onDeselect(cat.id)}

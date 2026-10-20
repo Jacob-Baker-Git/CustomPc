@@ -30,6 +30,9 @@ export function focusChange(prevOption, option, changed) {
   }
 }
 
+// Whole pounds, as PartSlot shows them, so prices agree side by side.
+export const gbp = (n) => `£${Math.round(n ?? 0).toLocaleString('en-GB')}`
+
 // Whole pounds: catalogue prices are fractional (579.99).
 export function formatDelta(raw) {
   const n = Math.round(raw)

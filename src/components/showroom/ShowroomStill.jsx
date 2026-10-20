@@ -41,7 +41,7 @@ export default function ShowroomStill({
         className="absolute top-0"
         style={{ width: `${r * 100}%`, height: '100%', left: `${((1 - r) / 2) * 100}%`, transform, transformOrigin: origin }}
       >
-        <img src="/img/showroom-pc.webp" alt="3D render of the build" loading="lazy" className="h-full w-full" />
+        <img src="/img/showroom-pc.webp" alt="" loading="lazy" className="h-full w-full" />
         {!zoom && (
           <ShowroomOverlay parts={parts} ids={ids} anchors={still.anchors} hot={hot} setHot={setHot ?? (() => {})} compact={compact} />
         )}

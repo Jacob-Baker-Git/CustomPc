@@ -54,8 +54,26 @@ describe('ShowroomOverlay', () => {
     render(<ShowroomOverlay {...base} compact setHot={setHot} anchors={{ cpu: { x: 1, y: 2 }, gpu: { x: 3, y: 4 } }} />)
     expect(screen.getAllByRole('button')).toHaveLength(2)
     expect(screen.getAllByRole('button')[0].className).toMatch(/h-11 w-11/)
-    fireEvent.click(screen.getByRole('button', { name: 'CPU' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Show CPU' }))
     expect(setHot).toHaveBeenCalledWith('cpu')
+  })
+
+  it('compact: the lit dot reads as pressed', () => {
+    render(<ShowroomOverlay {...base} compact hot="gpu" anchors={{ cpu: { x: 1, y: 2 }, gpu: { x: 3, y: 4 } }} />)
+    expect(screen.getByRole('button', { name: 'Show GPU' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: 'Show CPU' })).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  it('hides desktop labels from screen readers (the table says it), not the compact dots', () => {
+    const { container, rerender } = render(<ShowroomOverlay {...base} />)
+    expect(container.firstChild).toHaveAttribute('aria-hidden', 'true')
+    rerender(<ShowroomOverlay {...base} compact />)
+    expect(container.firstChild).not.toHaveAttribute('aria-hidden')
+  })
+
+  it('rounds prices to whole pounds, as the parts list does', () => {
+    render(<ShowroomOverlay {...base} parts={{ cpu: { name: 'X', price: 84.99 } }} />)
+    expect(screen.getByText('£85')).toBeTruthy()
   })
 })
 
@@ -65,6 +83,7 @@ describe('ShowroomTapStrip', () => {
     expect(screen.getByText('Tap a number to see the part')).toBeTruthy()
     rerender(<ShowroomTapStrip parts={parts} hot="cpu" />)
     expect(screen.getByText('Ryzen 5 7600')).toBeTruthy()
+    expect(document.querySelector('[data-tap-strip]')).toHaveAttribute('aria-live', 'polite')
     rerender(<ShowroomTapStrip parts={{ ...parts, ram: { name: 'DDR5', price: 90 } }} hot="ram" />)
     expect(screen.getByText('Tap a number to see the part')).toBeTruthy()
   })

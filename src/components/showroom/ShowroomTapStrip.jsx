@@ -1,13 +1,11 @@
-import { COMPACT_IDS } from '../../lib/showroomSlots.js'
+import { COMPACT_IDS, gbp } from '../../lib/showroomSlots.js'
 import { categoryLabel } from '../../lib/categories.js'
 import PartPictogram from './PartPictogram.jsx'
-
-const gbp = (n) => `£${Number(n ?? 0).toLocaleString('en-GB')}`
 
 export default function ShowroomTapStrip({ parts, hot }) {
   const sel = hot && COMPACT_IDS.includes(hot) && parts?.[hot] ? hot : null
   return (
-    <div data-tap-strip className="flex min-h-16 items-center gap-3 border-t border-brass bg-surface px-4 py-3">
+    <div data-tap-strip aria-live="polite" className="flex min-h-16 items-center gap-3 border-t border-brass bg-surface px-4 py-3">
       {sel ? (
         <>
           <PartPictogram id={sel} className="h-7 w-7 shrink-0 text-brass" />

@@ -14,7 +14,8 @@ describe('ShowroomStill', () => {
     const img = container.querySelector('img')
     expect(img.getAttribute('src')).toBe('/img/showroom-pc.webp')
     expect(img.getAttribute('loading')).toBe('lazy')
-    expect(img.getAttribute('alt')).toBeTruthy()
+    // Decorative: a fixed reference PC, not the user's build.
+    expect(img.getAttribute('alt')).toBe('')
     expect(container.querySelectorAll('[data-label]')).toHaveLength(3)
   })
 

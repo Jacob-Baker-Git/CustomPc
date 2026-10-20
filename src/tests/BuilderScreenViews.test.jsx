@@ -109,12 +109,12 @@ describe('number keys and text composition', () => {
 describe('the Build tab shows the labelled still beside the list (spec 2026-10-20)', () => {
   afterEach(() => { window.matchMedia = undefined })
 
-  it('desktop: labels only for the picked parts, chip says live build', () => {
+  it('desktop: labels only for the picked parts, no live-build chip on a fixed picture', () => {
     window.matchMedia = (q) => ({ matches: q.includes('min-width'), addEventListener() {}, removeEventListener() {} })
     openOn('build')
     const labels = [...document.querySelectorAll('[data-label]')].map((l) => l.dataset.label).sort()
     expect(labels).toEqual(['cpu', 'gpu'])
-    expect(screen.getByText('[ live build ]')).toBeInTheDocument()
+    expect(screen.queryByText('[ live build ]')).toBeNull()
     expect(document.querySelector('[data-tap-strip]')).toBeNull()
   })
 
@@ -130,5 +130,15 @@ describe('the Build tab shows the labelled still beside the list (spec 2026-10-2
     expect(document.querySelector('[data-label]')).toBeNull()
     expect(document.querySelectorAll('[data-dot]').length).toBe(2)
     expect(document.querySelector('[data-tap-strip]')).not.toBeNull()
+  })
+
+  // Build and Summary share hot, and a tap sends no mouseleave to clear it.
+  it('a part tapped on Build is not still lit on Summary', () => {
+    openOn('build')
+    fireEvent.click(screen.getByRole('button', { name: 'Show CPU' }))
+    expect(screen.getByRole('button', { name: 'Show CPU' })).toHaveAttribute('aria-pressed', 'true')
+    act(() => { fireEvent.keyDown(document.body, { key: '4' }) }) // Summary
+    act(() => { fireEvent.keyDown(document.body, { key: '1' }) }) // back to Build
+    expect(screen.getByRole('button', { name: 'Show CPU' })).toHaveAttribute('aria-pressed', 'false')
   })
 })
