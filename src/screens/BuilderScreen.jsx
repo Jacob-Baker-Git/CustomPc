@@ -30,6 +30,8 @@ import { useIsDesktop } from '../hooks/useIsDesktop'
 import ShowroomOverlay from '../components/showroom/ShowroomOverlay'
 import ShowroomTapStrip from '../components/showroom/ShowroomTapStrip'
 import SpecStack from '../components/showroom/SpecStack'
+import ShowroomStill from '../components/showroom/ShowroomStill'
+import CropFrame from '../components/showroom/CropFrame'
 import useBuilderStore from '../store/useBuilderStore'
 
 // A finger means mobile data, and the 3D view is ~6 MB of it. Read once at
@@ -129,13 +131,29 @@ export default function BuilderScreen() {
             renamed itself under the reader would be the noisier choice. */}
         <h1 className="sr-only">Your PC build</h1>
         {view === 'build' ? (
-          <div className="relative z-10 w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12 flex flex-col gap-3">
-            <SelectedPartsPanel
-              selectedParts={selectedParts}
-              onSelectCategory={setActiveCategory}
-              onDeselect={removePart}
-            />
-            <BuildWarnings />
+          // Parts: one-column list | the labelled still, sticky on the right from
+          // lg and above the list below it (spec 2026-10-20). The still, not
+          // live 3D: the 3D stays on Summary. Sticky under the sticky header —
+          // this screen scrolls the inner div, so top is the chrome height.
+          <div className="relative z-10 w-full max-w-2xl lg:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-14 pt-3 pb-12 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-10">
+            <div className="lg:order-last lg:sticky lg:top-[calc(var(--chrome-h,0px)+0.75rem)] lg:self-start">
+              {/* Phones get a 16:9 frame, not the tall portrait: the still
+                  would otherwise add most of a screen above the list. */}
+              <CropFrame>
+                <ShowroomStill parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} chip="[ live build ]" frame={desktop ? undefined : '16 / 9'} />
+              </CropFrame>
+              {!desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
+            </div>
+            <div className="flex min-w-0 flex-col gap-3">
+              <SelectedPartsPanel
+                selectedParts={selectedParts}
+                onSelectCategory={setActiveCategory}
+                onDeselect={removePart}
+                hot={hot}
+                onHot={setHot}
+              />
+              <BuildWarnings />
+            </div>
           </div>
         ) : view === 'peripherals' ? (
           <PeripheralsPanel />

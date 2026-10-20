@@ -2,7 +2,7 @@ import { CATEGORIES } from '../lib/categories'
 import CategoryIcon from '../lib/categoryIcons'
 import { RECOMMENDED_ORDER, nextRecommended, isOptional } from '../lib/recommendedOrder'
 import PartSlot from './PartSlot'
-import PartThumb from './art/PartThumb'
+import PartPictogram from './showroom/PartPictogram'
 
 const ORDERED = RECOMMENDED_ORDER
   .map((id) => CATEGORIES.find((c) => c.id === id))
@@ -10,9 +10,8 @@ const ORDERED = RECOMMENDED_ORDER
 
 const OPTIONAL_NOTE = 'Optional: most coolers ship with paste applied'
 
-// Hovering a row used to highlight the matching part in the 3D view. That
-// highlight was removed, and these handlers went with it rather than being left
-// writing to a store field nobody reads — see PartModel.
+// `hot`/`onHot` link a seated row to its label on the showroom still (Build
+// tab, spec 2026-10-20); left out, the rows are plain.
 //
 // `emphasiseMissing` is the Build tab's louder treatment: unfilled essentials go
 // red and tagged. Off by default, so a list shown anywhere else stays quiet.
@@ -26,9 +25,12 @@ export default function CategoryList({
   onDeselect,
   columns = 1,
   emphasiseMissing = false,
+  hot = null,
+  onHot,
 }) {
   const next = nextRecommended(selectedParts)
-  const wrap = columns === 2 ? 'grid grid-cols-1 lg:grid-cols-2 gap-2' : 'space-y-2'
+  // One column: hairline rows, no gaps between them (showroom list, spec 2026-10-20).
+  const wrap = columns === 2 ? 'grid grid-cols-1 lg:grid-cols-2 gap-2' : 'flex flex-col'
 
   return (
     <div className={wrap}>
@@ -46,9 +48,11 @@ export default function CategoryList({
               // one below keeps the category icon, because there is nothing yet
               // to draw and a picture of a generic GPU in an empty GPU slot
               // would read as though something were already in it.
-              icon={<PartThumb category={cat.id} seed={part.id} size="sm" />}
+              icon={<PartPictogram id={cat.id} className={hot === cat.id ? 'text-brass' : ''} />}
               onClick={() => onSelectCategory(cat.id)}
               onRemove={() => onDeselect(cat.id)}
+              hot={hot}
+              onHot={onHot}
             />
           )
         }

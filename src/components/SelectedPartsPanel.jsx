@@ -8,7 +8,7 @@ import Block from './ui/Block'
 
 // The Build tab's framing for CategoryList: the completeness counter and the
 // spend, kept out of CategoryList so the list itself stays plain.
-export default function SelectedPartsPanel({ selectedParts, onSelectCategory, onDeselect }) {
+export default function SelectedPartsPanel({ selectedParts, onSelectCategory, onDeselect, hot, onHot }) {
   const { chosen, total, missing } = countEssentials(selectedParts)
   const spend = Object.values(selectedParts).reduce((sum, p) => sum + (p?.price ?? 0), 0)
 
@@ -59,8 +59,9 @@ export default function SelectedPartsPanel({ selectedParts, onSelectCategory, on
         selectedParts={selectedParts}
         onSelectCategory={onSelectCategory}
         onDeselect={onDeselect}
-        columns={2}
         emphasiseMissing
+        hot={hot}
+        onHot={onHot}
       />
 
       {clearOpen && (

@@ -105,3 +105,30 @@ describe('number keys and text composition', () => {
     expect(window.location.hash).toBe('#build')
   })
 })
+
+describe('the Build tab shows the labelled still beside the list (spec 2026-10-20)', () => {
+  afterEach(() => { window.matchMedia = undefined })
+
+  it('desktop: labels only for the picked parts, chip says live build', () => {
+    window.matchMedia = (q) => ({ matches: q.includes('min-width'), addEventListener() {}, removeEventListener() {} })
+    openOn('build')
+    const labels = [...document.querySelectorAll('[data-label]')].map((l) => l.dataset.label).sort()
+    expect(labels).toEqual(['cpu', 'gpu'])
+    expect(screen.getByText('[ live build ]')).toBeInTheDocument()
+    expect(document.querySelector('[data-tap-strip]')).toBeNull()
+  })
+
+  it('hovering a row lights its label', () => {
+    window.matchMedia = (q) => ({ matches: q.includes('min-width'), addEventListener() {}, removeEventListener() {} })
+    openOn('build')
+    fireEvent.mouseEnter(document.querySelector('[data-part-row="cpu"]'))
+    expect(document.querySelector('[data-label="cpu"]').className).toMatch(/bg-brass/)
+  })
+
+  it('phone: tap dots and the tap strip, no labels', () => {
+    openOn('build')
+    expect(document.querySelector('[data-label]')).toBeNull()
+    expect(document.querySelectorAll('[data-dot]').length).toBe(2)
+    expect(document.querySelector('[data-tap-strip]')).not.toBeNull()
+  })
+})

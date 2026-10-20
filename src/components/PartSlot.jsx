@@ -32,11 +32,23 @@ export default function PartSlot({
   tag,
   onClick,
   onRemove,
+  hot,
+  onHot,
 }) {
   const seated = Boolean(part)
+  // A seated row lights its label on the showroom still (spec 2026-10-20).
+  const link = seated && onHot
+  const price = seated && part.price != null ? `£${part.price.toFixed(0)}` : null
 
   return (
-    <div className="border-t border-line">
+    <div
+      data-part-row={seated ? category : undefined}
+      onMouseEnter={link ? () => onHot(category) : undefined}
+      onMouseLeave={link ? () => onHot(null) : undefined}
+      onFocus={link ? () => onHot(category) : undefined}
+      onBlur={link ? () => onHot(null) : undefined}
+      className={`border-t border-line transition-colors ${seated && hot === category ? 'bg-surface-2' : ''}`}
+    >
       <div className="flex items-center">
         <button
           type="button"
@@ -52,21 +64,22 @@ export default function PartSlot({
           {icon}
           <span className="min-w-0 flex-1">
             {seated && label && (
-              <span className="block text-[12px] uppercase leading-none tracking-wide text-faint">{label}</span>
+              <span className={`flex gap-2 text-[12px] uppercase leading-none tracking-wide ${hot === category ? 'text-brass' : 'text-faint'}`}>
+                {label}
+                {/* On a phone the price sits with the type, leaving the name
+                    the row's full width (spec 2026-10-20). */}
+                {price && <span className={`${TELEMETRY} text-tech sm:hidden`}>{price}</span>}
+              </span>
             )}
-            {/* On a phone the row is a full-width list item, so the name wraps
-                to two lines rather than losing its meaningful tail — "i7-14700KF"
-                keeps the KF, the RAM keeps its 32GB. From `sm` up the row shares
-                a grid cell and stays one truncated line, as before. */}
-            <span className={`line-clamp-2 sm:line-clamp-none sm:block sm:truncate ${seated ? 'mt-0.5 leading-tight' : ''}`}>
+            {/* The name wraps, never truncates: "i7-14700KF" keeps its KF and
+                the RAM its 32GB (showroom spec: names wrap). */}
+            <span className={`block break-words ${seated ? 'mt-0.5 leading-tight' : ''}`}>
               {seated ? part.name : (label ?? `Choose a ${category}`)}
             </span>
           </span>
           {note}
           {tag}
-          {seated && part.price != null && (
-            <span className={`${TELEMETRY} shrink-0 text-sm text-tech`}>£{part.price.toFixed(0)}</span>
-          )}
+          {price && <span className={`${TELEMETRY} hidden shrink-0 text-sm text-tech sm:inline`}>{price}</span>}
         </button>
         {seated && onRemove && (
           <button
