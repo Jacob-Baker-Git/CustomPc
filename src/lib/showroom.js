@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { CATEGORIES } from './categories'
-import { partCentre } from './assemblyGeometry'
+import { partCentre, caseInterior } from './assemblyGeometry'
 import { sizeOverrides } from './partOverrides'
 
 export const SHOWROOM_SLOTS = [
@@ -62,4 +62,23 @@ export const ANCHOR_OFFSET = {
 export function anchorWorldPoint(id, parts) {
   const off = ANCHOR_OFFSET[id] ?? [0, 0, 0]
   return partCentre(id, sizeOverrides(parts)).map((v, i) => v + off[i])
+}
+
+// Whether the sight line from `eye` to `point` (inside the case) comes in
+// through the glass side (+Z, the interior's max Z face). Every other face is
+// a solid panel, roof vents included. The face a ray enters an axis-aligned
+// box by is the axis with the LATEST slab entry. An eye inside the box sees
+// everything.
+export function seenThroughGlass(eye, point, box = caseInterior()) {
+  let tEnter = -Infinity
+  let entry = null
+  for (let i = 0; i < 3; i++) {
+    const below = eye[i] < box.min[i]
+    if (!below && eye[i] <= box.max[i]) continue
+    const d = point[i] - eye[i]
+    if (d === 0) return false // outside this slab and never entering it
+    const t = ((below ? box.min[i] : box.max[i]) - eye[i]) / d
+    if (t > tEnter) { tEnter = t; entry = [i, below] }
+  }
+  return !entry || (entry[0] === 2 && !entry[1])
 }

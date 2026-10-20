@@ -64,6 +64,9 @@ export default function BuilderScreen() {
   // this ref, and `hot` links a label to its dot.
   const overlayRef = useRef(null)
   const [hot, setHot] = useState(null)
+  // True only while a canvas has rendered a frame (see AnchorProjector): no
+  // labels over a loading or failed 3D view.
+  const [canvasReady, setCanvasReady] = useState(false)
   const desktop = useIsDesktop()
 
   // The header is sticky inside the scroller, so nothing has to pad for a
@@ -187,10 +190,10 @@ export default function BuilderScreen() {
                   <>
                     <CanvasErrorBoundary>
                       <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center text-muted text-sm motion-safe:animate-pulse">Assembling 3D…</div>}>
-                        <BuildCanvas selectedParts={selectedParts} overlayRef={overlayRef} />
+                        <BuildCanvas selectedParts={selectedParts} overlayRef={overlayRef} onReady={setCanvasReady} ready={canvasReady} />
+                        {canvasReady && <ShowroomOverlay ref={overlayRef} parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} />}
                       </Suspense>
                     </CanvasErrorBoundary>
-                    <ShowroomOverlay ref={overlayRef} parts={selectedParts} hot={hot} setHot={setHot} compact={!desktop} />
                     <InfoDisclaimer />
                   </>
                 ) : (
@@ -261,7 +264,7 @@ export default function BuilderScreen() {
                   </div>
                 )}
               </div>
-              {show3D && !desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
+              {show3D && canvasReady && !desktop && <ShowroomTapStrip parts={selectedParts} hot={hot} />}
               </div>
               {/* One grid child, two stacked panels. Splitting these back into
                   separate grid rows reintroduces the zoom gap — see index.css. */}

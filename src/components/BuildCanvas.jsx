@@ -33,7 +33,7 @@ const FLOOR_Y = interior.min[1]
 const isCoarse = () =>
   typeof window !== 'undefined' && Boolean(window.matchMedia?.('(pointer: coarse)').matches)
 
-export default function BuildCanvas({ selectedParts, overlayRef }) {
+export default function BuildCanvas({ selectedParts, overlayRef, onReady, ready }) {
   const parts = Object.values(selectedParts).filter(Boolean)
   // Read once per mount, not once per render.
   const [coarse] = useState(isCoarse)
@@ -144,7 +144,7 @@ export default function BuildCanvas({ selectedParts, overlayRef }) {
         {/* 2.2–16 rather than 3–9: close enough to inspect one part, far enough
             to see the whole build in its room. WU_PER_MM was originally chosen
             so the old clamps still worked — widening them is deliberate. */}
-        {overlayRef && <AnchorProjector overlayRef={overlayRef} parts={selectedParts} />}
+        {overlayRef && <AnchorProjector overlayRef={overlayRef} parts={selectedParts} onReady={onReady} ready={ready} />}
 
         <OrbitControls
           target={[CENTRE_X, -0.1, 0.05]}
