@@ -30,7 +30,9 @@ export function focusChange(prevOption, option, changed) {
   }
 }
 
-export function formatDelta(n) {
+// Whole pounds: catalogue prices are fractional (579.99).
+export function formatDelta(raw) {
+  const n = Math.round(raw)
   if (n > 0) return `+£${n}`
   if (n < 0) return `\u2212£${-n}`
   return '£0'

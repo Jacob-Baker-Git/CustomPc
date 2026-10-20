@@ -1,10 +1,17 @@
 import { render, screen, act, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import TargetScreen from '../screens/TargetScreen'
 import useBuilderStore from '../store/useBuilderStore'
 import useCatalogStore from '../store/useCatalogStore'
 import partsData from '../data/partsData.json'
+import { buildForGame } from '../lib/gameTargetBuilder'
+
+// Pass-through, so a test can hand the screen a fixed answer.
+vi.mock('../lib/gameTargetBuilder', async (orig) => {
+  const real = await orig()
+  return { ...real, buildForGame: vi.fn(real.buildForGame) }
+})
 
 beforeEach(() => {
   useBuilderStore.setState({
@@ -136,5 +143,58 @@ describe('TargetScreen — nothing can be completed', () => {
     await userEvent.click(find())
     expect(screen.getByText(/no build in the catalogue reaches/i)).toBeInTheDocument()
     expect(screen.queryByText(/the fastest manages/i)).toBeNull()
+  })
+})
+
+describe('TargetScreen — cards show what changed', () => {
+  const p = (id, name, price) => ({ id, name, price })
+  // The callout's whole line; the delta sits in its own nowrap span.
+  const line = (text) => (_, el) => el?.classList.contains('font-semibold') && el.textContent === text
+  const opt = (parts, total, fps) => ({ parts, total, fps })
+  const shared = { motherboard: p('mb', 'Board X', 80), ram: p('ram', 'Ram X', 40) }
+  const cheapest = opt({ ...shared, cpu: p('c1', 'CPU One', 100), gpu: p('g1', 'GPU One', 400), case: p('k1', 'Case One', 50) }, 670, 70)
+  const middle = opt({ ...cheapest.parts, cpu: p('c2', 'CPU Two', 110), gpu: p('g2', 'GPU Two', 494.99) }, 775, 90)
+  const best = opt({ ...middle.parts, case: p('k2', 'Case Two', 60) }, 785, 90)
+
+  it('recommends the middle card, zooms on the biggest change and names the rest', async () => {
+    buildForGame.mockReturnValueOnce({ cheapest, middle, best })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    const sections = [...document.querySelectorAll('section')]
+    expect(sections).toHaveLength(3)
+    const [one, two, three] = sections
+    expect(within(two).getByText('Recommended')).toBeInTheDocument()
+    expect(within(one).queryByText('Recommended')).toBeNull()
+    expect(within(three).queryByText('Recommended')).toBeNull()
+    const btn = (s) => within(s).getByRole('button', { name: /use this build/i })
+    expect(btn(two).className).toContain('bg-brass')
+    expect(btn(one).className).not.toContain('bg-brass')
+    expect(btn(three).className).not.toContain('bg-brass')
+
+    expect(within(one).getByText('Base build')).toBeInTheDocument()
+    expect(within(one).getByText('CPU One + GPU One')).toBeInTheDocument()
+
+    expect(within(two).getByText(line('GPU · GPU Two · +£95'))).toBeInTheDocument()
+    expect(within(two).getByText('CPU also changed')).toBeInTheDocument()
+    expect(two.querySelector('[data-still-box]').style.transform).toContain('scale(2.2)')
+
+    // The case has no anchor: the whole still, and the label names the case.
+    expect(within(three).getByText(line('Case · Case Two · +£10'))).toBeInTheDocument()
+    expect(three.querySelector('[data-still-box]').style.transform).toBe('')
+  })
+
+  it('recommends nothing when there is no middle card', async () => {
+    buildForGame.mockReturnValueOnce({ cheapest, best, noValueStep: true })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.queryByText('Recommended')).toBeNull()
+    expect(screen.getByText('Nothing above the cheapest build is worth the extra money.')).toBeInTheDocument()
+  })
+
+  it('still says when there is no benchmark data', async () => {
+    buildForGame.mockReturnValueOnce({ noData: true })
+    render(<TargetScreen />)
+    await userEvent.click(find())
+    expect(screen.getByText(/no benchmark data for fortnite/i)).toBeInTheDocument()
   })
 })

@@ -32,6 +32,11 @@ describe('showroom', () => {
     expect(formatDelta(-40)).toBe('\u2212£40')
     expect(formatDelta(95)).toBe('+£95')
     expect(formatDelta(0)).toBe('£0')
+    // Catalogue prices are fractional; the label shows whole pounds.
+    expect(formatDelta(94.99)).toBe('+£95')
+    expect(formatDelta(-40.4)).toBe('−£40')
+    expect(formatDelta(0.3)).toBe('£0')
+    expect(formatDelta(-0.3)).toBe('£0')
   })
   it('priceShares', () => {
     expect(priceShares({ cpu: { price: 100 }, gpu: { price: 300 } })).toEqual([
