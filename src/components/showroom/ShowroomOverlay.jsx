@@ -1,7 +1,6 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { SHOWROOM_SLOTS, COMPACT_IDS } from '../../lib/showroom.js'
 import { categoryLabel } from '../../lib/categories.js'
-import PartPictogram from './PartPictogram.jsx'
 
 const ALL_IDS = SHOWROOM_SLOTS.map((s) => s.id)
 const SIDE = Object.fromEntries(SHOWROOM_SLOTS.map((s) => [s.id, s.side]))
@@ -58,7 +57,6 @@ const ShowroomOverlay = forwardRef(function ShowroomOverlay(
   })
 
   if (!picked.length) return null
-  const sel = hot && parts[hot] ? hot : null
   const dotCls = (id) =>
     `absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-brass ${hot === id ? 'bg-brass' : 'bg-surface'}`
 
@@ -90,9 +88,9 @@ const ShowroomOverlay = forwardRef(function ShowroomOverlay(
             aria-label={categoryLabel(id)}
             ref={(el) => { dots.current[id] = el }}
             onClick={() => setHot(id)}
-            className={`${dotCls(id)} pointer-events-auto grid h-8 w-8 place-items-center text-sm font-bold ${hot === id ? 'text-accent-ink' : 'text-brass'}`}
+            className="pointer-events-auto absolute grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center"
           >
-            {i + 1}
+            <span className={`grid h-8 w-8 place-items-center rounded-full border border-brass text-sm font-bold ${hot === id ? 'bg-brass text-accent-ink' : 'bg-surface text-brass'}`}>{i + 1}</span>
           </button>
         ) : (
           <span key={id} data-dot={id} ref={(el) => { dots.current[id] = el }} className={`${dotCls(id)} h-2.5 w-2.5`} />
@@ -123,22 +121,6 @@ const ShowroomOverlay = forwardRef(function ShowroomOverlay(
 
       {chip && <span className="absolute right-3 top-3 bg-surface px-1 text-[12px] text-muted">{chip}</span>}
 
-      {compact && (
-        <div data-tap-strip className="pointer-events-auto absolute inset-x-0 top-full flex min-h-16 items-center gap-3 border-t border-brass bg-surface px-4 py-3">
-          {sel ? (
-            <>
-              <PartPictogram id={sel} className="h-7 w-7 shrink-0 text-brass" />
-              <div className="min-w-0 flex-1">
-                <div className="text-[12px] uppercase tracking-wide text-brass">{categoryLabel(sel)}</div>
-                <div className="text-sm">{parts[sel].name}</div>
-              </div>
-              <span className="text-base">{gbp(parts[sel].price)}</span>
-            </>
-          ) : (
-            <span className="text-[12px] uppercase tracking-wide text-muted">Tap a number to see the part</span>
-          )}
-        </div>
-      )}
     </div>
   )
 })

@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, fireEvent, screen, act } from '@testing-library/react'
 import { createRef } from 'react'
 import ShowroomOverlay from '../components/showroom/ShowroomOverlay.jsx'
+import ShowroomTapStrip from '../components/showroom/ShowroomTapStrip.jsx'
 
 const parts = {
   cpu: { name: 'Ryzen 5 7600', price: 199 },
@@ -50,12 +51,21 @@ describe('ShowroomOverlay', () => {
 
   it('compact: numbered buttons and tap strip', () => {
     const setHot = vi.fn()
-    const { rerender } = render(<ShowroomOverlay {...base} compact setHot={setHot} anchors={{ cpu: { x: 1, y: 2 }, gpu: { x: 3, y: 4 } }} />)
+    render(<ShowroomOverlay {...base} compact setHot={setHot} anchors={{ cpu: { x: 1, y: 2 }, gpu: { x: 3, y: 4 } }} />)
     expect(screen.getAllByRole('button')).toHaveLength(2)
-    expect(screen.getByText('Tap a number to see the part')).toBeTruthy()
+    expect(screen.getAllByRole('button')[0].className).toMatch(/h-11 w-11/)
     fireEvent.click(screen.getByRole('button', { name: 'CPU' }))
     expect(setHot).toHaveBeenCalledWith('cpu')
-    rerender(<ShowroomOverlay {...base} compact hot="cpu" setHot={setHot} />)
+  })
+})
+
+describe('ShowroomTapStrip', () => {
+  it('prompts, then shows the hot compact part', () => {
+    const { rerender } = render(<ShowroomTapStrip parts={parts} hot={null} />)
+    expect(screen.getByText('Tap a number to see the part')).toBeTruthy()
+    rerender(<ShowroomTapStrip parts={parts} hot="cpu" />)
     expect(screen.getByText('Ryzen 5 7600')).toBeTruthy()
+    rerender(<ShowroomTapStrip parts={{ ...parts, ram: { name: 'DDR5', price: 90 } }} hot="ram" />)
+    expect(screen.getByText('Tap a number to see the part')).toBeTruthy()
   })
 })
