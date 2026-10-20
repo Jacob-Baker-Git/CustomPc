@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import * as THREE from 'three'
-import { SHOWROOM_SLOTS, COMPACT_IDS, focusChange, formatDelta, priceShares, projectAnchor } from '../lib/showroom'
+import { SHOWROOM_SLOTS, COMPACT_IDS, focusChange, formatDelta, priceShares } from '../lib/showroomSlots'
+import { projectAnchor } from '../lib/showroom'
 
 const opt = (o) => ({ parts: Object.fromEntries(Object.entries(o).map(([k, p]) => [k, { price: p }])) })
 

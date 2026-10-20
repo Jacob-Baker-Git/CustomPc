@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
-import { SHOWROOM_SLOTS, COMPACT_IDS } from '../../lib/showroom.js'
+import { SHOWROOM_SLOTS, COMPACT_IDS } from '../../lib/showroomSlots.js'
 import { categoryLabel } from '../../lib/categories.js'
 
 const ALL_IDS = SHOWROOM_SLOTS.map((s) => s.id)

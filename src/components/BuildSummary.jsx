@@ -5,7 +5,7 @@ import { CATEGORIES } from '../lib/categories'
 import { searchUrl } from '../lib/retailerLinks'
 import { useBuildActions } from '../hooks/useBuildActions'
 import { useIsDesktop } from '../hooks/useIsDesktop'
-import { priceShares } from '../lib/showroom'
+import { priceShares } from '../lib/showroomSlots'
 import PartPictogram from './showroom/PartPictogram'
 
 const PHONE_ROWS = 4
@@ -31,6 +31,10 @@ function Row({ id, label, name, brand, price, pct, hot, onHot }) {
       data-row
       onMouseEnter={onHot && (() => onHot(id))}
       onMouseLeave={onHot && (() => onHot(null))}
+      // Keyboard too: focus on the row's ↗ link lights the label (React's
+      // focus/blur bubble, like focusin/focusout).
+      onFocus={onHot && (() => onHot(id))}
+      onBlur={onHot && (() => onHot(null))}
       className={`part-row group border-t border-line px-1 py-1.5 transition-colors ${hot === id ? 'bg-surface-2' : ''}`}
     >
       <span className="[grid-area:icon]"><PartPictogram id={id} className={hot === id ? 'text-brass' : ''} /></span>
@@ -40,7 +44,7 @@ function Row({ id, label, name, brand, price, pct, hot, onHot }) {
       <span className="[grid-area:name] min-w-0 break-words text-sm text-ink">{name}</span>
       {pct != null && (
         <>
-          <span className="[grid-area:bar] mt-1 h-1 bg-surface-2 lg:mt-0"><span data-share-bar className="block h-1 bg-brass" style={{ width: `${pct}%` }} /></span>
+          <span className="[grid-area:bar] mt-1 h-1 bg-line lg:mt-0"><span data-share-bar className="block h-1 bg-brass" style={{ width: `${pct}%` }} /></span>
           <span className="[grid-area:pct] text-right font-mono text-[12px] text-muted">{pct.toFixed(1)}%</span>
         </>
       )}

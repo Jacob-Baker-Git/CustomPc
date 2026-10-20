@@ -149,7 +149,7 @@ describe('BuildSummary — parts list on a phone', () => {
 // hovering one lights the matching label on the 3D view.
 describe('BuildSummary — build table rows', () => {
   it('shows each part with a pictogram, its share bar and %, and a name that wraps', async () => {
-    const { priceShares } = await import('../lib/showroom')
+    const { priceShares } = await import('../lib/showroomSlots')
     useBuilderStore.setState({ selectedParts: { cpu, gpu } })
     const { container } = render(<BuildSummary />)
     const shares = priceShares({ cpu, gpu })
@@ -175,5 +175,25 @@ describe('BuildSummary — build table rows', () => {
     expect(calls).toEqual(['cpu', null])
     expect(gpuRow.className).toMatch(/bg-surface-2/)
     expect(cpuRow.className).not.toMatch(/bg-surface-2/)
+  })
+})
+
+describe('BuildSummary — keyboard and hot-row details', () => {
+  it('lights the label when the row link takes keyboard focus, and clears it on blur', () => {
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    const calls = []
+    render(<BuildSummary onHot={(id) => calls.push(id)} />)
+    const link = screen.getAllByRole('link', { name: /find best price/i })[1]
+    fireEvent.focus(link)
+    fireEvent.blur(link)
+    expect(calls).toEqual(['gpu', null])
+  })
+
+  it('keeps the share-bar track visible on the hot row', () => {
+    // The hot row is bg-surface-2; a track in the same colour vanished into it.
+    useBuilderStore.setState({ selectedParts: { cpu, gpu } })
+    const { container } = render(<BuildSummary hot="cpu" />)
+    const track = container.querySelector('[data-row] [data-share-bar]').parentElement
+    expect(track.className).not.toMatch(/bg-surface-2/)
   })
 })

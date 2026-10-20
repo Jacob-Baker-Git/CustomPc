@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { SHOWROOM_SLOTS, anchorWorldPoint, ANCHOR_OFFSET, seenThroughGlass } from '../lib/showroom'
+import { SHOWROOM_SLOTS } from '../lib/showroomSlots'
+import { anchorWorldPoint, ANCHOR_OFFSET, seenThroughGlass } from '../lib/showroom'
 import { partCentre } from '../lib/assemblyGeometry'
 
 describe('anchorWorldPoint', () => {

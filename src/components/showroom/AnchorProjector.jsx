@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import useBuilderStore from '../../store/useBuilderStore'
-import { SHOWROOM_SLOTS, anchorWorldPoint, projectAnchor, seenThroughGlass } from '../../lib/showroom.js'
+import { SHOWROOM_SLOTS } from '../../lib/showroomSlots.js'
+import { anchorWorldPoint, projectAnchor, seenThroughGlass } from '../../lib/showroom.js'
 
 // Inside <Canvas>: projects each picked part's anchor and hands it to the
 // overlay's place(). Under frameloop="demand" useFrame runs only on frames that

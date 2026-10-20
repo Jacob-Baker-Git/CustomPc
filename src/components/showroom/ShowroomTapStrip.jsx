@@ -1,4 +1,4 @@
-import { COMPACT_IDS } from '../../lib/showroom.js'
+import { COMPACT_IDS } from '../../lib/showroomSlots.js'
 import { categoryLabel } from '../../lib/categories.js'
 import PartPictogram from './PartPictogram.jsx'
 
