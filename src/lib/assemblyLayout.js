@@ -28,7 +28,8 @@ export function assemblyLayout(category, overrides) {
   if (MOUNTED_CATEGORIES.includes(category)) {
     return {
       position: partCentre(category, overrides),
-      rotation: PART_SPECS[category]?.rotation ?? [0, 0, 0],
+      // A procedurally drawn part (boxMm) is authored in world axes already.
+      rotation: overrides?.[category]?.boxMm ? [0, 0, 0] : PART_SPECS[category]?.rotation ?? [0, 0, 0],
     }
   }
 

@@ -107,13 +107,12 @@ export default function BuildCanvas({ selectedParts, overlayRef, onReady, ready 
         ))}
         <CableHarness selectedParts={selectedParts} />
         {selectedParts.gpu && selectedParts.motherboard && <SlotSeat selectedParts={selectedParts} />}
-        {/* Fans render at their mount points whenever fans are selected, case or
-            not. With a case but no fans, the empty slot outlines show where they
-            go — the outlines belong to the case, which is the thing with the
-            mounts. Cables stay driven by selectedParts: they only appear when
-            both parts they connect are present. */}
+        {/* Fans render at their mount points whenever fans or a case are
+            selected: as many as the case ships with plus the fan pack, empty
+            slot outlines on the rest. Cables stay driven by selectedParts: they
+            only appear when both parts they connect are present. */}
         {(selectedParts.fans || selectedParts.case) && (
-          <FanSystem filled={Boolean(selectedParts.fans)} />
+          <FanSystem selectedParts={selectedParts} />
         )}
 
         {/* Grounding contact shadow so the build sits on a surface instead of

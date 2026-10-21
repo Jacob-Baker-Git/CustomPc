@@ -73,7 +73,8 @@ export const GLTF_MODELS = Object.fromEntries(
 // not re-fit them on every render.
 export function gltfModelFor(category, overrides) {
   const file = FILES[category]
-  if (!file) return undefined
+  // No mesh for an air tower or a 2.5"/3.5" drive — drawn procedurally instead.
+  if (!file || overrides?.[category]?.boxMm) return undefined
   if (overrides?.[category] === undefined) return GLTF_MODELS[category]
   return descriptorFor(category, file, overrides)
 }

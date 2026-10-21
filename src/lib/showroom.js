@@ -23,8 +23,11 @@ export const ANCHOR_OFFSET = {
 }
 
 export function anchorWorldPoint(id, parts) {
-  const off = ANCHOR_OFFSET[id] ?? [0, 0, 0]
-  return partCentre(id, sizeOverrides(parts)).map((v, i) => v + off[i])
+  const overrides = sizeOverrides(parts)
+  // A procedurally drawn part (an air tower, a SATA drive) is solid to its
+  // centre, so the nudge meant for the AIO's empty box would point past it.
+  const off = (!overrides[id]?.boxMm && ANCHOR_OFFSET[id]) || [0, 0, 0]
+  return partCentre(id, overrides).map((v, i) => v + off[i])
 }
 
 // Whether the sight line from `eye` to `point` (inside the case) comes in

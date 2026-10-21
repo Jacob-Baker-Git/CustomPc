@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
-import { MODEL_REGISTRY } from './models/partModelRegistry'
+import { MODEL_REGISTRY, BOX_MODELS } from './models/partModelRegistry'
 import { gltfModelFor } from '../lib/gltfModels'
 import GltfPart from './models/GltfPart'
 import ModelErrorBoundary from './models/ModelErrorBoundary'
 import { assemblyLayout } from '../lib/assemblyLayout'
+import { partSize } from '../lib/assemblyGeometry'
 import { sizeOverrides } from '../lib/partOverrides'
 
 // Hovering a part in the list used to draw a translucent orange box around it in
@@ -15,7 +16,6 @@ export default function PartModel({ part }) {
   // Fans are rendered by FanSystem (mounts + empty slots), not per-part here.
   if (part.category === 'fans' || part.category === 'paste') return null
 
-  const ModelComponent = MODEL_REGISTRY[part.category]
   // The real dimensions of THIS part, where the catalogue records one that the
   // representative mesh cannot carry — a card's length, which spans 145–357 mm
   // across the catalogue against the mesh's single 300 mm figure. Both the
@@ -24,11 +24,15 @@ export default function PartModel({ part }) {
   const overrides = sizeOverrides({ [part.category]: part })
   const { position, rotation } = assemblyLayout(part.category, overrides)
   const gltf = gltfModelFor(part.category, overrides)
+  // An air tower or a 2.5"/3.5" drive has no mesh (the GLBs are an AIO and an
+  // M.2), so it is drawn procedurally at the box the geometry placed it with.
+  const box = overrides[part.category]?.boxMm
+  const ModelComponent = box ? BOX_MODELS[part.category] : MODEL_REGISTRY[part.category]
 
   // The procedural (primitive) model — also the fallback when a GLTF is missing
   // or fails to load.
   const primitive = ModelComponent ? (
-    <ModelComponent part={part} />
+    <ModelComponent part={part} {...overrides[part.category]} size={box && partSize(part.category, overrides)} />
   ) : (
     <mesh>
       <boxGeometry args={[0.5, 0.5, 0.5]} />
