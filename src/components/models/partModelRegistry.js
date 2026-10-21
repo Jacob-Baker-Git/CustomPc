@@ -7,6 +7,8 @@ import StorageModel from './StorageModel'
 import PsuModel from './PsuModel'
 import CaseModel from './CaseModel'
 import FansModel from './FansModel'
+import AirCoolerModel from './AirCoolerModel'
+import DriveModel from './DriveModel'
 
 export const MODEL_REGISTRY = {
   motherboard: MotherboardModel,
@@ -18,4 +20,10 @@ export const MODEL_REGISTRY = {
   psu: PsuModel,
   case: CaseModel,
   fans: FansModel,
+}
+
+// Parts drawn at a partOverrides box instead of from a mesh — see PartModel.
+export const BOX_MODELS = {
+  cooler: AirCoolerModel,
+  storage: DriveModel,
 }

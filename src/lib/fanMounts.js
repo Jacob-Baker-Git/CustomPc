@@ -56,3 +56,16 @@ export const FAN_MOUNTS = [
 
 // The panel cut-outs live in caseApertures.js, which also has to account for the
 // I/O stack, the PSU's socket and the roof vent — see that file.
+
+// How many of the mounts carry a fan: the case's own fans plus any fan pack,
+// capped at the mounts there are. Rear first — the one fan a budget case ships
+// with is almost always the rear exhaust — then the front column top-down.
+// ponytail: a case shipping 5-6 fans still shows 4; add top/bottom mounts if
+// that ever matters.
+const FILL_ORDER = [3, 0, 1, 2]
+
+export function fittedFanMounts(selectedParts = {}) {
+  const n = (selectedParts.case?.specs?.includedFans ?? 0) +
+    (selectedParts.fans ? selectedParts.fans.specs?.count ?? 1 : 0)
+  return new Set(FILL_ORDER.slice(0, Math.min(n, FAN_MOUNTS.length)))
+}

@@ -141,6 +141,10 @@ export function modelScaleAxes(category, overrides) {
 
 // World-space size of a part, in world units, after its model rotation.
 export function partSize(category, overrides) {
+  // A procedurally drawn part (partOverrides' boxMm) is its box, already in
+  // world axes — no mesh, no rotation.
+  const box = overrides?.[category]?.boxMm
+  if (box) return box.map(mm)
   const spec = PART_SPECS[category]
   if (!spec) return [0, 0, 0]
   return rotateExtents(partLocalSize(category, overrides), spec.rotation)
@@ -364,8 +368,31 @@ const PSU_BAY = { rearGapMm: 0, trayGapMm: 2, floorGapMm: 2 }
 // sit against the board's +Z face and extend outward by half their mounting
 // depth; anchored parts are shifted so their connector, not their centre, lands
 // on the mount point.
+// Where a drive goes when it is not an M.2: on the basement floor in front of
+// the PSU, against the tray. The basement has no shroud, so it shows through
+// the glass the way a drive in a real tower's lower bay does.
+const DRIVE_BAY = { psuGapMm: 20, floorGapMm: 2, trayGapMm: 2 }
+
+// Centre of a procedurally drawn part (partOverrides' boxMm). An air tower sits
+// on the CPU over the socket, like the AIO's pump block it replaces.
+function boxPartCentre(category, overrides) {
+  const size = partSize(category, overrides)
+  if (category === 'storage') {
+    const inner = caseInterior()
+    return [
+      partBox('psu').max[0] + mm(DRIVE_BAY.psuGapMm) + size[0] / 2,
+      inner.min[1] + mm(DRIVE_BAY.floorGapMm) + size[1] / 2,
+      inner.min[2] + mm(DRIVE_BAY.trayGapMm) + size[2] / 2,
+    ]
+  }
+  const mount = MOUNTS[category]
+  const [dx = 0, dy = 0] = overrides[category].offsetMm ?? []
+  return [mm(mount.xMm + dx), mm(mount.yMm + dy), mountBaseZ(category, overrides) + size[2] / 2]
+}
+
 export function partCentre(category, overrides) {
   if (category === 'motherboard') return [0, 0, 0]
+  if (overrides?.[category]?.boxMm) return boxPartCentre(category, overrides)
 
   if (category === 'psu') {
     const inner = caseInterior()
