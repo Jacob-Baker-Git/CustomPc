@@ -1,0 +1,26 @@
+// Re-captures the README screenshots in docs/screenshots. Start `npm run dev` first, then: node scripts/readme-screenshots.mjs
+import { chromium } from '@playwright/test'
+const out = 'docs/screenshots/'
+const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
+const p = await b.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 })
+const base = 'http://localhost:5173'
+const tab = (n) => p.getByRole('button', { name: new RegExp(`^${n}(beta)?(\s*\(beta\))?$`, 'i') }).first().click()
+await p.goto(base + '/'); await p.waitForTimeout(1500)
+await p.screenshot({ path: out + '01-home.png' })
+await p.getByRole('button', { name: /build for a game/i }).click()
+await p.getByRole('combobox', { name: 'Game' }).fill('Cyberpunk 2077')
+await p.getByRole('spinbutton', { name: /target fps/i }).fill('60')
+await p.getByRole('spinbutton', { name: /budget/i }).fill('1700')
+await p.getByRole('button', { name: /find builds/i }).click()
+await p.waitForTimeout(2500)
+await p.screenshot({ path: out + '02-build-for-a-game.png' })
+await p.locator('section', { hasText: /best within £/i }).getByRole('button', { name: /use this build/i }).click()
+await p.waitForURL(/#peripherals/)
+await tab('summary'); await p.getByText('/100').first().waitFor()
+await p.waitForTimeout(6000)
+await p.screenshot({ path: out + '05-summary.png' })
+await tab('build'); await p.waitForTimeout(3000)
+await p.screenshot({ path: out + '03-builder.png' })
+await tab('performance'); await p.waitForTimeout(3000)
+await p.screenshot({ path: out + '04-performance.png' })
+await b.close()

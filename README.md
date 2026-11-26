@@ -1,32 +1,70 @@
+<div align="center">
+
 # Custom PC Builder
 
-Plan a compatible custom gaming PC in 3D — live at [custompcbuilder.netlify.app](https://custompcbuilder.netlify.app/).
+**Build and price a gaming PC in 3D — and know what frame rate it will actually get.**
 
-Enter a budget (or pick a quick-start tier), then assemble a build part by part.
-The app checks compatibility as you go, estimates real-game FPS, flags
-bottlenecks, and renders the machine in an interactive 3D case.
+[**Open the app →**](https://custompcbuilder.netlify.app/)
 
-![The builder — a generated £1,700 build rendered in 3D, scored, with the best next upgrade suggested](docs/screenshots/03-builder.png)
+[![CI](https://github.com/Jacob-Baker-Git/CustomPc/actions/workflows/ci.yml/badge.svg)](https://github.com/Jacob-Baker-Git/CustomPc/actions/workflows/ci.yml)
+![React 19](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
+![three.js](https://img.shields.io/badge/three.js-r187-000000?logo=threedotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)
+![Netlify](https://img.shields.io/badge/deployed%20on-Netlify-00c7b7?logo=netlify&logoColor=white)
+
+![Home — build and price a gaming PC in 3D](docs/screenshots/01-home.png)
+
+</div>
+
+## What it does
+
+Picking PC parts is easy. Knowing they fit together, and what they will do in the
+game you actually play, is the hard part. Custom PC Builder does both:
+
+- **Build for a game** — pick a game, a resolution, a target frame rate and a
+  budget. You get three ready-made builds: the cheapest that hits your target, the
+  best value, and the best your budget can buy.
+- **What will my build get?** — enter the parts you own (or are eyeing up) and see
+  the frame rate in 75 benchmarked games, what is holding it back, and what to
+  upgrade next.
+- **See it in 3D** — every part you pick appears inside a real case you can spin,
+  zoom and look through.
+
+Free, no sign-up, nothing to install. Your builds stay in your own browser.
 
 ## Screenshots
 
-| | |
-|---|---|
-| ![Home](docs/screenshots/01-home.png) | ![Budget and tier setup](docs/screenshots/02-setup.png) |
-| **Home** — the two ways in | **Setup** — a budget or a quick-start tier |
-| ![Per-game frame rates](docs/screenshots/04-performance.png) | ![Build summary](docs/screenshots/05-summary.png) |
-| **Performance** — per-game FPS at three resolutions, each row labelled with what it is based on | **Summary** — the finished build, ready to save, share or export |
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/02-build-for-a-game.png" alt="Build for a game: three builds for Cyberpunk 2077 at 1440p Ultra"></td>
+    <td width="50%"><img src="docs/screenshots/03-builder.png" alt="Build tab: the parts list beside the labelled 3D build"></td>
+  </tr>
+  <tr>
+    <td><b>Build for a game</b> — cheapest, best value and best-in-budget, side by side</td>
+    <td><b>Build</b> — every part, its price, and where it sits in the case</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/04-performance.png" alt="Performance tab: 128 fps in Cyberpunk 2077 with the bottleneck explained"></td>
+    <td><img src="docs/screenshots/05-summary.png" alt="Summary tab: score, spec and the labelled 3D build"></td>
+  </tr>
+  <tr>
+    <td><b>Performance</b> — frame rate and 1% lows, the bottleneck, and what to upgrade next</td>
+    <td><b>Summary</b> — a score out of 100, power and cooling headroom, ready to save or share</td>
+  </tr>
+</table>
 
 ## Features
 
-- **3D build view** — parts appear inside a stylised case as you pick them (react-three-fiber), with a see-through toggle
-- **Auto-build** — fills the remaining slots with the best-value compatible parts for your budget
-- **Compatibility guardrails** — socket, RAM type, PSU wattage, GPU length / cooler height vs. case dimensions
-- **Performance estimates** — bottleneck balance, est. average FPS at 1080p/1440p/4K, and per-game FPS for popular titles
-- **Budget tracking** — live spend/remaining; the part picker hides parts above 60% of the budget unless you search for them
-- **Peripherals** — monitor, keyboard, mouse, headset alongside the core build
-- **Save, share & compare** — named saved builds (localStorage), shareable `?build=` links, print/markdown export, side-by-side comparison of two saved builds
-- **The in-progress build persists** across refreshes
+| | |
+|---|---|
+| 🧊 **3D build view** | Parts appear in a real case as you pick them, labelled with name and price, with a see-through toggle |
+| 🎮 **Build for a game** | Game + resolution + target FPS + budget in; three compatible builds out |
+| 📈 **Frame-rate estimates** | Per-game FPS and 1% lows at 1080p / 1440p / 4K, each labelled *measured* or *inferred* |
+| 🔍 **Bottleneck analysis** | Which part limits each game, how much it costs you, and what to upgrade next |
+| ✅ **Compatibility checks** | Socket, RAM type, PCIe, PSU wattage, GPU length and cooler height vs. the case |
+| 💷 **Budget tracking** | Live spend and remaining budget, power draw against the PSU |
+| 🖱️ **Peripherals** | Monitor, keyboard, mouse and headset alongside the core build |
+| 🔗 **Save, share & compare** | Named saved builds, shareable `?build=` links, print / Markdown export, side-by-side comparison |
 
 ## Stack
 
@@ -37,18 +75,18 @@ Supabase (PostgreSQL) for the catalogue, Vitest + Testing Library, Playwright, d
 
 ```
 src/
-  screens/       BuilderScreen — the one routed screen
-  components/    ~45 UI components
+  screens/       BuilderScreen (build tabs) and TargetScreen (build for a game)
+  components/    ~80 UI components
     models/      one react-three-fiber component per part category
     performance/ the per-game frame-rate table
     art/         drawn SVG artwork for every part and game
-  lib/           60 framework-free modules — the actual logic
+  lib/           ~60 framework-free modules — the actual logic
     perfEngine/  18 modules: the frame-rate model
   store/         3 Zustand stores (builder, catalog, saved)
-  hooks/         routing
+  hooks/         routing, layout and build actions
   data/          bundled catalogue + fitted performance model
 data/            research inputs: benchmarks, spec tables, source URLs
-scripts/         22 Node scripts (model fitting, catalogue push, pre-render, sitemap)
+scripts/         25 Node scripts (model fitting, catalogue push, pre-render, sitemap)
 e2e/             Playwright specs
 ```
 
@@ -114,8 +152,8 @@ rather than silently reintroducing the transfer.
 
 | Suite | What it covers | Command |
 |---|---|---|
-| Vitest — 1,602 tests / 150 files | logic, stores, components in jsdom | `npm run test:run` |
-| Playwright — 56 specs / 14 files | real layout and CSS, which jsdom has none of | `npm run test:e2e` |
+| Vitest — 1,872 tests / 174 files | logic, stores, components in jsdom | `npm run test:run` |
+| Playwright — 67 tests / 11 files | real layout and CSS, which jsdom has none of | `npm run test:e2e` |
 | Playwright `csp` project | the production Content-Security-Policy | part of `test:e2e` |
 
 The split is the point. jsdom computes no layout, so a layout bug cannot fail a
